@@ -22,34 +22,72 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     id: 'mistake-of-fact',
     term: {
-      en: 'Mistake of Fact (Ignorantia Facti Excusat)',
-      hi: 'तथ्य की भूल (इग्नोरेंशिया फैक्टी एक्सक्यूजैट)',
+      en: 'Mistake of Fact (Section 79 IPC)',
+      hi: 'तथ्य की भूल (आईपीसी धारा 79)',
     },
     pronunciation: 'ig-nor-AN-she-uh FAK-ty ex-KEW-zat',
     category: 'Criminal Law',
     code: 'IPC · Section 79 / BNS · Section 17',
     definition: {
-      en: 'A legal defence where an act is done in good faith by a person who, by reason of a mistake of fact and not a mistake of law, genuinely believes themselves to be justified by law in doing it.',
-      hi: 'एक कानूनी बचाव जहां सद्भाव में कोई कार्य उस व्यक्ति द्वारा किया जाता है, जो कानून की भूल नहीं बल्कि तथ्य की भूल के कारण ईमानदारी से मानता है कि वह ऐसा करने के लिए कानूनन उचित है।',
+      en: 'A legal defence under Section 79 IPC where an act is done in good faith by a person who, by reason of a mistake of fact and not a mistake of law, genuinely believes themselves to be justified by law in doing it.',
+      hi: 'धारा 79 आईपीसी के तहत कानूनी बचाव जहां सद्भाव में कोई कार्य उस व्यक्ति द्वारा किया जाता है, जो कानून की भूल नहीं बल्कि तथ्य की भूल के कारण ईमानदारी से मानता है कि वह ऐसा करने के लिए कानूनन उचित है।',
     },
     plainExplanation: {
-      en: "If you honestly believe you're attacking a supernatural monster in pitch darkness (when it was actually a person), the law protects you because your intention was not to harm a human.",
+      en: "If you honestly believe you're attacking a supernatural spirit in pitch darkness (when it was actually a person), the law protects you because your intention was not to harm a human.",
       hi: 'यदि आप सचमुच यह मानते हैं कि आप अंधेरे में किसी अलौकिक भूत पर वार कर रहे हैं (जो वास्तव में इंसान निकला), तो कानून आपको बचाता है क्योंकि आपका इरादा इंसान को नुकसान पहुँचाने का नहीं था।',
     },
     relatedCaseSlugs: ['ghost-case'],
   },
   {
+    id: 'bona-fide',
+    term: {
+      en: 'Bona Fide (Good Faith)',
+      hi: 'सद्भावपूर्वक (सच्चा विश्वास)',
+    },
+    pronunciation: 'BOH-nuh FY-dee',
+    category: 'Evidence & Procedure',
+    code: 'Section 52 IPC · Due Care and Attention',
+    definition: {
+      en: 'Acting with honest intention, sincerity, and without any intention to deceive or commit an intentional crime.',
+      hi: 'सच्चे इरादे, ईमानदारी और उचित सतर्कता के साथ किया गया कार्य जिसमें किसी को धोखा देने या अपराध करने की मंशा न हो।',
+    },
+    plainExplanation: {
+      en: 'Doing something with completely pure and honest intentions, having exercised due care under the circumstances.',
+      hi: 'परिस्थितियों के अनुसार पूरी ईमानदारी और सद्भाव से किया गया कार्य।',
+    },
+    relatedCaseSlugs: ['ghost-case'],
+  },
+  {
+    id: 'acquittal',
+    term: {
+      en: 'Acquittal (Discharge of Guilt)',
+      hi: 'दोषमुक्ति (बरी किया जाना)',
+    },
+    pronunciation: 'uh-KWIT-ul',
+    category: 'Evidence & Procedure',
+    code: 'Section 232 / 235 CrPC · Criminal Procedure',
+    definition: {
+      en: 'A formal judicial declaration that the accused person is not guilty of the criminal charges brought against them, setting them completely free.',
+      hi: 'अदालत का औपचारिक फैसला जिसमें अभियुक्त को सभी आपराधिक आरोपों से निर्दोष पाकर बाइज्जत बरी कर दिया जाता है।',
+    },
+    plainExplanation: {
+      en: 'When the court finds that the prosecution failed to prove the crime beyond reasonable doubt or the accused proved a valid legal defence, they are acquitted.',
+      hi: 'जब अदालत पाती है कि अपराध साबित नहीं हुआ या कानूनी बचाव सिद्ध हो गया, तो व्यक्ति को बरी कर दिया जाता है।',
+    },
+    relatedCaseSlugs: ['ghost-case', 'nanavati-case'],
+  },
+  {
     id: 'grave-sudden-provocation',
     term: {
-      en: 'Grave and Sudden Provocation',
-      hi: 'गंभीर और अचानक प्रकोपन',
+      en: 'Grave and Sudden Provocation (Section 300 IPC)',
+      hi: 'गंभीर और अचानक प्रकोपन (धारा 300 आईपीसी)',
     },
     pronunciation: 'grayv and SUD-den prah-vuh-KAY-shun',
     category: 'Criminal Law',
     code: 'IPC · Section 300 (Exception 1) / BNS · Section 101',
     definition: {
-      en: 'An exception that reduces murder (Sec 302) to culpable homicide not amounting to murder (Sec 304) if the offender was deprived of the power of self-control by grave and sudden provocation.',
-      hi: 'एक अपवाद जो हत्या (धारा 302) को गैर-इरादतन मानव वध (धारा 304) में बदल देता है यदि अपराधी गंभीर और अचानक उत्तेजना के कारण आत्म-नियंत्रण खो बैठा हो।',
+      en: 'An exception to Section 300 IPC that reduces murder (Sec 302) to culpable homicide not amounting to murder (Sec 304) if the offender was deprived of the power of self-control by grave and sudden provocation.',
+      hi: 'धारा 300 आईपीसी का एक अपवाद जो हत्या को गैर-इरादतन मानव वध में बदल देता है यदि अपराधी गंभीर और अचानक उत्तेजना के कारण आत्म-नियंत्रण खो बैठा हो।',
     },
     plainExplanation: {
       en: "If you catch someone in a shock discovery and react in instant, uncontrolled fury, it's not premeditated murder. But if you have time to cool off and plan revenge, the defence fails completely.",
@@ -79,8 +117,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     id: 'basic-structure-doctrine',
     term: {
-      en: 'Basic Structure Doctrine',
-      hi: 'संविधान के बुनियादी ढांचे का सिद्धांत',
+      en: 'Basic Structure Doctrine (Article 368)',
+      hi: 'संविधान के बुनियादी ढांचे का सिद्धांत (अनुच्छेद 368)',
     },
     pronunciation: 'BAY-sik STRUK-chur DAHK-trin',
     category: 'Constitutional Law',
@@ -98,8 +136,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     id: 'chilling-effect',
     term: {
-      en: 'Chilling Effect & Vagueness Doctrine',
-      hi: 'वाक् स्वतंत्रता पर प्रतिकूल प्रभाव का सिद्धांत',
+      en: 'Chilling Effect & Vagueness Doctrine (Section 66A)',
+      hi: 'वाक् स्वतंत्रता पर प्रतिकूल प्रभाव (धारा 66A)',
     },
     pronunciation: 'CHIL-ing ih-FEKT',
     category: 'Constitutional Law',
@@ -136,7 +174,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     id: 'section-125-crpc',
     term: {
-      en: 'Section 125 CrPC (Maintenance of Wives & Children)',
+      en: 'Section 125 CrPC (Maintenance Rights)',
       hi: 'धारा 125 सीआरपीसी (भरण-पोषण का अधिकार)',
     },
     pronunciation: 'SEK-shun 125 CR-P-C',
@@ -155,8 +193,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     id: 'vishaka-guidelines',
     term: {
-      en: 'Vishaka Guidelines & Workplace Safety',
-      hi: 'विशाखा दिशानिर्देश व कार्यस्थल सुरक्षा',
+      en: 'Vishaka Guidelines (Workplace Safety & POSH Act)',
+      hi: 'विशाखा दिशानिर्देश (कार्यस्थल सुरक्षा व पॉश एक्ट)',
     },
     pronunciation: 'vih-SHAH-kuh GUIDE-lyns',
     category: 'Constitutional Law',
@@ -174,8 +212,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     id: 'due-process-of-law',
     term: {
-      en: 'Due Process of Law & Substantive Fairness',
-      hi: 'विधि की सम्यक प्रक्रिया (ड्यू प्रोसेस ऑफ लॉ)',
+      en: 'Due Process of Law (Article 21)',
+      hi: 'विधि की सम्यक प्रक्रिया (अनुच्छेद 21)',
     },
     pronunciation: 'DOO PRAH-sess of LAW',
     category: 'Constitutional Law',
@@ -229,9 +267,28 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     relatedCaseSlugs: ['navtej-johar'],
   },
   {
+    id: 'section-377-ipc',
+    term: {
+      en: 'Section 377 IPC (Decriminalization of Consensual Acts)',
+      hi: 'धारा 377 आईपीसी (गैर-अपराधीकरण)',
+    },
+    pronunciation: 'SEK-shun 377 IPC',
+    category: 'Constitutional Law',
+    code: 'Section 377 IPC · Navtej Johar (2018)',
+    definition: {
+      en: 'An 1860 colonial penal provision that penalized unnatural offences. In 2018, the Supreme Court struck down Section 377 to the extent it criminalized consensual adult private intimacy.',
+      hi: '1860 का औपनिवेशिक कानून। 2018 में सुप्रीम कोर्ट ने सर्वसम्मति से इसे वयस्कों के आपसी सहमति वाले संबंधों के लिए असंवैधानिक घोषित कर दिया।',
+    },
+    plainExplanation: {
+      en: 'Adults have the constitutional right to privacy and intimate association without state intrusion or fear of arrest.',
+      hi: 'वयस्कों को सरकारी दखलंदाजी या गिरफ्तारी के डर के बिना निजता और सम्मान का मौलिक अधिकार है।',
+    },
+    relatedCaseSlugs: ['navtej-johar'],
+  },
+  {
     id: 'ratio-decidendi',
     term: {
-      en: 'Ratio Decidendi',
+      en: 'Ratio Decidendi (Binding Legal Principle)',
       hi: 'निर्णय का कानूनी आधार (विधिक सार)',
     },
     pronunciation: 'RAY-shee-oh des-ih-DEN-dye',
