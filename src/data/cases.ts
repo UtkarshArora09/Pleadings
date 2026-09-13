@@ -1,7 +1,7 @@
 import { CaseData } from '@/types';
 
 export const CASES_DATA: CaseData[] = [
-  {
+{
     slug: 'ghost-case',
     title: {
       en: 'The Ghost Case',
@@ -360,8 +360,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'बरी · आईपीसी धारा 79',
         },
         body: {
-          en: 'Chief Justice R.L. Narasimham and Justice S.P. Mohapatra of the Orissa High Court upheld the Sessions Court acquittal.\n\nThe court held that Thapa had no motive or animosity against the victims. He acted in absolute bona fide belief that he was attacking a ghost. The protection of Section 79 applied in full.',
-          hi: 'उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश आर.एल. नरसिम्हम और न्यायमूर्ति एस.पी. महापात्रा ने सत्र अदालत के बरी करने के फैसले को बरकरार रखा।\n\nअदालत ने माना कि थापा की पीड़िता से कोई दुश्मनी नहीं थी। उसने पूरी तरह से सच्चे विश्वास में काम किया कि वह भूत पर हमला कर रहा था। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।',
+          en: 'Chief Justice R.L. Narasimham and Justice S.P. Mohapatra of the Orissa High Court upheld the Sessions Court acquittal.\\n\\nThe court held that Thapa had no motive or animosity against the victims. He acted in absolute bona fide belief that he was attacking a ghost. The protection of Section 79 applied in full.',
+          hi: 'उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश आर.एल. नरसिम्हम और न्यायमूर्ति एस.पी. महापात्रा ने सत्र अदालत के बरी करने के फैसले को बरकरार रखा।\\n\\nअदालत ने माना कि थापा की पीड़िता से कोई दुश्मनी नहीं थी। उसने पूरी तरह से सच्चे विश्वास में काम किया कि वह भूत पर हमला कर रहा था। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।',
         },
         photoExhibitSrc: '/images/cases/ghost_court_verdict.jpg',
         photoExhibitCaption: {
@@ -381,8 +381,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'तथ्य की भूल माफी योग्य है।',
         },
         body: {
-          en: 'This case remains India’s leading precedent on Section 79 IPC and the latin maxim *Ignorantia facti excusat, ignorantia juris non excusat* (Mistake of fact excuses, mistake of law does not).\n\nIt established that "due care and attention" is not an absolute mechanical standard, but depends on the intellectual capacity, terror, and physical circumstances of the accused.',
-          hi: 'यह मामला आज भी भारतीय दंड संहिता की धारा 79 और लैटिन कहावत *Ignorantia facti excusat* (तथ्य की भूल क्षम्य है, कानून की नहीं) पर भारत का सबसे बड़ा नजीर है।\n\nइसने स्थापित किया कि "उचित सावधानी" कोई कठोर पैमाना नहीं है, बल्कि अभियुक्त की मानसिक स्थिति, भय और परिस्थितियों पर निर्भर करता है।',
+          en: 'This case remains India’s leading precedent on Section 79 IPC and the latin maxim *Ignorantia facti excusat, ignorantia juris non excusat* (Mistake of fact excuses, mistake of law does not).\\n\\nIt established that "due care and attention" is not an absolute mechanical standard, but depends on the intellectual capacity, terror, and physical circumstances of the accused.',
+          hi: 'यह मामला आज भी भारतीय दंड संहिता की धारा 79 और लैटिन कहावत *Ignorantia facti excusat* (तथ्य की भूल क्षम्य है, कानून की नहीं) पर भारत का सबसे बड़ा नजीर है।\\n\\nइसने स्थापित किया कि "उचित सावधानी" कोई कठोर पैमाना नहीं है, बल्कि अभियुक्त की मानसिक स्थिति, भय और परिस्थितियों पर निर्भर करता है।',
         },
         evidence: {
           archiveType: 'verdict_decree',
@@ -571,8 +571,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'कबूलनामे से गोलीबारी तक: समयरेखा।',
         },
         body: {
-          en: 'At 1:30 PM, Sylvia broke down and confessed her affair to Nanavati.\n\nNanavati drove his wife and children to the Metro Cinema for a 4:00 PM movie. He then drove to his naval ship INS Mysore, requisitioned a .38 service revolver and 6 rounds under a false pretext, and drove straight to Ahuja’s office and then his home.',
-          hi: 'दोपहर 1:30 बजे, सिल्विया रो पड़ी और नानावटी के सामने अपने प्रेम संबंध का कबूलनामा किया।\n\nनानावटी अपनी पत्नी और बच्चों को 4:00 बजे का शो देखने मेट्रो सिनेमा छोड़ आए। इसके बाद वे अपने युद्धपोत आईएनएस मैसूर गए, झूठा बहाना बनाकर .38 की सर्विस रिवॉल्वर और 6 गोलियां लीं, और सीधे आहूजा के घर जा पहुंचे।',
+          en: 'At 1:30 PM, Sylvia broke down and confessed her affair to Nanavati.\\n\\nNanavati drove his wife and children to the Metro Cinema for a 4:00 PM movie. He then drove to his naval ship INS Mysore, requisitioned a .38 service revolver and 6 rounds under a false pretext, and drove straight to Ahuja’s office and then his home.',
+          hi: 'दोपहर 1:30 बजे, सिल्विया रो पड़ी और नानावटी के सामने अपने प्रेम संबंध का कबूलनामा किया।\\n\\nनानावटी अपनी पत्नी और बच्चों को 4:00 बजे का शो देखने मेट्रो सिनेमा छोड़ आए। इसके बाद वे अपने युद्धपोत आईएनएस मैसूर गए, झूठा बहाना बनाकर .38 की सर्विस रिवॉल्वर और 6 गोलियां लीं, और सीधे आहूजा के घर जा पहुंचे।',
         },
         evidence: {
           archiveType: 'police_record',
@@ -787,8 +787,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'दोषी · आईपीसी धारा 302',
         },
         body: {
-          en: 'The 9-member jury had acquitted Nanavati by an 8-1 majority. But Sessions Judge Mehta found the verdict perverse and referred it to the Bombay High Court.\n\nThe High Court overturned the jury verdict, finding Nanavati guilty of murder under Section 302 IPC and sentencing him to life imprisonment. The Supreme Court dismissed his appeal in 1961.',
-          hi: '9 सदस्यीय जूरी ने 8-1 के बहुमत से नानावटी को निर्दोष ठहरा दिया था। लेकिन सेशंस जज मेहता ने इस फैसले को पक्षपातपूर्ण मानकर बॉम्बे हाई कोर्ट को रेफर कर दिया।\n\nहाई कोर्ट ने जूरी के फैसले को पलटते हुए नानावटी को धारा 302 के तहत हत्या का दोषी पाया और उम्रकैद की सजा सुनाई। 1961 में सुप्रीम कोर्ट ने भी उनकी अपील खारिज कर दी।',
+          en: 'The 9-member jury had acquitted Nanavati by an 8-1 majority. But Sessions Judge Mehta found the verdict perverse and referred it to the Bombay High Court.\\n\\nThe High Court overturned the jury verdict, finding Nanavati guilty of murder under Section 302 IPC and sentencing him to life imprisonment. The Supreme Court dismissed his appeal in 1961.',
+          hi: '9 सदस्यीय जूरी ने 8-1 के बहुमत से नानावटी को निर्दोष ठहरा दिया था। लेकिन सेशंस जज मेहता ने इस फैसले को पक्षपातपूर्ण मानकर बॉम्बे हाई कोर्ट को रेफर कर दिया।\\n\\nहाई कोर्ट ने जूरी के फैसले को पलटते हुए नानावटी को धारा 302 के तहत हत्या का दोषी पाया और उम्रकैद की सजा सुनाई। 1961 में सुप्रीम कोर्ट ने भी उनकी अपील खारिज कर दी।',
         },
         evidence: {
           archiveType: 'verdict_decree',
@@ -825,8 +825,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'चार सूत्रीय सिद्धांत और जूरी व्यवस्था का अंत।',
         },
         body: {
-          en: 'Justice K. Subba Rao laid down the landmark 4-part test for Grave & Sudden Provocation:\n1. The provocation must be grave and sudden.\n2. The test is objective: would a reasonable person lose self-control?\n3. Words and gestures can constitute provocation only in exceptional cases.\n4. The fatal act must be committed before cooling time has elapsed.\n\nPublic outrage over jury bias in this case led Parliament to abolish jury trials in India in the 1973 CrPC.',
-          hi: 'न्यायमूर्ति के. सुब्बा राव ने गंभीर और अचानक उकसावे के लिए 4 सूत्रीय ऐतिहासिक सिद्धांत तय किए:\n1. उकसावा गंभीर और अचानक होना चाहिए।\n2. पैमाना वस्तुनिष्ठ है: क्या एक सामान्य व्यक्ति आत्म-नियंत्रण खो देता?\n3. केवल असाधारण मामलों में ही शब्द उकसावा बन सकते हैं।\n4. कृत्य गुस्सा शांत होने (Cooling Time) से पहले होना चाहिए।\n\nइस मामले में जूरी के पक्षपात के बाद 1973 के नए CrPC में भारत से जूरी व्यवस्था को हमेशा के लिए समाप्त कर दिया गया।',
+          en: 'Justice K. Subba Rao laid down the landmark 4-part test for Grave & Sudden Provocation:\\n1. The provocation must be grave and sudden.\\n2. The test is objective: would a reasonable person lose self-control?\\n3. Words and gestures can constitute provocation only in exceptional cases.\\n4. The fatal act must be committed before cooling time has elapsed.\\n\\nPublic outrage over jury bias in this case led Parliament to abolish jury trials in India in the 1973 CrPC.',
+          hi: 'न्यायमूर्ति के. सुब्बा राव ने गंभीर और अचानक उकसावे के लिए 4 सूत्रीय ऐतिहासिक सिद्धांत तय किए:\\n1. उकसावा गंभीर और अचानक होना चाहिए।\\n2. पैमाना वस्तुनिष्ठ है: क्या एक सामान्य व्यक्ति आत्म-नियंत्रण खो देता?\\n3. केवल असाधारण मामलों में ही शब्द उकसावा बन सकते हैं।\\n4. कृत्य गुस्सा शांत होने (Cooling Time) से पहले होना चाहिए।\\n\\nइस मामले में जूरी के पक्षपात के बाद 1973 के नए CrPC में भारत से जूरी व्यवस्था को हमेशा के लिए समाप्त कर दिया गया।',
         },
         evidence: {
           archiveType: 'court_decree',
@@ -1022,8 +1022,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'केमिकल ट्रीटमेंट और बालों का नुकसान।',
         },
         body: {
-          en: 'The customer requested a 4-inch trim from the bottom. Instead, the stylist chopped her hair to just 1 inch from the scalp.\n\nWhen the salon offered a corrective keratin treatment, excess chemicals burned her scalp, causing permanent follicle damage.',
-          hi: 'ग्राहक ने केवल नीचे से 4 इंच बाल ट्रिम करने को कहा था। लेकिन स्टाइलिस्ट ने ऊपर से काटते हुए केवल 1 इंच बाल छोड़े।\n\nइसके बाद जब सैलून ने सुधार के लिए केराटिन ट्रीटमेंट किया, तो अत्यधिक केमिकल से स्कैल्प जल गया और बालों की जड़ें खराब हो गईं।',
+          en: 'The customer requested a 4-inch trim from the bottom. Instead, the stylist chopped her hair to just 1 inch from the scalp.\\n\\nWhen the salon offered a corrective keratin treatment, excess chemicals burned her scalp, causing permanent follicle damage.',
+          hi: 'ग्राहक ने केवल नीचे से 4 इंच बाल ट्रिम करने को कहा था। लेकिन स्टाइलिस्ट ने ऊपर से काटते हुए केवल 1 इंच बाल छोड़े।\\n\\nइसके बाद जब सैलून ने सुधार के लिए केराटिन ट्रीटमेंट किया, तो अत्यधिक केमिकल से स्कैल्प जल गया और बालों की जड़ें खराब हो गईं।',
         },
         evidence: {
           archiveType: 'forensic',
@@ -1255,8 +1255,8 @@ export const CASES_DATA: CaseData[] = [
           hi: '₹2 करोड़ रद्द · ₹25 लाख मुआवजा',
         },
         body: {
-          en: 'A Supreme Court bench of Justices Aniruddha Bose and Vikram Nath held that while ITC was unquestionably guilty of deficiency in service, compensation must be based on quantifiable material evidence.\n\nThe apex court held that consumer courts cannot award arbitrary windfall damages without examining tax returns and actual financial loss. The award was reduced to ₹25 Lakhs.',
-          hi: 'सुप्रीम कोर्ट के न्यायमूर्ति अनिरुद्ध बोस और विक्रम नाथ की पीठ ने फैसला सुनाया कि हालांकि आईटीसी सेवा में कमी की दोषी थी, लेकिन मुआवजा ठोस दस्तावेजी सबूतों पर आधारित होना चाहिए।\n\nअदालत ने कहा कि उपभोक्ता आयोग बिना टैक्स रिटर्न या वित्तीय नुकसान की जांच किए मनमाना हर्जाना नहीं दे सकते। मुआवजे को घटाकर ₹25 लाख कर दिया गया।',
+          en: 'A Supreme Court bench of Justices Aniruddha Bose and Vikram Nath held that while ITC was unquestionably guilty of deficiency in service, compensation must be based on quantifiable material evidence.\\n\\nThe apex court held that consumer courts cannot award arbitrary windfall damages without examining tax returns and actual financial loss. The award was reduced to ₹25 Lakhs.',
+          hi: 'सुप्रीम कोर्ट के न्यायमूर्ति अनिरुद्ध बोस और विक्रम नाथ की पीठ ने फैसला सुनाया कि हालांकि आईटीसी सेवा में कमी की दोषी थी, लेकिन मुआवजा ठोस दस्तावेजी सबूतों पर आधारित होना चाहिए।\\n\\nअदालत ने कहा कि उपभोक्ता आयोग बिना टैक्स रिटर्न या वित्तीय नुकसान की जांच किए मनमाना हर्जाना नहीं दे सकते। मुआवजे को घटाकर ₹25 लाख कर दिया गया।',
         },
         evidence: {
           archiveType: 'verdict_decree',
@@ -1371,8 +1371,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'फेसबुक पोस्ट के लिए गिरफ्तारी।',
         },
         body: {
-          en: 'November 2012, Palghar, Maharashtra. 21-year-old Shaheen Dhada posted a status on Facebook questioning the complete shutdown of Mumbai following a political leader’s demise. Her friend Rinu Srinivasan merely "liked" it.\n\nWithin hours, both were arrested under Section 66A of the IT Act.',
-          hi: 'नवंबर 2012, पालघर, महाराष्ट्र। 21 वर्षीय शाहीन ढाडा ने एक राजनेता के निधन पर मुंबई बंद को लेकर फेसबुक पर एक सवाल उठाया। उनकी सहेली रिनू श्रीनिवासन ने उस पोस्ट को केवल "लाइक" किया था।\n\nकुछ ही घंटों में दोनों को आईटी एक्ट की धारा 66A के तहत गिरफ्तार कर लिया गया।',
+          en: 'November 2012, Palghar, Maharashtra. 21-year-old Shaheen Dhada posted a status on Facebook questioning the complete shutdown of Mumbai following a political leader’s demise. Her friend Rinu Srinivasan merely "liked" it.\\n\\nWithin hours, both were arrested under Section 66A of the IT Act.',
+          hi: 'नवंबर 2012, पालघर, महाराष्ट्र। 21 वर्षीय शाहीन ढाडा ने एक राजनेता के निधन पर मुंबई बंद को लेकर फेसबुक पर एक सवाल उठाया। उनकी सहेली रिनू श्रीनिवासन ने उस पोस्ट को केवल "लाइक" किया था।\\n\\nकुछ ही घंटों में दोनों को आईटी एक्ट की धारा 66A के तहत गिरफ्तार कर लिया गया।',
         },
         photoExhibitSrc: '/images/cases/shreya-singhal.jpg',
         photoExhibitCaption: {
@@ -1452,8 +1452,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'धारा 66A इतनी खतरनाक क्यों थी?',
         },
         body: {
-          en: 'Section 66A criminalized sending any message via computer or phone that was "grossly offensive", "annoying", or "inconvenient", punishable with up to 3 years in prison.\n\nBecause terms like "offensive" were never defined, police across India used it to arrest cartoonists, activists, journalists, and ordinary citizens for criticizing politicians.',
-          hi: 'धारा 66A के तहत कंप्यूटर या फोन से ऐसा कोई भी संदेश भेजना अपराध था जो "अत्यंत आपत्तिजनक", "परेशान करने वाला" या "असुविधाजनक" हो, जिसकी सजा 3 साल तक की जेल थी।\n\nचूंकि "आपत्तिजनक" शब्द की कोई परिभाषा नहीं थी, इसलिए पूरे देश की पुलिस इसका इस्तेमाल नेताओं की आलोचना करने वाले कार्टूनिस्टों, पत्रकारों और आम नागरिकों को जेल भेजने के लिए करने लगी।',
+          en: 'Section 66A criminalized sending any message via computer or phone that was "grossly offensive", "annoying", or "inconvenient", punishable with up to 3 years in prison.\\n\\nBecause terms like "offensive" were never defined, police across India used it to arrest cartoonists, activists, journalists, and ordinary citizens for criticizing politicians.',
+          hi: 'धारा 66A के तहत कंप्यूटर या फोन से ऐसा कोई भी संदेश भेजना अपराध था जो "अत्यंत आपत्तिजनक", "परेशान करने वाला" या "असुविधाजनक" हो, जिसकी सजा 3 साल तक की जेल थी।\\n\\nचूंकि "आपत्तिजनक" शब्द की कोई परिभाषा नहीं थी, इसलिए पूरे देश की पुलिस इसका इस्तेमाल नेताओं की आलोचना करने वाले कार्टूनिस्टों, पत्रकारों और आम नागरिकों को जेल भेजने के लिए करने लगी।',
         },
         evidence: {
           archiveType: 'police_record',
@@ -1685,8 +1685,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'रद्द · असंवैधानिक',
         },
         body: {
-          en: 'On 24 March 2015, Justices J. Chelameswar and Rohinton Fali Nariman delivered the historic 120-page judgment striking down Section 66A in its entirety.\n\nJustice Nariman drew the crucial distinction between Discussion, Advocacy, and Incitement: free speech only loses constitutional protection when it reaches the clear threshold of **incitement**.',
-          hi: '24 मार्च 2015 को, न्यायमूर्ति जे. चेलमेश्वर और रोहिंटन फली नरीमन ने धारा 66A को पूरी तरह से रद्द करते हुए 120 पन्नों का ऐतिहासिक फैसला सुनाया।\n\nन्यायमूर्ति नरीमन ने चर्चा, समर्थन और उकसावे के बीच महत्वपूर्ण अंतर स्पष्ट किया: अभिव्यक्ति की स्वतंत्रता का संरक्षण तभी समाप्त होता है जब वह सीधे तौर पर **हिंसा भड़काने** तक पहुंच जाए।',
+          en: 'On 24 March 2015, Justices J. Chelameswar and Rohinton Fali Nariman delivered the historic 120-page judgment striking down Section 66A in its entirety.\\n\\nJustice Nariman drew the crucial distinction between Discussion, Advocacy, and Incitement: free speech only loses constitutional protection when it reaches the clear threshold of **incitement**.',
+          hi: '24 मार्च 2015 को, न्यायमूर्ति जे. चेलमेश्वर और रोहिंटन फली नरीमन ने धारा 66A को पूरी तरह से रद्द करते हुए 120 पन्नों का ऐतिहासिक फैसला सुनाया।\\n\\nन्यायमूर्ति नरीमन ने चर्चा, समर्थन और उकसावे के बीच महत्वपूर्ण अंतर स्पष्ट किया: अभिव्यक्ति की स्वतंत्रता का संरक्षण तभी समाप्त होता है जब वह सीधे तौर पर **हिंसा भड़काने** तक पहुंच जाए।',
         },
         evidence: {
           archiveType: 'verdict_decree',
@@ -1803,8 +1803,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'दिल्ली पर छाया सफेद जहरीला धुआं।',
         },
         body: {
-          en: '4 December 1985, 10:30 AM. Exactly one year after the Bhopal disaster, an Oleum gas storage tank at Shriram Foods & Fertilizers in West Delhi ruptured. A thick, suffocating cloud of white fumes swept across Karampura, Kirti Nagar, and the Tis Hazari Court complex.\n\nHundreds were hospitalized; Tis Hazari advocate Charanjit Khatra died from inhalation.',
-          hi: '4 दिसंबर 1985, सुबह 10:30 बजे। भोपाल त्रासदी के ठीक एक साल बाद पश्चिमी दिल्ली स्थित श्रीराम फर्टिलाइजर्स का ओलियम गैस टैंक फट गया। जहरीला सफेद धुआं करमपुरा, कीर्ति नगर और तीस हजारी कोर्ट तक फैल गया।\n\nसैकड़ों लोग अस्पताल पहुंचे और तीस हजारी के वकील चरणजीत खटरा की गैस से मौत हो गई।',
+          en: '4 December 1985, 10:30 AM. Exactly one year after the Bhopal disaster, an Oleum gas storage tank at Shriram Foods & Fertilizers in West Delhi ruptured. A thick, suffocating cloud of white fumes swept across Karampura, Kirti Nagar, and the Tis Hazari Court complex.\\n\\nHundreds were hospitalized; Tis Hazari advocate Charanjit Khatra died from inhalation.',
+          hi: '4 दिसंबर 1985, सुबह 10:30 बजे। भोपाल त्रासदी के ठीक एक साल बाद पश्चिमी दिल्ली स्थित श्रीराम फर्टिलाइजर्स का ओलियम गैस टैंक फट गया। जहरीला सफेद धुआं करमपुरा, कीर्ति नगर और तीस हजारी कोर्ट तक फैल गया।\\n\\nसैकड़ों लोग अस्पताल पहुंचे और तीस हजारी के वकील चरणजीत खटरा की गैस से मौत हो गई।',
         },
         photoExhibitSrc: '/images/cases/m-c-mehta.jpg',
         photoExhibitCaption: {
@@ -2117,8 +2117,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'पूर्ण दायित्व सिद्धांत लागू',
         },
         body: {
-          en: 'Chief Justice P.N. Bhagwati delivered the unanimous 5-judge bench judgment on 20 December 1986.\n\nThe Supreme Court held that where an enterprise engages in hazardous activities, it owes an **absolute and non-delegable duty** to ensure no harm results. If damage occurs, the enterprise must pay compensation regardless of whether it took all precautions.',
-          hi: '20 दिसंबर 1986 को चीफ जस्टिस पी.एन. भगवती की 5 जजों की संविधान पीठ ने सर्वसम्मत फैसला सुनाया।\n\nसुप्रीम कोर्ट ने कहा कि खतरनाक उद्योग चलाने वाले हर उद्यम का समाज के प्रति **पूर्ण और गैर-हस्तांतरणीय कर्तव्य** है। यदि कोई नुकसान होता है, तो कंपनी को हर्जाना देना ही होगा, चाहे उसने कितनी भी सावधानियां क्यों न बरती हों।',
+          en: 'Chief Justice P.N. Bhagwati delivered the unanimous 5-judge bench judgment on 20 December 1986.\\n\\nThe Supreme Court held that where an enterprise engages in hazardous activities, it owes an **absolute and non-delegable duty** to ensure no harm results. If damage occurs, the enterprise must pay compensation regardless of whether it took all precautions.',
+          hi: '20 दिसंबर 1986 को चीफ जस्टिस पी.एन. भगवती की 5 जजों की संविधान पीठ ने सर्वसम्मत फैसला सुनाया।\\n\\nसुप्रीम कोर्ट ने कहा कि खतरनाक उद्योग चलाने वाले हर उद्यम का समाज के प्रति **पूर्ण और गैर-हस्तांतरणीय कर्तव्य** है। यदि कोई नुकसान होता है, तो कंपनी को हर्जाना देना ही होगा, चाहे उसने कितनी भी सावधानियां क्यों न बरती हों।',
         },
         evidence: {
           archiveType: 'verdict_decree',
@@ -2235,8 +2235,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'संविधान की आत्मा को बचाने की लड़ाई।',
         },
         body: {
-          en: '1970–1973. Prime Minister Indira Gandhi’s government passed constitutional amendments claiming unlimited power: Parliament could amend, repeal, or rewrite ANY part of the Constitution, including Fundamental Rights.\n\nOne seer and one legendary lawyer stood in their way.',
-          hi: '1970–1973। तत्कालीन प्रधानमंत्री इंदिरा गांधी की सरकार ने ऐसे संविधान संशोधन पारित किए जिसके तहत संसद को असीमित शक्तियां मिल गईं: संसद मौलिक अधिकारों सहित संविधान के किसी भी हिस्से को बदल या खत्म कर सकती थी।\n\nउनके सामने खड़े हुए एक संन्यासी और भारत के सबसे महान वकील।',
+          en: '1970–1973. Prime Minister Indira Gandhi’s government passed constitutional amendments claiming unlimited power: Parliament could amend, repeal, or rewrite ANY part of the Constitution, including Fundamental Rights.\\n\\nOne seer and one legendary lawyer stood in their way.',
+          hi: '1970–1973। तत्कालीन प्रधानमंत्री इंदिरा गांधी की सरकार ने ऐसे संविधान संशोधन पारित किए जिसके तहत संसद को असीमित शक्तियां मिल गईं: संसद मौलिक अधिकारों सहित संविधान के किसी भी हिस्से को बदल या खत्म कर सकती थी।\\n\\nउनके सामने खड़े हुए एक संन्यासी और भारत के सबसे महान वकील।',
         },
         photoExhibitSrc: '/images/cases/kesavananda-bharati.jpg',
         photoExhibitCaption: {
@@ -2542,8 +2542,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'बुनियादी ढांचे का सिद्धांत लागू (7-6)',
         },
         body: {
-          en: 'On 24 April 1973 (the day before CJI Sikri retired), the Supreme Court delivered 11 separate opinions totaling 703 pages.\n\nBy a razor-thin 7–6 majority, the court ruled:\n**Parliament has wide power to amend the Constitution, but it CANNOT alter its Basic Structure.**\n\nSwami Kesavananda Bharati lost his land petition, but his name became immortalized as the case that saved Indian democracy.',
-          hi: '24 अप्रैल 1973 को (सीजेआई सीकरी के रिटायरमेंट से ठीक एक दिन पहले) सुप्रीम कोर्ट ने 11 अलग-अलग रायों के साथ 703 पन्नों का फैसला सुनाया।\n\n7-6 के बहुमत से कोर्ट ने तय किया:\n**संसद के पास संविधान संशोधन की व्यापक शक्ति है, लेकिन वह इसके बुनियादी ढांचे को नहीं बदल सकती।**\n\nस्वामी केशवानंद भारती अपनी जमीन का केस हार गए, लेकिन उनका नाम भारतीय लोकतंत्र को बचाने वाले सबसे बड़े मुकदमे के रूप में अमर हो गया।',
+          en: 'On 24 April 1973 (the day before CJI Sikri retired), the Supreme Court delivered 11 separate opinions totaling 703 pages.\\n\\nBy a razor-thin 7–6 majority, the court ruled:\\n**Parliament has wide power to amend the Constitution, but it CANNOT alter its Basic Structure.**\\n\\nSwami Kesavananda Bharati lost his land petition, but his name became immortalized as the case that saved Indian democracy.',
+          hi: '24 अप्रैल 1973 को (सीजेआई सीकरी के रिटायरमेंट से ठीक एक दिन पहले) सुप्रीम कोर्ट ने 11 अलग-अलग रायों के साथ 703 पन्नों का फैसला सुनाया।\\n\\n7-6 के बहुमत से कोर्ट ने तय किया:\\n**संसद के पास संविधान संशोधन की व्यापक शक्ति है, लेकिन वह इसके बुनियादी ढांचे को नहीं बदल सकती।**\\n\\nस्वामी केशवानंद भारती अपनी जमीन का केस हार गए, लेकिन उनका नाम भारतीय लोकतंत्र को बचाने वाले सबसे बड़े मुकदमे के रूप में अमर हो गया।',
         },
         evidence: {
           archiveType: 'court_decree',
@@ -2580,8 +2580,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'वह नजीर जिसने तानाशाही को रोका।',
         },
         body: {
-          en: 'During the 1975 Emergency, the government passed the 39th Amendment to make Prime Minister election unchallengeable in any court.\n\nThe Supreme Court used the Basic Structure Doctrine to strike it down, declaring Judicial Review and Free Elections part of the untouchable basic structure.\n\nToday, India’s democracy stands protected because no government can ever rewrite the foundational pillars of the republic.',
-          hi: '1975 के आपातकाल के दौरान सरकार ने 39वां संशोधन पारित कर प्रधानमंत्री के चुनाव को किसी भी अदालत में चुनौती से परे कर दिया था।\n\nसुप्रीम कोर्ट ने बेसिक स्ट्रक्चर सिद्धांत का उपयोग करके इस संशोधन को रद्द कर दिया और न्यायिक समीक्षा तथा निष्पक्ष चुनाव को संविधान का बुनियादी ढांचा घोषित किया।\n\nआज भारतीय लोकतंत्र सुरक्षित है क्योंकि कोई भी सरकार कभी भी संविधान के मूल स्तंभों को मिटा नहीं सकती।',
+          en: 'During the 1975 Emergency, the government passed the 39th Amendment to make Prime Minister election unchallengeable in any court.\\n\\nThe Supreme Court used the Basic Structure Doctrine to strike it down, declaring Judicial Review and Free Elections part of the untouchable basic structure.\\n\\nToday, India’s democracy stands protected because no government can ever rewrite the foundational pillars of the republic.',
+          hi: '1975 के आपातकाल के दौरान सरकार ने 39वां संशोधन पारित कर प्रधानमंत्री के चुनाव को किसी भी अदालत में चुनौती से परे कर दिया था।\\n\\nसुप्रीम कोर्ट ने बेसिक स्ट्रक्चर सिद्धांत का उपयोग करके इस संशोधन को रद्द कर दिया और न्यायिक समीक्षा तथा निष्पक्ष चुनाव को संविधान का बुनियादी ढांचा घोषित किया।\\n\\nआज भारतीय लोकतंत्र सुरक्षित है क्योंकि कोई भी सरकार कभी भी संविधान के मूल स्तंभों को मिटा नहीं सकती।',
         },
         evidence: {
           archiveType: 'verdict_decree',
@@ -2642,6 +2642,1444 @@ export const CASES_DATA: CaseData[] = [
       whyItMatters: {
         en: 'This is universally acknowledged as the most important judgment in Indian legal history. It saved Indian constitutional democracy by ensuring that no political party with a parliamentary majority can ever dismantle democratic institutions or fundamental liberties.',
         hi: 'यह भारतीय कानूनी इतिहास का सबसे महत्वपूर्ण फैसला है। इसने सुनिश्चित किया कि संसद में भारी बहुमत वाली कोई भी सरकार लोकतांत्रिक संस्थाओं या नागरिकों की आजादी को कभी खत्म नहीं कर सकती।',
+      },
+    },
+  },
+  {
+    slug: 'shah-bano',
+    title: {
+      en: 'The Shah Bano Case',
+      hi: 'शाह बानो मामला',
+    },
+    tag: {
+      en: 'CrPC 125 · Maintenance Rights',
+      hi: 'सीआरपीसी 125 · भरण-पोषण का अधिकार',
+    },
+    categoryTag: 'CRPC 125',
+    genre: 'constitutional',
+    theme: 'constitutional-gold',
+    court: 'Supreme Court of India',
+    year: 1985,
+    readTime: {
+      en: '5 min read',
+      hi: '5 मिनट',
+    },
+    matchRate: 97,
+    maturityRating: 'U/A 13+',
+    rank: 7,
+    bannerImage: '/images/cases/shah-bano.jpg',
+    blurb: {
+      en: 'A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.',
+      hi: '43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।',
+    },
+    citation: 'Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945',
+    judgmentUrl: 'https://indiankanoon.org/doc/823221/',
+    watermark: '§125',
+    featuredHeroHook: {
+      en: 'Denied alimony after 43 years of marriage. She changed Indian law forever.',
+      hi: '43 साल बाद बिना गुजारा भत्ता छोड़ा गया। उसने भारतीय कानून का इतिहास बदल दिया।',
+    },
+    featuredHeroDesc: {
+      en: 'In 1978, Shah Bano filed for maintenance under Section 125 CrPC. Her wealthy advocate husband claimed personal law absolved him after paying Rs. 3,000 Mehr. The Supreme Court ruled Section 125 is a secular, universal shield for all destitute women.',
+      hi: '1978 में इंदौर की शाह बानो ने धारा 125 सीआरपीसी के तहत भरण-पोषण की मांग की। सुप्रीम कोर्ट की संविधान पीठ ने फैसला दिया कि भरण-पोषण का कानून धर्मनिरपेक्ष है और हर बेसहारा महिला पर लागू होता है।',
+    },
+    hasJudgeDecision: true,
+    panels: [
+      {
+        id: 'panel-1',
+        type: 'HOOK',
+        eyebrow: {
+          en: 'EPISODE 01 · THE ABANDONMENT',
+          hi: 'एपिसोड 01 · बेसहारा छोड़ना',
+        },
+        headline: {
+          en: '43 Years of Marriage. Evicted with Five Children.',
+          hi: '43 साल का वैवाहिक जीवन और पांच बच्चों के साथ निष्कासन।',
+        },
+        body: {
+          en: 'Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn.',
+          hi: 'इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।',
+        },
+        photoExhibitSrc: '/images/cases/shah-bano.jpg',
+        photoExhibitCaption: {
+          en: 'Archival courtroom records: Shah Bano Begum filing for maintenance under Section 125 CrPC.',
+          hi: 'अदालती रिकॉर्ड: धारा 125 सीआरपीसी के तहत भरण-पोषण की याचिका दायर करती शाह बानो।',
+        },
+      },
+      {
+        id: 'panel-2',
+        type: 'PEOPLE',
+        eyebrow: {
+          en: 'EPISODE 02 · DRAMATIS PERSONAE',
+          hi: 'एपिसोड 02 · मुख्य पात्र',
+        },
+        headline: {
+          en: 'The Indigent Mother vs. The Elite Advocate.',
+          hi: 'एक बेसहारा मां बनाम शहर का दिग्गज वकील।',
+        },
+        body: {
+          en: 'Meet the key parties in India’s most polarized legal battle on secularism and gender justice.',
+          hi: 'जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।',
+        },
+        characters: [
+          {
+            name: { en: 'Shah Bano Begum', hi: 'शाह बानो बेगम' },
+            role: { en: 'Petitioner (Divorced Wife)', hi: 'याचिकाकर्ता (तलाकशुदा पत्नी)' },
+            tag: { en: 'Aged 62, Fighting for Survival', hi: '62 वर्षीय बेसहारा मां' },
+            description: {
+              en: 'Mother of 5 children seeking modest survival maintenance under Section 125 CrPC.',
+              hi: '5 बच्चों की मां जिन्होंने जीवित रहने के लिए धारा 125 के तहत 500 रुपये प्रति माह की मांग की।',
+            },
+          },
+          {
+            name: { en: 'Mohd. Ahmed Khan', hi: 'मोहम्मद अहमद खान' },
+            role: { en: 'Respondent (Advocate Husband)', hi: 'प्रतिवादी (वकील पति)' },
+            tag: { en: 'Prominent Legal Counsel', hi: 'वरिष्ठ अधिवक्ता' },
+            description: {
+              en: 'Wealthy lawyer earning Rs. 60,000/year who claimed Muslim Personal Law limited liability to Iddat period.',
+              hi: 'सालाना 60,000 रुपये कमाने वाले अमीर वकील जिन्होंने दावा किया कि पर्सनल लॉ के तहत इद्दत के बाद कोई दायित्व नहीं है।',
+            },
+          },
+          {
+            name: { en: 'Chief Justice Y.V. Chandrachud', hi: 'सीजेआई वाई.वी. चंद्रचूड़' },
+            role: { en: 'Chief Justice of India', hi: 'भारत के मुख्य न्यायाधीश' },
+            tag: { en: '5-Judge Constitution Bench', hi: '5 जजों की संविधान पीठ' },
+            description: {
+              en: 'Authored the unanimous judgment harmonizing secular criminal law with humanitarian principles.',
+              hi: 'ऐतिहासिक फैसले के लेखक जिन्होंने स्पष्ट किया कि धर्मनिरपेक्ष कानून धार्मिक संकीर्णता से ऊपर है।',
+            },
+          },
+        ],
+      },
+      {
+        id: 'panel-3',
+        type: 'INCIDENT',
+        eyebrow: {
+          en: 'EPISODE 03 · THE LEGAL CLAIM',
+          hi: 'एपिसोड 03 · ₹500 का भरण-पोषण',
+        },
+        headline: {
+          en: 'The Claim: ₹500/month. The Defense: Instant Triple Talaq.',
+          hi: 'मांग: ₹500 महीना। बचाव: तीन तलाक का सहारा।',
+        },
+        body: {
+          en: 'In April 1978, Shah Bano filed an application under Section 125 CrPC claiming Rs. 500 per month for maintenance.\n\nIn November 1978, the husband pronounced irrevocable Talaq, deposited Rs. 3,000 as Dower/Mehr, and argued he was completely discharged under Islamic law.',
+          hi: 'अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।',
+        },
+        evidence: {
+          archiveType: 'police_record',
+          masthead: 'FIRST CLASS MAGISTRATE INDORE · DOCKET NO. 125/1978',
+          date: 'APRIL 1978',
+          headline: {
+            en: 'PETITION UNDER SECTION 125 CRPC FOR MAINTENANCE OF DESTITUTE WIFE',
+            hi: 'बेसहारा पत्नी के भरण-पोषण हेतु धारा 125 सीआरपीसी के तहत याचिका',
+          },
+          snippet: {
+            en: 'Petitioner Shah Bano Begum aged 62 years having no independent source of income prays for maintenance allowance of Rs. 500 per month from respondent earning exceeding Rs. 60,000 per annum.',
+            hi: 'याचिकाकर्ता शाह बानो (62 वर्ष) जिनके पास कोई आय का साधन नहीं है, प्रतिवादी से 500 रुपये प्रति माह भरण-पोषण की प्रार्थना करती हैं।',
+          },
+          highlightedPhrase: {
+            en: 'no independent source of income prays for maintenance allowance',
+            hi: 'कोई आय का साधन नहीं है, भरण-पोषण की प्रार्थना करती हैं',
+          },
+          exhibitNumber: 'PETITION · DOCKET 125/78',
+          caption: {
+            en: 'Certified court filing in the Court of Judicial Magistrate First Class, Indore.',
+            hi: 'न्यायिक मजिस्ट्रेट प्रथम श्रेणी, इंदौर की अदालत में दाखिल मूल याचिका।',
+          },
+        },
+      },
+      {
+        id: 'panel-4',
+        type: 'ARGUMENTS',
+        eyebrow: {
+          en: 'EPISODE 04 · COURTROOM CLASH',
+          hi: 'एपिसोड 04 · अदालत में टकराव',
+        },
+        headline: {
+          en: 'Personal Law vs. Secular Criminal Code.',
+          hi: 'पर्सनल लॉ बनाम धर्मनिरपेक्ष आपराधिक संहिता।',
+        },
+        body: {
+          en: 'The constitutional bench examined whether Section 125 CrPC is truly universal across all religions in India.',
+          hi: 'संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।',
+        },
+        prosecutionArgs: {
+          party: { en: 'Shah Bano (Wife)', hi: 'शाह बानो (पत्नी)' },
+          claim: {
+            en: 'Section 125 CrPC is a secular social-welfare law designed to prevent vagrancy and starvation.',
+            hi: 'धारा 125 सीआरपीसी भुखमरी और बेसहारा होने से बचाने वाला एक धर्मनिरपेक्ष सामाजिक कानून है।',
+          },
+          statute: 'Section 125 CrPC · Code of Criminal Procedure',
+          keyPoint: {
+            en: 'Religion cannot be used as a shield to abandon an elderly wife with no means of livelihood.',
+            hi: 'वृद्ध पत्नी को बिना किसी आजीविका के बेसहारा छोड़ने के लिए धर्म को ढाल नहीं बनाया जा सकता।',
+          },
+        },
+        defenceArgs: {
+          party: { en: 'Mohd. Ahmed Khan (Husband)', hi: 'मोहम्मद अहमद खान (पति)' },
+          claim: {
+            en: 'Under Muslim Personal Law, a husband is only liable during the 3-month Iddat period.',
+            hi: 'मुस्लिम पर्सनल लॉ के तहत पति की जिम्मेदारी सिर्फ 3 महीने की इद्दत अवधि तक सीमित है।',
+          },
+          statute: 'Muslim Personal Law (Shariat) Application Act 1937',
+          keyPoint: {
+            en: 'Paying maintenance beyond Iddat violates the Shariat and criminal courts have no jurisdiction.',
+            hi: 'इद्दत के बाद भरण-पोषण देना शरीयत के नियमों के विरुद्ध है।',
+          },
+        },
+      },
+      {
+        id: 'panel-5',
+        type: 'YOU_DECIDE',
+        eyebrow: {
+          en: 'EPISODE 05 · YOU ARE THE JUDGE',
+          hi: 'एपिसोड 05 · आप हैं जज',
+        },
+        headline: {
+          en: 'Does Secular Law Override Personal Law for Destitute Women?',
+          hi: 'क्या बेसहारा महिलाओं के लिए धर्मनिरपेक्ष कानून पर्सनल लॉ से ऊपर है?',
+        },
+        body: {
+          en: 'Cast your judicial decision before reading the Supreme Court verdict.',
+          hi: 'सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।',
+        },
+        judgeDecision: {
+          question: {
+            en: 'Should Section 125 CrPC apply equally to a divorced Muslim woman unable to maintain herself?',
+            hi: 'क्या धारा 125 सीआरपीसी तलाकशुदा मुस्लिम महिला पर भी समान रूप से लागू होनी चाहिए?',
+          },
+          subtext: {
+            en: 'Section 125 is part of the criminal procedure code intended to prevent destitution.',
+            hi: 'धारा 125 आपराधिक प्रक्रिया का हिस्सा है जिसका उद्देश्य बेसहारा महिलाओं को भुखमरी से बचाना है।',
+          },
+          options: [
+            {
+              id: 'personal-law-priority',
+              title: {
+                en: 'Personal Law Prevails (Limit to Iddat)',
+                hi: 'पर्सनल लॉ सर्वोपरि है (इद्दत तक सीमित)',
+              },
+              reason: {
+                en: 'Civil courts must respect religious personal laws in marital financial obligations.',
+                hi: 'वैवाहिक वित्तीय दायित्वों में धार्मिक पर्सनल लॉ का सम्मान होना चाहिए।',
+              },
+              simulatedVotesPercent: 18,
+              isActualVerdict: false,
+            },
+            {
+              id: 'secular-welfare-priority',
+              title: {
+                en: 'Section 125 CrPC Applies to ALL Citizens',
+                hi: 'धारा 125 सभी नागरिकों पर समान रूप से लागू है',
+              },
+              reason: {
+                en: 'Secular criminal law prevents destitution regardless of religion. No woman should starve.',
+                hi: 'धर्मनिरपेक्ष कानून धर्म से ऊपर है और किसी भी नागरिक को भुखमरी से बचाना राज्य का कर्तव्य है।',
+              },
+              simulatedVotesPercent: 82,
+              isActualVerdict: true,
+            },
+          ],
+          judicialRationale: {
+            en: 'The Supreme Court ruled unanimously that Section 125 CrPC is truly secular and applies to all citizens irrespective of religion.',
+            hi: 'सुप्रीम कोर्ट ने सर्वसम्मति से फैसला दिया कि धारा 125 सीआरपीसी पूर्णतः धर्मनिरपेक्ष है और हर नागरिक पर लागू होती है।',
+          },
+        },
+      },
+      {
+        id: 'panel-6',
+        type: 'VERDICT',
+        eyebrow: {
+          en: 'EPISODE 06 · THE UNANIMOUS VERDICT',
+          hi: 'एपिसोड 06 · ऐतिहासिक फैसला',
+        },
+        headline: {
+          en: '23 April 1985: Section 125 CrPC is Secular and Universal.',
+          hi: '23 अप्रैल 1985: धारा 125 सीआरपीसी धर्मनिरपेक्ष और सार्वभौमिक है।',
+        },
+        stamp: {
+          en: 'SECULAR MAINTENANCE AFFIRMED (5-0)',
+          hi: 'भरण-पोषण का अधिकार स्वीकृत (5-0)',
+        },
+        body: {
+          en: 'A unanimous 5-judge Constitution Bench led by CJI Chandrachud held:\n\n**"Section 125 CrPC is a secular provision designed to prevent destitution. It cuts across the barriers of religion and applies equally to all wives, children, and parents."**\n\nThe court ordered the husband to pay maintenance, establishing gender justice as a paramount constitutional principle.',
+          hi: 'सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।',
+        },
+        evidence: {
+          archiveType: 'court_decree',
+          masthead: 'SUPREME COURT OF INDIA · (1985) 2 SCC 556',
+          date: '23 APRIL 1985',
+          headline: {
+            en: 'CERTIFIED DECREE: SECTION 125 CRPC APPLIES TO ALL DIVORCED WOMEN',
+            hi: 'प्रमाणित डिक्री: धारा 125 सीआरपीसी सभी तलाकशुदा महिलाओं पर लागू होती है',
+          },
+          snippet: {
+            en: 'Held: "Section 125 of the Code of Criminal Procedure is truly secular in character. There is no conflict between the provisions of Section 125 and the personal law on the subject of the Muslim husband’s obligation to provide maintenance to a divorced wife as long as she is unable to maintain herself."',
+            hi: 'फैसला: "आपराधिक प्रक्रिया संहिता की धारा 125 पूरी तरह से धर्मनिरपेक्ष है। जब तक तलाकशुदा पत्नी स्वयं का भरण-पोषण करने में असमर्थ है, तब तक धारा 125 और पर्सनल लॉ में कोई विरोधाभास नहीं है।"',
+          },
+          highlightedPhrase: {
+            en: 'Section 125 of the Code of Criminal Procedure is truly secular in character',
+            hi: 'धारा 125 पूरी तरह से धर्मनिरपेक्ष है',
+          },
+          exhibitNumber: 'SUPREME COURT DECREE · AIR 1985 SC 945',
+          caption: {
+            en: 'Certified judgment decree delivered by the Constitution Bench on 23 April 1985.',
+            hi: '23 अप्रैल 1985 को सुप्रीम कोर्ट की संविधान पीठ द्वारा दिया गया प्रमाणित फैसला।',
+          },
+        },
+      },
+      {
+        id: 'panel-7',
+        type: 'RATIO',
+        eyebrow: {
+          en: 'EPISODE 07 · THE LEGACY',
+          hi: 'एपिसोड 07 · कानूनी प्रभाव',
+        },
+        headline: {
+          en: 'The Danial Latifi Precedent: Enduring Protection.',
+          hi: 'दानियाल लतीफी फैसला: महिलाओं के अधिकारों की रक्षा।',
+        },
+        body: {
+          en: 'Although the subsequent 1986 Act attempted to restrict Section 125, the Supreme Court in **Danial Latifi v. Union of India (2001)** interpreted the law to require husbands to make a "reasonable and fair provision" for the wife’s ENTIRE life within the Iddat period.\n\nShah Bano’s courageous crusade laid the bedrock for modern gender equality in Indian family jurisprudence.',
+          hi: 'यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।',
+        },
+        evidence: {
+          archiveType: 'verdict_decree',
+          masthead: 'SUPREME COURT OF INDIA · LANDMARK JURISPRUDENCE',
+          date: 'PERPETUAL RATIO',
+          headline: {
+            en: 'RATIO: DIGNITY AND RIGHT TO LIVELIHOOD FOR DESTITUTE WOMEN IS INVIOLABLE',
+            hi: 'विधिक सिद्धांत: बेसहारा महिलाओं की गरिमा और आजीविका का अधिकार अटल है',
+          },
+          snippet: {
+            en: 'The fundamental principle established in Shah Bano ensures that no person can evade the statutory obligation of preventing their dependent spouse from falling into destitution and starvation.',
+            hi: 'शाह बानो में स्थापित सिद्धांत सुनिश्चित करता है कि कोई भी व्यक्ति अपने आश्रित जीवनसाथी को भुखमरी से बचाने के कानूनी कर्तव्य से बच नहीं सकता।',
+          },
+          highlightedPhrase: {
+            en: 'preventing their dependent spouse from falling into destitution and starvation',
+            hi: 'आश्रित जीवनसाथी को भुखमरी से बचाने के कानूनी कर्तव्य से',
+          },
+          exhibitNumber: 'GOLDEN RATIO · CRPC 125',
+          caption: {
+            en: 'The timeless precedent protecting vulnerable women across India.',
+            hi: 'भारत भर में बेसहारा महिलाओं की रक्षा करने वाली ऐतिहासिक नजीर।',
+          },
+        },
+        citationFooter: '(1985) 2 SCC 556 · Supreme Court of India',
+        judgmentUrl: 'https://indiankanoon.org/doc/823221/',
+      },
+    ],
+    brief: {
+      courtAndYear: {
+        en: 'Supreme Court of India · 1985',
+        hi: 'सुप्रीम कोर्ट ऑफ इंडिया · 1985',
+      },
+      facts: {
+        en: 'Shah Bano, a 62-year-old woman, was divorced by her husband Mohd. Ahmed Khan after 43 years of marriage. She approached the magistrate under Section 125 CrPC seeking maintenance. The husband contended that under Muslim Personal Law, his liability ceased after paying Mehr and maintaining her for the 3-month Iddat period.',
+        hi: '62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान ने 43 साल की शादी के बाद तलाक दे दिया। उन्होंने धारा 125 सीआरपीसी के तहत भरण-पोषण की मांग की। पति ने तर्क दिया कि मुस्लिम पर्सनल लॉ के अनुसार मेहर और 3 महीने की इद्दत के बाद उसका कोई दायित्व नहीं है।',
+      },
+      issues: {
+        en: [
+          'Whether Section 125 of the Code of Criminal Procedure applies to Muslim divorced women?',
+          'Whether the payment of Mehr/Dower under personal law discharges the husband’s liability under Section 125 CrPC?',
+        ],
+        hi: [
+          'क्या आपराधिक प्रक्रिया संहिता की धारा 125 मुस्लिम तलाकशुदा महिलाओं पर लागू होती है?',
+          'क्या मेहर का भुगतान पति को धारा 125 के तहत भरण-पोषण के दायित्व से मुक्त करता है?',
+        ],
+      },
+      chargesApplied: ['Section 125 of the Code of Criminal Procedure 1973', 'Muslim Personal Law (Shariat) Application Act 1937'],
+      held: {
+        en: 'A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband.',
+        hi: '5 जजों की संविधान पीठ ने सर्वसम्मति से फैसला दिया कि धारा 125 सीआरपीसी एक धर्मनिरपेक्ष सामाजिक कानून है जो सभी नागरिकों पर लागू होता है। असमर्थ तलाकशुदा मुस्लिम महिला अपने पूर्व पति से भरण-पोषण पाने की हकदार है।',
+      },
+      reasoning: {
+        en: 'Section 125 CrPC was enacted to prevent vagrancy and destitution. It is completely secular in operation and takes precedence over personal laws when an indigent person faces starvation.',
+        hi: 'धारा 125 का उद्देश्य समाज में भुखमरी और लाचारी को रोकना है। यह कानून धर्मनिरपेक्ष है और जब कोई व्यक्ति बेसहारा हो, तो यह पर्सनल लॉ पर प्रभावी होता है।',
+      },
+      whyItMatters: {
+        en: 'Shah Bano is one of the most famous judgments in Indian constitutional history, defining the boundary between secular state laws and personal religious laws, and solidifying maintenance rights for women.',
+        hi: 'यह भारतीय कानूनी इतिहास का मील का पत्थर है जिसने धर्मनिरपेक्ष कानूनों और पर्सनल लॉ के बीच संतुलन स्थापित किया और महिलाओं के भरण-पोषण अधिकारों को सशक्त बनाया।',
+      },
+    },
+  },
+  {
+    slug: 'vishaka-case',
+    title: {
+      en: 'Vishaka v. State of Rajasthan',
+      hi: 'विशाखा बनाम राजस्थान राज्य',
+    },
+    tag: {
+      en: 'Article 21 · Workplace Harassment Guidelines',
+      hi: 'अनुच्छेद 21 · कार्यस्थल यौन उत्पीड़न रोकथाम',
+    },
+    categoryTag: 'ARTICLE 21',
+    genre: 'constitutional',
+    theme: 'constitutional-gold',
+    court: 'Supreme Court of India',
+    year: 1997,
+    readTime: {
+      en: '5 min read',
+      hi: '5 मिनट',
+    },
+    matchRate: 99,
+    maturityRating: 'U/A 16+',
+    rank: 8,
+    bannerImage: '/images/cases/vishaka-case.jpg',
+    blurb: {
+      en: 'When a social worker was assaulted for stopping child marriage and the legislature had no law, the Supreme Court created binding law: The Vishaka Guidelines.',
+      hi: 'बाल विवाह रोकने पर सामाजिक कार्यकर्ता पर हमला हुआ और कोई कानून नहीं था, तो सुप्रीम कोर्ट ने कार्यस्थल सुरक्षा के लिए ऐतिहासिक विशाखा गाइडलाइंस बनाईं।',
+    },
+    citation: 'Vishaka and others v. State of Rajasthan, (1997) 6 SCC 241, AIR 1997 SC 3011',
+    judgmentUrl: 'https://indiankanoon.org/doc/1031794/',
+    watermark: 'VISHAKA',
+    featuredHeroHook: {
+      en: 'No law existed to protect working women. So the Supreme Court wrote one.',
+      hi: 'कामकाजी महिलाओं की सुरक्षा के लिए कोई कानून नहीं था। इसलिए सुप्रीम कोर्ट ने खुद कानून लिखा।',
+    },
+    featuredHeroDesc: {
+      en: 'In 1992, Bhanwari Devi, a Rajasthan government saathin, was gang-raped for campaigning against child marriage. The trial court acquitted the accused with shocking misogyny. Women’s rights groups filed a PIL under the name Vishaka. The Supreme Court invoked CEDAW and Articles 14, 19, and 21 to formulate the mandatory Vishaka Guidelines.',
+      hi: '1992 में बाल विवाह का विरोध करने पर भंवरी देवी के साथ बर्बरता हुई। निचली अदालत ने आरोपियों को बरी कर दिया। इसके विरोध में महिला संगठनों ने "विशाखा" नाम से जनहित याचिका दायर की। सुप्रीम कोर्ट ने कार्यस्थल पर यौन उत्पीड़न रोकने के लिए ऐतिहासिक दिशा-निर्देश जारी किए।',
+    },
+    hasJudgeDecision: true,
+    panels: [
+      {
+        id: 'panel-1',
+        type: 'HOOK',
+        eyebrow: {
+          en: 'EPISODE 01 · THE CATALYST',
+          hi: 'एपिसोड 01 · भयावह घटना',
+        },
+        headline: {
+          en: 'Punished for Doing Her Duty as a State Worker.',
+          hi: 'सरकारी कर्तव्य निभाने की भयानक सजा।',
+        },
+        body: {
+          en: 'Bhanwari Devi was employed by the Rajasthan Government as a social worker (Saathin) under the Women’s Development Project.\n\nIn 1992, while preventing the child marriage of a nine-month-old infant in Bhateri village, she was brutally gang-raped by influential upper-caste men.',
+          hi: 'भंवरी देवी राजस्थान सरकार के महिला विकास कार्यक्रम में साथिन के रूप में कार्यरत थीं।\n\n1992 में भटेरी गांव में 9 महीने की बच्ची का बाल विवाह रोकने पर दबंगों ने उनके साथ सामूहिक दुष्कर्म किया।',
+        },
+        photoExhibitSrc: '/images/cases/vishaka-case.jpg',
+        photoExhibitCaption: {
+          en: 'Supreme Court of India PIL archival docket: Vishaka & Others v. State of Rajasthan (1992-1997).',
+          hi: 'सुप्रीम कोर्ट जनहित याचिका रिकॉर्ड: विशाखा बनाम राजस्थान राज्य (1992-1997)।',
+        },
+      },
+      {
+        id: 'panel-2',
+        type: 'PEOPLE',
+        eyebrow: {
+          en: 'EPISODE 02 · DRAMATIS PERSONAE',
+          hi: 'एपिसोड 02 · मुख्य किरदार',
+        },
+        headline: {
+          en: 'The Whistleblower, The Advocates, and The Chief Justice.',
+          hi: 'साहसी महिला, मानवाधिकार वकील और मुख्य न्यायाधीश।',
+        },
+        body: {
+          en: 'Meet the women and jurists who converted a brutal injustice into a nationwide shield.',
+          hi: 'जानिए उन महिलाओं और जजों को जिन्होंने एक जुर्म के खिलाफ देशव्यापी सुरक्षा दीवार खड़ी कर दी।',
+        },
+        characters: [
+          {
+            name: { en: 'Bhanwari Devi', hi: 'भंवरी देवी' },
+            role: { en: 'Grassroots Social Worker', hi: 'ग्रामीण साथिन' },
+            tag: { en: 'Symbol of Courage', hi: 'अदम्य साहस की प्रतीक' },
+            description: {
+              en: 'Grassroots worker whose harrowing struggle exposed the complete absence of workplace sexual harassment laws in India.',
+              hi: 'वह साहसी महिला जिनकी लड़ाई ने भारत के कानूनी इतिहास में कार्यस्थल सुरक्षा की नींव रखी।',
+            },
+          },
+          {
+            name: { en: 'Naina Kapur & Vishaka NGO Collective', hi: 'नैना कपूर व विशाखा संगठन' },
+            role: { en: 'PIL Petitioners & Human Rights Lawyers', hi: 'जनहित याचिकाकर्ता व वकील' },
+            tag: { en: 'Article 32 Public Interest Litigation', hi: 'अनुच्छेद 32 याचिका' },
+            description: {
+              en: 'Drafted the historic PIL seeking judicial guidelines based on international CEDAW conventions.',
+              hi: 'अंतरराष्ट्रीय मानवाधिकार संधियों के आधार पर सुप्रीम कोर्ट से दिशा-निर्देश मांगने वाले अधिवक्ता।',
+            },
+          },
+          {
+            name: { en: 'CJI J.S. Verma', hi: 'सीजेआई जे.एस. वर्मा' },
+            role: { en: 'Chief Justice of India', hi: 'भारत के मुख्य न्यायाधीश' },
+            tag: { en: 'Architect of Vishaka Guidelines', hi: 'विशाखा दिशानिर्देशों के रचयिता' },
+            description: {
+              en: 'Pioneered judicial law-making under Article 141 to fill legislative void until Parliament enacted a statute.',
+              hi: 'जिन्होंने अनुच्छेद 141 के तहत न्यायिक शक्ति का उपयोग कर संसद के कानून बनने तक बाध्यकारी नियम बनाए।',
+            },
+          },
+        ],
+      },
+      {
+        id: 'panel-3',
+        type: 'INCIDENT',
+        eyebrow: {
+          en: 'EPISODE 03 · THE OUTRAGE',
+          hi: 'एपिसोड 03 · व्यवस्था की विफलता',
+        },
+        headline: {
+          en: 'A Shocking Trial Court Acquittal Triggers National Fury.',
+          hi: 'निचली अदालत का शर्मनाक फैसला और देशव्यापी आक्रोश।',
+        },
+        body: {
+          en: 'In 1995, a Sessions Court acquitted all the accused with shocking remarks, claiming "elderly village men of high caste would not rape a lower caste woman".\n\nOutraged by the systemic misogyny, women rights advocates united under the collective name "Vishaka" and approached the Supreme Court directly under Article 32.',
+          hi: '1995 में सत्र अदालत ने यह कहते हुए आरोपियों को बरी कर दिया कि "उच्च जाति के बुजुर्ग व्यक्ति ऐसा अपराध नहीं कर सकते।"\n\nइस फैसले से आक्रोशित महिला अधिकार संगठनों ने "विशाखा" नाम से सुप्रीम कोर्ट में सीधे अनुच्छेद 32 के तहत जनहित याचिका दायर की।',
+        },
+        evidence: {
+          archiveType: 'newspaper',
+          masthead: 'THE HINDUSTAN TIMES · SUPREME COURT DISPATCH',
+          date: '14 AUGUST 1997',
+          headline: {
+            en: 'SUPREME COURT STEPS IN WHERE LEGISLATURE FAILED: VISHAKA GUIDELINES DECREED',
+            hi: 'जहां संसद विफल रही वहां सुप्रीम कोर्ट ने लिखा कानून: विशाखा गाइडलाइंस लागू',
+          },
+          snippet: {
+            en: 'The Supreme Court of India in a pathbreaking judgment formulated comprehensive guidelines to prevent sexual harassment of women at workplaces. The court held that gender equality and dignity are fundamental rights under Article 21.',
+            hi: 'सुप्रीम कोर्ट ने कार्यस्थल पर महिलाओं के यौन उत्पीड़न को रोकने के लिए व्यापक नियम तय किए। कोर्ट ने कहा कि कार्यस्थल पर गरिमा अनुच्छेद 21 का मूल अधिकार है।',
+          },
+          highlightedPhrase: {
+            en: 'gender equality and dignity are fundamental rights under Article 21',
+            hi: 'गरिमा अनुच्छेद 21 का मूल अधिकार है',
+          },
+          exhibitNumber: 'PRESS REPORT · 14 AUG 1997',
+          caption: {
+            en: 'National coverage following the historic Vishaka judgment.',
+            hi: 'ऐतिहासिक विशाखा फैसले के बाद राष्ट्रीय समाचार पत्रों की रिपोर्ट।',
+          },
+        },
+      },
+      {
+        id: 'panel-4',
+        type: 'ARGUMENTS',
+        eyebrow: {
+          en: 'EPISODE 04 · JURISPRUDENTIAL QUESTION',
+          hi: 'एपिसोड 04 · बड़ा संवैधानिक सवाल',
+        },
+        headline: {
+          en: 'Can the Judiciary Make Law When Parliament is Silent?',
+          hi: 'क्या संसद के कानून न होने पर न्यायपालिका नियम बना सकती है?',
+        },
+        body: {
+          en: 'The court had to balance the doctrine of separation of powers with the urgent need to protect fundamental rights.',
+          hi: 'सुप्रीम कोर्ट को शक्तियों के पृथक्करण और महिलाओं के मूल अधिकारों की तत्काल रक्षा के बीच संतुलन बनाना था।',
+        },
+        prosecutionArgs: {
+          party: { en: 'Vishaka (Petitioners)', hi: 'विशाखा (याचिकाकर्ता)' },
+          claim: {
+            en: 'Workplace sexual harassment violates Articles 14, 19(1)(g), and 21. In absence of domestic law, international conventions (CEDAW) must be applied.',
+            hi: 'यौन उत्पीड़न अनुच्छेद 14, 19 और 21 का उल्लंघन है। घरेलू कानून के अभाव में अंतरराष्ट्रीय संधि (CEDAW) लागू होनी चाहिए।',
+          },
+          statute: 'Articles 14, 19, 21 Constitution of India & CEDAW Convention',
+          keyPoint: {
+            en: 'Every working woman has the constitutional right to a safe work environment free from hostility.',
+            hi: 'प्रत्येक कामकाजी महिला को सुरक्षित और भयमुक्त वातावरण में काम करने का मौलिक अधिकार है।',
+          },
+        },
+        defenceArgs: {
+          party: { en: 'State & Employers', hi: 'राज्य व नियोक्ता' },
+          claim: {
+            en: 'Only Parliament has the constitutional power to create new legal obligations and employment penal codes.',
+            hi: 'नियोक्ताओं पर नए कानूनी दायित्व तय करने का अधिकार सिर्फ संसद के पास है।',
+          },
+          statute: 'Article 245 · Powers of Parliament',
+          keyPoint: {
+            en: 'Courts should not enter the domain of legislative policy formulation.',
+            hi: 'अदालतों को कानून बनाने के क्षेत्र में हस्तक्षेप नहीं करना चाहिए।',
+          },
+        },
+      },
+      {
+        id: 'panel-5',
+        type: 'YOU_DECIDE',
+        eyebrow: {
+          en: 'EPISODE 05 · YOU ARE THE JUDGE',
+          hi: 'एपिसोड 05 · आप हैं जज',
+        },
+        headline: {
+          en: 'Should Courts Formulate Binding Guidelines in a Legislative Void?',
+          hi: 'क्या कानून न होने पर कोर्ट को बाध्यकारी नियम बनाने चाहिए?',
+        },
+        body: {
+          en: 'Cast your judicial vote before viewing the Supreme Court decree.',
+          hi: 'सुप्रीम कोर्ट का ऐतिहासिक फैसला देखने से पहले अपना वोट दें।',
+        },
+        judgeDecision: {
+          question: {
+            en: 'Does the Supreme Court have the power under Article 32 to lay down binding workplace guidelines until Parliament enacts a law?',
+            hi: 'क्या सुप्रीम कोर्ट के पास संसद द्वारा कानून बनाए जाने तक बाध्यकारी नियम लागू करने की शक्ति है?',
+          },
+          subtext: {
+            en: 'Under Article 141, the law declared by the Supreme Court is binding on all courts and authorities in India.',
+            hi: 'अनुच्छेद 141 के तहत सुप्रीम कोर्ट द्वारा घोषित कानून भारत के सभी प्राधिकरणों पर बाध्यकारी होता है।',
+          },
+          options: [
+            {
+              id: 'strict-separation',
+              title: {
+                en: 'Wait for Parliament (No Judicial Law)',
+                hi: 'संसद की प्रतीक्षा करें (न्यायिक संयम)',
+              },
+              reason: {
+                en: 'Judicial law-making breaches the separation of powers. Courts should only interpret existing statutes.',
+                hi: 'कानून बनाना केवल संसद का काम है। कोर्ट को सिर्फ मौजूदा कानूनों की व्याख्या करनी चाहिए।',
+              },
+              simulatedVotesPercent: 9,
+              isActualVerdict: false,
+            },
+            {
+              id: 'judicial-guidelines',
+              title: {
+                en: 'Enforce Binding Vishaka Guidelines',
+                hi: 'बाध्यकारी विशाखा दिशानिर्देश लागू करें',
+              },
+              reason: {
+                en: 'When fundamental rights under Article 21 are violated, the court must step in under Articles 32 and 141 to fill the void.',
+                hi: 'जब मौलिक अधिकारों का हनन हो रहा हो, तो सुप्रीम कोर्ट को सुरक्षा हेतु बाध्यकारी नियम बनाने का पूरा अधिकार है।',
+              },
+              simulatedVotesPercent: 91,
+              isActualVerdict: true,
+            },
+          ],
+          judicialRationale: {
+            en: 'CJI J.S. Verma held that in the absence of domestic legislation, international conventions and fundamental rights empower the Supreme Court to lay down binding guidelines.',
+            hi: 'सीजेआई जे.एस. वर्मा ने फैसला दिया कि कानून के अभाव में अंतरराष्ट्रीय संधियों के आधार पर कोर्ट को बाध्यकारी नियम बनाने का पूर्ण अधिकार है।',
+          },
+        },
+      },
+      {
+        id: 'panel-6',
+        type: 'VERDICT',
+        eyebrow: {
+          en: 'EPISODE 06 · THE LANDMARK GUIDELINES',
+          hi: 'एपिसोड 06 · ऐतिहासिक दिशा-निर्देश',
+        },
+        headline: {
+          en: '13 August 1997: The Vishaka Guidelines are Born.',
+          hi: '13 अगस्त 1997: विशाखा गाइडलाइंस का जन्म।',
+        },
+        stamp: {
+          en: 'VISHAKA GUIDELINES DECREED (LAW UNDER ART 141)',
+          hi: 'विशाखा दिशानिर्देश लागू (अनुच्छेद 141 के तहत कानून)',
+        },
+        body: {
+          en: 'A 3-judge bench led by CJI J.S. Verma delivered a masterpiece of judicial statesmanship:\n\n1. **Defined Sexual Harassment**: Unwelcome physical contact, demands for sexual favours, sexually coloured remarks, showing pornography.\n2. **Mandated Internal Complaints Committees (ICC)**: Every organization with 10+ employees must have an ICC headed by a woman.\n3. **Universal Applicability**: Binding on all private and public sector workplaces across India under Article 141.',
+          hi: 'सीजेआई जे.एस. वर्मा की अध्यक्षता वाली 3 जजों की पीठ ने ऐतिहासिक फैसला सुनाया:\n\n1. **यौन उत्पीड़न की स्पष्ट परिभाषा**: अवांछित शारीरिक स्पर्श, यौन अनुग्रह की मांग, अश्लील टिप्पणियां और पोर्नोग्राफी दिखाना।\n2. **आंतरिक शिकायत समिति (ICC) अनिवार्य**: 10 से अधिक कर्मचारियों वाले हर संस्थान में महिला की अध्यक्षता वाली शिकायत समिति का गठन।\n3. **देशव्यापी बाध्यता**: अनुच्छेद 141 के तहत यह आदेश पूरे भारत के सरकारी व निजी सभी संस्थानों पर कानून की तरह लागू हुआ।',
+        },
+        evidence: {
+          archiveType: 'court_decree',
+          masthead: 'SUPREME COURT OF INDIA · (1997) 6 SCC 241',
+          date: '13 AUGUST 1997',
+          headline: {
+            en: 'MANDATORY GUIDELINES FOR WORKPLACE SAFETY UNDER ARTICLES 14, 19 AND 21',
+            hi: 'अनुच्छेद 14, 19 व 21 के तहत कार्यस्थल सुरक्षा के अनिवार्य दिशानिर्देश',
+          },
+          snippet: {
+            en: 'Held: "Each incident of sexual harassment of working women results in violation of the fundamental rights of Gender Equality and Right to Life and Liberty. The following guidelines are laid down for due observance at all workplaces until legislation is enacted for the purpose."',
+            hi: 'फैसला: "कामकाजी महिलाओं के यौन उत्पीड़न की प्रत्येक घटना लैंगिक समानता और जीवन के मूल अधिकार का उल्लंघन है। जब तक संसद कानून नहीं बनाती, तब तक ये दिशानिर्देश सभी कार्यस्थलों पर कानून की तरह लागू रहेंगे।"',
+          },
+          highlightedPhrase: {
+            en: 'laid down for due observance at all workplaces until legislation is enacted',
+            hi: 'जब तक कानून नहीं बनता, तब तक ये दिशानिर्देश सभी कार्यस्थलों पर लागू रहेंगे',
+          },
+          exhibitNumber: 'JUDGMENT DECREE · AIR 1997 SC 3011',
+          caption: {
+            en: 'Certified Supreme Court judgment decree creating the Vishaka Code.',
+            hi: 'विशाखा संहिता की स्थापना करने वाला सुप्रीम कोर्ट का प्रमाणित फैसला।',
+          },
+        },
+      },
+      {
+        id: 'panel-7',
+        type: 'RATIO',
+        eyebrow: {
+          en: 'EPISODE 07 · LEGISLATIVE IMPACT',
+          hi: 'एपिसोड 07 · संसद का नया कानून',
+        },
+        headline: {
+          en: 'From Judicial Decree to the POSH Act 2013.',
+          hi: 'अदालती आदेश से पॉश एक्ट 2013 तक का सफर।',
+        },
+        body: {
+          en: 'The Vishaka Guidelines operated as the supreme law of the land for 16 years.\n\nIn 2013, Parliament formally codified these principles into **The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 (POSH Act)**.\n\nToday, millions of working women across India are protected because of one case that refused to be silenced.',
+          hi: 'विशाखा दिशानिर्देशों ने 16 वर्षों तक देश के सर्वोच्च कानून के रूप में काम किया।\n\n2013 में संसद ने इन्हीं सिद्धांतों को **कार्यस्थल पर महिलाओं का यौन उत्पीड़न (रोकथाम, निषेध और निवारण) अधिनियम, 2013 (POSH Act)** के रूप में कानून बनाया।\n\nआज भारत की करोड़ों कामकाजी महिलाएं उस एक लड़ाई के कारण सुरक्षित हैं।',
+        },
+        evidence: {
+          archiveType: 'verdict_decree',
+          masthead: 'PARLIAMENT OF INDIA · POSH ACT 2013',
+          date: 'PERPETUAL RATIO',
+          headline: {
+            en: 'RATIO: THE RIGHT TO SAFE WORKPLACE IS AN INSEPARABLE PART OF ARTICLE 21 RIGHT TO LIFE',
+            hi: 'विधिक सिद्धांत: सुरक्षित कार्यस्थल का अधिकार अनुच्छेद 21 के जीवन के अधिकार का अभिन्न अंग है',
+          },
+          snippet: {
+            en: 'The Vishaka judgment stands as the quintessential example of creative judicial activism in Indian history, transforming international human rights norms into enforceable domestic constitutional protections.',
+            hi: 'विशाखा फैसला भारतीय इतिहास में न्यायिक सक्रियता का सबसे उत्कृष्ट उदाहरण है, जिसने अंतरराष्ट्रीय मानवाधिकारों को देश के संविधान की ढाल बना दिया।',
+          },
+          highlightedPhrase: {
+            en: 'transforming international human rights norms into enforceable domestic constitutional protections',
+            hi: 'अंतरराष्ट्रीय मानवाधिकारों को देश के संविधान की ढाल बना दिया',
+          },
+          exhibitNumber: 'GOLDEN RATIO · POSH 2013',
+          caption: {
+            en: 'The foundational precedent for workplace gender justice.',
+            hi: 'कार्यस्थल पर लैंगिक न्याय की आधारशिला।',
+          },
+        },
+        citationFooter: '(1997) 6 SCC 241 · Supreme Court of India',
+        judgmentUrl: 'https://indiankanoon.org/doc/1031794/',
+      },
+    ],
+    brief: {
+      courtAndYear: {
+        en: 'Supreme Court of India · 1997',
+        hi: 'सुप्रीम कोर्ट ऑफ इंडिया · 1997',
+      },
+      facts: {
+        en: 'Following the brutal gang-rape of Bhanwari Devi, a state social worker in Rajasthan who was targeted for opposing child marriage, several social activists and NGOs filed a PIL under Article 32 in the Supreme Court. They highlighted that working women in India had no statutory legal framework protecting them from sexual harassment at workplaces.',
+        hi: 'बाल विवाह का विरोध करने पर राजस्थान की साथिन भंवरी देवी के साथ हुए सामूहिक दुष्कर्म के बाद महिला संगठनों ने सुप्रीम कोर्ट में जनहित याचिका दायर की। उन्होंने रेखांकित किया कि देश में कार्यस्थल पर यौन उत्पीड़न से बचाव के लिए कोई कानून मौजूद नहीं है।',
+      },
+      issues: {
+        en: [
+          'Whether workplace sexual harassment violates Articles 14, 19(1)(g), and 21 of the Indian Constitution?',
+          'Whether the Supreme Court can formulate binding guidelines under Articles 32 and 141 in the absence of domestic legislation?',
+        ],
+        hi: [
+          'क्या कार्यस्थल पर यौन उत्पीड़न संविधान के अनुच्छेद 14, 19 और 21 का उल्लंघन है?',
+          'क्या संसद द्वारा कानून न बनाए जाने की स्थिति में सुप्रीम कोर्ट बाध्यकारी नियम लागू कर सकता है?',
+        ],
+      },
+      chargesApplied: ['Constitution of India Articles 14, 19(1)(g), 21, 32, 141', 'CEDAW International Convention'],
+      held: {
+        en: 'The Supreme Court held that workplace sexual harassment is a direct violation of fundamental rights to gender equality and personal liberty under Articles 14 and 21. The Court formulated the binding "Vishaka Guidelines" and mandated the creation of Internal Complaints Committees (ICC) across all workplaces.',
+        hi: 'सुप्रीम कोर्ट ने फैसला दिया कि कार्यस्थल पर यौन उत्पीड़न लैंगिक समानता और जीवन के मूल अधिकार का हनन है। अदालत ने बाध्यकारी "विशाखा दिशानिर्देश" जारी किए और सभी संस्थानों में आंतरिक शिकायत समिति (ICC) का गठन अनिवार्य किया।',
+      },
+      reasoning: {
+        en: 'In the absence of enacted legislation, international conventions like CEDAW, not inconsistent with fundamental rights, can be read into Articles 14, 19, and 21 to enforce gender justice under Article 141.',
+        hi: 'घरेलू कानून के अभाव में अंतरराष्ट्रीय संधियों (जैसे CEDAW) को मूल अधिकारों के साथ जोड़कर अनुच्छेद 141 के तहत कानून की तरह लागू किया जा सकता है।',
+      },
+      whyItMatters: {
+        en: 'Vishaka is the landmark precedent that revolutionized workplace safety for women across India and served as the direct precursor to the POSH Act 2013.',
+        hi: 'विशाखा वह ऐतिहासिक नजीर है जिसने पूरे देश में कामकाजी महिलाओं की सुरक्षा की रूपरेखा तय की और पॉश एक्ट 2013 की नींव रखी।',
+      },
+    },
+  },
+  {
+    slug: 'maneka-gandhi',
+    title: {
+      en: 'Maneka Gandhi v. Union of India',
+      hi: 'मेनका गांधी बनाम भारत संघ',
+    },
+    tag: {
+      en: 'Article 21 · Due Process of Law',
+      hi: 'अनुच्छेद 21 · सम्यक विधि प्रक्रिया',
+    },
+    categoryTag: 'DUE PROCESS',
+    genre: 'constitutional',
+    theme: 'constitutional-gold',
+    court: 'Supreme Court of India',
+    year: 1978,
+    readTime: {
+      en: '5 min read',
+      hi: '5 मिनट',
+    },
+    matchRate: 98,
+    maturityRating: 'U/A 13+',
+    rank: 9,
+    bannerImage: '/images/cases/maneka-gandhi.jpg',
+    blurb: {
+      en: 'An impounded passport without reasons given. A constitutional showdown that transformed Article 21 into the golden triangle of justice, fairness, and liberty.',
+      hi: 'बिना कारण बताए जब्त किया गया पासपोर्ट। एक ऐसी कानूनी जंग जिसने अनुच्छेद 21 को मनमानी सरकारी शक्ति के खिलाफ सबसे बड़ी ढाल बना दिया।',
+    },
+    citation: 'Maneka Gandhi v. Union of India, (1978) 1 SCC 248, AIR 1978 SC 597',
+    judgmentUrl: 'https://indiankanoon.org/doc/1766147/',
+    watermark: 'ART 21',
+    featuredHeroHook: {
+      en: 'They confiscated her passport in the "public interest". The Supreme Court rebuilt Article 21.',
+      hi: 'जनहित के नाम पर पासपोर्ट जब्त हुआ। सुप्रीम कोर्ट ने अनुच्छेद 21 की नई परिभाषा लिख दी।',
+    },
+    featuredHeroDesc: {
+      en: 'In July 1977, the Passport Office impounded Maneka Gandhi’s passport under Section 10(3)(c) of the Passports Act without disclosing any reasons. The 7-judge Constitution Bench held that any law depriving personal liberty must pass the test of Articles 14, 19, and 21, and procedure must be just, fair, and reasonable.',
+      hi: 'जुलाई 1977 में पासपोर्ट कार्यालय ने बिना कोई कारण बताए मेनका गांधी का पासपोर्ट जब्त कर लिया। 7 जजों की संविधान पीठ ने फैसला सुनाया कि नागरिकों की आजादी छीनने वाला कोई भी कानून अनुच्छेद 14, 19 और 21 की कसौटी पर न्यायसंगत और उचित होना चाहिए।',
+    },
+    hasJudgeDecision: true,
+    panels: [
+      {
+        id: 'panel-1',
+        type: 'HOOK',
+        eyebrow: {
+          en: 'EPISODE 01 · THE CONFISCATION',
+          hi: 'एपिसोड 01 · जब्ती का आदेश',
+        },
+        headline: {
+          en: 'Passport Impounded. Reasons: "Declined in Public Interest".',
+          hi: 'पासपोर्ट जब्त। कारण: "सार्वजनिक हित में बताना मना है"।',
+        },
+        body: {
+          en: 'July 1977. Journalist and politician Maneka Gandhi received an official order from the Regional Passport Officer in Delhi:\n\nHer passport was impounded under Section 10(3)(c) of the Passports Act 1967. When she demanded to know why, the government refused to give reasons "in the interest of the general public".',
+          hi: 'जुलाई 1977। दिल्ली के पासपोर्ट कार्यालय से मेनका गांधी को आदेश मिला कि उनका पासपोर्ट धारा 10(3)(c) के तहत जब्त कर लिया गया है।\n\nजब उन्होंने कारण पूछा, तो सरकार ने यह कहते हुए कारण बताने से इनकार कर दिया कि "जनहित में कारण नहीं बताए जा सकते।"',
+        },
+        photoExhibitSrc: '/images/cases/maneka-gandhi.jpg',
+        photoExhibitCaption: {
+          en: 'Government of India Regional Passport Office impoundment order (July 1977).',
+          hi: 'भारत सरकार क्षेत्रीय पासपोर्ट कार्यालय द्वारा जारी जब्ती आदेश (जुलाई 1977)।',
+        },
+      },
+      {
+        id: 'panel-2',
+        type: 'PEOPLE',
+        eyebrow: {
+          en: 'EPISODE 02 · DRAMATIS PERSONAE',
+          hi: 'एपिसोड 02 · मुख्य किरदार',
+        },
+        headline: {
+          en: 'The Petitioner, The Attorney General, and The Jurists.',
+          hi: 'याचिकाकर्ता, अटॉर्नी जनरल और संविधान पीठ।',
+        },
+        body: {
+          en: 'Meet the key legal minds who transformed Indian constitutional jurisprudence.',
+          hi: 'जानिए उन दिग्गजों को जिन्होंने भारतीय संवैधानिक न्यायशास्त्र की दिशा बदल दी।',
+        },
+        characters: [
+          {
+            name: { en: 'Maneka Gandhi', hi: 'मेनका गांधी' },
+            role: { en: 'Petitioner (Journalist)', hi: 'याचिकाकर्ता (पत्रकार)' },
+            tag: { en: 'Challenged Passport Seizure', hi: 'पासपोर्ट जब्ती को चुनौती' },
+            description: {
+              en: 'Asserted that the right to travel abroad is an integral part of personal liberty under Article 21.',
+              hi: 'जिन्होंने दावा किया कि विदेश यात्रा का अधिकार अनुच्छेद 21 के तहत व्यक्तिगत स्वतंत्रता का मूल हिस्सा है।',
+            },
+          },
+          {
+            name: { en: 'Fali S. Nariman & Counsel', hi: 'फाली एस. नरीमन व अधिवक्ता' },
+            role: { en: 'Senior Legal Advocates', hi: 'वरिष्ठ अधिवक्ता' },
+            tag: { en: 'Golden Triangle Argument', hi: 'स्वर्ण त्रिकोण का सिद्धांत' },
+            description: {
+              en: 'Argued that procedure established by law cannot be arbitrary, oppressive, or fanciful.',
+              hi: 'जिन्होंने दलील दी कि कानून द्वारा स्थापित प्रक्रिया मनमानी और अन्यायपूर्ण नहीं हो सकती।',
+            },
+          },
+          {
+            name: { en: 'Justice P.N. Bhagwati', hi: 'जस्टिस पी.एन. भगवती' },
+            role: { en: 'Supreme Court Justice', hi: 'सुप्रीम कोर्ट के न्यायाधीश' },
+            tag: { en: 'Architect of Substantive Due Process', hi: 'सम्यक विधि प्रक्रिया के प्रणेता' },
+            description: {
+              en: 'Penned the iconic doctrine linking Article 14, 19, and 21 into an unbreakable golden triangle.',
+              hi: 'जिन्होंने अनुच्छेद 14, 19 और 21 को अटूट स्वर्ण त्रिकोण में पिरोने वाला ऐतिहासिक फैसला लिखा।',
+            },
+          },
+        ],
+      },
+      {
+        id: 'panel-3',
+        type: 'INCIDENT',
+        eyebrow: {
+          en: 'EPISODE 03 · THE LEGAL SHIFT',
+          hi: 'एपिसोड 03 · एके गोपालन की छाया',
+        },
+        headline: {
+          en: 'Breaking Free from the Ghost of A.K. Gopalan (1950).',
+          hi: 'एके गोपालन (1950) की संकीर्ण व्याख्या का अंत।',
+        },
+        body: {
+          en: 'For 28 years since the **A.K. Gopalan** ruling in 1950, Indian courts believed that "procedure established by law" simply meant any enacted statute passed by Parliament, even if deeply unfair or tyrannical.\n\nManeka Gandhi challenged this narrow literalism directly before a 7-judge Constitution Bench.',
+          hi: '1950 के **एके गोपालन** फैसले के बाद से 28 वर्षों तक अदालतों का मानना था कि "विधि द्वारा स्थापित प्रक्रिया" का मतलब केवल संसद द्वारा बनाया गया कोई भी कानून है, भले ही वह कितना भी क्रूर क्यों न हो।\n\nमेनका गांधी ने 7 जजों की संविधान पीठ के सामने इस संकीर्ण सोच को सीधे चुनौती दी।',
+        },
+        evidence: {
+          archiveType: 'police_record',
+          masthead: 'MINISTRY OF EXTERNAL AFFAIRS · PASSPORTS DIVISION',
+          date: '7 JULY 1977',
+          headline: {
+            en: 'ORDER NO. F.4/5/77-PV: IMPOUNDMENT OF PASSPORT UNDER SECTION 10(3)(C)',
+            hi: 'आदेश संख्या F.4/5/77-PV: धारा 10(3)(c) के तहत पासपोर्ट जब्ती',
+          },
+          snippet: {
+            en: 'Whereas it is considered necessary in the public interest so to do, the Regional Passport Officer hereby orders the impoundment of Indian Passport No. K-86960 issued to Smt. Maneka Gandhi. The reasons for the order shall not be furnished.',
+            hi: 'सार्वजनिक हित में आवश्यक समझते हुए श्रीमती मेनका गांधी का पासपोर्ट जब्त किया जाता है। इस आदेश के कारण नहीं बताए जाएंगे।',
+          },
+          highlightedPhrase: {
+            en: 'The reasons for the order shall not be furnished',
+            hi: 'इस आदेश के कारण नहीं बताए जाएंगे',
+          },
+          exhibitNumber: 'ORDER · MEA/PV/1977',
+          caption: {
+            en: 'The unreasoned impoundment order that initiated the historic case.',
+            hi: 'बिना कारण बताए जारी किया गया जब्ती आदेश जिसने इस मुकदमे को जन्म दिया।',
+          },
+        },
+      },
+      {
+        id: 'panel-4',
+        type: 'ARGUMENTS',
+        eyebrow: {
+          en: 'EPISODE 04 · CONSTITUTIONAL SHOWDOWN',
+          hi: 'एपिसोड 04 · संवैधानिक महाबहस',
+        },
+        headline: {
+          en: 'Procedure Established by Law vs. Just, Fair & Reasonable.',
+          hi: 'कानून द्वारा स्थापित प्रक्रिया बनाम उचित, निष्पक्ष और न्यायसंगत प्रक्रिया।',
+        },
+        body: {
+          en: 'The 7-judge bench examined whether personal liberty can be stripped without natural justice.',
+          hi: '7 जजों की संविधान पीठ ने परखा कि क्या बिना प्राकृतिक न्याय के किसी नागरिक की आजादी छीनी जा सकती है।',
+        },
+        prosecutionArgs: {
+          party: { en: 'Maneka Gandhi (Petitioner)', hi: 'मेनका गांधी (याचिकाकर्ता)' },
+          claim: {
+            en: 'Right to travel abroad is part of personal liberty under Article 21. Natural justice (hearing before action) must be respected.',
+            hi: 'विदेश यात्रा का अधिकार अनुच्छेद 21 का हिस्सा है। कार्रवाई से पहले सुनवाई (प्राकृतिक न्याय) अनिवार्य है।',
+          },
+          statute: 'Articles 14, 19(1)(a), 19(1)(g), and 21 of the Constitution',
+          keyPoint: {
+            en: 'A law cannot be arbitrary. Procedure must be just, fair, and reasonable, not harsh or fanciful.',
+            hi: 'कानून मनमाना नहीं हो सकता। प्रक्रिया उचित, न्यायसंगत और तर्कसंगत होनी चाहिए।',
+          },
+        },
+        defenceArgs: {
+          party: { en: 'Union of India (Government)', hi: 'भारत संघ (सरकार)' },
+          claim: {
+            en: 'Section 10(3)(c) was validly enacted by Parliament. Article 21 only requires procedure established by written law.',
+            hi: 'पासपोर्ट कानून संसद द्वारा विधिवत पारित है। अनुच्छेद 21 केवल लिखित कानून की प्रक्रिया की मांग करता है।',
+          },
+          statute: 'Section 10(3)(c) Passports Act 1967',
+          keyPoint: {
+            en: 'The executive has absolute discretion to withhold reasons in the interest of national sovereignty and public interest.',
+            hi: 'राष्ट्रीय हित और सुरक्षा को ध्यान में रखते हुए सरकार को कारण न बताने का पूरा अधिकार है।',
+          },
+        },
+      },
+      {
+        id: 'panel-5',
+        type: 'YOU_DECIDE',
+        eyebrow: {
+          en: 'EPISODE 05 · YOU ARE THE JUDGE',
+          hi: 'एपिसोड 05 · आप हैं जज',
+        },
+        headline: {
+          en: 'Must "Procedure Established by Law" Be Inherently Fair?',
+          hi: 'क्या कानून द्वारा स्थापित प्रक्रिया का निष्पक्ष होना अनिवार्य है?',
+        },
+        body: {
+          en: 'Cast your judicial decision before reading the Supreme Court verdict.',
+          hi: 'सुप्रीम कोर्ट का ऐतिहासिक फैसला जानने से पहले अपना निर्णय दें।',
+        },
+        judgeDecision: {
+          question: {
+            en: 'Can the government seize a citizen’s passport without providing reasons or an opportunity of being heard?',
+            hi: 'क्या सरकार बिना कारण बताए या बिना सुनवाई का मौका दिए किसी नागरिक का पासपोर्ट जब्त कर सकती है?',
+          },
+          subtext: {
+            en: 'Article 21 states: "No person shall be deprived of his life or personal liberty except according to procedure established by law."',
+            hi: 'अनुच्छेद 21: "विधि द्वारा स्थापित प्रक्रिया के बिना किसी व्यक्ति को उसके प्राण या दैहिक स्वतंत्रता से वंचित नहीं किया जाएगा।"',
+          },
+          options: [
+            {
+              id: 'literal-statute',
+              title: {
+                en: 'Uphold State Discretion (Literal Law)',
+                hi: 'सरकार के अधिकार को मान्यता दें (शाब्दिक कानून)',
+              },
+              reason: {
+                en: 'If Parliament enacted Section 10(3)(c), courts cannot question executive discretion in public interest.',
+                hi: 'संसद द्वारा बनाए गए कानून में सरकार को जनहित में निर्णय लेने की पूरी छूट होनी चाहिए।',
+              },
+              simulatedVotesPercent: 11,
+              isActualVerdict: false,
+            },
+            {
+              id: 'substantive-fairness',
+              title: {
+                en: 'Procedure Must Be Just, Fair & Reasonable',
+                hi: 'प्रक्रिया का उचित, निष्पक्ष व न्यायसंगत होना अनिवार्य',
+              },
+              reason: {
+                en: 'Procedure under Article 21 cannot be arbitrary. It must conform to natural justice and Article 14 equality.',
+                hi: 'अनुच्छेद 21 की प्रक्रिया मनमानी नहीं हो सकती। इसमें प्राकृतिक न्याय और समानता का पालन जरूरी है।',
+              },
+              simulatedVotesPercent: 89,
+              isActualVerdict: true,
+            },
+          ],
+          judicialRationale: {
+            en: 'Justice P.N. Bhagwati held that procedure under Article 21 cannot be arbitrary, fanciful, or oppressive; it must be right, just, and fair.',
+            hi: 'जस्टिस पी.एन. भगवती ने तय किया कि अनुच्छेद 21 के तहत प्रक्रिया मनमानी नहीं हो सकती, बल्कि उचित और न्यायसंगत होनी चाहिए।',
+          },
+        },
+      },
+      {
+        id: 'panel-6',
+        type: 'VERDICT',
+        eyebrow: {
+          en: 'EPISODE 06 · THE GOLDEN TRIANGLE',
+          hi: 'एपिसोड 06 · स्वर्ण त्रिकोण का फैसला',
+        },
+        headline: {
+          en: '25 January 1978: The Rebirth of Article 21.',
+          hi: '25 जनवरी 1978: अनुच्छेद 21 का पुनर्जन्म।',
+        },
+        stamp: {
+          en: 'GOLDEN TRIANGLE RATIO ESTABLISHED (7-0)',
+          hi: 'स्वर्ण त्रिकोण का सिद्धांत लागू (7-0)',
+        },
+        body: {
+          en: 'The 7-judge Constitution Bench unanimously ruled:\n\n1. **The Golden Triangle**: Articles 14 (Equality), 19 (Freedoms), and 21 (Life & Liberty) are not separate silos — they form an interconnected web. A law under Art 21 must satisfy Art 14 and Art 19.\n2. **Just, Fair & Reasonable**: "Procedure established by law" cannot be a mere formal legislative act. It MUST be just, fair, and reasonable.\n3. **Natural Justice**: Principles of Audi Alteram Partem (hear the other side) apply to administrative actions impounding passports.',
+          hi: '7 जजों की संविधान पीठ ने सर्वसम्मति से फैसला सुनाया:\n\n1. **स्वर्ण त्रिकोण**: अनुच्छेद 14 (समानता), 19 (स्वतंत्रता) और 21 (जीवन) अलग-अलग नहीं हैं, वे एक अटूट त्रिकोण हैं। अनुच्छेद 21 का कोई भी कानून अनुच्छेद 14 और 19 की कसौटी पर खरा उतरना चाहिए।\n2. **उचित और न्यायसंगत**: प्रक्रिया केवल संसद का लिखा हुआ कानून नहीं हो सकती, उसे अनिवार्य रूप से न्यायसंगत और उचित होना चाहिए।\n3. **प्राकृतिक न्याय**: बिना सुनवाई का मौका दिए पासपोर्ट जब्त करना असंवैधानिक है।',
+        },
+        evidence: {
+          archiveType: 'court_decree',
+          masthead: 'SUPREME COURT OF INDIA · (1978) 1 SCC 248',
+          date: '25 JANUARY 1978',
+          headline: {
+            en: 'CERTIFIED DECREE: PROCEDURE DEPRIVING LIBERTY MUST BE JUST, FAIR AND REASONABLE',
+            hi: 'प्रमाणित डिक्री: आजादी छीनने वाली प्रक्रिया का न्यायसंगत व निष्पक्ष होना अनिवार्य',
+          },
+          snippet: {
+            en: 'Held per Bhagwati J: "The principle of reasonableness, which legally as well as philosophically, is an essential element of equality or non-arbitrariness pervades Article 14 like a brooding omnipresence and the procedure contemplated by Article 21 must answer the test of reasonableness in order to be in conformity with Article 14."',
+            hi: 'जस्टिस भगवती: "तर्कसंगतता का सिद्धांत अनुच्छेद 14 की आत्मा है। अनुच्छेद 21 के तहत बनाई गई किसी भी प्रक्रिया को उचित और न्यायसंगत होना ही होगा।"',
+          },
+          highlightedPhrase: {
+            en: 'procedure contemplated by Article 21 must answer the test of reasonableness',
+            hi: 'अनुच्छेद 21 के तहत प्रक्रिया को उचित और न्यायसंगत होना ही होगा',
+          },
+          exhibitNumber: 'LANDMARK DECREE · AIR 1978 SC 597',
+          caption: {
+            en: 'The monumental 7-judge Constitution Bench judgment delivered on 25 January 1978.',
+            hi: '25 जनवरी 1978 को 7 जजों की संविधान पीठ द्वारा दिया गया युगांतरकारी फैसला।',
+          },
+        },
+      },
+      {
+        id: 'panel-7',
+        type: 'RATIO',
+        eyebrow: {
+          en: 'EPISODE 07 · THE EXPANDED UNIVERSE',
+          hi: 'एपिसोड 07 · अधिकारों का अनंत विस्तार',
+        },
+        headline: {
+          en: 'How Maneka Gandhi Unlocked Every Modern Indian Right.',
+          hi: 'कैसे मेनका गांधी फैसले ने हर आधुनिक भारतीय अधिकार का द्वार खोला।',
+        },
+        body: {
+          en: 'By infusing "fairness" into Article 21, the Supreme Court opened the floodgates to read dozens of unwritten human rights into the Constitution:\n\n• Right to Clean Environment\n• Right to Privacy (Puttaswamy)\n• Right to Speedy Trial & Legal Aid\n• Right to Medical Care\n• Right to Die with Dignity\n\nManeka Gandhi converted Article 21 into the beating heart of Indian human rights jurisprudence.',
+          hi: 'अनुच्छेद 21 में "उचित प्रक्रिया" जोड़कर सुप्रीम कोर्ट ने अनगिनत नए मौलिक अधिकारों का मार्ग प्रशस्त किया:\n\n• स्वच्छ पर्यावरण का अधिकार\n• निजता का अधिकार (पुट्टास्वामी मामला)\n• त्वरित सुनवाई और मुफ्त कानूनी सहायता का अधिकार\n• स्वास्थ्य और गरिमापूर्ण जीवन का अधिकार\n\nइस फैसले ने अनुच्छेद 21 को भारतीय मानवाधिकारों का सबसे शक्तिशाली स्तंभ बना दिया।',
+        },
+        evidence: {
+          archiveType: 'verdict_decree',
+          masthead: 'CONSTITUTION OF INDIA · THE GOLDEN TRIANGLE',
+          date: 'PERPETUAL RATIO',
+          headline: {
+            en: 'RATIO: ARTICLES 14, 19 AND 21 FORM AN UNBREAKABLE TRIAD OF PERSONAL LIBERTY',
+            hi: 'विधिक सिद्धांत: अनुच्छेद 14, 19 और 21 व्यक्तिगत स्वतंत्रता की अटूट त्रिमूर्ति हैं',
+          },
+          snippet: {
+            en: 'The Maneka Gandhi doctrine ensures that no citizen in India can ever be subjected to arbitrary state oppression under the cloak of statutory procedure.',
+            hi: 'मेनका गांधी सिद्धांत सुनिश्चित करता है कि भारत के किसी भी नागरिक को प्रक्रिया के नाम पर मनमानी सरकारी प्रताड़ना का शिकार नहीं बनाया जा सकता।',
+          },
+          highlightedPhrase: {
+            en: 'no citizen in India can ever be subjected to arbitrary state oppression',
+            hi: 'किसी भी नागरिक को मनमानी सरकारी प्रताड़ना का शिकार नहीं बनाया जा सकता',
+          },
+          exhibitNumber: 'GOLDEN RATIO · DUE PROCESS',
+          caption: {
+            en: 'The cornerstone of modern Indian constitutional liberties.',
+            hi: 'आधुनिक भारतीय संवैधानिक स्वतंत्रताओं का आधारस्तंभ।',
+          },
+        },
+        citationFooter: '(1978) 1 SCC 248 · Supreme Court of India',
+        judgmentUrl: 'https://indiankanoon.org/doc/1766147/',
+      },
+    ],
+    brief: {
+      courtAndYear: {
+        en: 'Supreme Court of India · 1978',
+        hi: 'सुप्रीम कोर्ट ऑफ इंडिया · 1978',
+      },
+      facts: {
+        en: 'In July 1977, the Regional Passport Office in New Delhi impounded the passport of journalist Maneka Gandhi under Section 10(3)(c) of the Passports Act 1967 in the "public interest". When she requested reasons for the order, the government declined to provide them. She challenged the impoundment directly in the Supreme Court under Article 32.',
+        hi: 'जुलाई 1977 में दिल्ली के पासपोर्ट कार्यालय ने पत्रकार मेनका गांधी का पासपोर्ट "जनहित" के नाम पर जब्त कर लिया। कारण मांगने पर सरकार ने इनकार कर दिया। उन्होंने इस आदेश को सीधे सुप्रीम कोर्ट में अनुच्छेद 32 के तहत चुनौती दी।',
+      },
+      issues: {
+        en: [
+          'Whether the Right to Travel Abroad is part of "personal liberty" under Article 21?',
+          'Whether Section 10(3)(c) of the Passports Act violates Articles 14, 19(1)(a), and 21?',
+          'Whether "procedure established by law" under Article 21 must be just, fair, and reasonable?',
+        ],
+        hi: [
+          'क्या विदेश यात्रा का अधिकार अनुच्छेद 21 के तहत "दैहिक स्वतंत्रता" का हिस्सा है?',
+          'क्या पासपोर्ट कानून की धारा 10(3)(c) अनुच्छेद 14, 19 और 21 का उल्लंघन करती है?',
+          'क्या अनुच्छेद 21 के तहत "विधि द्वारा स्थापित प्रक्रिया" का उचित और निष्पक्ष होना अनिवार्य है?',
+        ],
+      },
+      chargesApplied: ['Constitution of India Articles 14, 19(1)(a), 19(1)(g), 21, 32', 'Section 10(3)(c) Passports Act 1967'],
+      held: {
+        en: 'A 7-judge Constitution Bench unanimously held that the Right to Travel Abroad is protected under Article 21. Any procedure depriving a person of personal liberty must be "just, fair, and reasonable" and must not be arbitrary, fanciful, or oppressive. Articles 14, 19, and 21 form an interconnected Golden Triangle.',
+        hi: '7 जजों की संविधान पीठ ने फैसला दिया कि विदेश यात्रा का अधिकार अनुच्छेद 21 का हिस्सा है। आजादी छीनने वाली कोई भी प्रक्रिया उचित, न्यायसंगत और तर्कसंगत होनी चाहिए। अनुच्छेद 14, 19 और 21 एक अटूट "स्वर्ण त्रिकोण" बनाते हैं।',
+      },
+      reasoning: {
+        en: 'Overruling the narrow literal interpretation of A.K. Gopalan (1950), the Court held that the law must satisfy the test of non-arbitrariness under Article 14 and reasonableness under Article 19. Natural justice principles must be read into administrative actions affecting liberty.',
+        hi: '1950 के संकीर्ण गोपालन फैसले को पलटते हुए कोर्ट ने कहा कि कानून को अनुच्छेद 14 की समानता और अनुच्छेद 19 की तर्कसंगतता की कसौटी पर खरा उतरना होगा। प्रशासनिक निर्णयों में प्राकृतिक न्याय का पालन अनिवार्य है।',
+      },
+      whyItMatters: {
+        en: 'Maneka Gandhi is one of the greatest constitutional milestones in Indian history, transforming Article 21 from a dry procedural clause into the fountainhead of all human rights in India.',
+        hi: 'मेनका गांधी फैसला भारतीय इतिहास का युगांतरकारी मील का पत्थर है जिसने अनुच्छेद 21 को सभी बुनियादी मानवाधिकारों का सबसे बड़ा स्रोत बना दिया।',
+      },
+    },
+  },
+  {
+    slug: 'navtej-johar',
+    title: {
+      en: 'Navtej Singh Johar v. Union of India',
+      hi: 'नवतेज सिंह जौहर बनाम भारत संघ',
+    },
+    tag: {
+      en: 'Section 377 IPC · Decriminalization & Privacy',
+      hi: 'धारा 377 आईपीसी · गैर-अपराधीकरण व निजता',
+    },
+    categoryTag: 'IPC 377',
+    genre: 'constitutional',
+    theme: 'constitutional-gold',
+    court: 'Supreme Court of India',
+    year: 2018,
+    readTime: {
+      en: '5 min read',
+      hi: '5 मिनट',
+    },
+    matchRate: 99,
+    maturityRating: 'U/A 16+',
+    rank: 10,
+    bannerImage: '/images/cases/navtej-johar.jpg',
+    blurb: {
+      en: 'A 158-year-old colonial relic criminalizing consensual love. A unanimous 5-judge Constitution Bench struck it down to uphold constitutional morality.',
+      hi: '158 साल पुराना औपनिवेशिक कानून जो वयस्कों के आपसी प्यार को अपराध मानता था। सुप्रीम कोर्ट की 5 जजों की संविधान पीठ ने इसे सर्वसम्मति से खारिज कर दिया।',
+    },
+    citation: 'Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321',
+    judgmentUrl: 'https://indiankanoon.org/doc/168677580/',
+    watermark: '§377',
+    featuredHeroHook: {
+      en: '158 years of colonial injustice ended in one unanimous decree.',
+      hi: '158 साल पुराना औपनिवेशिक अन्याय एक सर्वसम्मत फैसले में समाप्त हुआ।',
+    },
+    featuredHeroDesc: {
+      en: 'Introduced by Lord Macaulay in 1860, Section 377 IPC criminalized "unnatural offences". Classical dancer Navtej Singh Johar, chef Ritu Dalmia, and hotelier Aman Nath filed a writ petition asserting their fundamental right to dignity, equality, and privacy. The Supreme Court struck down Section 377 to the extent it criminalized consensual adult intimacy.',
+      hi: '1860 में अंग्रेजों द्वारा बनाई गई धारा 377 आईपीसी वयस्कों के निजी संबंधों को अपराध बनाती थी। शास्त्रीय नर्तक नवतेज सिंह जौहर और अन्य नागरिकों ने सुप्रीम कोर्ट में याचिका दायर की। 5 जजों की पीठ ने सर्वसम्मति से धारा 377 के उस हिस्से को असंवैधानिक घोषित कर दिया।',
+    },
+    hasJudgeDecision: true,
+    panels: [
+      {
+        id: 'panel-1',
+        type: 'HOOK',
+        eyebrow: {
+          en: 'EPISODE 01 · THE 1860 COLONIAL CODE',
+          hi: 'एपिसोड 01 · 1860 का कानून',
+        },
+        headline: {
+          en: 'A 158-Year Shadow Over Millions of Citizens.',
+          hi: 'करोड़ों नागरिकों पर 158 साल पुराना साया।',
+        },
+        body: {
+          en: 'In 1860, the British colonial administration enacted Section 377 of the Indian Penal Code, penalizing "unnatural offences" with up to life imprisonment.\n\nFor over a century and a half, this Victorian morality provision subjected millions of LGBTQ+ citizens to criminal prosecution, blackmail, and systemic denial of dignity.',
+          hi: '1860 में ब्रिटिश हुकूमत ने भारतीय दंड संहिता की धारा 377 लागू की, जिसमें "अप्राकृतिक संबंध" के नाम पर उम्रकैद तक की सजा का प्रावधान था।\n\nडेढ़ सदी से अधिक समय तक इस कानून का इस्तेमाल नागरिकों को प्रताड़ित करने, ब्लैकमेल करने और उनकी गरिमा छीनने के लिए किया गया।',
+        },
+        photoExhibitSrc: '/images/cases/navtej-johar.jpg',
+        photoExhibitCaption: {
+          en: 'Supreme Court of India Constitution Bench proceedings: Navtej Singh Johar v. Union of India (September 2018).',
+          hi: 'सुप्रीम कोर्ट संविधान पीठ की कार्यवाही: नवतेज सिंह जौहर बनाम भारत संघ (सितंबर 2018)।',
+        },
+      },
+      {
+        id: 'panel-2',
+        type: 'PEOPLE',
+        eyebrow: {
+          en: 'EPISODE 02 · DRAMATIS PERSONAE',
+          hi: 'एपिसोड 02 · मुख्य याचिकाकर्ता',
+        },
+        headline: {
+          en: 'The Artists, The Jurists, and The Constitution Bench.',
+          hi: 'कलाकार, वरिष्ठ वकील और संविधान पीठ।',
+        },
+        body: {
+          en: 'Meet the citizens who put their personal lives and liberty on the line before the highest court.',
+          hi: 'जानिए उन नागरिकों को जिन्होंने अपने सम्मान और आजादी के लिए सर्वोच्च अदालत का दरवाजा खटखटाया।',
+        },
+        characters: [
+          {
+            name: { en: 'Navtej Singh Johar', hi: 'नवतेज सिंह जौहर' },
+            role: { en: 'Lead Petitioner (Bharatanatyam Dancer)', hi: 'मुख्य याचिकाकर्ता (भरतनाट्यम नर्तक)' },
+            tag: { en: 'Sangeet Natak Akademi Awardee', hi: 'संगीत नाटक अकादमी पुरस्कार विजेता' },
+            description: {
+              en: 'Pioneering classical dancer who challenged Section 377 on grounds of personal dignity and creative expression.',
+              hi: 'प्रसिद्ध शास्त्रीय नर्तक जिन्होंने मानवीय गरिमा और अभिव्यक्ति की स्वतंत्रता के आधार पर धारा 377 को चुनौती दी।',
+            },
+          },
+          {
+            name: { en: 'Mukul Rohatgi, Menaka Guruswamy & Saurabh Kirpal', hi: 'मुकुल रोहतगी, मेनका गुरुस्वामी व सौरभ कृपाल' },
+            role: { en: 'Senior Legal Advocates', hi: 'वरिष्ठ अधिवक्ता' },
+            tag: { en: 'Constitutional Morality Counsel', hi: 'संवैधानिक नैतिकता के पैरोकार' },
+            description: {
+              en: 'Argued that privacy, sexual orientation, and bodily autonomy are inalienable fundamental rights under Article 21.',
+              hi: 'जिन्होंने दलील दी कि निजता, शारीरिक स्वायत्तता और समानता अनुच्छेद 14, 19 और 21 के तहत मूल अधिकार हैं।',
+            },
+          },
+          {
+            name: { en: 'CJI Dipak Misra & Justice D.Y. Chandrachud', hi: 'सीजेआई दीपक मिश्रा व जस्टिस डी.वाई. चंद्रचूड़' },
+            role: { en: 'Constitution Bench Jurists', hi: 'संविधान पीठ के न्यायाधीश' },
+            tag: { en: 'Unanimous 5-Judge Bench', hi: '5 जजों की सर्वसम्मत पीठ' },
+            description: {
+              en: 'Authored historic concurring opinions holding that majoritarian popular morality must yield to constitutional morality.',
+              hi: 'जिन्होंने स्पष्ट किया कि बहुसंख्यकवादी नैतिकता को हमेशा संवैधानिक नैतिकता के आगे झुकना होगा।',
+            },
+          },
+        ],
+      },
+      {
+        id: 'panel-3',
+        type: 'INCIDENT',
+        eyebrow: {
+          en: 'EPISODE 03 · THE LEGAL SEESAW',
+          hi: 'एपिसोड 03 · कानूनी उतार-चढ़ाव',
+        },
+        headline: {
+          en: 'From Delhi High Court (Naz Foundation) to Suresh Koushal.',
+          hi: 'दिल्ली हाई कोर्ट (नाज फाउंडेशन) से सुरेश कौशल तक का संघर्ष।',
+        },
+        body: {
+          en: 'In 2009, the Delhi High Court in **Naz Foundation** decriminalized homosexuality.\n\nHowever, in 2013, the Supreme Court in **Suresh Kumar Koushal** overturned the ruling, calling the LGBTQ+ community a "miniscule fraction".\n\nWhen the 9-judge bench in **Puttaswamy (2017)** affirmed privacy as a fundamental right, the stage was set for the final battle.',
+          hi: '2009 में दिल्ली हाई कोर्ट ने **नाज फाउंडेशन** मामले में धारा 377 को खारिज कर दिया था।\n\nलेकिन 2013 में सुप्रीम कोर्ट ने **सुरेश कौशल** मामले में इसे पलट दिया और एलजीबीटीक्यू समुदाय को "अल्पसंख्यक अंश" कह दिया।\n\n2017 में 9 जजों की पीठ ने **पुट्टास्वामी** मामले में निजता को मौलिक अधिकार घोषित किया, जिससे अंतिम फैसले का रास्ता साफ हुआ।',
+        },
+        evidence: {
+          archiveType: 'police_record',
+          masthead: 'INDIAN PENAL CODE 1860 · SECTION 377',
+          date: 'ENACTED 1860',
+          headline: {
+            en: 'STATUTE TEXT: OF UNNATURAL OFFENCES · SECTION 377 IPC',
+            hi: 'कानून का मूल पाठ: अप्राकृतिक अपराध · धारा 377 आईपीसी',
+          },
+          snippet: {
+            en: 'Section 377 IPC: "Whoever voluntarily has carnal intercourse against the order of nature with any man, woman or animal, shall be punished with imprisonment for life, or with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine."',
+            hi: 'धारा 377 आईपीसी: "जो कोई भी स्वेच्छा से प्रकृति के नियमों के विरुद्ध किसी पुरुष, महिला या पशु के साथ संबंध बनाता है, उसे आजीवन कारावास या 10 वर्ष तक की कैद और जुर्माने की सजा होगी।"',
+          },
+          highlightedPhrase: {
+            en: 'against the order of nature with any man, woman or animal',
+            hi: 'प्रकृति के नियमों के विरुद्ध किसी पुरुष, महिला या पशु के साथ',
+          },
+          exhibitNumber: 'COLONIAL CODE · §377 IPC',
+          caption: {
+            en: 'The archaic 1860 penal provision struck down in 2018.',
+            hi: '1860 का वह औपनिवेशिक दंडात्मक प्रावधान जिसे 2018 में खारिज किया गया।',
+          },
+        },
+      },
+      {
+        id: 'panel-4',
+        type: 'ARGUMENTS',
+        eyebrow: {
+          en: 'EPISODE 04 · COURTROOM DEBATE',
+          hi: 'एपिसोड 04 · संवैधानिक तर्क',
+        },
+        headline: {
+          en: 'Popular Morality vs. Constitutional Morality.',
+          hi: 'सामाजिक रूढ़िवादिता बनाम संवैधानिक नैतिकता।',
+        },
+        body: {
+          en: 'The 5-judge bench evaluated whether societal taboos can override the fundamental guarantees of equality and privacy.',
+          hi: '5 जजों की संविधान पीठ ने परखा कि क्या सामाजिक पूर्वाग्रह समानता और निजता के मूल अधिकारों को दबा सकते हैं।',
+        },
+        prosecutionArgs: {
+          party: { en: 'Navtej Johar & Petitioners', hi: 'नवतेज जौहर व याचिकाकर्ता' },
+          claim: {
+            en: 'Section 377 violates Articles 14 (Equality), 15 (Non-discrimination on sex), 19(1)(a) (Expression), and 21 (Dignity & Privacy).',
+            hi: 'धारा 377 अनुच्छेद 14, 15, 19 और 21 (गरिमा व निजता) का सीधा उल्लंघन है।',
+          },
+          statute: 'Constitution of India Articles 14, 15, 19, 21',
+          keyPoint: {
+            en: 'Constitutional morality must govern court rulings, not majoritarian or religious orthodoxy.',
+            hi: 'अदालतों को बहुसंख्यकवादी पूर्वाग्रहों के बजाय संवैधानिक नैतिकता के अनुसार न्याय करना चाहिए।',
+          },
+        },
+        defenceArgs: {
+          party: { en: 'Opposing Intervenors', hi: 'विरोधी पक्षकार' },
+          claim: {
+            en: 'Decriminalization harms traditional social fabric and family values. Legislative amendments belong exclusively to Parliament.',
+            hi: 'इसे गैर-अपराधिक घोषित करने से सामाजिक ताना-बाना प्रभावित होगा। बदलाव केवल संसद द्वारा होना चाहिए।',
+          },
+          statute: 'Article 245 & Traditional Family Morals',
+          keyPoint: {
+            en: 'Indian cultural values must take precedence over imported western liberal concepts.',
+            hi: 'भारतीय सांस्कृतिक मूल्यों और पारंपरिक मान्यताओं का सम्मान होना चाहिए।',
+          },
+        },
+      },
+      {
+        id: 'panel-5',
+        type: 'YOU_DECIDE',
+        eyebrow: {
+          en: 'EPISODE 05 · YOU ARE THE JUDGE',
+          hi: 'एपISODE 05 · आप हैं जज',
+        },
+        headline: {
+          en: 'Should the Court Decriminalize Consensual Adult Intimacy?',
+          hi: 'क्या वयस्कों के आपसी सहमति वाले संबंधों को अपराध मुक्त करना चाहिए?',
+        },
+        body: {
+          en: 'Cast your vote before viewing the Supreme Court ruling.',
+          hi: 'सुप्रीम कोर्ट का ऐतिहासिक फैसला देखने से पहले अपना वोट दें।',
+        },
+        judgeDecision: {
+          question: {
+            en: 'Does Section 377 IPC violate the fundamental rights to equality, non-discrimination, and privacy of consensual adults?',
+            hi: 'क्या धारा 377 आईपीसी वयस्कों के समानता, गैर-भेदभाव और निजता के मौलिक अधिकारों का हनन करती है?',
+          },
+          subtext: {
+            en: 'The Constitution guarantees equality before law (Art 14) and protection of life and personal liberty (Art 21).',
+            hi: 'संविधान हर नागरिक को कानून के समक्ष समानता (अनुच्छेद 14) और गरिमापूर्ण जीवन (अनुच्छेद 21) की गारंटी देता है।',
+          },
+          options: [
+            {
+              id: 'retain-statute',
+              title: {
+                en: 'Retain Section 377 (Leave to Parliament)',
+                hi: 'धारा 377 बनाए रखें (संसद पर छोड़ें)',
+              },
+              reason: {
+                en: 'Societal norms and penal laws should only be altered by elected representatives through parliamentary debates.',
+                hi: 'दंडात्मक कानूनों में बदलाव केवल जनता द्वारा चुनी गई संसद को करना चाहिए।',
+              },
+              simulatedVotesPercent: 8,
+              isActualVerdict: false,
+            },
+            {
+              id: 'strike-down-377',
+              title: {
+                en: 'Strike Down Section 377 for Consenting Adults',
+                hi: 'धारा 377 को वयस्कों के लिए असंवैधानिक घोषित करें',
+              },
+              reason: {
+                en: 'Consensual adult intimacy is an intrinsic part of human dignity and privacy under Articles 14 and 21.',
+                hi: 'वयस्कों के आपसी सहमति वाले संबंध मानवीय गरिमा, समानता और निजता के अभिन्न अंग हैं।',
+              },
+              simulatedVotesPercent: 92,
+              isActualVerdict: true,
+            },
+          ],
+          judicialRationale: {
+            en: 'The 5-judge Constitution Bench held unanimously that constitutional morality always supersedes popular morality, and struck down Section 377 for consenting adults.',
+            hi: '5 जजों की संविधान पीठ ने सर्वसम्मति से तय किया कि संवैधानिक नैतिकता हमेशा जनभावनाओं से ऊपर है और धारा 377 को असंवैधानिक घोषित किया।',
+          },
+        },
+      },
+      {
+        id: 'panel-6',
+        type: 'VERDICT',
+        eyebrow: {
+          en: 'EPISODE 06 · THE HISTORIC JUDGMENT',
+          hi: 'एपिसोड 06 · ऐतिहासिक फैसला',
+        },
+        headline: {
+          en: '6 September 2018: "History Owes an Apology".',
+          hi: '6 सितंबर 2018: "इतिहास को माफी मांगनी होगी"।',
+        },
+        stamp: {
+          en: 'SECTION 377 STRUCK DOWN (UNANIMOUS 5-0)',
+          hi: 'धारा 377 असंवैधानिक घोषित (सर्वसम्मत 5-0)',
+        },
+        body: {
+          en: 'On 6 September 2018, all 5 judges delivered separate but unanimous opinions striking down Section 377 IPC insofar as it applied to consenting adults.\n\nJustice Indu Malhotra wrote the famous words: **"History owes an apology to the members of this community and their families for the delay in providing redressal."**\n\nCJI Dipak Misra declared: **"I am what I am, so take me as I am."**',
+          hi: '6 सितंबर 2018 को संविधान पीठ के सभी 5 जजों ने सर्वसम्मति से धारा 377 को वयस्कों के लिए असंवैधानिक घोषित कर दिया।\n\nजस्टिस इंदु मल्होत्रा ने ऐतिहासिक शब्द कहे: **"इतिहास को इस समुदाय और उनके परिवारों से इस देरी के लिए माफी मांगनी होगी।"**\n\nसीजेआई दीपक मिश्रा ने कहा: **"मैं जो हूं सो हूं, मुझे वैसे ही स्वीकार करें।"**',
+        },
+        evidence: {
+          archiveType: 'court_decree',
+          masthead: 'SUPREME COURT OF INDIA · (2018) 10 SCC 1',
+          date: '6 SEPTEMBER 2018',
+          headline: {
+            en: 'CERTIFIED DECREE: SECTION 377 STRUCK DOWN AS UNCONSTITUTIONAL FOR CONSENTING ADULTS',
+            hi: 'प्रमाणित डिक्री: सहमति से बने वयस्क संबंधों के लिए धारा 377 असंवैधानिक घोषित',
+          },
+          snippet: {
+            en: 'Held: "Section 377 IPC, so far as it penalises any consensual sexual activity between two adults, be it homosexuals (man and man), hetereosexuals (man and woman) or lesbians (woman and woman), cannot be regarded as constitutional and is liable to be struck down as being unconstitutional and violative of Articles 14, 15, 19 and 21 of the Constitution."',
+            hi: 'फैसला: "धारा 377 आईपीसी, जहां तक दो वयस्कों के बीच आपसी सहमति से बने संबंधों को दंडित करती है, असंवैधानिक है और संविधान के अनुच्छेद 14, 15, 19 और 21 का उल्लंघन होने के कारण रद्द की जाती है।"',
+          },
+          highlightedPhrase: {
+            en: 'cannot be regarded as constitutional and is liable to be struck down as being unconstitutional',
+            hi: 'असंवैधानिक है और रद्द की जाती है',
+          },
+          exhibitNumber: 'SUPREME COURT DECREE · AIR 2018 SC 4321',
+          caption: {
+            en: 'Certified Constitution Bench judgment decree delivered on 6 September 2018.',
+            hi: '6 सितंबर 2018 को संविधान पीठ द्वारा सुनाया गया प्रमाणित फैसला।',
+          },
+        },
+      },
+      {
+        id: 'panel-7',
+        type: 'RATIO',
+        eyebrow: {
+          en: 'EPISODE 07 · CONSTITUTIONAL MORALITY',
+          hi: 'एपिसोड 07 · संवैधानिक नैतिकता का सिद्धांत',
+        },
+        headline: {
+          en: 'The Doctrine of Constitutional Morality.',
+          hi: 'संवैधानिक नैतिकता का अमर सिद्धांत।',
+        },
+        body: {
+          en: 'The Navtej Johar ruling established that Indian courts exist to protect the counter-majoritarian rights of minorities.\n\nPopular majoritarian sentiments cannot justify the state intruding into the private lives, bedrooms, and identities of sovereign citizens.\n\nThis judgment stands alongside Kesavananda Bharati as a masterwork of Indian constitutional freedom.',
+          hi: 'नवतेज जौहर फैसले ने स्थापित किया कि भारतीय अदालतें अल्पसंख्यकों और हर नागरिक के बुनियादी अधिकारों की रक्षा के लिए हैं।\n\nबहुसंख्यकवादी भावनाएं किसी भी नागरिक के निजी जीवन और पहचान में सरकारी दखलंदाजी को सही नहीं ठहरा सकतीं।\n\nयह फैसला भारतीय स्वतंत्रता और मानवाधिकारों के इतिहास का स्वर्णिम अध्याय है।',
+        },
+        evidence: {
+          archiveType: 'verdict_decree',
+          masthead: 'CONSTITUTION OF INDIA · CONSTITUTIONAL MORALITY',
+          date: 'PERPETUAL RATIO',
+          headline: {
+            en: 'RATIO: CONSTITUTIONAL MORALITY SUPERSEDES POPULAR MORALITY IN DEFENDING INDIVIDUAL RIGHTS',
+            hi: 'विधिक सिद्धांत: व्यक्तिगत अधिकारों की रक्षा में संवैधानिक नैतिकता जनभावनाओं से सर्वोपरि है',
+          },
+          snippet: {
+            en: 'Constitutional morality requires that the guarantees of equality, liberty, and fraternity must never be compromised by majoritarian social prejudice.',
+            hi: 'संवैधानिक नैतिकता की मांग है कि समानता, स्वतंत्रता और बंधुत्व के वादों को सामाजिक पूर्वाग्रहों की भेंट नहीं चढ़ाया जा सकता।',
+          },
+          highlightedPhrase: {
+            en: 'guarantees of equality, liberty, and fraternity must never be compromised',
+            hi: 'समानता, स्वतंत्रता और बंधुत्व के वादों को कभी नहीं तोड़ा जा सकता',
+          },
+          exhibitNumber: 'GOLDEN RATIO · SECTION 377',
+          caption: {
+            en: 'The monumental human rights precedent.',
+            hi: 'मानवाधिकारों की ऐतिहासिक नजीर।',
+          },
+        },
+        citationFooter: '(2018) 10 SCC 1 · Supreme Court of India',
+        judgmentUrl: 'https://indiankanoon.org/doc/168677580/',
+      },
+    ],
+    brief: {
+      courtAndYear: {
+        en: 'Supreme Court of India · 2018',
+        hi: 'सुप्रीम कोर्ट ऑफ इंडिया · 2018',
+      },
+      facts: {
+        en: 'Section 377 of the Indian Penal Code 1860 criminalized consensual sexual acts "against the order of nature". In 2009, the Delhi High Court decriminalized it in Naz Foundation, but the Supreme Court reversed that in Suresh Koushal (2013). Classical dancer Navtej Singh Johar and others filed fresh writ petitions under Article 32 asserting violations of Articles 14, 15, 19, and 21.',
+        hi: '1860 की धारा 377 आईपीसी आपसी सहमति वाले संबंधों को अपराध मानती थी। 2009 में दिल्ली हाई कोर्ट ने इसे रद्द किया, लेकिन 2013 में सुप्रीम कोर्ट ने फैसले को पलट दिया। नवतेज सिंह जौहर और अन्य नागरिकों ने अनुच्छेद 32 के तहत नई याचिकाएं दायर कर मूल अधिकारों के हनन का दावा किया।',
+      },
+      issues: {
+        en: [
+          'Whether Section 377 IPC violates the fundamental rights to equality (Art 14), non-discrimination (Art 15), and freedom of expression (Art 19(1)(a))?',
+          'Whether the right to privacy and bodily autonomy under Article 21 includes the right to intimate association for consenting adults?',
+        ],
+        hi: [
+          'क्या धारा 377 आईपीसी समानता (अनुच्छेद 14), गैर-भेदभाव (अनुच्छेद 15) और अभिव्यक्ति की स्वतंत्रता (अनुच्छेद 19) का हनन करती है?',
+          'क्या अनुच्छेद 21 के तहत निजता और शारीरिक स्वायत्तता में वयस्कों के आपसी सहमति के संबंध शामिल हैं?',
+        ],
+      },
+      chargesApplied: ['Section 377 of the Indian Penal Code 1860', 'Constitution of India Articles 14, 15, 19, 21, 32'],
+      held: {
+        en: 'A unanimous 5-judge Constitution Bench held that Section 377 IPC is unconstitutional insofar as it criminalizes consensual adult intimacy in private. The court upheld Section 377 only for non-consensual acts and bestiality.',
+        hi: '5 जजों की संविधान पीठ ने सर्वसम्मति से फैसला दिया कि वयस्कों के बीच आपसी सहमति से बने निजी संबंधों को अपराध मानना असंवैधानिक है। कोर्ट ने जबरन अपराधों और पशु क्रूरता के लिए धारा 377 को बरकरार रखा।',
+      },
+      reasoning: {
+        en: 'The Court held that sexual orientation is an intrinsic biological element of human identity. Constitutional morality demands that individual dignity and privacy must override societal prejudice. Any discrimination based on sex under Article 15 includes sexual orientation.',
+        hi: 'अदालत ने कहा कि पहचान और निजता मानवीय अस्तित्व का अभिन्न अंग हैं। संवैधानिक नैतिकता की मांग है कि व्यक्तिगत गरिमा सामाजिक पूर्वाग्रहों से ऊपर रहे। अनुच्छेद 15 में लैंगिक आधार पर भेदभाव का निषेध इस पर भी लागू होता है।',
+      },
+      whyItMatters: {
+        en: 'Navtej Johar is a historic milestone for civil liberties and human dignity in India, affirming that the Constitution protects minorities against majoritarian prejudice.',
+        hi: 'नवतेज जौहर फैसला भारत में नागरिक स्वतंत्रताओं और मानवीय गरिमा का ऐतिहासिक मील का पत्थर है, जो साबित करता है कि संविधान बहुसंख्यकवादी पूर्वाग्रहों के खिलाफ हर नागरिक की ढाल है।',
       },
     },
   },

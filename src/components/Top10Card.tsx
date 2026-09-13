@@ -20,13 +20,13 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
     <div className="group relative flex-shrink-0 flex items-center cursor-pointer select-none">
       <Link href={`/case/${caseData.slug}`} className="flex items-center">
         {/* Giant Metallic Rank Number */}
-        <div className="relative z-10 -mr-6 sm:-mr-8 flex-shrink-0 select-none pointer-events-none">
+        <div className="relative z-10 -mr-5 sm:-mr-7 flex-shrink-0 select-none pointer-events-none">
           <span
             className="font-anton text-7xl sm:text-8xl md:text-9xl tracking-tighter leading-none"
             style={{
-              WebkitTextStroke: '2px rgba(255,255,255,0.25)',
+              WebkitTextStroke: '2px rgba(255,255,255,0.3)',
               color: '#0e1017',
-              textShadow: '0 10px 20px rgba(0,0,0,0.9)',
+              textShadow: '0 10px 24px rgba(0,0,0,0.95)',
             }}
           >
             {rank}
