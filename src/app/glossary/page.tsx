@@ -75,8 +75,8 @@ export default function GlossaryPage() {
               }
               className="w-full bg-[#141722] border border-white/20 focus:border-[#D4AF37] text-sm text-[#F3EFE6] px-4 py-3.5 pl-11 rounded-xs focus:outline-none transition-all placeholder:text-[#a9a49a]/60 shadow-lg"
             />
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm opacity-50">
-              🔍
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-mono opacity-50 uppercase tracking-widest">
+              FIND
             </span>
             {searchQuery && (
               <button

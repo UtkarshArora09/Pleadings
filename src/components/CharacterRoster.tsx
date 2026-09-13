@@ -20,8 +20,10 @@ export function CharacterRoster({ characters }: CharacterRosterProps) {
         >
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xl">{char.badgeEmoji || '👤'}</span>
-              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#D4AF37] bg-[#D4AF37]/10 px-2 py-0.5 rounded-xs">
+              <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase tracking-wider">
+                PERSONA 0{index + 1}
+              </span>
+              <span className="text-[9px] font-mono font-bold uppercase tracking-[0.18em] text-white/90 bg-white/10 px-2 py-0.5 rounded-xs">
                 {char.role[language]}
               </span>
             </div>
@@ -30,11 +32,11 @@ export function CharacterRoster({ characters }: CharacterRosterProps) {
               {char.name[language]}
             </h4>
 
-            <p className="text-[11px] font-semibold text-[#a9a49a] mb-2 uppercase tracking-wider">
+            <p className="text-[11px] font-mono font-semibold text-[#8c887e] mb-2 uppercase tracking-wider">
               {char.tag[language]}
             </p>
 
-            <p className="text-xs text-[#c4c0b6] leading-relaxed font-normal">
+            <p className="text-xs text-[#c4c0b6] leading-relaxed font-normal font-sans">
               {char.description[language]}
             </p>
           </div>

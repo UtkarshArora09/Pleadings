@@ -36,7 +36,7 @@ export default function HomePage() {
         {/* Shelf: Saved by You (if any) */}
         {savedCases.length > 0 && (
           <BrowseRow
-            title={language === 'en' ? '★ My List (Saved Cases)' : '★ मेरी सूची (सहेजे गए मामले)'}
+            title={language === 'en' ? 'My Saved Cases' : 'मेरी सहेजी गई सूची'}
             subtitle={
               language === 'en'
                 ? 'Your personal bookmarked courtroom case library'
@@ -46,57 +46,57 @@ export default function HomePage() {
           />
         )}
 
-        {/* Shelf 1: Top 10 in Indian Law Today */}
+        {/* Shelf 1: Featured Landmark Precedents */}
         <BrowseRow
-          title={language === 'en' ? 'Top 10 Landmark Cases in India Today' : 'भारत में आज के शीर्ष 10 ऐतिहासिक मामले'}
+          title={language === 'en' ? 'Featured Landmark Precedents' : 'भारत के शीर्ष ऐतिहासिक फैसले'}
           subtitle={
             language === 'en'
-              ? 'Most studied court verdicts by law students and advocates'
+              ? 'Most studied court rulings by law students, advocates, and citizens'
               : 'लॉ छात्रों और वकीलों द्वारा सबसे ज्यादा पढ़े जाने वाले फैसले'
           }
           cases={top10Cases}
         />
 
-        {/* Shelf 2: "You Are The Judge" Originals */}
+        {/* Shelf 2: Interactive Judicial Decisions */}
         <BrowseRow
-          title={language === 'en' ? '⚖️ "You Are The Judge" Thrillers' : '⚖️ "आप हैं जज" — इंटरैक्टिव फैसले'}
+          title={language === 'en' ? 'Interactive Judicial Cases' : '"आप हैं जज" — इंटरैक्टिव फैसले'}
           subtitle={
             language === 'en'
-              ? 'Analyze the crime scene evidence and cast your verdict before the court reveals the truth.'
-              : 'साक्ष्य देखें और सुप्रीम कोर्ट का फैसला जानने से पहले अपना निर्णय दें।'
+              ? 'Analyze the forensic evidence and cast your verdict before the court reveals the truth'
+              : 'साक्ष्य देखें और सुप्रीम कोर्ट का फैसला जानने से पहले अपना निर्णय दें'
           }
           cases={judgeCases}
         />
 
-        {/* Shelf 3: Crime & True Murder Thrillers */}
+        {/* Shelf 3: Criminal Law & IPC Precedents */}
         <BrowseRow
-          title={language === 'en' ? '🩸 True Crime & Murder Thrillers (IPC)' : '🩸 आपराधिक व हत्या के मुकदमे (आईपीसी)'}
+          title={language === 'en' ? 'Criminal Law & IPC Precedents' : 'आपराधिक व हत्या के मुकदमे (आईपीसी)'}
           subtitle={
             language === 'en'
-              ? 'Ghost killings, three shots in Colaba, and the boundaries of criminal intent.'
-              : 'भूत की हत्या, कोलाबा में 3 गोलियां और आपराधिक मंशा की कानूनी सीमाएं।'
+              ? 'Mistake of fact, grave provocation, and the boundaries of criminal intent'
+              : 'भूत की हत्या, कोलाबा में 3 गोलियां और आपराधिक मंशा की कानूनी सीमाएं'
           }
           cases={crimeCases}
         />
 
-        {/* Shelf 4: Constitutional Blockbusters */}
+        {/* Shelf 4: Constitutional Law Benches */}
         <BrowseRow
-          title={language === 'en' ? '🏛️ Supreme Court Blockbusters' : '🏛️ ऐतिहासिक संवैधानिक महामुकदमे'}
+          title={language === 'en' ? 'Constitutional Law Benches' : 'ऐतिहासिक संवैधानिक महामुकदमे'}
           subtitle={
             language === 'en'
-              ? 'The 68-day hearing that saved democracy and the fight against online censorship.'
-              : 'वह 68 दिवसीय बहस जिसने भारतीय लोकतंत्र को बचाया और ऑनलाइन अभिव्यक्ति की जंग।'
+              ? 'The 68-day hearing that saved democracy and the defense of digital free speech'
+              : 'वह 68 दिवसीय बहस जिसने भारतीय लोकतंत्र को बचाया और ऑनलाइन अभिव्यक्ति की जंग'
           }
           cases={constitutionalCases}
         />
 
-        {/* Shelf 5: Corporate & Consumer Law */}
+        {/* Shelf 5: Consumer & Corporate Torts */}
         <BrowseRow
-          title={language === 'en' ? '💼 High-Stakes Corporate & Consumer Feuds' : '💼 उपभोक्ता व औद्योगिक कानून'}
+          title={language === 'en' ? 'Consumer & Corporate Disputes' : 'उपभोक्ता व औद्योगिक कानून'}
           subtitle={
             language === 'en'
-              ? 'The ₹2 Crore haircut dispute and the absolute liability doctrine for toxic gas leaks.'
-              : '2 करोड़ का हेयरकट विवाद और जहरीली गैस रिसाव पर पूर्ण दायित्व का सिद्धांत।'
+              ? 'The ₹2 Crore haircut dispute and the absolute liability doctrine for toxic gas leaks'
+              : '2 करोड़ का हेयरकट विवाद और जहरीली गैस रिसाव पर पूर्ण दायित्व का सिद्धांत'
           }
           cases={corporateCases}
         />
@@ -124,7 +124,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Pillar 1: Law Students */}
           <div className="bg-[#181818] p-6 sm:p-8 rounded-xs border border-white/10 hover:border-[#E50914]/50 transition-all">
-            <div className="text-3xl mb-4">👨‍⚖️</div>
+            <div className="text-sm font-mono font-bold text-[#E50914] mb-3 uppercase tracking-widest">PILLAR 01</div>
             <h3 className="font-anton text-xl text-white uppercase tracking-wide mb-2">
               {language === 'en' ? 'Law Students' : 'लॉ के छात्र'}
             </h3>
@@ -137,7 +137,7 @@ export default function HomePage() {
 
           {/* Pillar 2: Lawyers */}
           <div className="bg-[#181818] p-6 sm:p-8 rounded-xs border border-white/10 hover:border-[#E50914]/50 transition-all">
-            <div className="text-3xl mb-4">⚖️</div>
+            <div className="text-sm font-mono font-bold text-[#D4AF37] mb-3 uppercase tracking-widest">PILLAR 02</div>
             <h3 className="font-anton text-xl text-white uppercase tracking-wide mb-2">
               {language === 'en' ? 'Lawyers & Advocates' : 'वकील और पेशेवर'}
             </h3>
@@ -150,7 +150,7 @@ export default function HomePage() {
 
           {/* Pillar 3: General Public */}
           <div className="bg-[#181818] p-6 sm:p-8 rounded-xs border border-white/10 hover:border-[#E50914]/50 transition-all">
-            <div className="text-3xl mb-4">🧑‍💼</div>
+            <div className="text-sm font-mono font-bold text-[#38bdf8] mb-3 uppercase tracking-widest">PILLAR 03</div>
             <h3 className="font-anton text-xl text-white uppercase tracking-wide mb-2">
               {language === 'en' ? 'General Public & Gen-Z' : 'आम नागरिक व युवा'}
             </h3>

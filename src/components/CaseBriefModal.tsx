@@ -97,7 +97,7 @@ Sourced via Pleadings (Netflix for Indian Law)`;
                 : 'bg-white border-[#0E1016]/20 text-[#0E1016] hover:bg-[#0E1016]/5'
             }`}
           >
-            {bookmarked ? '★ Saved' : '☆ Save Brief'}
+            {bookmarked ? (language === 'en' ? 'Saved' : 'सहेजा गया') : (language === 'en' ? 'Save Brief' : 'ब्रीफ सहेजें')}
           </button>
 
           {/* Copy Brief Button */}
@@ -105,8 +105,7 @@ Sourced via Pleadings (Netflix for Indian Law)`;
             onClick={handleCopyFullBrief}
             className="px-3 py-1.5 bg-white border border-[#0E1016]/20 text-[#0E1016] hover:bg-[#0E1016]/5 rounded-xs text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer hidden sm:inline-flex items-center gap-1.5"
           >
-            <span>📋</span>
-            <span>{copied ? (language === 'en' ? 'Copied!' : 'कॉपी हुआ!') : (language === 'en' ? 'Copy Brief' : 'ब्रीफ कॉपी')}</span>
+            <span>{copied ? (language === 'en' ? 'Copied' : 'कॉपी हुआ') : (language === 'en' ? 'Copy Brief' : 'ब्रीफ कॉपी')}</span>
           </button>
 
           {/* Close Button */}

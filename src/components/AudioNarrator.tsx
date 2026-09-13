@@ -33,7 +33,7 @@ export function AudioNarrator({ textToRead, className = '' }: AudioNarratorProps
         </>
       ) : (
         <>
-          <span className="text-sm">🔊</span>
+          <span className="text-[10px] font-mono text-[#D4AF37]">▶</span>
           <span>{language === 'en' ? 'Listen' : 'सुनें'}</span>
         </>
       )}

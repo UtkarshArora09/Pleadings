@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { CaseData } from '@/types';
 import { useApp } from '@/context/AppContext';
@@ -14,66 +13,79 @@ export function PosterCard({ caseData }: PosterCardProps) {
   const { language, toggleBookmark, isBookmarked } = useApp();
   const bookmarked = isBookmarked(caseData.slug);
 
+  // Determine category color accent
+  const isCrime = caseData.genre === 'crime';
+  const isConstitutional = caseData.genre === 'constitutional' || caseData.genre === 'cyber';
+  const accentColor = isCrime ? '#E50914' : isConstitutional ? '#D4AF37' : '#38bdf8';
+
   return (
-    <div className="group relative flex-shrink-0 w-64 sm:w-72 md:w-80 cursor-pointer">
-      {/* Sleek 16:9 Thumbnail Card */}
-      <Link href={`/case/${caseData.slug}`} className="block">
-        <div className="relative aspect-video w-full rounded-md overflow-hidden bg-[#181818] border border-white/10 transition-all duration-300 ease-out group-hover:scale-105 group-hover:border-white/30 group-hover:shadow-2xl">
-          {/* Cover Art */}
-          <Image
-            src={caseData.bannerImage}
-            alt={caseData.title[language]}
-            fill
-            sizes="(max-width: 768px) 260px, 320px"
-            className="object-cover object-center transition-transform duration-500 group-hover:scale-110 brightness-90 group-hover:brightness-100"
+    <div className="group relative flex-shrink-0 w-72 sm:w-80 md:w-[330px] cursor-pointer">
+      <Link href={`/case/${caseData.slug}`} className="block h-full">
+        {/* Sleek Professional Legal Dossier Card */}
+        <div className="relative h-full flex flex-col justify-between p-5 rounded-md bg-[#13151D] hover:bg-[#181B24] border border-white/10 hover:border-white/30 transition-all duration-300 ease-out group-hover:-translate-y-1.5 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.8)] overflow-hidden">
+          
+          {/* Top colored accent line */}
+          <div
+            className="absolute top-0 inset-x-0 h-1 transition-all duration-300 group-hover:h-1.5"
+            style={{ backgroundColor: accentColor }}
           />
 
-          {/* Subtle bottom gradient for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+          {/* Card Header: Category Tag & Bookmark */}
+          <div>
+            <div className="flex items-center justify-between gap-2 mb-3 pt-1">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] px-2 py-0.5 rounded-xs bg-white/5 border border-white/10 text-[#D4AF37]">
+                {caseData.categoryTag || caseData.tag[language]}
+              </span>
 
-          {/* Minimalist overlay tag (top left) */}
-          <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1.5">
-            <span className="bg-black/70 backdrop-blur-md text-[#D4AF37] border border-white/10 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs">
-              {caseData.categoryTag}
-            </span>
-          </div>
+              {/* Bookmark Button */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleBookmark(caseData.slug);
+                }}
+                className={`w-6 h-6 rounded-xs flex items-center justify-center transition-all cursor-pointer text-xs font-mono ${
+                  bookmarked
+                    ? 'bg-[#E50914] text-white'
+                    : 'bg-white/5 text-white/50 hover:text-white hover:bg-white/15'
+                }`}
+                title={bookmarked ? 'Saved in My Library' : 'Save to My Library'}
+                aria-label="Bookmark Case"
+              >
+                {bookmarked ? '✓' : '+'}
+              </button>
+            </div>
 
-          {/* Bookmark button (top right) */}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleBookmark(caseData.slug);
-            }}
-            className={`absolute top-2.5 right-2.5 z-20 w-7 h-7 rounded-full flex items-center justify-center backdrop-blur-md transition-all cursor-pointer ${
-              bookmarked
-                ? 'bg-[#E50914] text-white shadow-md'
-                : 'bg-black/60 text-white/70 hover:text-white hover:bg-black/90'
-            }`}
-            title={bookmarked ? 'Remove from My List' : 'Add to My List'}
-            aria-label="Bookmark Case"
-          >
-            <span className="text-xs font-bold leading-none">{bookmarked ? '✓' : '+'}</span>
-          </button>
-
-          {/* Title & match at bottom of image */}
-          <div className="absolute inset-x-0 bottom-0 p-3 z-10">
-            <h3 className="font-anton text-lg sm:text-xl text-white uppercase tracking-wide leading-tight group-hover:text-[#E50914] transition-colors line-clamp-1 drop-shadow-md">
+            {/* Case Title */}
+            <h3 className="font-anton text-xl sm:text-2xl text-white uppercase tracking-tight leading-snug mb-1.5 group-hover:text-[#D4AF37] transition-colors line-clamp-1">
               {caseData.title[language]}
             </h3>
-            <div className="flex items-center gap-2 text-[11px] text-[#c9c5bc] mt-0.5 font-sans">
-              <span>{caseData.court}</span>
-              <span>•</span>
-              <span className="text-[#D4AF37] font-semibold">{caseData.tag[language]}</span>
+
+            {/* Court & Landmark Year */}
+            <p className="text-[11px] font-mono font-semibold text-[#8c887e] uppercase tracking-wider mb-3.5">
+              {caseData.court} · {caseData.year}
+            </p>
+
+            {/* Readable Case Synopsis / Blurb */}
+            <p className="text-xs text-[#c9c5bc] leading-[1.7] line-clamp-3 mb-5 font-sans font-normal">
+              {caseData.blurb[language]}
+            </p>
+          </div>
+
+          {/* Card Footer: Read Time & Action */}
+          <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono tracking-wider">
+            <span className="text-[#8c887e] uppercase">
+              {caseData.readTime[language]}
+            </span>
+
+            <div className="flex items-center gap-1.5 text-white font-bold group-hover:text-[#D4AF37] transition-colors">
+              <span className="uppercase tracking-widest text-[10px]">
+                {language === 'en' ? 'Review Case' : 'केस पढ़ें'}
+              </span>
+              <span className="transform transition-transform group-hover:translate-x-1">→</span>
             </div>
           </div>
 
-          {/* Hover Play Button Icon */}
-          <div className="absolute inset-0 z-15 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/20 pointer-events-none">
-            <div className="w-10 h-10 rounded-full bg-white/95 text-[#141414] flex items-center justify-center text-sm font-bold shadow-xl">
-              ▶
-            </div>
-          </div>
         </div>
       </Link>
     </div>

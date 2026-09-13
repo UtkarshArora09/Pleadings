@@ -21,9 +21,6 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
   const router = useRouter();
   const {
     openBriefModal,
-    openShareModal,
-    toggleBookmark,
-    isBookmarked,
     language,
   } = useApp();
 
@@ -153,7 +150,6 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
 
   const activeCase = cases[activeCaseIndex] || cases[0];
   const totalPanels = activeCase.panels.length;
-  const bookmarked = isBookmarked(activeCase.slug);
 
   const handleAdvanceToNextPanel = () => {
     if (activePanelIndex < totalPanels - 1) {
@@ -197,57 +193,8 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
           </span>
         </div>
 
-        {/* Center: Case Indicator Pills */}
-        <div className="flex items-center gap-1.5">
-          {cases.map((c, i) => (
-            <button
-              key={c.slug}
-              onClick={() => {
-                setActiveCaseIndex(i);
-                setActivePanelIndex(0);
-                scrollHorizontalToCase(i);
-                router.replace(`/case/${c.slug}`, { scroll: false });
-              }}
-              className={`rounded-full transition-all duration-300 cursor-pointer ${
-                i === activeCaseIndex
-                  ? 'w-7 h-2 bg-[#D4AF37]'
-                  : 'w-2 h-2 bg-[#F3EFE6]/25 hover:bg-[#F3EFE6]/50'
-              }`}
-              title={`Switch to ${c.title[language]}`}
-            />
-          ))}
-        </div>
-
-        {/* Right: Actions (Bookmark, Share, Brief, Language) */}
+        {/* Right: Actions (Brief, Language) */}
         <div className="flex items-center gap-2.5">
-          {/* Bookmark Button */}
-          <button
-            onClick={() => toggleBookmark(activeCase.slug)}
-            className={`p-2 rounded-xs border transition-all cursor-pointer text-xs ${
-              bookmarked
-                ? 'bg-[#D4AF37] text-[#0E1016] border-[#D4AF37]'
-                : 'bg-white/5 hover:bg-white/15 text-[#F3EFE6] border-white/15'
-            }`}
-            title={bookmarked ? 'Remove Bookmark' : 'Save to My Library'}
-          >
-            {bookmarked ? '★' : '☆'}
-          </button>
-
-          {/* Share Button */}
-          <button
-            onClick={() =>
-              openShareModal({
-                title: activeCase.title[language],
-                url: typeof window !== 'undefined' ? window.location.href : '',
-                citation: activeCase.citation,
-              })
-            }
-            className="p-2 rounded-xs bg-white/5 hover:bg-white/15 text-[#F3EFE6] border border-white/15 transition-all cursor-pointer text-xs"
-            title="Share Case"
-          >
-            ↗
-          </button>
-
           {/* Case Brief Modal Trigger */}
           <button
             onClick={openBriefModal}

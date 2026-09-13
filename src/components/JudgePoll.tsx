@@ -30,8 +30,8 @@ export function JudgePoll({ caseSlug, judgeDecision, onAdvanceToVerdict }: Judge
       {/* Header Gavel Icon */}
       <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <span className="text-xl">⚖️</span>
-          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+          <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
             {language === 'en' ? 'Interactive Judicial Decision' : 'न्यायिक निर्णय सिमुलेटर'}
           </span>
         </div>

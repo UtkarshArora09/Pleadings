@@ -79,12 +79,9 @@ export function ReelPanel({
           )}
 
           {/* Panel Headline */}
-          <h2 className="font-anton text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight uppercase leading-[1.1] mb-3 max-w-xl">
+          <h2 className="font-anton text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight uppercase leading-[1.1] mb-4 max-w-xl">
             {panel.headline[language]}
           </h2>
-
-          {/* Red/Gold Accent line */}
-          <div className="w-14 h-1 bg-gradient-to-r from-[#E50914] to-[#D4AF37] mb-4 rounded-full" />
 
           {/* Story Body with Tappable Terms */}
           {panel.body[language] && (
@@ -113,17 +110,7 @@ export function ReelPanel({
             />
           )}
 
-          {/* First panel scroll hint */}
-          {panelIndex === 0 && (
-            <div className="mt-3 flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#D4AF37] uppercase opacity-90 animate-pulse">
-              <span className="animate-bounce text-sm">↓</span>
-              <span>
-                {language === 'en'
-                  ? 'Scroll down for Episode 2 (Evidence & Characters)'
-                  : 'अगले एपिसोड और साक्ष्य के लिए नीचे स्क्रॉल करें'}
-              </span>
-            </div>
-          )}
+
 
           {/* Last panel judgment actions */}
           {isLastPanel && (
@@ -132,8 +119,8 @@ export function ReelPanel({
                 onClick={openBriefModal}
                 className="px-5 py-3 bg-white hover:bg-white/90 text-[#0E1016] font-bold text-xs uppercase tracking-widest transition-all cursor-pointer shadow-lg rounded-xs flex items-center gap-2"
               >
-                <span>📋</span>
                 <span>{language === 'en' ? 'Open Full Legal Brief' : 'पूरा केस ब्रीफ खोलें'}</span>
+                <span>→</span>
               </button>
 
               <a
@@ -188,12 +175,6 @@ export function ReelPanel({
 
                   {/* Dark gradient overlay at bottom */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Red Live / Archival Badge */}
-                  <div className="absolute bottom-2.5 left-2.5 z-10 flex items-center gap-1.5 bg-black/75 px-2 py-0.5 rounded-xs border border-white/10 text-[9px] font-bold uppercase tracking-wider text-white">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E50914] animate-pulse" />
-                    <span>{caseData.year} · RECORD</span>
-                  </div>
                 </div>
 
                 {/* Archival Photo Caption */}

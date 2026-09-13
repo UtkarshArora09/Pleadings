@@ -101,8 +101,8 @@ function BrowseContent() {
               }
               className="w-full bg-[#141722] border border-white/20 focus:border-[#D4AF37] text-sm text-[#F3EFE6] px-4 py-3.5 pl-11 rounded-xs focus:outline-none transition-all placeholder:text-[#a9a49a]/60 shadow-lg"
             />
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm opacity-50">
-              🔍
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-mono opacity-50 uppercase tracking-widest">
+              FIND
             </span>
             {searchQuery && (
               <button
@@ -138,8 +138,8 @@ function BrowseContent() {
                 : 'bg-white/5 text-[#a9a49a] hover:text-white border border-white/10'
             }`}
           >
-            <span>★ {language === 'en' ? 'My Saved' : 'सहेजे गए'}</span>
-            <span className="text-[10px] px-1.5 py-0.2 bg-black/30 rounded-full font-bold">
+            <span>{language === 'en' ? 'Saved Library' : 'सहेजे गए'}</span>
+            <span className="text-[10px] px-1.5 py-0.2 bg-black/30 rounded-full font-bold font-mono">
               {bookmarkedSlugs.length}
             </span>
           </button>
@@ -153,7 +153,7 @@ function BrowseContent() {
                 : 'bg-white/5 text-[#a9a49a] hover:text-white border border-white/10'
             }`}
           >
-            ⚖️ {language === 'en' ? 'You Decide (Interactive)' : 'आप हैं जज'}
+            {language === 'en' ? 'Interactive Decisions' : 'आप हैं जज'}
           </button>
 
           {/* Dynamic Statute Tags */}
