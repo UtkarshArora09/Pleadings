@@ -23,7 +23,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     id: 'mistake-of-fact',
     term: {
       en: 'Mistake of Fact (Ignorantia Facti Excusat)',
-      hi: 'तथ्य की भूल',
+      hi: 'तथ्य की भूल (इग्नोरेंशिया फैक्टी एक्सक्यूजैट)',
     },
     pronunciation: 'ig-nor-AN-she-uh FAK-ty ex-KEW-zat',
     category: 'Criminal Law',
@@ -80,7 +80,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     id: 'basic-structure-doctrine',
     term: {
       en: 'Basic Structure Doctrine',
-      hi: 'संविधान के मूल ढांचे का सिद्धांत',
+      hi: 'संविधान के बुनियादी ढांचे का सिद्धांत',
     },
     pronunciation: 'BAY-sik STRUK-chur DAHK-trin',
     category: 'Constitutional Law',
@@ -134,6 +134,101 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     relatedCaseSlugs: ['haircut-case'],
   },
   {
+    id: 'section-125-crpc',
+    term: {
+      en: 'Section 125 CrPC (Maintenance of Wives & Children)',
+      hi: 'धारा 125 सीआरपीसी (भरण-पोषण का अधिकार)',
+    },
+    pronunciation: 'SEK-shun 125 CR-P-C',
+    category: 'Criminal Law',
+    code: 'Code of Criminal Procedure · Section 125',
+    definition: {
+      en: 'A statutory social-welfare law enabling wives, children, and elderly parents unable to maintain themselves to claim a monthly financial allowance from a person with sufficient means.',
+      hi: 'एक सामाजिक कल्याणकारी कानून जो बेसहारा पत्नियों, बच्चों और बुजुर्ग माता-पिता को जीवनयापन के लिए मासिक गुजारा भत्ता पाने का अधिकार देता है।',
+    },
+    plainExplanation: {
+      en: 'A secular law ensuring that no person with financial ability can abandon their dependent family members into starvation or destitution, regardless of religion.',
+      hi: 'एक धर्मनिरपेक्ष कानून जो सुनिश्चित करता है कि कोई भी सक्षम व्यक्ति अपने परिवार को भुखमरी या बेसहारा हालत में नहीं छोड़ सकता।',
+    },
+    relatedCaseSlugs: ['shah-bano'],
+  },
+  {
+    id: 'vishaka-guidelines',
+    term: {
+      en: 'Vishaka Guidelines & Workplace Safety',
+      hi: 'विशाखा दिशानिर्देश व कार्यस्थल सुरक्षा',
+    },
+    pronunciation: 'vih-SHAH-kuh GUIDE-lyns',
+    category: 'Constitutional Law',
+    code: 'Articles 14, 19, 21 & 141 · POSH Act 2013',
+    definition: {
+      en: 'Mandatory judicial regulations formulated by the Supreme Court of India in 1997 to prevent sexual harassment of women at workplaces, making Internal Complaints Committees (ICC) compulsory.',
+      hi: '1997 में सुप्रीम कोर्ट द्वारा जारी बाध्यकारी नियम जो कार्यस्थल पर महिलाओं के यौन उत्पीड़न की रोकथाम और आंतरिक शिकायत समिति (ICC) का गठन अनिवार्य बनाते हैं।',
+    },
+    plainExplanation: {
+      en: 'Every workplace with 10 or more employees must provide a safe environment free from harassment, with a dedicated complaints committee headed by a woman.',
+      hi: '10 या अधिक कर्मचारियों वाले हर संस्थान को एक सुरक्षित वातावरण और महिला की अध्यक्षता में शिकायत निवारण समिति प्रदान करनी होगी।',
+    },
+    relatedCaseSlugs: ['vishaka-case'],
+  },
+  {
+    id: 'due-process-of-law',
+    term: {
+      en: 'Due Process of Law & Substantive Fairness',
+      hi: 'विधि की सम्यक प्रक्रिया (ड्यू प्रोसेस ऑफ लॉ)',
+    },
+    pronunciation: 'DOO PRAH-sess of LAW',
+    category: 'Constitutional Law',
+    code: 'Article 21 · Maneka Gandhi Rule',
+    definition: {
+      en: 'The constitutional doctrine that any law or executive procedure depriving a citizen of life or personal liberty must not merely exist on paper, but must be just, fair, and reasonable, adhering to natural justice.',
+      hi: 'संवैधानिक सिद्धांत कि नागरिक की स्वतंत्रता छीनने वाला कानून केवल कागजों पर नहीं, बल्कि वास्तव में उचित, निष्पक्ष और न्यायसंगत होना चाहिए।',
+    },
+    plainExplanation: {
+      en: "The government cannot just invent arbitrary rules to seize your passport or lock you up. The procedure itself must be inherently fair and give you a chance to defend yourself.",
+      hi: 'सरकार मनमाने नियम बनाकर आपका पासपोर्ट जब्त या आपकी आजादी नहीं छीन सकती। प्रक्रिया का न्यायसंगत और निष्पक्ष होना अनिवार्य है।',
+    },
+    relatedCaseSlugs: ['maneka-gandhi'],
+  },
+  {
+    id: 'golden-triangle',
+    term: {
+      en: 'The Golden Triangle (Articles 14, 19 & 21)',
+      hi: 'स्वर्ण त्रिकोण (अनुच्छेद 14, 19 और 21)',
+    },
+    pronunciation: 'GOHL-den TRY-ang-gul',
+    category: 'Constitutional Law',
+    code: 'Articles 14, 19, 21 · Constitutional Triad',
+    definition: {
+      en: 'The jurisprudential doctrine that Equality (Art 14), Fundamental Freedoms (Art 19), and Right to Life & Liberty (Art 21) form an inseparable triad. A restriction on one must satisfy all three.',
+      hi: 'समानता (अनुच्छेद 14), स्वतंत्रता (अनुच्छेद 19) और जीवन के अधिकार (अनुच्छेद 21) का अटूट त्रिकोण। किसी कानून को वैध होने के लिए तीनों की कसौटी पर खरा उतरना होगा।',
+    },
+    plainExplanation: {
+      en: 'These three articles are the beating heart of the Indian Constitution, protecting citizens from arbitrary state power and tyranny.',
+      hi: 'ये तीन अनुच्छेद संविधान की आत्मा हैं जो नागरिकों को सरकारी मनमानी और तानाशाही से बचाते हैं।',
+    },
+    relatedCaseSlugs: ['maneka-gandhi', 'navtej-johar'],
+  },
+  {
+    id: 'constitutional-morality',
+    term: {
+      en: 'Constitutional Morality vs. Popular Morality',
+      hi: 'संवैधानिक नैतिकता बनाम सामाजिक पूर्वाग्रह',
+    },
+    pronunciation: 'kon-stih-TOO-shun-ul mor-AL-ih-tee',
+    category: 'Constitutional Law',
+    code: 'Articles 14, 15, 21 · Navtej Johar Doctrine',
+    definition: {
+      en: 'The principle that courts must uphold constitutional values of equality, liberty, and human dignity, even when popular majoritarian opinion or orthodox social prejudices oppose them.',
+      hi: 'यह सिद्धांत कि अदालतों को सामाजिक पूर्वाग्रहों या बहुसंख्यक राय के बजाय संविधान के समानता और स्वतंत्रता के मूल्यों को सर्वोपरि रखना चाहिए।',
+    },
+    plainExplanation: {
+      en: "Just because a majority of people disapprove of a minority community's identity does not make it illegal. The Constitution protects everyone equally.",
+      hi: 'सिर्फ इसलिए कि समाज का एक बड़ा वर्ग किसी अल्पसंख्यक वर्ग को नापसंद करता है, उनके मूल अधिकार नहीं छीने जा सकते। संविधान सबके लिए समान है।',
+    },
+    relatedCaseSlugs: ['navtej-johar'],
+  },
+  {
     id: 'ratio-decidendi',
     term: {
       en: 'Ratio Decidendi',
@@ -151,5 +246,43 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       hi: 'सिर्फ यह नहीं कि कौन जीता, बल्कि वह नियम जो भविष्य के सभी समान मामलों पर लागू होगा।',
     },
     relatedCaseSlugs: ['ghost-case', 'nanavati-case', 'kesavananda-bharati', 'haircut-case'],
+  },
+  {
+    id: 'mens-rea',
+    term: {
+      en: 'Mens Rea (Guilty Mind)',
+      hi: 'मेन्स रिया (आपराधिक मनःस्थिति / दुराशय)',
+    },
+    pronunciation: 'MENZ RAY-uh',
+    category: 'Criminal Law',
+    code: 'Fundamental Principle of Criminal Law',
+    definition: {
+      en: 'The intention or knowledge of wrongdoing that constitutes part of a crime, as opposed to the action or conduct of the accused (Actus Reus).',
+      hi: 'अपराध करने का इरादा या ज्ञान। आपराधिक कानून में किसी को दोषी ठहराने के लिए काम के साथ-साथ गलत इरादे का होना भी अनिवार्य है।',
+    },
+    plainExplanation: {
+      en: "An act alone doesn't make someone guilty unless their mind was also guilty (Actus non facit reum nisi mens sit rea).",
+      hi: 'केवल कोई कार्य किसी को अपराधी नहीं बनाता जब तक कि उसका मन भी आपराधिक न हो।',
+    },
+    relatedCaseSlugs: ['ghost-case', 'nanavati-case'],
+  },
+  {
+    id: 'public-interest-litigation',
+    term: {
+      en: 'Public Interest Litigation (PIL)',
+      hi: 'जनहित याचिका (पीआईएल)',
+    },
+    pronunciation: 'P-I-L / Lih-tih-GAY-shun',
+    category: 'Evidence & Procedure',
+    code: 'Articles 32 & 226 · Locus Standi Relaxation',
+    definition: {
+      en: 'Litigation undertaken to secure public interest and demonstrate the availability of justice to socially-disadvantaged parties who cannot approach the court themselves.',
+      hi: 'जनता के हित में या कमजोर वर्गों के अधिकारों की रक्षा के लिए किसी भी जागरूक नागरिक या संगठन द्वारा अदालत में दायर की गई याचिका।',
+    },
+    plainExplanation: {
+      en: 'You can file a court petition on behalf of the public or vulnerable victims even if your own personal rights were not directly affected.',
+      hi: 'आप जनता या पीड़ितों के पक्ष में अदालत जा सकते हैं, भले ही आपका व्यक्तिगत नुकसान न हुआ हो।',
+    },
+    relatedCaseSlugs: ['m-c-mehta', 'vishaka-case'],
   },
 ];
