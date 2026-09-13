@@ -38,23 +38,14 @@ export function Hero({ featuredCase }: HeroProps) {
       {/* Billboard Hero Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 flex flex-col justify-end">
         <div className="max-w-2xl animate-fadeIn">
-          {/* Series & Match Bar */}
-          <div className="flex items-center gap-3 mb-3">
-            <span className="flex items-center gap-1 bg-[#E50914] text-white text-[10px] font-black uppercase tracking-[0.2em] px-2 py-0.5 rounded-xs shadow-md">
+          {/* Series & Case Identity Bar */}
+          <div className="flex items-center gap-2.5 mb-3">
+            <span className="flex items-center gap-1 bg-[#E50914] text-white text-[10px] font-black uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-xs shadow-md">
               <span>PLEADINGS</span>
               <span className="font-sans font-normal opacity-80">ORIGINAL</span>
             </span>
-            <span className="text-[#46d369] font-bold text-xs">
-              {activeCase.matchRate}% Match
-            </span>
-            <span className="text-white/70 text-xs font-mono font-semibold">
-              {activeCase.year}
-            </span>
-            <span className="border border-white/30 text-white/80 text-[10px] px-1.5 py-0.2 rounded-xs font-bold">
-              {activeCase.maturityRating}
-            </span>
-            <span className="border border-white/30 text-white/80 text-[10px] px-1.5 py-0.2 rounded-xs font-bold">
-              4K HD
+            <span className="text-[#D4AF37] text-xs font-mono font-semibold uppercase tracking-wider">
+              {activeCase.court} · {activeCase.year}
             </span>
           </div>
 

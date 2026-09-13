@@ -18,6 +18,7 @@ export interface LawTerm {
 export interface EvidenceItem {
   masthead: string; // e.g. "THE TIMES OF INDIA" or "POLICE GAZETTE" or "FORENSIC EXHIBIT"
   date: string; // e.g. "21 MAY 1958" or "NEW DELHI"
+  archiveType?: 'newspaper' | 'police_record' | 'forensic' | 'court_decree' | 'verdict_decree' | 'dossier';
   headline: {
     en: string;
     hi: string;

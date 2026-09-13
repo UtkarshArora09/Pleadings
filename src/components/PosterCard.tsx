@@ -61,12 +61,10 @@ export function PosterCard({ caseData }: PosterCardProps) {
             <h3 className="font-anton text-lg sm:text-xl text-white uppercase tracking-wide leading-tight group-hover:text-[#E50914] transition-colors line-clamp-1 drop-shadow-md">
               {caseData.title[language]}
             </h3>
-            <div className="flex items-center gap-2 text-[11px] text-[#a9a49a] mt-0.5 font-sans">
-              <span className="text-[#46d369] font-bold">{caseData.matchRate}% Match</span>
-              <span>•</span>
+            <div className="flex items-center gap-2 text-[11px] text-[#c9c5bc] mt-0.5 font-sans">
               <span>{caseData.court}</span>
               <span>•</span>
-              <span>{caseData.year}</span>
+              <span className="text-[#D4AF37] font-semibold">{caseData.tag[language]}</span>
             </div>
           </div>
 
