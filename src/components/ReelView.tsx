@@ -87,15 +87,17 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
     [cases]
   );
 
-  // Smooth scroll vertically to a panel within a case
+  // Smooth scroll vertically to a panel within a case using exact DOM offsetTop
   const scrollVerticalToPanel = useCallback((caseIndex: number, panelIndex: number) => {
     const verticalContainer = verticalScrollRefs.current[caseIndex];
-    if (verticalContainer) {
-      const targetHeight = verticalContainer.clientHeight;
-      verticalContainer.scrollTo({
-        top: targetHeight * panelIndex,
-        behavior: 'smooth',
-      });
+    if (verticalContainer && verticalContainer.children[panelIndex]) {
+      const targetElement = verticalContainer.children[panelIndex] as HTMLElement;
+      if (targetElement) {
+        verticalContainer.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: 'smooth',
+        });
+      }
     }
   }, []);
 
@@ -155,17 +157,27 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
     }, 50);
   }, [activeCaseIndex, cases]);
 
-  // Vertical scroll listener to update progress bar and dots
+  // Vertical scroll listener to update progress bar and dots with accurate offsetTop matching
   const handleVerticalScroll = useCallback(
     (caseIndex: number) => {
       const verticalContainer = verticalScrollRefs.current[caseIndex];
       if (verticalContainer && caseIndex === activeCaseIndex) {
         const scrollTop = verticalContainer.scrollTop;
-        const height = verticalContainer.clientHeight;
-        if (height === 0) return;
-        const newPanelIndex = Math.round(scrollTop / height);
-        if (newPanelIndex !== activePanelIndex && newPanelIndex >= 0) {
-          setActivePanelIndex(newPanelIndex);
+        const children = Array.from(verticalContainer.children) as HTMLElement[];
+        if (children.length === 0) return;
+
+        let closestIndex = 0;
+        let minDiff = Infinity;
+        children.forEach((child, idx) => {
+          const diff = Math.abs(child.offsetTop - scrollTop);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = idx;
+          }
+        });
+
+        if (closestIndex !== activePanelIndex && closestIndex >= 0) {
+          setActivePanelIndex(closestIndex);
         }
       }
     },

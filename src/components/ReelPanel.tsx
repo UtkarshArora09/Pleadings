@@ -60,7 +60,7 @@ export function ReelPanel({
   const isVisibleOnMobile = hasEvidence && isNewspaper && allowedMobileIndices.includes(panelIndex);
 
   return (
-    <div className="w-full h-full min-h-screen snap-start snap-always flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 bg-[#0B0C10] text-[#F3EFE6] relative overflow-visible">
+    <div className="w-full min-h-screen lg:h-screen snap-start snap-always flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-16 bg-[#0B0C10] text-[#F3EFE6] relative overflow-y-auto lg:overflow-hidden select-none pt-16 sm:pt-20 pb-6 sm:pb-8">
       {/* Background cinematic vignette & subtle atmospheric glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-40"
@@ -70,11 +70,8 @@ export function ReelPanel({
         }}
       />
 
-      {/* Top spacer for navigation bar */}
-      <div className="h-14 sm:h-16 md:h-20 flex-shrink-0" />
-
       {/* Container: 2-Column Split on Desktop, Clean 1-Column on Mobile */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12 py-6 sm:py-8 my-auto pr-6 sm:pr-8 md:pr-0">
+      <div className="relative z-10 w-full max-w-7xl mx-auto my-auto flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12 pr-6 sm:pr-8 md:pr-0">
         
         {/* LEFT COLUMN: Story, Dialogue, Arguments, Poll, Actions */}
         <div className="w-full lg:w-[55%] flex flex-col justify-center">
@@ -231,10 +228,6 @@ export function ReelPanel({
         </div>
 
       </div>
-
-      {/* Bottom spacer */}
-      <div className="h-14 sm:h-16 md:h-20 flex-shrink-0" />
     </div>
   );
 }
-
