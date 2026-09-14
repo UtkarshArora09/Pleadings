@@ -307,7 +307,7 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
       </div>
 
       {/* Right Edge Panel Progress Indicators */}
-      <div className="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2.5">
+      <div className="fixed right-2 sm:right-3 md:right-6 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2 opacity-50 hover:opacity-100 transition-opacity">
         {Array.from({ length: totalPanels }).map((_, pIndex) => (
           <button
             key={pIndex}
@@ -317,19 +317,19 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
             }}
             className={`rounded-full transition-all duration-300 cursor-pointer ${
               pIndex === activePanelIndex
-                ? 'h-6 w-1.5 bg-[#D4AF37]'
-                : 'h-1.5 w-1.5 bg-[#F3EFE6]/25 hover:bg-[#F3EFE6]/60'
+                ? 'h-5 sm:h-6 w-1 sm:w-1.5 bg-[#D4AF37]'
+                : 'h-1 sm:h-1.5 w-1 sm:w-1.5 bg-[#F3EFE6]/25 hover:bg-[#F3EFE6]/60'
             }`}
             title={`Go to panel ${pIndex + 1}`}
           />
         ))}
       </div>
 
-      {/* Screen Side Case Navigation Arrows (Available on both mobile and desktop) */}
+      {/* Screen Side Case Navigation Arrows (Desktop only, avoiding mobile text overlap) */}
       {activeCaseIndex > 0 && (
         <button
           onClick={() => scrollToCase(activeCaseIndex - 1)}
-          className="fixed left-2 sm:left-5 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-11 sm:h-11 bg-black/75 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6] flex items-center justify-center transition-all cursor-pointer text-base sm:text-lg rounded-full border border-white/20 shadow-2xl backdrop-blur-xs touch-manipulation"
+          className="hidden md:flex fixed left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-black/40 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6]/70 hover:text-white items-center justify-center transition-all cursor-pointer text-lg rounded-full border border-white/10 shadow-lg backdrop-blur-xs"
           aria-label="Previous Case"
           title={`Previous Case: ${cases[activeCaseIndex - 1].title[language]} (←)`}
         >
@@ -340,7 +340,7 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
       {activeCaseIndex < cases.length - 1 && (
         <button
           onClick={() => scrollToCase(activeCaseIndex + 1)}
-          className="fixed right-8 sm:right-14 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-11 sm:h-11 bg-black/75 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6] flex items-center justify-center transition-all cursor-pointer text-base sm:text-lg rounded-full border border-white/20 shadow-2xl backdrop-blur-xs touch-manipulation"
+          className="hidden md:flex fixed right-14 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-black/40 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6]/70 hover:text-white items-center justify-center transition-all cursor-pointer text-lg rounded-full border border-white/10 shadow-lg backdrop-blur-xs"
           aria-label="Next Case"
           title={`Next Case: ${cases[activeCaseIndex + 1].title[language]} (→)`}
         >

@@ -74,7 +74,7 @@ export function ReelPanel({
       <div className="h-14 sm:h-16 md:h-20 flex-shrink-0" />
 
       {/* Container: 2-Column Split on Desktop, Clean 1-Column on Mobile */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12 py-6 sm:py-8 my-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12 py-6 sm:py-8 my-auto pr-6 sm:pr-8 md:pr-0">
         
         {/* LEFT COLUMN: Story, Dialogue, Arguments, Poll, Actions */}
         <div className="w-full lg:w-[55%] flex flex-col justify-center">
