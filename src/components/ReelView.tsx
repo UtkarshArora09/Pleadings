@@ -222,6 +222,7 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
 
   return (
     <div
+      suppressHydrationWarning
       className="relative w-screen h-screen bg-[#0E1016] overflow-hidden select-none touch-pan-y touch-pan-x"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
