@@ -60,7 +60,7 @@ export function ReelPanel({
   const isVisibleOnMobile = hasEvidence && isNewspaper && allowedMobileIndices.includes(panelIndex);
 
   return (
-    <div className="w-full h-full min-h-screen snap-start snap-always flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 bg-[#0B0C10] text-[#F3EFE6] relative overflow-y-auto overflow-x-hidden">
+    <div className="w-full h-full min-h-screen snap-start snap-always flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 bg-[#0B0C10] text-[#F3EFE6] relative overflow-visible">
       {/* Background cinematic vignette & subtle atmospheric glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-40"

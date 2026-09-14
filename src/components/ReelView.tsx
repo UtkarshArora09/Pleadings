@@ -29,137 +29,77 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
     [cases]
   );
 
-  const [activeCaseIndex, setActiveCaseIndex] = useState<number>(() =>
-    getIndexFromSlug(initialCaseSlug)
-  );
+  const initialIndex = getIndexFromSlug(initialCaseSlug);
+  const [activeCaseIndex, setActiveCaseIndex] = useState<number>(initialIndex);
   const [activePanelIndex, setActivePanelIndex] = useState<number>(0);
 
-  const verticalScrollRef = useRef<HTMLDivElement>(null);
+  const horizontalScrollRef = useRef<HTMLDivElement>(null);
+  const verticalScrollRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isInitialPositioned = useRef<boolean>(false);
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
 
-  // Sync if initialCaseSlug changes externally (e.g. initial load or direct navigation)
+  // Instant scroll to initial case on first mount (ZERO travelling animation)
   useEffect(() => {
-    const targetIndex = getIndexFromSlug(initialCaseSlug);
-    if (targetIndex !== activeCaseIndex) {
-      setActiveCaseIndex(targetIndex);
-      setActivePanelIndex(0);
-      if (verticalScrollRef.current) {
-        verticalScrollRef.current.scrollTo({ top: 0, behavior: 'instant' });
-      }
-    }
-  }, [initialCaseSlug, getIndexFromSlug, activeCaseIndex]);
+    const el = horizontalScrollRef.current;
+    if (!el) return;
 
-  // Support browser Back/Forward buttons without re-mounting
-  useEffect(() => {
-    const handlePopState = () => {
-      const pathSegments = window.location.pathname.split('/');
-      const slug = pathSegments[pathSegments.length - 1];
-      const targetIndex = cases.findIndex((c) => c.slug === slug);
-      if (targetIndex >= 0 && targetIndex !== activeCaseIndex) {
-        setActiveCaseIndex(targetIndex);
-        setActivePanelIndex(0);
-        if (verticalScrollRef.current) {
-          verticalScrollRef.current.scrollTo({ top: 0, behavior: 'instant' });
-        }
+    const setInitialPos = () => {
+      const width = el.clientWidth || window.innerWidth;
+      if (initialIndex > 0) {
+        el.scrollLeft = width * initialIndex;
       }
+      isInitialPositioned.current = true;
     };
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, [cases, activeCaseIndex]);
+    setInitialPos();
+    const raf = requestAnimationFrame(setInitialPos);
+    return () => cancelAnimationFrame(raf);
+  }, [initialIndex]);
 
-  // Navigate cleanly to another case instantly without triggering server re-renders or text flicker
-  const navigateToCase = useCallback(
-    (newIndex: number) => {
-      if (newIndex >= 0 && newIndex < cases.length && newIndex !== activeCaseIndex) {
-        setActiveCaseIndex(newIndex);
-        setActivePanelIndex(0);
-        if (verticalScrollRef.current) {
-          verticalScrollRef.current.scrollTo({ top: 0, behavior: 'instant' });
-        }
-        if (typeof window !== 'undefined') {
-          window.history.replaceState(null, '', `/case/${cases[newIndex].slug}`);
-        }
+  // Smooth scroll horizontally to a case
+  const scrollToCase = useCallback(
+    (index: number) => {
+      if (index < 0 || index >= cases.length) return;
+
+      setActiveCaseIndex(index);
+      setActivePanelIndex(0);
+
+      const targetCase = cases[index];
+      if (targetCase && typeof window !== 'undefined') {
+        window.history.replaceState(null, '', `/case/${targetCase.slug}`);
+      }
+
+      const el = horizontalScrollRef.current;
+      if (el) {
+        const width = el.clientWidth || window.innerWidth;
+        el.scrollTo({
+          left: width * index,
+          behavior: 'smooth',
+        });
+      }
+
+      // Reset vertical scroll of target case to top panel
+      const targetVertical = verticalScrollRefs.current[index];
+      if (targetVertical) {
+        targetVertical.scrollTo({ top: 0, behavior: 'instant' });
       }
     },
-    [cases, activeCaseIndex]
+    [cases]
   );
 
-  // Scroll to active panel vertically within current case
-  const scrollVerticalToPanel = useCallback((panelIndex: number) => {
-    if (verticalScrollRef.current) {
-      const targetHeight = verticalScrollRef.current.clientHeight;
-      verticalScrollRef.current.scrollTo({
+  // Smooth scroll vertically to a panel within a case
+  const scrollVerticalToPanel = useCallback((caseIndex: number, panelIndex: number) => {
+    const verticalContainer = verticalScrollRefs.current[caseIndex];
+    if (verticalContainer) {
+      const targetHeight = verticalContainer.clientHeight;
+      verticalContainer.scrollTo({
         top: targetHeight * panelIndex,
         behavior: 'smooth',
       });
     }
   }, []);
 
-  // Vertical scroll listener to update active panel dot & progress
-  const handleVerticalScroll = useCallback(() => {
-    if (verticalScrollRef.current) {
-      const scrollTop = verticalScrollRef.current.scrollTop;
-      const height = verticalScrollRef.current.clientHeight;
-      if (height === 0) return;
-      const newPanelIndex = Math.round(scrollTop / height);
-      if (newPanelIndex !== activePanelIndex && newPanelIndex >= 0) {
-        setActivePanelIndex(newPanelIndex);
-      }
-    }
-  }, [activePanelIndex]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
-        return;
-      }
-
-      if (e.key === 'ArrowRight') {
-        if (activeCaseIndex < cases.length - 1) {
-          navigateToCase(activeCaseIndex + 1);
-        }
-      } else if (e.key === 'ArrowLeft') {
-        if (activeCaseIndex > 0) {
-          navigateToCase(activeCaseIndex - 1);
-        }
-      } else if (e.key === 'ArrowDown') {
-        const currentCasePanels = cases[activeCaseIndex].panels.length;
-        if (activePanelIndex < currentCasePanels - 1) {
-          const nextPanel = activePanelIndex + 1;
-          setActivePanelIndex(nextPanel);
-          scrollVerticalToPanel(nextPanel);
-        }
-      } else if (e.key === 'ArrowUp') {
-        if (activePanelIndex > 0) {
-          const prevPanel = activePanelIndex - 1;
-          setActivePanelIndex(prevPanel);
-          scrollVerticalToPanel(prevPanel);
-        }
-      } else if (e.key === 'Escape') {
-        router.push('/');
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeCaseIndex, activePanelIndex, cases, navigateToCase, router, scrollVerticalToPanel]);
-
-  const activeCase = cases[activeCaseIndex] || cases[0];
-  const totalPanels = activeCase.panels.length;
-  const nextCase = activeCaseIndex < cases.length - 1 ? cases[activeCaseIndex + 1] : null;
-
-  const handleAdvanceToNextPanel = () => {
-    if (activePanelIndex < totalPanels - 1) {
-      const nextP = activePanelIndex + 1;
-      setActivePanelIndex(nextP);
-      scrollVerticalToPanel(nextP);
-    }
-  };
-
-  // Touch swipe handling for mobile left/right case transitions
-  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
-
+  // Touch swipe detection for mobile phones (Swipe Left -> Next Case, Swipe Right -> Prev Case)
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 1) {
       touchStartRef.current = {
@@ -171,35 +111,120 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!touchStartRef.current) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
-    const diffX = touchEndX - touchStartRef.current.x;
-    const diffY = touchEndY - touchStartRef.current.y;
-    const elapsedTime = Date.now() - touchStartRef.current.time;
+    if (!touchStartRef.current || e.changedTouches.length === 0) return;
+    const touchEnd = e.changedTouches[0];
+    const deltaX = touchEnd.clientX - touchStartRef.current.x;
+    const deltaY = touchEnd.clientY - touchStartRef.current.y;
+    const duration = Date.now() - touchStartRef.current.time;
     touchStartRef.current = null;
 
-    // Detect intentional horizontal swipe (at least 40px and more horizontal than vertical)
-    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.1 && elapsedTime < 800) {
-      if (diffX < -40) {
-        // Swiped Left -> Next Case
+    // Trigger swipe if horizontal delta is significant (> 45px) and predominantly horizontal
+    if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15 && duration < 650) {
+      if (deltaX < 0) {
+        // Swiped Left -> Move to Next Case
         if (activeCaseIndex < cases.length - 1) {
-          navigateToCase(activeCaseIndex + 1);
+          scrollToCase(activeCaseIndex + 1);
         }
-      } else if (diffX > 40) {
-        // Swiped Right -> Prev Case
+      } else {
+        // Swiped Right -> Move to Previous Case
         if (activeCaseIndex > 0) {
-          navigateToCase(activeCaseIndex - 1);
+          scrollToCase(activeCaseIndex - 1);
         }
       }
     }
   };
 
+  // Debounced horizontal scroll listener (Silent URL update without flicker)
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handleHorizontalScroll = useCallback(() => {
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      if (horizontalScrollRef.current) {
+        const scrollLeft = horizontalScrollRef.current.scrollLeft;
+        const width = horizontalScrollRef.current.clientWidth || window.innerWidth;
+        if (width === 0) return;
+        const newIndex = Math.round(scrollLeft / width);
+        if (newIndex >= 0 && newIndex < cases.length && newIndex !== activeCaseIndex) {
+          setActiveCaseIndex(newIndex);
+          setActivePanelIndex(0);
+          if (typeof window !== 'undefined') {
+            window.history.replaceState(null, '', `/case/${cases[newIndex].slug}`);
+          }
+        }
+      }
+    }, 50);
+  }, [activeCaseIndex, cases]);
+
+  // Vertical scroll listener to update progress bar and dots
+  const handleVerticalScroll = useCallback(
+    (caseIndex: number) => {
+      const verticalContainer = verticalScrollRefs.current[caseIndex];
+      if (verticalContainer && caseIndex === activeCaseIndex) {
+        const scrollTop = verticalContainer.scrollTop;
+        const height = verticalContainer.clientHeight;
+        if (height === 0) return;
+        const newPanelIndex = Math.round(scrollTop / height);
+        if (newPanelIndex !== activePanelIndex && newPanelIndex >= 0) {
+          setActivePanelIndex(newPanelIndex);
+        }
+      }
+    },
+    [activeCaseIndex, activePanelIndex]
+  );
+
+  // Keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      if (e.key === 'ArrowRight') {
+        if (activeCaseIndex < cases.length - 1) {
+          scrollToCase(activeCaseIndex + 1);
+        }
+      } else if (e.key === 'ArrowLeft') {
+        if (activeCaseIndex > 0) {
+          scrollToCase(activeCaseIndex - 1);
+        }
+      } else if (e.key === 'ArrowDown') {
+        const currentCasePanels = cases[activeCaseIndex].panels.length;
+        if (activePanelIndex < currentCasePanels - 1) {
+          const nextPanel = activePanelIndex + 1;
+          setActivePanelIndex(nextPanel);
+          scrollVerticalToPanel(activeCaseIndex, nextPanel);
+        }
+      } else if (e.key === 'ArrowUp') {
+        if (activePanelIndex > 0) {
+          const prevPanel = activePanelIndex - 1;
+          setActivePanelIndex(prevPanel);
+          scrollVerticalToPanel(activeCaseIndex, prevPanel);
+        }
+      } else if (e.key === 'Escape') {
+        router.push('/');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeCaseIndex, activePanelIndex, cases, router, scrollToCase, scrollVerticalToPanel]);
+
+  const activeCase = cases[activeCaseIndex] || cases[0];
+  const totalPanels = activeCase.panels.length;
+
+  const handleAdvanceToNextPanel = () => {
+    if (activePanelIndex < totalPanels - 1) {
+      const nextP = activePanelIndex + 1;
+      setActivePanelIndex(nextP);
+      scrollVerticalToPanel(activeCaseIndex, nextP);
+    }
+  };
+
   return (
     <div
+      className="relative w-screen h-screen bg-[#0E1016] overflow-hidden select-none touch-pan-y touch-pan-x"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative w-screen h-screen bg-[#0E1016] overflow-hidden select-none"
     >
       {/* Top Reading Progress Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-white/10">
@@ -217,7 +242,7 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
             'linear-gradient(to bottom, rgba(14,16,22,0.96) 0%, rgba(14,16,22,0.7) 70%, transparent 100%)',
         }}
       >
-        {/* Left: Home link, Case genre badge & Case Switcher */}
+        {/* Left: Home link, Case genre badge & Case Switcher Controls */}
         <div className="flex items-center gap-2 sm:gap-4">
           <Link
             href="/"
@@ -232,19 +257,19 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
             {activeCase.tag[language]}
           </span>
 
-          {/* Mobile & Desktop Interactive Case Switcher Controls */}
+          {/* Interactive Case Switcher Controls */}
           <div className="flex items-center gap-1 bg-white/5 border border-white/10 px-2 py-0.5 rounded-xs">
             {activeCaseIndex > 0 ? (
               <button
-                onClick={() => navigateToCase(activeCaseIndex - 1)}
-                className="text-xs text-[#D4AF37] hover:text-white px-1 py-0.5 cursor-pointer"
-                title="Previous Case (Swipe Right)"
+                onClick={() => scrollToCase(activeCaseIndex - 1)}
+                className="text-xs text-[#D4AF37] hover:text-white px-1.5 py-0.5 cursor-pointer touch-manipulation"
+                title="Previous Case (Scroll/Swipe Right)"
                 aria-label="Previous Case"
               >
                 ◀
               </button>
             ) : (
-              <span className="text-xs text-white/20 px-1 py-0.5 select-none">◀</span>
+              <span className="text-xs text-white/20 px-1.5 py-0.5 select-none">◀</span>
             )}
 
             <span className="text-[10px] font-mono text-[#a9a49a] uppercase tracking-wider px-1">
@@ -253,20 +278,20 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
 
             {activeCaseIndex < cases.length - 1 ? (
               <button
-                onClick={() => navigateToCase(activeCaseIndex + 1)}
-                className="text-xs text-[#D4AF37] hover:text-white px-1 py-0.5 cursor-pointer"
-                title="Next Case (Swipe Left)"
+                onClick={() => scrollToCase(activeCaseIndex + 1)}
+                className="text-xs text-[#D4AF37] hover:text-white px-1.5 py-0.5 cursor-pointer touch-manipulation"
+                title="Next Case (Scroll/Swipe Left)"
                 aria-label="Next Case"
               >
                 ▶
               </button>
             ) : (
-              <span className="text-xs text-white/20 px-1 py-0.5 select-none">▶</span>
+              <span className="text-xs text-white/20 px-1.5 py-0.5 select-none">▶</span>
             )}
           </div>
         </div>
 
-        {/* Right: Actions (Brief, Language, Share) */}
+        {/* Right: Actions (Brief, Language) */}
         <div className="flex items-center gap-2 sm:gap-2.5">
           {/* Case Brief Modal Trigger */}
           <button
@@ -288,7 +313,7 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
             key={pIndex}
             onClick={() => {
               setActivePanelIndex(pIndex);
-              scrollVerticalToPanel(pIndex);
+              scrollVerticalToPanel(activeCaseIndex, pIndex);
             }}
             className={`rounded-full transition-all duration-300 cursor-pointer ${
               pIndex === activePanelIndex
@@ -300,11 +325,11 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
         ))}
       </div>
 
-      {/* Horizontal Desktop Case Navigation Arrows (Glitch-Free) */}
+      {/* Screen Side Case Navigation Arrows (Available on both mobile and desktop) */}
       {activeCaseIndex > 0 && (
         <button
-          onClick={() => navigateToCase(activeCaseIndex - 1)}
-          className="hidden md:flex fixed left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-black/70 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6] items-center justify-center transition-all cursor-pointer text-lg rounded-full border border-white/15 shadow-xl"
+          onClick={() => scrollToCase(activeCaseIndex - 1)}
+          className="fixed left-2 sm:left-5 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-11 sm:h-11 bg-black/75 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6] flex items-center justify-center transition-all cursor-pointer text-base sm:text-lg rounded-full border border-white/20 shadow-2xl backdrop-blur-xs touch-manipulation"
           aria-label="Previous Case"
           title={`Previous Case: ${cases[activeCaseIndex - 1].title[language]} (←)`}
         >
@@ -314,8 +339,8 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
 
       {activeCaseIndex < cases.length - 1 && (
         <button
-          onClick={() => navigateToCase(activeCaseIndex + 1)}
-          className="hidden md:flex fixed right-14 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-black/70 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6] items-center justify-center transition-all cursor-pointer text-lg rounded-full border border-white/15 shadow-xl"
+          onClick={() => scrollToCase(activeCaseIndex + 1)}
+          className="fixed right-8 sm:right-14 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-11 sm:h-11 bg-black/75 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6] flex items-center justify-center transition-all cursor-pointer text-base sm:text-lg rounded-full border border-white/20 shadow-2xl backdrop-blur-xs touch-manipulation"
           aria-label="Next Case"
           title={`Next Case: ${cases[activeCaseIndex + 1].title[language]} (→)`}
         >
@@ -323,24 +348,36 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
         </button>
       )}
 
-      {/* Vertical Reel of Active Case */}
+      {/* 2D Reel: Native Horizontal Scroll across Cases, Native Vertical Scroll within Panels */}
       <div
-        ref={verticalScrollRef}
-        onScroll={handleVerticalScroll}
-        className="w-full h-full overflow-y-auto snap-y snap-mandatory scrollbar-none"
-        style={{ scrollBehavior: 'smooth' }}
+        ref={horizontalScrollRef}
+        onScroll={handleHorizontalScroll}
+        className="w-full h-full flex overflow-x-auto snap-x snap-mandatory scrollbar-none touch-pan-x touch-pan-y"
+        style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
       >
-        {activeCase.panels.map((panel, pIndex) => (
-          <ReelPanel
-            key={`${activeCase.slug}-${panel.id}`}
-            panel={panel}
-            panelIndex={pIndex}
-            totalPanels={totalPanels}
-            caseData={activeCase}
-            onAdvancePanel={handleAdvanceToNextPanel}
-            onNextCase={nextCase ? () => navigateToCase(activeCaseIndex + 1) : undefined}
-            nextCaseTitle={nextCase ? nextCase.title[language] : undefined}
-          />
+        {cases.map((caseItem, cIndex) => (
+          <div
+            key={caseItem.slug}
+            ref={(el) => {
+              verticalScrollRefs.current[cIndex] = el;
+            }}
+            onScroll={() => handleVerticalScroll(cIndex)}
+            className="w-screen h-screen flex-shrink-0 snap-start overflow-y-auto snap-y snap-mandatory scrollbar-none"
+            style={{ scrollBehavior: 'smooth' }}
+          >
+            {caseItem.panels.map((panel, pIndex) => (
+              <ReelPanel
+                key={`${caseItem.slug}-${panel.id}`}
+                panel={panel}
+                panelIndex={pIndex}
+                totalPanels={caseItem.panels.length}
+                caseData={caseItem}
+                onAdvancePanel={handleAdvanceToNextPanel}
+                onNextCase={cIndex < cases.length - 1 ? () => scrollToCase(cIndex + 1) : undefined}
+                nextCaseTitle={cIndex < cases.length - 1 ? cases[cIndex + 1].title[language] : undefined}
+              />
+            ))}
+          </div>
         ))}
       </div>
 
@@ -358,4 +395,5 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
     </div>
   );
 }
+
 
