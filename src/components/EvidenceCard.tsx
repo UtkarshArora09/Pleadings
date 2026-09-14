@@ -236,7 +236,7 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
       default:
         return (
           <div
-            className="relative bg-[#ECE6D8] text-[#1a1b1f] p-6 sm:p-8 rounded-sm shadow-2xl overflow-hidden font-serif"
+            className="relative bg-[#ECE6D8] text-[#1a1b1f] p-4 sm:p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden font-serif"
             style={{
               boxShadow: '0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(243,239,230,0.15)',
               backgroundImage:
