@@ -14,11 +14,51 @@ export default function AdminDashboardPage() {
   const fetchCases = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/admin/cases');
-      const data = await res.json();
-      if (data.success) {
-        setCases(data.cases);
+
+      // 1. Gather any custom / client cases from localStorage
+      let localCases: CaseData[] = [];
+      if (typeof window !== 'undefined') {
+        try {
+          const userListRaw = localStorage.getItem('pleadings_user_cases');
+          if (userListRaw) {
+            localCases = JSON.parse(userListRaw);
+          }
+          for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith('pleadings_case_')) {
+              const itemRaw = localStorage.getItem(key);
+              if (itemRaw) {
+                const item = JSON.parse(itemRaw);
+                if (item && item.slug && !localCases.some((c) => c.slug === item.slug)) {
+                  localCases.push(item);
+                }
+              }
+            }
+          }
+        } catch {}
       }
+
+      // 2. Fetch server cases
+      let serverCases: CaseData[] = [];
+      try {
+        const res = await fetch('/api/admin/cases');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && Array.isArray(data.cases)) {
+            serverCases = data.cases;
+          }
+        }
+      } catch (netErr) {
+        console.warn('Network error fetching admin cases:', netErr);
+      }
+
+      // 3. Merge server cases and local cases
+      const map = new Map<string, CaseData>();
+      serverCases.forEach((c) => map.set(c.slug, c));
+      localCases.forEach((c) => map.set(c.slug, c));
+
+      const merged = Array.from(map.values());
+      setCases(merged);
     } catch (err) {
       console.error('Failed to load admin cases:', err);
     } finally {

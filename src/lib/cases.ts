@@ -11,6 +11,7 @@ import vishakaCase from '@/content/cases/vishaka-case.json';
 import manekaGandhi from '@/content/cases/maneka-gandhi.json';
 import navtejJohar from '@/content/cases/navtej-johar.json';
 import rightToPrivacyCase from '@/content/cases/right-to-privacy-case.json';
+import rinkuRuksharCase from '@/content/cases/rinku-rukshar-habeas-corpus-case.json';
 
 const ALL_CASES: CaseFile[] = [
   ghostCase as unknown as CaseFile,
@@ -24,6 +25,7 @@ const ALL_CASES: CaseFile[] = [
   manekaGandhi as unknown as CaseFile,
   navtejJohar as unknown as CaseFile,
   rightToPrivacyCase as unknown as CaseFile,
+  rinkuRuksharCase as unknown as CaseFile,
 ];
 
 export function getAllCases(): CaseFile[] {
@@ -33,11 +35,26 @@ export function getAllCases(): CaseFile[] {
 export function getCaseBySlug(slug: string): CaseFile | null {
   if (!slug) return null;
   const decoded = decodeURIComponent(slug).trim().toLowerCase();
-  return ALL_CASES.find((c) => c.slug === decoded || c.slug.toLowerCase() === decoded) || null;
+  return (
+    ALL_CASES.find(
+      (c) =>
+        c.slug === decoded ||
+        c.slug.toLowerCase() === decoded ||
+        (decoded === 'rinku-rukshar-habeas-corpus-case' && c.slug === 'rinku-rukshar-habeas-corpus-custody-case') ||
+        (decoded === 'rinku-rukshar-habeas-corpus-custody-case' && c.slug === 'rinku-rukshar-habeas-corpus-case')
+    ) || null
+  );
 }
 
 export function getAllCaseSlugs(): string[] {
-  return ALL_CASES.map((c) => c.slug);
+  const slugs = ALL_CASES.map((c) => c.slug);
+  if (!slugs.includes('rinku-rukshar-habeas-corpus-custody-case')) {
+    slugs.push('rinku-rukshar-habeas-corpus-custody-case');
+  }
+  if (!slugs.includes('rinku-rukshar-habeas-corpus-case')) {
+    slugs.push('rinku-rukshar-habeas-corpus-case');
+  }
+  return slugs;
 }
 
 export function getFeaturedCases(): CaseFile[] {
