@@ -4,12 +4,13 @@ import { Hero } from '@/components/Hero';
 import { Top10Carousel } from '@/components/Top10Carousel';
 import { PosterCard } from '@/components/PosterCard';
 import { CourtroomExperienceShowcase } from '@/components/CourtroomExperienceShowcase';
+import { HomeSectionNav } from '@/components/HomeSectionNav';
 import { getAllCases, getFeaturedCases } from '@/lib/cases';
 import Link from 'next/link';
 
 export const metadata = {
   title: 'Pleadings — Landmark Indian Court Judgments as Verified Stories',
-  description: 'Certified Indian legal precedents transformed into transparent, episodic, source-tiered stories with bilingual support.'
+  description: 'Certified Indian legal precedents transformed into transparent, episodic, source-tiered stories with bilingual support.',
 };
 
 export default function HomePage() {
@@ -17,17 +18,27 @@ export default function HomePage() {
   const featuredCase = getFeaturedCases()[0] || allCases[0];
 
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden select-none">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative select-none snap-y snap-mandatory scroll-smooth">
       <Header />
+      <HomeSectionNav />
+
+      {/* Section 1: Hero Billboard */}
       <Hero featuredCase={featuredCase} casesList={allCases} />
 
-      {/* Main Rows Layout */}
-      <div className="relative z-20 pb-12 space-y-14 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 -mt-4">
-        {/* Row 1: TOP 10 LANDMARK PRECEDENTS IN INDIA Carousel */}
+      {/* Section 2: Top 10 Landmark Precedents in India */}
+      <section
+        id="section-top10"
+        className="min-h-screen snap-start snap-always flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 relative z-20"
+      >
         <Top10Carousel cases={allCases} />
+      </section>
 
-        {/* Row 2: START HERE: ESSENTIAL PRECEDENTS */}
-        <section className="space-y-4">
+      {/* Section 3: Start Here: Essential Precedents */}
+      <section
+        id="section-essential"
+        className="min-h-screen snap-start snap-always flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 space-y-8 relative z-20"
+      >
+        <div className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-2 border-b border-white/10 pb-3">
             <div>
               <h2 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight">
@@ -49,13 +60,10 @@ export default function HomePage() {
           {/* Grid of Poster Cards */}
           <div className="flex items-center gap-4 overflow-x-auto pb-4 pt-1 scrollbar-none">
             {allCases.map((caseItem) => (
-              <PosterCard
-                key={caseItem.slug}
-                caseData={caseItem}
-              />
+              <PosterCard key={caseItem.slug} caseData={caseItem} />
             ))}
           </div>
-        </section>
+        </div>
 
         {/* Explore All Link Banner */}
         <div className="p-6 bg-[#12141C] border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4 shadow-xl">
@@ -74,13 +82,21 @@ export default function HomePage() {
             Open Case Dossier Directory →
           </Link>
         </div>
-      </div>
+      </section>
 
-      {/* The Pleadings Interactive Experience Showcase */}
-      <CourtroomExperienceShowcase />
+      {/* Section 4: The Advocate Toolkit & Courtroom Showcase */}
+      <section
+        id="section-toolkit"
+        className="min-h-screen snap-start snap-always flex flex-col justify-center py-12 relative z-20"
+      >
+        <CourtroomExperienceShowcase />
+      </section>
 
-      {/* Comprehensive Editorial Footer */}
-      <footer className="border-t border-white/10 bg-[#0A0C10] py-12 px-4 sm:px-6 md:px-12 text-[#a9a49a] text-xs font-mono select-none">
+      {/* Section 5: Comprehensive Editorial Footer */}
+      <footer
+        id="section-footer"
+        className="border-t border-white/10 bg-[#0A0C10] py-14 px-4 sm:px-6 md:px-12 text-[#a9a49a] text-xs font-mono select-none snap-start snap-always"
+      >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
             <div className="font-anton text-lg text-white uppercase tracking-wider">
@@ -118,3 +134,4 @@ export default function HomePage() {
     </main>
   );
 }
+

@@ -47,6 +47,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const [activeSource, setActiveSource] = useState<Source | null>(null);
   const [activeTermSlug, setActiveTermSlug] = useState<string | null>(null);
   const [activeEpisodeAnchor, setActiveEpisodeAnchor] = useState<number>(1);
+  const [activeSectionId, setActiveSectionId] = useState<string>('case-header');
   const [isVerdictUnlocked, setIsVerdictUnlocked] = useState<boolean>(false);
 
   // Swipe Gesture Handling
@@ -81,6 +82,57 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     }
   }, []);
 
+  // Track active section and episode on scroll for floating rail
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+      const allIds = ['case-header', ...Array.from({ length: 8 }, (_, i) => `episode-${i + 1}`), 'case-dossier'];
+
+      for (let i = allIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(allIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSectionId(allIds[i]);
+          if (allIds[i].startsWith('episode-')) {
+            const num = parseInt(allIds[i].replace('episode-', ''));
+            if (!isNaN(num)) setActiveEpisodeAnchor(num);
+          }
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Keyboard navigation between episodes (ArrowDown, ArrowUp, Space)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) return;
+
+      const allIds = ['case-header', ...Array.from({ length: 8 }, (_, i) => `episode-${i + 1}`), 'case-dossier'];
+      const currentIdx = allIds.indexOf(activeSectionId);
+
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
+        if (currentIdx >= 0 && currentIdx < allIds.length - 1) {
+          e.preventDefault();
+          const targetEl = document.getElementById(allIds[currentIdx + 1]);
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
+        if (currentIdx > 0) {
+          e.preventDefault();
+          const targetEl = document.getElementById(allIds[currentIdx - 1]);
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeSectionId]);
+
   // Handle Depth Change with 180ms crossfade and anchor preservation
   const handleDepthChange = (newDepth: DepthLayer) => {
     if (newDepth === depth) return;
@@ -108,7 +160,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     touchStartRef.current = {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY,
-      time: Date.now()
+      time: Date.now(),
     };
   };
 
@@ -121,14 +173,19 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     // Detect fast horizontal swipe (> 75px, angle predominantly horizontal, < 350ms)
     if (Math.abs(deltaX) > 75 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5 && deltaTime < 400) {
       if (deltaX < 0 && nextSlug) {
-        // Swiped Left -> Go to Next Case
         router.push(`/case/${nextSlug}?depth=${depth}`);
       } else if (deltaX > 0 && prevSlug) {
-        // Swiped Right -> Go to Prev Case
         router.push(`/case/${prevSlug}?depth=${depth}`);
       }
     }
     touchStartRef.current = null;
+  };
+
+  const scrollToEpisode = (targetId: string) => {
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   // Hindi localization resolution
@@ -148,11 +205,21 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   // Track first AMBER block
   let hasFoundAmber = false;
 
+  const episodeRailItems = [
+    { id: 'case-header', label: 'BRIEF', epNumber: '00' },
+    ...episodes.map((_, i) => ({
+      id: `episode-${i + 1}`,
+      label: `EP ${i + 1}`,
+      epNumber: `0${i + 1}`,
+    })),
+    { id: 'case-dossier', label: 'RATIO', epNumber: '09' },
+  ];
+
   return (
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none relative overflow-x-hidden font-sans"
+      className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none relative overflow-x-hidden font-sans snap-y snap-mandatory scroll-smooth"
     >
       {/* Sticky Top Navigation Bar */}
       <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-3 sm:px-6 py-2.5 flex items-center justify-between transition-all">
@@ -197,10 +264,39 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
         </div>
       </header>
 
+      {/* Floating Episode Navigation Rail on Desktop */}
+      <nav
+        aria-label="Episode Navigation Rail"
+        className="fixed right-3 sm:right-5 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-2 pointer-events-auto"
+      >
+        {episodeRailItems.map((item) => {
+          const isActive = activeSectionId === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => scrollToEpisode(item.id)}
+              className="p-1 focus:outline-none cursor-pointer"
+              aria-label={item.label}
+            >
+              <span
+                className={`block rounded-full transition-all duration-300 ${
+                  isActive
+                    ? 'w-1.5 h-4 bg-white/80'
+                    : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
+                }`}
+              />
+            </button>
+          );
+        })}
+      </nav>
+
       {/* Main Container */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
-        {/* Case Header Hero Section */}
-        <section className="space-y-4 border-b border-white/10 pb-8 animate-fadeIn">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6">
+        {/* Section 0: Case Header Hero Section */}
+        <section
+          id="case-header"
+          className="min-h-[calc(100vh-64px)] snap-start snap-always flex flex-col justify-center py-8 border-b border-white/10 animate-fadeIn space-y-4"
+        >
           {/* Status Badge & Court Info */}
           <div className="flex flex-wrap items-center gap-2.5">
             <StatusBadge status={caseData.status} size="md" />
@@ -230,7 +326,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           </div>
 
           {/* Poster Image */}
-          <div className="pt-4">
+          <div className="pt-2">
             <CaseImage
               src={caseData.poster.src}
               alt={caseData.poster.alt}
@@ -239,11 +335,22 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
               priority
             />
           </div>
+
+          {/* Quick Scroll Indicator to Episode 1 */}
+          <div className="pt-4 flex justify-center">
+            <button
+              onClick={() => scrollToEpisode('episode-1')}
+              className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-[#D4AF37] hover:text-black font-bold text-xs uppercase tracking-widest rounded-xs transition-all cursor-pointer text-white"
+            >
+              <span>Begin Episode 1</span>
+              <span>↓</span>
+            </button>
+          </div>
         </section>
 
         {/* Episodes 1 through 8 Container with 180ms Crossfade */}
         <div
-          className={`space-y-16 transition-opacity duration-180 ${
+          className={`transition-opacity duration-180 ${
             isCrossfading ? 'opacity-0' : 'opacity-100'
           }`}
         >
@@ -252,13 +359,16 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             const currentLayer = ep.layers[depth] || ep.layers.story;
             const isVerdictEpisode = epNum === 7;
             const isLocked = isVerdictEpisode && !isVerdictUnlocked;
+            const nextEpId = epNum < 8 ? `episode-${epNum + 1}` : 'case-dossier';
 
             return (
               <article
                 key={epNum}
-                ref={(el) => { episodeRefs.current[epIdx] = el; }}
+                ref={(el) => {
+                  episodeRefs.current[epIdx] = el;
+                }}
                 onMouseEnter={() => setActiveEpisodeAnchor(epNum)}
-                className="pt-6 border-t border-white/10 space-y-5 relative scroll-mt-20"
+                className="min-h-[calc(100vh-64px)] snap-start snap-always flex flex-col justify-center py-10 border-t border-white/10 space-y-5 relative scroll-mt-16"
                 id={`episode-${epNum}`}
               >
                 {/* Episode Kicker & Title */}
@@ -347,9 +457,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                   )}
 
                   {/* Exhibit Card (if any in this episode) */}
-                  {ep.exhibit && (
-                    <Exhibit exhibit={ep.exhibit} />
-                  )}
+                  {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
 
                   {/* End Hook */}
                   {epIdx < 7 && ep.endHook && (
@@ -358,23 +466,38 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                     </div>
                   )}
                 </div>
+
+                {/* Quick Continue to Next Episode Button */}
+                <div className="pt-3 flex items-center justify-between border-t border-white/5 text-xs font-mono">
+                  <span className="text-white/40">Episode {epNum} of 8</span>
+                  <button
+                    onClick={() => scrollToEpisode(nextEpId)}
+                    className="flex items-center gap-1.5 text-[#D4AF37] hover:text-white font-bold uppercase transition-colors cursor-pointer"
+                  >
+                    <span>{epNum < 8 ? `Continue to Episode ${epNum + 1}` : 'View Ratio & Impact'}</span>
+                    <span>↓</span>
+                  </button>
+                </div>
               </article>
             );
           })}
         </div>
 
-        {/* Student Mode End: Flashcards */}
-        {depth === 'student' && caseData.flashcards && (
-          <Flashcards flashcards={caseData.flashcards} lang={language} />
-        )}
+        {/* Section 9: End-of-Case Dossier Snap Section */}
+        <section
+          id="case-dossier"
+          className="min-h-[calc(100vh-64px)] snap-start snap-always flex flex-col justify-center py-12 border-t border-white/10 space-y-8"
+        >
+          {/* Student Mode End: Flashcards */}
+          {depth === 'student' && caseData.flashcards && (
+            <Flashcards flashcards={caseData.flashcards} lang={language} />
+          )}
 
-        {/* Advocate Mode End: Subsequent History */}
-        {depth === 'advocate' && caseData.subsequentHistory && (
-          <SubsequentHistory history={caseData.subsequentHistory} lang={language} />
-        )}
+          {/* Advocate Mode End: Subsequent History */}
+          {depth === 'advocate' && caseData.subsequentHistory && (
+            <SubsequentHistory history={caseData.subsequentHistory} lang={language} />
+          )}
 
-        {/* Phase 7: End-of-Case Block in Exact Required Order */}
-        <div className="pt-8 border-t border-white/10 space-y-8">
           {/* 1. If This Affects You */}
           <IfThisAffectsYou affectsYou={caseData.affectsYou} lang={language} />
 
@@ -387,7 +510,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           {/* 3. Read Next (2 related cases by doctrine) */}
           <ReadNext relatedSlugs={caseData.relatedSlugs} lang={language} />
 
-          {/* 4. Sources & Editorial Review + Report Error Button */}
+          {/* 4. Sources & Editorial Review */}
           <SourcesAndCorrections
             caseSlug={caseData.slug}
             sourceUrl={caseData.sourceUrl}
@@ -396,22 +519,22 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             review={caseData.review}
             lang={language}
           />
-        </div>
 
-        {/* Swipe Hint Footer */}
-        <div className="py-8 text-center border-t border-white/10 text-xs font-mono text-white/40 space-y-2">
-          {nextSlug ? (
-            <Link
-              href={`/case/${nextSlug}?depth=${depth}`}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-[#D4AF37] hover:text-black font-bold uppercase rounded-xs transition-all cursor-pointer text-white"
-            >
-              <span>Swipe or Tap for Next Case</span>
-              <span>→</span>
-            </Link>
-          ) : (
-            <span>You have completed all cases in this dossier.</span>
-          )}
-        </div>
+          {/* Next Case Link */}
+          <div className="py-6 text-center border-t border-white/10 text-xs font-mono text-white/40 space-y-2">
+            {nextSlug ? (
+              <Link
+                href={`/case/${nextSlug}?depth=${depth}`}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#D4AF37] hover:bg-white text-black font-bold uppercase rounded-xs transition-all cursor-pointer shadow-lg"
+              >
+                <span>Swipe or Tap for Next Case</span>
+                <span>→</span>
+              </Link>
+            ) : (
+              <span>You have completed all cases in this dossier.</span>
+            )}
+          </div>
+        </section>
       </main>
 
       {/* ParaSheet for Verbatim Judgment Text */}
@@ -435,3 +558,4 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     </div>
   );
 }
+

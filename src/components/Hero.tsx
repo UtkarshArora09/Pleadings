@@ -41,7 +41,10 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
   }, [activeCase.poster.src, defaultHeroFallback]);
 
   return (
-    <section className="relative w-full min-h-[640px] md:min-h-[700px] bg-[#141414] flex items-end pb-12 sm:pb-16 overflow-hidden select-none">
+    <section
+      id="section-hero"
+      className="relative w-full min-h-screen bg-[#141414] flex flex-col justify-end pb-12 sm:pb-16 pt-20 overflow-hidden select-none snap-start snap-always"
+    >
       {/* Full Bleed Background */}
       <div className="absolute inset-0 z-0">
         <Image

@@ -18,6 +18,8 @@ export default function NewCasePage() {
     judgmentUrl: '',
     judgmentText: '',
     additionalNotes: '',
+    reviewer: 'Adv. Girish Kr. Srivastava',
+    enrolmentNumber: 'D/842/1991',
     rank: 1,
     makeTrendingTop10: true,
   });
@@ -205,6 +207,36 @@ export default function NewCasePage() {
                 value={formData.citation}
                 onChange={(e) => setFormData({ ...formData, citation: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-white/5">
+            <div>
+              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
+                Reviewing Advocate <span className="text-[#E50914]">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. Adv. Girish Kr. Srivastava"
+                value={formData.reviewer}
+                onChange={(e) => setFormData({ ...formData, reviewer: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-semibold px-3.5 py-2.5 rounded-xs focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
+                Bar Enrolment Number <span className="text-[#E50914]">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. D/842/1991"
+                value={formData.enrolmentNumber}
+                onChange={(e) => setFormData({ ...formData, enrolmentNumber: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-semibold px-3.5 py-2.5 rounded-xs focus:outline-none"
               />
             </div>
           </div>

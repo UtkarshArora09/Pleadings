@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 import { CaseStore } from '@/lib/db/caseStore';
 import { processCaseIngestion } from '@/lib/ai/pipeline';
-import { AdminIngestPayload } from '@/types';
 import { isRequestAuthenticated } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -24,7 +25,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body: AdminIngestPayload = await request.json();
+    const body = await request.json();
 
     if (!body.title || !body.court || !body.year || !body.genre || !body.statuteSections) {
       return NextResponse.json(
@@ -36,12 +37,28 @@ export async function POST(request: NextRequest) {
     // Process using AI extraction & structuring pipeline
     const generatedCase = await processCaseIngestion(body);
 
+    // Persist as JSON file in content/cases/
+    try {
+      const casesDir = path.join(process.cwd(), 'content', 'cases');
+      if (!fs.existsSync(casesDir)) {
+        fs.mkdirSync(casesDir, { recursive: true });
+      }
+      const caseFilePath = path.join(casesDir, `${generatedCase.slug}.json`);
+      fs.writeFileSync(caseFilePath, JSON.stringify(generatedCase, null, 2), 'utf8');
+    } catch (fsErr) {
+      console.warn('Could not write case file directly to disk (serverless mode):', fsErr);
+    }
+
     // Save to dynamic store with ADMIN_REVIEW status
-    const savedCase = CaseStore.create(generatedCase);
+    const savedCase = CaseStore.create(generatedCase as any);
 
     return NextResponse.json({ success: true, case: savedCase });
   } catch (error) {
     console.error('Error ingesting case:', error);
-    return NextResponse.json({ success: false, error: 'Failed to process case ingestion' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: error instanceof Error ? error.message : 'Failed to process case ingestion' },
+      { status: 500 }
+    );
   }
 }
+
