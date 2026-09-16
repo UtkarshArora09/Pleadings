@@ -1,0 +1,162 @@
+[
+  {
+    "slug": "mens-rea",
+    "term": "Mens Rea",
+    "plainMeaning": {
+      "en": "\"Guilty mind\" — the criminal intent or mental awareness required to make an act a crime.",
+      "hi": "\"दोषी मन\" — किसी कार्य को अपराध बनाने के लिए आवश्यक आपराधिक मंशा या मानसिक जागरूकता।"
+    },
+    "statute": "IPC §52 → BNS §2(11)",
+    "related": ["actus-reus", "bona-fide", "mistake-of-fact"]
+  },
+  {
+    "slug": "actus-reus",
+    "term": "Actus Reus",
+    "plainMeaning": {
+      "en": "\"Guilty act\" — the physical action or omission constituting the crime itself.",
+      "hi": "\"अपराधिक कृत्य\" — वह वास्तविक शारीरिक कार्य या चूक जो अपराध का भौतिक स्वरूप बनाती है।"
+    },
+    "statute": "IPC §32 → BNS §2(1)",
+    "related": ["mens-rea", "culpable-homicide"]
+  },
+  {
+    "slug": "mistake-of-fact",
+    "term": "Mistake of Fact",
+    "plainMeaning": {
+      "en": "A defense where an honest, mistaken belief about real circumstances negates criminal intention.",
+      "hi": "एक कानूनी बचाव जहाँ वास्तविक परिस्थितियों के बारे में ईमानदार भूल आपराधिक इरादे को समाप्त कर देती है।"
+    },
+    "statute": "IPC §79 → BNS §17",
+    "related": ["mens-rea", "bona-fide", "good-faith"]
+  },
+  {
+    "slug": "bona-fide",
+    "term": "Bona Fide",
+    "plainMeaning": {
+      "en": "In good faith — done with genuine honesty and without deceptive or fraudulent intent.",
+      "hi": "सद्भावपूर्वक — पूर्ण ईमानदारी, उचित सतर्कता और बिना किसी कपट के किया गया कार्य।"
+    },
+    "statute": "IPC §52 → BNS §2(11)",
+    "related": ["mistake-of-fact", "due-diligence"]
+  },
+  {
+    "slug": "grave-sudden-provocation",
+    "term": "Grave & Sudden Provocation",
+    "plainMeaning": {
+      "en": "An unexpected shock that temporarily deprives a reasonable person of self-control, reducing murder to manslaughter.",
+      "hi": "एक अप्रत्याशित आघात जो व्यक्ति के आत्म-नियंत्रण को क्षण भर के लिए छीन लेता है, जिससे हत्या गैर-इरादतन मानव वध में बदल जाती है।"
+    },
+    "statute": "IPC §300(1) → BNS §101(1)",
+    "related": ["culpable-homicide", "mens-rea"]
+  },
+  {
+    "slug": "culpable-homicide",
+    "term": "Culpable Homicide",
+    "plainMeaning": {
+      "en": "Causing the death of a person by an act with intention or knowledge, categorized as murder or manslaughter.",
+      "hi": "इरादे या ज्ञान के साथ किसी व्यक्ति की जान लेना, जिसे हत्या या गैर-इरादतन मानव वध के रूप में वर्गीकृत किया जाता है।"
+    },
+    "statute": "IPC §299 → BNS §100",
+    "related": ["mens-rea", "grave-sudden-provocation"]
+  },
+  {
+    "slug": "absolute-liability",
+    "term": "Absolute Liability",
+    "plainMeaning": {
+      "en": "No-fault enterprise liability with zero exceptions: an industry engaging in hazardous activity is strictly liable for all resulting damage.",
+      "hi": "बिना किसी अपवाद का कड़ा दायित्व: खतरनाक उद्योग से होने वाले हर नुकसान की भरपाई कंपनी को करनी ही होगी।"
+    },
+    "statute": "Article 32 & 21 Constitution of India",
+    "related": ["strict-liability", "polluter-pays", "public-interest-litigation"]
+  },
+  {
+    "slug": "basic-structure",
+    "term": "Basic Structure Doctrine",
+    "plainMeaning": {
+      "en": "The principle that Parliament cannot use constitutional amendments to destroy the foundational pillars of the Indian Constitution.",
+      "hi": "वह सिद्धांत जिसके अनुसार संसद संविधान संशोधन के जरिए भी संविधान के मूल ढांचे और बुनियादी स्तंभों को नष्ट नहीं कर सकती।"
+    },
+    "statute": "Article 368 Constitution of India",
+    "related": ["judicial-review", "ultra-vires", "separation-of-powers"]
+  },
+  {
+    "slug": "ratio-decidendi",
+    "term": "Ratio Decidendi",
+    "plainMeaning": {
+      "en": "The core legal principle and essential legal rationale upon which the court's ultimate judgment is founded.",
+      "hi": "निर्णय का विधिक आधार — वह मुख्य कानूनी सिद्धांत जिस पर अदालत का अंतिम फैसला टिका होता है।"
+    },
+    "statute": "Article 141 Constitution of India",
+    "related": ["obiter-dicta", "stare-decisis"]
+  },
+  {
+    "slug": "obiter-dicta",
+    "term": "Obiter Dicta",
+    "plainMeaning": {
+      "en": "Incidental remarks or opinions expressed by a judge in a ruling that are not essential to the core holding.",
+      "hi": "प्रसंगवश कही गई बातें — न्यायाधीश की ऐसी अतिरिक्त टिप्पणियां जो फैसले का मुख्य आधार नहीं हैं।"
+    },
+    "statute": "Precedent Jurisprudence",
+    "related": ["ratio-decidendi", "stare-decisis"]
+  },
+  {
+    "slug": "substantive-due-process",
+    "term": "Substantive Due Process",
+    "plainMeaning": {
+      "en": "The requirement that a law depriving a person of life or liberty must itself be just, fair, and reasonable — not arbitrary.",
+      "hi": "यह अनिवार्यता कि जीवन या स्वतंत्रता छीनने वाला कानून केवल प्रक्रियात्मक रूप से ही नहीं, बल्कि न्यायसंगत, निष्पक्ष और उचित होना चाहिए।"
+    },
+    "statute": "Article 21 Constitution of India",
+    "related": ["golden-triangle", "natural-justice"]
+  },
+  {
+    "slug": "golden-triangle",
+    "term": "Golden Triangle of Rights",
+    "plainMeaning": {
+      "en": "The interconnected constitutional protection of Articles 14 (Equality), 19 (Freedom), and 21 (Life & Liberty).",
+      "hi": "अनुच्छेद 14 (समानता), 19 (स्वतंत्रता), और 21 (जीवन का अधिकार) का अटूट त्रिकोण जो मनमाने राज्य हस्तक्षेप से बचाता है।"
+    },
+    "statute": "Articles 14, 19, 21 Constitution of India",
+    "related": ["substantive-due-process", "fundamental-rights"]
+  },
+  {
+    "slug": "chilling-effect",
+    "term": "Chilling Effect",
+    "plainMeaning": {
+      "en": "When vague or overbroad laws discourage or intimidate citizens from exercising their lawful free speech rights.",
+      "hi": "जब अस्पष्ट या कठोर कानून नागरिकों को डर के मारे अभिव्यक्ति की स्वतंत्रता का उपयोग करने से रोकते हैं।"
+    },
+    "statute": "Article 19(1)(a) & 19(2) Constitution of India",
+    "related": ["vagueness-doctrine", "freedom-of-speech"]
+  },
+  {
+    "slug": "deficiency-in-service",
+    "term": "Deficiency in Service",
+    "plainMeaning": {
+      "en": "Any fault, imperfection, or shortcoming in quality and standard required to be maintained by a service provider.",
+      "hi": "सेवा प्रदाता द्वारा प्रदान की जाने वाली गुणवत्ता, मात्रा या मानक में कोई भी कमी, दोष या अपूर्णता।"
+    },
+    "statute": "CPA 1986 §2(1)(g) → CPA 2019 §2(11)",
+    "related": ["consumer-rights", "punitive-damages"]
+  },
+  {
+    "slug": "judicial-legislation",
+    "term": "Judicial Legislation",
+    "plainMeaning": {
+      "en": "When courts lay down binding guidelines and standards to fill a legislative vacuum until Parliament passes a statutory law.",
+      "hi": "जब संसद द्वारा कानून न बनाए जाने की स्थिति में अदालतें शून्यता को भरने के लिए बाध्यकारी दिशानिर्देश जारी करती हैं।"
+    },
+    "statute": "Articles 32 & 141 Constitution of India",
+    "related": ["posh-act", "fundamental-rights"]
+  },
+  {
+    "slug": "unconstitutional-manifestly-arbitrary",
+    "term": "Manifest Arbitrariness",
+    "plainMeaning": {
+      "en": "A law or state action enacted without determining principle, excessive, capricious, or irrational is struck down under Article 14.",
+      "hi": "कोई भी कानून या सरकारी कदम जो बिना किसी तार्किक सिद्धांत, अत्यधिक या मनमाना हो, अनुच्छेद 14 के तहत असंवैधानिक घोषित होता है।"
+    },
+    "statute": "Article 14 Constitution of India",
+    "related": ["equality-before-law", "judicial-review"]
+  }
+]

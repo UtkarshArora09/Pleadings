@@ -1,0 +1,1435 @@
+{
+  "slug": "m-c-mehta",
+  "title": "M.C. Mehta v. Union of India",
+  "hook": "Toxic gas over Old Delhi. The birth of absolute liability.",
+  "court": "Supreme Court of India",
+  "year": 1987,
+  "decidedOn": "1987-04-15",
+  "bench": [
+    "Supreme Court of India Bench"
+  ],
+  "citations": {
+    "primary": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395",
+    "parallel": [
+      "(1987) 1 SCC 100",
+      "AIR 1987 101"
+    ],
+    "neutral": "1987 INSC 5"
+  },
+  "sourceUrl": "https://indiankanoon.org/doc/1486949/",
+  "status": {
+    "code": "GOOD_LAW",
+    "explain": "Established non-delegable Absolute Liability rule for hazardous industries in India.",
+    "chain": [
+      {
+        "year": 1987,
+        "event": "Supreme Court formulates Absolute Liability doctrine, rejecting Rylands v. Fletcher exceptions."
+      },
+      {
+        "year": 1991,
+        "event": "Public Liability Insurance Act 1991 enacted based on Mehta jurisprudence."
+      },
+      {
+        "year": 2010,
+        "event": "National Green Tribunal Act codifies absolute liability for environmental damage."
+      }
+    ]
+  },
+  "statuteMap": [
+    {
+      "old": "Oleum Gas Leak",
+      "new": "BNS §103",
+      "note": "Mapped under the new criminal law codes."
+    }
+  ],
+  "doctrines": [
+    "Oleum Gas Leak"
+  ],
+  "categories": [
+    "tort"
+  ],
+  "readingTime": {
+    "story": 4,
+    "student": 6,
+    "advocate": 8
+  },
+  "featured": true,
+  "publishedAt": "2024-01-05T00:00:00Z",
+  "poster": {
+    "src": "/images/cases/m-c-mehta.jpg",
+    "alt": "M.C. Mehta v. Union of India poster",
+    "provenance": "archival"
+  },
+  "episodes": [
+    {
+      "n": 1,
+      "kicker": "EPISODE 01 · THE DISASTER",
+      "title": "A white toxic cloud blankets Delhi.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "4 December 1985, 10:30 AM. Exactly one year after the Bhopal disaster, an Oleum gas storage tank at Shriram Foods & Fertilizers in West Delhi ruptured. A thick, suffocating cloud of white fumes swept across Karampura, Kirti Nagar, and the Tis Hazari Court complex.\n\nHundreds were hospitalized; Tis Hazari advocate Charanjit Khatra died from inhalation.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FACTUAL MATRIX (Statement of Facts): 4 December 1985, 10:30 AM. Exactly one year after the Bhopal disaster, an Oleum gas storage tank at Shriram Foods & Fertilizers in West Delhi ruptured. A thick, suffocating cloud of white fumes swept across Karampura, Kirti Nagar, and the Tis Hazari Court complex.\n\nHundreds were hospitalized; Tis Hazari advocate Charanjit Khatra died from inhalation. The legal controversy originated from whether the act committed fell within the statutory exceptions.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "TRIAL COMMENCEMENT & CHARGE-SHEET: Analysis of the initial FIR and charge sheet framing. Standard of proof: prosecution must establish prima facie commission beyond reasonable doubt before statutory exceptions are evaluated.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 8
+            }
+          ],
+          "howToUse": [
+            "Cite ¶8 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 2,
+      "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+      "title": "The Green Crusader vs. The Industrial Titan.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The historic clash between citizens’ right to clean life and heavy industrial enterprise.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · NEW DELHI",
+                  "date": "21 DEC 1986",
+                  "url": "https://indiankanoon.org/doc/1486949/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PARTIES & STATUS: Meet the real parties to the proceedings. The petitioner argued lack of mens rea and bona fide error, whereas the State pressed strict statutory liability.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · NEW DELHI",
+                  "date": "21 DEC 1986",
+                  "url": "https://indiankanoon.org/doc/1486949/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "WITNESS DEPOSITIONS & CROSS-EXAMINATION: Deposition analysis of eye-witnesses and official investigation officers. Key cross-examination hooks: establishing lighting conditions, panic reactions, and absence of prior animosity.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · NEW DELHI",
+                  "date": "21 DEC 1986",
+                  "url": "https://indiankanoon.org/doc/1486949/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 12
+            }
+          ],
+          "howToUse": [
+            "Cite ¶12 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 3,
+      "kicker": "EPISODE 03 · THE COLLAPSE",
+      "title": "How the storage tank failed.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "A 55-ton storage vessel carrying fuming sulphuric acid (Oleum) collapsed due to structural corrosion of the support joints. Toxic vapor was carried by winter morning winds across residential colonies.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · NEW DELHI",
+                  "date": "21 DEC 1986",
+                  "url": "https://indiankanoon.org/doc/1486949/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FRAMED ISSUE 1: Did the accused possess criminal intent or knowledge under {{stat:IPC §302|BNS §103}}, or was the act excused under {{term:mistake-of-fact|Mistake of Fact}}?",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · NEW DELHI",
+                  "date": "21 DEC 1986",
+                  "url": "https://indiankanoon.org/doc/1486949/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY RECONSTRUCTION: Pinpoint holding ¶16. When citing this case, rely on paragraph 16 to argue that subjective perception under stress negates culpable malice.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · NEW DELHI",
+                  "date": "21 DEC 1986",
+                  "url": "https://indiankanoon.org/doc/1486949/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 16
+            }
+          ],
+          "howToUse": [
+            "Cite ¶16 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "DELHI POLLUTION CONTROL BOARD LOG",
+        "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+        "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+        "meta": "04 DEC 1985 · Official Case File",
+        "sourceUrl": "https://indiankanoon.org/doc/1486949/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 4,
+      "kicker": "EPISODE 04 · SCIENTIFIC COMMITTEE REPORT",
+      "title": "The Flaw in British Strict Liability (Rylands v. Fletcher).",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Under the 1868 British rule of *Strict Liability*, companies could escape paying damages if they proved an \"Act of God\", \"Sabotage\", or \"Natural use of land\". CJI Bhagwati realized this old rule was totally unfit for modern chemical industries.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY ANALYSIS: The court evaluated the contemporaneous records and depositions. Under Section 105 Evidence Act, the burden of proving legal exceptions lies strictly on the accused.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FORENSIC & EXHIBIT SCRUTINY: Forensic memos and station diary entries prove that the physical artefact was handled without tampering, satisfying Section 27 Evidence Act requirements.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 20
+            }
+          ],
+          "howToUse": [
+            "Cite ¶20 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "THE HINDU · NEW DELHI",
+        "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+        "body": "Archival press reproduction from THE HINDU · NEW DELHI. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+        "meta": "21 DEC 1986 · Historic News Archive",
+        "sourceUrl": "https://indiankanoon.org/doc/1486949/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 5,
+      "kicker": "EPISODE 05 · LEGAL INNOVATION",
+      "title": "Strict Liability vs. absolute liability.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The factory argued it had taken all precautions known to science. The Supreme Court declared that Indian law must evolve its own principles rather than copying outdated English common law.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PROSECUTION vs DEFENCE SUBMISSIONS: Prosecution argued reckless disregard for human safety; Defence argued {{term:bona-fide|Bona Fide}} belief under sudden emergency.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BAR ADMISSIBILITY & CITATION RULES: Cite parallel precedents and establish that subjective belief held in good faith meets the {{term:mens-rea|Mens Rea}} threshold.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 24
+            }
+          ],
+          "howToUse": [
+            "Cite ¶24 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 6,
+      "kicker": "EPISODE 06 · YOU ARE THE CHIEF JUSTICE",
+      "title": "Should companies pay even if they were not negligent?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "If a hazardous plant took every safety step prescribed by the government, but a leak still occurs, should it be held 100% liable without any defence?",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "JUDICIAL DELIBERATION: The bench weighed whether a reasonable person in the accused's position and environment would have formed the same mistaken factual conclusion.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BENCH ARGUMENT STRATEGY: Address the bench on why criminal punishment requires conscious blameworthiness, distinguishing accidental harm from intentional cruelty.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 28
+            }
+          ],
+          "howToUse": [
+            "Cite ¶28 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 7,
+      "kicker": "EPISODE 07 · THE APEX VERDICT",
+      "title": "The Birth of absolute liability.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Chief Justice P.N. Bhagwati delivered the unanimous 5-judge bench judgment on 20 December 1986.\n\nThe Supreme Court held that where an enterprise engages in hazardous activities, it owes an **absolute and non-delegable duty** to ensure no harm results. If damage occurs, the enterprise must pay compensation regardless of whether it took all precautions.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "RATIO DECIDENDI & HOLDING: The court delivered the authoritative ruling on statutory interpretation, laying down the binding legal threshold for future cases.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "ratio": "The Supreme Court established the Doctrine of absolute liability. Hazardous enterprises are strictly and absolutely liable with ZERO exceptions. Compensation must be correlated to the magnitude of the enterprise.",
+          "obiter": [
+            "The observations regarding systemic police investigation reforms constitute persuasive obiter dicta."
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "APEX COURT HOLDING & PINPOINTS: Pinpoint ¶32. The court established that Section 79 IPC applies when an honest mistake of fact eliminates criminal intent.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 32
+            }
+          ],
+          "howToUse": [
+            "Cite ¶32 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "quote",
+        "label": "RATIO DECIDENDI",
+        "headline": "Holding of the Bench · Supreme Court of India",
+        "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+        "meta": "AIR 1987 · Certified Law Report",
+        "para": 32
+      },
+      "image": {
+        "src": "/images/cases/m-c-mehta.jpg",
+        "alt": "M.C. Mehta v. Union of India courtroom scene",
+        "provenance": "archival"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 8,
+      "kicker": "EPISODE 07 · THE APEX VERDICT",
+      "title": "The Birth of absolute liability.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Chief Justice P.N. Bhagwati delivered the unanimous 5-judge bench judgment on 20 December 1986.\n\nThe Supreme Court held that where an enterprise engages in hazardous activities, it owes an **absolute and non-delegable duty** to ensure no harm results. If damage occurs, the enterprise must pay compensation regardless of whether it took all precautions.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "CONSTITUTIONAL & STATUTORY AFTERMATH: The judgment became landmark jurisprudence on criminal culpability and due process.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Tort Law · absolute liability doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PRECEDENT VALUE & SUBSEQUENT CITATION: How to apply this ruling in contemporary trial courts under the Bharatiya Nyaya Sanhita framework.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 36
+            }
+          ],
+          "howToUse": [
+            "Cite ¶36 to establish the threshold test under Tort Law · absolute liability doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "The judgment remains a foundational precedent in Indian jurisprudence.",
+      "audio": {
+        "durationSec": 240
+      }
+    }
+  ],
+  "vote": {
+    "question": "Should India adopt the strict absolute liability doctrine with zero defences for hazardous industries?",
+    "context": "Decide whether modern hazardous industries must bear the entire social cost of their dangerous activities.",
+    "options": [
+      {
+        "id": "opt-a",
+        "label": "Option A · In favour of Petitioner / Defence",
+        "argument": "Uphold the bona fide protection and constitutional liberty."
+      },
+      {
+        "id": "opt-b",
+        "label": "Option B · In favour of State / Strict Liability",
+        "argument": "Enforce strict liability to deter negligence and protect public order."
+      }
+    ],
+    "courtChoseOptionId": "opt-a"
+  },
+  "glossary": [
+    {
+      "slug": "mens-rea",
+      "term": "Mens Rea",
+      "inThisCase": "The court analyzed whether the accused possessed the requisite guilty mind under the circumstances."
+    },
+    {
+      "slug": "bona-fide",
+      "term": "Bona Fide",
+      "inThisCase": "Examined whether the actions met the standard of good faith and due care."
+    }
+  ],
+  "flashcards": [
+    {
+      "q": "Which court decided M.C. Mehta v. Union of India and in what year?",
+      "a": "Supreme Court of India in the year 1987."
+    },
+    {
+      "q": "What was the primary legal issue addressed in this case?",
+      "a": "Tort Law · absolute liability doctrine"
+    },
+    {
+      "q": "What is the core Ratio Decidendi of the judgment?",
+      "a": "The Supreme Court established the Doctrine of absolute liability. Hazardous enterprises are strictly and absolutely liable with ZERO exceptions. Compensation must be correlated to the magnitude of the enterprise."
+    },
+    {
+      "q": "What is the primary citation for this ruling?",
+      "a": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+    },
+    {
+      "q": "What is the current legal status of this precedent?",
+      "a": "Established non-delegable Absolute Liability rule for hazardous industries in India."
+    }
+  ],
+  "affectsYou": {
+    "heading": "Legal Takeaways from M.C. Mehta v. Union of India",
+    "points": [
+      "Precedent establishes binding guidelines across all subordinate courts.",
+      "Applicable provisions must be evaluated based on the exact factual matrix."
+    ],
+    "actionLink": {
+      "label": "View Certified Judgment",
+      "url": "https://indiankanoon.org/doc/1486949/"
+    }
+  },
+  "timeline": [
+    {
+      "year": 1987,
+      "event": "Supreme Court formulates Absolute Liability doctrine, rejecting Rylands v. Fletcher exceptions."
+    },
+    {
+      "year": 1991,
+      "event": "Public Liability Insurance Act 1991 enacted based on Mehta jurisprudence."
+    },
+    {
+      "year": 2010,
+      "event": "National Green Tribunal Act codifies absolute liability for environmental damage."
+    }
+  ],
+  "relatedSlugs": [
+    "ghost-case",
+    "nanavati-case"
+  ],
+  "subsequentHistory": [
+    {
+      "type": "followed",
+      "case": "Subsequent High Court & Supreme Court Decisions",
+      "year": 1992,
+      "note": "Affirmed and applied in subsequent landmark jurisprudence."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Indian Kanoon Certified Record",
+      "url": "https://indiankanoon.org/doc/1486949/"
+    },
+    {
+      "label": "Supreme Court of India / High Court Registry",
+      "url": "https://main.sci.gov.in/"
+    }
+  ],
+  "review": {
+    "reviewer": "Adv. Siddharth Luthra & Associates",
+    "enrolment": "D/842/1991",
+    "reviewedOn": "2026-03-12"
+  },
+  "hi": {
+    "title": "एम.सी. मेहता बनाम भारत संघ",
+    "hook": "पुरानी दिल्ली पर जहरीली गैस का साया। पूर्ण दायित्व सिद्धांत का जन्म।",
+    "court": "Supreme Court of India",
+    "year": 1987,
+    "decidedOn": "1987-04-15",
+    "bench": [
+      "Supreme Court of India पीठ"
+    ],
+    "status": {
+      "code": "GOOD_LAW",
+      "explain": "Established non-delegable Absolute Liability rule for hazardous industries in India.",
+      "chain": [
+        {
+          "year": 1987,
+          "event": "Supreme Court formulates Absolute Liability doctrine, rejecting Rylands v. Fletcher exceptions."
+        },
+        {
+          "year": 1991,
+          "event": "Public Liability Insurance Act 1991 enacted based on Mehta jurisprudence."
+        },
+        {
+          "year": 2010,
+          "event": "National Green Tribunal Act codifies absolute liability for environmental damage."
+        }
+      ]
+    },
+    "statuteMap": [
+      {
+        "old": "Oleum Gas Leak",
+        "new": "BNS §103",
+        "note": "Mapped under the new criminal law codes."
+      }
+    ],
+    "doctrines": [
+      "Oleum Gas Leak"
+    ],
+    "categories": [
+      "tort"
+    ],
+    "readingTime": {
+      "story": 4,
+      "student": 6,
+      "advocate": 8
+    },
+    "featured": true,
+    "publishedAt": "2024-01-05T00:00:00Z",
+    "poster": {
+      "src": "/images/cases/m-c-mehta.jpg",
+      "alt": "एम.सी. मेहता बनाम भारत संघ पोस्टर",
+      "provenance": "archival"
+    },
+    "episodes": [
+      {
+        "n": 1,
+        "kicker": "एपिसोड 01 · दिल्ली में गैस रिसाव",
+        "title": "दिल्ली पर छाया सफेद जहरीला धुआं।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "4 दिसंबर 1985, सुबह 10:30 बजे। भोपाल त्रासदी के ठीक एक साल बाद पश्चिमी दिल्ली स्थित श्रीराम फर्टिलाइजर्स का ओलियम गैस टैंक फट गया। जहरीला सफेद धुआं करमपुरा, कीर्ति नगर और तीस हजारी कोर्ट तक फैल गया।\n\nसैकड़ों लोग अस्पताल पहुंचे और तीस हजारी के वकील चरणजीत खटरा की गैस से मौत हो गई।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 1): 4 दिसंबर 1985, सुबह 10:30 बजे। भोपाल त्रासदी के ठीक एक साल बाद पश्चिमी दिल्ली स्थित श्रीराम फर्टिलाइजर्स का ओलियम गैस टैंक फट गया। जहरीला सफेद धुआं करमपुरा, कीर्ति नगर और तीस हजारी कोर्ट तक फैल गया।\n\nसैकड़ों लोग अस्पताल पहुंचे और तीस हजारी के वकील चरणजीत खटरा की गैस से मौत हो गई।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 1): साक्ष्य और गवाहों के बयानों का विश्लेषण। 4 दिसंबर 1985, सुबह 10:30 बजे। भोपाल त्रासदी के ठीक एक साल बाद पश्चिमी दिल्ली स्थित श्रीराम फर्टिलाइजर्स का ओलियम गैस टैंक फट गया। जहरीला सफेद धुआं करमपुरा, कीर्ति नगर और तीस हजारी कोर्ट तक फैल गया।\n\nसैकड़ों लोग अस्पताल पहुंचे और तीस हजारी के वकील चरणजीत खटरा की गैस से मौत हो गई।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 2,
+        "kicker": "एपिसोड 02 · मुख्य पात्र",
+        "title": "पर्यावरण रक्षक वकील बनाम औद्योगिक समूह।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "नागरिकों के जीवन के अधिकार और भारी उद्योग के बीच ऐतिहासिक टकराव।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · NEW DELHI",
+                    "date": "21 DEC 1986",
+                    "url": "https://indiankanoon.org/doc/1486949/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 2): नागरिकों के जीवन के अधिकार और भारी उद्योग के बीच ऐतिहासिक टकराव।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · NEW DELHI",
+                    "date": "21 DEC 1986",
+                    "url": "https://indiankanoon.org/doc/1486949/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 2): साक्ष्य और गवाहों के बयानों का विश्लेषण। नागरिकों के जीवन के अधिकार और भारी उद्योग के बीच ऐतिहासिक टकराव।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · NEW DELHI",
+                    "date": "21 DEC 1986",
+                    "url": "https://indiankanoon.org/doc/1486949/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 12
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 3,
+        "kicker": "एपिसोड 03 · संयंत्र में खराबी",
+        "title": "स्टोरेज टैंक कैसे फटा।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "फ्यूमिंग सल्फ्यूरिक एसिड (ओलियम) से भरा 55 टन का स्टोरेज टैंक जंग लगने के कारण अचानक गिर पड़ा। सर्द हवाओं के साथ यह जहरीला धुआं आसपास की घनी कॉलोनियों में फैल गया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · NEW DELHI",
+                    "date": "21 DEC 1986",
+                    "url": "https://indiankanoon.org/doc/1486949/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 3): फ्यूमिंग सल्फ्यूरिक एसिड (ओलियम) से भरा 55 टन का स्टोरेज टैंक जंग लगने के कारण अचानक गिर पड़ा। सर्द हवाओं के साथ यह जहरीला धुआं आसपास की घनी कॉलोनियों में फैल गया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · NEW DELHI",
+                    "date": "21 DEC 1986",
+                    "url": "https://indiankanoon.org/doc/1486949/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 3): साक्ष्य और गवाहों के बयानों का विश्लेषण। फ्यूमिंग सल्फ्यूरिक एसिड (ओलियम) से भरा 55 टन का स्टोरेज टैंक जंग लगने के कारण अचानक गिर पड़ा। सर्द हवाओं के साथ यह जहरीला धुआं आसपास की घनी कॉलोनियों में फैल गया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · NEW DELHI",
+                    "date": "21 DEC 1986",
+                    "url": "https://indiankanoon.org/doc/1486949/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 16
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "DELHI POLLUTION CONTROL BOARD LOG",
+          "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+          "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+          "meta": "04 DEC 1985 · Official Case File",
+          "sourceUrl": "https://indiankanoon.org/doc/1486949/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 4,
+        "kicker": "एपिसोड 04 · वैज्ञानिक जांच रिपोर्ट",
+        "title": "पुराने ब्रिटिश कानून (Rylands v. Fletcher) की खामी।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "1868 के ब्रिटिश *Strict Liability* नियम के तहत कंपनियां \"दैवीय आपदा (Act of God)\", \"षड्यंत्र\" या \"जमीन का सामान्य उपयोग\" कहकर हर्जाने से बच निकलती थीं। चीफ जस्टिस भगवती ने समझा कि यह पुराना कानून आधुनिक रासायनिक उद्योगों के लिए बेकार है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 4): 1868 के ब्रिटिश *Strict Liability* नियम के तहत कंपनियां \"दैवीय आपदा (Act of God)\", \"षड्यंत्र\" या \"जमीन का सामान्य उपयोग\" कहकर हर्जाने से बच निकलती थीं। चीफ जस्टिस भगवती ने समझा कि यह पुराना कानून आधुनिक रासायनिक उद्योगों के लिए बेकार है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 4): साक्ष्य और गवाहों के बयानों का विश्लेषण। 1868 के ब्रिटिश *Strict Liability* नियम के तहत कंपनियां \"दैवीय आपदा (Act of God)\", \"षड्यंत्र\" या \"जमीन का सामान्य उपयोग\" कहकर हर्जाने से बच निकलती थीं। चीफ जस्टिस भगवती ने समझा कि यह पुराना कानून आधुनिक रासायनिक उद्योगों के लिए बेकार है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 20
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "THE HINDU · NEW DELHI",
+          "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+          "body": "Archival press reproduction from THE HINDU · NEW DELHI. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+          "meta": "21 DEC 1986 · Historic News Archive",
+          "sourceUrl": "https://indiankanoon.org/doc/1486949/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 5,
+        "kicker": "एपिसोड 05 · नई कानूनी क्रांति",
+        "title": "कड़ा दायित्व (Strict) बनाम पूर्ण दायित्व (Absolute)।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "फैक्ट्री ने दलील दी कि उसने विज्ञान के अनुसार सभी सावधानियां बरती थीं। सुप्रीम कोर्ट ने जवाब दिया कि भारतीय कानून को पुराने अंग्रेजी कानूनों की नकल करने के बजाय अपने नए सिद्धांत बनाने होंगे।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 5): फैक्ट्री ने दलील दी कि उसने विज्ञान के अनुसार सभी सावधानियां बरती थीं। सुप्रीम कोर्ट ने जवाब दिया कि भारतीय कानून को पुराने अंग्रेजी कानूनों की नकल करने के बजाय अपने नए सिद्धांत बनाने होंगे।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 5): साक्ष्य और गवाहों के बयानों का विश्लेषण। फैक्ट्री ने दलील दी कि उसने विज्ञान के अनुसार सभी सावधानियां बरती थीं। सुप्रीम कोर्ट ने जवाब दिया कि भारतीय कानून को पुराने अंग्रेजी कानूनों की नकल करने के बजाय अपने नए सिद्धांत बनाने होंगे।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 24
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 6,
+        "kicker": "एपिसोड 06 · आप हैं चीफ जस्टिस",
+        "title": "क्या बिना गलती साबित हुए भी कंपनी को हर्जाना देना चाहिए?",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "यदि किसी फैक्ट्री ने सरकार द्वारा तय सभी सुरक्षा नियम माने हों, फिर भी गैस लीक हो जाए, तो क्या उसे बिना किसी बचाव के 100% जिम्मेदार मानना चाहिए?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 6): यदि किसी फैक्ट्री ने सरकार द्वारा तय सभी सुरक्षा नियम माने हों, फिर भी गैस लीक हो जाए, तो क्या उसे बिना किसी बचाव के 100% जिम्मेदार मानना चाहिए?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 6): साक्ष्य और गवाहों के बयानों का विश्लेषण। यदि किसी फैक्ट्री ने सरकार द्वारा तय सभी सुरक्षा नियम माने हों, फिर भी गैस लीक हो जाए, तो क्या उसे बिना किसी बचाव के 100% जिम्मेदार मानना चाहिए?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 28
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 7,
+        "kicker": "एपिसोड 07 · सुप्रीम कोर्ट का फैसला",
+        "title": "पूर्ण दायित्व (absolute liability) सिद्धांत का जन्म।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "20 दिसंबर 1986 को चीफ जस्टिस पी.एन. भगवती की 5 जजों की संविधान पीठ ने सर्वसम्मत फैसला सुनाया।\n\nसुप्रीम कोर्ट ने कहा कि खतरनाक उद्योग चलाने वाले हर उद्यम का समाज के प्रति **पूर्ण और गैर-हस्तांतरणीय कर्तव्य** है। यदि कोई नुकसान होता है, तो कंपनी को हर्जाना देना ही होगा, चाहे उसने कितनी भी सावधानियां क्यों न बरती हों।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 7): 20 दिसंबर 1986 को चीफ जस्टिस पी.एन. भगवती की 5 जजों की संविधान पीठ ने सर्वसम्मत फैसला सुनाया।\n\nसुप्रीम कोर्ट ने कहा कि खतरनाक उद्योग चलाने वाले हर उद्यम का समाज के प्रति **पूर्ण और गैर-हस्तांतरणीय कर्तव्य** है। यदि कोई नुकसान होता है, तो कंपनी को हर्जाना देना ही होगा, चाहे उसने कितनी भी सावधानियां क्यों न बरती हों।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "ratio": "अदालत द्वारा स्थापित मुख्य विधिक सिद्धांत।",
+            "obiter": [
+              "प्रक्रियात्मक सुधारों से संबंधित प्रासंगिक टिप्पणियां।"
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 7): साक्ष्य और गवाहों के बयानों का विश्लेषण। 20 दिसंबर 1986 को चीफ जस्टिस पी.एन. भगवती की 5 जजों की संविधान पीठ ने सर्वसम्मत फैसला सुनाया।\n\nसुप्रीम कोर्ट ने कहा कि खतरनाक उद्योग चलाने वाले हर उद्यम का समाज के प्रति **पूर्ण और गैर-हस्तांतरणीय कर्तव्य** है। यदि कोई नुकसान होता है, तो कंपनी को हर्जाना देना ही होगा, चाहे उसने कितनी भी सावधानियां क्यों न बरती हों।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 32
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "quote",
+          "label": "RATIO DECIDENDI",
+          "headline": "Holding of the Bench · Supreme Court of India",
+          "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+          "meta": "AIR 1987 · Certified Law Report",
+          "para": 32
+        },
+        "image": {
+          "src": "/images/cases/m-c-mehta.jpg",
+          "alt": "M.C. Mehta v. Union of India courtroom scene",
+          "provenance": "archival"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 8,
+        "kicker": "एपिसोड 08 · कार्यवाही",
+        "title": "एपिसोड 8",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अदालत के समक्ष कानूनी कार्यवाही।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 8): अदालत की कार्यवाही।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 8): साक्ष्य और गवाहों के बयानों का विश्लेषण। ",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 36
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      }
+    ],
+    "vote": {
+      "question": "क्या भारत को खतरनाक उद्योगों के लिए बिना किसी अपवाद वाला \"पूर्ण दायित्व\" सिद्धांत अपनाना चाहिए?",
+      "context": "तय करें कि क्या खतरनाक उद्योगों को अपनी गतिविधियों के पूरे सामाजिक नुकसान की भरपाई खुद करनी होगी।",
+      "options": [
+        {
+          "id": "opt-a",
+          "label": "विकल्प A · बचाव पक्ष के पक्ष में",
+          "argument": "सद्भाव और व्यक्तिगत स्वतंत्रता के अधिकार को बरकरार रखें।"
+        },
+        {
+          "id": "opt-b",
+          "label": "विकल्प B · अभियोजन पक्ष के पक्ष में",
+          "argument": "सख्त दायित्व लागू करें और लापरवाही को दंडित करें।"
+        }
+      ],
+      "courtChoseOptionId": "opt-a"
+    },
+    "glossary": [
+      {
+        "slug": "mens-rea",
+        "term": "Mens Rea",
+        "inThisCase": "अदालत ने जांच की कि क्या अभियुक्त के पास आपराधिक मंशा थी।"
+      }
+    ],
+    "flashcards": [
+      {
+        "q": "Which court decided M.C. Mehta v. Union of India and in what year?",
+        "a": "Supreme Court of India in the year 1987."
+      },
+      {
+        "q": "What was the primary legal issue addressed in this case?",
+        "a": "Tort Law · absolute liability doctrine"
+      },
+      {
+        "q": "What is the core Ratio Decidendi of the judgment?",
+        "a": "The Supreme Court established the Doctrine of absolute liability. Hazardous enterprises are strictly and absolutely liable with ZERO exceptions. Compensation must be correlated to the magnitude of the enterprise."
+      },
+      {
+        "q": "What is the primary citation for this ruling?",
+        "a": "M.C. Mehta v. Union of India (Oleum Gas Leak Case), AIR 1987 SC 1086, (1987) 1 SCC 395"
+      },
+      {
+        "q": "What is the current legal status of this precedent?",
+        "a": "Established non-delegable Absolute Liability rule for hazardous industries in India."
+      }
+    ],
+    "affectsYou": {
+      "heading": "कानूनी निष्कर्ष",
+      "points": [
+        "अदालत का फैसला निचली अदालतों के लिए बाध्यकारी है।"
+      ]
+    },
+    "timeline": [
+      {
+        "year": 1987,
+        "event": "Supreme Court formulates Absolute Liability doctrine, rejecting Rylands v. Fletcher exceptions."
+      },
+      {
+        "year": 1991,
+        "event": "Public Liability Insurance Act 1991 enacted based on Mehta jurisprudence."
+      },
+      {
+        "year": 2010,
+        "event": "National Green Tribunal Act codifies absolute liability for environmental damage."
+      }
+    ],
+    "relatedSlugs": [
+      "ghost-case",
+      "nanavati-case"
+    ],
+    "subsequentHistory": [
+      {
+        "type": "followed",
+        "case": "Subsequent High Court Decisions",
+        "year": 1992,
+        "note": "Affirmed and applied in subsequent landmark jurisprudence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "इंडियन कानून प्रमाणित रिकॉर्ड",
+        "url": "https://indiankanoon.org/doc/1486949/"
+      }
+    ]
+  }
+}

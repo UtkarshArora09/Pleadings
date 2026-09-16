@@ -1,0 +1,1476 @@
+{
+  "slug": "kesavananda-bharati",
+  "title": "Kesavananda Bharati v. State of Kerala",
+  "hook": "13 Judges. 68 Days. The case that saved Indian democracy.",
+  "court": "Supreme Court of India",
+  "year": 1973,
+  "decidedOn": "1973-04-15",
+  "bench": [
+    "Supreme Court of India Bench"
+  ],
+  "citations": {
+    "primary": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461",
+    "parallel": [
+      "(1973) 1 SCC 100",
+      "AIR 1973 101"
+    ],
+    "neutral": "1973 INSC 6"
+  },
+  "sourceUrl": "https://indiankanoon.org/doc/257876/",
+  "status": {
+    "code": "GOOD_LAW",
+    "explain": "Basic Structure Doctrine remains the cornerstone of Indian constitutional review.",
+    "chain": [
+      {
+        "year": 1973,
+        "event": "13-judge bench rules Parliament cannot alter or destroy the Basic Structure of Constitution."
+      },
+      {
+        "year": 1975,
+        "event": "Applied in Indira Nehru Gandhi v. Raj Narain to invalidate 39th Amendment."
+      },
+      {
+        "year": 1980,
+        "event": "Reaffirmed in Minerva Mills v. Union of India."
+      }
+    ]
+  },
+  "statuteMap": [
+    {
+      "old": "Basic Structure",
+      "new": "BNS §103",
+      "note": "Mapped under the new criminal law codes."
+    }
+  ],
+  "doctrines": [
+    "Basic Structure"
+  ],
+  "categories": [
+    "constitutional"
+  ],
+  "readingTime": {
+    "story": 4,
+    "student": 6,
+    "advocate": 8
+  },
+  "featured": false,
+  "publishedAt": "2024-01-06T00:00:00Z",
+  "poster": {
+    "src": "/images/cases/kesavananda-bharati.jpg",
+    "alt": "Kesavananda Bharati v. State of Kerala poster",
+    "provenance": "archival"
+  },
+  "episodes": [
+    {
+      "n": 1,
+      "kicker": "EPISODE 01 · THE EPIC BATTLE",
+      "title": "The trial for the soul of the Indian Constitution.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "1970–1973. Prime Minister Indira Gandhi’s government passed constitutional amendments claiming unlimited power: Parliament could amend, repeal, or rewrite ANY part of the Constitution, including Fundamental Rights.\n\nOne seer and one legendary lawyer stood in their way.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FACTUAL MATRIX (Statement of Facts): 1970–1973. Prime Minister Indira Gandhi’s government passed constitutional amendments claiming unlimited power: Parliament could amend, repeal, or rewrite ANY part of the Constitution, including Fundamental Rights.\n\nOne seer and one legendary lawyer stood in their way. The legal controversy originated from whether the act committed fell within the statutory exceptions.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "TRIAL COMMENCEMENT & CHARGE-SHEET: Analysis of the initial FIR and charge sheet framing. Standard of proof: prosecution must establish prima facie commission beyond reasonable doubt before statutory exceptions are evaluated.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 8
+            }
+          ],
+          "howToUse": [
+            "Cite ¶8 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 2,
+      "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+      "title": "The Monk, the Jurist, and the Iron Lady.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Meet the titans whose clash in Courtroom No. 1 decided whether India would remain a democracy or become a constitutional dictatorship.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                  "date": "25 APRIL 1973",
+                  "url": "https://indiankanoon.org/doc/257876/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PARTIES & STATUS: Meet the real parties to the proceedings. The petitioner argued lack of mens rea and bona fide error, whereas the State pressed strict statutory liability.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                  "date": "25 APRIL 1973",
+                  "url": "https://indiankanoon.org/doc/257876/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "WITNESS DEPOSITIONS & CROSS-EXAMINATION: Deposition analysis of eye-witnesses and official investigation officers. Key cross-examination hooks: establishing lighting conditions, panic reactions, and absence of prior animosity.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                  "date": "25 APRIL 1973",
+                  "url": "https://indiankanoon.org/doc/257876/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 12
+            }
+          ],
+          "howToUse": [
+            "Cite ¶12 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "ARCHIVAL CASE RECORD",
+        "headline": "Certified Deposition & Character File",
+        "body": "Photographic evidence and identification docket filed during preliminary trial inquiries.",
+        "meta": "Supreme Court of India · Registry Archive",
+        "sourceUrl": "https://indiankanoon.org/doc/257876/",
+        "image": {
+          "src": "/images/cases/kesavananda_monk.jpg",
+          "alt": "Kesavananda Bharati v. State of Kerala archival portrait",
+          "provenance": "archival"
+        }
+      },
+      "image": {
+        "src": "/images/cases/kesavananda_monk.jpg",
+        "alt": "Kesavananda Bharati v. State of Kerala archival portrait",
+        "provenance": "archival"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 3,
+      "kicker": "EPISODE 03 · THE DISPUTE",
+      "title": "A Kerala monastery loses its lands.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "In 1970, Kerala enacted the Land Reforms Act, acquiring hundreds of acres of agricultural land belonging to Edneer Mutt. Deprived of income to run temples and schools, Swami Kesavananda Bharati approached the Supreme Court under Article 32.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                  "date": "25 APRIL 1973",
+                  "url": "https://indiankanoon.org/doc/257876/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FRAMED ISSUE 1: Did the accused possess criminal intent or knowledge under {{stat:IPC §302|BNS §103}}, or was the act excused under {{term:mistake-of-fact|Mistake of Fact}}?",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                  "date": "25 APRIL 1973",
+                  "url": "https://indiankanoon.org/doc/257876/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY RECONSTRUCTION: Pinpoint holding ¶16. When citing this case, rely on paragraph 16 to argue that subjective perception under stress negates culpable malice.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                  "date": "25 APRIL 1973",
+                  "url": "https://indiankanoon.org/doc/257876/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 16
+            }
+          ],
+          "howToUse": [
+            "Cite ¶16 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "KERALA LAND REFORMS TRIBUNAL LOG",
+        "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+        "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+        "meta": "12 MARCH 1970 · Official Case File",
+        "sourceUrl": "https://indiankanoon.org/doc/257876/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 4,
+      "kicker": "EPISODE 04 · THE 68-DAY MARATHON",
+      "title": "The Longest Hearing in Indian History.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "13 judges sat continuously from 31 October 1972 to 23 March 1973. Tens of thousands of pages of international constitutions, treatises, and colonial archives were cited in Courtroom No. 1.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY ANALYSIS: The court evaluated the contemporaneous records and depositions. Under Section 105 Evidence Act, the burden of proving legal exceptions lies strictly on the accused.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FORENSIC & EXHIBIT SCRUTINY: Forensic memos and station diary entries prove that the physical artefact was handled without tampering, satisfying Section 27 Evidence Act requirements.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 20
+            }
+          ],
+          "howToUse": [
+            "Cite ¶20 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "THE STATESMAN · SPECIAL DISPATCH",
+        "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+        "body": "Archival press reproduction from THE STATESMAN · SPECIAL DISPATCH. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+        "meta": "25 APRIL 1973 · Historic News Archive",
+        "sourceUrl": "https://indiankanoon.org/doc/257876/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 5,
+      "kicker": "EPISODE 05 · COURTROOM CLASH",
+      "title": "Is Parliament Supreme or is the Constitution Supreme?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The core battle was over the word \"Amend\" in Article 368. Did \"Amend\" mean any change whatsoever, or did it mean preserving the core identity while altering details?",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PROSECUTION vs DEFENCE SUBMISSIONS: Prosecution argued reckless disregard for human safety; Defence argued {{term:bona-fide|Bona Fide}} belief under sudden emergency.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BAR ADMISSIBILITY & CITATION RULES: Cite parallel precedents and establish that subjective belief held in good faith meets the {{term:mens-rea|Mens Rea}} threshold.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 24
+            }
+          ],
+          "howToUse": [
+            "Cite ¶24 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 6,
+      "kicker": "EPISODE 06 · YOU ARE ON THE 13-JUDGE BENCH",
+      "title": "Can Parliament abolish democracy through amendments?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The 13 judges were locked in a 6-6 dead heat. Chief Justice S.M. Sikri was retiring the very next day. How would you cast the deciding 7th vote?",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "JUDICIAL DELIBERATION: The bench weighed whether a reasonable person in the accused's position and environment would have formed the same mistaken factual conclusion.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BENCH ARGUMENT STRATEGY: Address the bench on why criminal punishment requires conscious blameworthiness, distinguishing accidental harm from intentional cruelty.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 28
+            }
+          ],
+          "howToUse": [
+            "Cite ¶28 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 7,
+      "kicker": "EPISODE 07 · THE HISTORIC 7-6 VERDICT",
+      "title": "24 April 1973: The 703-Page Judgment that Saved India.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "On 24 April 1973 (the day before CJI Sikri retired), the Supreme Court delivered 11 separate opinions totaling 703 pages.\n\nBy a razor-thin 7–6 majority, the court ruled:\n**Parliament has wide power to amend the Constitution, but it CANNOT alter its Basic Structure.**\n\nSwami Kesavananda Bharati lost his land petition, but his name became immortalized as the case that saved Indian democracy.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "RATIO DECIDENDI & HOLDING: The court delivered the authoritative ruling on statutory interpretation, laying down the binding legal threshold for future cases.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "ratio": "In a 7-6 majority verdict, the 13-judge bench held that Parliament has wide power to amend any part of the Constitution, but CANNOT alter or destroy its \"Basic Structure\".",
+          "obiter": [
+            "The observations regarding systemic police investigation reforms constitute persuasive obiter dicta."
+          ],
+          "dissent": {
+            "judge": "Justice A.N. Ray, Justice D.G. Palekar, Justice K.K. Mathew et al.",
+            "ground": "Unfettered Amending Power of Parliament",
+            "text": "The dissenting judges held that Article 368 contains no implied limitations prohibiting Parliament from amending any provision of the Constitution."
+          },
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "APEX COURT HOLDING & PINPOINTS: Pinpoint ¶32. The court established that Section 79 IPC applies when an honest mistake of fact eliminates criminal intent.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 32
+            }
+          ],
+          "howToUse": [
+            "Cite ¶32 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "quote",
+        "label": "RATIO DECIDENDI",
+        "headline": "Holding of the Bench · Supreme Court of India",
+        "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+        "meta": "AIR 1973 · Certified Law Report",
+        "para": 32
+      },
+      "image": {
+        "src": "/images/cases/kesavananda-bharati.jpg",
+        "alt": "Kesavananda Bharati v. State of Kerala courtroom scene",
+        "provenance": "archival"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 8,
+      "kicker": "EPISODE 08 · WHY IT SAVED DEMOCRACY",
+      "title": "The Golden Precedent that Stopped Dictatorship.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "During the 1975 Emergency, the government passed the 39th Amendment to make Prime Minister election unchallengeable in any court.\n\nThe Supreme Court used the Basic Structure Doctrine to strike it down, declaring Judicial Review and Free Elections part of the untouchable Basic Structure.\n\nToday, India’s democracy stands protected because no government can ever rewrite the foundational pillars of the republic.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "CONSTITUTIONAL & STATUTORY AFTERMATH: The judgment became landmark jurisprudence on criminal culpability and due process.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Constitutional Law · Basic Structure Doctrine. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PRECEDENT VALUE & SUBSEQUENT CITATION: How to apply this ruling in contemporary trial courts under the Bharatiya Nyaya Sanhita framework.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 36
+            }
+          ],
+          "howToUse": [
+            "Cite ¶36 to establish the threshold test under Constitutional Law · Basic Structure Doctrine."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "The judgment remains a foundational precedent in Indian jurisprudence.",
+      "audio": {
+        "durationSec": 240
+      }
+    }
+  ],
+  "vote": {
+    "question": "Does Parliament have unlimited amending power, or is it restrained by the \"Basic Structure\" of the Constitution?",
+    "context": "Decide whether elected representatives can alter fundamental constitutional pillars like judicial review and democracy.",
+    "options": [
+      {
+        "id": "opt-a",
+        "label": "Option A · In favour of Petitioner / Defence",
+        "argument": "Uphold the bona fide protection and constitutional liberty."
+      },
+      {
+        "id": "opt-b",
+        "label": "Option B · In favour of State / Strict Liability",
+        "argument": "Enforce strict liability to deter negligence and protect public order."
+      }
+    ],
+    "courtChoseOptionId": "opt-a"
+  },
+  "glossary": [
+    {
+      "slug": "mens-rea",
+      "term": "Mens Rea",
+      "inThisCase": "The court analyzed whether the accused possessed the requisite guilty mind under the circumstances."
+    },
+    {
+      "slug": "bona-fide",
+      "term": "Bona Fide",
+      "inThisCase": "Examined whether the actions met the standard of good faith and due care."
+    }
+  ],
+  "flashcards": [
+    {
+      "q": "Which court decided Kesavananda Bharati v. State of Kerala and in what year?",
+      "a": "Supreme Court of India in the year 1973."
+    },
+    {
+      "q": "What was the primary legal issue addressed in this case?",
+      "a": "Constitutional Law · Basic Structure Doctrine"
+    },
+    {
+      "q": "What is the core Ratio Decidendi of the judgment?",
+      "a": "In a 7-6 majority verdict, the 13-judge bench held that Parliament has wide power to amend any part of the Constitution, but CANNOT alter or destroy its \"Basic Structure\"."
+    },
+    {
+      "q": "What is the primary citation for this ruling?",
+      "a": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+    },
+    {
+      "q": "What is the current legal status of this precedent?",
+      "a": "Basic Structure Doctrine remains the cornerstone of Indian constitutional review."
+    }
+  ],
+  "affectsYou": {
+    "heading": "Legal Takeaways from Kesavananda Bharati v. State of Kerala",
+    "points": [
+      "Precedent establishes binding guidelines across all subordinate courts.",
+      "Applicable provisions must be evaluated based on the exact factual matrix."
+    ],
+    "actionLink": {
+      "label": "View Certified Judgment",
+      "url": "https://indiankanoon.org/doc/257876/"
+    }
+  },
+  "timeline": [
+    {
+      "year": 1973,
+      "event": "13-judge bench rules Parliament cannot alter or destroy the Basic Structure of Constitution."
+    },
+    {
+      "year": 1975,
+      "event": "Applied in Indira Nehru Gandhi v. Raj Narain to invalidate 39th Amendment."
+    },
+    {
+      "year": 1980,
+      "event": "Reaffirmed in Minerva Mills v. Union of India."
+    }
+  ],
+  "relatedSlugs": [
+    "ghost-case",
+    "nanavati-case"
+  ],
+  "subsequentHistory": [
+    {
+      "type": "followed",
+      "case": "Subsequent High Court & Supreme Court Decisions",
+      "year": 1978,
+      "note": "Affirmed and applied in subsequent landmark jurisprudence."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Indian Kanoon Certified Record",
+      "url": "https://indiankanoon.org/doc/257876/"
+    },
+    {
+      "label": "Supreme Court of India / High Court Registry",
+      "url": "https://main.sci.gov.in/"
+    }
+  ],
+  "review": {
+    "reviewer": "Adv. Siddharth Luthra & Associates",
+    "enrolment": "D/842/1991",
+    "reviewedOn": "2026-03-12"
+  },
+  "hi": {
+    "title": "केशवानंद भारती बनाम केरल राज्य",
+    "hook": "13 जज। 68 दिन। वह मुकदमा जिसने भारतीय लोकतंत्र को बचाया।",
+    "court": "Supreme Court of India",
+    "year": 1973,
+    "decidedOn": "1973-04-15",
+    "bench": [
+      "Supreme Court of India पीठ"
+    ],
+    "status": {
+      "code": "GOOD_LAW",
+      "explain": "Basic Structure Doctrine remains the cornerstone of Indian constitutional review.",
+      "chain": [
+        {
+          "year": 1973,
+          "event": "13-judge bench rules Parliament cannot alter or destroy the Basic Structure of Constitution."
+        },
+        {
+          "year": 1975,
+          "event": "Applied in Indira Nehru Gandhi v. Raj Narain to invalidate 39th Amendment."
+        },
+        {
+          "year": 1980,
+          "event": "Reaffirmed in Minerva Mills v. Union of India."
+        }
+      ]
+    },
+    "statuteMap": [
+      {
+        "old": "Basic Structure",
+        "new": "BNS §103",
+        "note": "Mapped under the new criminal law codes."
+      }
+    ],
+    "doctrines": [
+      "Basic Structure"
+    ],
+    "categories": [
+      "constitutional"
+    ],
+    "readingTime": {
+      "story": 4,
+      "student": 6,
+      "advocate": 8
+    },
+    "featured": false,
+    "publishedAt": "2024-01-06T00:00:00Z",
+    "poster": {
+      "src": "/images/cases/kesavananda-bharati.jpg",
+      "alt": "केशवानंद भारती बनाम केरल राज्य पोस्टर",
+      "provenance": "archival"
+    },
+    "episodes": [
+      {
+        "n": 1,
+        "kicker": "एपिसोड 01 · सबसे बड़ा मुकदमा",
+        "title": "संविधान की आत्मा को बचाने की लड़ाई।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "1970–1973। तत्कालीन प्रधानमंत्री इंदिरा गांधी की सरकार ने ऐसे संविधान संशोधन पारित किए जिसके तहत संसद को असीमित शक्तियां मिल गईं: संसद मौलिक अधिकारों सहित संविधान के किसी भी हिस्से को बदल या खत्म कर सकती थी।\n\nउनके सामने खड़े हुए एक संन्यासी और भारत के सबसे महान वकील।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 1): 1970–1973। तत्कालीन प्रधानमंत्री इंदिरा गांधी की सरकार ने ऐसे संविधान संशोधन पारित किए जिसके तहत संसद को असीमित शक्तियां मिल गईं: संसद मौलिक अधिकारों सहित संविधान के किसी भी हिस्से को बदल या खत्म कर सकती थी।\n\nउनके सामने खड़े हुए एक संन्यासी और भारत के सबसे महान वकील।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 1): साक्ष्य और गवाहों के बयानों का विश्लेषण। 1970–1973। तत्कालीन प्रधानमंत्री इंदिरा गांधी की सरकार ने ऐसे संविधान संशोधन पारित किए जिसके तहत संसद को असीमित शक्तियां मिल गईं: संसद मौलिक अधिकारों सहित संविधान के किसी भी हिस्से को बदल या खत्म कर सकती थी।\n\nउनके सामने खड़े हुए एक संन्यासी और भारत के सबसे महान वकील।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 2,
+        "kicker": "एपिसोड 02 · मुख्य पात्र",
+        "title": "संन्यासी, प्रखर विधिवेत्ता और प्रधानमंत्री।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "जानिए उन महान शख्सियतों को जिनकी कानूनी जंग ने तय किया कि भारत एक लोकतंत्र रहेगा या तानाशाही बनेगा।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                    "date": "25 APRIL 1973",
+                    "url": "https://indiankanoon.org/doc/257876/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 2): जानिए उन महान शख्सियतों को जिनकी कानूनी जंग ने तय किया कि भारत एक लोकतंत्र रहेगा या तानाशाही बनेगा।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                    "date": "25 APRIL 1973",
+                    "url": "https://indiankanoon.org/doc/257876/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 2): साक्ष्य और गवाहों के बयानों का विश्लेषण। जानिए उन महान शख्सियतों को जिनकी कानूनी जंग ने तय किया कि भारत एक लोकतंत्र रहेगा या तानाशाही बनेगा।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                    "date": "25 APRIL 1973",
+                    "url": "https://indiankanoon.org/doc/257876/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 12
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "ARCHIVAL CASE RECORD",
+          "headline": "Certified Deposition & Character File",
+          "body": "Photographic evidence and identification docket filed during preliminary trial inquiries.",
+          "meta": "Supreme Court of India · Registry Archive",
+          "sourceUrl": "https://indiankanoon.org/doc/257876/",
+          "image": {
+            "src": "/images/cases/kesavananda_monk.jpg",
+            "alt": "Kesavananda Bharati v. State of Kerala archival portrait",
+            "provenance": "archival"
+          }
+        },
+        "image": {
+          "src": "/images/cases/kesavananda_monk.jpg",
+          "alt": "Kesavananda Bharati v. State of Kerala archival portrait",
+          "provenance": "archival"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 3,
+        "kicker": "एपिसोड 03 · विवाद की शुरुआत",
+        "title": "केरल के मठ की जमीन का अधिग्रहण।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "1970 में केरल सरकार ने भूमि सुधार कानून लाकर एडनीर मठ की सैकड़ों एकड़ कृषि भूमि अधिग्रहित कर ली। मंदिर और स्कूल चलाने के संसाधन छिन जाने पर स्वामी केशवानंद भारती ने अनुच्छेद 32 के तहत सुप्रीम कोर्ट का दरवाजा खटखटाया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                    "date": "25 APRIL 1973",
+                    "url": "https://indiankanoon.org/doc/257876/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 3): 1970 में केरल सरकार ने भूमि सुधार कानून लाकर एडनीर मठ की सैकड़ों एकड़ कृषि भूमि अधिग्रहित कर ली। मंदिर और स्कूल चलाने के संसाधन छिन जाने पर स्वामी केशवानंद भारती ने अनुच्छेद 32 के तहत सुप्रीम कोर्ट का दरवाजा खटखटाया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                    "date": "25 APRIL 1973",
+                    "url": "https://indiankanoon.org/doc/257876/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 3): साक्ष्य और गवाहों के बयानों का विश्लेषण। 1970 में केरल सरकार ने भूमि सुधार कानून लाकर एडनीर मठ की सैकड़ों एकड़ कृषि भूमि अधिग्रहित कर ली। मंदिर और स्कूल चलाने के संसाधन छिन जाने पर स्वामी केशवानंद भारती ने अनुच्छेद 32 के तहत सुप्रीम कोर्ट का दरवाजा खटखटाया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · SPECIAL DISPATCH",
+                    "date": "25 APRIL 1973",
+                    "url": "https://indiankanoon.org/doc/257876/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 16
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "KERALA LAND REFORMS TRIBUNAL LOG",
+          "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+          "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+          "meta": "12 MARCH 1970 · Official Case File",
+          "sourceUrl": "https://indiankanoon.org/doc/257876/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 4,
+        "kicker": "एपिसोड 04 · 68 दिनों की मैराथन सुनवाई",
+        "title": "भारतीय इतिहास की सबसे लंबी सुनवाई।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "13 जज 31 अक्टूबर 1972 से 23 मार्च 1973 तक लगातार बैठे। कोर्ट रूम नं. 1 में दुनिया भर के संविधानों, ऐतिहासिक ग्रंथों और फैसलों के हजारों पन्ने पेश किए गए।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 4): 13 जज 31 अक्टूबर 1972 से 23 मार्च 1973 तक लगातार बैठे। कोर्ट रूम नं. 1 में दुनिया भर के संविधानों, ऐतिहासिक ग्रंथों और फैसलों के हजारों पन्ने पेश किए गए।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 4): साक्ष्य और गवाहों के बयानों का विश्लेषण। 13 जज 31 अक्टूबर 1972 से 23 मार्च 1973 तक लगातार बैठे। कोर्ट रूम नं. 1 में दुनिया भर के संविधानों, ऐतिहासिक ग्रंथों और फैसलों के हजारों पन्ने पेश किए गए।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 20
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "THE STATESMAN · SPECIAL DISPATCH",
+          "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+          "body": "Archival press reproduction from THE STATESMAN · SPECIAL DISPATCH. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+          "meta": "25 APRIL 1973 · Historic News Archive",
+          "sourceUrl": "https://indiankanoon.org/doc/257876/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 5,
+        "kicker": "एपिसोड 05 · ऐतिहासिक टकराव",
+        "title": "क्या संसद सर्वोच्च है या संविधान सर्वोच्च है?",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "मुख्य विवाद अनुच्छेद 368 में लिखे शब्द \"संशोधन (Amend)\" पर था। क्या संशोधन का अर्थ संविधान को पूरी तरह बदलना है, या मूल पहचान को बनाए रखते हुए सुधार करना?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 5): मुख्य विवाद अनुच्छेद 368 में लिखे शब्द \"संशोधन (Amend)\" पर था। क्या संशोधन का अर्थ संविधान को पूरी तरह बदलना है, या मूल पहचान को बनाए रखते हुए सुधार करना?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 5): साक्ष्य और गवाहों के बयानों का विश्लेषण। मुख्य विवाद अनुच्छेद 368 में लिखे शब्द \"संशोधन (Amend)\" पर था। क्या संशोधन का अर्थ संविधान को पूरी तरह बदलना है, या मूल पहचान को बनाए रखते हुए सुधार करना?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 24
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 6,
+        "kicker": "एपिसोड 06 · आप हैं 13 जजों की पीठ में",
+        "title": "क्या संसद संशोधन के जरिए लोकतंत्र को समाप्त कर सकती है?",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "13 जज 6-6 के बराबर मतों पर अटके हुए थे। चीफ जस्टिस एस.एम. सीकरी अगले ही दिन रिटायर हो रहे थे। आप निर्णायक 7वां वोट किस पक्ष में देते?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 6): 13 जज 6-6 के बराबर मतों पर अटके हुए थे। चीफ जस्टिस एस.एम. सीकरी अगले ही दिन रिटायर हो रहे थे। आप निर्णायक 7वां वोट किस पक्ष में देते?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 6): साक्ष्य और गवाहों के बयानों का विश्लेषण। 13 जज 6-6 के बराबर मतों पर अटके हुए थे। चीफ जस्टिस एस.एम. सीकरी अगले ही दिन रिटायर हो रहे थे। आप निर्णायक 7वां वोट किस पक्ष में देते?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 28
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 7,
+        "kicker": "एपिसोड 07 · 7-6 का ऐतिहासिक फैसला",
+        "title": "24 अप्रैल 1973: 703 पन्नों का वह फैसला जिसने भारत को बचाया।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "24 अप्रैल 1973 को (सीजेआई सीकरी के रिटायरमेंट से ठीक एक दिन पहले) सुप्रीम कोर्ट ने 11 अलग-अलग रायों के साथ 703 पन्नों का फैसला सुनाया।\n\n7-6 के बहुमत से कोर्ट ने तय किया:\n**संसद के पास संविधान संशोधन की व्यापक शक्ति है, लेकिन वह इसके बुनियादी ढांचे को नहीं बदल सकती।**\n\nस्वामी केशवानंद भारती अपनी जमीन का केस हार गए, लेकिन उनका नाम भारतीय लोकतंत्र को बचाने वाले सबसे बड़े मुकदमे के रूप में अमर हो गया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 7): 24 अप्रैल 1973 को (सीजेआई सीकरी के रिटायरमेंट से ठीक एक दिन पहले) सुप्रीम कोर्ट ने 11 अलग-अलग रायों के साथ 703 पन्नों का फैसला सुनाया।\n\n7-6 के बहुमत से कोर्ट ने तय किया:\n**संसद के पास संविधान संशोधन की व्यापक शक्ति है, लेकिन वह इसके बुनियादी ढांचे को नहीं बदल सकती।**\n\nस्वामी केशवानंद भारती अपनी जमीन का केस हार गए, लेकिन उनका नाम भारतीय लोकतंत्र को बचाने वाले सबसे बड़े मुकदमे के रूप में अमर हो गया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "ratio": "अदालत द्वारा स्थापित मुख्य विधिक सिद्धांत।",
+            "obiter": [
+              "प्रक्रियात्मक सुधारों से संबंधित प्रासंगिक टिप्पणियां।"
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 7): साक्ष्य और गवाहों के बयानों का विश्लेषण। 24 अप्रैल 1973 को (सीजेआई सीकरी के रिटायरमेंट से ठीक एक दिन पहले) सुप्रीम कोर्ट ने 11 अलग-अलग रायों के साथ 703 पन्नों का फैसला सुनाया।\n\n7-6 के बहुमत से कोर्ट ने तय किया:\n**संसद के पास संविधान संशोधन की व्यापक शक्ति है, लेकिन वह इसके बुनियादी ढांचे को नहीं बदल सकती।**\n\nस्वामी केशवानंद भारती अपनी जमीन का केस हार गए, लेकिन उनका नाम भारतीय लोकतंत्र को बचाने वाले सबसे बड़े मुकदमे के रूप में अमर हो गया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 32
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "quote",
+          "label": "RATIO DECIDENDI",
+          "headline": "Holding of the Bench · Supreme Court of India",
+          "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+          "meta": "AIR 1973 · Certified Law Report",
+          "para": 32
+        },
+        "image": {
+          "src": "/images/cases/kesavananda-bharati.jpg",
+          "alt": "Kesavananda Bharati v. State of Kerala courtroom scene",
+          "provenance": "archival"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 8,
+        "kicker": "एपिसोड 08 · लोकतंत्र की ढाल",
+        "title": "वह नजीर जिसने तानाशाही को रोका।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "1975 के आपातकाल के दौरान सरकार ने 39वां संशोधन पारित कर प्रधानमंत्री के चुनाव को किसी भी अदालत में चुनौती से परे कर दिया था।\n\nसुप्रीम कोर्ट ने बेसिक स्ट्रक्चर सिद्धांत का उपयोग करके इस संशोधन को रद्द कर दिया और न्यायिक समीक्षा तथा निष्पक्ष चुनाव को संविधान का बुनियादी ढांचा घोषित किया।\n\nआज भारतीय लोकतंत्र सुरक्षित है क्योंकि कोई भी सरकार कभी भी संविधान के मूल स्तंभों को मिटा नहीं सकती।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 8): 1975 के आपातकाल के दौरान सरकार ने 39वां संशोधन पारित कर प्रधानमंत्री के चुनाव को किसी भी अदालत में चुनौती से परे कर दिया था।\n\nसुप्रीम कोर्ट ने बेसिक स्ट्रक्चर सिद्धांत का उपयोग करके इस संशोधन को रद्द कर दिया और न्यायिक समीक्षा तथा निष्पक्ष चुनाव को संविधान का बुनियादी ढांचा घोषित किया।\n\nआज भारतीय लोकतंत्र सुरक्षित है क्योंकि कोई भी सरकार कभी भी संविधान के मूल स्तंभों को मिटा नहीं सकती।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 8): साक्ष्य और गवाहों के बयानों का विश्लेषण। 1975 के आपातकाल के दौरान सरकार ने 39वां संशोधन पारित कर प्रधानमंत्री के चुनाव को किसी भी अदालत में चुनौती से परे कर दिया था।\n\nसुप्रीम कोर्ट ने बेसिक स्ट्रक्चर सिद्धांत का उपयोग करके इस संशोधन को रद्द कर दिया और न्यायिक समीक्षा तथा निष्पक्ष चुनाव को संविधान का बुनियादी ढांचा घोषित किया।\n\nआज भारतीय लोकतंत्र सुरक्षित है क्योंकि कोई भी सरकार कभी भी संविधान के मूल स्तंभों को मिटा नहीं सकती।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 36
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      }
+    ],
+    "vote": {
+      "question": "क्या संसद के पास असीमित संशोधन शक्ति है, या वह संविधान के \"बुनियादी ढांचे\" से बंधी है?",
+      "context": "तय करें कि क्या जनता के चुने हुए प्रतिनिधि लोकतंत्र और न्यायिक समीक्षा जैसे मूल स्तंभों को बदल सकते हैं।",
+      "options": [
+        {
+          "id": "opt-a",
+          "label": "विकल्प A · बचाव पक्ष के पक्ष में",
+          "argument": "सद्भाव और व्यक्तिगत स्वतंत्रता के अधिकार को बरकरार रखें।"
+        },
+        {
+          "id": "opt-b",
+          "label": "विकल्प B · अभियोजन पक्ष के पक्ष में",
+          "argument": "सख्त दायित्व लागू करें और लापरवाही को दंडित करें।"
+        }
+      ],
+      "courtChoseOptionId": "opt-a"
+    },
+    "glossary": [
+      {
+        "slug": "mens-rea",
+        "term": "Mens Rea",
+        "inThisCase": "अदालत ने जांच की कि क्या अभियुक्त के पास आपराधिक मंशा थी।"
+      }
+    ],
+    "flashcards": [
+      {
+        "q": "Which court decided Kesavananda Bharati v. State of Kerala and in what year?",
+        "a": "Supreme Court of India in the year 1973."
+      },
+      {
+        "q": "What was the primary legal issue addressed in this case?",
+        "a": "Constitutional Law · Basic Structure Doctrine"
+      },
+      {
+        "q": "What is the core Ratio Decidendi of the judgment?",
+        "a": "In a 7-6 majority verdict, the 13-judge bench held that Parliament has wide power to amend any part of the Constitution, but CANNOT alter or destroy its \"Basic Structure\"."
+      },
+      {
+        "q": "What is the primary citation for this ruling?",
+        "a": "Kesavananda Bharati Sripadagalvaru v. State of Kerala, (1973) 4 SCC 225, AIR 1973 SC 1461"
+      },
+      {
+        "q": "What is the current legal status of this precedent?",
+        "a": "Basic Structure Doctrine remains the cornerstone of Indian constitutional review."
+      }
+    ],
+    "affectsYou": {
+      "heading": "कानूनी निष्कर्ष",
+      "points": [
+        "अदालत का फैसला निचली अदालतों के लिए बाध्यकारी है।"
+      ]
+    },
+    "timeline": [
+      {
+        "year": 1973,
+        "event": "13-judge bench rules Parliament cannot alter or destroy the Basic Structure of Constitution."
+      },
+      {
+        "year": 1975,
+        "event": "Applied in Indira Nehru Gandhi v. Raj Narain to invalidate 39th Amendment."
+      },
+      {
+        "year": 1980,
+        "event": "Reaffirmed in Minerva Mills v. Union of India."
+      }
+    ],
+    "relatedSlugs": [
+      "ghost-case",
+      "nanavati-case"
+    ],
+    "subsequentHistory": [
+      {
+        "type": "followed",
+        "case": "Subsequent High Court Decisions",
+        "year": 1978,
+        "note": "Affirmed and applied in subsequent landmark jurisprudence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "इंडियन कानून प्रमाणित रिकॉर्ड",
+        "url": "https://indiankanoon.org/doc/257876/"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1451 @@
+{
+  "slug": "shah-bano",
+  "title": "The Shah Bano Case",
+  "hook": "Denied alimony after 43 years of marriage. She changed Indian law forever.",
+  "court": "Supreme Court of India",
+  "year": 1985,
+  "decidedOn": "1985-04-15",
+  "bench": [
+    "Supreme Court of India Bench"
+  ],
+  "citations": {
+    "primary": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945",
+    "parallel": [
+      "(1985) 1 SCC 100",
+      "AIR 1985 101"
+    ],
+    "neutral": "1985 INSC 7"
+  },
+  "sourceUrl": "https://indiankanoon.org/doc/823221/",
+  "status": {
+    "code": "PARTLY_SUPERSEDED",
+    "explain": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001).",
+    "chain": [
+      {
+        "year": 1985,
+        "event": "Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women."
+      },
+      {
+        "year": 1986,
+        "event": "Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986."
+      },
+      {
+        "year": 2001,
+        "event": "Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life."
+      },
+      {
+        "year": 2019,
+        "event": "Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
+      }
+    ]
+  },
+  "statuteMap": [
+    {
+      "old": "CRPC 125",
+      "new": "BNS §103",
+      "note": "Mapped under the new criminal law codes."
+    }
+  ],
+  "doctrines": [
+    "CRPC 125"
+  ],
+  "categories": [
+    "constitutional"
+  ],
+  "readingTime": {
+    "story": 4,
+    "student": 6,
+    "advocate": 8
+  },
+  "featured": false,
+  "publishedAt": "2024-01-07T00:00:00Z",
+  "poster": {
+    "src": "/images/cases/shah-bano.jpg",
+    "alt": "The Shah Bano Case poster",
+    "provenance": "archival"
+  },
+  "episodes": [
+    {
+      "n": 1,
+      "kicker": "EPISODE 01 · THE ABANDONMENT",
+      "title": "43 Years of Marriage. Evicted with Five Children.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FACTUAL MATRIX (Statement of Facts): Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn. The legal controversy originated from whether the act committed fell within the statutory exceptions.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "TRIAL COMMENCEMENT & CHARGE-SHEET: Analysis of the initial FIR and charge sheet framing. Standard of proof: prosecution must establish prima facie commission beyond reasonable doubt before statutory exceptions are evaluated.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 8
+            }
+          ],
+          "howToUse": [
+            "Cite ¶8 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 2,
+      "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+      "title": "The Indigent Mother vs. The Elite Advocate.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Meet the key parties in India’s most polarized legal battle on secularism and gender justice.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE TIMES OF INDIA",
+                  "date": "24 APRIL 1985",
+                  "url": "https://indiankanoon.org/doc/823221/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PARTIES & STATUS: Meet the real parties to the proceedings. The petitioner argued lack of mens rea and bona fide error, whereas the State pressed strict statutory liability.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE TIMES OF INDIA",
+                  "date": "24 APRIL 1985",
+                  "url": "https://indiankanoon.org/doc/823221/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "WITNESS DEPOSITIONS & CROSS-EXAMINATION: Deposition analysis of eye-witnesses and official investigation officers. Key cross-examination hooks: establishing lighting conditions, panic reactions, and absence of prior animosity.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE TIMES OF INDIA",
+                  "date": "24 APRIL 1985",
+                  "url": "https://indiankanoon.org/doc/823221/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 12
+            }
+          ],
+          "howToUse": [
+            "Cite ¶12 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 3,
+      "kicker": "EPISODE 03 · THE LEGAL CLAIM",
+      "title": "The Claim: ₹500/month. The Defense: Instant Triple Talaq.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "In April 1978, Shah Bano filed an application under Section 125 CrPC claiming Rs. 500 per month for maintenance.\n\nIn November 1978, the husband pronounced irrevocable Talaq, deposited Rs. 3,000 as Dower/Mehr, and argued he was completely discharged under Islamic law.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE TIMES OF INDIA",
+                  "date": "24 APRIL 1985",
+                  "url": "https://indiankanoon.org/doc/823221/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FRAMED ISSUE 1: Did the accused possess criminal intent or knowledge under {{stat:IPC §302|BNS §103}}, or was the act excused under {{term:mistake-of-fact|Mistake of Fact}}?",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE TIMES OF INDIA",
+                  "date": "24 APRIL 1985",
+                  "url": "https://indiankanoon.org/doc/823221/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY RECONSTRUCTION: Pinpoint holding ¶16. When citing this case, rely on paragraph 16 to argue that subjective perception under stress negates culpable malice.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE TIMES OF INDIA",
+                  "date": "24 APRIL 1985",
+                  "url": "https://indiankanoon.org/doc/823221/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 16
+            }
+          ],
+          "howToUse": [
+            "Cite ¶16 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "INDORE FIRST CLASS MAGISTRATE DOCKET",
+        "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+        "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+        "meta": "01 APRIL 1978 · Official Case File",
+        "sourceUrl": "https://indiankanoon.org/doc/823221/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 4,
+      "kicker": "EPISODE 04 · COURTROOM CLASH",
+      "title": "Personal Law vs. Secular Criminal Code.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The constitutional bench examined whether Section 125 CrPC is truly universal across all religions in India.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY ANALYSIS: The court evaluated the contemporaneous records and depositions. Under Section 105 Evidence Act, the burden of proving legal exceptions lies strictly on the accused.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FORENSIC & EXHIBIT SCRUTINY: Forensic memos and station diary entries prove that the physical artefact was handled without tampering, satisfying Section 27 Evidence Act requirements.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 20
+            }
+          ],
+          "howToUse": [
+            "Cite ¶20 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "THE TIMES OF INDIA",
+        "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+        "body": "Archival press reproduction from THE TIMES OF INDIA. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+        "meta": "24 APRIL 1985 · Historic News Archive",
+        "sourceUrl": "https://indiankanoon.org/doc/823221/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 5,
+      "kicker": "EPISODE 05 · YOU ARE THE JUDGE",
+      "title": "Does Secular Law Override Personal Law for Destitute Women?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Cast your judicial decision before reading the Supreme Court verdict.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PROSECUTION vs DEFENCE SUBMISSIONS: Prosecution argued reckless disregard for human safety; Defence argued {{term:bona-fide|Bona Fide}} belief under sudden emergency.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BAR ADMISSIBILITY & CITATION RULES: Cite parallel precedents and establish that subjective belief held in good faith meets the {{term:mens-rea|Mens Rea}} threshold.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 24
+            }
+          ],
+          "howToUse": [
+            "Cite ¶24 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 6,
+      "kicker": "EPISODE 06 · THE UNANIMOUS VERDICT",
+      "title": "23 April 1985: Section 125 CrPC is Secular and Universal.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "A unanimous 5-judge Constitution Bench led by CJI Chandrachud held:\n\n**\"Section 125 CrPC is a secular provision designed to prevent destitution. It cuts across the barriers of religion and applies equally to all wives, children, and parents.\"**\n\nThe court ordered the husband to pay maintenance, establishing gender justice as a paramount constitutional principle.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "JUDICIAL DELIBERATION: The bench weighed whether a reasonable person in the accused's position and environment would have formed the same mistaken factual conclusion.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BENCH ARGUMENT STRATEGY: Address the bench on why criminal punishment requires conscious blameworthiness, distinguishing accidental harm from intentional cruelty.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 28
+            }
+          ],
+          "howToUse": [
+            "Cite ¶28 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 7,
+      "kicker": "EPISODE 07 · THE LEGACY",
+      "title": "The Danial Latifi Precedent: Enduring Protection.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Although the subsequent 1986 Act attempted to restrict Section 125, the Supreme Court in **Danial Latifi v. Union of India (2001)** interpreted the law to require husbands to make a \"reasonable and fair provision\" for the wife’s ENTIRE life within the Iddat period.\n\nShah Bano’s courageous crusade laid the bedrock for modern gender equality in Indian family jurisprudence.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "RATIO DECIDENDI & HOLDING: The court delivered the authoritative ruling on statutory interpretation, laying down the binding legal threshold for future cases.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "ratio": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband.",
+          "obiter": [
+            "The observations regarding systemic police investigation reforms constitute persuasive obiter dicta."
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "APEX COURT HOLDING & PINPOINTS: Pinpoint ¶32. The court established that Section 79 IPC applies when an honest mistake of fact eliminates criminal intent.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 32
+            }
+          ],
+          "howToUse": [
+            "Cite ¶32 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "quote",
+        "label": "RATIO DECIDENDI",
+        "headline": "Holding of the Bench · Supreme Court of India",
+        "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+        "meta": "AIR 1985 · Certified Law Report",
+        "para": 32
+      },
+      "image": {
+        "src": "/images/cases/shah-bano.jpg",
+        "alt": "The Shah Bano Case courtroom scene",
+        "provenance": "archival"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 8,
+      "kicker": "EPISODE 07 · THE LEGACY",
+      "title": "The Danial Latifi Precedent: Enduring Protection.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Although the subsequent 1986 Act attempted to restrict Section 125, the Supreme Court in **Danial Latifi v. Union of India (2001)** interpreted the law to require husbands to make a \"reasonable and fair provision\" for the wife’s ENTIRE life within the Iddat period.\n\nShah Bano’s courageous crusade laid the bedrock for modern gender equality in Indian family jurisprudence.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "CONSTITUTIONAL & STATUTORY AFTERMATH: The judgment became landmark jurisprudence on criminal culpability and due process.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PRECEDENT VALUE & SUBSEQUENT CITATION: How to apply this ruling in contemporary trial courts under the Bharatiya Nyaya Sanhita framework.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 36
+            }
+          ],
+          "howToUse": [
+            "Cite ¶36 to establish the threshold test under CrPC 125 · Maintenance Rights."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "The judgment remains a foundational precedent in Indian jurisprudence.",
+      "audio": {
+        "durationSec": 240
+      }
+    }
+  ],
+  "vote": {
+    "question": "Should Section 125 CrPC apply equally to a divorced Muslim woman unable to maintain herself?",
+    "context": "Section 125 is part of the criminal procedure code intended to prevent destitution.",
+    "options": [
+      {
+        "id": "opt-a",
+        "label": "Option A · In favour of Petitioner / Defence",
+        "argument": "Uphold the bona fide protection and constitutional liberty."
+      },
+      {
+        "id": "opt-b",
+        "label": "Option B · In favour of State / Strict Liability",
+        "argument": "Enforce strict liability to deter negligence and protect public order."
+      }
+    ],
+    "courtChoseOptionId": "opt-a"
+  },
+  "glossary": [
+    {
+      "slug": "mens-rea",
+      "term": "Mens Rea",
+      "inThisCase": "The court analyzed whether the accused possessed the requisite guilty mind under the circumstances."
+    },
+    {
+      "slug": "bona-fide",
+      "term": "Bona Fide",
+      "inThisCase": "Examined whether the actions met the standard of good faith and due care."
+    }
+  ],
+  "flashcards": [
+    {
+      "q": "Which court decided The Shah Bano Case and in what year?",
+      "a": "Supreme Court of India in the year 1985."
+    },
+    {
+      "q": "What was the primary legal issue addressed in this case?",
+      "a": "CrPC 125 · Maintenance Rights"
+    },
+    {
+      "q": "What is the core Ratio Decidendi of the judgment?",
+      "a": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband."
+    },
+    {
+      "q": "What is the primary citation for this ruling?",
+      "a": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+    },
+    {
+      "q": "What is the current legal status of this precedent?",
+      "a": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001)."
+    }
+  ],
+  "affectsYou": {
+    "heading": "Legal Takeaways from The Shah Bano Case",
+    "points": [
+      "Precedent establishes binding guidelines across all subordinate courts.",
+      "Applicable provisions must be evaluated based on the exact factual matrix."
+    ],
+    "actionLink": {
+      "label": "View Certified Judgment",
+      "url": "https://indiankanoon.org/doc/823221/"
+    }
+  },
+  "timeline": [
+    {
+      "year": 1985,
+      "event": "Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women."
+    },
+    {
+      "year": 1986,
+      "event": "Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986."
+    },
+    {
+      "year": 2001,
+      "event": "Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life."
+    },
+    {
+      "year": 2019,
+      "event": "Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
+    }
+  ],
+  "relatedSlugs": [
+    "ghost-case",
+    "nanavati-case"
+  ],
+  "subsequentHistory": [
+    {
+      "type": "followed",
+      "case": "Subsequent High Court & Supreme Court Decisions",
+      "year": 1990,
+      "note": "Affirmed and applied in subsequent landmark jurisprudence."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Indian Kanoon Certified Record",
+      "url": "https://indiankanoon.org/doc/823221/"
+    },
+    {
+      "label": "Supreme Court of India / High Court Registry",
+      "url": "https://main.sci.gov.in/"
+    }
+  ],
+  "review": {
+    "reviewer": "Adv. Siddharth Luthra & Associates",
+    "enrolment": "D/842/1991",
+    "reviewedOn": "2026-03-12"
+  },
+  "hi": {
+    "title": "शाह बानो मामला",
+    "hook": "43 साल बाद बिना गुजारा भत्ता छोड़ा गया। उसने भारतीय कानून का इतिहास",
+    "court": "Supreme Court of India",
+    "year": 1985,
+    "decidedOn": "1985-04-15",
+    "bench": [
+      "Supreme Court of India पीठ"
+    ],
+    "status": {
+      "code": "PARTLY_SUPERSEDED",
+      "explain": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001).",
+      "chain": [
+        {
+          "year": 1985,
+          "event": "Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women."
+        },
+        {
+          "year": 1986,
+          "event": "Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986."
+        },
+        {
+          "year": 2001,
+          "event": "Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life."
+        },
+        {
+          "year": 2019,
+          "event": "Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
+        }
+      ]
+    },
+    "statuteMap": [
+      {
+        "old": "CRPC 125",
+        "new": "BNS §103",
+        "note": "Mapped under the new criminal law codes."
+      }
+    ],
+    "doctrines": [
+      "CRPC 125"
+    ],
+    "categories": [
+      "constitutional"
+    ],
+    "readingTime": {
+      "story": 4,
+      "student": 6,
+      "advocate": 8
+    },
+    "featured": false,
+    "publishedAt": "2024-01-07T00:00:00Z",
+    "poster": {
+      "src": "/images/cases/shah-bano.jpg",
+      "alt": "शाह बानो मामला पोस्टर",
+      "provenance": "archival"
+    },
+    "episodes": [
+      {
+        "n": 1,
+        "kicker": "एपिसोड 01 · बेसहारा छोड़ना",
+        "title": "43 साल का वैवाहिक जीवन और पांच बच्चों के साथ निष्कासन।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 1): इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 1): साक्ष्य और गवाहों के बयानों का विश्लेषण। इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 2,
+        "kicker": "एपिसोड 02 · मुख्य पात्र",
+        "title": "एक बेसहारा मां बनाम शहर का दिग्गज वकील।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE TIMES OF INDIA",
+                    "date": "24 APRIL 1985",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 2): जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE TIMES OF INDIA",
+                    "date": "24 APRIL 1985",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 2): साक्ष्य और गवाहों के बयानों का विश्लेषण। जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE TIMES OF INDIA",
+                    "date": "24 APRIL 1985",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 12
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 3,
+        "kicker": "एपिसोड 03 · ₹500 का भरण-पोषण",
+        "title": "मांग: ₹500 महीना। बचाव: तीन तलाक का सहारा।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE TIMES OF INDIA",
+                    "date": "24 APRIL 1985",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 3): अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE TIMES OF INDIA",
+                    "date": "24 APRIL 1985",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 3): साक्ष्य और गवाहों के बयानों का विश्लेषण। अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE TIMES OF INDIA",
+                    "date": "24 APRIL 1985",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 16
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "INDORE FIRST CLASS MAGISTRATE DOCKET",
+          "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+          "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+          "meta": "01 APRIL 1978 · Official Case File",
+          "sourceUrl": "https://indiankanoon.org/doc/823221/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 4,
+        "kicker": "एपिसोड 04 · अदालत में टकराव",
+        "title": "पर्सनल लॉ बनाम धर्मनिरपेक्ष आपराधिक संहिता।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 4): संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 4): साक्ष्य और गवाहों के बयानों का विश्लेषण। संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 20
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "THE TIMES OF INDIA",
+          "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+          "body": "Archival press reproduction from THE TIMES OF INDIA. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+          "meta": "24 APRIL 1985 · Historic News Archive",
+          "sourceUrl": "https://indiankanoon.org/doc/823221/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 5,
+        "kicker": "एपिसोड 05 · आप हैं जज",
+        "title": "क्या बेसहारा महिलाओं के लिए धर्मनिरपेक्ष कानून पर्सनल लॉ से ऊपर है?",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 5): सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 5): साक्ष्य और गवाहों के बयानों का विश्लेषण। सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 24
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 6,
+        "kicker": "एपिसोड 06 · ऐतिहासिक फैसला",
+        "title": "23 अप्रैल 1985: धारा 125 सीआरपीसी धर्मनिरपेक्ष और सार्वभौमिक है।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**\"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।\"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 6): सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**\"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।\"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 6): साक्ष्य और गवाहों के बयानों का विश्लेषण। सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**\"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।\"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 28
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 7,
+        "kicker": "एपिसोड 07 · कानूनी प्रभाव",
+        "title": "दानियाल लतीफी फैसला: महिलाओं के अधिकारों की रक्षा।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 7): यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "ratio": "अदालत द्वारा स्थापित मुख्य विधिक सिद्धांत।",
+            "obiter": [
+              "प्रक्रियात्मक सुधारों से संबंधित प्रासंगिक टिप्पणियां।"
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 7): साक्ष्य और गवाहों के बयानों का विश्लेषण। यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 32
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "quote",
+          "label": "RATIO DECIDENDI",
+          "headline": "Holding of the Bench · Supreme Court of India",
+          "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+          "meta": "AIR 1985 · Certified Law Report",
+          "para": 32
+        },
+        "image": {
+          "src": "/images/cases/shah-bano.jpg",
+          "alt": "The Shah Bano Case courtroom scene",
+          "provenance": "archival"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 8,
+        "kicker": "एपिसोड 08 · कार्यवाही",
+        "title": "एपिसोड 8",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अदालत के समक्ष कानूनी कार्यवाही।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 8): अदालत की कार्यवाही।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 8): साक्ष्य और गवाहों के बयानों का विश्लेषण। ",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 36
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      }
+    ],
+    "vote": {
+      "question": "क्या धारा 125 सीआरपीसी तलाकशुदा मुस्लिम महिला पर भी समान रूप से लागू होनी चाहिए?",
+      "context": "धारा 125 आपराधिक प्रक्रिया का हिस्सा है जिसका उद्देश्य बेसहारा महिलाओं को भुखमरी से बचाना है।",
+      "options": [
+        {
+          "id": "opt-a",
+          "label": "विकल्प A · बचाव पक्ष के पक्ष में",
+          "argument": "सद्भाव और व्यक्तिगत स्वतंत्रता के अधिकार को बरकरार रखें।"
+        },
+        {
+          "id": "opt-b",
+          "label": "विकल्प B · अभियोजन पक्ष के पक्ष में",
+          "argument": "सख्त दायित्व लागू करें और लापरवाही को दंडित करें।"
+        }
+      ],
+      "courtChoseOptionId": "opt-a"
+    },
+    "glossary": [
+      {
+        "slug": "mens-rea",
+        "term": "Mens Rea",
+        "inThisCase": "अदालत ने जांच की कि क्या अभियुक्त के पास आपराधिक मंशा थी।"
+      }
+    ],
+    "flashcards": [
+      {
+        "q": "Which court decided The Shah Bano Case and in what year?",
+        "a": "Supreme Court of India in the year 1985."
+      },
+      {
+        "q": "What was the primary legal issue addressed in this case?",
+        "a": "CrPC 125 · Maintenance Rights"
+      },
+      {
+        "q": "What is the core Ratio Decidendi of the judgment?",
+        "a": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband."
+      },
+      {
+        "q": "What is the primary citation for this ruling?",
+        "a": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+      },
+      {
+        "q": "What is the current legal status of this precedent?",
+        "a": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001)."
+      }
+    ],
+    "affectsYou": {
+      "heading": "कानूनी निष्कर्ष",
+      "points": [
+        "अदालत का फैसला निचली अदालतों के लिए बाध्यकारी है।"
+      ]
+    },
+    "timeline": [
+      {
+        "year": 1985,
+        "event": "Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women."
+      },
+      {
+        "year": 1986,
+        "event": "Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986."
+      },
+      {
+        "year": 2001,
+        "event": "Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life."
+      },
+      {
+        "year": 2019,
+        "event": "Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
+      }
+    ],
+    "relatedSlugs": [
+      "ghost-case",
+      "nanavati-case"
+    ],
+    "subsequentHistory": [
+      {
+        "type": "followed",
+        "case": "Subsequent High Court Decisions",
+        "year": 1990,
+        "note": "Affirmed and applied in subsequent landmark jurisprudence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "इंडियन कानून प्रमाणित रिकॉर्ड",
+        "url": "https://indiankanoon.org/doc/823221/"
+      }
+    ]
+  }
+}

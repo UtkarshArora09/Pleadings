@@ -19,6 +19,15 @@ export function PosterCard({ caseData }: PosterCardProps) {
   const isConstitutional = caseData.genre === 'constitutional' || caseData.genre === 'cyber';
   const accentColor = isCrime ? '#E50914' : isConstitutional ? '#D4AF37' : '#38bdf8';
 
+  const defaultFallback = caseData.genre === 'constitutional' ? '/images/cases/kesavananda-bharati.jpg' : '/images/cases/nanavati-case.jpg';
+  const [imgSrc, setImgSrc] = React.useState<string>(caseData.bannerImage || defaultFallback);
+
+  React.useEffect(() => {
+    if (caseData.bannerImage) {
+      setImgSrc(caseData.bannerImage);
+    }
+  }, [caseData.bannerImage]);
+
   return (
     <div className="group relative flex-shrink-0 w-72 sm:w-80 md:w-[330px] cursor-pointer select-none">
       <Link href={`/case/${caseData.slug}`} className="block h-full">
@@ -60,21 +69,14 @@ export function PosterCard({ caseData }: PosterCardProps) {
 
           {/* Cinematic Photo Thumbnail with Play Glow on Hover */}
           <div className="relative w-full aspect-[16/9] rounded-xs overflow-hidden bg-[#0A0C12] mb-3.5 border border-white/5">
-            {caseData.bannerImage ? (
-              <Image
-                src={caseData.bannerImage}
-                alt={caseData.title[language]}
-                fill
-                sizes="(max-width: 640px) 280px, 330px"
-                className="object-cover object-center transition-transform duration-500 group-hover:scale-105 brightness-90 group-hover:brightness-100"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1c1f2e] to-[#0c0e17]">
-                <span className="font-anton text-2xl text-white/15 uppercase tracking-widest">
-                  {caseData.watermark || 'CASE FILE'}
-                </span>
-              </div>
-            )}
+            <Image
+              src={imgSrc}
+              alt={caseData.title[language]}
+              fill
+              sizes="(max-width: 640px) 280px, 330px"
+              onError={() => setImgSrc(defaultFallback)}
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-105 brightness-90 group-hover:brightness-100"
+            />
 
             {/* Subtle Gradient Vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#12141D]/80 via-transparent to-transparent pointer-events-none" />

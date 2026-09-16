@@ -16,6 +16,15 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
   const rank = index + 1;
   const bookmarked = isBookmarked(caseData.slug);
 
+  const defaultFallback = caseData.genre === 'constitutional' ? '/images/cases/kesavananda-bharati.jpg' : '/images/cases/nanavati-case.jpg';
+  const [imgSrc, setImgSrc] = React.useState<string>(caseData.bannerImage || defaultFallback);
+
+  React.useEffect(() => {
+    if (caseData.bannerImage) {
+      setImgSrc(caseData.bannerImage);
+    }
+  }, [caseData.bannerImage]);
+
   return (
     <div className="group relative flex-shrink-0 flex items-center cursor-pointer select-none">
       <Link href={`/case/${caseData.slug}`} className="flex items-center">
@@ -37,10 +46,11 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
         <div className="relative w-44 sm:w-48 md:w-52 aspect-[2/3] rounded-md overflow-hidden bg-[#151722] border border-white/10 group-hover:border-[#D4AF37] transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
           {/* Cover Art */}
           <Image
-            src={caseData.bannerImage}
+            src={imgSrc}
             alt={caseData.title[language]}
             fill
             sizes="220px"
+            onError={() => setImgSrc(defaultFallback)}
             className="object-cover object-center brightness-90 group-hover:brightness-100 transition-transform duration-500 group-hover:scale-110"
           />
 

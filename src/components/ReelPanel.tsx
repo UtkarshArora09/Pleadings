@@ -39,8 +39,15 @@ export function ReelPanel({
   const isNewspaper =
     panel.evidence?.archiveType === 'newspaper' ||
     (hasEvidence && (!panel.evidence?.archiveType || panel.type === 'EVIDENCE'));
-  const hasPhoto = Boolean(panel.photoExhibitSrc || (!hasEvidence && caseData.bannerImage));
-  const photoSrc = panel.photoExhibitSrc || caseData.bannerImage;
+  const defaultPhotoFallback = caseData.genre === 'constitutional' ? '/images/cases/kesavananda-bharati.jpg' : '/images/cases/nanavati-case.jpg';
+  const rawPhotoSrc = panel.photoExhibitSrc || caseData.bannerImage || defaultPhotoFallback;
+  const hasPhoto = Boolean(panel.photoExhibitSrc || (!hasEvidence && caseData.bannerImage) || true);
+  const [curPhotoSrc, setCurPhotoSrc] = React.useState<string>(rawPhotoSrc);
+
+  React.useEffect(() => {
+    setCurPhotoSrc(rawPhotoSrc);
+  }, [rawPhotoSrc]);
+
   const photoCaption = panel.photoExhibitCaption?.[language] || caseData.title[language];
 
   // Mobile layout optimization:
@@ -204,10 +211,11 @@ export function ReelPanel({
                 {/* Cinematic Image Container */}
                 <div className="relative w-full aspect-video rounded-xs overflow-hidden bg-black/60 group">
                   <Image
-                    src={photoSrc}
+                    src={curPhotoSrc}
                     alt={photoCaption}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    onError={() => setCurPhotoSrc(defaultPhotoFallback)}
                     className="object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
                     priority={panelIndex === 0}
                   />

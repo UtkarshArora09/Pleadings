@@ -60,9 +60,12 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
       if (savedDecisions) {
         setUserDecisions(JSON.parse(savedDecisions));
       }
-      const savedLang = localStorage.getItem('pleadings_lang');
+      const savedLang = (localStorage.getItem('pleadings:lang') || localStorage.getItem('pleadings_lang')) as Language;
       if (savedLang === 'en' || savedLang === 'hi') {
         setLanguage(savedLang);
+        if (typeof document !== 'undefined') {
+          document.documentElement.lang = savedLang;
+        }
       }
     } catch {
       // ignore storage errors
@@ -72,7 +75,12 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
     try {
+      localStorage.setItem('pleadings:lang', lang);
       localStorage.setItem('pleadings_lang', lang);
+      if (typeof document !== 'undefined') {
+        document.documentElement.lang = lang;
+        document.cookie = `lang=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+      }
     } catch {
       // ignore
     }

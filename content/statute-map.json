@@ -1,0 +1,128 @@
+[
+  {
+    "old": "IPC §302",
+    "new": "BNS §103",
+    "subject": "Punishment for Murder",
+    "note": "Punishment substantially retained with death or life imprisonment.",
+    "changed": false
+  },
+  {
+    "old": "IPC §300",
+    "new": "BNS §101",
+    "subject": "Murder and Exceptions",
+    "note": "Exceptions including grave and sudden provocation retained.",
+    "changed": false
+  },
+  {
+    "old": "IPC §304",
+    "new": "BNS §105",
+    "subject": "Culpable Homicide not amounting to murder",
+    "note": "Retains division between intentional and knowledge-based acts.",
+    "changed": false
+  },
+  {
+    "old": "IPC §79",
+    "new": "BNS §17",
+    "subject": "Act done by person justified or believing themselves justified by mistake of fact",
+    "note": "Bona fide belief based on mistake of fact eliminates criminal culpability.",
+    "changed": false
+  },
+  {
+    "old": "IPC §52",
+    "new": "BNS §2(11)",
+    "subject": "Good Faith (Due care and attention)",
+    "note": "Requirement of due care and attention strictly preserved.",
+    "changed": false
+  },
+  {
+    "old": "IPC §377",
+    "new": null,
+    "subject": "Unnatural offences",
+    "note": "No equivalent provision in BNS following constitutional reading down.",
+    "changed": true
+  },
+  {
+    "old": "IPC §124A",
+    "new": "BNS §152",
+    "subject": "Endangering sovereignty, unity and integrity of India",
+    "note": "Colonial sedition term eliminated; refocused on subversive armed acts.",
+    "changed": true
+  },
+  {
+    "old": "IPC §499",
+    "new": "BNS §356",
+    "subject": "Defamation",
+    "note": "Community service introduced as an alternative punishment option.",
+    "changed": true
+  },
+  {
+    "old": "IPC §354A",
+    "new": "BNS §75",
+    "subject": "Sexual Harassment",
+    "note": "Subsumed into unified Chapter V protecting women and children.",
+    "changed": false
+  },
+  {
+    "old": "IPC §354",
+    "new": "BNS §74",
+    "subject": "Assault on woman with intent to outrage modesty",
+    "note": "Preserved with enhanced minimum sentences.",
+    "changed": false
+  },
+  {
+    "old": "CrPC §125",
+    "new": "BNSS §144",
+    "subject": "Order for maintenance of wives, children and parents",
+    "note": "Mandatory timeline for interim maintenance applications.",
+    "changed": false
+  },
+  {
+    "old": "CrPC §154",
+    "new": "BNSS §173",
+    "subject": "Information in cognizable cases (Zero FIR / e-FIR)",
+    "note": "Formal statutory recognition of Zero FIR and digital electronic FIRs.",
+    "changed": true
+  },
+  {
+    "old": "CrPC §161",
+    "new": "BNSS §180",
+    "subject": "Examination of witnesses by police",
+    "note": "Expressly allows audio-video recording of statements.",
+    "changed": true
+  },
+  {
+    "old": "CrPC §438",
+    "new": "BNSS §482",
+    "subject": "Direction for grant of bail to person apprehending arrest (Anticipatory Bail)",
+    "note": "Retained with codified procedural guidelines.",
+    "changed": false
+  },
+  {
+    "old": "IEA §27",
+    "new": "BSA §23",
+    "subject": "Information received from accused proved in evidence (Discovery)",
+    "note": "Fact discovered in consequence of information remains admissible.",
+    "changed": false
+  },
+  {
+    "old": "IEA §65B",
+    "new": "BSA §63",
+    "subject": "Admissibility of electronic records",
+    "note": "Refined electronic certificate mechanisms for modern digital evidence.",
+    "changed": true
+  },
+  {
+    "old": "IT Act §66A",
+    "new": null,
+    "subject": "Punishment for sending offensive messages through communication service",
+    "note": "Struck down as unconstitutional in Shreya Singhal (2015); void ab initio.",
+    "changed": true
+  },
+  {
+    "old": "CPA 1986 §14",
+    "new": "CPA 2019 §39",
+    "subject": "Findings and reliefs granted by Consumer Commissions",
+    "note": "Consumer Protection Act 2019 overhauled compensation for deficiency in service.",
+    "changed": true
+  }
+]

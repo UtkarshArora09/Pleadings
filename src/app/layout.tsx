@@ -23,7 +23,8 @@ const notoDevanagari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: 'Pleadings — Netflix for Real Indian Law',
+  metadataBase: new URL('https://pleadings.in'),
+  title: 'Pleadings — Real Indian Court Judgments as Verified Stories',
   description:
     'Pleadings transforms real, closed, verified Indian court cases into interactive courtroom thrillers, evidence reels, and law student briefs. Sourced directly from certified court judgments.',
   keywords: [

@@ -32,12 +32,12 @@ export const CASES_DATA: CaseData[] = [
     judgmentUrl: 'https://indiankanoon.org/doc/1489567/',
     watermark: '§79',
     featuredHeroHook: {
-      en: 'He killed a ghost. The High Court believed him.',
-      hi: 'उसने एक भूत को मार डाला। हाई कोर्ट ने उसकी बात मानी।',
+      en: 'He killed a ghost. The court believed him.',
+      hi: 'उसने एक भूत को मार डाला। अदालत ने उसकी बात मानी।',
     },
     featuredHeroDesc: {
-      en: 'In 1958, a servant attacked what he believed was a spirit in an abandoned World War II aerodrome. When the "ghost" turned out to be a living human, the Orissa High Court had to decide: does an honest mistake of fact protect you from murder?',
-      hi: '1958 में, एक नौकर ने द्वितीय विश्व युद्ध के सुनसान हवाई अड्डे पर एक रोशनी पर हमला किया जिसे वह भूत समझ रहा था। जब वह रोशनी महुआ बीनने वाली महिलाएं निकलीं, तो अदालत के सामने बड़ा सवाल था: क्या अलौकिक शक्ति में सच्चा विश्वास हत्या से बचा सकता है?',
+      en: 'In 1958, a servant attacked what he believed was a spirit in an abandoned aerodrome. When the "ghost" turned out to be a living person, the Orissa High Court had to decide: does an honest mistake of fact protect you from a murder charge?',
+      hi: '1958 में, एक नौकर ने सुनसान हवाई अड्डे पर एक रोशनी पर हमला किया जिसे वह भूत समझ रहा था। जब "भूत" एक जीवित इंसान निकला, तो उड़ीसा उच्च न्यायालय को तय करना था: क्या तथ्य की भूल हत्या के आरोप से बचा सकती है?',
     },
     hasJudgeDecision: true,
     panels: [
@@ -53,8 +53,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'उसने एक भूत को मार डाला। अदालत ने उस पर भरोसा किया।',
         },
         body: {
-          en: 'Rasgovindpur village, May 1958. An abandoned World War II military airstrip surrounded by dense jungle. Every villager swore it was cursed and crawling with vengeful spirits.',
-          hi: 'रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा द्वितीय विश्व युद्ध का एक सुनसान सैन्य हवाई अड्डा। गांव का हर व्यक्ति कसम खाता था कि वहां भूत और चुड़ैलों का साया है।',
+          en: 'Rasgovindpur village, May 1958. An abandoned aerodrome, overrun by jungle, littered with wartime scrap. Villagers swore it was haunted — and would not cross it alone after dark.',
+          hi: 'रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा सुनसान हवाई अड्डा, युद्ध के कबाड़ से भरा हुआ। गांव वाले कसम खाते थे कि वहां भूत का साया है — और अंधेरे के बाद कोई भी अकेले वहां से नहीं गुजरता था।',
         },
         photoExhibitSrc: '/images/cases/ghost-case.jpg',
         photoExhibitCaption: {
@@ -71,11 +71,11 @@ export const CASES_DATA: CaseData[] = [
         },
         headline: {
           en: 'Three men who went into the dark.',
-          hi: 'तीन लोग जो उस रात अंधेरे में उतरे।',
+          hi: 'अंधेरे में उतरे वो तीन लोग।',
         },
         body: {
-          en: 'Meet the key figures whose lives collided on that pitch-black midnight in May 1958.',
-          hi: 'जानिए उन मुख्य लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए बदल गई।',
+          en: 'Meet the people whose lives collided on that midnight in May.',
+          hi: 'जानिए उन लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए टकरा गई।',
         },
         photoExhibitSrc: '/images/cases/ghost_thapa_portrait.jpg',
         photoExhibitCaption: {
@@ -86,30 +86,30 @@ export const CASES_DATA: CaseData[] = [
           {
             name: { en: 'Ram Bahadur Thapa', hi: 'राम बहादुर थापा' },
             role: { en: 'Accused (Servant)', hi: 'अभियुक्त (नेपाली नौकर)' },
-            tag: { en: 'Firm Believer in Spirits', hi: 'भूत-प्रेत में अटूट विश्वास' },
+            tag: { en: 'Nepali servant, firm believer in ghosts', hi: 'भूत-प्रेत में अटूट विश्वास' },
             description: {
-              en: 'A 22-year-old Nepali domestic servant armed with a heavy khukri blade.',
-              hi: '22 वर्षीय नेपाली घरेलू सहायक जो अपनी खुखरी के साथ गया था।',
+              en: 'Carried a khukri that night. Believed, without a flicker of doubt, that he was fighting a spirit.',
+              hi: 'उस रात खुखरी लेकर चला था। बिना किसी संदेह के माना कि वह एक भूत से लड़ रहा था।',
             },
             badgeEmoji: '🗡️',
           },
           {
             name: { en: 'Jagat Bandhu Chatterjee', hi: 'जगत बंधु चटर्जी' },
-            role: { en: 'Employer & Landlord', hi: 'मालिक और ज़मींदार' },
-            tag: { en: 'Scrap Dealer', hi: 'कबाड़ व्यापारी' },
+            role: { en: 'Employer', hi: 'मालिक (कबाड़ व्यापारी)' },
+            tag: { en: 'Scrap dealer from Calcutta', hi: 'कलकत्ता का कबाड़ व्यापारी' },
             description: {
-              en: 'Came to purchase military scrap from the aerodrome; wanted to test the ghost rumors.',
-              hi: 'हवाई अड्डे का कबाड़ खरीदने आया था और भूतों की अफवाहों की सच्चाई देखना चाहता था।',
+              en: 'Had come to buy aeroscrap from the aerodrome. Curious about the ghost stories, he wanted to see one for himself.',
+              hi: 'हवाई अड्डे का कबाड़ खरीदने आया था। भूतों की कहानियों की सच्चाई खुद देखना चाहता था।',
             },
             badgeEmoji: '👔',
           },
           {
             name: { en: 'Gelhi Majhiani', hi: 'गेल्ही मझियानी' },
             role: { en: 'Victim (Villager)', hi: 'पीड़िता (स्थानीय ग्रामीण)' },
-            tag: { en: 'Tribal Flower Collector', hi: 'महुआ बीनने वाली आदिवासी महिला' },
+            tag: { en: 'Local woman, mahua flower collector', hi: 'महुआ बीनने वाली आदिवासी महिला' },
             description: {
-              en: 'A local village woman collecting fallen mahua flowers under the cover of night.',
-              hi: 'एक स्थानीय महिला जो रात के सन्नाटे में महुआ के फूल एकत्र कर रही थी।',
+              en: "Gathering fallen mahua flowers under a tree at midnight, with two companions and a lantern — an ordinary night's work.",
+              hi: 'अपनी दो साथियों और एक लालटेन के साथ आधी रात को पेड़ के नीचे महुआ के फूल एकत्र कर रही थी — एक साधारण रात का काम।',
             },
             badgeEmoji: '🥀',
           },
@@ -127,8 +127,8 @@ export const CASES_DATA: CaseData[] = [
           hi: 'सन्नाटे में टिमटिमाती एक लालटेन।',
         },
         body: {
-          en: 'At 12:30 AM, Jagat Bandhu and Thapa walked into the runway area. Deep in the darkness, they saw a bobbing, swinging light moving across the overgrown fields. Wind whipped through the trees. Convinced he was confronting a deadly apparition, Thapa charged forward with his khukri shouting battle cries.',
-          hi: 'रात 12:30 बजे, जगत बंधु और थापा हवाई पट्टी की ओर बढ़े। घुप अंधेरे में उन्हें एक डगमगाती हुई रोशनी हिलती दिखाई दी। हवाएं तेज थीं। भूत समझकर थापा अपनी खुखरी लेकर "भूत आया!" चिल्लाते हुए दौड़ पड़ा।',
+          en: 'Just past midnight, Chatterjee and Thapa were walking back across the aerodrome after seeing a villager safely home. Four hundred cubits away, a light was swaying in the wind — bobbing, dimming, flaring again, exactly like the old stories described. Shapes moved around it.\n\nKrishna Chandra Patro, walking with them, shouted that the ghosts had come. Thapa didn\'t wait to look twice. He ran straight at the light, khukri in hand.',
+          hi: 'आधी रात के ठीक बाद, चटर्जी और थापा एक ग्रामीण को सुरक्षित घर पहुंचाकर हवाई अड्डे के पार लौट रहे थे। चार सौ हाथ की दूरी पर, हवा में एक रोशनी डोल रही थी — डगमगाती, मंद पड़ती और फिर भड़कती हुई, ठीक वैसे ही जैसे पुरानी कहानियों में बताया जाता था। उसके चारों ओर आकृतियां घूम रही थीं।\n\nसाथ चल रहे कृष्ण चंद्र पात्रा ने चिल्लाकर कहा कि भूत आ गए हैं। थापा ने दोबारा देखने का इंतज़ार नहीं किया। वह खुखरी हाथ में लिए सीधे रोशनी की ओर दौड़ पड़ा।',
         },
         evidence: {
           archiveType: 'police_record',
@@ -157,16 +157,16 @@ export const CASES_DATA: CaseData[] = [
         id: 'panel-4',
         type: 'EVIDENCE',
         eyebrow: {
-          en: 'EPISODE 04 · THE CRIME SCENE EVIDENCE',
-          hi: 'एपिसोड 04 · फॉरेंसिक साक्ष्य',
+          en: 'EPISODE 04 · THE CRIME SCENE',
+          hi: 'एपिसोड 04 · घटनास्थल व साक्ष्य',
         },
         headline: {
           en: 'The lantern that cost a life.',
           hi: 'वह लालटेन जिसने एक जान ले ली।',
         },
         body: {
-          en: 'The light was not a phantom. It was an ordinary hurricane lantern carried by three tribal women quietly gathering mahua flowers.',
-          hi: 'वह रोशनी कोई भूत नहीं थी। वह महुआ के फूल चुन रही तीन महिलाओं की साधारण लालटेन थी।',
+          en: 'The light was never a phantom. It was an ordinary hurricane lantern, carried by women quietly gathering mahua flowers.\n\nThapa struck before he understood who he was striking. Gelhi Majhiani died where she stood. Ganga Majhiani and Saunri Majhiani were left grievously wounded. Krishna Chandra Patro, who arrived moments later, was cut too — and his scream was what finally stopped Thapa\'s hand.',
+          hi: 'वह रोशनी कभी कोई भूत नहीं थी। वह चुपचाप महुआ के फूल बीन रही महिलाओं द्वारा ले जाई जा रही एक साधारण लालटेन थी।\n\nथापा ने यह समझने से पहले ही वार कर दिया कि वह किस पर वार कर रहा है। गेल्ही मझियानी की मौके पर ही मौत हो गई। गंगा मझियानी और सांवरी मझियानी गंभीर रूप से घायल हो गईं। कुछ ही पलों बाद पहुंचे कृष्ण चंद्र पात्रा पर भी वार हुआ — और उनकी चीख ने आखिरकार थापा के हाथ रोक दिए।',
         },
         evidence: {
           archiveType: 'newspaper',
@@ -199,12 +199,12 @@ export const CASES_DATA: CaseData[] = [
           hi: 'एपिसोड 05 · अदालत में बहस',
         },
         headline: {
-          en: 'Murder (IPC 302) vs. honest mistake of fact (IPC 79).',
-          hi: 'हत्या का आरोप (302) बनाम तथ्य की भूल (79)।',
+          en: 'MURDER (IPC 302) VS. HONEST MISTAKE OF FACT (IPC 79)',
+          hi: 'हत्या (IPC 302) बनाम तथ्य की भूल (IPC 79)',
         },
         body: {
-          en: 'The State charged Thapa with murder. Thapa raised the ancient common law shield: mistake of fact under Section 79.',
-          hi: 'राज्य ने थापा पर हत्या का मुकदमा चलाया। थापा ने धारा 79 (तथ्य की भूल) का बचाव लिया।',
+          en: 'The State charged Thapa with murder. His defence rested on one old principle: mistake of fact, under Section 79.',
+          hi: 'राज्य ने थापा पर हत्या का आरोप लगाया। उसका बचाव एक पुराने सिद्धांत पर टिका था: धारा 79 के तहत तथ्य की भूल।',
         },
         evidence: {
           archiveType: 'court_decree',
@@ -229,24 +229,24 @@ export const CASES_DATA: CaseData[] = [
           },
         },
         prosecutionArgs: {
-          party: { en: 'State of Orissa (Prosecution)', hi: 'राज्य अभियोजन पक्ष' },
+          party: { en: 'State of Orissa — Prosecution', hi: 'उड़ीसा राज्य — अभियोजन पक्ष' },
           claim: {
-            en: 'Gross recklessness! You cannot swing a deadly weapon in the dark without verifying if a human is present.',
-            hi: 'घोर लापरवाही! अंधेरे में बिना जांचे किसी पर घातक हथियार से हमला नहीं किया जा सकता।',
+            en: '"A deadly weapon swung in the dark, without a moment\'s pause to check if the figures ahead were even human, is recklessness — not good faith."',
+            hi: '"अंधेरे में बिना यह जांचे घातक हथियार चलाना कि सामने इंसान हैं या नहीं, घोर लापरवाही है — सद्भाव नहीं।"',
           },
-          statute: 'IPC § 302 · Murder / Section 326 · Grievous Hurt',
+          statute: 'IPC §302 · Murder | §326 · Grievous Hurt',
           keyPoint: {
             en: 'Belief in ghosts is an irrational superstition and cannot constitute "good faith" or "due care and attention" under Section 52.',
             hi: 'भूतों पर विश्वास एक अंधविश्वास है और इसे कानून के तहत "सद्भाव" या "उचित सावधानी" नहीं माना जा सकता।',
           },
         },
         defenceArgs: {
-          party: { en: 'Ram Bahadur Thapa (Defence)', hi: 'अभियुक्त का बचाव पक्ष' },
+          party: { en: 'Ram Bahadur Thapa — Defence', hi: 'राम बहादुर थापा — बचाव पक्ष' },
           claim: {
-            en: 'Complete absence of Mens Rea (criminal intent). Thapa genuinely believed he was defending his master from a ghost.',
-            hi: 'आपराधिक इरादे (Mens Rea) का पूर्ण अभाव। थापा का सचमुच मानना था कि वह अलौकिक राक्षस से अपने मालिक की रक्षा कर रहा था।',
+            en: '"There was no intention to harm any person. Thapa genuinely, honestly believed he was attacking a ghost — not a human being."',
+            hi: '"किसी इंसान को नुकसान पहुंचाने का कोई इरादा नहीं था। थापा ने ईमानदारी से माना कि वह भूत पर हमला कर रहा था — इंसान पर नहीं।"',
           },
-          statute: 'IPC § 79 · Ignorantia Facti Excusat',
+          statute: 'IPC §79 · Mistake of Fact',
           keyPoint: {
             en: 'Section 79 protects acts done under an honest mistake of fact. Thapa thought he was attacking a spirit, not a human being.',
             hi: 'धारा 79 तथ्य की भूल के तहत किए गए कृत्य की रक्षा करती है। थापा इंसान को नहीं, भूत को मारने के विश्वास में था।',
@@ -272,12 +272,12 @@ export const CASES_DATA: CaseData[] = [
           hi: 'एपिसोड 06 · आप हैं जज',
         },
         headline: {
-          en: 'How would you decide this case?',
-          hi: 'यदि आप जज होते, तो क्या फैसला सुनाते?',
+          en: 'HOW WOULD YOU DECIDE THIS CASE?',
+          hi: 'आप इस मामले में क्या फैसला देते?',
         },
         body: {
-          en: 'A woman is dead, but the killer had no grievance against her and genuinely thought she was an evil spirit. Does the law convict him or acquit him?',
-          hi: 'एक महिला की मृत्यु हो गई है, लेकिन हत्यारे की उससे कोई दुश्मनी नहीं थी और वह उसे भूत मान रहा था। क्या कानून उसे सजा देगा या बरी करेगा?',
+          en: 'A woman is dead. The man who killed her held no grudge against her — he believed, in that moment, that she wasn\'t human at all. Does the law convict him, or does it let him go?\n\nConsider: does an honest, deeply-held belief in ghosts count as "good faith" under criminal law — even if greater caution might have revealed the truth?',
+          hi: 'एक महिला की मौत हो गई है। उसे मारने वाले का उससे कोई बैर नहीं था — उस पल उसका मानना था कि वह इंसान ही नहीं थी। क्या कानून उसे दोषी ठहराता है, या बरी करता है?\n\nविचार करें: क्या भूतों में सच्चा विश्वास आपराधिक कानून के तहत "सद्भाव" गिना जा सकता है — भले ही अधिक सावधानी से सच्चाई सामने आ सकती थी?',
         },
         evidence: {
           archiveType: 'dossier',
@@ -352,16 +352,16 @@ export const CASES_DATA: CaseData[] = [
           hi: 'एपिसोड 07 · अदालत का फैसला',
         },
         headline: {
-          en: 'The Verdict: Complete Acquittal.',
-          hi: 'फैसला: पूरी तरह से बाइज्जत बरी।',
+          en: 'THE VERDICT: ACQUITTAL UPHELD.',
+          hi: 'फैसला: बरी करने का निर्णय बरकरार।',
         },
         stamp: {
           en: 'ACQUITTED · Section 79 IPC',
           hi: 'बरी · आईपीसी धारा 79',
         },
         body: {
-          en: 'Chief Justice R.L. Narasimham and Justice S.P. Mohapatra of the Orissa High Court upheld the Sessions Court acquittal.\n\nThe court held that Thapa had no motive or animosity against the victims. He acted in absolute bona fide belief that he was attacking a ghost. The protection of Section 79 applied in full.',
-          hi: 'उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश आर.एल. नरसिम्हम और न्यायमूर्ति एस.पी. महापात्रा ने सत्र अदालत के बरी करने के फैसले को बरकरार रखा।\n\nअदालत ने माना कि थापा की पीड़िता से कोई दुश्मनी नहीं थी। उसने पूरी तरह से सच्चे विश्वास में काम किया कि वह भूत पर हमला कर रहा था। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।',
+          en: 'Chief Justice Narasimham and Justice Barman of the Orissa High Court dismissed the State\'s appeal and confirmed the Sessions Court\'s acquittal.\n\nThapa bore no ill will toward the women he struck — he didn\'t know them, didn\'t see them as anything but the ghosts he\'d spent the whole night hunting. The Court held that "due care and attention" isn\'t the same fixed standard for everyone; it bends to a person\'s own circumstances. A newcomer to the village, primed all night by ghost stories, standing in a place already marked as haunted on the one night it was said to wake — his reaction was, the Court found, exactly what could be expected of him. The protection of Section 79 applied in full.',
+          hi: 'उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश नरसिम्हम और न्यायमूर्ति बर्मन ने राज्य की अपील को खारिज कर दिया और सत्र अदालत के बरी करने के फैसले की पुष्टि की।\n\nथापा के मन में उन महिलाओं के प्रति कोई दुर्भावना नहीं थी जिन पर उसने वार किया — वह उन्हें नहीं जानता था, और उन्हें उन भूतों के अलावा कुछ नहीं समझता था जिनका वह पूरी रात से शिकार कर रहा था। अदालत ने माना कि "उचित सावधानी और ध्यान" हर किसी के लिए एक निश्चित पैमाना नहीं है; यह व्यक्ति की अपनी परिस्थितियों के अनुसार बदलता है। गाँव में नया आया व्यक्ति, जिसे पूरी रात भूतों की कहानियाँ सुनाई गई हों, और वह उस जगह पर खड़ा हो जो पहले से ही भूतिया मानी जाती हो — उसकी प्रतिक्रिया वही थी जिसकी उससे उम्मीद की जा सकती थी। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।',
         },
         photoExhibitSrc: '/images/cases/ghost_court_verdict.jpg',
         photoExhibitCaption: {
@@ -377,19 +377,19 @@ export const CASES_DATA: CaseData[] = [
           hi: 'एपिसोड 08 · कानूनी सिद्धांत और प्रभाव',
         },
         headline: {
-          en: 'Ignorantia Facti Excusat: mistake of fact Excuses.',
-          hi: 'तथ्य की भूल माफी योग्य है।',
+          en: 'MISTAKE OF FACT EXCUSES. MISTAKE OF LAW DOES NOT.',
+          hi: 'तथ्य की भूल क्षम्य है। कानून की भूल नहीं।',
         },
         body: {
-          en: 'This case remains India’s leading precedent on Section 79 IPC and the latin maxim *Ignorantia facti excusat, ignorantia juris non excusat* (mistake of fact excuses, mistake of law does not).\n\nIt established that "due care and attention" is not an absolute mechanical standard, but depends on the intellectual capacity, terror, and physical circumstances of the accused.',
-          hi: 'यह मामला आज भी भारतीय दंड संहिता की धारा 79 और लैटिन कहावत *Ignorantia facti excusat* (तथ्य की भूल क्षम्य है, कानून की नहीं) पर भारत का सबसे बड़ा नजीर है।\n\nइसने स्थापित किया कि "उचित सावधानी" कोई कठोर पैमाना नहीं है, बल्कि अभियुक्त की मानसिक स्थिति, भय और परिस्थितियों पर निर्भर करता है।',
+          en: 'This case remains a leading Indian precedent on Section 79 IPC and the old maxim — *ignorantia facti excusat, ignorantia juris non excusat* (mistake of fact excuses; mistake of law does not).\n\nIt established that "due care and attention" is not one mechanical yardstick for every person — it depends on the accused\'s own capacity, fear, and the circumstances closing in around them at that moment.\n\n**HELD:** An act done under a genuine, good-faith mistake of fact is not an offence — even when the consequences are fatal.',
+          hi: 'यह मामला धारा 79 आईपीसी और पुरानी लैटिन कहावत — *ignorantia facti excusat, ignorantia juris non excusat* (तथ्य की भूल क्षमा करती है; कानून की भूल नहीं) पर भारत की एक प्रमुख नजीर बना हुआ है।\n\nइसने स्थापित किया कि "उचित सावधानी और ध्यान" हर व्यक्ति के लिए एक यांत्रिक पैमाना नहीं है — यह आरोपी की अपनी क्षमता, भय और उस क्षण उसके आसपास की परिस्थितियों पर निर्भर करता है।\n\n**निर्णय:** वास्तविक और सद्भावपूर्वक तथ्य की भूल के तहत किया गया कृत्य कोई अपराध नहीं है — भले ही उसके परिणाम घातक क्यों न हों।',
         },
         evidence: {
           archiveType: 'verdict_decree',
           masthead: 'ALL INDIA REPORTER · AIR 1960 ORI 161',
           date: '1960 JUDICIAL RECORD',
           headline: {
-            en: 'LANDMARK RATIO: mistake of fact PREVENTS FORMATION OF MENS REA',
+            en: 'LANDMARK RATIO: MISTAKE OF FACT PREVENTS FORMATION OF MENS REA',
             hi: 'ऐतिहासिक सिद्धांत: तथ्य की भूल आपराधिक इरादे (Mens Rea) को समाप्त करती है',
           },
           snippet: {

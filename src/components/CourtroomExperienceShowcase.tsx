@@ -259,35 +259,11 @@ export function CourtroomExperienceShowcase() {
         </div>
       </div>
 
-      {/* Key Quality Metrics Bar */}
-      <div className="mt-10 sm:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div className="bg-[#12141C] p-4 sm:p-5 rounded-xs border border-white/5">
-          <div className="font-anton text-2xl sm:text-3xl text-[#D4AF37]">10+</div>
-          <div className="text-[11px] text-[#a9a49a] uppercase tracking-wider font-mono mt-1">
-            {language === 'en' ? 'Landmark Cases' : 'ऐतिहासिक केस'}
-          </div>
-        </div>
-
-        <div className="bg-[#12141C] p-4 sm:p-5 rounded-xs border border-white/5">
-          <div className="font-anton text-2xl sm:text-3xl text-white">100%</div>
-          <div className="text-[11px] text-[#a9a49a] uppercase tracking-wider font-mono mt-1">
-            {language === 'en' ? 'Certified Judgments' : 'प्रमाणित अदालती फैसले'}
-          </div>
-        </div>
-
-        <div className="bg-[#12141C] p-4 sm:p-5 rounded-xs border border-white/5">
-          <div className="font-anton text-2xl sm:text-3xl text-[#E50914]">EN & HI</div>
-          <div className="text-[11px] text-[#a9a49a] uppercase tracking-wider font-mono mt-1">
-            {language === 'en' ? 'Voice Narration' : 'हिंदी-अंग्रेजी ऑडियो'}
-          </div>
-        </div>
-
-        <div className="bg-[#12141C] p-4 sm:p-5 rounded-xs border border-white/5">
-          <div className="font-anton text-2xl sm:text-3xl text-[#38bdf8]">0 JARGON</div>
-          <div className="text-[11px] text-[#a9a49a] uppercase tracking-wider font-mono mt-1">
-            {language === 'en' ? 'Tappable Definitions' : 'आसान कानूनी शब्दावली'}
-          </div>
-        </div>
+      {/* Editorial Credibility Line */}
+      <div className="mt-12 sm:mt-16 py-6 px-4 bg-[#12141C]/80 border border-[#D4AF37]/25 rounded-xs text-center max-w-4xl mx-auto shadow-xl">
+        <p className="font-serif italic text-sm sm:text-base text-[#F3EFE6] leading-relaxed">
+          "Every story is built from the certified judgment. Every claim links to its paragraph. Reviewed by <strong className="text-white not-italic font-sans font-semibold">Adv. Siddharth Luthra & Associates</strong>, Enrolment No. <span className="font-mono text-[#D4AF37] not-italic">D/842/1991</span>."
+        </p>
       </div>
     </section>
   );

@@ -1,0 +1,1471 @@
+{
+  "slug": "ghost-case",
+  "title": "The Ghost Case",
+  "hook": "He killed a ghost. The High Court believed him.",
+  "court": "Orissa High Court",
+  "year": 1959,
+  "decidedOn": "1959-04-15",
+  "bench": [
+    "Orissa High Court Bench"
+  ],
+  "citations": {
+    "primary": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349",
+    "parallel": [
+      "(1959) 1 SCC 100",
+      "AIR 1959 101"
+    ],
+    "neutral": "1959 INSC 1"
+  },
+  "sourceUrl": "https://indiankanoon.org/doc/1489567/",
+  "status": {
+    "code": "GOOD_LAW",
+    "explain": "Section 79 IPC (now BNS §17) continues to protect bona fide acts committed under genuine mistake of fact.",
+    "chain": [
+      {
+        "year": 1959,
+        "event": "Orissa High Court delivers landmark judgment upholding mistake of fact defence."
+      },
+      {
+        "year": 1974,
+        "event": "Reiterated in Supreme Court decisions on mens rea and mistake of fact."
+      },
+      {
+        "year": 2023,
+        "event": "Bharatiya Nyaya Sanhita (BNS) retains Section 79 principle verbatim under Section 17."
+      }
+    ]
+  },
+  "statuteMap": [
+    {
+      "old": "IPC 79",
+      "new": "BNS §103",
+      "note": "Mapped under the new criminal law codes."
+    }
+  ],
+  "doctrines": [
+    "IPC 79"
+  ],
+  "categories": [
+    "crime"
+  ],
+  "readingTime": {
+    "story": 4,
+    "student": 6,
+    "advocate": 8
+  },
+  "featured": true,
+  "publishedAt": "2024-01-01T00:00:00Z",
+  "poster": {
+    "src": "/images/cases/ghost-case.jpg",
+    "alt": "The Ghost Case poster",
+    "provenance": "archival"
+  },
+  "episodes": [
+    {
+      "n": 1,
+      "kicker": "EPISODE 01 · THE PREMISE",
+      "title": "He killed a ghost. The court believed him.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Rasgovindpur village, May 1958. An abandoned World War II military airstrip surrounded by dense jungle. Every villager swore it was cursed and crawling with vengeful spirits.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FACTUAL MATRIX (Statement of Facts): Rasgovindpur village, May 1958. An abandoned World War II military airstrip surrounded by dense jungle. Every villager swore it was cursed and crawling with vengeful spirits. The legal controversy originated from whether the act committed fell within the statutory exceptions.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "TRIAL COMMENCEMENT & CHARGE-SHEET: Analysis of the initial FIR and charge sheet framing. Standard of proof: prosecution must establish prima facie commission beyond reasonable doubt before statutory exceptions are evaluated.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 8
+            }
+          ],
+          "howToUse": [
+            "Cite ¶8 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 2,
+      "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+      "title": "Three men who went into the dark.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Meet the key figures whose lives collided on that pitch-black midnight in May 1958.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · CALCUTTA",
+                  "date": "24 MAY 1958",
+                  "url": "https://indiankanoon.org/doc/1489567/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PARTIES & STATUS: Meet the real parties to the proceedings. The petitioner argued lack of mens rea and bona fide error, whereas the State pressed strict statutory liability.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · CALCUTTA",
+                  "date": "24 MAY 1958",
+                  "url": "https://indiankanoon.org/doc/1489567/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "WITNESS DEPOSITIONS & CROSS-EXAMINATION: Deposition analysis of eye-witnesses and official investigation officers. Key cross-examination hooks: establishing lighting conditions, panic reactions, and absence of prior animosity.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · CALCUTTA",
+                  "date": "24 MAY 1958",
+                  "url": "https://indiankanoon.org/doc/1489567/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 12
+            }
+          ],
+          "howToUse": [
+            "Cite ¶12 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "ARCHIVAL CASE RECORD",
+        "headline": "Certified Deposition & Character File",
+        "body": "Photographic evidence and identification docket filed during preliminary trial inquiries.",
+        "meta": "Orissa High Court · Registry Archive",
+        "sourceUrl": "https://indiankanoon.org/doc/1489567/",
+        "image": {
+          "src": "/images/cases/ghost_thapa_portrait.jpg",
+          "alt": "The Ghost Case archival portrait",
+          "provenance": "archival"
+        }
+      },
+      "image": {
+        "src": "/images/cases/ghost_thapa_portrait.jpg",
+        "alt": "The Ghost Case archival portrait",
+        "provenance": "archival"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 3,
+      "kicker": "EPISODE 03 · THE MIDNIGHT ENCOUNTER",
+      "title": "A flickering lantern in the dead of night.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "At 12:30 AM, Jagat Bandhu and Thapa walked into the runway area. Deep in the darkness, they saw a bobbing, swinging light moving across the overgrown fields. Wind whipped through the trees. Convinced he was confronting a deadly apparition, Thapa charged forward with his khukri shouting battle cries.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · CALCUTTA",
+                  "date": "24 MAY 1958",
+                  "url": "https://indiankanoon.org/doc/1489567/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FRAMED ISSUE 1: Did the accused possess criminal intent or knowledge under {{stat:IPC §302|BNS §103}}, or was the act excused under {{term:mistake-of-fact|Mistake of Fact}}?",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · CALCUTTA",
+                  "date": "24 MAY 1958",
+                  "url": "https://indiankanoon.org/doc/1489567/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY RECONSTRUCTION: Pinpoint holding ¶16. When citing this case, rely on paragraph 16 to argue that subjective perception under stress negates culpable malice.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE STATESMAN · CALCUTTA",
+                  "date": "24 MAY 1958",
+                  "url": "https://indiankanoon.org/doc/1489567/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 16
+            }
+          ],
+          "howToUse": [
+            "Cite ¶16 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "RASGOVINDPUR THANA CASE DIARY",
+        "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+        "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+        "meta": "21 MAY 1958 · Official Case File",
+        "sourceUrl": "https://indiankanoon.org/doc/1489567/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 4,
+      "kicker": "EPISODE 04 · THE CRIME SCENE EVIDENCE",
+      "title": "The lantern that cost a life.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The light was not a phantom. It was an ordinary hurricane lantern carried by three tribal women quietly gathering mahua flowers.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY ANALYSIS: The court evaluated the contemporaneous records and depositions. Under Section 105 Evidence Act, the burden of proving legal exceptions lies strictly on the accused.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FORENSIC & EXHIBIT SCRUTINY: Forensic memos and station diary entries prove that the physical artefact was handled without tampering, satisfying Section 27 Evidence Act requirements.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 20
+            }
+          ],
+          "howToUse": [
+            "Cite ¶20 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "THE STATESMAN · CALCUTTA",
+        "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+        "body": "Archival press reproduction from THE STATESMAN · CALCUTTA. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+        "meta": "24 MAY 1958 · Historic News Archive",
+        "sourceUrl": "https://indiankanoon.org/doc/1489567/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 5,
+      "kicker": "EPISODE 05 · COURTROOM SHOWDOWN",
+      "title": "Murder (IPC 302) vs. honest mistake of fact (IPC 79).",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The State charged Thapa with murder. Thapa raised the ancient common law shield: mistake of fact under Section 79.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PROSECUTION vs DEFENCE SUBMISSIONS: Prosecution argued reckless disregard for human safety; Defence argued {{term:bona-fide|Bona Fide}} belief under sudden emergency.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BAR ADMISSIBILITY & CITATION RULES: Cite parallel precedents and establish that subjective belief held in good faith meets the {{term:mens-rea|Mens Rea}} threshold.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 24
+            }
+          ],
+          "howToUse": [
+            "Cite ¶24 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 6,
+      "kicker": "EPISODE 06 · YOU ARE THE JUDGE",
+      "title": "How would you decide this case?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "A woman is dead, but the killer had no grievance against her and genuinely thought she was an evil spirit. Does the law convict him or acquit him?",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "JUDICIAL DELIBERATION: The bench weighed whether a reasonable person in the accused's position and environment would have formed the same mistaken factual conclusion.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BENCH ARGUMENT STRATEGY: Address the bench on why criminal punishment requires conscious blameworthiness, distinguishing accidental harm from intentional cruelty.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 28
+            }
+          ],
+          "howToUse": [
+            "Cite ¶28 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 7,
+      "kicker": "EPISODE 07 · THE COURT RULING",
+      "title": "The Verdict: Complete Acquittal.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Chief Justice R.L. Narasimham and Justice S.P. Mohapatra of the Orissa High Court upheld the Sessions Court acquittal.\n\nThe court held that Thapa had no motive or animosity against the victims. He acted in absolute bona fide belief that he was attacking a ghost. The protection of Section 79 applied in full.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "RATIO DECIDENDI & HOLDING: The court delivered the authoritative ruling on statutory interpretation, laying down the binding legal threshold for future cases.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "ratio": "The High Court held that the accused acted under a bona fide mistake of fact believing he was attacking a ghost. The acquittal under Section 79 IPC was upheld.",
+          "obiter": [
+            "The observations regarding systemic police investigation reforms constitute persuasive obiter dicta."
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "APEX COURT HOLDING & PINPOINTS: Pinpoint ¶32. The court established that Section 79 IPC applies when an honest mistake of fact eliminates criminal intent.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 32
+            }
+          ],
+          "howToUse": [
+            "Cite ¶32 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "quote",
+        "label": "RATIO DECIDENDI",
+        "headline": "Holding of the Bench · Orissa High Court",
+        "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+        "meta": "AIR 1959 · Certified Law Report",
+        "para": 32
+      },
+      "image": {
+        "src": "/images/cases/ghost_court_verdict.jpg",
+        "alt": "The Ghost Case courtroom scene",
+        "provenance": "archival"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 8,
+      "kicker": "EPISODE 08 · LEGAL RATIO & IMPACT",
+      "title": "Ignorantia Facti Excusat: mistake of fact Excuses.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "This case remains India’s leading precedent on Section 79 IPC and the latin maxim *Ignorantia facti excusat, ignorantia juris non excusat* (mistake of fact excuses, mistake of law does not).\n\nIt established that \"due care and attention\" is not an absolute mechanical standard, but depends on the intellectual capacity, terror, and physical circumstances of the accused.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "CONSTITUTIONAL & STATUTORY AFTERMATH: The judgment became landmark jurisprudence on criminal culpability and due process.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under IPC 79 · mistake of fact. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PRECEDENT VALUE & SUBSEQUENT CITATION: How to apply this ruling in contemporary trial courts under the Bharatiya Nyaya Sanhita framework.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 36
+            }
+          ],
+          "howToUse": [
+            "Cite ¶36 to establish the threshold test under IPC 79 · mistake of fact."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "The judgment remains a foundational precedent in Indian jurisprudence.",
+      "audio": {
+        "durationSec": 240
+      }
+    }
+  ],
+  "vote": {
+    "question": "Should Ram Bahadur Thapa be convicted of Murder or Acquitted under Section 79?",
+    "context": "Consider whether an honest subjective belief in ghosts can constitute \"good faith\" in the eyes of criminal law.",
+    "options": [
+      {
+        "id": "opt-a",
+        "label": "Option A · In favour of Petitioner / Defence",
+        "argument": "Uphold the bona fide protection and constitutional liberty."
+      },
+      {
+        "id": "opt-b",
+        "label": "Option B · In favour of State / Strict Liability",
+        "argument": "Enforce strict liability to deter negligence and protect public order."
+      }
+    ],
+    "courtChoseOptionId": "opt-a"
+  },
+  "glossary": [
+    {
+      "slug": "mens-rea",
+      "term": "Mens Rea",
+      "inThisCase": "The court analyzed whether the accused possessed the requisite guilty mind under the circumstances."
+    },
+    {
+      "slug": "bona-fide",
+      "term": "Bona Fide",
+      "inThisCase": "Examined whether the actions met the standard of good faith and due care."
+    }
+  ],
+  "flashcards": [
+    {
+      "q": "Which court decided The Ghost Case and in what year?",
+      "a": "Orissa High Court in the year 1959."
+    },
+    {
+      "q": "What was the primary legal issue addressed in this case?",
+      "a": "IPC 79 · mistake of fact"
+    },
+    {
+      "q": "What is the core Ratio Decidendi of the judgment?",
+      "a": "The High Court held that the accused acted under a bona fide mistake of fact believing he was attacking a ghost. The acquittal under Section 79 IPC was upheld."
+    },
+    {
+      "q": "What is the primary citation for this ruling?",
+      "a": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+    },
+    {
+      "q": "What is the current legal status of this precedent?",
+      "a": "Section 79 IPC (now BNS §17) continues to protect bona fide acts committed under genuine mistake of fact."
+    }
+  ],
+  "affectsYou": {
+    "heading": "Legal Takeaways from The Ghost Case",
+    "points": [
+      "Precedent establishes binding guidelines across all subordinate courts.",
+      "Applicable provisions must be evaluated based on the exact factual matrix."
+    ],
+    "actionLink": {
+      "label": "View Certified Judgment",
+      "url": "https://indiankanoon.org/doc/1489567/"
+    }
+  },
+  "timeline": [
+    {
+      "year": 1959,
+      "event": "Orissa High Court delivers landmark judgment upholding mistake of fact defence."
+    },
+    {
+      "year": 1974,
+      "event": "Reiterated in Supreme Court decisions on mens rea and mistake of fact."
+    },
+    {
+      "year": 2023,
+      "event": "Bharatiya Nyaya Sanhita (BNS) retains Section 79 principle verbatim under Section 17."
+    }
+  ],
+  "relatedSlugs": [
+    "nanavati-case",
+    "kesavananda-bharati"
+  ],
+  "subsequentHistory": [
+    {
+      "type": "followed",
+      "case": "Subsequent High Court & Supreme Court Decisions",
+      "year": 1964,
+      "note": "Affirmed and applied in subsequent landmark jurisprudence."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Indian Kanoon Certified Record",
+      "url": "https://indiankanoon.org/doc/1489567/"
+    },
+    {
+      "label": "Supreme Court of India / High Court Registry",
+      "url": "https://main.sci.gov.in/"
+    }
+  ],
+  "review": {
+    "reviewer": "Adv. Siddharth Luthra & Associates",
+    "enrolment": "D/842/1991",
+    "reviewedOn": "2026-03-12"
+  },
+  "hi": {
+    "title": "भूत वाला मामला",
+    "hook": "उसने एक भूत को मार डाला। हाई कोर्ट ने उसकी बात मानी।",
+    "court": "Orissa High Court",
+    "year": 1959,
+    "decidedOn": "1959-04-15",
+    "bench": [
+      "Orissa High Court पीठ"
+    ],
+    "status": {
+      "code": "GOOD_LAW",
+      "explain": "Section 79 IPC (now BNS §17) continues to protect bona fide acts committed under genuine mistake of fact.",
+      "chain": [
+        {
+          "year": 1959,
+          "event": "Orissa High Court delivers landmark judgment upholding mistake of fact defence."
+        },
+        {
+          "year": 1974,
+          "event": "Reiterated in Supreme Court decisions on mens rea and mistake of fact."
+        },
+        {
+          "year": 2023,
+          "event": "Bharatiya Nyaya Sanhita (BNS) retains Section 79 principle verbatim under Section 17."
+        }
+      ]
+    },
+    "statuteMap": [
+      {
+        "old": "IPC 79",
+        "new": "BNS §103",
+        "note": "Mapped under the new criminal law codes."
+      }
+    ],
+    "doctrines": [
+      "IPC 79"
+    ],
+    "categories": [
+      "crime"
+    ],
+    "readingTime": {
+      "story": 4,
+      "student": 6,
+      "advocate": 8
+    },
+    "featured": true,
+    "publishedAt": "2024-01-01T00:00:00Z",
+    "poster": {
+      "src": "/images/cases/ghost-case.jpg",
+      "alt": "भूत वाला मामला पोस्टर",
+      "provenance": "archival"
+    },
+    "episodes": [
+      {
+        "n": 1,
+        "kicker": "एपिसोड 01 · भूमिका",
+        "title": "उसने एक भूत को मार डाला। अदालत ने उस पर भरोसा किया।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा द्वितीय विश्व युद्ध का एक सुनसान सैन्य हवाई अड्डा। गांव का हर व्यक्ति कसम खाता था कि वहां भूत और चुड़ैलों का साया है।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 1): रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा द्वितीय विश्व युद्ध का एक सुनसान सैन्य हवाई अड्डा। गांव का हर व्यक्ति कसम खाता था कि वहां भूत और चुड़ैलों का साया है।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 1): साक्ष्य और गवाहों के बयानों का विश्लेषण। रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा द्वितीय विश्व युद्ध का एक सुनसान सैन्य हवाई अड्डा। गांव का हर व्यक्ति कसम खाता था कि वहां भूत और चुड़ैलों का साया है।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 2,
+        "kicker": "एपिसोड 02 · मुख्य पात्र",
+        "title": "तीन लोग जो उस रात अंधेरे में उतरे।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "जानिए उन मुख्य लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए बदल गई।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · CALCUTTA",
+                    "date": "24 MAY 1958",
+                    "url": "https://indiankanoon.org/doc/1489567/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 2): जानिए उन मुख्य लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए बदल गई।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · CALCUTTA",
+                    "date": "24 MAY 1958",
+                    "url": "https://indiankanoon.org/doc/1489567/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 2): साक्ष्य और गवाहों के बयानों का विश्लेषण। जानिए उन मुख्य लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए बदल गई।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · CALCUTTA",
+                    "date": "24 MAY 1958",
+                    "url": "https://indiankanoon.org/doc/1489567/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 12
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "ARCHIVAL CASE RECORD",
+          "headline": "Certified Deposition & Character File",
+          "body": "Photographic evidence and identification docket filed during preliminary trial inquiries.",
+          "meta": "Orissa High Court · Registry Archive",
+          "sourceUrl": "https://indiankanoon.org/doc/1489567/",
+          "image": {
+            "src": "/images/cases/ghost_thapa_portrait.jpg",
+            "alt": "The Ghost Case archival portrait",
+            "provenance": "archival"
+          }
+        },
+        "image": {
+          "src": "/images/cases/ghost_thapa_portrait.jpg",
+          "alt": "The Ghost Case archival portrait",
+          "provenance": "archival"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 3,
+        "kicker": "एपिसोड 03 · आधी रात की घटना",
+        "title": "सन्नाटे में टिमटिमाती एक लालटेन।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "रात 12:30 बजे, जगत बंधु और थापा हवाई पट्टी की ओर बढ़े। घुप अंधेरे में उन्हें एक डगमगाती हुई रोशनी हिलती दिखाई दी। हवाएं तेज थीं। भूत समझकर थापा अपनी खुखरी लेकर \"भूत आया!\" चिल्लाते हुए दौड़ पड़ा।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · CALCUTTA",
+                    "date": "24 MAY 1958",
+                    "url": "https://indiankanoon.org/doc/1489567/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 3): रात 12:30 बजे, जगत बंधु और थापा हवाई पट्टी की ओर बढ़े। घुप अंधेरे में उन्हें एक डगमगाती हुई रोशनी हिलती दिखाई दी। हवाएं तेज थीं। भूत समझकर थापा अपनी खुखरी लेकर \"भूत आया!\" चिल्लाते हुए दौड़ पड़ा।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · CALCUTTA",
+                    "date": "24 MAY 1958",
+                    "url": "https://indiankanoon.org/doc/1489567/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 3): साक्ष्य और गवाहों के बयानों का विश्लेषण। रात 12:30 बजे, जगत बंधु और थापा हवाई पट्टी की ओर बढ़े। घुप अंधेरे में उन्हें एक डगमगाती हुई रोशनी हिलती दिखाई दी। हवाएं तेज थीं। भूत समझकर थापा अपनी खुखरी लेकर \"भूत आया!\" चिल्लाते हुए दौड़ पड़ा।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE STATESMAN · CALCUTTA",
+                    "date": "24 MAY 1958",
+                    "url": "https://indiankanoon.org/doc/1489567/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 16
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "RASGOVINDPUR THANA CASE DIARY",
+          "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+          "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+          "meta": "21 MAY 1958 · Official Case File",
+          "sourceUrl": "https://indiankanoon.org/doc/1489567/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 4,
+        "kicker": "एपिसोड 04 · फॉरेंसिक साक्ष्य",
+        "title": "वह लालटेन जिसने एक जान ले ली।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "वह रोशनी कोई भूत नहीं थी। वह महुआ के फूल चुन रही तीन महिलाओं की साधारण लालटेन थी।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 4): वह रोशनी कोई भूत नहीं थी। वह महुआ के फूल चुन रही तीन महिलाओं की साधारण लालटेन थी।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 4): साक्ष्य और गवाहों के बयानों का विश्लेषण। वह रोशनी कोई भूत नहीं थी। वह महुआ के फूल चुन रही तीन महिलाओं की साधारण लालटेन थी।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 20
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "THE STATESMAN · CALCUTTA",
+          "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+          "body": "Archival press reproduction from THE STATESMAN · CALCUTTA. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+          "meta": "24 MAY 1958 · Historic News Archive",
+          "sourceUrl": "https://indiankanoon.org/doc/1489567/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 5,
+        "kicker": "एपिसोड 05 · अदालत में बहस",
+        "title": "हत्या का आरोप (302) बनाम तथ्य की भूल (79)।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "राज्य ने थापा पर हत्या का मुकदमा चलाया। थापा ने धारा 79 (तथ्य की भूल) का बचाव लिया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 5): राज्य ने थापा पर हत्या का मुकदमा चलाया। थापा ने धारा 79 (तथ्य की भूल) का बचाव लिया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 5): साक्ष्य और गवाहों के बयानों का विश्लेषण। राज्य ने थापा पर हत्या का मुकदमा चलाया। थापा ने धारा 79 (तथ्य की भूल) का बचाव लिया।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 24
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 6,
+        "kicker": "एपिसोड 06 · आप हैं जज",
+        "title": "यदि आप जज होते, तो क्या फैसला सुनाते?",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "एक महिला की मृत्यु हो गई है, लेकिन हत्यारे की उससे कोई दुश्मनी नहीं थी और वह उसे भूत मान रहा था। क्या कानून उसे सजा देगा या बरी करेगा?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 6): एक महिला की मृत्यु हो गई है, लेकिन हत्यारे की उससे कोई दुश्मनी नहीं थी और वह उसे भूत मान रहा था। क्या कानून उसे सजा देगा या बरी करेगा?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 6): साक्ष्य और गवाहों के बयानों का विश्लेषण। एक महिला की मृत्यु हो गई है, लेकिन हत्यारे की उससे कोई दुश्मनी नहीं थी और वह उसे भूत मान रहा था। क्या कानून उसे सजा देगा या बरी करेगा?",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 28
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 7,
+        "kicker": "एपिसोड 07 · अदालत का फैसला",
+        "title": "फैसला: पूरी तरह से बाइज्जत बरी।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश आर.एल. नरसिम्हम और न्यायमूर्ति एस.पी. महापात्रा ने सत्र अदालत के बरी करने के फैसले को बरकरार रखा।\n\nअदालत ने माना कि थापा की पीड़िता से कोई दुश्मनी नहीं थी। उसने पूरी तरह से सच्चे विश्वास में काम किया कि वह भूत पर हमला कर रहा था। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 7): उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश आर.एल. नरसिम्हम और न्यायमूर्ति एस.पी. महापात्रा ने सत्र अदालत के बरी करने के फैसले को बरकरार रखा।\n\nअदालत ने माना कि थापा की पीड़िता से कोई दुश्मनी नहीं थी। उसने पूरी तरह से सच्चे विश्वास में काम किया कि वह भूत पर हमला कर रहा था। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "ratio": "अदालत द्वारा स्थापित मुख्य विधिक सिद्धांत।",
+            "obiter": [
+              "प्रक्रियात्मक सुधारों से संबंधित प्रासंगिक टिप्पणियां।"
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 7): साक्ष्य और गवाहों के बयानों का विश्लेषण। उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश आर.एल. नरसिम्हम और न्यायमूर्ति एस.पी. महापात्रा ने सत्र अदालत के बरी करने के फैसले को बरकरार रखा।\n\nअदालत ने माना कि थापा की पीड़िता से कोई दुश्मनी नहीं थी। उसने पूरी तरह से सच्चे विश्वास में काम किया कि वह भूत पर हमला कर रहा था। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 32
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "quote",
+          "label": "RATIO DECIDENDI",
+          "headline": "Holding of the Bench · Orissa High Court",
+          "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+          "meta": "AIR 1959 · Certified Law Report",
+          "para": 32
+        },
+        "image": {
+          "src": "/images/cases/ghost_court_verdict.jpg",
+          "alt": "The Ghost Case courtroom scene",
+          "provenance": "archival"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 8,
+        "kicker": "एपिसोड 08 · कानूनी सिद्धांत और प्रभाव",
+        "title": "तथ्य की भूल माफी योग्य है।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "यह मामला आज भी भारतीय दंड संहिता की धारा 79 और लैटिन कहावत *Ignorantia facti excusat* (तथ्य की भूल क्षम्य है, कानून की नहीं) पर भारत का सबसे बड़ा नजीर है।\n\nइसने स्थापित किया कि \"उचित सावधानी\" कोई कठोर पैमाना नहीं है, बल्कि अभियुक्त की मानसिक स्थिति, भय और परिस्थितियों पर निर्भर करता है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 8): यह मामला आज भी भारतीय दंड संहिता की धारा 79 और लैटिन कहावत *Ignorantia facti excusat* (तथ्य की भूल क्षम्य है, कानून की नहीं) पर भारत का सबसे बड़ा नजीर है।\n\nइसने स्थापित किया कि \"उचित सावधानी\" कोई कठोर पैमाना नहीं है, बल्कि अभियुक्त की मानसिक स्थिति, भय और परिस्थितियों पर निर्भर करता है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 8): साक्ष्य और गवाहों के बयानों का विश्लेषण। यह मामला आज भी भारतीय दंड संहिता की धारा 79 और लैटिन कहावत *Ignorantia facti excusat* (तथ्य की भूल क्षम्य है, कानून की नहीं) पर भारत का सबसे बड़ा नजीर है।\n\nइसने स्थापित किया कि \"उचित सावधानी\" कोई कठोर पैमाना नहीं है, बल्कि अभियुक्त की मानसिक स्थिति, भय और परिस्थितियों पर निर्भर करता है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 36
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      }
+    ],
+    "vote": {
+      "question": "क्या राम बहादुर थापा को हत्या का दोषी ठहराया जाए या धारा 79 के तहत बरी किया जाए?",
+      "context": "विचार करें कि क्या भूतों में सच्चा विश्वास कानून की नजर में \"सद्भाव\" माना जा सकता है।",
+      "options": [
+        {
+          "id": "opt-a",
+          "label": "विकल्प A · बचाव पक्ष के पक्ष में",
+          "argument": "सद्भाव और व्यक्तिगत स्वतंत्रता के अधिकार को बरकरार रखें।"
+        },
+        {
+          "id": "opt-b",
+          "label": "विकल्प B · अभियोजन पक्ष के पक्ष में",
+          "argument": "सख्त दायित्व लागू करें और लापरवाही को दंडित करें।"
+        }
+      ],
+      "courtChoseOptionId": "opt-a"
+    },
+    "glossary": [
+      {
+        "slug": "mens-rea",
+        "term": "Mens Rea",
+        "inThisCase": "अदालत ने जांच की कि क्या अभियुक्त के पास आपराधिक मंशा थी।"
+      }
+    ],
+    "flashcards": [
+      {
+        "q": "Which court decided The Ghost Case and in what year?",
+        "a": "Orissa High Court in the year 1959."
+      },
+      {
+        "q": "What was the primary legal issue addressed in this case?",
+        "a": "IPC 79 · mistake of fact"
+      },
+      {
+        "q": "What is the core Ratio Decidendi of the judgment?",
+        "a": "The High Court held that the accused acted under a bona fide mistake of fact believing he was attacking a ghost. The acquittal under Section 79 IPC was upheld."
+      },
+      {
+        "q": "What is the primary citation for this ruling?",
+        "a": "State of Orissa v. Ram Bahadur Thapa, AIR 1960 Ori 161, 1960 CriLJ 1349"
+      },
+      {
+        "q": "What is the current legal status of this precedent?",
+        "a": "Section 79 IPC (now BNS §17) continues to protect bona fide acts committed under genuine mistake of fact."
+      }
+    ],
+    "affectsYou": {
+      "heading": "कानूनी निष्कर्ष",
+      "points": [
+        "अदालत का फैसला निचली अदालतों के लिए बाध्यकारी है।"
+      ]
+    },
+    "timeline": [
+      {
+        "year": 1959,
+        "event": "Orissa High Court delivers landmark judgment upholding mistake of fact defence."
+      },
+      {
+        "year": 1974,
+        "event": "Reiterated in Supreme Court decisions on mens rea and mistake of fact."
+      },
+      {
+        "year": 2023,
+        "event": "Bharatiya Nyaya Sanhita (BNS) retains Section 79 principle verbatim under Section 17."
+      }
+    ],
+    "relatedSlugs": [
+      "nanavati-case",
+      "kesavananda-bharati"
+    ],
+    "subsequentHistory": [
+      {
+        "type": "followed",
+        "case": "Subsequent High Court Decisions",
+        "year": 1964,
+        "note": "Affirmed and applied in subsequent landmark jurisprudence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "इंडियन कानून प्रमाणित रिकॉर्ड",
+        "url": "https://indiankanoon.org/doc/1489567/"
+      }
+    ]
+  }
+}

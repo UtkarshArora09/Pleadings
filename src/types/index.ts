@@ -1,3 +1,5 @@
+export * from './case';
+
 export type Language = 'en' | 'hi';
 
 export type CaseTheme = 'crime-noir' | 'corporate-luxury' | 'constitutional-gold' | 'cyber-neon';
@@ -179,6 +181,19 @@ export interface CaseBrief {
   };
 }
 
+export type CaseStatus = 'DRAFT' | 'PROCESSING' | 'CONTENT_GENERATED' | 'IMAGES_GENERATED' | 'ADMIN_REVIEW' | 'READY_TO_PUBLISH' | 'PUBLISHED';
+
+export interface ImageMetadata {
+  id: string;
+  type: 'banner' | 'scene' | 'character' | 'courtroom' | 'evidence';
+  panelId?: string;
+  prompt: string;
+  url: string;
+  isAiGenerated: boolean;
+  isApproved: boolean;
+  createdAt: string;
+}
+
 export interface CaseData {
   slug: string;
   title: {
@@ -220,4 +235,25 @@ export interface CaseData {
   hasJudgeDecision?: boolean;
   panels: StoryPanel[];
   brief: CaseBrief;
+  // CMS & Ingestion fields
+  status?: CaseStatus;
+  createdAt?: string;
+  updatedAt?: string;
+  sourceText?: string;
+  imagesList?: ImageMetadata[];
 }
+
+export interface AdminIngestPayload {
+  title: string;
+  shortTitle?: string;
+  citation?: string;
+  court: string;
+  year: number;
+  genre: 'crime' | 'consumer' | 'constitutional' | 'cyber' | 'tort';
+  statuteSections: string;
+  factsSummary: string;
+  judgmentUrl?: string;
+  judgmentText?: string;
+  additionalNotes?: string;
+}
+

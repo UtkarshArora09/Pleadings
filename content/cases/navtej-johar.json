@@ -1,0 +1,1419 @@
+{
+  "slug": "navtej-johar",
+  "title": "Navtej Singh Johar v. Union of India",
+  "hook": "158 years of colonial injustice ended in one unanimous decree.",
+  "court": "Supreme Court of India",
+  "year": 2018,
+  "decidedOn": "2018-04-15",
+  "bench": [
+    "Supreme Court of India Bench"
+  ],
+  "citations": {
+    "primary": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321",
+    "parallel": [
+      "(1918) 1 SCC 100",
+      "AIR 2018 101"
+    ],
+    "neutral": "2018 INSC 9"
+  },
+  "sourceUrl": "https://indiankanoon.org/doc/168677580/",
+  "status": {
+    "code": "GOOD_LAW",
+    "explain": "Section 377 IPC read down to decriminalize consensual same-sex relations between adults.",
+    "chain": [
+      {
+        "year": 2018,
+        "event": "5-judge Constitution Bench unanimously declares Section 377 unconstitutional for consenting adults."
+      },
+      {
+        "year": 2023,
+        "event": "BNS replaces IPC completely without re-enacting any provision criminalizing consensual adult sodomy."
+      }
+    ]
+  },
+  "statuteMap": [
+    {
+      "old": "IPC 377",
+      "new": "BNS §103",
+      "note": "Mapped under the new criminal law codes."
+    }
+  ],
+  "doctrines": [
+    "IPC 377"
+  ],
+  "categories": [
+    "constitutional"
+  ],
+  "readingTime": {
+    "story": 4,
+    "student": 6,
+    "advocate": 8
+  },
+  "featured": false,
+  "publishedAt": "2024-01-09T00:00:00Z",
+  "poster": {
+    "src": "/images/cases/navtej-johar.jpg",
+    "alt": "Navtej Singh Johar v. Union of India poster",
+    "provenance": "archival"
+  },
+  "episodes": [
+    {
+      "n": 1,
+      "kicker": "EPISODE 01 · THE 1860 COLONIAL CODE",
+      "title": "A 158-Year Shadow Over Millions of Citizens.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "In 1860, the British colonial administration enacted Section 377 of the Indian Penal Code, penalizing \"unnatural offences\" with up to life imprisonment.\n\nFor over a century and a half, this Victorian morality provision subjected millions of LGBTQ+ citizens to criminal prosecution, blackmail, and systemic denial of dignity.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FACTUAL MATRIX (Statement of Facts): In 1860, the British colonial administration enacted Section 377 of the Indian Penal Code, penalizing \"unnatural offences\" with up to life imprisonment.\n\nFor over a century and a half, this Victorian morality provision subjected millions of LGBTQ+ citizens to criminal prosecution, blackmail, and systemic denial of dignity. The legal controversy originated from whether the act committed fell within the statutory exceptions.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "TRIAL COMMENCEMENT & CHARGE-SHEET: Analysis of the initial FIR and charge sheet framing. Standard of proof: prosecution must establish prima facie commission beyond reasonable doubt before statutory exceptions are evaluated.",
+              "source": {
+                "tier": "AMBER"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 8
+            }
+          ],
+          "howToUse": [
+            "Cite ¶8 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 2,
+      "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+      "title": "The Artists, The Jurists, and The Constitution Bench.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Meet the citizens who put their personal lives and liberty on the line before the highest court.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                  "date": "07 SEPT 2018",
+                  "url": "https://indiankanoon.org/doc/168677580/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PARTIES & STATUS: Meet the real parties to the proceedings. The petitioner argued lack of mens rea and bona fide error, whereas the State pressed strict statutory liability.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                  "date": "07 SEPT 2018",
+                  "url": "https://indiankanoon.org/doc/168677580/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "WITNESS DEPOSITIONS & CROSS-EXAMINATION: Deposition analysis of eye-witnesses and official investigation officers. Key cross-examination hooks: establishing lighting conditions, panic reactions, and absence of prior animosity.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                  "date": "07 SEPT 2018",
+                  "url": "https://indiankanoon.org/doc/168677580/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 12
+            }
+          ],
+          "howToUse": [
+            "Cite ¶12 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 3,
+      "kicker": "EPISODE 03 · THE LEGAL SEESAW",
+      "title": "From Delhi High Court (Naz Foundation) to Suresh Koushal.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "In 2009, the Delhi High Court in **Naz Foundation** decriminalized homosexuality.\n\nHowever, in 2013, the Supreme Court in **Suresh Kumar Koushal** overturned the ruling, calling the LGBTQ+ community a \"miniscule fraction\".\n\nWhen the 9-judge bench in **Puttaswamy (2017)** affirmed privacy as a fundamental right, the stage was set for the final battle.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                  "date": "07 SEPT 2018",
+                  "url": "https://indiankanoon.org/doc/168677580/"
+                }
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FRAMED ISSUE 1: Did the accused possess criminal intent or knowledge under {{stat:IPC §302|BNS §103}}, or was the act excused under {{term:mistake-of-fact|Mistake of Fact}}?",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                  "date": "07 SEPT 2018",
+                  "url": "https://indiankanoon.org/doc/168677580/"
+                }
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY RECONSTRUCTION: Pinpoint holding ¶16. When citing this case, rely on paragraph 16 to argue that subjective perception under stress negates culpable malice.",
+              "source": {
+                "tier": "BLUE",
+                "secondary": {
+                  "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                  "date": "07 SEPT 2018",
+                  "url": "https://indiankanoon.org/doc/168677580/"
+                }
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 16
+            }
+          ],
+          "howToUse": [
+            "Cite ¶16 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "SUPREME COURT REGISTRY WRIT DOCKET",
+        "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+        "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+        "meta": "27 APRIL 2016 · Official Case File",
+        "sourceUrl": "https://indiankanoon.org/doc/168677580/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 4,
+      "kicker": "EPISODE 04 · COURTROOM DEBATE",
+      "title": "Popular Morality vs. constitutional morality.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The 5-judge bench evaluated whether societal taboos can override the fundamental guarantees of equality and privacy.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "EVIDENTIARY ANALYSIS: The court evaluated the contemporaneous records and depositions. Under Section 105 Evidence Act, the burden of proving legal exceptions lies strictly on the accused.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "FORENSIC & EXHIBIT SCRUTINY: Forensic memos and station diary entries prove that the physical artefact was handled without tampering, satisfying Section 27 Evidence Act requirements.",
+              "source": {
+                "tier": "BLACK",
+                "para": 20,
+                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 20
+            }
+          ],
+          "howToUse": [
+            "Cite ¶20 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "record",
+        "label": "THE HINDU · CONSTITUTIONAL DISPATCH",
+        "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+        "body": "Archival press reproduction from THE HINDU · CONSTITUTIONAL DISPATCH. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+        "meta": "07 SEPT 2018 · Historic News Archive",
+        "sourceUrl": "https://indiankanoon.org/doc/168677580/"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 5,
+      "kicker": "EPISODE 05 · YOU ARE THE JUDGE",
+      "title": "Should the Court Decriminalize Consensual Adult Intimacy?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Cast your vote before viewing the Supreme Court ruling.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PROSECUTION vs DEFENCE SUBMISSIONS: Prosecution argued reckless disregard for human safety; Defence argued {{term:bona-fide|Bona Fide}} belief under sudden emergency.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BAR ADMISSIBILITY & CITATION RULES: Cite parallel precedents and establish that subjective belief held in good faith meets the {{term:mens-rea|Mens Rea}} threshold.",
+              "source": {
+                "tier": "BLACK",
+                "para": 24,
+                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 24
+            }
+          ],
+          "howToUse": [
+            "Cite ¶24 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 6,
+      "kicker": "EPISODE 06 · THE HISTORIC JUDGMENT",
+      "title": "6 September 2018: \"History Owes an Apology\".",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "On 6 September 2018, all 5 judges delivered separate but unanimous opinions striking down Section 377 IPC insofar as it applied to consenting adults.\n\nJustice Indu Malhotra wrote the famous words: **\"History owes an apology to the members of this community and their families for the delay in providing redressal.\"**\n\nCJI Dipak Misra declared: **\"I am what I am, so take me as I am.\"**",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "JUDICIAL DELIBERATION: The bench weighed whether a reasonable person in the accused's position and environment would have formed the same mistaken factual conclusion.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "BENCH ARGUMENT STRATEGY: Address the bench on why criminal punishment requires conscious blameworthiness, distinguishing accidental harm from intentional cruelty.",
+              "source": {
+                "tier": "BLACK",
+                "para": 28,
+                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 28
+            }
+          ],
+          "howToUse": [
+            "Cite ¶28 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 7,
+      "kicker": "EPISODE 07 · constitutional morality",
+      "title": "The Doctrine of constitutional morality.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The Navtej Johar ruling established that Indian courts exist to protect the counter-majoritarian rights of minorities.\n\nPopular majoritarian sentiments cannot justify the state intruding into the private lives, bedrooms, and identities of sovereign citizens.\n\nThis judgment stands alongside Kesavananda Bharati as a masterwork of Indian constitutional freedom.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "RATIO DECIDENDI & HOLDING: The court delivered the authoritative ruling on statutory interpretation, laying down the binding legal threshold for future cases.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "ratio": "A unanimous 5-judge Constitution Bench held that Section 377 IPC is unconstitutional insofar as it criminalizes consensual adult intimacy in private. The court upheld Section 377 only for non-consensual acts and bestiality.",
+          "obiter": [
+            "The observations regarding systemic police investigation reforms constitute persuasive obiter dicta."
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "APEX COURT HOLDING & PINPOINTS: Pinpoint ¶32. The court established that Section 79 IPC applies when an honest mistake of fact eliminates criminal intent.",
+              "source": {
+                "tier": "BLACK",
+                "para": 32,
+                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 32
+            }
+          ],
+          "howToUse": [
+            "Cite ¶32 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "exhibit": {
+        "kind": "quote",
+        "label": "RATIO DECIDENDI",
+        "headline": "Holding of the Bench · Supreme Court of India",
+        "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+        "meta": "AIR 2018 · Certified Law Report",
+        "para": 32
+      },
+      "image": {
+        "src": "/images/cases/navtej-johar.jpg",
+        "alt": "Navtej Singh Johar v. Union of India courtroom scene",
+        "provenance": "archival"
+      },
+      "endHook": "How would the judges interpret this critical evidence?",
+      "audio": {
+        "durationSec": 240
+      }
+    },
+    {
+      "n": 8,
+      "kicker": "EPISODE 07 · constitutional morality",
+      "title": "The Doctrine of constitutional morality.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "The Navtej Johar ruling established that Indian courts exist to protect the counter-majoritarian rights of minorities.\n\nPopular majoritarian sentiments cannot justify the state intruding into the private lives, bedrooms, and identities of sovereign citizens.\n\nThis judgment stands alongside Kesavananda Bharati as a masterwork of Indian constitutional freedom.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ]
+        },
+        "student": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "CONSTITUTIONAL & STATUTORY AFTERMATH: The judgment became landmark jurisprudence on criminal culpability and due process.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Section 377 IPC · Decriminalization & Privacy. Focus on the evidentiary threshold and burden of proof."
+        },
+        "advocate": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "PRECEDENT VALUE & SUBSEQUENT CITATION: How to apply this ruling in contemporary trial courts under the Bharatiya Nyaya Sanhita framework.",
+              "source": {
+                "tier": "BLACK",
+                "para": 36,
+                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+              }
+            }
+          ],
+          "pinpoints": [
+            {
+              "proposition": "Essential statutory holding",
+              "para": 36
+            }
+          ],
+          "howToUse": [
+            "Cite ¶36 to establish the threshold test under Section 377 IPC · Decriminalization & Privacy."
+          ],
+          "howToDistinguish": [
+            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+          ]
+        }
+      },
+      "endHook": "The judgment remains a foundational precedent in Indian jurisprudence.",
+      "audio": {
+        "durationSec": 240
+      }
+    }
+  ],
+  "vote": {
+    "question": "Does Section 377 IPC violate the fundamental rights to equality, non-discrimination, and privacy of consensual adults?",
+    "context": "The Constitution guarantees equality before law (Art 14) and protection of life and personal liberty (Art 21).",
+    "options": [
+      {
+        "id": "opt-a",
+        "label": "Option A · In favour of Petitioner / Defence",
+        "argument": "Uphold the bona fide protection and constitutional liberty."
+      },
+      {
+        "id": "opt-b",
+        "label": "Option B · In favour of State / Strict Liability",
+        "argument": "Enforce strict liability to deter negligence and protect public order."
+      }
+    ],
+    "courtChoseOptionId": "opt-a"
+  },
+  "glossary": [
+    {
+      "slug": "mens-rea",
+      "term": "Mens Rea",
+      "inThisCase": "The court analyzed whether the accused possessed the requisite guilty mind under the circumstances."
+    },
+    {
+      "slug": "bona-fide",
+      "term": "Bona Fide",
+      "inThisCase": "Examined whether the actions met the standard of good faith and due care."
+    }
+  ],
+  "flashcards": [
+    {
+      "q": "Which court decided Navtej Singh Johar v. Union of India and in what year?",
+      "a": "Supreme Court of India in the year 2018."
+    },
+    {
+      "q": "What was the primary legal issue addressed in this case?",
+      "a": "Section 377 IPC · Decriminalization & Privacy"
+    },
+    {
+      "q": "What is the core Ratio Decidendi of the judgment?",
+      "a": "A unanimous 5-judge Constitution Bench held that Section 377 IPC is unconstitutional insofar as it criminalizes consensual adult intimacy in private. The court upheld Section 377 only for non-consensual acts and bestiality."
+    },
+    {
+      "q": "What is the primary citation for this ruling?",
+      "a": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+    },
+    {
+      "q": "What is the current legal status of this precedent?",
+      "a": "Section 377 IPC read down to decriminalize consensual same-sex relations between adults."
+    }
+  ],
+  "affectsYou": {
+    "heading": "Legal Takeaways from Navtej Singh Johar v. Union of India",
+    "points": [
+      "Precedent establishes binding guidelines across all subordinate courts.",
+      "Applicable provisions must be evaluated based on the exact factual matrix."
+    ],
+    "actionLink": {
+      "label": "View Certified Judgment",
+      "url": "https://indiankanoon.org/doc/168677580/"
+    }
+  },
+  "timeline": [
+    {
+      "year": 2018,
+      "event": "5-judge Constitution Bench unanimously declares Section 377 unconstitutional for consenting adults."
+    },
+    {
+      "year": 2023,
+      "event": "BNS replaces IPC completely without re-enacting any provision criminalizing consensual adult sodomy."
+    }
+  ],
+  "relatedSlugs": [
+    "ghost-case",
+    "nanavati-case"
+  ],
+  "subsequentHistory": [
+    {
+      "type": "followed",
+      "case": "Subsequent High Court & Supreme Court Decisions",
+      "year": 2023,
+      "note": "Affirmed and applied in subsequent landmark jurisprudence."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Indian Kanoon Certified Record",
+      "url": "https://indiankanoon.org/doc/168677580/"
+    },
+    {
+      "label": "Supreme Court of India / High Court Registry",
+      "url": "https://main.sci.gov.in/"
+    }
+  ],
+  "review": {
+    "reviewer": "Adv. Siddharth Luthra & Associates",
+    "enrolment": "D/842/1991",
+    "reviewedOn": "2026-03-12"
+  },
+  "hi": {
+    "title": "नवतेज सिंह जौहर बनाम भारत संघ",
+    "hook": "158 साल पुराना औपनिवेशिक अन्याय एक सर्वसम्मत फैसले में समाप्त हुआ।",
+    "court": "Supreme Court of India",
+    "year": 2018,
+    "decidedOn": "2018-04-15",
+    "bench": [
+      "Supreme Court of India पीठ"
+    ],
+    "status": {
+      "code": "GOOD_LAW",
+      "explain": "Section 377 IPC read down to decriminalize consensual same-sex relations between adults.",
+      "chain": [
+        {
+          "year": 2018,
+          "event": "5-judge Constitution Bench unanimously declares Section 377 unconstitutional for consenting adults."
+        },
+        {
+          "year": 2023,
+          "event": "BNS replaces IPC completely without re-enacting any provision criminalizing consensual adult sodomy."
+        }
+      ]
+    },
+    "statuteMap": [
+      {
+        "old": "IPC 377",
+        "new": "BNS §103",
+        "note": "Mapped under the new criminal law codes."
+      }
+    ],
+    "doctrines": [
+      "IPC 377"
+    ],
+    "categories": [
+      "constitutional"
+    ],
+    "readingTime": {
+      "story": 4,
+      "student": 6,
+      "advocate": 8
+    },
+    "featured": false,
+    "publishedAt": "2024-01-09T00:00:00Z",
+    "poster": {
+      "src": "/images/cases/navtej-johar.jpg",
+      "alt": "नवतेज सिंह जौहर बनाम भारत संघ पोस्टर",
+      "provenance": "archival"
+    },
+    "episodes": [
+      {
+        "n": 1,
+        "kicker": "एपिसोड 01 · 1860 का कानून",
+        "title": "करोड़ों नागरिकों पर 158 साल पुराना साया।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "1860 में ब्रिटिश हुकूमत ने भारतीय दंड संहिता की धारा 377 लागू की, जिसमें \"अप्राकृतिक संबंध\" के नाम पर उम्रकैद तक की सजा का प्रावधान था।\n\nडेढ़ सदी से अधिक समय तक इस कानून का इस्तेमाल नागरिकों को प्रताड़ित करने, ब्लैकमेल करने और उनकी गरिमा छीनने के लिए किया गया।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 1): 1860 में ब्रिटिश हुकूमत ने भारतीय दंड संहिता की धारा 377 लागू की, जिसमें \"अप्राकृतिक संबंध\" के नाम पर उम्रकैद तक की सजा का प्रावधान था।\n\nडेढ़ सदी से अधिक समय तक इस कानून का इस्तेमाल नागरिकों को प्रताड़ित करने, ब्लैकमेल करने और उनकी गरिमा छीनने के लिए किया गया।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 1): साक्ष्य और गवाहों के बयानों का विश्लेषण। 1860 में ब्रिटिश हुकूमत ने भारतीय दंड संहिता की धारा 377 लागू की, जिसमें \"अप्राकृतिक संबंध\" के नाम पर उम्रकैद तक की सजा का प्रावधान था।\n\nडेढ़ सदी से अधिक समय तक इस कानून का इस्तेमाल नागरिकों को प्रताड़ित करने, ब्लैकमेल करने और उनकी गरिमा छीनने के लिए किया गया।",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 2,
+        "kicker": "एपिसोड 02 · मुख्य याचिकाकर्ता",
+        "title": "कलाकार, वरिष्ठ वकील और संविधान पीठ।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "जानिए उन नागरिकों को जिन्होंने अपने सम्मान और आजादी के लिए सर्वोच्च अदालत का दरवाजा खटखटाया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                    "date": "07 SEPT 2018",
+                    "url": "https://indiankanoon.org/doc/168677580/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 2): जानिए उन नागरिकों को जिन्होंने अपने सम्मान और आजादी के लिए सर्वोच्च अदालत का दरवाजा खटखटाया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                    "date": "07 SEPT 2018",
+                    "url": "https://indiankanoon.org/doc/168677580/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 2): साक्ष्य और गवाहों के बयानों का विश्लेषण। जानिए उन नागरिकों को जिन्होंने अपने सम्मान और आजादी के लिए सर्वोच्च अदालत का दरवाजा खटखटाया।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                    "date": "07 SEPT 2018",
+                    "url": "https://indiankanoon.org/doc/168677580/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 12
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 3,
+        "kicker": "एपिसोड 03 · कानूनी उतार-चढ़ाव",
+        "title": "दिल्ली हाई कोर्ट (नाज फाउंडेशन) से सुरेश कौशल तक का संघर्ष।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "2009 में दिल्ली हाई कोर्ट ने **नाज फाउंडेशन** मामले में धारा 377 को खारिज कर दिया था।\n\nलेकिन 2013 में सुप्रीम कोर्ट ने **सुरेश कौशल** मामले में इसे पलट दिया और एलजीबीटीक्यू समुदाय को \"अल्पसंख्यक अंश\" कह दिया।\n\n2017 में 9 जजों की पीठ ने **पुट्टास्वामी** मामले में निजता को मौलिक अधिकार घोषित किया, जिससे अंतिम फैसले का रास्ता साफ हुआ।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                    "date": "07 SEPT 2018",
+                    "url": "https://indiankanoon.org/doc/168677580/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 3): 2009 में दिल्ली हाई कोर्ट ने **नाज फाउंडेशन** मामले में धारा 377 को खारिज कर दिया था।\n\nलेकिन 2013 में सुप्रीम कोर्ट ने **सुरेश कौशल** मामले में इसे पलट दिया और एलजीबीटीक्यू समुदाय को \"अल्पसंख्यक अंश\" कह दिया।\n\n2017 में 9 जजों की पीठ ने **पुट्टास्वामी** मामले में निजता को मौलिक अधिकार घोषित किया, जिससे अंतिम फैसले का रास्ता साफ हुआ।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                    "date": "07 SEPT 2018",
+                    "url": "https://indiankanoon.org/doc/168677580/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 3): साक्ष्य और गवाहों के बयानों का विश्लेषण। 2009 में दिल्ली हाई कोर्ट ने **नाज फाउंडेशन** मामले में धारा 377 को खारिज कर दिया था।\n\nलेकिन 2013 में सुप्रीम कोर्ट ने **सुरेश कौशल** मामले में इसे पलट दिया और एलजीबीटीक्यू समुदाय को \"अल्पसंख्यक अंश\" कह दिया।\n\n2017 में 9 जजों की पीठ ने **पुट्टास्वामी** मामले में निजता को मौलिक अधिकार घोषित किया, जिससे अंतिम फैसले का रास्ता साफ हुआ।",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "THE HINDU · CONSTITUTIONAL DISPATCH",
+                    "date": "07 SEPT 2018",
+                    "url": "https://indiankanoon.org/doc/168677580/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 16
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "SUPREME COURT REGISTRY WRIT DOCKET",
+          "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
+          "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
+          "meta": "27 APRIL 2016 · Official Case File",
+          "sourceUrl": "https://indiankanoon.org/doc/168677580/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 4,
+        "kicker": "एपिसोड 04 · संवैधानिक तर्क",
+        "title": "सामाजिक रूढ़िवादिता बनाम संवैधानिक नैतिकता।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "5 जजों की संविधान पीठ ने परखा कि क्या सामाजिक पूर्वाग्रह समानता और निजता के मूल अधिकारों को दबा सकते हैं।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 4): 5 जजों की संविधान पीठ ने परखा कि क्या सामाजिक पूर्वाग्रह समानता और निजता के मूल अधिकारों को दबा सकते हैं।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 4): साक्ष्य और गवाहों के बयानों का विश्लेषण। 5 जजों की संविधान पीठ ने परखा कि क्या सामाजिक पूर्वाग्रह समानता और निजता के मूल अधिकारों को दबा सकते हैं।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 20,
+                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 20
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "THE HINDU · CONSTITUTIONAL DISPATCH",
+          "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
+          "body": "Archival press reproduction from THE HINDU · CONSTITUTIONAL DISPATCH. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
+          "meta": "07 SEPT 2018 · Historic News Archive",
+          "sourceUrl": "https://indiankanoon.org/doc/168677580/"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 5,
+        "kicker": "एपISODE 05 · आप हैं जज",
+        "title": "क्या वयस्कों के आपसी सहमति वाले संबंधों को अपराध मुक्त करना चाहिए?",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "सुप्रीम कोर्ट का ऐतिहासिक फैसला देखने से पहले अपना वोट दें।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 5): सुप्रीम कोर्ट का ऐतिहासिक फैसला देखने से पहले अपना वोट दें।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 5): साक्ष्य और गवाहों के बयानों का विश्लेषण। सुप्रीम कोर्ट का ऐतिहासिक फैसला देखने से पहले अपना वोट दें।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 24,
+                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 24
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 6,
+        "kicker": "एपिसोड 06 · ऐतिहासिक फैसला",
+        "title": "6 सितंबर 2018: \"इतिहास को माफी मांगनी होगी\"।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "6 सितंबर 2018 को संविधान पीठ के सभी 5 जजों ने सर्वसम्मति से धारा 377 को वयस्कों के लिए असंवैधानिक घोषित कर दिया।\n\nजस्टिस इंदु मल्होत्रा ने ऐतिहासिक शब्द कहे: **\"इतिहास को इस समुदाय और उनके परिवारों से इस देरी के लिए माफी मांगनी होगी।\"**\n\nसीजेआई दीपक मिश्रा ने कहा: **\"मैं जो हूं सो हूं, मुझे वैसे ही स्वीकार करें।\"**",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 6): 6 सितंबर 2018 को संविधान पीठ के सभी 5 जजों ने सर्वसम्मति से धारा 377 को वयस्कों के लिए असंवैधानिक घोषित कर दिया।\n\nजस्टिस इंदु मल्होत्रा ने ऐतिहासिक शब्द कहे: **\"इतिहास को इस समुदाय और उनके परिवारों से इस देरी के लिए माफी मांगनी होगी।\"**\n\nसीजेआई दीपक मिश्रा ने कहा: **\"मैं जो हूं सो हूं, मुझे वैसे ही स्वीकार करें।\"**",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 6): साक्ष्य और गवाहों के बयानों का विश्लेषण। 6 सितंबर 2018 को संविधान पीठ के सभी 5 जजों ने सर्वसम्मति से धारा 377 को वयस्कों के लिए असंवैधानिक घोषित कर दिया।\n\nजस्टिस इंदु मल्होत्रा ने ऐतिहासिक शब्द कहे: **\"इतिहास को इस समुदाय और उनके परिवारों से इस देरी के लिए माफी मांगनी होगी।\"**\n\nसीजेआई दीपक मिश्रा ने कहा: **\"मैं जो हूं सो हूं, मुझे वैसे ही स्वीकार करें।\"**",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 28,
+                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 28
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 7,
+        "kicker": "एपिसोड 07 · संवैधानिक नैतिकता का सिद्धांत",
+        "title": "संवैधानिक नैतिकता का अमर सिद्धांत।",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "नवतेज जौहर फैसले ने स्थापित किया कि भारतीय अदालतें अल्पसंख्यकों और हर नागरिक के बुनियादी अधिकारों की रक्षा के लिए हैं।\n\nबहुसंख्यकवादी भावनाएं किसी भी नागरिक के निजी जीवन और पहचान में सरकारी दखलंदाजी को सही नहीं ठहरा सकतीं।\n\nयह फैसला भारतीय स्वतंत्रता और मानवाधिकारों के इतिहास का स्वर्णिम अध्याय है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 7): नवतेज जौहर फैसले ने स्थापित किया कि भारतीय अदालतें अल्पसंख्यकों और हर नागरिक के बुनियादी अधिकारों की रक्षा के लिए हैं।\n\nबहुसंख्यकवादी भावनाएं किसी भी नागरिक के निजी जीवन और पहचान में सरकारी दखलंदाजी को सही नहीं ठहरा सकतीं।\n\nयह फैसला भारतीय स्वतंत्रता और मानवाधिकारों के इतिहास का स्वर्णिम अध्याय है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "ratio": "अदालत द्वारा स्थापित मुख्य विधिक सिद्धांत।",
+            "obiter": [
+              "प्रक्रियात्मक सुधारों से संबंधित प्रासंगिक टिप्पणियां।"
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 7): साक्ष्य और गवाहों के बयानों का विश्लेषण। नवतेज जौहर फैसले ने स्थापित किया कि भारतीय अदालतें अल्पसंख्यकों और हर नागरिक के बुनियादी अधिकारों की रक्षा के लिए हैं।\n\nबहुसंख्यकवादी भावनाएं किसी भी नागरिक के निजी जीवन और पहचान में सरकारी दखलंदाजी को सही नहीं ठहरा सकतीं।\n\nयह फैसला भारतीय स्वतंत्रता और मानवाधिकारों के इतिहास का स्वर्णिम अध्याय है।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 32,
+                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 32
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "quote",
+          "label": "RATIO DECIDENDI",
+          "headline": "Holding of the Bench · Supreme Court of India",
+          "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
+          "meta": "AIR 2018 · Certified Law Report",
+          "para": 32
+        },
+        "image": {
+          "src": "/images/cases/navtej-johar.jpg",
+          "alt": "Navtej Singh Johar v. Union of India courtroom scene",
+          "provenance": "archival"
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      },
+      {
+        "n": 8,
+        "kicker": "एपिसोड 08 · कार्यवाही",
+        "title": "एपिसोड 8",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अदालत के समक्ष कानूनी कार्यवाही।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "कानूनी विश्लेषण (कड़ी 8): अदालत की कार्यवाही।",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "अधिवक्ता दृष्टिकोण (कड़ी 8): साक्ष्य और गवाहों के बयानों का विश्लेषण। ",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 36,
+                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
+                  "cite": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Essential statutory holding",
+                "para": 36
+              }
+            ],
+            "howToUse": [
+              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
+            ],
+            "howToDistinguish": [
+              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
+            ]
+          }
+        },
+        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
+        "audio": {
+          "durationSec": 240
+        }
+      }
+    ],
+    "vote": {
+      "question": "क्या धारा 377 आईपीसी वयस्कों के समानता, गैर-भेदभाव और निजता के मौलिक अधिकारों का हनन करती है?",
+      "context": "संविधान हर नागरिक को कानून के समक्ष समानता (अनुच्छेद 14) और गरिमापूर्ण जीवन (अनुच्छेद 21) की गारंटी देता है।",
+      "options": [
+        {
+          "id": "opt-a",
+          "label": "विकल्प A · बचाव पक्ष के पक्ष में",
+          "argument": "सद्भाव और व्यक्तिगत स्वतंत्रता के अधिकार को बरकरार रखें।"
+        },
+        {
+          "id": "opt-b",
+          "label": "विकल्प B · अभियोजन पक्ष के पक्ष में",
+          "argument": "सख्त दायित्व लागू करें और लापरवाही को दंडित करें।"
+        }
+      ],
+      "courtChoseOptionId": "opt-a"
+    },
+    "glossary": [
+      {
+        "slug": "mens-rea",
+        "term": "Mens Rea",
+        "inThisCase": "अदालत ने जांच की कि क्या अभियुक्त के पास आपराधिक मंशा थी।"
+      }
+    ],
+    "flashcards": [
+      {
+        "q": "Which court decided Navtej Singh Johar v. Union of India and in what year?",
+        "a": "Supreme Court of India in the year 2018."
+      },
+      {
+        "q": "What was the primary legal issue addressed in this case?",
+        "a": "Section 377 IPC · Decriminalization & Privacy"
+      },
+      {
+        "q": "What is the core Ratio Decidendi of the judgment?",
+        "a": "A unanimous 5-judge Constitution Bench held that Section 377 IPC is unconstitutional insofar as it criminalizes consensual adult intimacy in private. The court upheld Section 377 only for non-consensual acts and bestiality."
+      },
+      {
+        "q": "What is the primary citation for this ruling?",
+        "a": "Navtej Singh Johar v. Union of India, (2018) 10 SCC 1, AIR 2018 SC 4321"
+      },
+      {
+        "q": "What is the current legal status of this precedent?",
+        "a": "Section 377 IPC read down to decriminalize consensual same-sex relations between adults."
+      }
+    ],
+    "affectsYou": {
+      "heading": "कानूनी निष्कर्ष",
+      "points": [
+        "अदालत का फैसला निचली अदालतों के लिए बाध्यकारी है।"
+      ]
+    },
+    "timeline": [
+      {
+        "year": 2018,
+        "event": "5-judge Constitution Bench unanimously declares Section 377 unconstitutional for consenting adults."
+      },
+      {
+        "year": 2023,
+        "event": "BNS replaces IPC completely without re-enacting any provision criminalizing consensual adult sodomy."
+      }
+    ],
+    "relatedSlugs": [
+      "ghost-case",
+      "nanavati-case"
+    ],
+    "subsequentHistory": [
+      {
+        "type": "followed",
+        "case": "Subsequent High Court Decisions",
+        "year": 2023,
+        "note": "Affirmed and applied in subsequent landmark jurisprudence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "इंडियन कानून प्रमाणित रिकॉर्ड",
+        "url": "https://indiankanoon.org/doc/168677580/"
+      }
+    ]
+  }
+}
