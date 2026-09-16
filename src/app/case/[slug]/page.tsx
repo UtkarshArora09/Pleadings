@@ -1,10 +1,9 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { getCaseBySlug, getAllCases, getAllCaseSlugs } from '@/lib/cases';
 import { CaseStore } from '@/lib/db/caseStore';
 import { CaseFile } from '@/types/case';
-import { CaseViewer } from '@/components/case/CaseViewer';
+import { CasePageClient } from '@/components/case/CasePageClient';
 
 interface CasePageProps {
   params: Promise<{
@@ -82,9 +81,10 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   const caseItem = getCaseForPage(slug);
 
   if (!caseItem) {
+    const humanTitle = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     return {
-      title: 'Case Not Found | Pleadings',
-      description: 'The requested landmark case record was not found.'
+      title: `${humanTitle} | Pleadings`,
+      description: `Episodic courtroom experience and landmark legal breakdown for ${humanTitle}.`
     };
   }
 
@@ -124,12 +124,8 @@ export default async function CasePage({ params }: CasePageProps) {
   const { slug } = await params;
   const currentCase = getCaseForPage(slug);
 
-  if (!currentCase) {
-    notFound();
-  }
-
   const allCases = getAllCases();
-  const currentIndex = allCases.findIndex((c) => c.slug === currentCase.slug);
+  const currentIndex = currentCase ? allCases.findIndex((c) => c.slug === currentCase.slug) : -1;
   const nextSlug = currentIndex >= 0 && currentIndex < allCases.length - 1
     ? allCases[currentIndex + 1].slug
     : allCases[0]?.slug;
@@ -137,17 +133,17 @@ export default async function CasePage({ params }: CasePageProps) {
     ? allCases[currentIndex - 1].slug
     : allCases[allCases.length - 1]?.slug;
 
-  const jsonLd = {
+  const jsonLd = currentCase ? {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: currentCase.title,
     description: currentCase.hook,
     datePublished: currentCase.publishedAt,
-    dateModified: currentCase.review.reviewedOn,
+    dateModified: currentCase.review?.reviewedOn,
     url: `https://pleadings.in/case/${currentCase.slug}`,
     author: {
       '@type': 'Person',
-      name: currentCase.review.reviewer
+      name: currentCase.review?.reviewer || 'Advocate'
     },
     publisher: {
       '@type': 'Organization',
@@ -159,17 +155,20 @@ export default async function CasePage({ params }: CasePageProps) {
       name: currentCase.citations.primary,
       legislationJurisdiction: 'IN'
     }
-  };
+  } : null;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <React.Suspense fallback={<div className="min-h-screen bg-[#0E1016] text-[#D4AF37] flex items-center justify-center font-mono">Loading case dossier...</div>}>
-        <CaseViewer
-          caseData={currentCase}
+        <CasePageClient
+          slug={slug}
+          initialCase={currentCase}
           nextSlug={nextSlug}
           prevSlug={prevSlug}
         />
@@ -177,3 +176,4 @@ export default async function CasePage({ params }: CasePageProps) {
     </>
   );
 }
+

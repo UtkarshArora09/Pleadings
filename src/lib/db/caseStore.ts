@@ -1,28 +1,48 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import { CaseData, CaseStatus } from '@/types';
 import { CASES_DATA } from '@/data/cases';
 
 const DATA_DIR = path.join(process.cwd(), 'src', 'data');
-const DB_FILE_PATH = path.join(DATA_DIR, 'dynamicCases.json');
+const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
+const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
 
 // In-memory cache for fast lookups
 let cachedCases: CaseData[] | null = null;
 
 function ensureInitialized(): CaseData[] {
-  if (cachedCases) return cachedCases;
+  if (cachedCases && cachedCases.length > 0) return cachedCases;
 
+  // 1. Try reading from TMP_DB_PATH (written by serverless functions)
   try {
-    if (fs.existsSync(DB_FILE_PATH)) {
-      const raw = fs.readFileSync(DB_FILE_PATH, 'utf-8');
-      cachedCases = JSON.parse(raw);
-      return cachedCases || [];
+    if (fs.existsSync(TMP_DB_PATH)) {
+      const raw = fs.readFileSync(TMP_DB_PATH, 'utf-8');
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        cachedCases = parsed;
+        return cachedCases;
+      }
     }
-  } catch (error) {
-    console.error('Error reading dynamicCases.json, falling back to seed data:', error);
+  } catch (tmpErr) {
+    // continue
   }
 
-  // Bootstrap with the 10 landmark cases from CASES_DATA
+  // 2. Try reading from PRIMARY_DB_PATH
+  try {
+    if (fs.existsSync(PRIMARY_DB_PATH)) {
+      const raw = fs.readFileSync(PRIMARY_DB_PATH, 'utf-8');
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        cachedCases = parsed;
+        return cachedCases;
+      }
+    }
+  } catch (error) {
+    console.warn('Error reading dynamicCases.json, falling back to seed data:', error);
+  }
+
+  // 3. Bootstrap with the 10 landmark cases from CASES_DATA
   const seedCases: CaseData[] = CASES_DATA.map((c, idx) => ({
     ...c,
     status: 'PUBLISHED' as CaseStatus,
@@ -30,33 +50,38 @@ function ensureInitialized(): CaseData[] {
     updatedAt: new Date().toISOString(),
   }));
 
-  try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    fs.writeFileSync(DB_FILE_PATH, JSON.stringify(seedCases, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Error writing initial dynamicCases.json:', err);
-  }
-
   cachedCases = seedCases;
   return cachedCases;
 }
 
 function persistCases(cases: CaseData[]): boolean {
   cachedCases = cases;
+  let saved = false;
+
+  // Try writing to primary path
   try {
     if (!fs.existsSync(DATA_DIR)) {
       fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-    const tempFile = `${DB_FILE_PATH}.tmp`;
+    const tempFile = `${PRIMARY_DB_PATH}.tmp`;
     fs.writeFileSync(tempFile, JSON.stringify(cases, null, 2), 'utf-8');
-    fs.renameSync(tempFile, DB_FILE_PATH);
-    return true;
-  } catch (error) {
-    console.error('Failed to persist cases to disk:', error);
-    return false;
+    fs.renameSync(tempFile, PRIMARY_DB_PATH);
+    saved = true;
+  } catch {
+    // Primary path is read-only in Vercel serverless
   }
+
+  // Always write to /tmp on serverless
+  try {
+    const tmpTemp = `${TMP_DB_PATH}.tmp`;
+    fs.writeFileSync(tmpTemp, JSON.stringify(cases, null, 2), 'utf-8');
+    fs.renameSync(tmpTemp, TMP_DB_PATH);
+    saved = true;
+  } catch (tmpErr) {
+    console.warn('Failed to write to /tmp dynamic cases:', tmpErr);
+  }
+
+  return saved;
 }
 
 export function normalizeCaseData(raw: any): CaseData {
