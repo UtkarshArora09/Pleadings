@@ -53,7 +53,7 @@ const ExhibitSchema = z.object({
       message: "Reconstruction exhibits must NEVER have a 'docNumber' (fabricated document numbers are forbidden)."
     });
   }
-  if (data.kind === 'record' && !data.sourceUrl) {
+  if (data.kind === 'record' && (!data.sourceUrl || data.sourceUrl.trim() === '')) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       message: "Record exhibits MUST have a 'sourceUrl'."

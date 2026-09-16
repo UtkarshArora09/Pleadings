@@ -71,6 +71,78 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     setTimeout(() => setCopiedPromptId(null), 2500);
   };
 
+async function compressImageForUpload(
+  file: File,
+  maxWidth = 1920,
+  maxHeight = 1080,
+  quality = 0.85
+): Promise<{ blob: Blob; dataUrl: string; fileName: string }> {
+  return new Promise((resolve) => {
+    if (file.type === 'image/svg+xml') {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = (reader.result as string) || '';
+        resolve({ blob: file, dataUrl, fileName: file.name });
+      };
+      reader.onerror = () => resolve({ blob: file, dataUrl: '', fileName: file.name });
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (readerEvent) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth || height > maxHeight) {
+          const ratio = Math.min(maxWidth / width, maxHeight / height);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          const dataUrl = (readerEvent.target?.result as string) || '';
+          resolve({ blob: file, dataUrl, fileName: file.name });
+          return;
+        }
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const outputType = 'image/jpeg';
+        const dataUrl = canvas.toDataURL(outputType, quality);
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || 'photo';
+              resolve({ blob, dataUrl, fileName: `${baseName}.jpg` });
+            } else {
+              resolve({ blob: file, dataUrl, fileName: file.name });
+            }
+          },
+          outputType,
+          quality
+        );
+      };
+      img.onerror = () => {
+        const dataUrl = (readerEvent.target?.result as string) || '';
+        resolve({ blob: file, dataUrl, fileName: file.name });
+      };
+      img.src = (readerEvent.target?.result as string) || '';
+    };
+    reader.onerror = () => resolve({ blob: file, dataUrl: '', fileName: file.name });
+    reader.readAsDataURL(file);
+  });
+}
+
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'poster' | 'exhibit' | 'verdict') => {
     const file = e.target.files?.[0];
     if (!file || !caseData) return;
@@ -79,19 +151,38 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
       setUploadingTarget(target);
       setImageError(null);
 
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('slug', slug);
-      formData.append('type', target);
+      // Fast in-browser compression to ensure payloads stay under Vercel's limits
+      const { blob, dataUrl, fileName } = await compressImageForUpload(file);
+      let finalUrl = dataUrl;
 
-      const res = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      try {
+        const formData = new FormData();
+        formData.append('file', blob, fileName);
+        formData.append('slug', slug);
+        formData.append('type', target);
 
-      const data = await res.json();
-      if (!data.success) {
-        throw new Error(data.error || 'Upload failed');
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (res.ok) {
+          const text = await res.text();
+          try {
+            const data = JSON.parse(text);
+            if (data.success && data.url) {
+              finalUrl = data.url;
+            }
+          } catch {
+            // keep compressed dataUrl
+          }
+        }
+      } catch (uploadErr) {
+        console.warn('Upload network error, using compressed Data URI fallback:', uploadErr);
+      }
+
+      if (!finalUrl) {
+        throw new Error('Image could not be read. Please try another image.');
       }
 
       const syncImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
@@ -172,7 +263,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         return updated;
       };
 
-      const updated = syncImageUpdate(caseData, data.url, target);
+      const updated = syncImageUpdate(caseData, finalUrl, target);
       setCaseData(updated);
       await handleSave(updated);
     } catch (err: unknown) {
@@ -200,6 +291,11 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
           aspectRatio: '16:9',
         }),
       });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`AI generation error (${res.status}): ${text.slice(0, 100)}`);
+      }
 
       const data = await res.json();
       if (!data.success) {

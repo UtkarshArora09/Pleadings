@@ -186,7 +186,7 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
     genre,
     statuteSections,
     factsSummary,
-    judgmentUrl = 'https://indiankanoon.org/',
+    judgmentUrl: rawJudgmentUrl,
     judgmentText = '',
     additionalNotes = '',
     reviewer = 'Adv. Girish Kr. Srivastava',
@@ -194,6 +194,10 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
     bench = [`Hon'ble Bench of the ${court}`],
     decidedOn = `${year}-05-15`,
   } = payload;
+
+  const judgmentUrl = (rawJudgmentUrl && typeof rawJudgmentUrl === 'string' && rawJudgmentUrl.trim() !== '')
+    ? rawJudgmentUrl.trim()
+    : 'https://indiankanoon.org/';
 
   const rawSlug = shortTitle || title;
   const slug = slugify(rawSlug);
