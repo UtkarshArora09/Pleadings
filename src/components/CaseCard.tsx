@@ -32,8 +32,10 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
   }, [caseData.slug]);
 
   const activeContent = language === 'hi' && caseData.hi ? caseData.hi : caseData;
-  const displayTitle = activeContent.title;
-  const displayHook = activeContent.hook;
+  const rawTitle = activeContent.title;
+  const displayTitle = typeof rawTitle === 'string' ? rawTitle : ((rawTitle as any)?.[language] || (rawTitle as any)?.en || caseData.slug);
+  const rawHook = activeContent.hook;
+  const displayHook = typeof rawHook === 'string' ? rawHook : ((rawHook as any)?.[language] || (rawHook as any)?.en || '');
   const doctrine = (activeContent.doctrines && activeContent.doctrines[0]) || 'Constitutional Law';
   const readTime = `${caseData.readingTime?.story || 5} min`;
   const bookmarked = isBookmarked(caseData.slug);

@@ -147,6 +147,8 @@ export interface StoryPanel {
     en: string;
     hi: string;
   };
+  image?: string;
+  backgroundImage?: string;
   characters?: CharacterItem[];
   prosecutionArgs?: ArgumentSide;
   defenceArgs?: ArgumentSide;
@@ -221,6 +223,11 @@ export interface CaseData {
   judgmentUrl: string;
   watermark: string;
   bannerImage: string;
+  poster?: {
+    src: string;
+    alt: string;
+    provenance: 'archival' | 'illustration';
+  };
   matchRate: number; // e.g. 98 for 98% Match
   maturityRating: string; // e.g. "U/A 16+" or "U/A 13+"
   rank: number; // e.g. 1 for Top 10 #1

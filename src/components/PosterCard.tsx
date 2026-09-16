@@ -16,21 +16,32 @@ export function PosterCard({ caseData }: PosterCardProps) {
   const bookmarked = isBookmarked(caseData.slug);
 
   // Normalizing fields
-  const title = typeof (caseData as CaseFile).title === 'string'
-    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.title : (caseData as CaseFile).title)
-    : (caseData as CaseData).title?.[language] || (caseData as CaseFile).title;
+  const rawTitle = (caseData as any).title;
+  const title = typeof rawTitle === 'string'
+    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.title : rawTitle)
+    : (rawTitle?.[language] || rawTitle?.en || caseData.slug);
 
-  const hook = typeof (caseData as CaseFile).hook === 'string'
-    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.hook : (caseData as CaseFile).hook)
-    : (caseData as CaseData).blurb?.[language] || (caseData as CaseFile).hook;
+  const rawHook = (caseData as any).hook || (caseData as any).blurb;
+  const hook = typeof rawHook === 'string'
+    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.hook : rawHook)
+    : (rawHook?.[language] || rawHook?.en || '');
 
-  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as CaseData).bannerImage || '/images/cases/ghost-case.jpg';
-  const categoryTag = (caseData as any).tag || (caseData as CaseData).categoryTag || (caseData as CaseFile).doctrines?.[0] || 'IPC';
-  const readTimeStr = typeof (caseData as CaseFile).readingTime?.story === 'number'
-    ? `${(caseData as CaseFile).readingTime.story} min read`
-    : (caseData as CaseData).readTime?.[language] || '5 min read';
+  const rawTag = (caseData as any).tag || (caseData as any).categoryTag || (caseData as CaseFile).doctrines?.[0] || 'IPC';
+  const categoryTag = typeof rawTag === 'string' ? rawTag : (rawTag?.[language] || rawTag?.en || 'IPC');
 
-  const isCrime = String((caseData as any).tag || (caseData as CaseData).genre || (caseData as CaseFile).doctrines?.[0] || '').toLowerCase().includes('ipc') || (caseData as CaseData).genre === 'crime';
+  const rawReadTime = (caseData as CaseFile).readingTime?.story ?? (caseData as any).readTime;
+  const readTimeStr = typeof rawReadTime === 'number'
+    ? `${rawReadTime} min read`
+    : typeof rawReadTime === 'string'
+    ? rawReadTime
+    : ((rawReadTime as any)?.[language] || (rawReadTime as any)?.en || '5 min read');
+
+  const rawCourt = (caseData as any).court;
+  const displayCourt = typeof rawCourt === 'string' ? rawCourt : ((rawCourt as any)?.[language] || (rawCourt as any)?.en || 'Supreme Court of India');
+
+  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as any).bannerImage || '/images/cases/ghost-case.jpg';
+
+  const isCrime = String(categoryTag).toLowerCase().includes('ipc') || (caseData as any).genre === 'crime';
   const accentColor = isCrime ? '#E50914' : '#D4AF37';
 
   const defaultFallback = '/images/cases/ghost-case.jpg';
@@ -105,7 +116,7 @@ export function PosterCard({ caseData }: PosterCardProps) {
           <div className="flex-1 flex flex-col justify-between">
             <div>
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#D4AF37] block mb-1 font-semibold truncate">
-                {caseData.court}
+                {displayCourt}
               </span>
 
               <h3 className="font-anton text-xl text-white uppercase tracking-tight leading-snug mb-2 group-hover:text-[#D4AF37] transition-colors line-clamp-1">

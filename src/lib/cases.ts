@@ -10,6 +10,7 @@ import shahBano from '@/content/cases/shah-bano.json';
 import vishakaCase from '@/content/cases/vishaka-case.json';
 import manekaGandhi from '@/content/cases/maneka-gandhi.json';
 import navtejJohar from '@/content/cases/navtej-johar.json';
+import rightToPrivacyCase from '@/content/cases/right-to-privacy-case.json';
 
 const ALL_CASES: CaseFile[] = [
   ghostCase as unknown as CaseFile,
@@ -22,6 +23,7 @@ const ALL_CASES: CaseFile[] = [
   vishakaCase as unknown as CaseFile,
   manekaGandhi as unknown as CaseFile,
   navtejJohar as unknown as CaseFile,
+  rightToPrivacyCase as unknown as CaseFile,
 ];
 
 export function getAllCases(): CaseFile[] {
@@ -42,10 +44,26 @@ export function getFeaturedCases(): CaseFile[] {
   return ALL_CASES.filter((c) => c.featured).slice(0, 5);
 }
 
+export function getTop10Cases(): CaseFile[] {
+  return [...ALL_CASES]
+    .filter((c) => {
+      const r = (c as any).rank;
+      if (typeof r === 'number' && r > 10) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      const rankA = typeof (a as any).rank === 'number' ? (a as any).rank : 100;
+      const rankB = typeof (b as any).rank === 'number' ? (b as any).rank : 100;
+      return rankA - rankB;
+    })
+    .slice(0, 10);
+}
+
 export function getLatestCases(): CaseFile[] {
   return [...ALL_CASES]
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime())
     .slice(0, 5);
 }
+
 
 

@@ -10,6 +10,8 @@ interface CasePageProps {
   }>;
 }
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const slugs = getAllCaseSlugs();
   return slugs.map((slug) => ({ slug }));

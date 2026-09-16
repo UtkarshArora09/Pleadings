@@ -143,7 +143,7 @@ export function CourtroomExperienceShowcase() {
               href="/browse"
               className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:underline"
             >
-              {language === 'en' ? 'Browse All 10 Cases →' : 'सभी 10 केस देखें →'}
+              {language === 'en' ? 'Browse Cases →' : 'सभी केस देखें →'}
             </Link>
           </div>
         </div>

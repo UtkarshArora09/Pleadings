@@ -18,15 +18,25 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
   const bookmarked = isBookmarked(caseData.slug);
 
   // Normalizing fields between CaseFile and CaseData
-  const title = typeof (caseData as CaseFile).title === 'string'
-    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.title : (caseData as CaseFile).title)
-    : (caseData as CaseData).title?.[language] || (caseData as CaseFile).title;
+  const rawTitle = (caseData as any).title;
+  const title = typeof rawTitle === 'string'
+    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.title : rawTitle)
+    : (rawTitle?.[language] || rawTitle?.en || caseData.slug);
 
-  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as CaseData).bannerImage || '/images/cases/ghost-case.jpg';
-  const categoryTag = (caseData as any).tag || (caseData as CaseData).categoryTag || (caseData as CaseFile).doctrines?.[0] || 'IPC';
-  const readTimeStr = typeof (caseData as CaseFile).readingTime?.story === 'number'
-    ? `${(caseData as CaseFile).readingTime.story} min read`
-    : (caseData as CaseData).readTime?.[language] || '5 min read';
+  const rawTag = (caseData as any).tag || (caseData as any).categoryTag || (caseData as CaseFile).doctrines?.[0] || 'IPC';
+  const categoryTag = typeof rawTag === 'string' ? rawTag : (rawTag?.[language] || rawTag?.en || 'IPC');
+
+  const rawReadTime = (caseData as CaseFile).readingTime?.story ?? (caseData as any).readTime;
+  const readTimeStr = typeof rawReadTime === 'number'
+    ? `${rawReadTime} min read`
+    : typeof rawReadTime === 'string'
+    ? rawReadTime
+    : ((rawReadTime as any)?.[language] || (rawReadTime as any)?.en || '5 min read');
+
+  const rawCourt = (caseData as any).court;
+  const displayCourt = typeof rawCourt === 'string' ? rawCourt : ((rawCourt as any)?.[language] || (rawCourt as any)?.en || 'Supreme Court of India');
+
+  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as any).bannerImage || '/images/cases/ghost-case.jpg';
 
   const defaultFallback = '/images/cases/ghost-case.jpg';
   const [imgSrc, setImgSrc] = React.useState<string>(bannerImg);
@@ -94,7 +104,7 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
           {/* Bottom Title & Meta */}
           <div className="absolute inset-x-0 bottom-0 p-3.5 z-10">
             <span className="text-[9px] font-mono text-[#D4AF37] font-bold tracking-widest uppercase block mb-0.5">
-              {caseData.court}
+              {displayCourt}
             </span>
             <h3 className="font-anton text-base sm:text-lg text-white uppercase tracking-tight leading-tight line-clamp-2 group-hover:text-[#D4AF37] transition-colors">
               {title}

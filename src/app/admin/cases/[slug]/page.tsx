@@ -20,6 +20,11 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'panels' | 'brief' | 'images'>('overview');
   const [activeLanguage, setActiveLanguage] = useState<'en' | 'hi'>('en');
 
+  const [copiedPromptId, setCopiedPromptId] = useState<string | null>(null);
+  const [uploadingTarget, setUploadingTarget] = useState<string | null>(null);
+  const [generatingTarget, setGeneratingTarget] = useState<string | null>(null);
+  const [imageError, setImageError] = useState<string | null>(null);
+
   useEffect(() => {
     async function loadCase() {
       try {
@@ -60,6 +65,236 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     }
   };
 
+  const copyPrompt = (id: string, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedPromptId(id);
+    setTimeout(() => setCopiedPromptId(null), 2500);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'poster' | 'exhibit' | 'verdict') => {
+    const file = e.target.files?.[0];
+    if (!file || !caseData) return;
+
+    try {
+      setUploadingTarget(target);
+      setImageError(null);
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('slug', slug);
+      formData.append('type', target);
+
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!data.success) {
+        throw new Error(data.error || 'Upload failed');
+      }
+
+      const syncImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
+        let updated = { ...prev };
+        const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
+
+        if (tgt === 'poster') {
+          updated.bannerImage = url;
+          updated.poster = { src: url, alt: `${titleStr} cover poster`, provenance: 'illustration' as const };
+          if (updated.episodes?.[0]) {
+            const epList = [...updated.episodes];
+            epList[0] = { ...epList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            updated.episodes = epList;
+          }
+          if (updated.hi?.episodes?.[0]) {
+            const hiEpList = [...updated.hi.episodes];
+            hiEpList[0] = { ...hiEpList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            updated.hi = { ...updated.hi, episodes: hiEpList };
+          }
+        } else if (tgt === 'exhibit') {
+          if (updated.panels?.[1]) {
+            const panels = [...updated.panels];
+            panels[1] = {
+              ...panels[1],
+              photoExhibitSrc: url,
+              image: url,
+              evidence: panels[1].evidence ? { ...panels[1].evidence, imageSrc: url } : undefined,
+            };
+            updated.panels = panels;
+          }
+          if (updated.episodes?.[1]) {
+            const epList = [...updated.episodes];
+            epList[1] = {
+              ...epList[1],
+              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
+              exhibit: epList[1].exhibit ? { ...epList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
+            };
+            updated.episodes = epList;
+          }
+          if (updated.hi?.episodes?.[1]) {
+            const hiEpList = [...updated.hi.episodes];
+            hiEpList[1] = {
+              ...hiEpList[1],
+              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
+              exhibit: hiEpList[1].exhibit ? { ...hiEpList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
+            };
+            updated.hi = { ...updated.hi, episodes: hiEpList };
+          }
+        } else if (tgt === 'verdict') {
+          if (updated.panels?.[6]) {
+            const panels = [...updated.panels];
+            panels[6] = {
+              ...panels[6],
+              photoExhibitSrc: url,
+              image: url,
+            };
+            updated.panels = panels;
+          }
+          if (updated.episodes?.[6]) {
+            const epList = [...updated.episodes];
+            epList[6] = {
+              ...epList[6],
+              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
+              exhibit: epList[6].exhibit ? { ...epList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
+            };
+            updated.episodes = epList;
+          }
+          if (updated.hi?.episodes?.[6]) {
+            const hiEpList = [...updated.hi.episodes];
+            hiEpList[6] = {
+              ...hiEpList[6],
+              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
+              exhibit: hiEpList[6].exhibit ? { ...hiEpList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
+            };
+            updated.hi = { ...updated.hi, episodes: hiEpList };
+          }
+        }
+        return updated;
+      };
+
+      const updated = syncImageUpdate(caseData, data.url, target);
+      setCaseData(updated);
+      await handleSave(updated);
+    } catch (err: unknown) {
+      console.error('File upload error:', err);
+      setImageError(err instanceof Error ? err.message : 'Image upload failed');
+    } finally {
+      setUploadingTarget(null);
+    }
+  };
+
+  const handleGeminiGenerate = async (prompt: string, target: 'poster' | 'exhibit' | 'verdict') => {
+    if (!caseData || !prompt) return;
+
+    try {
+      setGeneratingTarget(target);
+      setImageError(null);
+
+      const res = await fetch('/api/admin/generate-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt,
+          slug,
+          type: target,
+          aspectRatio: '16:9',
+        }),
+      });
+
+      const data = await res.json();
+      if (!data.success) {
+        throw new Error(data.error || 'AI Generation failed');
+      }
+
+      const syncImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
+        let updated = { ...prev };
+        const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
+
+        if (tgt === 'poster') {
+          updated.bannerImage = url;
+          updated.poster = { src: url, alt: `${titleStr} cover poster`, provenance: 'illustration' as const };
+          if (updated.episodes?.[0]) {
+            const epList = [...updated.episodes];
+            epList[0] = { ...epList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            updated.episodes = epList;
+          }
+          if (updated.hi?.episodes?.[0]) {
+            const hiEpList = [...updated.hi.episodes];
+            hiEpList[0] = { ...hiEpList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            updated.hi = { ...updated.hi, episodes: hiEpList };
+          }
+        } else if (tgt === 'exhibit') {
+          if (updated.panels?.[1]) {
+            const panels = [...updated.panels];
+            panels[1] = {
+              ...panels[1],
+              photoExhibitSrc: url,
+              image: url,
+              evidence: panels[1].evidence ? { ...panels[1].evidence, imageSrc: url } : undefined,
+            };
+            updated.panels = panels;
+          }
+          if (updated.episodes?.[1]) {
+            const epList = [...updated.episodes];
+            epList[1] = {
+              ...epList[1],
+              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
+              exhibit: epList[1].exhibit ? { ...epList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
+            };
+            updated.episodes = epList;
+          }
+          if (updated.hi?.episodes?.[1]) {
+            const hiEpList = [...updated.hi.episodes];
+            hiEpList[1] = {
+              ...hiEpList[1],
+              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
+              exhibit: hiEpList[1].exhibit ? { ...hiEpList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
+            };
+            updated.hi = { ...updated.hi, episodes: hiEpList };
+          }
+        } else if (tgt === 'verdict') {
+          if (updated.panels?.[6]) {
+            const panels = [...updated.panels];
+            panels[6] = {
+              ...panels[6],
+              photoExhibitSrc: url,
+              image: url,
+            };
+            updated.panels = panels;
+          }
+          if (updated.episodes?.[6]) {
+            const epList = [...updated.episodes];
+            epList[6] = {
+              ...epList[6],
+              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
+              exhibit: epList[6].exhibit ? { ...epList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
+            };
+            updated.episodes = epList;
+          }
+          if (updated.hi?.episodes?.[6]) {
+            const hiEpList = [...updated.hi.episodes];
+            hiEpList[6] = {
+              ...hiEpList[6],
+              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
+              exhibit: hiEpList[6].exhibit ? { ...hiEpList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
+            };
+            updated.hi = { ...updated.hi, episodes: hiEpList };
+          }
+        }
+        return updated;
+      };
+
+      const updated = syncImageUpdate(caseData, data.url, target);
+      setCaseData(updated);
+      await handleSave(updated);
+    } catch (err: unknown) {
+      console.error('Gemini image generation error:', err);
+      setImageError(err instanceof Error ? err.message : 'Gemini image generation failed');
+    } finally {
+      setGeneratingTarget(null);
+    }
+  };
+
   const handleTogglePublish = async () => {
     if (!caseData) return;
     try {
@@ -90,6 +325,13 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   }
 
   const isPublished = caseData.status === 'PUBLISHED';
+  const caseTitleEn = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.en || caseData.slug);
+  const caseTitleDisplay = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.[activeLanguage] || caseData.title?.en || caseData.slug);
+
+  // Pre-craft prompts based on case metadata
+  const posterPrompt = `Dramatic 16:9 cinematic archival billboard for Indian court case "${caseTitleEn}", dealing with ${caseData.categoryTag || 'constitutional law'}, warm amber tungsten lighting, rich dark shadows, retro legal documentary aesthetic, 8k resolution.`;
+  const exhibitPrompt = `Archival documentary photograph of 1970s legal case file and investigative records for ${caseTitleEn}, stamped official memo, retro 35mm film grain, sepia tones.`;
+  const verdictPrompt = `Indian Supreme Court Constitution Bench delivering landmark ruling in ${caseTitleEn}, courtroom bench with wooden gavel, advocates in black robes listening intently, cinematic wide shot 16:9.`;
 
   return (
     <div className="space-y-6 animate-fadeIn pb-16">
@@ -114,7 +356,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
           </div>
 
           <h1 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight line-clamp-1">
-            {caseData.title[activeLanguage] || caseData.title.en}
+            {caseTitleDisplay}
           </h1>
           <p className="text-xs text-[#8c887e] font-mono">
             {caseData.court} · {caseData.year} · {caseData.citation}
@@ -150,7 +392,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
           <div className="flex items-center gap-1 bg-black/40 border border-white/10 p-0.5 rounded-xs">
             <button
               onClick={() => setActiveLanguage('en')}
-              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all ${
+              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all cursor-pointer ${
                 activeLanguage === 'en' ? 'bg-[#D4AF37] text-[#0E1016]' : 'text-[#a9a49a] hover:text-white'
               }`}
             >
@@ -158,7 +400,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             </button>
             <button
               onClick={() => setActiveLanguage('hi')}
-              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all ${
+              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all cursor-pointer ${
                 activeLanguage === 'hi' ? 'bg-[#D4AF37] text-[#0E1016]' : 'text-[#a9a49a] hover:text-white'
               }`}
             >
@@ -200,13 +442,22 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         </div>
       </div>
 
+      {imageError && (
+        <div className="p-4 bg-red-500/15 border border-red-500/40 text-red-300 rounded-xs text-xs font-mono flex items-center justify-between">
+          <span>✕ {imageError}</span>
+          <button onClick={() => setImageError(null)} className="text-white hover:underline cursor-pointer ml-4">
+            Dismiss
+          </button>
+        </div>
+      )}
+
       {/* Tabs */}
       <div className="flex items-center gap-2 border-b border-white/10 pb-2 overflow-x-auto">
         {[
-          { id: 'overview', label: '1. Overview & Billboard' },
-          { id: 'panels', label: `2. Story Episodes (${caseData.panels.length})` },
+          { id: 'overview', label: '1. Overview & Metadata' },
+          { id: 'panels', label: `2. Story Episodes (${caseData.panels?.length || 8})` },
           { id: 'brief', label: '3. Legal Brief & Certified Ratio' },
-          { id: 'images', label: '4. AI Visuals & Prompts' },
+          { id: 'images', label: '4. AI Visuals & Dual Generator' },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -232,11 +483,11 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
               </label>
               <input
                 type="text"
-                value={caseData.title[activeLanguage] || ''}
+                value={(typeof caseData.title === 'string' ? caseData.title : caseData.title?.[activeLanguage]) || ''}
                 onChange={(e) =>
                   setCaseData({
                     ...caseData,
-                    title: { ...caseData.title, [activeLanguage]: e.target.value },
+                    title: { ...(typeof caseData.title === 'object' ? caseData.title : { en: String(caseData.title || ''), hi: String(caseData.title || '') }), [activeLanguage]: e.target.value },
                   })
                 }
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
@@ -261,7 +512,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
               <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Court</label>
               <input
                 type="text"
-                value={caseData.court}
+                value={caseData.court || ''}
                 onChange={(e) => setCaseData({ ...caseData, court: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
               />
@@ -271,7 +522,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
               <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Year</label>
               <input
                 type="number"
-                value={caseData.year}
+                value={caseData.year || 2020}
                 onChange={(e) => setCaseData({ ...caseData, year: parseInt(e.target.value) || 2020 })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
               />
@@ -280,7 +531,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             <div>
               <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Legal Genre</label>
               <select
-                value={caseData.genre}
+                value={caseData.genre || 'constitutional'}
                 onChange={(e) => setCaseData({ ...caseData, genre: e.target.value as any })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-bold p-2.5 rounded-xs"
               >
@@ -299,11 +550,11 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             </label>
             <textarea
               rows={3}
-              value={caseData.blurb[activeLanguage] || ''}
+              value={(typeof caseData.blurb === 'string' ? caseData.blurb : caseData.blurb?.[activeLanguage]) || (caseData as any).hook || ''}
               onChange={(e) =>
                 setCaseData({
                   ...caseData,
-                  blurb: { ...caseData.blurb, [activeLanguage]: e.target.value },
+                  blurb: { ...(typeof caseData.blurb === 'object' ? caseData.blurb : { en: String(caseData.blurb || (caseData as any).hook || ''), hi: String(caseData.blurb || (caseData as any).hook || '') }), [activeLanguage]: e.target.value },
                 })
               }
               className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3 rounded-xs"
@@ -317,7 +568,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
               </label>
               <input
                 type="text"
-                value={caseData.citation}
+                value={caseData.citation || ''}
                 onChange={(e) => setCaseData({ ...caseData, citation: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs font-mono"
               />
@@ -329,7 +580,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
               </label>
               <input
                 type="url"
-                value={caseData.judgmentUrl}
+                value={caseData.judgmentUrl || ''}
                 onChange={(e) => setCaseData({ ...caseData, judgmentUrl: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs font-mono"
               />
@@ -341,15 +592,15 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
       {/* TAB 2: STORY PANELS */}
       {activeTab === 'panels' && (
         <div className="space-y-6">
-          {caseData.panels.map((panel, idx) => (
-            <div key={panel.id} className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4">
+          {caseData.panels?.map((panel, idx) => (
+            <div key={panel.id || idx} className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-mono font-bold uppercase text-[#D4AF37]">
-                    Panel #{idx + 1} ({panel.type})
+                    Episode #{idx + 1} ({panel.type})
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[#8c887e]">ID: {panel.id}</span>
+                <span className="text-[10px] font-mono text-[#8c887e]">ID: {panel.id || `panel-${idx + 1}`}</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -359,10 +610,11 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                   </label>
                   <input
                     type="text"
-                    value={panel.eyebrow[activeLanguage] || ''}
+                    value={(typeof panel.eyebrow === 'string' ? panel.eyebrow : panel.eyebrow?.[activeLanguage]) || ''}
                     onChange={(e) => {
                       const updatedPanels = [...caseData.panels];
-                      updatedPanels[idx].eyebrow[activeLanguage] = e.target.value;
+                      const currentEyebrow = typeof updatedPanels[idx].eyebrow === 'object' ? updatedPanels[idx].eyebrow : { en: String(updatedPanels[idx].eyebrow || ''), hi: String(updatedPanels[idx].eyebrow || '') };
+                      updatedPanels[idx].eyebrow = { ...currentEyebrow, [activeLanguage]: e.target.value };
                       setCaseData({ ...caseData, panels: updatedPanels });
                     }}
                     className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#D4AF37] font-bold p-2.5 rounded-xs"
@@ -375,10 +627,11 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                   </label>
                   <input
                     type="text"
-                    value={panel.headline[activeLanguage] || ''}
+                    value={(typeof panel.headline === 'string' ? panel.headline : panel.headline?.[activeLanguage]) || ''}
                     onChange={(e) => {
                       const updatedPanels = [...caseData.panels];
-                      updatedPanels[idx].headline[activeLanguage] = e.target.value;
+                      const currentHeadline = typeof updatedPanels[idx].headline === 'object' ? updatedPanels[idx].headline : { en: String(updatedPanels[idx].headline || ''), hi: String(updatedPanels[idx].headline || '') };
+                      updatedPanels[idx].headline = { ...currentHeadline, [activeLanguage]: e.target.value };
                       setCaseData({ ...caseData, panels: updatedPanels });
                     }}
                     className="w-full bg-[#0A0C10] border border-white/15 text-sm text-white font-bold p-2.5 rounded-xs"
@@ -392,57 +645,16 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                 </label>
                 <textarea
                   rows={4}
-                  value={panel.body[activeLanguage] || ''}
+                  value={(typeof panel.body === 'string' ? panel.body : panel.body?.[activeLanguage]) || ''}
                   onChange={(e) => {
                     const updatedPanels = [...caseData.panels];
-                    updatedPanels[idx].body[activeLanguage] = e.target.value;
+                    const currentBody = typeof updatedPanels[idx].body === 'object' ? updatedPanels[idx].body : { en: String(updatedPanels[idx].body || ''), hi: String(updatedPanels[idx].body || '') };
+                    updatedPanels[idx].body = { ...currentBody, [activeLanguage]: e.target.value };
                     setCaseData({ ...caseData, panels: updatedPanels });
                   }}
                   className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#c9c5bc] p-3 rounded-xs leading-relaxed"
                 />
               </div>
-
-              {/* Arguments if present */}
-              {panel.prosecutionArgs && (
-                <div className="p-4 bg-black/40 border border-white/10 rounded-xs space-y-3">
-                  <span className="text-[10px] font-mono font-bold text-[#E50914] uppercase block">
-                    Prosecution / Appellant Claim:
-                  </span>
-                  <input
-                    type="text"
-                    value={panel.prosecutionArgs.claim[activeLanguage] || ''}
-                    onChange={(e) => {
-                      const updatedPanels = [...caseData.panels];
-                      if (updatedPanels[idx].prosecutionArgs) {
-                        updatedPanels[idx].prosecutionArgs!.claim[activeLanguage] = e.target.value;
-                        setCaseData({ ...caseData, panels: updatedPanels });
-                      }
-                    }}
-                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2 rounded-xs"
-                  />
-                </div>
-              )}
-
-              {/* Judge Decision if present */}
-              {panel.judgeDecision && (
-                <div className="p-4 bg-black/40 border border-[#D4AF37]/30 rounded-xs space-y-3">
-                  <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase block">
-                    Judge Decision Question:
-                  </span>
-                  <input
-                    type="text"
-                    value={panel.judgeDecision.question[activeLanguage] || ''}
-                    onChange={(e) => {
-                      const updatedPanels = [...caseData.panels];
-                      if (updatedPanels[idx].judgeDecision) {
-                        updatedPanels[idx].judgeDecision!.question[activeLanguage] = e.target.value;
-                        setCaseData({ ...caseData, panels: updatedPanels });
-                      }
-                    }}
-                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2 rounded-xs"
-                  />
-                </div>
-              )}
             </div>
           ))}
         </div>
@@ -457,13 +669,13 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             </label>
             <textarea
               rows={5}
-              value={caseData.brief.facts[activeLanguage] || ''}
+              value={caseData.brief?.facts?.[activeLanguage] || ''}
               onChange={(e) =>
                 setCaseData({
                   ...caseData,
                   brief: {
                     ...caseData.brief,
-                    facts: { ...caseData.brief.facts, [activeLanguage]: e.target.value },
+                    facts: { ...caseData.brief?.facts, [activeLanguage]: e.target.value },
                   },
                 })
               }
@@ -477,13 +689,13 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             </label>
             <textarea
               rows={3}
-              value={caseData.brief.held[activeLanguage] || ''}
+              value={caseData.brief?.held?.[activeLanguage] || ''}
               onChange={(e) =>
                 setCaseData({
                   ...caseData,
                   brief: {
                     ...caseData.brief,
-                    held: { ...caseData.brief.held, [activeLanguage]: e.target.value },
+                    held: { ...caseData.brief?.held, [activeLanguage]: e.target.value },
                   },
                 })
               }
@@ -497,13 +709,13 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             </label>
             <textarea
               rows={4}
-              value={caseData.brief.reasoning[activeLanguage] || ''}
+              value={caseData.brief?.reasoning?.[activeLanguage] || ''}
               onChange={(e) =>
                 setCaseData({
                   ...caseData,
                   brief: {
                     ...caseData.brief,
-                    reasoning: { ...caseData.brief.reasoning, [activeLanguage]: e.target.value },
+                    reasoning: { ...caseData.brief?.reasoning, [activeLanguage]: e.target.value },
                   },
                 })
               }
@@ -513,50 +725,314 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         </div>
       )}
 
-      {/* TAB 4: VISUAL ASSETS & AI PROMPTS */}
+      {/* TAB 4: VISUAL ASSETS & AI DUAL GENERATOR */}
       {activeTab === 'images' && (
-        <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-6">
-          <div className="pb-3 border-b border-white/10">
-            <h3 className="text-sm font-anton text-white uppercase tracking-wider">
-              Visual Asset Management
-            </h3>
-            <p className="text-xs text-[#a9a49a]">
-              Review generated prompts, upload custom photographs/documents, or replace image paths.
-            </p>
+        <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-8">
+          <div className="pb-3 border-b border-white/10 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 className="text-sm font-anton text-white uppercase tracking-wider">
+                Visual Asset Studio & AI Dual Generator
+              </h3>
+              <p className="text-xs text-[#a9a49a]">
+                Generate new AI visuals with Gemini, or copy prompts for Midjourney / ChatGPT and upload files directly.
+              </p>
+            </div>
+            <div className="text-[10px] font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-1 rounded-xs border border-[#D4AF37]/20">
+              Dual System Active
+            </div>
           </div>
 
-          {/* Banner Image */}
-          <div className="p-4 bg-black/40 border border-white/10 rounded-xs space-y-3">
-            <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase block">
-              1. 16:9 Hero Billboard & Card Cover Image
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                  Image URL / File Path
-                </label>
-                <input
-                  type="text"
-                  value={caseData.bannerImage}
-                  onChange={(e) => setCaseData({ ...caseData, bannerImage: e.target.value })}
-                  className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono"
-                />
+          {/* 1. Hero Billboard Poster (21:9 / 16:9) */}
+          <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+              <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
+                1. Hero Billboard Cover Poster (21:9 / 16:9)
+              </span>
+              <span className="text-[10px] font-mono text-white/50">{caseData.bannerImage || caseData.poster?.src}</span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+              {/* Image Preview */}
+              <div className="space-y-2">
+                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center">
+                  <img
+                    src={caseData.bannerImage || caseData.poster?.src || '/images/cases/ghost-case.jpg'}
+                    alt="Hero Poster Preview"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/images/cases/ghost-case.jpg';
+                    }}
+                  />
+                </div>
+                <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Billboard Asset</p>
               </div>
 
-              <div>
-                <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                  AI Generation Prompt
-                </label>
-                <textarea
-                  rows={2}
-                  value={caseData.imagesList?.[0]?.prompt || ''}
-                  onChange={(e) => {
-                    const list = [...(caseData.imagesList || [])];
-                    if (list[0]) list[0].prompt = e.target.value;
-                    setCaseData({ ...caseData, imagesList: list });
-                  }}
-                  className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#c9c5bc] p-2 rounded-xs"
-                />
+              {/* Prompt & Dual Actions */}
+              <div className="md:col-span-2 space-y-3">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt</label>
+                    <button
+                      type="button"
+                      onClick={() => copyPrompt('poster', posterPrompt)}
+                      className="text-[10px] font-mono text-[#D4AF37] hover:underline cursor-pointer flex items-center gap-1"
+                    >
+                      <span>{copiedPromptId === 'poster' ? '✓ Copied!' : '📋 Copy Prompt'}</span>
+                    </button>
+                  </div>
+                  <textarea
+                    rows={3}
+                    defaultValue={posterPrompt}
+                    id="prompt-poster"
+                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37]"
+                  />
+                </div>
+
+                {/* Dual Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {/* Option A: Gemini AI */}
+                  <button
+                    type="button"
+                    disabled={generatingTarget === 'poster'}
+                    onClick={() => {
+                      const p = (document.getElementById('prompt-poster') as HTMLTextAreaElement)?.value || posterPrompt;
+                      handleGeminiGenerate(p, 'poster');
+                    }}
+                    className="px-4 py-2.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    {generatingTarget === 'poster' ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                        <span>Generating Gemini...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>⚡</span>
+                        <span>Generate with Gemini AI</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Option B: Direct File Upload */}
+                  <label className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider rounded-xs transition-all border border-white/20 flex items-center justify-center gap-2 cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      disabled={uploadingTarget === 'poster'}
+                      onChange={(e) => handleFileUpload(e, 'poster')}
+                    />
+                    {uploadingTarget === 'poster' ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>📂</span>
+                        <span>Upload Custom Image</span>
+                      </>
+                    )}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. Archival Press / Record Exhibit (Episode 2) */}
+          <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+              <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
+                2. Archival Press Clipping / Case Docket (Episode 2)
+              </span>
+              <span className="text-[10px] font-mono text-white/50">
+                {caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || '/images/cases/nanavati_portrait.jpg'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+              {/* Image Preview */}
+              <div className="space-y-2">
+                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center">
+                  <img
+                    src={caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || '/images/cases/nanavati_portrait.jpg'}
+                    alt="Exhibit Preview"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/images/cases/nanavati_portrait.jpg';
+                    }}
+                  />
+                </div>
+                <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Exhibit Asset</p>
+              </div>
+
+              {/* Prompt & Dual Actions */}
+              <div className="md:col-span-2 space-y-3">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt</label>
+                    <button
+                      type="button"
+                      onClick={() => copyPrompt('exhibit', exhibitPrompt)}
+                      className="text-[10px] font-mono text-[#D4AF37] hover:underline cursor-pointer flex items-center gap-1"
+                    >
+                      <span>{copiedPromptId === 'exhibit' ? '✓ Copied!' : '📋 Copy Prompt'}</span>
+                    </button>
+                  </div>
+                  <textarea
+                    rows={3}
+                    defaultValue={exhibitPrompt}
+                    id="prompt-exhibit"
+                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37]"
+                  />
+                </div>
+
+                {/* Dual Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {/* Option A: Gemini AI */}
+                  <button
+                    type="button"
+                    disabled={generatingTarget === 'exhibit'}
+                    onClick={() => {
+                      const p = (document.getElementById('prompt-exhibit') as HTMLTextAreaElement)?.value || exhibitPrompt;
+                      handleGeminiGenerate(p, 'exhibit');
+                    }}
+                    className="px-4 py-2.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    {generatingTarget === 'exhibit' ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                        <span>Generating Gemini...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>⚡</span>
+                        <span>Generate with Gemini AI</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Option B: Direct File Upload */}
+                  <label className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider rounded-xs transition-all border border-white/20 flex items-center justify-center gap-2 cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      disabled={uploadingTarget === 'exhibit'}
+                      onChange={(e) => handleFileUpload(e, 'exhibit')}
+                    />
+                    {uploadingTarget === 'exhibit' ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>📂</span>
+                        <span>Upload Custom Image</span>
+                      </>
+                    )}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. Courtroom Verdict & Bench Scene (Episode 7) */}
+          <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+              <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
+                3. Courtroom Verdict & Bench Scene (Episode 7)
+              </span>
+              <span className="text-[10px] font-mono text-white/50">
+                {caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || '/images/cases/ghost_court_verdict.jpg'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+              {/* Image Preview */}
+              <div className="space-y-2">
+                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center">
+                  <img
+                    src={caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || '/images/cases/ghost_court_verdict.jpg'}
+                    alt="Verdict Scene Preview"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/images/cases/ghost_court_verdict.jpg';
+                    }}
+                  />
+                </div>
+                <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Verdict Asset</p>
+              </div>
+
+              {/* Prompt & Dual Actions */}
+              <div className="md:col-span-2 space-y-3">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt</label>
+                    <button
+                      type="button"
+                      onClick={() => copyPrompt('verdict', verdictPrompt)}
+                      className="text-[10px] font-mono text-[#D4AF37] hover:underline cursor-pointer flex items-center gap-1"
+                    >
+                      <span>{copiedPromptId === 'verdict' ? '✓ Copied!' : '📋 Copy Prompt'}</span>
+                    </button>
+                  </div>
+                  <textarea
+                    rows={3}
+                    defaultValue={verdictPrompt}
+                    id="prompt-verdict"
+                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37]"
+                  />
+                </div>
+
+                {/* Dual Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {/* Option A: Gemini AI */}
+                  <button
+                    type="button"
+                    disabled={generatingTarget === 'verdict'}
+                    onClick={() => {
+                      const p = (document.getElementById('prompt-verdict') as HTMLTextAreaElement)?.value || verdictPrompt;
+                      handleGeminiGenerate(p, 'verdict');
+                    }}
+                    className="px-4 py-2.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    {generatingTarget === 'verdict' ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                        <span>Generating Gemini...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>⚡</span>
+                        <span>Generate with Gemini AI</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Option B: Direct File Upload */}
+                  <label className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider rounded-xs transition-all border border-white/20 flex items-center justify-center gap-2 cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      disabled={uploadingTarget === 'verdict'}
+                      onChange={(e) => handleFileUpload(e, 'verdict')}
+                    />
+                    {uploadingTarget === 'verdict' ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>📂</span>
+                        <span>Upload Custom Image</span>
+                      </>
+                    )}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -565,3 +1041,4 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     </div>
   );
 }
+

@@ -99,7 +99,7 @@ export function AdvocateQuickToolkit() {
                 </span>
               </div>
 
-              <span className="text-2xl text-[#D4AF37] font-bold">➔</span>
+              <span className="text-2xl text-[#D4AF37] font-bold">→</span>
 
               <div className="text-right">
                 <span className="text-[10px] font-mono text-white/50 uppercase block">

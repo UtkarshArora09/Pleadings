@@ -56,7 +56,7 @@ export function Top10Carousel({ cases }: Top10CarouselProps) {
         className="flex items-center gap-6 overflow-x-auto pb-4 pt-2 scrollbar-none scroll-smooth pl-2"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {cases.map((caseItem, idx) => (
+        {cases.slice(0, 10).map((caseItem, idx) => (
           <Top10Card
             key={caseItem.slug}
             caseData={caseItem}

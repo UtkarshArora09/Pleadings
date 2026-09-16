@@ -170,8 +170,8 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y;
     const deltaTime = Date.now() - touchStartRef.current.time;
 
-    // Detect fast horizontal swipe (> 75px, angle predominantly horizontal, < 350ms)
-    if (Math.abs(deltaX) > 75 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5 && deltaTime < 400) {
+    // Detect fast horizontal swipe (> 100px, angle predominantly horizontal, < 350ms)
+    if (Math.abs(deltaX) > 100 && Math.abs(deltaX) > Math.abs(deltaY) * 2.5 && deltaTime < 350) {
       if (deltaX < 0 && nextSlug) {
         router.push(`/case/${nextSlug}?depth=${depth}`);
       } else if (deltaX > 0 && prevSlug) {
@@ -190,8 +190,10 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
 
   // Hindi localization resolution
   const activeContent = language === 'hi' && caseData.hi ? caseData.hi : caseData;
-  const displayTitle = activeContent.title;
-  const displayHook = activeContent.hook;
+  const rawTitle = activeContent.title;
+  const displayTitle = typeof rawTitle === 'string' ? rawTitle : ((rawTitle as any)?.[language] || (rawTitle as any)?.en || caseData.slug);
+  const rawHook = activeContent.hook;
+  const displayHook = typeof rawHook === 'string' ? rawHook : ((rawHook as any)?.[language] || (rawHook as any)?.en || '');
   const episodes = activeContent.episodes;
   const bookmarked = isBookmarked(caseData.slug);
 
@@ -219,7 +221,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none relative overflow-x-hidden font-sans snap-y snap-mandatory scroll-smooth"
+      className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden font-sans md:snap-y md:snap-proximity scroll-smooth"
     >
       {/* Sticky Top Navigation Bar */}
       <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-3 sm:px-6 py-2.5 flex items-center justify-between transition-all">
@@ -295,7 +297,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
         {/* Section 0: Case Header Hero Section */}
         <section
           id="case-header"
-          className="min-h-[calc(100vh-64px)] snap-start snap-always flex flex-col justify-center py-8 border-b border-white/10 animate-fadeIn space-y-4"
+          className="py-6 sm:py-10 md:py-14 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-b border-white/10 animate-fadeIn space-y-4"
         >
           {/* Status Badge & Court Info */}
           <div className="flex flex-wrap items-center gap-2.5">
@@ -368,7 +370,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                   episodeRefs.current[epIdx] = el;
                 }}
                 onMouseEnter={() => setActiveEpisodeAnchor(epNum)}
-                className="min-h-[calc(100vh-64px)] snap-start snap-always flex flex-col justify-center py-10 border-t border-white/10 space-y-5 relative scroll-mt-16"
+                className="py-8 sm:py-12 md:py-16 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-t border-white/10 space-y-5 relative scroll-mt-16"
                 id={`episode-${epNum}`}
               >
                 {/* Episode Kicker & Title */}
@@ -486,7 +488,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
         {/* Section 9: End-of-Case Dossier Snap Section */}
         <section
           id="case-dossier"
-          className="min-h-[calc(100vh-64px)] snap-start snap-always flex flex-col justify-center py-12 border-t border-white/10 space-y-8"
+          className="py-8 sm:py-12 md:py-16 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-t border-white/10 space-y-8"
         >
           {/* Student Mode End: Flashcards */}
           {depth === 'student' && caseData.flashcards && (

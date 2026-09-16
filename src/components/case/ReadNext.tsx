@@ -29,8 +29,10 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         {cases.map((c) => {
-          const displayTitle = lang === 'hi' && c.hi ? c.hi.title : c.title;
-          const displayHook = lang === 'hi' && c.hi ? c.hi.hook : c.hook;
+          const rawTitle = lang === 'hi' && c.hi ? c.hi.title : c.title;
+          const displayTitle = typeof rawTitle === 'string' ? rawTitle : ((rawTitle as any)?.[lang] || (rawTitle as any)?.en || c.slug);
+          const rawHook = lang === 'hi' && c.hi ? c.hi.hook : c.hook;
+          const displayHook = typeof rawHook === 'string' ? rawHook : ((rawHook as any)?.[lang] || (rawHook as any)?.en || '');
 
           return (
             <Link

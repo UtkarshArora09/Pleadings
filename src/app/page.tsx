@@ -5,7 +5,7 @@ import { Top10Carousel } from '@/components/Top10Carousel';
 import { PosterCard } from '@/components/PosterCard';
 import { CourtroomExperienceShowcase } from '@/components/CourtroomExperienceShowcase';
 import { HomeSectionNav } from '@/components/HomeSectionNav';
-import { getAllCases, getFeaturedCases } from '@/lib/cases';
+import { getAllCases, getFeaturedCases, getTop10Cases } from '@/lib/cases';
 import Link from 'next/link';
 
 export const metadata = {
@@ -15,10 +15,11 @@ export const metadata = {
 
 export default function HomePage() {
   const allCases = getAllCases();
+  const top10Cases = getTop10Cases();
   const featuredCase = getFeaturedCases()[0] || allCases[0];
 
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative select-none snap-y snap-mandatory scroll-smooth">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative md:snap-y md:snap-proximity scroll-smooth">
       <Header />
       <HomeSectionNav />
 
@@ -28,15 +29,15 @@ export default function HomePage() {
       {/* Section 2: Top 10 Landmark Precedents in India */}
       <section
         id="section-top10"
-        className="min-h-screen snap-start snap-always flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 relative z-20"
+        className="py-6 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative z-20 md:snap-start"
       >
-        <Top10Carousel cases={allCases} />
+        <Top10Carousel cases={top10Cases} />
       </section>
 
       {/* Section 3: Start Here: Essential Precedents */}
       <section
         id="section-essential"
-        className="min-h-screen snap-start snap-always flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 space-y-8 relative z-20"
+        className="py-6 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 space-y-6 sm:space-y-8 relative z-20 md:snap-start"
       >
         <div className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-2 border-b border-white/10 pb-3">
@@ -53,7 +54,7 @@ export default function HomePage() {
               href="/browse"
               className="text-xs font-mono font-bold text-[#D4AF37] hover:underline"
             >
-              Browse All 10 Cases →
+              Browse Cases →
             </Link>
           </div>
 
@@ -66,9 +67,9 @@ export default function HomePage() {
         </div>
 
         {/* Explore All Link Banner */}
-        <div className="p-6 bg-[#12141C] border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4 shadow-xl">
+        <div className="p-5 sm:p-6 bg-[#12141C] border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4 shadow-xl">
           <div className="space-y-1">
-            <h3 className="font-anton text-xl text-white uppercase tracking-tight">
+            <h3 className="font-anton text-lg sm:text-xl text-white uppercase tracking-tight">
               Looking for a specific doctrine or court?
             </h3>
             <p className="text-xs text-[#a9a49a] font-sans">
@@ -77,7 +78,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/browse"
-            className="px-6 py-2.5 bg-[#D4AF37] hover:bg-[#c49f27] text-black font-bold text-xs font-mono uppercase tracking-wider rounded-xs transition-all shadow-md"
+            className="px-5 sm:px-6 py-2.5 bg-[#D4AF37] hover:bg-[#c49f27] text-black font-bold text-xs font-mono uppercase tracking-wider rounded-xs transition-all shadow-md"
           >
             Open Case Dossier Directory →
           </Link>
@@ -87,7 +88,7 @@ export default function HomePage() {
       {/* Section 4: The Advocate Toolkit & Courtroom Showcase */}
       <section
         id="section-toolkit"
-        className="min-h-screen snap-start snap-always flex flex-col justify-center py-12 relative z-20"
+        className="py-6 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center relative z-20 md:snap-start"
       >
         <CourtroomExperienceShowcase />
       </section>
@@ -95,7 +96,7 @@ export default function HomePage() {
       {/* Section 5: Comprehensive Editorial Footer */}
       <footer
         id="section-footer"
-        className="border-t border-white/10 bg-[#0A0C10] py-14 px-4 sm:px-6 md:px-12 text-[#a9a49a] text-xs font-mono select-none snap-start snap-always"
+        className="border-t border-white/10 bg-[#0A0C10] py-10 sm:py-14 px-4 sm:px-6 md:px-12 text-[#a9a49a] text-xs font-mono md:snap-start"
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
