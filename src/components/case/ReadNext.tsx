@@ -57,7 +57,7 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
                     </span>
                   </div>
 
-                  <h4 className="font-serif font-bold text-sm text-white group-hover:text-[#D4AF37] transition-colors line-clamp-2">
+                  <h4 className="font-anton text-base sm:text-lg text-white group-hover:text-[#D4AF37] uppercase tracking-tight transition-colors line-clamp-2">
                     {displayTitle}
                   </h4>
 

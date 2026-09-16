@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useApp } from '@/context/AppContext';
+import { AdvocateQuickToolkit } from './AdvocateQuickToolkit';
 
 export function CourtroomExperienceShowcase() {
   const { language } = useApp();
@@ -259,12 +260,8 @@ export function CourtroomExperienceShowcase() {
         </div>
       </div>
 
-      {/* Editorial Credibility Line */}
-      <div className="mt-12 sm:mt-16 py-6 px-4 bg-[#12141C]/80 border border-[#D4AF37]/25 rounded-xs text-center max-w-4xl mx-auto shadow-xl">
-        <p className="font-serif italic text-sm sm:text-base text-[#F3EFE6] leading-relaxed">
-          "Every story is built from the certified judgment. Every claim links to its paragraph. Reviewed by <strong className="text-white not-italic font-sans font-semibold">Adv. Siddharth Luthra & Associates</strong>, Enrolment No. <span className="font-mono text-[#D4AF37] not-italic">D/842/1991</span>."
-        </p>
-      </div>
+      {/* Interactive Rapid IPC -> BNS Concordance & Precedent Tool for Advocates */}
+      <AdvocateQuickToolkit />
     </section>
   );
 }

@@ -23,7 +23,7 @@ export function IfThisAffectsYou({ affectsYou, lang = 'en' }: IfThisAffectsYouPr
         </span>
       </div>
 
-      <h3 className="font-serif text-lg sm:text-xl font-bold text-white">
+      <h3 className="font-anton text-xl sm:text-2xl text-white uppercase tracking-tight leading-snug">
         {affectsYou.heading}
       </h3>
 

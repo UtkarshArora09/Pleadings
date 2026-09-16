@@ -79,8 +79,8 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
             <span>⏱ {readTime}</span>
           </div>
 
-          {/* Title */}
-          <h3 className="font-serif font-bold text-base sm:text-lg text-white group-hover:text-[#D4AF37] transition-colors leading-snug line-clamp-2">
+          {/* Title in Netflix Font-Anton Style */}
+          <h3 className="font-anton text-lg sm:text-xl text-white group-hover:text-[#D4AF37] uppercase tracking-tight leading-snug line-clamp-2 transition-colors">
             {displayTitle}
           </h3>
 

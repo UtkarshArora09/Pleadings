@@ -3,30 +3,42 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CaseFile } from '@/types/case';
 import { CaseData } from '@/types';
 import { useApp } from '@/context/AppContext';
 
 interface PosterCardProps {
-  caseData: CaseData;
+  caseData: CaseFile | CaseData;
 }
 
 export function PosterCard({ caseData }: PosterCardProps) {
   const { language, toggleBookmark, isBookmarked } = useApp();
   const bookmarked = isBookmarked(caseData.slug);
 
-  // Category Accent styling
-  const isCrime = caseData.genre === 'crime';
-  const isConstitutional = caseData.genre === 'constitutional' || caseData.genre === 'cyber';
-  const accentColor = isCrime ? '#E50914' : isConstitutional ? '#D4AF37' : '#38bdf8';
+  // Normalizing fields
+  const title = typeof (caseData as CaseFile).title === 'string'
+    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.title : (caseData as CaseFile).title)
+    : (caseData as CaseData).title?.[language] || (caseData as CaseFile).title;
 
-  const defaultFallback = caseData.genre === 'constitutional' ? '/images/cases/kesavananda-bharati.jpg' : '/images/cases/nanavati-case.jpg';
-  const [imgSrc, setImgSrc] = React.useState<string>(caseData.bannerImage || defaultFallback);
+  const hook = typeof (caseData as CaseFile).hook === 'string'
+    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.hook : (caseData as CaseFile).hook)
+    : (caseData as CaseData).blurb?.[language] || (caseData as CaseFile).hook;
+
+  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as CaseData).bannerImage || '/images/cases/ghost-case.jpg';
+  const categoryTag = (caseData as any).tag || (caseData as CaseData).categoryTag || (caseData as CaseFile).doctrines?.[0] || 'IPC';
+  const readTimeStr = typeof (caseData as CaseFile).readingTime?.story === 'number'
+    ? `${(caseData as CaseFile).readingTime.story} min read`
+    : (caseData as CaseData).readTime?.[language] || '5 min read';
+
+  const isCrime = String((caseData as any).tag || (caseData as CaseData).genre || (caseData as CaseFile).doctrines?.[0] || '').toLowerCase().includes('ipc') || (caseData as CaseData).genre === 'crime';
+  const accentColor = isCrime ? '#E50914' : '#D4AF37';
+
+  const defaultFallback = '/images/cases/ghost-case.jpg';
+  const [imgSrc, setImgSrc] = React.useState<string>(bannerImg);
 
   React.useEffect(() => {
-    if (caseData.bannerImage) {
-      setImgSrc(caseData.bannerImage);
-    }
-  }, [caseData.bannerImage]);
+    setImgSrc(bannerImg);
+  }, [bannerImg]);
 
   return (
     <div className="group relative flex-shrink-0 w-72 sm:w-80 md:w-[330px] cursor-pointer select-none">
@@ -34,13 +46,13 @@ export function PosterCard({ caseData }: PosterCardProps) {
         {/* Modern Editorial Legal Card */}
         <div className="relative h-full flex flex-col justify-between p-4 sm:p-5 rounded-md bg-[#12141D] hover:bg-[#171A26] border border-white/10 hover:border-white/25 transition-all duration-300 ease-out group-hover:-translate-y-1.5 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.85)]">
           
-          {/* Top Bar: Clean Tag & Bookmark (Zero Overlap, Clean Spacing) */}
+          {/* Top Bar: Clean Tag & Bookmark */}
           <div className="flex items-center justify-between gap-2 mb-3">
             <span
               className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-xs bg-white/5 border border-white/10"
               style={{ color: accentColor }}
             >
-              {caseData.categoryTag || caseData.tag[language]}
+              {categoryTag}
             </span>
 
             <div className="flex items-center gap-2">
@@ -71,7 +83,7 @@ export function PosterCard({ caseData }: PosterCardProps) {
           <div className="relative w-full aspect-[16/9] rounded-xs overflow-hidden bg-[#0A0C12] mb-3.5 border border-white/5">
             <Image
               src={imgSrc}
-              alt={caseData.title[language]}
+              alt={String(title)}
               fill
               sizes="(max-width: 640px) 280px, 330px"
               onError={() => setImgSrc(defaultFallback)}
@@ -97,18 +109,18 @@ export function PosterCard({ caseData }: PosterCardProps) {
               </span>
 
               <h3 className="font-anton text-xl text-white uppercase tracking-tight leading-snug mb-2 group-hover:text-[#D4AF37] transition-colors line-clamp-1">
-                {caseData.title[language]}
+                {title}
               </h3>
 
               <p className="text-xs text-[#c9c5bc] leading-relaxed line-clamp-2 font-sans font-normal mb-3">
-                {caseData.blurb[language]}
+                {hook}
               </p>
             </div>
 
             {/* Bottom Footer: Read Time & Action CTA */}
             <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono">
               <span className="text-[#8c887e] uppercase">
-                {caseData.readTime[language]}
+                {readTimeStr}
               </span>
 
               <div className="flex items-center gap-1 text-white font-bold group-hover:text-[#D4AF37] transition-colors uppercase tracking-widest">

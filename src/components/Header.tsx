@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Logo } from './Logo';
 import { LanguageToggle } from './LanguageToggle';
@@ -9,15 +9,23 @@ import { useApp } from '@/context/AppContext';
 export function Header() {
   const { language, bookmarkedSlugs } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-40 px-4 md:px-8 py-3.5 flex items-center justify-between transition-all"
-      style={{
-        background:
-          'linear-gradient(to bottom, rgba(14,16,22,0.98) 0%, rgba(14,16,22,0.85) 75%, transparent 100%)',
-        borderBottom: '1px solid rgba(243,239,230,0.06)',
-      }}
+      className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-3.5 flex items-center justify-between transition-all duration-300 ${
+        isScrolled
+          ? 'bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 shadow-xl'
+          : 'bg-gradient-to-b from-black/90 via-black/40 to-transparent border-none'
+      }`}
     >
       {/* Brand Logo & Desktop Nav */}
       <div className="flex items-center gap-8">

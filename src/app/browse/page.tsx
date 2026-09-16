@@ -125,9 +125,9 @@ function BrowseContent() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#D4AF37] block">
-                CASE DIRECTORY & ARCHIVES
+                COMPREHENSIVE CASE DIRECTORY
               </span>
-              <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">
+              <h1 className="font-anton text-3xl sm:text-5xl text-white uppercase tracking-tight mt-1">
                 Browse Precedents
               </h1>
             </div>

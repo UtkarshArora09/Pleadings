@@ -1,10 +1,10 @@
 import React from 'react';
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
-import { CaseCard } from '@/components/CaseCard';
+import { Top10Carousel } from '@/components/Top10Carousel';
+import { PosterCard } from '@/components/PosterCard';
 import { CourtroomExperienceShowcase } from '@/components/CourtroomExperienceShowcase';
 import { getAllCases, getFeaturedCases } from '@/lib/cases';
-import { getVisibleHomepageRows } from '@/config/homepage';
 import Link from 'next/link';
 
 export const metadata = {
@@ -15,54 +15,55 @@ export const metadata = {
 export default function HomePage() {
   const allCases = getAllCases();
   const featuredCase = getFeaturedCases()[0] || allCases[0];
-  const visibleRows = getVisibleHomepageRows(allCases);
 
   return (
     <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden select-none">
       <Header />
       <Hero featuredCase={featuredCase} casesList={allCases} />
 
-      {/* Structured 2-Row Layout Driven by Config */}
-      <div className="relative z-20 pb-16 space-y-12 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 -mt-6">
-        {visibleRows.map(({ row, cases }) => (
-          <section key={row.id} className="space-y-4">
-            {/* Row Title & Description */}
-            <div className="flex flex-wrap items-end justify-between gap-2 border-b border-white/10 pb-3">
-              <div>
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-                  <span>{row.title.en}</span>
-                </h2>
-                <p className="text-xs sm:text-sm text-[#a9a49a] font-sans mt-0.5">
-                  {row.subtitle.en}
-                </p>
-              </div>
+      {/* Main Rows Layout */}
+      <div className="relative z-20 pb-12 space-y-14 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 -mt-4">
+        {/* Row 1: TOP 10 LANDMARK PRECEDENTS IN INDIA Carousel */}
+        <Top10Carousel cases={allCases} />
 
-              <Link
-                href="/browse"
-                className="text-xs font-mono font-bold text-[#D4AF37] hover:underline"
-              >
-                Browse All 10 Cases →
-              </Link>
+        {/* Row 2: START HERE: ESSENTIAL PRECEDENTS */}
+        <section className="space-y-4">
+          <div className="flex flex-wrap items-end justify-between gap-2 border-b border-white/10 pb-3">
+            <div>
+              <h2 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight">
+                START HERE: ESSENTIAL PRECEDENTS
+              </h2>
+              <p className="text-xs sm:text-sm text-[#a9a49a] font-sans mt-0.5">
+                Foundational criminal, constitutional, and civil doctrines that established Indian jurisprudence.
+              </p>
             </div>
 
-            {/* Grid of 5 Sized Case Cards (Mobile-first responsive grid) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-              {cases.map((caseItem, idx) => (
-                <CaseCard
-                  key={caseItem.slug}
-                  caseData={caseItem}
-                  priority={idx < 2}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
+            <Link
+              href="/browse"
+              className="text-xs font-mono font-bold text-[#D4AF37] hover:underline"
+            >
+              Browse All 10 Cases →
+            </Link>
+          </div>
+
+          {/* Grid of Poster Cards */}
+          <div className="flex items-center gap-4 overflow-x-auto pb-4 pt-1 scrollbar-none">
+            {allCases.map((caseItem) => (
+              <PosterCard
+                key={caseItem.slug}
+                caseData={caseItem}
+              />
+            ))}
+          </div>
+        </section>
 
         {/* Explore All Link Banner */}
-        <div className="p-6 bg-[#12141C] border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="p-6 bg-[#12141C] border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4 shadow-xl">
           <div className="space-y-1">
-            <h3 className="font-serif font-bold text-lg text-white">Looking for a specific doctrine or court?</h3>
-            <p className="text-xs text-[#a9a49a]">
+            <h3 className="font-anton text-xl text-white uppercase tracking-tight">
+              Looking for a specific doctrine or court?
+            </h3>
+            <p className="text-xs text-[#a9a49a] font-sans">
               Filter by Supreme Court benches, High Courts, IPC→BNS statutes, or constitutional topics.
             </p>
           </div>
@@ -75,8 +76,45 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Credibility & Experience Showcase with Replaced Credibility Line */}
+      {/* The Pleadings Interactive Experience Showcase */}
       <CourtroomExperienceShowcase />
+
+      {/* Comprehensive Editorial Footer */}
+      <footer className="border-t border-white/10 bg-[#0A0C10] py-12 px-4 sm:px-6 md:px-12 text-[#a9a49a] text-xs font-mono select-none">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-1 text-center md:text-left">
+            <div className="font-anton text-lg text-white uppercase tracking-wider">
+              PLEADINGS · LEGAL MEDIA
+            </div>
+            <p className="text-[11px] text-[#7a766e]">
+              Certified Indian Court Judgments as Verified, Episodic Courtroom Experiences.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/70">
+            <Link href="/about" className="hover:text-[#D4AF37] transition-colors">
+              Editorial Masthead
+            </Link>
+            <Link href="/corrections" className="hover:text-[#D4AF37] transition-colors">
+              Corrections Log
+            </Link>
+            <Link href="/glossary" className="hover:text-[#D4AF37] transition-colors">
+              Legal Glossary
+            </Link>
+            <Link href="/bns" className="hover:text-[#D4AF37] transition-colors">
+              IPC → BNS Concordance
+            </Link>
+            <Link href="/browse" className="hover:text-[#D4AF37] transition-colors">
+              Browse Precedents
+            </Link>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-white/40">
+          <div>© {new Date().getFullYear()} Pleadings. All rights reserved. Sourced from certified public court records.</div>
+          <div>Transforming certified Indian judgments into transparent legal media.</div>
+        </div>
+      </footer>
     </main>
   );
 }

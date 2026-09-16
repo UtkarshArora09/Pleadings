@@ -86,7 +86,7 @@ export default function AboutPage() {
           <div className="p-6 bg-[#12141C] border border-white/10 rounded-xs space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10">
               <div>
-                <h3 className="text-lg font-bold text-white">Adv. Siddharth Luthra & Associates</h3>
+                <h3 className="text-lg font-bold text-white">Adv. Girish Kr. Srivastava</h3>
                 <p className="text-xs text-[#D4AF37] font-mono">Senior Legal Reviewer · Supreme Court of India</p>
               </div>
               <div className="font-mono text-xs px-2.5 py-1 bg-black/50 border border-white/15 rounded-xs text-white/80">

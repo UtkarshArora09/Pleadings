@@ -90,7 +90,7 @@ export default async function TermPage({ params }: TermPageProps) {
             <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               LEGAL DOCTRINE & PLAIN MEANING
             </span>
-            <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            <h1 className="font-anton text-3xl sm:text-5xl md:text-6xl text-white uppercase tracking-tight">
               {item.term}
             </h1>
           </div>

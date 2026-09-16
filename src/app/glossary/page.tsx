@@ -35,7 +35,7 @@ export default function GlossaryPage() {
           <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#D4AF37] block">
             {language === 'en' ? 'LEGAL VOCABULARY & DOCTRINES' : 'कानूनी शब्दकोश और सिद्धांत'}
           </span>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
+          <h1 className="font-anton text-3xl sm:text-5xl text-white uppercase tracking-tight">
             {language === 'en' ? 'Plain-English Legal Glossary' : 'सरल कानूनी शब्दावली'}
           </h1>
           <p className="text-sm sm:text-base text-[#a9a49a] max-w-3xl leading-relaxed">
@@ -81,7 +81,7 @@ export default function GlossaryPage() {
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-serif font-bold text-lg text-white group-hover:text-[#D4AF37] transition-colors">
+                    <h2 className="font-anton text-lg sm:text-xl text-white uppercase tracking-tight group-hover:text-[#D4AF37] transition-colors">
                       {item.term}
                     </h2>
                   </div>

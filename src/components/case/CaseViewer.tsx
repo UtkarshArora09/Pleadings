@@ -209,13 +209,13 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             </span>
           </div>
 
-          {/* Headline Title */}
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight leading-[1.1]">
+          {/* Headline Title in Netflix Anton Style */}
+          <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-tight leading-[0.95] drop-shadow-xl">
             {displayTitle}
           </h1>
 
-          {/* Hook */}
-          <p className="font-serif italic text-base sm:text-xl text-[#E0DCD3] leading-relaxed">
+          {/* Hook in Clean Sans */}
+          <p className="text-sm sm:text-base md:text-lg text-[#c9c5bc] leading-relaxed font-sans">
             "{displayHook}"
           </p>
 
@@ -267,13 +267,13 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                     <span>{ep.kicker}</span>
                     <span className="text-white/40">{epNum} / 8</span>
                   </div>
-                  <h2 className="font-serif text-xl sm:text-2xl font-bold text-white leading-snug">
+                  <h2 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight leading-snug">
                     {ep.title}
                   </h2>
                 </div>
 
-                {/* Optional Episode Visual Image */}
-                {ep.image && epIdx !== 0 && (
+                {/* Optional Episode Visual Image (only if not identical to exhibit image below) */}
+                {ep.image && epIdx !== 0 && (!ep.exhibit?.image || ep.exhibit.image.src !== ep.image.src) && (
                   <CaseImage
                     src={ep.image.src}
                     alt={ep.image.alt}

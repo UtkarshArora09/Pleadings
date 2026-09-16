@@ -75,60 +75,53 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
             </span>
           </div>
 
-          {/* Title */}
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-bold tracking-tight leading-[1.05] drop-shadow-md">
+          {/* Bold Billboard Title in Netflix Anton Style */}
+          <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white uppercase tracking-tight leading-[0.95] drop-shadow-xl">
             {displayTitle}
           </h1>
 
-          {/* Dramatic Story Hook */}
-          <p className="text-sm sm:text-base md:text-lg text-[#E0DCD3] leading-relaxed font-serif italic drop-shadow-sm">
-            "{displayHook}"
+          {/* Subtitle / Citation in Amber Gold */}
+          <p className="text-xs sm:text-sm font-semibold text-[#D4AF37] uppercase tracking-wider font-mono">
+            {activeCase.court} · {activeCase.doctrines?.[0] || 'IPC 79'}
           </p>
 
-          {/* Status Badge & Provenance Strip */}
-          <div className="pt-2 space-y-2.5">
-            <div className="flex items-center gap-2">
-              <StatusBadge status={activeCase.status} size="md" />
-            </div>
-            <ProvenanceStrip
-              citation={activeCase.citations.primary}
-              paragraphsCitedCount={totalParasCited}
-              reviewer={activeCase.review.reviewer}
-              lastVerifiedDate={activeCase.review.reviewedOn}
-            />
-          </div>
+          {/* Dramatic Story Hook */}
+          <p className="text-sm sm:text-base text-[#e5e5e5] leading-relaxed line-clamp-3 font-sans drop-shadow-md">
+            {displayHook}
+          </p>
 
-          {/* CTA Row */}
-          <div className="flex flex-wrap items-center gap-3 pt-3">
-            {/* 1. [▶ Read Story · 5 min] */}
+          {/* Action CTAs: Play Story, Evidence & Brief, Bookmark */}
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            {/* 1. Play Story */}
             <Link
               href={`/case/${activeCase.slug}`}
-              className="flex items-center gap-2 px-6 sm:px-7 py-3 bg-[#D4AF37] hover:bg-[#c49f27] text-black font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xs transition-all shadow-xl hover:scale-105 cursor-pointer"
+              className="flex items-center gap-2.5 px-7 py-3 bg-white hover:bg-white/90 text-[#141414] font-bold text-sm uppercase tracking-wider rounded-xs transition-all shadow-xl hover:scale-105 cursor-pointer"
             >
-              <span>▶</span>
-              <span>{language === 'en' ? `Read Story · ${activeCase.readingTime?.story || 5} min` : `कहानी पढ़ें · ${activeCase.readingTime?.story || 5} मिनट`}</span>
+              <span className="text-base">▶</span>
+              <span>{language === 'en' ? 'Play Story' : 'स्टोरी शुरू करें'}</span>
             </Link>
 
-            {/* 2. [⚖ Jump to Verdict] */}
+            {/* 2. Evidence & Brief */}
             <Link
-              href={`/case/${activeCase.slug}#episode-7`}
-              className="flex items-center gap-2 px-5 sm:px-6 py-3 bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xs backdrop-blur-md transition-all cursor-pointer border border-white/20"
+              href={`/case/${activeCase.slug}#episode-2`}
+              className="flex items-center gap-2 px-6 py-3 bg-white/20 hover:bg-white/30 text-white font-bold text-sm uppercase tracking-wider rounded-xs backdrop-blur-md transition-all cursor-pointer border border-white/20"
             >
-              <span>⚖</span>
-              <span>{language === 'en' ? 'Jump to Verdict' : 'फैसला देखें'}</span>
+              <span>ℹ</span>
+              <span>{language === 'en' ? 'Evidence & Brief' : 'साक्ष्य व ब्रीफ'}</span>
             </Link>
 
-            {/* 3. [+ Save] */}
+            {/* 3. Bookmark Toggle */}
             <button
               onClick={() => toggleBookmark(activeCase.slug)}
-              className={`px-4 py-3 rounded-xs border font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer ${
+              className={`p-3 rounded-xs border transition-all cursor-pointer text-sm font-bold flex items-center justify-center min-w-[44px] min-h-[44px] ${
                 bookmarked
                   ? 'bg-[#E50914] text-white border-[#E50914]'
                   : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
               }`}
-              title={bookmarked ? 'Saved in library' : 'Save case'}
+              title={bookmarked ? 'Remove from My List' : 'Add to My List'}
+              aria-label="Add to My List"
             >
-              {bookmarked ? '✓ Saved' : '+ Save'}
+              {bookmarked ? '✓' : '+'}
             </button>
           </div>
         </div>

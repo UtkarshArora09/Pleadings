@@ -3,11 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CaseFile } from '@/types/case';
 import { CaseData } from '@/types';
 import { useApp } from '@/context/AppContext';
 
 interface Top10CardProps {
-  caseData: CaseData;
+  caseData: CaseFile | CaseData;
   index: number;
 }
 
@@ -16,14 +17,23 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
   const rank = index + 1;
   const bookmarked = isBookmarked(caseData.slug);
 
-  const defaultFallback = caseData.genre === 'constitutional' ? '/images/cases/kesavananda-bharati.jpg' : '/images/cases/nanavati-case.jpg';
-  const [imgSrc, setImgSrc] = React.useState<string>(caseData.bannerImage || defaultFallback);
+  // Normalizing fields between CaseFile and CaseData
+  const title = typeof (caseData as CaseFile).title === 'string'
+    ? (language === 'hi' && (caseData as CaseFile).hi ? (caseData as CaseFile).hi?.title : (caseData as CaseFile).title)
+    : (caseData as CaseData).title?.[language] || (caseData as CaseFile).title;
+
+  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as CaseData).bannerImage || '/images/cases/ghost-case.jpg';
+  const categoryTag = (caseData as any).tag || (caseData as CaseData).categoryTag || (caseData as CaseFile).doctrines?.[0] || 'IPC';
+  const readTimeStr = typeof (caseData as CaseFile).readingTime?.story === 'number'
+    ? `${(caseData as CaseFile).readingTime.story} min read`
+    : (caseData as CaseData).readTime?.[language] || '5 min read';
+
+  const defaultFallback = '/images/cases/ghost-case.jpg';
+  const [imgSrc, setImgSrc] = React.useState<string>(bannerImg);
 
   React.useEffect(() => {
-    if (caseData.bannerImage) {
-      setImgSrc(caseData.bannerImage);
-    }
-  }, [caseData.bannerImage]);
+    setImgSrc(bannerImg);
+  }, [bannerImg]);
 
   return (
     <div className="group relative flex-shrink-0 flex items-center cursor-pointer select-none">
@@ -47,7 +57,7 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
           {/* Cover Art */}
           <Image
             src={imgSrc}
-            alt={caseData.title[language]}
+            alt={String(title)}
             fill
             sizes="220px"
             onError={() => setImgSrc(defaultFallback)}
@@ -60,7 +70,7 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
           {/* Top category badge */}
           <div className="absolute top-2.5 left-2.5 z-10">
             <span className="bg-[#E50914] text-white text-[9px] font-black uppercase tracking-[0.15em] px-2 py-0.5 rounded-xs shadow-md">
-              {caseData.categoryTag}
+              {categoryTag}
             </span>
           </div>
 
@@ -87,10 +97,10 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
               {caseData.court}
             </span>
             <h3 className="font-anton text-base sm:text-lg text-white uppercase tracking-tight leading-tight line-clamp-2 group-hover:text-[#D4AF37] transition-colors">
-              {caseData.title[language]}
+              {title}
             </h3>
             <span className="text-[10px] font-mono text-white/60 block mt-1">
-              {caseData.year} · {caseData.readTime[language]}
+              {caseData.year} · {readTimeStr}
             </span>
           </div>
         </div>
