@@ -137,15 +137,19 @@ export async function POST(request: NextRequest) {
     const safeType = type.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
     const fileName = `${safeSlug}-${safeType}-${Date.now()}.jpg`;
 
-    const uploadDir = path.join(process.cwd(), 'public', 'images', 'cases');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
+    let publicUrl = `/images/cases/${fileName}`;
+    try {
+      const uploadDir = path.join(process.cwd(), 'public', 'images', 'cases');
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+
+      const filePath = path.join(uploadDir, fileName);
+      fs.writeFileSync(filePath, imageBuffer);
+    } catch (fsErr) {
+      console.warn('Filesystem write failed (Vercel serverless environment), returning Data URI:', fsErr);
+      publicUrl = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`;
     }
-
-    const filePath = path.join(uploadDir, fileName);
-    fs.writeFileSync(filePath, imageBuffer);
-
-    const publicUrl = `/images/cases/${fileName}`;
 
     return NextResponse.json({
       success: true,

@@ -45,7 +45,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
   return (
     <section
       id="section-hero"
-      className="relative w-full min-h-[480px] sm:min-h-[560px] md:min-h-[85vh] lg:min-h-screen bg-[#141414] flex flex-col justify-end pb-6 sm:pb-10 md:pb-14 pt-20 sm:pt-24 md:pt-28 overflow-hidden md:snap-start"
+      className="relative w-full max-w-full min-h-[500px] sm:min-h-[560px] md:min-h-[85vh] lg:min-h-screen bg-[#0E1016] flex flex-col justify-end pb-6 sm:pb-10 md:pb-14 pt-20 sm:pt-24 md:pt-28 overflow-hidden md:snap-start"
     >
       {/* Full Bleed Background */}
       <div className="absolute inset-0 z-0">
@@ -56,13 +56,14 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
           priority
           sizes="100vw"
           onError={() => setHeroImg(defaultHeroFallback)}
-          className="object-cover object-center transform scale-105 transition-all duration-1000 brightness-60"
+          className="object-cover object-center transform scale-105 transition-all duration-1000 brightness-60 sm:brightness-75"
         />
 
         {/* Cinematic Vignettes */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0E1016] via-[#0E1016]/80 to-transparent w-full md:w-[70%] pointer-events-none" />
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#0E1016] via-[#0E1016]/80 to-transparent w-full md:w-[70%] pointer-events-none" />
+        <div className="md:hidden absolute inset-0 bg-gradient-to-b from-[#0E1016]/90 via-[#0E1016]/40 to-[#0E1016] pointer-events-none" />
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0E1016] via-[#0E1016]/80 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0E1016]/90 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#0E1016]/90 to-transparent pointer-events-none" />
       </div>
 
       {/* Hero Content Body */}
@@ -96,29 +97,29 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
           </p>
 
           {/* Action CTAs: Play Story, Evidence & Brief, Bookmark */}
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1 sm:pt-2">
+          <div className="flex items-center gap-2 sm:gap-3 pt-1 sm:pt-2">
             {/* 1. Play Story */}
             <Link
               href={`/case/${activeCase.slug}`}
-              className="flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 bg-white hover:bg-white/90 text-[#141414] font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xs transition-all shadow-xl hover:scale-105 cursor-pointer"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-7 py-3 bg-white hover:bg-white/90 text-[#141414] font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xs transition-all shadow-xl hover:scale-105 cursor-pointer"
             >
               <span className="text-sm sm:text-base">▶</span>
-              <span>{language === 'en' ? 'Play Story' : 'स्टोरी शुरू करें'}</span>
+              <span className="truncate">{language === 'en' ? 'Play Story' : 'स्टोरी शुरू करें'}</span>
             </Link>
 
             {/* 2. Evidence & Brief */}
             <Link
               href={`/case/${activeCase.slug}#episode-2`}
-              className="flex items-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xs backdrop-blur-md transition-all cursor-pointer border border-white/20"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 sm:px-6 py-3 bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xs backdrop-blur-md transition-all cursor-pointer border border-white/20"
             >
               <span>ℹ</span>
-              <span>{language === 'en' ? 'Evidence & Brief' : 'साक्ष्य व ब्रीफ'}</span>
+              <span className="truncate">{language === 'en' ? 'Evidence' : 'साक्ष्य'}</span>
             </Link>
 
             {/* 3. Bookmark Toggle */}
             <button
               onClick={() => toggleBookmark(activeCase.slug)}
-              className={`p-2.5 sm:p-3 rounded-xs border transition-all cursor-pointer text-xs sm:text-sm font-bold flex items-center justify-center min-w-[38px] min-h-[38px] sm:min-w-[44px] sm:min-h-[44px] ${
+              className={`p-3 rounded-xs border transition-all cursor-pointer text-xs sm:text-sm font-bold flex items-center justify-center min-w-[44px] min-h-[44px] flex-shrink-0 ${
                 bookmarked
                   ? 'bg-[#E50914] text-white border-[#E50914]'
                   : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
@@ -132,7 +133,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
         </div>
 
         {/* Thumbnail Selector Bar for Cases */}
-        <div className="pt-4 sm:pt-6 mt-5 sm:mt-8 border-t border-white/10 flex items-center gap-2 overflow-x-auto scrollbar-none py-1">
+        <div className="pt-3 sm:pt-6 mt-4 sm:mt-8 border-t border-white/10 flex items-center gap-2 overflow-x-auto scrollbar-none py-1 w-full max-w-full">
           <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#a9a49a] hidden sm:inline flex-shrink-0">
             {language === 'en' ? 'Quick Switch:' : 'त्वरित चुनाव:'}
           </span>
@@ -151,7 +152,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
                 }`}
               >
                 <span>#{idx + 1}</span>
-                <span className="truncate max-w-[110px] sm:max-w-[160px] font-sans">{cTitle}</span>
+                <span className="truncate max-w-[100px] sm:max-w-[160px] font-sans">{cTitle}</span>
               </button>
             );
           })}

@@ -30,6 +30,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
@@ -37,6 +39,10 @@ body {
   color: var(--paper);
   font-family: var(--font-montserrat), var(--font-devanagari), sans-serif;
   font-feature-settings: "kern" 1, "liga" 1;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
 }
 
 @keyframes fadeIn {

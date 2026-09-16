@@ -19,7 +19,7 @@ export default function HomePage() {
   const featuredCase = getFeaturedCases()[0] || allCases[0];
 
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative md:snap-y md:snap-proximity scroll-smooth">
+    <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#0E1016] text-[#F3EFE6] relative md:snap-y md:snap-proximity scroll-smooth">
       <Header />
       <HomeSectionNav />
 
