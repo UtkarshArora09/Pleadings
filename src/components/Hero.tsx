@@ -53,6 +53,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
           src={heroImg}
           alt={activeCase.poster.alt || displayTitle}
           fill
+          unoptimized={typeof heroImg === 'string' && (heroImg.startsWith('data:') || heroImg.startsWith('blob:'))}
           priority
           sizes="100vw"
           onError={() => setHeroImg(defaultHeroFallback)}

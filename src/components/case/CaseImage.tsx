@@ -27,6 +27,8 @@ export function CaseImage({
   const isIllustration = provenance === 'illustration';
   const resolvedAlt = isIllustration && !alt.startsWith('Illustration:') ? `Illustration: ${alt}` : alt;
 
+  const isDataUri = typeof src === 'string' && (src.startsWith('data:') || src.startsWith('blob:'));
+
   return (
     <div
       className={`relative overflow-hidden rounded-xs select-none ${
@@ -38,6 +40,7 @@ export function CaseImage({
           src={src}
           alt={resolvedAlt}
           fill
+          unoptimized={isDataUri}
           priority={priority}
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover object-center"
@@ -48,6 +51,7 @@ export function CaseImage({
           alt={resolvedAlt}
           width={width || 600}
           height={height || 338}
+          unoptimized={isDataUri}
           priority={priority}
           className="w-full h-auto object-cover object-center"
         />

@@ -45,6 +45,7 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
                   src={c.poster.src}
                   alt={c.poster.alt}
                   fill
+                  unoptimized={typeof c.poster.src === 'string' && (c.poster.src.startsWith('data:') || c.poster.src.startsWith('blob:'))}
                   sizes="80px"
                   className="object-cover group-hover:scale-105 transition-transform"
                 />

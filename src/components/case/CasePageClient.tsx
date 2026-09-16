@@ -130,34 +130,40 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (initialCase) {
-      setCaseData(initialCase);
-      return;
-    }
-
     let isMounted = true;
 
-    async function loadClientCase() {
+    // 1. Check local storage first (instant client cache for user-uploaded custom images)
+    if (typeof window !== 'undefined') {
       try {
-        setLoading(true);
+        const cleanSlug = slug.toLowerCase().trim();
+        const possibleKeys = [
+          `pleadings_case_${slug}`,
+          `pleadings_case_${cleanSlug}`,
+          'pleadings_case_rinku-rukshar-habeas-corpus-custody-case',
+          'pleadings_case_rinku-rukshar-habeas-corpus-case',
+        ];
 
-        // 1. Check local storage first (instant client cache)
-        if (typeof window !== 'undefined') {
-          try {
-            const savedRaw = localStorage.getItem(`pleadings_case_${slug}`);
-            if (savedRaw) {
-              const parsed = JSON.parse(savedRaw);
-              if (parsed && isMounted) {
-                const normalized = normalizeToCaseFile(parsed, slug);
+        for (const key of possibleKeys) {
+          const savedRaw = localStorage.getItem(key);
+          if (savedRaw) {
+            const parsed = JSON.parse(savedRaw);
+            if (parsed && (parsed.poster?.src || parsed.bannerImage || parsed.panels || parsed.episodes)) {
+              const normalized = normalizeToCaseFile(parsed, slug);
+              if (isMounted) {
                 setCaseData(normalized);
                 setLoading(false);
               }
+              break;
             }
-          } catch {
-            // continue
           }
         }
+      } catch (err) {
+        console.warn('Error reading dynamic case from localStorage:', err);
+      }
+    }
 
+    async function loadClientCase() {
+      try {
         // 2. Fetch from API
         const res = await fetch(`/api/cases/${slug}`);
         if (res.ok) {
@@ -182,12 +188,12 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
           }
         }
 
-        if (isMounted && !caseData) {
+        if (isMounted && !caseData && !initialCase) {
           setError('Case record could not be found.');
         }
       } catch (err) {
         console.error('Failed to load dynamic case on client:', err);
-        if (isMounted && !caseData) {
+        if (isMounted && !caseData && !initialCase) {
           setError('Failed to load case dossier.');
         }
       } finally {
