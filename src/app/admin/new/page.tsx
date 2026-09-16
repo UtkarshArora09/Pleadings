@@ -18,8 +18,8 @@ export default function NewCasePage() {
     judgmentUrl: '',
     judgmentText: '',
     additionalNotes: '',
-    reviewer: 'Adv. Girish Kr. Srivastava',
-    enrolmentNumber: 'D/842/1991',
+    reviewer: '',
+    enrolmentNumber: '',
     rank: 1,
     makeTrendingTop10: true,
   });
@@ -30,8 +30,17 @@ export default function NewCasePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title || !formData.court || !formData.statuteSections || !formData.factsSummary) {
-      setError('Please fill in the required fields: Title, Court, Statute/Sections, and Facts Summary.');
+    if (
+      !formData.title ||
+      !formData.court ||
+      !formData.statuteSections ||
+      !formData.factsSummary ||
+      !formData.reviewer.trim() ||
+      !formData.enrolmentNumber.trim()
+    ) {
+      setError(
+        'Please fill in all required fields: Title, Court, Statute/Sections, Facts Summary, Reviewing Advocate, and Bar Enrolment Number.'
+      );
       return;
     }
 
@@ -219,10 +228,10 @@ export default function NewCasePage() {
               <input
                 type="text"
                 required
-                placeholder="e.g. Adv. Girish Kr. Srivastava"
+                placeholder="e.g. Adv. Counsel Name"
                 value={formData.reviewer}
                 onChange={(e) => setFormData({ ...formData, reviewer: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-semibold px-3.5 py-2.5 rounded-xs focus:outline-none"
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
               />
             </div>
 
@@ -233,10 +242,10 @@ export default function NewCasePage() {
               <input
                 type="text"
                 required
-                placeholder="e.g. D/842/1991"
+                placeholder="e.g. D/1042/2012"
                 value={formData.enrolmentNumber}
                 onChange={(e) => setFormData({ ...formData, enrolmentNumber: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-semibold px-3.5 py-2.5 rounded-xs focus:outline-none"
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
               />
             </div>
           </div>
