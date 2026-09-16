@@ -116,9 +116,9 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
 
 async function compressImageForUpload(
   file: File,
-  maxWidth = 1280,
-  maxHeight = 720,
-  quality = 0.75
+  maxWidth = 1024,
+  maxHeight = 576,
+  quality = 0.65
 ): Promise<{ blob: Blob; dataUrl: string; fileName: string }> {
   return new Promise((resolve) => {
     if (file.type === 'image/svg+xml') {

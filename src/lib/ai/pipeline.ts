@@ -69,6 +69,15 @@ function getCaseVisuals(genre: string, title: string) {
     };
   }
 
+  if (lower.includes('rinku') || lower.includes('rukshar') || lower.includes('habeas') || lower.includes('custody') || lower.includes('hizanat')) {
+    return {
+      poster: '/images/cases/shah-bano.jpg',
+      exhibitPhoto: '/images/cases/maneka-gandhi.jpg',
+      courtVerdict: '/images/cases/maneka-gandhi.jpg',
+      genreLabel: 'HABEAS CORPUS & CHILD CUSTODY WRITS',
+    };
+  }
+
   if (lower.includes('shah bano') || lower.includes('maintenance') || lower.includes('125')) {
     return {
       poster: '/images/cases/shah-bano.jpg',

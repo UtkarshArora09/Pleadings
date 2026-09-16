@@ -169,6 +169,20 @@ export function normalizeCaseData(raw: any): CaseData {
   };
 }
 
+function matchSlug(caseSlug?: string, querySlug?: string): boolean {
+  if (!caseSlug || !querySlug) return false;
+  const a = caseSlug.toLowerCase().trim();
+  const b = querySlug.toLowerCase().trim();
+  if (a === b) return true;
+  if (
+    (a === 'rinku-rukshar-habeas-corpus-custody-case' || a === 'rinku-rukshar-habeas-corpus-case') &&
+    (b === 'rinku-rukshar-habeas-corpus-custody-case' || b === 'rinku-rukshar-habeas-corpus-case')
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export const CaseStore = {
   getAll(): CaseData[] {
     return ensureInitialized();
@@ -181,18 +195,35 @@ export const CaseStore = {
 
   getBySlug(slug: string): CaseData | null {
     const all = ensureInitialized();
-    const found = all.find((c) => c.slug === slug);
+    const found = all.find((c) => matchSlug(c.slug, slug));
     if (found) return normalizeCaseData(found);
 
-    // Fallback: check content/cases/${slug}.json on disk
+    // Fallback 1: check static CASES_DATA
+    const staticCase = CASES_DATA.find((c) => matchSlug(c.slug, slug));
+    if (staticCase) {
+      const normalized = normalizeCaseData(staticCase);
+      this.create(normalized);
+      return normalized;
+    }
+
+    // Fallback 2: check content/cases/*.json on disk
     try {
-      const caseFilePath = path.join(process.cwd(), 'content', 'cases', `${slug}.json`);
-      if (fs.existsSync(caseFilePath)) {
-        const raw = fs.readFileSync(caseFilePath, 'utf8');
-        const parsed = JSON.parse(raw);
-        const normalized = normalizeCaseData(parsed);
-        this.create(normalized);
-        return normalized;
+      const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+      const possibleFilenames = [
+        `${cleanSlug}.json`,
+        'rinku-rukshar-habeas-corpus-case.json',
+      ];
+      for (const fn of possibleFilenames) {
+        const caseFilePath = path.join(process.cwd(), 'content', 'cases', fn);
+        if (fs.existsSync(caseFilePath)) {
+          const raw = fs.readFileSync(caseFilePath, 'utf8');
+          const parsed = JSON.parse(raw);
+          if (matchSlug(parsed.slug, slug) || fn.includes('rinku')) {
+            const normalized = normalizeCaseData(parsed);
+            this.create(normalized);
+            return normalized;
+          }
+        }
       }
     } catch (err) {
       console.warn(`Could not read case from content/cases/${slug}.json:`, err);
@@ -204,7 +235,7 @@ export const CaseStore = {
   create(newCase: any): CaseData {
     const normalized = normalizeCaseData(newCase);
     const all = ensureInitialized();
-    const existingIdx = all.findIndex((c) => c.slug === normalized.slug);
+    const existingIdx = all.findIndex((c) => matchSlug(c.slug, normalized.slug));
     
     const timestamp = new Date().toISOString();
     const caseToSave: CaseData = {
@@ -228,15 +259,24 @@ export const CaseStore = {
 
   update(slug: string, updates: Partial<CaseData>): CaseData | null {
     const all = ensureInitialized();
-    const idx = all.findIndex((c) => c.slug === slug);
-    if (idx === 0 || idx > 0) {
+    let idx = all.findIndex((c) => matchSlug(c.slug, slug));
+    if (idx < 0) {
+      const loaded = this.getBySlug(slug);
+      if (loaded) {
+        const refreshed = ensureInitialized();
+        idx = refreshed.findIndex((c) => matchSlug(c.slug, slug));
+      }
+    }
+
+    if (idx >= 0) {
+      const current = ensureInitialized();
       const updatedCase: CaseData = normalizeCaseData({
-        ...all[idx],
+        ...current[idx],
         ...updates,
-        slug: updates.slug || all[idx].slug,
+        slug: updates.slug || current[idx].slug,
         updatedAt: new Date().toISOString(),
       });
-      const updatedList = [...all];
+      const updatedList = [...current];
       updatedList[idx] = updatedCase;
       persistCases(updatedList);
       return updatedCase;
@@ -246,7 +286,7 @@ export const CaseStore = {
 
   delete(slug: string): boolean {
     const all = ensureInitialized();
-    const filtered = all.filter((c) => c.slug !== slug);
+    const filtered = all.filter((c) => !matchSlug(c.slug, slug));
     if (filtered.length !== all.length) {
       persistCases(filtered);
       return true;
