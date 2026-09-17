@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://pleadings.in'),
   title: 'Pleadings — Real Indian Court Judgments as Verified Stories',
   description:
-    'Pleadings transforms real, closed, verified Indian court cases into interactive courtroom thrillers, evidence reels, and law student briefs. Sourced directly from certified court judgments.',
+    'Pleadings transforms real, closed, verified Indian court cases into interactive courtroom thrillers, evidence reels, and law student briefs. Verified against the original/officially published judgment.',
   keywords: [
     'legal media',
     'indian law',

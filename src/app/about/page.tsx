@@ -94,7 +94,7 @@ export default function AboutPage() {
               </div>
             </div>
             <p className="text-xs sm:text-sm text-[#E0DCD3] leading-relaxed">
-              Every case published on Pleadings undergoes scrutiny by enrolled advocates to ensure paragraph pinpoints, statutory citations (including IPC→BNS concordance), and ratio-obiter demarcations strictly reflect certified court records.
+              Every case published on Pleadings undergoes scrutiny by enrolled advocates to ensure paragraph pinpoints, statutory citations (including IPC→BNS concordance), and ratio-obiter demarcations strictly reflect and are verified against the original/officially published judgment.
             </p>
           </div>
         </section>

@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: TermPageProps): Promise<Metad
   }
 
   const title = `${item.term} — Meaning, Statute & Landmark Case Applications | Pleadings`;
-  const description = `${item.plainMeaning.en} Sourced from certified Indian court precedents.`;
+  const description = `${item.plainMeaning.en} Verified against the original/officially published judgment.`;
 
   return {
     title,

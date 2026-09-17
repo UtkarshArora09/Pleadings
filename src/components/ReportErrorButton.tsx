@@ -98,7 +98,7 @@ export function ReportErrorButton({
                 <div className="text-3xl">✓</div>
                 <div className="font-bold text-sm">Correction Logged</div>
                 <p className="text-xs text-white/70">
-                  Our reviewing advocate will verify against certified court records and update the corrections log.
+                  Our reviewing advocate will verify against the original/officially published judgment and update the corrections log.
                 </p>
               </div>
             ) : (

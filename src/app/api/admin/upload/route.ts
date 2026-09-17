@@ -43,18 +43,32 @@ export async function POST(request: NextRequest) {
     const fileName = `${safeSlug}-${safeType}-${Date.now()}.${ext}`;
 
     let publicUrl = `/images/cases/${fileName}`;
-    try {
-      const uploadDir = path.join(process.cwd(), 'public', 'images', 'cases');
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
 
-      const filePath = path.join(uploadDir, fileName);
-      fs.writeFileSync(filePath, buffer);
-    } catch (fsErr) {
-      console.warn('Filesystem write failed (Vercel serverless environment), returning Data URI:', fsErr);
+    // 1. Attempt Supabase Storage upload (permanent cloud storage accessible from everywhere)
+    const { uploadImageToSupabase, isSupabaseConfigured } = await import('@/lib/supabase');
+    if (isSupabaseConfigured()) {
       const mime = file.type || (ext === 'png' ? 'image/png' : 'image/jpeg');
-      publicUrl = `data:${mime};base64,${buffer.toString('base64')}`;
+      const supabaseUrl = await uploadImageToSupabase(buffer, fileName, mime);
+      if (supabaseUrl) {
+        publicUrl = supabaseUrl;
+      }
+    }
+
+    // 2. Fallback: Local filesystem or Data URI
+    if (!publicUrl.startsWith('http')) {
+      try {
+        const uploadDir = path.join(process.cwd(), 'public', 'images', 'cases');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        const filePath = path.join(uploadDir, fileName);
+        fs.writeFileSync(filePath, buffer);
+      } catch (fsErr) {
+        console.warn('Filesystem write failed (Vercel serverless environment), returning Data URI:', fsErr);
+        const mime = file.type || (ext === 'png' ? 'image/png' : 'image/jpeg');
+        publicUrl = `data:${mime};base64,${buffer.toString('base64')}`;
+      }
     }
 
     return NextResponse.json({

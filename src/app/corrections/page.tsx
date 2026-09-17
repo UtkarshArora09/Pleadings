@@ -46,7 +46,7 @@ export default function CorrectionsPage() {
             Corrections & Clarifications Log
           </h1>
           <p className="text-sm sm:text-base text-[#a9a49a] font-sans leading-relaxed">
-            Pleadings upholds an open corrections policy. Whenever a typo, legal citation, or factual error is reported and verified against certified court records, it is documented here with the date and exact nature of the change.
+            Pleadings upholds an open corrections policy. Whenever a typo, legal citation, or factual error is reported and verified against the original/officially published judgment, it is documented here with the date and exact nature of the change.
           </p>
         </div>
 

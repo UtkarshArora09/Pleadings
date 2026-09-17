@@ -68,7 +68,7 @@ export default async function Image() {
           }}
         >
           <div style={{ fontSize: '18px', color: '#a9a49a', fontFamily: 'sans-serif' }}>
-            Instant bi-directional legal mapping cross-referenced with certified judgments
+            Instant bi-directional legal mapping verified against the original/officially published judgment
           </div>
           <div
             style={{

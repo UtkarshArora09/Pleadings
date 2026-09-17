@@ -104,7 +104,7 @@ export default function HomePage() {
               PLEADINGS · LEGAL MEDIA
             </div>
             <p className="text-[11px] text-[#7a766e]">
-              Certified Indian Court Judgments as Verified, Episodic Courtroom Experiences.
+              Verified against the original/officially published judgment.
             </p>
           </div>
 
@@ -128,8 +128,8 @@ export default function HomePage() {
         </div>
 
         <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-white/40">
-          <div>© {new Date().getFullYear()} Pleadings. All rights reserved. Sourced from certified public court records.</div>
-          <div>Transforming certified Indian judgments into transparent legal media.</div>
+          <div>© {new Date().getFullYear()} Pleadings. All rights reserved. Verified against the original/officially published judgment.</div>
+          <div>Transforming verified Indian judgments into transparent legal media.</div>
         </div>
       </footer>
     </main>

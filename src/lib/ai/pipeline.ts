@@ -1,5 +1,6 @@
 import { CaseFile, Episode, Exhibit, Block, CaseStatusCode } from '@/types/case';
 import { validateCase } from '@/lib/validateCase';
+import { getCaseVisualPrompts } from '@/lib/ai/visualPrompts';
 
 export interface AdminIngestPayload {
   title: string;

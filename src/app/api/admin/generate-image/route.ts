@@ -132,23 +132,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Save image to public/images/cases/
+    // Save image to Supabase Storage or public/images/cases/
     const safeSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
     const safeType = type.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
     const fileName = `${safeSlug}-${safeType}-${Date.now()}.jpg`;
 
     let publicUrl = `/images/cases/${fileName}`;
-    try {
-      const uploadDir = path.join(process.cwd(), 'public', 'images', 'cases');
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
 
-      const filePath = path.join(uploadDir, fileName);
-      fs.writeFileSync(filePath, imageBuffer);
-    } catch (fsErr) {
-      console.warn('Filesystem write failed (Vercel serverless environment), returning Data URI:', fsErr);
-      publicUrl = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`;
+    // 1. Attempt Supabase Storage upload (permanent cloud storage accessible across production & localhost)
+    const { uploadImageToSupabase, isSupabaseConfigured } = await import('@/lib/supabase');
+    if (isSupabaseConfigured()) {
+      const supabaseUrl = await uploadImageToSupabase(imageBuffer, fileName, 'image/jpeg');
+      if (supabaseUrl) {
+        publicUrl = supabaseUrl;
+      }
+    }
+
+    // 2. Fallback: Local filesystem or Data URI
+    if (!publicUrl.startsWith('http')) {
+      try {
+        const uploadDir = path.join(process.cwd(), 'public', 'images', 'cases');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        const filePath = path.join(uploadDir, fileName);
+        fs.writeFileSync(filePath, imageBuffer);
+      } catch (fsErr) {
+        console.warn('Filesystem write failed (Vercel serverless environment), returning Data URI:', fsErr);
+        publicUrl = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`;
+      }
     }
 
     return NextResponse.json({

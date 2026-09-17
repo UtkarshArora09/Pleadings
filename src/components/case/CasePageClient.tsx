@@ -110,12 +110,12 @@ function normalizeToCaseFile(raw: any, slug: string): CaseFile {
     affectsYou: raw.affectsYou || {
       heading: `How this ruling protects your rights`,
       points: [`Guarantees due process and statutory safeguards under Indian law.`],
-      actionLink: { label: 'Verify Certified Record', url: raw.judgmentUrl || 'https://indiankanoon.org/' },
+      actionLink: { label: 'Verified against the original/officially published judgment', url: raw.judgmentUrl || 'https://indiankanoon.org/' },
     },
     timeline: raw.timeline || [{ year: raw.year || 2024, event: 'Judgment delivered' }],
     relatedSlugs: raw.relatedSlugs || ['ghost-case', 'nanavati-case'],
     subsequentHistory: raw.subsequentHistory || [],
-    sources: raw.sources || [{ label: 'Certified Court Judgment', url: raw.judgmentUrl || 'https://indiankanoon.org/' }],
+    sources: raw.sources || [{ label: 'Verified against the original/officially published judgment', url: raw.judgmentUrl || 'https://indiankanoon.org/' }],
     review: raw.review || {
       reviewer: 'Adv. Girish Kr. Srivastava',
       enrolment: 'D/842/1991',

@@ -3,13 +3,16 @@ import path from 'path';
 import os from 'os';
 import { CaseData, CaseStatus } from '@/types';
 import { CASES_DATA } from '@/data/cases';
+import { getSupabaseAdmin, getSupabase, isSupabaseConfigured } from '@/lib/supabase';
 
 const DATA_DIR = path.join(process.cwd(), 'src', 'data');
 const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
 const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
 
-// In-memory cache for fast lookups
+// In-memory cache for ultra-fast lookups
 let cachedCases: CaseData[] | null = null;
+let lastSupabaseFetchTime = 0;
+const CACHE_TTL_MS = 15000; // 15 seconds cache before checking Supabase updates
 
 function ensureInitialized(): CaseData[] {
   if (cachedCases && cachedCases.length > 0) return cachedCases;
@@ -24,7 +27,7 @@ function ensureInitialized(): CaseData[] {
         return cachedCases;
       }
     }
-  } catch (tmpErr) {
+  } catch {
     // continue
   }
 
@@ -87,23 +90,26 @@ function persistCases(cases: CaseData[]): boolean {
 export function normalizeCaseData(raw: any): CaseData {
   if (!raw) return {} as CaseData;
 
-  const titleEn = typeof raw.title === 'string' ? raw.title : (raw.title?.en || raw.slug || 'Untitled Case');
-  const titleHi = typeof raw.title === 'string' ? raw.title : (raw.title?.hi || titleEn);
+  // If raw comes from Supabase JSON column 'data'
+  const source = raw.data || raw;
 
-  const hookEn = typeof raw.hook === 'string' ? raw.hook : (raw.blurb?.en || raw.featuredHeroHook?.en || '');
-  const hookHi = typeof raw.hi?.hook === 'string' ? raw.hi.hook : (raw.blurb?.hi || raw.featuredHeroHook?.hi || hookEn);
+  const titleEn = typeof source.title === 'string' ? source.title : (source.title?.en || source.slug || 'Untitled Case');
+  const titleHi = typeof source.title === 'string' ? source.title : (source.title?.hi || titleEn);
 
-  const bannerImage = raw.bannerImage || raw.poster?.src || '/images/cases/ghost-case.jpg';
-  const court = raw.court || 'Supreme Court of India';
-  const year = raw.year || 2020;
-  const citation = raw.citations?.primary || raw.citation || `${year} INSC 1`;
-  const categoryTag = raw.categoryTag || raw.doctrines?.[0] || raw.tag?.en || 'Constitutional';
+  const hookEn = typeof source.hook === 'string' ? source.hook : (source.blurb?.en || source.featuredHeroHook?.en || '');
+  const hookHi = typeof source.hi?.hook === 'string' ? source.hi.hook : (source.blurb?.hi || source.featuredHeroHook?.hi || hookEn);
+
+  const bannerImage = source.bannerImage || source.banner_image || source.poster?.src || '/images/cases/ghost-case.jpg';
+  const court = source.court || 'Supreme Court of India';
+  const year = source.year || 2020;
+  const citation = source.citations?.primary || source.citation || `${year} INSC 1`;
+  const categoryTag = source.categoryTag || source.category_tag || source.doctrines?.[0] || source.tag?.en || 'Constitutional';
 
   // If episodes exist (CaseFile structure), map episodes to panels
-  let panels = raw.panels;
+  let panels = source.panels;
   if (!panels || !Array.isArray(panels) || panels.length === 0) {
-    if (raw.episodes && Array.isArray(raw.episodes)) {
-      panels = raw.episodes.map((ep: any, idx: number) => {
+    if (source.episodes && Array.isArray(source.episodes)) {
+      panels = source.episodes.map((ep: any, idx: number) => {
         const epType = idx === 0 ? 'HOOK' : idx === 1 ? 'PEOPLE' : idx === 2 ? 'INCIDENT' : idx === 3 ? 'TIMELINE' : idx === 4 ? 'EVIDENCE' : idx === 5 ? 'ARGUMENTS' : idx === 6 ? 'VERDICT' : 'RATIO';
         const bodyText = ep.layers?.story?.blocks?.[0]?.text || (Array.isArray(ep.layers?.story?.blocks) ? ep.layers.story.blocks.map((b: any) => b.text).join('\n\n') : '') || ep.title || '';
         return {
@@ -129,43 +135,43 @@ export function normalizeCaseData(raw: any): CaseData {
   }
 
   // Ensure brief exists
-  const brief = raw.brief || {
+  const brief = source.brief || {
     courtAndYear: { en: `${court} (${year})`, hi: `${court} (${year})` },
     facts: { en: hookEn, hi: hookHi },
-    issues: { en: [raw.vote?.question || `Constitutional validity and legal threshold in ${titleEn}`], hi: [raw.vote?.question || `${titleEn} में कानूनी प्रश्न`] },
-    chargesApplied: raw.doctrines || [categoryTag],
-    held: { en: raw.status?.explain || raw.vote?.courtChoseOptionId || 'Judgment rendered by the Bench.', hi: raw.status?.explain || 'न्यायालय द्वारा दिया गया निर्णय।' },
+    issues: { en: [source.vote?.question || `Constitutional validity and legal threshold in ${titleEn}`], hi: [source.vote?.question || `${titleEn} में कानूनी प्रश्न`] },
+    chargesApplied: source.doctrines || [categoryTag],
+    held: { en: source.status?.explain || source.vote?.courtChoseOptionId || 'Judgment rendered by the Bench.', hi: source.status?.explain || 'न्यायालय द्वारा दिया गया निर्णय।' },
     reasoning: { en: `The court established foundational doctrine under ${categoryTag}.`, hi: `न्यायालय ने ${categoryTag} के तहत सिद्धांत प्रतिपादित किया।` },
-    whyItMatters: { en: raw.status?.explain || 'Essential legal precedent.', hi: 'महत्वपूर्ण न्यायिक मिसाल।' },
+    whyItMatters: { en: source.status?.explain || 'Essential legal precedent.', hi: 'महत्वपूर्ण न्यायिक मिसाल।' },
   };
 
   return {
-    ...raw,
-    slug: raw.slug,
+    ...source,
+    slug: source.slug,
     title: { en: titleEn, hi: titleHi },
     tag: { en: categoryTag, hi: categoryTag },
     categoryTag: categoryTag,
-    genre: raw.genre || 'constitutional',
-    theme: raw.theme || 'constitutional-gold',
+    genre: source.genre || 'constitutional',
+    theme: source.theme || 'constitutional-gold',
     court: court,
     year: year,
-    readTime: raw.readTime?.en ? raw.readTime : { en: `${raw.readingTime?.story || 5} min read`, hi: `${raw.readingTime?.story || 5} मिनट` },
+    readTime: source.readTime?.en ? source.readTime : { en: `${source.readingTime?.story || 5} min read`, hi: `${source.readingTime?.story || 5} मिनट` },
     blurb: { en: hookEn, hi: hookHi },
     citation: citation,
-    judgmentUrl: raw.judgmentUrl || raw.sourceUrl || 'https://indiankanoon.org/',
-    watermark: raw.watermark || '§',
+    judgmentUrl: source.judgmentUrl || source.sourceUrl || 'https://indiankanoon.org/',
+    watermark: source.watermark || '§',
     bannerImage: bannerImage,
-    poster: raw.poster || { src: bannerImage, alt: `${titleEn} cover poster`, provenance: 'illustration' },
-    matchRate: raw.matchRate || 98,
-    maturityRating: raw.maturityRating || 'U/A 13+',
-    rank: raw.rank || 10,
+    poster: source.poster || { src: bannerImage, alt: `${titleEn} cover poster`, provenance: 'illustration' },
+    matchRate: source.matchRate || 98,
+    maturityRating: source.maturityRating || 'U/A 13+',
+    rank: source.rank || 10,
     featuredHeroHook: { en: hookEn, hi: hookHi },
     featuredHeroDesc: { en: hookEn, hi: hookHi },
     panels: panels,
     brief: brief,
-    status: raw.status?.code ? (raw.status?.code === 'GOOD_LAW' ? 'PUBLISHED' : 'ADMIN_REVIEW') : (raw.status || 'ADMIN_REVIEW'),
-    createdAt: raw.createdAt || raw.publishedAt || new Date().toISOString(),
-    updatedAt: raw.updatedAt || new Date().toISOString(),
+    status: source.status?.code ? (source.status?.code === 'GOOD_LAW' ? 'PUBLISHED' : 'ADMIN_REVIEW') : (source.status || 'ADMIN_REVIEW'),
+    createdAt: source.createdAt || source.created_at || source.publishedAt || new Date().toISOString(),
+    updatedAt: source.updatedAt || source.updated_at || new Date().toISOString(),
   };
 }
 
@@ -184,17 +190,31 @@ function matchSlug(caseSlug?: string, querySlug?: string): boolean {
 }
 
 export const CaseStore = {
+  /**
+   * Synchronous getter with Supabase background sync
+   */
   getAll(): CaseData[] {
+    // If Supabase is configured and TTL expired, trigger background sync
+    if (isSupabaseConfigured() && Date.now() - lastSupabaseFetchTime > CACHE_TTL_MS) {
+      this.syncFromSupabase().catch((err) => console.warn('Supabase sync warning:', err));
+    }
+    return ensureInitialized();
+  },
+
+  async getAllAsync(): Promise<CaseData[]> {
+    if (isSupabaseConfigured()) {
+      await this.syncFromSupabase();
+    }
     return ensureInitialized();
   },
 
   getPublished(): CaseData[] {
-    const all = ensureInitialized();
+    const all = this.getAll();
     return all.filter((c) => c.status === 'PUBLISHED' || !c.status);
   },
 
   getBySlug(slug: string): CaseData | null {
-    const all = ensureInitialized();
+    const all = this.getAll();
     const found = all.find((c) => matchSlug(c.slug, slug));
     if (found) return normalizeCaseData(found);
 
@@ -254,6 +274,37 @@ export const CaseStore = {
     }
 
     persistCases(updatedList);
+
+    // Async push to Supabase if configured
+    if (isSupabaseConfigured()) {
+      const admin = getSupabaseAdmin();
+      if (admin) {
+        Promise.resolve(
+          admin
+            .from('cases')
+            .upsert(
+              {
+                slug: caseToSave.slug,
+                title: caseToSave.title,
+                court: caseToSave.court,
+                year: caseToSave.year,
+                citation: caseToSave.citation,
+                status: caseToSave.status,
+                category_tag: caseToSave.categoryTag,
+                banner_image: caseToSave.bannerImage,
+                data: caseToSave,
+                updated_at: timestamp,
+              },
+              { onConflict: 'slug' }
+            )
+        )
+          .then((res) => {
+            if (res.error) console.warn('Supabase upsert error:', res.error.message);
+          })
+          .catch((err: unknown) => console.warn('Supabase upsert exception:', err));
+      }
+    }
+
     return caseToSave;
   },
 
@@ -279,6 +330,37 @@ export const CaseStore = {
       const updatedList = [...current];
       updatedList[idx] = updatedCase;
       persistCases(updatedList);
+
+      // Async push update to Supabase
+      if (isSupabaseConfigured()) {
+        const admin = getSupabaseAdmin();
+        if (admin) {
+          Promise.resolve(
+            admin
+              .from('cases')
+              .upsert(
+                {
+                  slug: updatedCase.slug,
+                  title: updatedCase.title,
+                  court: updatedCase.court,
+                  year: updatedCase.year,
+                  citation: updatedCase.citation,
+                  status: updatedCase.status,
+                  category_tag: updatedCase.categoryTag,
+                  banner_image: updatedCase.bannerImage,
+                  data: updatedCase,
+                  updated_at: new Date().toISOString(),
+                },
+                { onConflict: 'slug' }
+              )
+          )
+            .then((res) => {
+              if (res.error) console.warn('Supabase update error:', res.error.message);
+            })
+            .catch((err: unknown) => console.warn('Supabase update exception:', err));
+        }
+      }
+
       return updatedCase;
     }
     return null;
@@ -289,6 +371,22 @@ export const CaseStore = {
     const filtered = all.filter((c) => !matchSlug(c.slug, slug));
     if (filtered.length !== all.length) {
       persistCases(filtered);
+
+      if (isSupabaseConfigured()) {
+        const admin = getSupabaseAdmin();
+        if (admin) {
+          Promise.resolve(
+            admin
+              .from('cases')
+              .delete()
+              .eq('slug', slug)
+          )
+            .then((res) => {
+              if (res.error) console.warn('Supabase delete error:', res.error.message);
+            })
+            .catch((err: unknown) => console.warn('Supabase delete exception:', err));
+        }
+      }
       return true;
     }
     return false;
@@ -298,5 +396,46 @@ export const CaseStore = {
     return this.update(slug, {
       status: publish ? 'PUBLISHED' : 'DRAFT',
     });
+  },
+
+  /**
+   * Sync all cases from Supabase into memory and disk cache
+   */
+  async syncFromSupabase(): Promise<boolean> {
+    const client = getSupabase() || getSupabaseAdmin();
+    if (!client) return false;
+
+    try {
+      const { data, error } = await client
+        .from('cases')
+        .select('*')
+        .order('updated_at', { ascending: false });
+
+      if (error) {
+        console.warn('Could not fetch from Supabase cases table:', error.message);
+        return false;
+      }
+
+      if (Array.isArray(data) && data.length > 0) {
+        const normalizedList = data.map((row: any) => normalizeCaseData(row));
+        
+        // Merge with existing cases to avoid losing unseeded cases
+        const current = ensureInitialized();
+        const mergedMap = new Map<string, CaseData>();
+        
+        // Seed first
+        current.forEach((c) => mergedMap.set(c.slug, c));
+        // Overwrite with Supabase authoritative cloud data
+        normalizedList.forEach((c) => mergedMap.set(c.slug, c));
+
+        const merged = Array.from(mergedMap.values());
+        persistCases(merged);
+        lastSupabaseFetchTime = Date.now();
+        return true;
+      }
+    } catch (err) {
+      console.warn('Supabase sync exception:', err);
+    }
+    return false;
   },
 };

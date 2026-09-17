@@ -63,7 +63,7 @@ function getCaseForPage(slug: string): CaseFile | null {
       timeline: dyn.timeline || [{ year: dyn.year || 2024, event: 'Judgment delivered' }],
       relatedSlugs: dyn.relatedSlugs || ['ghost-case', 'nanavati-case'],
       subsequentHistory: dyn.subsequentHistory || [],
-      sources: dyn.sources || [{ label: 'Certified Court Record', url: dyn.judgmentUrl || 'https://indiankanoon.org/' }],
+      sources: dyn.sources || [{ label: 'Verified against the original/officially published judgment', url: dyn.judgmentUrl || 'https://indiankanoon.org/' }],
       review: dyn.review || { reviewer: 'Adv. Girish Kr. Srivastava', enrolment: 'D/842/1991', reviewedOn: new Date().toISOString().split('T')[0] },
     } as unknown as CaseFile;
   }
@@ -89,7 +89,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   }
 
   const title = `${caseItem.title} (${caseItem.court}, ${caseItem.year}) | Pleadings`;
-  const description = `${caseItem.hook} Sourced from certified judgment ${caseItem.citations.primary}.`;
+  const description = `${caseItem.hook} Verified against the original/officially published judgment ${caseItem.citations.primary}.`;
   const url = `https://pleadings.in/case/${caseItem.slug}`;
   const ogImageUrl = `https://pleadings.in/api/share/${caseItem.slug}`;
 

@@ -1,5 +1,253 @@
 [
   {
+    "slug": "rinku-rukshar-habeas-corpus-custody-case",
+    "rank": 99,
+    "theme": "constitutional-gold",
+    "matchRate": 97,
+    "maturityRating": "U/A 13+",
+    "categoryTag": "Family & Constitutional Writs",
+    "genre": "constitutional",
+    "bannerImage": "/images/cases/rinku-rukshar-poster.jpg",
+    "readTime": {
+      "en": "5 min read",
+      "hi": "5 मिनट"
+    },
+    "watermark": "§",
+    "title": {
+      "en": "Rinku Rukshar v. State of U.P. and 4 Others",
+      "hi": "रिंकू रुखसार बनाम उत्तर प्रदेश राज्य व 4 अन्य"
+    },
+    "court": "High Court of Judicature at Allahabad",
+    "year": 2020,
+    "citation": "Habeas Corpus Writ Petition No. 495 of 2020; 2020 Supreme(All) 903",
+    "judgmentUrl": "https://indiankanoon.org/docfragment/150989080/",
+    "tag": {
+      "en": "Family & Constitutional Writs",
+      "hi": "Family & Constitutional Writs"
+    },
+    "blurb": {
+      "en": "Habeas corpus writ by mother for child custody against father.",
+      "hi": "नाबालिग बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका।"
+    },
+    "featuredHeroHook": {
+      "en": "Habeas corpus writ by mother for child custody against father.",
+      "hi": "नाबालिग बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका।"
+    },
+    "featuredHeroDesc": {
+      "en": "Habeas corpus writ by mother for child custody against father.",
+      "hi": "नाबालिग बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका।"
+    },
+    "panels": [
+      {
+        "id": "panel-1",
+        "type": "HOOK",
+        "eyebrow": {
+          "en": "EPISODE 01 · THE CATALYST",
+          "hi": "एपिसोड 01 · विवाद की शुरुआत"
+        },
+        "headline": {
+          "en": "A Mother Dispossessed: The Eviction & Writ.",
+          "hi": "घर से निष्कासन और संवैधानिक याचिका।"
+        },
+        "body": {
+          "en": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son Asif, aged under six years.\n\nMarried in 2014, she alleged domestic cruelty and claimed she was assaulted and ejected from the matrimonial home while the father fled with the child.",
+          "hi": "अगस्त 2020 में रिंकू रुखसार ने 6 वर्ष से कम उम्र के पुत्र आसिफ की कस्टडी के लिए इलाहाबाद उच्च न्यायालय में बंदी प्रत्यक्षीकरण याचिका दायर की।"
+        },
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg"
+      },
+      {
+        "id": "panel-2",
+        "type": "PEOPLE",
+        "eyebrow": {
+          "en": "EPISODE 02 · DRAMATIS PERSONAE",
+          "hi": "एपिसोड 02 · पक्षकार और आपत्ति"
+        },
+        "headline": {
+          "en": "Paternal Guardianship vs. Maternal Hizanat.",
+          "hi": "पिता का संरक्षकता दावा और मां का हिज़ानत अधिकार।"
+        },
+        "body": {
+          "en": "The respondent father raised a preliminary objection that a biological father cannot be accused of illegal custody under personal law. The High Court rejected this, holding that maternal custody of infants under seven is protected by equity.",
+          "hi": "पिता ने आपत्ति जताई कि प्राकृतिक पिता के विरुद्ध बंदी प्रत्यक्षीकरण याचिका विचारणीय नहीं है। उच्च न्यायालय ने इसे खारिज करते हुए मां के हिज़ानत अधिकार को मान्यता दी।"
+        },
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-exhibit.jpg"
+      },
+      {
+        "id": "panel-3",
+        "type": "INCIDENT",
+        "eyebrow": {
+          "en": "EPISODE 03 · THE STATUTORY MATRIX",
+          "hi": "एपिसोड 03 · वैधानिक संतुलन"
+        },
+        "headline": {
+          "en": "Guardians and Wards Act §17 & Muslim Law §352.",
+          "hi": "अभिभावक अधिनियम धारा 17 व मुस्लिम पर्सनल लॉ धारा 352।"
+        },
+        "body": {
+          "en": "Under Section 352 of Mulla Mahomedan Law, a mother is entitled to custody of male infants until age seven. Depriving her of custody without judicial authority is unlawful under Article 226.",
+          "hi": "मुस्लिम विधि के तहत 7 वर्ष से कम आयु के बालक की कस्टडी पर मां का प्राथमिक अधिकार है जिसे बिना अदालती आदेश के नहीं छीना जा सकता।"
+        }
+      },
+      {
+        "id": "panel-4",
+        "type": "TIMELINE",
+        "eyebrow": {
+          "en": "EPISODE 04 · COURT INQUIRY",
+          "hi": "एपिसोड 04 · न्यायालय में पेशी"
+        },
+        "headline": {
+          "en": "Child Produced Before the Bench.",
+          "hi": "न्यायालय के समक्ष बालक की उपस्थिति।"
+        },
+        "body": {
+          "en": "The High Court directed State authorities to produce the minor child. Upon inquiry, the Court verified the infant age and the imperative need for maternal care.",
+          "hi": "उच्च न्यायालय के आदेश पर बालक को अदालत में पेश किया गया और अबोध उम्र में मां के स्नेह की अनिवार्यता दर्ज की गई।"
+        }
+      },
+      {
+        "id": "panel-5",
+        "type": "ARGUMENTS",
+        "eyebrow": {
+          "en": "EPISODE 05 · PARENS PATRIAE",
+          "hi": "एपिसोड 05 · कोर्ट का दायित्व"
+        },
+        "headline": {
+          "en": "Welfare of the Child is Paramount.",
+          "hi": "बाल कल्याण का सर्वोपरि सिद्धांत।"
+        },
+        "body": {
+          "en": "Applying Supreme Court jurisprudence in Tejaswini Gaud, the bench held that the welfare of the infant overrides statutory technicalities and claims of fatherhood.",
+          "hi": "सर्वोच्च न्यायालय के निर्णयों के आधार पर तय किया गया कि बालक का कल्याण तकनीकी कानूनों और पिता के दावों से सर्वोपरि है।"
+        },
+        "judgeDecision": {
+          "question": {
+            "en": "Should a writ of habeas corpus lie against a father for custody of an infant child?",
+            "hi": "क्या पिता के विरुद्ध बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका स्वीकार्य है?"
+          },
+          "subtext": {
+            "en": "Consider whether paternal guardianship bars writ jurisdiction when maternal custody is guaranteed by law.",
+            "hi": "विचार करें कि क्या पर्सनल लॉ के तहत पिता के संरक्षकता अधिकार पर मां की हिज़ानत प्रभावी है।"
+          },
+          "options": [
+            {
+              "id": "allow-writ",
+              "title": {
+                "en": "Allow Writ & Restore Custody to Mother",
+                "hi": "याचिका स्वीकार कर मां को कस्टडी दी जाए"
+              },
+              "reason": {
+                "en": "Child welfare and maternal hizanat protect the infant child.",
+                "hi": "बाल कल्याण और मां की हिज़ानत अबोध बालक की रक्षा करती है।"
+              },
+              "simulatedVotesPercent": 88,
+              "isActualVerdict": true
+            },
+            {
+              "id": "dismiss-writ",
+              "title": {
+                "en": "Dismiss Writ and Relegate to Family Court",
+                "hi": "याचिका खारिज कर फैमिली कोर्ट भेजा जाए"
+              },
+              "reason": {
+                "en": "The father is a natural legal guardian and regular civil suit is required.",
+                "hi": "पिता कानूनी संरक्षक है और नियमित दीवानी मुकदमा आवश्यक है।"
+              },
+              "simulatedVotesPercent": 12,
+              "isActualVerdict": false
+            }
+          ],
+          "judicialRationale": {
+            "en": "The High Court allowed the writ petition, restoring physical custody of the infant to the mother forthwith.",
+            "hi": "उच्च न्यायालय ने याचिका स्वीकार करते हुए बालक की कस्टडी तुरंत मां को सौंपने का निर्देश दिया।"
+          }
+        }
+      },
+      {
+        "id": "panel-6",
+        "type": "VERDICT",
+        "eyebrow": {
+          "en": "EPISODE 06 · THE VERDICT",
+          "hi": "एपिसोड 06 · ऐतिहासिक फैसला"
+        },
+        "headline": {
+          "en": "Writ Allowed: Immediate Custody to Mother.",
+          "hi": "रिट याचिका स्वीकार: मां को तत्काल कस्टडी।"
+        },
+        "stamp": {
+          "en": "HABEAS CORPUS ALLOWED · CUSTODY RESTORED",
+          "hi": "बंदी प्रत्यक्षीकरण स्वीकार · कस्टडी बहाल"
+        },
+        "body": {
+          "en": "The Allahabad High Court allowed the habeas corpus petition and ordered immediate restoration of custody to the mother, granting liberty to the father to approach Family Court for permanent guardianship.",
+          "hi": "इलाहाबाद उच्च न्यायालय ने रिट स्वीकार करते हुए बालक की कस्टडी तुरंत मां को सौंपी और पिता को फैमिली कोर्ट जाने की छूट दी।"
+        },
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-verdict.jpg"
+      },
+      {
+        "id": "panel-7",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 07 · THE RATIO",
+          "hi": "एपिसोड 07 · कानूनी नज़ीर"
+        },
+        "headline": {
+          "en": "Child Welfare Overrides Strict Personal Law.",
+          "hi": "पर्सनल लॉ पर बाल कल्याण की सर्वोच्चता।"
+        },
+        "body": {
+          "en": "The ruling established that constitutional courts exercising Article 226 will not permit procedural hurdles to deprive young infants of maternal custody.",
+          "hi": "फैसले ने स्थापित किया कि संवैधानिक अदालतें प्रक्रियात्मक बाधाओं को अबोध बालकों को मां से अलग करने की अनुमति नहीं देंगी।"
+        },
+        "citationFooter": "2020 Supreme(All) 903 · Allahabad High Court",
+        "judgmentUrl": "https://indiankanoon.org/docfragment/150989080/"
+      }
+    ],
+    "brief": {
+      "courtAndYear": {
+        "en": "High Court of Judicature at Allahabad · 2020",
+        "hi": "इलाहाबाद उच्च न्यायालय · 2020"
+      },
+      "facts": {
+        "en": "Petitioner Rinku Rukshar approached the High Court via a habeas corpus petition to recover custody of her minor son Asif (under six years) who was taken by the father.",
+        "hi": "रिंकू रुखसार ने पिता द्वारा ले जाए गए 6 वर्ष से कम उम्र के पुत्र आसिफ की कस्टडी के लिए बंदी प्रत्यक्षीकरण याचिका दायर की।"
+      },
+      "issues": {
+        "en": [
+          "Whether a writ of habeas corpus is maintainable against a biological father for custody of a minor child?",
+          "Whether the mother retains the right to hizanat of a child under seven years over paternal statutory guardianship?"
+        ],
+        "hi": [
+          "क्या पिता के विरुद्ध बच्चे की कस्टडी के लिए बंदी प्रत्यक्षीकरण याचिका विचारणीय है?",
+          "क्या सात वर्ष से कम आयु के बालक पर मां का हिज़ानत अधिकार पिता के संरक्षकता अधिकार पर प्रभावी है?"
+        ]
+      },
+      "chargesApplied": [
+        "Guardians and Wards Act 1890 (Sections 17, 25)",
+        "Muslim Personal Law (Principles of Mahomedan Law §352)"
+      ],
+      "held": {
+        "en": "The Allahabad High Court held the writ petition maintainable and ordered immediate custody of the child to be restored to the mother, affirming that child welfare is paramount.",
+        "hi": "इलाहाबाद उच्च न्यायालय ने रिट याचिका को स्वीकार्य ठहराया और बालक की कस्टडी तुरंत मां को सौंपने का फैसला सुनाया।"
+      },
+      "reasoning": {
+        "en": "The Court reasoned that under Muslim personal law, a mother has the exclusive custodial right (hizanat) over male children under seven, and welfare principles under the Guardians and Wards Act prevail over dry technical guardianship claims.",
+        "hi": "न्यायालय ने कहा कि 7 वर्ष से कम उम्र के बालक पर मां का हिज़ानत अधिकार सुरक्षित है और बाल कल्याण किसी भी तकनीकी दावे से बड़ा है।"
+      },
+      "whyItMatters": {
+        "en": "The judgment reinforces that constitutional writ remedies under Article 226 are available to protect infant children and prevent unilateral custodial deprivation.",
+        "hi": "यह निर्णय सुनिश्चित करता है कि अबोध बच्चों के अधिकारों और मां की कस्टडी की रक्षा के लिए उच्च न्यायालय सीधे हस्तक्षेप कर सकते हैं।"
+      }
+    },
+    "poster": {
+      "src": "/images/cases/rinku-rukshar-poster.jpg",
+      "alt": "Rinku Rukshar v. State of U.P. and 4 Others cover poster",
+      "provenance": "illustration"
+    },
+    "status": "ADMIN_REVIEW",
+    "createdAt": "2026-09-17T21:33:44.074Z",
+    "updatedAt": "2026-09-17T21:33:44.076Z"
+  },
+  {
     "slug": "right-to-privacy-case",
     "title": {
       "en": "Justice K.S. Puttaswamy (Retd.) & Anr. v. Union of India & Ors.",

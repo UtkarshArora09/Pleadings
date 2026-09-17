@@ -4,6 +4,11 @@ import React, { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CaseData, StoryPanel } from '@/types';
+import {
+  getCaseVisualPrompts,
+  getArchetypePrompt,
+  LEGAL_PROMPT_ARCHETYPES,
+} from '@/lib/ai/visualPrompts';
 
 interface ReviewStudioProps {
   params: Promise<{ slug: string }>;
@@ -24,6 +29,25 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   const [uploadingTarget, setUploadingTarget] = useState<string | null>(null);
   const [generatingTarget, setGeneratingTarget] = useState<string | null>(null);
   const [imageError, setImageError] = useState<string | null>(null);
+
+  const [prompts, setPrompts] = useState<{
+    poster: string;
+    exhibit: string;
+    verdict: string;
+    posterArchetype: string;
+    exhibitArchetype: string;
+    verdictArchetype: string;
+  }>({
+    poster: '',
+    exhibit: '',
+    verdict: '',
+    posterArchetype: 'senior-advocate-bar',
+    exhibitArchetype: 'vintage-newspaper-headline',
+    verdictArchetype: 'constitution-bench-rostrum',
+  });
+
+  const [batchGenerating, setBatchGenerating] = useState<boolean>(false);
+  const [batchProgress, setBatchProgress] = useState<string>('');
 
   useEffect(() => {
     async function loadCase() {
@@ -112,6 +136,108 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     navigator.clipboard.writeText(text);
     setCopiedPromptId(id);
     setTimeout(() => setCopiedPromptId(null), 2500);
+  };
+
+  useEffect(() => {
+    if (caseData) {
+      const caseTitleEn = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.en || caseData.slug);
+      const generated = getCaseVisualPrompts({
+        title: caseTitleEn,
+        court: caseData.court,
+        year: caseData.year,
+        genre: caseData.categoryTag,
+        categoryTag: caseData.categoryTag,
+        slug: caseData.slug || slug,
+      });
+
+      setPrompts((prev) => ({
+        poster: prev.poster || generated.poster.prompt,
+        exhibit: prev.exhibit || generated.exhibit.prompt,
+        verdict: prev.verdict || generated.verdict.prompt,
+        posterArchetype: prev.posterArchetype || generated.poster.archetypeId,
+        exhibitArchetype: prev.exhibitArchetype || generated.exhibit.archetypeId,
+        verdictArchetype: prev.verdictArchetype || generated.verdict.archetypeId,
+      }));
+    }
+  }, [caseData?.slug, caseData?.title, slug]);
+
+  const handleShufflePrompts = () => {
+    if (!caseData) return;
+    const caseTitleEn = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.en || caseData.slug);
+    const randomized = getCaseVisualPrompts(
+      {
+        title: caseTitleEn,
+        court: caseData.court,
+        year: caseData.year,
+        genre: caseData.categoryTag,
+        categoryTag: caseData.categoryTag,
+        slug: caseData.slug || slug,
+      },
+      { forceRandom: true }
+    );
+
+    setPrompts({
+      poster: randomized.poster.prompt,
+      exhibit: randomized.exhibit.prompt,
+      verdict: randomized.verdict.prompt,
+      posterArchetype: randomized.poster.archetypeId,
+      exhibitArchetype: randomized.exhibit.archetypeId,
+      verdictArchetype: randomized.verdict.archetypeId,
+    });
+  };
+
+  const handleArchetypeChange = (slot: 'poster' | 'exhibit' | 'verdict', archetypeId: string) => {
+    if (!caseData) return;
+    const caseTitleEn = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.en || caseData.slug);
+    const newPrompt = getArchetypePrompt(archetypeId, {
+      title: caseTitleEn,
+      court: caseData.court,
+      year: caseData.year,
+      genre: caseData.categoryTag,
+      categoryTag: caseData.categoryTag,
+      slug: caseData.slug || slug,
+    });
+
+    setPrompts((prev) => ({
+      ...prev,
+      [slot]: newPrompt,
+      [`${slot}Archetype`]: archetypeId,
+    }));
+  };
+
+  const handlePromptTextChange = (slot: 'poster' | 'exhibit' | 'verdict', text: string) => {
+    setPrompts((prev) => ({
+      ...prev,
+      [slot]: text,
+    }));
+  };
+
+  const handleGenerateAllThree = async () => {
+    if (!caseData || batchGenerating) return;
+    try {
+      setBatchGenerating(true);
+      setImageError(null);
+
+      // 1. Poster
+      setBatchProgress('1/3 Generating Hero Billboard Poster...');
+      await handleGeminiGenerate(prompts.poster || posterPrompt, 'poster');
+
+      // 2. Exhibit
+      setBatchProgress('2/3 Generating Archival Exhibit Photo...');
+      await handleGeminiGenerate(prompts.exhibit || exhibitPrompt, 'exhibit');
+
+      // 3. Verdict
+      setBatchProgress('3/3 Generating Courtroom Verdict Scene...');
+      await handleGeminiGenerate(prompts.verdict || verdictPrompt, 'verdict');
+
+      setBatchProgress('✓ All 3 case visuals generated successfully!');
+      setTimeout(() => setBatchProgress(''), 4000);
+    } catch (err: unknown) {
+      console.error('Batch generation error:', err);
+      setImageError(err instanceof Error ? err.message : 'Batch generation error');
+    } finally {
+      setBatchGenerating(false);
+    }
   };
 
 async function compressImageForUpload(
@@ -881,36 +1007,84 @@ async function compressImageForUpload(
         </div>
       )}
 
-      {/* TAB 4: VISUAL ASSETS & AI DUAL GENERATOR */}
+      {/* TAB 4: VISUAL ASSETS & AI MULTI-PROMPT STUDIO */}
       {activeTab === 'images' && (
-        <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-8">
-          <div className="pb-3 border-b border-white/10 flex flex-wrap items-center justify-between gap-2">
+        <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-8 shadow-2xl">
+          {/* Header & Global Studio Actions */}
+          <div className="pb-5 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="text-sm font-anton text-white uppercase tracking-wider">
-                Visual Asset Studio & AI Dual Generator
-              </h3>
-              <p className="text-xs text-[#a9a49a]">
-                Generate new AI visuals with Gemini, or copy prompts for Midjourney / ChatGPT and upload files directly.
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+                <h3 className="text-base font-anton text-white uppercase tracking-wider">
+                  Visual Asset Studio · 12+ Legal Prompt Engine
+                </h3>
+              </div>
+              <p className="text-xs text-[#a9a49a] max-w-2xl">
+                Choose from 12+ authentic legal prompt archetypes (Senior Advocates, Constitution Benches, vintage newspapers, police dockets, chambers, and gavel verdicts). Randomize or customize prompts so no two cases look identical.
               </p>
             </div>
-            <div className="text-[10px] font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-1 rounded-xs border border-[#D4AF37]/20">
-              Dual System Active
+
+            {/* Top Global Actions */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              {/* Shuffle Prompts */}
+              <button
+                type="button"
+                onClick={handleShufflePrompts}
+                disabled={batchGenerating}
+                className="px-3.5 py-2 bg-white/5 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider rounded-xs border border-white/20 transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#D4AF37]"
+                title="Randomly select 3 new distinct prompt templates from the 12+ legal archetypes"
+              >
+                <span>🎲</span>
+                <span>Shuffle 3 Prompts</span>
+              </button>
+
+              {/* Batch Generate All 3 AI Images */}
+              <button
+                type="button"
+                onClick={handleGenerateAllThree}
+                disabled={batchGenerating || !!generatingTarget}
+                className="px-4 py-2 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-[#D4AF37]/30"
+              >
+                {batchGenerating ? (
+                  <>
+                    <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                    <span>{batchProgress || 'Generating Visuals...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>⚡</span>
+                    <span>Generate All 3 AI Images</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
+          {batchProgress && (
+            <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] rounded-xs text-xs font-mono flex items-center gap-2 animate-fadeIn">
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
+              <span>{batchProgress}</span>
+            </div>
+          )}
+
           {/* 1. Hero Billboard Poster (21:9 / 16:9) */}
           <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-              <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
-                1. Hero Billboard Cover Poster (21:9 / 16:9)
+            <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-3 gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
+                  1. Hero Billboard Cover Poster (16:9 / 21:9)
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
+                {caseData.bannerImage || caseData.poster?.src || 'No image set'}
               </span>
-              <span className="text-[10px] font-mono text-white/50">{caseData.bannerImage || caseData.poster?.src}</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
               <div className="space-y-2">
-                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center">
+                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center group shadow-md">
                   <img
                     src={caseData.bannerImage || caseData.poster?.src || '/images/cases/ghost-case.jpg'}
                     alt="Hero Poster Preview"
@@ -923,14 +1097,33 @@ async function compressImageForUpload(
                 <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Billboard Asset</p>
               </div>
 
-              {/* Prompt & Dual Actions */}
+              {/* Prompt, Style Selector & Dual Actions */}
               <div className="md:col-span-2 space-y-3">
+                {/* Archetype Selector Dropdown */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#12141C] p-2 rounded-xs border border-white/10">
+                  <label className="text-[10px] font-mono uppercase text-[#D4AF37] font-bold flex items-center gap-1.5">
+                    <span>🎨</span>
+                    <span>Prompt Style Archetype:</span>
+                  </label>
+                  <select
+                    value={prompts.posterArchetype}
+                    onChange={(e) => handleArchetypeChange('poster', e.target.value)}
+                    className="bg-[#0A0C10] border border-white/20 text-white text-xs py-1 px-2 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37] cursor-pointer"
+                  >
+                    {LEGAL_PROMPT_ARCHETYPES.map((arch) => (
+                      <option key={arch.id} value={arch.id} className="bg-[#121520] text-white">
+                        {arch.name} ({arch.category})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt</label>
+                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt (Editable)</label>
                     <button
                       type="button"
-                      onClick={() => copyPrompt('poster', posterPrompt)}
+                      onClick={() => copyPrompt('poster', prompts.poster || posterPrompt)}
                       className="text-[10px] font-mono text-[#D4AF37] hover:underline cursor-pointer flex items-center gap-1"
                     >
                       <span>{copiedPromptId === 'poster' ? '✓ Copied!' : '📋 Copy Prompt'}</span>
@@ -938,7 +1131,8 @@ async function compressImageForUpload(
                   </div>
                   <textarea
                     rows={3}
-                    defaultValue={posterPrompt}
+                    value={prompts.poster}
+                    onChange={(e) => handlePromptTextChange('poster', e.target.value)}
                     id="prompt-poster"
                     className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37]"
                   />
@@ -949,9 +1143,9 @@ async function compressImageForUpload(
                   {/* Option A: Gemini AI */}
                   <button
                     type="button"
-                    disabled={generatingTarget === 'poster'}
+                    disabled={generatingTarget === 'poster' || batchGenerating}
                     onClick={() => {
-                      const p = (document.getElementById('prompt-poster') as HTMLTextAreaElement)?.value || posterPrompt;
+                      const p = (document.getElementById('prompt-poster') as HTMLTextAreaElement)?.value || prompts.poster || posterPrompt;
                       handleGeminiGenerate(p, 'poster');
                     }}
                     className="px-4 py-2.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
@@ -975,7 +1169,7 @@ async function compressImageForUpload(
                       type="file"
                       accept="image/jpeg,image/png,image/webp"
                       className="hidden"
-                      disabled={uploadingTarget === 'poster'}
+                      disabled={uploadingTarget === 'poster' || batchGenerating}
                       onChange={(e) => handleFileUpload(e, 'poster')}
                     />
                     {uploadingTarget === 'poster' ? (
@@ -997,21 +1191,24 @@ async function compressImageForUpload(
 
           {/* 2. Archival Press / Record Exhibit (Episode 2) */}
           <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-              <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
-                2. Archival Press Clipping / Case Docket (Episode 2)
-              </span>
-              <span className="text-[10px] font-mono text-white/50">
-                {caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || '/images/cases/nanavati_portrait.jpg'}
+            <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-3 gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
+                  2. Archival Press Clipping / Case Docket (Episode 2)
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
+                {caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || 'No exhibit image'}
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
               <div className="space-y-2">
-                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center">
+                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center group shadow-md">
                   <img
-                    src={caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || '/images/cases/nanavati_portrait.jpg'}
+                    src={caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || '/images/cases/nanavati_portrait.jpg'}
                     alt="Exhibit Preview"
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -1022,14 +1219,33 @@ async function compressImageForUpload(
                 <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Exhibit Asset</p>
               </div>
 
-              {/* Prompt & Dual Actions */}
+              {/* Prompt, Style Selector & Dual Actions */}
               <div className="md:col-span-2 space-y-3">
+                {/* Archetype Selector Dropdown */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#12141C] p-2 rounded-xs border border-white/10">
+                  <label className="text-[10px] font-mono uppercase text-[#D4AF37] font-bold flex items-center gap-1.5">
+                    <span>📰</span>
+                    <span>Prompt Style Archetype:</span>
+                  </label>
+                  <select
+                    value={prompts.exhibitArchetype}
+                    onChange={(e) => handleArchetypeChange('exhibit', e.target.value)}
+                    className="bg-[#0A0C10] border border-white/20 text-white text-xs py-1 px-2 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37] cursor-pointer"
+                  >
+                    {LEGAL_PROMPT_ARCHETYPES.map((arch) => (
+                      <option key={arch.id} value={arch.id} className="bg-[#121520] text-white">
+                        {arch.name} ({arch.category})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt</label>
+                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt (Editable)</label>
                     <button
                       type="button"
-                      onClick={() => copyPrompt('exhibit', exhibitPrompt)}
+                      onClick={() => copyPrompt('exhibit', prompts.exhibit || exhibitPrompt)}
                       className="text-[10px] font-mono text-[#D4AF37] hover:underline cursor-pointer flex items-center gap-1"
                     >
                       <span>{copiedPromptId === 'exhibit' ? '✓ Copied!' : '📋 Copy Prompt'}</span>
@@ -1037,7 +1253,8 @@ async function compressImageForUpload(
                   </div>
                   <textarea
                     rows={3}
-                    defaultValue={exhibitPrompt}
+                    value={prompts.exhibit}
+                    onChange={(e) => handlePromptTextChange('exhibit', e.target.value)}
                     id="prompt-exhibit"
                     className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37]"
                   />
@@ -1048,9 +1265,9 @@ async function compressImageForUpload(
                   {/* Option A: Gemini AI */}
                   <button
                     type="button"
-                    disabled={generatingTarget === 'exhibit'}
+                    disabled={generatingTarget === 'exhibit' || batchGenerating}
                     onClick={() => {
-                      const p = (document.getElementById('prompt-exhibit') as HTMLTextAreaElement)?.value || exhibitPrompt;
+                      const p = (document.getElementById('prompt-exhibit') as HTMLTextAreaElement)?.value || prompts.exhibit || exhibitPrompt;
                       handleGeminiGenerate(p, 'exhibit');
                     }}
                     className="px-4 py-2.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
@@ -1074,7 +1291,7 @@ async function compressImageForUpload(
                       type="file"
                       accept="image/jpeg,image/png,image/webp"
                       className="hidden"
-                      disabled={uploadingTarget === 'exhibit'}
+                      disabled={uploadingTarget === 'exhibit' || batchGenerating}
                       onChange={(e) => handleFileUpload(e, 'exhibit')}
                     />
                     {uploadingTarget === 'exhibit' ? (
@@ -1096,21 +1313,24 @@ async function compressImageForUpload(
 
           {/* 3. Courtroom Verdict & Bench Scene (Episode 7) */}
           <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-              <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
-                3. Courtroom Verdict & Bench Scene (Episode 7)
-              </span>
-              <span className="text-[10px] font-mono text-white/50">
-                {caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || '/images/cases/ghost_court_verdict.jpg'}
+            <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-3 gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
+                  3. Courtroom Verdict & Bench Scene (Episode 7)
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
+                {caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || (caseData as any).episodes?.[6]?.image?.src || 'No verdict image'}
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
               <div className="space-y-2">
-                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center">
+                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center group shadow-md">
                   <img
-                    src={caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || '/images/cases/ghost_court_verdict.jpg'}
+                    src={caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || (caseData as any).episodes?.[6]?.image?.src || '/images/cases/ghost_court_verdict.jpg'}
                     alt="Verdict Scene Preview"
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -1121,14 +1341,33 @@ async function compressImageForUpload(
                 <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Verdict Asset</p>
               </div>
 
-              {/* Prompt & Dual Actions */}
+              {/* Prompt, Style Selector & Dual Actions */}
               <div className="md:col-span-2 space-y-3">
+                {/* Archetype Selector Dropdown */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#12141C] p-2 rounded-xs border border-white/10">
+                  <label className="text-[10px] font-mono uppercase text-[#D4AF37] font-bold flex items-center gap-1.5">
+                    <span>⚖️</span>
+                    <span>Prompt Style Archetype:</span>
+                  </label>
+                  <select
+                    value={prompts.verdictArchetype}
+                    onChange={(e) => handleArchetypeChange('verdict', e.target.value)}
+                    className="bg-[#0A0C10] border border-white/20 text-white text-xs py-1 px-2 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37] cursor-pointer"
+                  >
+                    {LEGAL_PROMPT_ARCHETYPES.map((arch) => (
+                      <option key={arch.id} value={arch.id} className="bg-[#121520] text-white">
+                        {arch.name} ({arch.category})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt</label>
+                    <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt (Editable)</label>
                     <button
                       type="button"
-                      onClick={() => copyPrompt('verdict', verdictPrompt)}
+                      onClick={() => copyPrompt('verdict', prompts.verdict || verdictPrompt)}
                       className="text-[10px] font-mono text-[#D4AF37] hover:underline cursor-pointer flex items-center gap-1"
                     >
                       <span>{copiedPromptId === 'verdict' ? '✓ Copied!' : '📋 Copy Prompt'}</span>
@@ -1136,7 +1375,8 @@ async function compressImageForUpload(
                   </div>
                   <textarea
                     rows={3}
-                    defaultValue={verdictPrompt}
+                    value={prompts.verdict}
+                    onChange={(e) => handlePromptTextChange('verdict', e.target.value)}
                     id="prompt-verdict"
                     className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37]"
                   />
@@ -1147,9 +1387,9 @@ async function compressImageForUpload(
                   {/* Option A: Gemini AI */}
                   <button
                     type="button"
-                    disabled={generatingTarget === 'verdict'}
+                    disabled={generatingTarget === 'verdict' || batchGenerating}
                     onClick={() => {
-                      const p = (document.getElementById('prompt-verdict') as HTMLTextAreaElement)?.value || verdictPrompt;
+                      const p = (document.getElementById('prompt-verdict') as HTMLTextAreaElement)?.value || prompts.verdict || verdictPrompt;
                       handleGeminiGenerate(p, 'verdict');
                     }}
                     className="px-4 py-2.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
@@ -1173,7 +1413,7 @@ async function compressImageForUpload(
                       type="file"
                       accept="image/jpeg,image/png,image/webp"
                       className="hidden"
-                      disabled={uploadingTarget === 'verdict'}
+                      disabled={uploadingTarget === 'verdict' || batchGenerating}
                       onChange={(e) => handleFileUpload(e, 'verdict')}
                     />
                     {uploadingTarget === 'verdict' ? (

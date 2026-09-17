@@ -57,7 +57,7 @@ export function ParaSheet({ source, isOpen, onClose, caseTitle }: ParaSheetProps
         {/* Content Body */}
         <div className="flex-1 space-y-4">
           <h3 id="parasheet-title" className="font-serif text-lg font-bold text-white leading-snug">
-            {isBlack ? `Certified Judicial Record: Paragraph ${source.para}` : (source.secondary?.publication || 'Historical Record')}
+            {isBlack ? `Verified Judgment Record: Paragraph ${source.para}` : (source.secondary?.publication || 'Historical Record')}
           </h3>
 
           {caseTitle && (
@@ -78,7 +78,7 @@ export function ParaSheet({ source, isOpen, onClose, caseTitle }: ParaSheetProps
           {source.paraText && (
             <div className="p-4 bg-[#181B26] rounded-xs border-l-2 border-[#D4AF37] text-sm font-serif italic text-white/90 leading-relaxed space-y-2">
               <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#D4AF37] block not-italic">
-                VERBATIM TEXT FROM CERTIFIED BENCH COPY
+                VERBATIM TEXT FROM ORIGINAL PUBLISHED JUDGMENT
               </span>
               <p>"{source.paraText}"</p>
             </div>
@@ -102,7 +102,7 @@ export function ParaSheet({ source, isOpen, onClose, caseTitle }: ParaSheetProps
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#D4AF37] hover:bg-[#c49f27] text-black font-bold text-xs uppercase tracking-widest rounded-xs transition-all shadow-lg cursor-pointer"
             >
-              <span>View Certified Source on Indian Kanoon</span>
+              <span>View Original Judgment on Indian Kanoon</span>
               <span>↗</span>
             </a>
           )}
