@@ -41,9 +41,25 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
   const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
-    setImgSrc(bannerImg);
+    let active = bannerImg;
+    if (typeof window !== 'undefined') {
+      try {
+        const cleanSlug = caseData.slug.toLowerCase().trim();
+        const savedRaw = localStorage.getItem(`pleadings_case_${caseData.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
+        if (savedRaw) {
+          const parsed = JSON.parse(savedRaw);
+          if (parsed && (parsed.slug === caseData.slug || parsed.slug === cleanSlug)) {
+            const custom = parsed.poster?.src || parsed.bannerImage || parsed.panels?.[0]?.photoExhibitSrc;
+            if (custom && typeof custom === 'string' && (custom.startsWith('data:') || custom.startsWith('blob:') || custom.startsWith('http'))) {
+              active = custom;
+            }
+          }
+        }
+      } catch {}
+    }
+    setImgSrc(active);
     setHasError(false);
-  }, [bannerImg]);
+  }, [bannerImg, caseData.slug]);
 
   return (
     <div className="group relative flex-shrink-0 flex items-center cursor-pointer select-none">

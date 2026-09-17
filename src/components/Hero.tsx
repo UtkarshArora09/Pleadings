@@ -39,9 +39,25 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
   const [hasHeroError, setHasHeroError] = useState<boolean>(false);
 
   useEffect(() => {
-    setHeroImg(activeCase.poster.src || '');
+    let active = activeCase.poster.src || '';
+    if (typeof window !== 'undefined') {
+      try {
+        const cleanSlug = activeCase.slug.toLowerCase().trim();
+        const savedRaw = localStorage.getItem(`pleadings_case_${activeCase.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
+        if (savedRaw) {
+          const parsed = JSON.parse(savedRaw);
+          if (parsed && (parsed.slug === activeCase.slug || parsed.slug === cleanSlug)) {
+            const custom = parsed.poster?.src || parsed.bannerImage || parsed.panels?.[0]?.photoExhibitSrc;
+            if (custom && typeof custom === 'string' && (custom.startsWith('data:') || custom.startsWith('blob:') || custom.startsWith('http'))) {
+              active = custom;
+            }
+          }
+        }
+      } catch {}
+    }
+    setHeroImg(active);
     setHasHeroError(false);
-  }, [activeCase.poster.src]);
+  }, [activeCase.poster.src, activeCase.slug]);
 
   return (
     <section

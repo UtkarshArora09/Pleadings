@@ -234,24 +234,14 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
     if (typeof window !== 'undefined') {
       try {
         const cleanSlug = slug.toLowerCase().trim();
-        const possibleKeys = [
-          `pleadings_case_${slug}`,
-          `pleadings_case_${cleanSlug}`,
-          'pleadings_case_rinku-rukshar-habeas-corpus-custody-case',
-          'pleadings_case_rinku-rukshar-habeas-corpus-case',
-        ];
-
-        for (const key of possibleKeys) {
-          const savedRaw = localStorage.getItem(key);
-          if (savedRaw) {
-            localParsed = JSON.parse(savedRaw);
-            if (localParsed && (localParsed.poster?.src || localParsed.bannerImage || localParsed.panels || localParsed.episodes)) {
-              const normalized = normalizeToCaseFile(localParsed, slug);
-              if (isMounted) {
-                setCaseData(normalized);
-                setLoading(false);
-              }
-              break;
+        const savedRaw = localStorage.getItem(`pleadings_case_${slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
+        if (savedRaw) {
+          localParsed = JSON.parse(savedRaw);
+          if (localParsed && (localParsed.slug === slug || localParsed.slug === cleanSlug) && (localParsed.poster?.src || localParsed.bannerImage || localParsed.panels || localParsed.episodes)) {
+            const normalized = normalizeToCaseFile(localParsed, slug);
+            if (isMounted) {
+              setCaseData(normalized);
+              setLoading(false);
             }
           }
         }

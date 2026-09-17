@@ -17,10 +17,30 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
   const { language, isBookmarked, toggleBookmark } = useApp();
   const [hasVoted, setHasVoted] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [posterSrc, setPosterSrc] = useState<string>(caseData.poster?.src || (caseData as any).bannerImage || '');
 
   useEffect(() => {
+    let activeSrc = caseData.poster?.src || (caseData as any).bannerImage || '';
+    if (typeof window !== 'undefined') {
+      try {
+        const cleanSlug = caseData.slug.toLowerCase().trim();
+        const savedRaw = localStorage.getItem(`pleadings_case_${caseData.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
+        if (savedRaw) {
+          const parsed = JSON.parse(savedRaw);
+          if (parsed && (parsed.slug === caseData.slug || parsed.slug === cleanSlug)) {
+            const customImg = parsed.poster?.src || parsed.bannerImage || parsed.panels?.[0]?.photoExhibitSrc;
+            if (customImg && typeof customImg === 'string' && (customImg.startsWith('data:') || customImg.startsWith('blob:') || customImg.startsWith('http'))) {
+              activeSrc = customImg;
+            }
+          }
+        }
+      } catch {
+        // ignore
+      }
+    }
+    setPosterSrc(activeSrc);
     setHasError(false);
-  }, [caseData.poster.src]);
+  }, [caseData.slug, caseData.poster?.src]);
 
   useEffect(() => {
     const saved = localStorage.getItem('pleadings:votes');
@@ -52,7 +72,7 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
       <Link href={`/case/${caseData.slug}`} className="block flex-1">
         {/* Poster Image Container */}
         <div className="relative w-full aspect-[16/10] overflow-hidden bg-black/80">
-          {hasError || !caseData.poster.src ? (
+          {hasError || !posterSrc ? (
             <div className="w-full h-full flex flex-col items-center justify-center bg-[#12141C] border border-red-500/30 p-3 text-center">
               <span className="text-red-400 font-mono text-[10px] font-bold uppercase tracking-wider mb-1">
                 ✕ Error loading image
@@ -63,10 +83,10 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
             </div>
           ) : (
             <Image
-              src={caseData.poster.src}
-              alt={caseData.poster.alt || displayTitle}
+              src={posterSrc}
+              alt={caseData.poster?.alt || displayTitle}
               fill
-              unoptimized={typeof caseData.poster.src === 'string' && (caseData.poster.src.startsWith('data:') || caseData.poster.src.startsWith('blob:'))}
+              unoptimized={typeof posterSrc === 'string' && (posterSrc.startsWith('data:') || posterSrc.startsWith('blob:'))}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               priority={priority}
               onError={() => setHasError(true)}
