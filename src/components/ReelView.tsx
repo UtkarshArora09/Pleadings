@@ -21,12 +21,46 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
   const router = useRouter();
   const { openBriefModal, language } = useApp();
 
+  const [caseList, setCaseList] = useState<CaseData[]>(cases);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const merged = cases.map((c) => {
+          const cleanSlug = c.slug.toLowerCase().trim();
+          const savedRaw = localStorage.getItem(`pleadings_case_${c.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
+          if (savedRaw) {
+            const parsed = JSON.parse(savedRaw);
+            if (parsed && (parsed.slug === c.slug || parsed.slug === cleanSlug)) {
+              const updated = { ...c };
+              if (parsed.bannerImage || parsed.poster?.src) {
+                updated.bannerImage = parsed.poster?.src || parsed.bannerImage;
+              }
+              if (parsed.panels && Array.isArray(parsed.panels)) {
+                updated.panels = updated.panels.map((p, pIdx) => {
+                  const customP = parsed.panels[pIdx];
+                  if (customP && customP.photoExhibitSrc) {
+                    return { ...p, photoExhibitSrc: customP.photoExhibitSrc };
+                  }
+                  return p;
+                });
+              }
+              return updated;
+            }
+          }
+          return c;
+        });
+        setCaseList(merged);
+      } catch {}
+    }
+  }, [cases]);
+
   const getIndexFromSlug = useCallback(
     (slug?: string) => {
-      const idx = cases.findIndex((c) => c.slug === slug);
+      const idx = caseList.findIndex((c) => c.slug === slug);
       return idx >= 0 ? idx : 0;
     },
-    [cases]
+    [caseList]
   );
 
   const initialIndex = getIndexFromSlug(initialCaseSlug);
@@ -344,18 +378,18 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
           onClick={() => scrollToCase(activeCaseIndex - 1)}
           className="hidden md:flex fixed left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-black/40 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6]/70 hover:text-white items-center justify-center transition-all cursor-pointer text-lg rounded-full border border-white/10 shadow-lg backdrop-blur-xs"
           aria-label="Previous Case"
-          title={`Previous Case: ${cases[activeCaseIndex - 1].title[language]} (←)`}
+          title={`Previous Case: ${caseList[activeCaseIndex - 1]?.title[language]} (←)`}
         >
           ←
         </button>
       )}
 
-      {activeCaseIndex < cases.length - 1 && (
+      {activeCaseIndex < caseList.length - 1 && (
         <button
           onClick={() => scrollToCase(activeCaseIndex + 1)}
           className="hidden md:flex fixed right-14 top-1/2 -translate-y-1/2 z-30 w-11 h-11 bg-black/40 hover:bg-[#D4AF37] hover:text-[#0E1016] text-[#F3EFE6]/70 hover:text-white items-center justify-center transition-all cursor-pointer text-lg rounded-full border border-white/10 shadow-lg backdrop-blur-xs"
           aria-label="Next Case"
-          title={`Next Case: ${cases[activeCaseIndex + 1].title[language]} (→)`}
+          title={`Next Case: ${caseList[activeCaseIndex + 1]?.title[language]} (→)`}
         >
           →
         </button>
@@ -368,7 +402,7 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
         className="w-full h-full flex overflow-x-auto snap-x snap-mandatory scrollbar-none touch-pan-x touch-pan-y"
         style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
       >
-        {cases.map((caseItem, cIndex) => (
+        {caseList.map((caseItem, cIndex) => (
           <div
             key={caseItem.slug}
             ref={(el) => {

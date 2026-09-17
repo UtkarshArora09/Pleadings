@@ -238,7 +238,8 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
         if (savedRaw) {
           localParsed = JSON.parse(savedRaw);
           if (localParsed && (localParsed.slug === slug || localParsed.slug === cleanSlug) && (localParsed.poster?.src || localParsed.bannerImage || localParsed.panels || localParsed.episodes)) {
-            const normalized = normalizeToCaseFile(localParsed, slug);
+            let normalized = normalizeToCaseFile(localParsed, slug);
+            normalized = mergeCustomVisuals(normalized, localParsed);
             if (isMounted) {
               setCaseData(normalized);
               setLoading(false);
