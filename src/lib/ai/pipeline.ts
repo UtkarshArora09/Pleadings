@@ -71,9 +71,9 @@ function getCaseVisuals(genre: string, title: string) {
 
   if (lower.includes('rinku') || lower.includes('rukshar') || lower.includes('habeas') || lower.includes('custody') || lower.includes('hizanat')) {
     return {
-      poster: '/images/cases/shah-bano.jpg',
-      exhibitPhoto: '/images/cases/maneka-gandhi.jpg',
-      courtVerdict: '/images/cases/maneka-gandhi.jpg',
+      poster: '/images/cases/rinku-rukshar-poster.jpg',
+      exhibitPhoto: '/images/cases/rinku-rukshar-exhibit.jpg',
+      courtVerdict: '/images/cases/rinku-rukshar-verdict.jpg',
       genreLabel: 'HABEAS CORPUS & CHILD CUSTODY WRITS',
     };
   }
@@ -123,39 +123,13 @@ function getCaseVisuals(genre: string, title: string) {
     };
   }
 
-  // Fallback by Genre
-  switch (genre) {
-    case 'crime':
-      return {
-        poster: '/images/cases/nanavati-case.jpg',
-        exhibitPhoto: '/images/cases/nanavati_portrait.jpg',
-        courtVerdict: '/images/cases/ghost_court_verdict.jpg',
-        genreLabel: 'CRIMINAL TRIAL & PENAL CODE',
-      };
-    case 'constitutional':
-      return {
-        poster: '/images/cases/kesavananda-bharati.jpg',
-        exhibitPhoto: '/images/cases/kesavananda_monk.jpg',
-        courtVerdict: '/images/cases/maneka-gandhi.jpg',
-        genreLabel: 'CONSTITUTIONAL BENCH & FUNDAMENTAL RIGHTS',
-      };
-    case 'cyber':
-      return {
-        poster: '/images/cases/shreya-singhal.jpg',
-        exhibitPhoto: '/images/cases/shreya-singhal.jpg',
-        courtVerdict: '/images/cases/navtej-johar.jpg',
-        genreLabel: 'CYBER & DIGITAL RIGHTS JURISPRUDENCE',
-      };
-    case 'consumer':
-    case 'tort':
-    default:
-      return {
-        poster: '/images/cases/haircut-case.jpg',
-        exhibitPhoto: '/images/cases/m-c-mehta.jpg',
-        courtVerdict: '/images/cases/shah-bano.jpg',
-        genreLabel: 'CONSUMER DEFICIENCY & TORT LIABILITY',
-      };
-  }
+  // Generic fallback for any other new case: Never apply another case's photo
+  return {
+    poster: '',
+    exhibitPhoto: '',
+    courtVerdict: '',
+    genreLabel: 'CASE DOSSIER & LEGAL ANALYSIS',
+  };
 }
 
 // Judicial English-to-Hindi Terminology Mapping

@@ -9,6 +9,34 @@ interface ReadNextProps {
   lang?: 'en' | 'hi';
 }
 
+function ReadNextPoster({ src, alt }: { src: string; alt: string }) {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (hasError || !src) {
+    return (
+      <div className="relative w-20 h-28 flex-shrink-0 rounded-2xs overflow-hidden border border-red-500/30 bg-[#121520] flex flex-col items-center justify-center p-1 text-center">
+        <span className="text-red-400 font-mono text-[9px] font-bold uppercase tracking-wider">
+          ✕ Error
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-20 h-28 flex-shrink-0 rounded-2xs overflow-hidden border border-white/15 bg-black">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        unoptimized={typeof src === 'string' && (src.startsWith('data:') || src.startsWith('blob:'))}
+        sizes="80px"
+        onError={() => setHasError(true)}
+        className="object-cover group-hover:scale-105 transition-transform"
+      />
+    </div>
+  );
+}
+
 export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
   if (!relatedSlugs || relatedSlugs.length === 0) return null;
 
@@ -40,16 +68,7 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
               href={`/case/${c.slug}`}
               className="p-4 bg-[#141824] hover:bg-[#1a2030] border border-white/10 hover:border-[#D4AF37] rounded-xs transition-all shadow-lg flex gap-4 group cursor-pointer"
             >
-              <div className="relative w-20 h-28 flex-shrink-0 rounded-2xs overflow-hidden border border-white/15 bg-black">
-                <Image
-                  src={c.poster.src}
-                  alt={c.poster.alt}
-                  fill
-                  unoptimized={typeof c.poster.src === 'string' && (c.poster.src.startsWith('data:') || c.poster.src.startsWith('blob:'))}
-                  sizes="80px"
-                  className="object-cover group-hover:scale-105 transition-transform"
-                />
-              </div>
+              <ReadNextPoster src={c.poster.src} alt={c.poster.alt} />
 
               <div className="flex-1 flex flex-col justify-between">
                 <div className="space-y-1">

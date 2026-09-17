@@ -39,13 +39,14 @@ export function ReelPanel({
   const isNewspaper =
     panel.evidence?.archiveType === 'newspaper' ||
     (hasEvidence && (!panel.evidence?.archiveType || panel.type === 'EVIDENCE'));
-  const defaultPhotoFallback = caseData.genre === 'constitutional' ? '/images/cases/kesavananda-bharati.jpg' : '/images/cases/nanavati-case.jpg';
-  const rawPhotoSrc = panel.photoExhibitSrc || caseData.bannerImage || defaultPhotoFallback;
-  const hasPhoto = Boolean(panel.photoExhibitSrc || (!hasEvidence && caseData.bannerImage) || true);
+  const rawPhotoSrc = panel.photoExhibitSrc || (panelIndex === 0 ? caseData.bannerImage : '');
   const [curPhotoSrc, setCurPhotoSrc] = React.useState<string>(rawPhotoSrc);
+  const [hasPhotoError, setHasPhotoError] = React.useState(false);
+  const hasPhoto = Boolean(curPhotoSrc || panel.photoExhibitSrc);
 
   React.useEffect(() => {
     setCurPhotoSrc(rawPhotoSrc);
+    setHasPhotoError(false);
   }, [rawPhotoSrc]);
 
   const photoCaption = panel.photoExhibitCaption?.[language] || caseData.title[language];
@@ -210,18 +211,31 @@ export function ReelPanel({
 
                 {/* Cinematic Image Container */}
                 <div className="relative w-full aspect-video rounded-xs overflow-hidden bg-black/60 group">
-                  <Image
-                    src={curPhotoSrc}
-                    alt={photoCaption}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    onError={() => setCurPhotoSrc(defaultPhotoFallback)}
-                    className="object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
-                    priority={panelIndex === 0}
-                  />
-
-                  {/* Dark gradient overlay at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                  {hasPhotoError || !curPhotoSrc ? (
+                    <div className="w-full h-full min-h-[180px] flex flex-col items-center justify-center bg-[#121520] border border-red-500/30 p-4 text-center">
+                      <span className="text-red-400 font-mono text-xs font-bold uppercase tracking-wider mb-1">
+                        ✕ Error loading image
+                      </span>
+                      <span className="text-white/40 text-[10px] font-mono truncate max-w-full px-2">
+                        {photoCaption || 'Image unavailable'}
+                      </span>
+                    </div>
+                  ) : (
+                    <>
+                      <Image
+                        src={curPhotoSrc}
+                        alt={photoCaption}
+                        fill
+                        unoptimized={typeof curPhotoSrc === 'string' && (curPhotoSrc.startsWith('data:') || curPhotoSrc.startsWith('blob:'))}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        onError={() => setHasPhotoError(true)}
+                        className="object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
+                        priority={panelIndex === 0}
+                      />
+                      {/* Dark gradient overlay at bottom */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                    </>
+                  )}
                 </div>
 
                 {/* Archival Photo Caption */}

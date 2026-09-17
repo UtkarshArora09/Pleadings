@@ -4091,7 +4091,7 @@ export const CASES_DATA: CaseData[] = [
     maturityRating: 'U/A 13+',
     categoryTag: 'Family & Constitutional Writs',
     genre: 'constitutional',
-    bannerImage: '/images/cases/shah-bano.jpg',
+    bannerImage: '/images/cases/rinku-rukshar-poster.jpg',
     readTime: { en: '5 min read', hi: '5 मिनट' },
     watermark: '§',
     title: {
@@ -4134,7 +4134,7 @@ export const CASES_DATA: CaseData[] = [
           en: 'In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son Asif, aged under six years.\n\nMarried in 2014, she alleged domestic cruelty and claimed she was assaulted and ejected from the matrimonial home while the father fled with the child.',
           hi: 'अगस्त 2020 में रिंकू रुखसार ने 6 वर्ष से कम उम्र के पुत्र आसिफ की कस्टडी के लिए इलाहाबाद उच्च न्यायालय में बंदी प्रत्यक्षीकरण याचिका दायर की।',
         },
-        photoExhibitSrc: '/images/cases/shah-bano.jpg',
+        photoExhibitSrc: '/images/cases/rinku-rukshar-poster.jpg',
       },
       {
         id: 'panel-2',
@@ -4151,7 +4151,7 @@ export const CASES_DATA: CaseData[] = [
           en: 'The respondent father raised a preliminary objection that a biological father cannot be accused of illegal custody under personal law. The High Court rejected this, holding that maternal custody of infants under seven is protected by equity.',
           hi: 'पिता ने आपत्ति जताई कि प्राकृतिक पिता के विरुद्ध बंदी प्रत्यक्षीकरण याचिका विचारणीय नहीं है। उच्च न्यायालय ने इसे खारिज करते हुए मां के हिज़ानत अधिकार को मान्यता दी।',
         },
-        photoExhibitSrc: '/images/cases/maneka-gandhi.jpg',
+        photoExhibitSrc: '/images/cases/rinku-rukshar-exhibit.jpg',
       },
       {
         id: 'panel-3',
@@ -4168,7 +4168,6 @@ export const CASES_DATA: CaseData[] = [
           en: 'Under Section 352 of Mulla Mahomedan Law, a mother is entitled to custody of male infants until age seven. Depriving her of custody without judicial authority is unlawful under Article 226.',
           hi: 'मुस्लिम विधि के तहत 7 वर्ष से कम आयु के बालक की कस्टडी पर मां का प्राथमिक अधिकार है जिसे बिना अदालती आदेश के नहीं छीना जा सकता।',
         },
-        photoExhibitSrc: '/images/cases/kesavananda-bharati.jpg',
       },
       {
         id: 'panel-4',
@@ -4185,7 +4184,6 @@ export const CASES_DATA: CaseData[] = [
           en: 'The High Court directed State authorities to produce the minor child. Upon inquiry, the Court verified the infant age and the imperative need for maternal care.',
           hi: 'उच्च न्यायालय के आदेश पर बालक को अदालत में पेश किया गया और अबोध उम्र में मां के स्नेह की अनिवार्यता दर्ज की गई।',
         },
-        photoExhibitSrc: '/images/cases/maneka-gandhi.jpg',
       },
       {
         id: 'panel-5',
@@ -4264,7 +4262,7 @@ export const CASES_DATA: CaseData[] = [
           en: 'The Allahabad High Court allowed the habeas corpus petition and ordered immediate restoration of custody to the mother, granting liberty to the father to approach Family Court for permanent guardianship.',
           hi: 'इलाहाबाद उच्च न्यायालय ने रिट स्वीकार करते हुए बालक की कस्टडी तुरंत मां को सौंपी और पिता को फैमिली कोर्ट जाने की छूट दी।',
         },
-        photoExhibitSrc: '/images/cases/maneka-gandhi.jpg',
+        photoExhibitSrc: '/images/cases/rinku-rukshar-verdict.jpg',
       },
       {
         id: 'panel-7',
@@ -4281,7 +4279,6 @@ export const CASES_DATA: CaseData[] = [
           en: 'The ruling established that constitutional courts exercising Article 226 will not permit procedural hurdles to deprive young infants of maternal custody.',
           hi: 'फैसले ने स्थापित किया कि संवैधानिक अदालतें प्रक्रियात्मक बाधाओं को अबोध बालकों को मां से अलग करने की अनुमति नहीं देंगी।',
         },
-        photoExhibitSrc: '/images/cases/shah-bano.jpg',
         citationFooter: '2020 Supreme(All) 903 · Allahabad High Court',
         judgmentUrl: 'https://indiankanoon.org/docfragment/150989080/',
       },

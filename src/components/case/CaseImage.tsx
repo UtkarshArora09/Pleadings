@@ -26,8 +26,29 @@ export function CaseImage({
 }: CaseImageProps) {
   const isIllustration = provenance === 'illustration';
   const resolvedAlt = isIllustration && !alt.startsWith('Illustration:') ? `Illustration: ${alt}` : alt;
-
   const isDataUri = typeof src === 'string' && (src.startsWith('data:') || src.startsWith('blob:'));
+  const [hasError, setHasError] = React.useState(false);
+
+  React.useEffect(() => {
+    setHasError(false);
+  }, [src]);
+
+  if (!src || hasError) {
+    return (
+      <div
+        className={`relative overflow-hidden rounded-xs select-none flex flex-col items-center justify-center p-6 bg-[#121520] border border-red-500/30 text-center ${
+          !fill && !width ? aspectRatio : ''
+        } ${className}`}
+      >
+        <span className="text-red-400 font-mono text-xs font-bold uppercase tracking-wider mb-1">
+          ✕ Error loading image
+        </span>
+        <span className="text-white/40 text-[10px] font-mono truncate max-w-full px-2">
+          {resolvedAlt || 'Image unavailable'}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -43,6 +64,7 @@ export function CaseImage({
           unoptimized={isDataUri}
           priority={priority}
           sizes="(max-width: 768px) 100vw, 50vw"
+          onError={() => setHasError(true)}
           className="object-cover object-center"
         />
       ) : (
@@ -53,6 +75,7 @@ export function CaseImage({
           height={height || 338}
           unoptimized={isDataUri}
           priority={priority}
+          onError={() => setHasError(true)}
           className="w-full h-auto object-cover object-center"
         />
       )}

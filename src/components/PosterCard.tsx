@@ -39,16 +39,17 @@ export function PosterCard({ caseData }: PosterCardProps) {
   const rawCourt = (caseData as any).court;
   const displayCourt = typeof rawCourt === 'string' ? rawCourt : ((rawCourt as any)?.[language] || (rawCourt as any)?.en || 'Supreme Court of India');
 
-  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as any).bannerImage || '/images/cases/ghost-case.jpg';
+  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as any).bannerImage || '';
 
   const isCrime = String(categoryTag).toLowerCase().includes('ipc') || (caseData as any).genre === 'crime';
   const accentColor = isCrime ? '#E50914' : '#D4AF37';
 
-  const defaultFallback = '/images/cases/ghost-case.jpg';
   const [imgSrc, setImgSrc] = React.useState<string>(bannerImg);
+  const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
     setImgSrc(bannerImg);
+    setHasError(false);
   }, [bannerImg]);
 
   return (
@@ -92,25 +93,38 @@ export function PosterCard({ caseData }: PosterCardProps) {
 
           {/* Cinematic Photo Thumbnail with Play Glow on Hover */}
           <div className="relative w-full aspect-[16/9] rounded-xs overflow-hidden bg-[#0A0C12] mb-3.5 border border-white/5">
-            <Image
-              src={imgSrc}
-              alt={String(title)}
-              fill
-              unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:'))}
-              sizes="(max-width: 640px) 280px, 330px"
-              onError={() => setImgSrc(defaultFallback)}
-              className="object-cover object-center transition-transform duration-500 group-hover:scale-105 brightness-90 group-hover:brightness-100"
-            />
-
-            {/* Subtle Gradient Vignette */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#12141D]/80 via-transparent to-transparent pointer-events-none" />
-
-            {/* Play Button Overlay on Hover */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <div className="w-10 h-10 rounded-full bg-black/70 backdrop-blur-sm border border-white/30 flex items-center justify-center shadow-lg text-white text-sm pl-0.5">
-                ▶
+            {hasError || !imgSrc ? (
+              <div className="w-full h-full flex flex-col items-center justify-center bg-[#121520] border border-red-500/30 p-3 text-center">
+                <span className="text-red-400 font-mono text-[10px] font-bold uppercase tracking-wider mb-1">
+                  ✕ Error loading image
+                </span>
+                <span className="text-white/40 text-[9px] font-mono truncate max-w-full px-1">
+                  {String(title)}
+                </span>
               </div>
-            </div>
+            ) : (
+              <>
+                <Image
+                  src={imgSrc}
+                  alt={String(title)}
+                  fill
+                  unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:'))}
+                  sizes="(max-width: 640px) 280px, 330px"
+                  onError={() => setHasError(true)}
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105 brightness-90 group-hover:brightness-100"
+                />
+
+                {/* Subtle Gradient Vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12141D]/80 via-transparent to-transparent pointer-events-none" />
+
+                {/* Play Button Overlay on Hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="w-10 h-10 rounded-full bg-black/70 backdrop-blur-sm border border-white/30 flex items-center justify-center shadow-lg text-white text-sm pl-0.5">
+                    ▶
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Case Content: Title & Court & Synopsis */}

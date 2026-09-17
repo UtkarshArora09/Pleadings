@@ -35,12 +35,13 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
     return acc + count;
   }, 0) || 12;
 
-  const defaultHeroFallback = '/images/cases/ghost-case.jpg';
-  const [heroImg, setHeroImg] = useState<string>(activeCase.poster.src || defaultHeroFallback);
+  const [heroImg, setHeroImg] = useState<string>(activeCase.poster.src || '');
+  const [hasHeroError, setHasHeroError] = useState<boolean>(false);
 
   useEffect(() => {
-    setHeroImg(activeCase.poster.src || defaultHeroFallback);
-  }, [activeCase.poster.src, defaultHeroFallback]);
+    setHeroImg(activeCase.poster.src || '');
+    setHasHeroError(false);
+  }, [activeCase.poster.src]);
 
   return (
     <section
@@ -48,17 +49,19 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
       className="relative w-full max-w-full min-h-[500px] sm:min-h-[560px] md:min-h-[85vh] lg:min-h-screen bg-[#0E1016] flex flex-col justify-end pb-6 sm:pb-10 md:pb-14 pt-20 sm:pt-24 md:pt-28 overflow-hidden md:snap-start"
     >
       {/* Full Bleed Background */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={heroImg}
-          alt={activeCase.poster.alt || displayTitle}
-          fill
-          unoptimized={typeof heroImg === 'string' && (heroImg.startsWith('data:') || heroImg.startsWith('blob:'))}
-          priority
-          sizes="100vw"
-          onError={() => setHeroImg(defaultHeroFallback)}
-          className="object-cover object-center transform scale-105 transition-all duration-1000 brightness-60 sm:brightness-75"
-        />
+      <div className="absolute inset-0 z-0 bg-[#0E1016]">
+        {heroImg && !hasHeroError && (
+          <Image
+            src={heroImg}
+            alt={activeCase.poster.alt || displayTitle}
+            fill
+            unoptimized={typeof heroImg === 'string' && (heroImg.startsWith('data:') || heroImg.startsWith('blob:'))}
+            priority
+            sizes="100vw"
+            onError={() => setHasHeroError(true)}
+            className="object-cover object-center transform scale-105 transition-all duration-1000 brightness-60 sm:brightness-75"
+          />
+        )}
 
         {/* Cinematic Vignettes */}
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#0E1016] via-[#0E1016]/80 to-transparent w-full md:w-[70%] pointer-events-none" />

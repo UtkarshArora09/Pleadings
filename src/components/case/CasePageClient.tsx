@@ -16,7 +16,7 @@ function normalizeToCaseFile(raw: any, slug: string): CaseFile {
   const titleStr = typeof raw.title === 'string' ? raw.title : (raw.title?.en || raw.title?.hi || slug);
   const hookStr = typeof raw.hook === 'string' ? raw.hook : (raw.hook?.en || raw.blurb?.en || raw.featuredHeroHook?.en || '');
   const posterImg = raw.poster || {
-    src: raw.bannerImage || '/images/cases/ghost-case.jpg',
+    src: raw.bannerImage || '',
     alt: `${titleStr} cover poster`,
     provenance: 'illustration' as const,
   };
@@ -124,6 +124,103 @@ function normalizeToCaseFile(raw: any, slug: string): CaseFile {
   } as unknown as CaseFile;
 }
 
+function isStockPlaceholder(url?: string): boolean {
+  if (!url) return true;
+  return (
+    url === '/images/cases/shah-bano.jpg' ||
+    url === '/images/cases/maneka-gandhi.jpg' ||
+    url === '/images/cases/kesavananda-bharati.jpg' ||
+    url === '/images/cases/ghost-case.jpg' ||
+    url === '/images/cases/nanavati-case.jpg' ||
+    url === '/images/cases/rinku-rukshar-poster.jpg' ||
+    url === '/images/cases/rinku-rukshar-exhibit.jpg' ||
+    url === '/images/cases/rinku-rukshar-verdict.jpg'
+  );
+}
+
+function mergeCustomVisuals(base: CaseFile, custom?: any): CaseFile {
+  if (!custom) return base;
+  const result = { ...base };
+
+  const customPoster = custom.poster?.src || custom.bannerImage;
+  if (customPoster && (!isStockPlaceholder(customPoster) || !base.poster?.src)) {
+    result.poster = {
+      src: customPoster,
+      alt: custom.poster?.alt || base.poster?.alt || `${base.title} poster`,
+      provenance: custom.poster?.provenance || 'illustration',
+    };
+    (result as any).bannerImage = customPoster;
+    if (result.episodes?.[0]) {
+      result.episodes[0] = { ...result.episodes[0], image: result.poster };
+    }
+    if (result.hi?.episodes?.[0]) {
+      result.hi.episodes[0] = { ...result.hi.episodes[0], image: result.poster };
+    }
+  }
+
+  const customExhibit =
+    custom.panels?.[1]?.photoExhibitSrc ||
+    custom.episodes?.[1]?.exhibit?.image?.src ||
+    custom.episodes?.[1]?.image?.src;
+  if (customExhibit && (!isStockPlaceholder(customExhibit) || !base.episodes?.[1]?.exhibit?.image?.src)) {
+    const exhibitImg = {
+      src: customExhibit,
+      alt: `Archival Exhibit for ${base.title}`,
+      provenance: 'archival' as const,
+    };
+    if (result.episodes?.[1]) {
+      result.episodes[1] = {
+        ...result.episodes[1],
+        image: exhibitImg,
+        exhibit: result.episodes[1].exhibit
+          ? { ...result.episodes[1].exhibit, image: exhibitImg }
+          : undefined,
+      };
+    }
+    if (result.hi?.episodes?.[1]) {
+      result.hi.episodes[1] = {
+        ...result.hi.episodes[1],
+        image: exhibitImg,
+        exhibit: result.hi.episodes[1].exhibit
+          ? { ...result.hi.episodes[1].exhibit, image: exhibitImg }
+          : undefined,
+      };
+    }
+  }
+
+  const customVerdict =
+    custom.panels?.[6]?.photoExhibitSrc ||
+    custom.episodes?.[6]?.image?.src ||
+    custom.episodes?.[6]?.exhibit?.image?.src;
+  if (customVerdict && (!isStockPlaceholder(customVerdict) || !base.episodes?.[6]?.image?.src)) {
+    const verdictImg = {
+      src: customVerdict,
+      alt: `Courtroom Verdict for ${base.title}`,
+      provenance: 'illustration' as const,
+    };
+    if (result.episodes?.[6]) {
+      result.episodes[6] = {
+        ...result.episodes[6],
+        image: verdictImg,
+        exhibit: result.episodes[6].exhibit
+          ? { ...result.episodes[6].exhibit, image: verdictImg }
+          : undefined,
+      };
+    }
+    if (result.hi?.episodes?.[6]) {
+      result.hi.episodes[6] = {
+        ...result.hi.episodes[6],
+        image: verdictImg,
+        exhibit: result.hi.episodes[6].exhibit
+          ? { ...result.hi.episodes[6].exhibit, image: verdictImg }
+          : undefined,
+      };
+    }
+  }
+
+  return result;
+}
+
 export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePageClientProps) {
   const [caseData, setCaseData] = useState<CaseFile | null>(initialCase);
   const [loading, setLoading] = useState<boolean>(!initialCase);
@@ -131,6 +228,7 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
 
   useEffect(() => {
     let isMounted = true;
+    let localParsed: any = null;
 
     // 1. Check local storage first (instant client cache for user-uploaded custom images)
     if (typeof window !== 'undefined') {
@@ -146,9 +244,9 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
         for (const key of possibleKeys) {
           const savedRaw = localStorage.getItem(key);
           if (savedRaw) {
-            const parsed = JSON.parse(savedRaw);
-            if (parsed && (parsed.poster?.src || parsed.bannerImage || parsed.panels || parsed.episodes)) {
-              const normalized = normalizeToCaseFile(parsed, slug);
+            localParsed = JSON.parse(savedRaw);
+            if (localParsed && (localParsed.poster?.src || localParsed.bannerImage || localParsed.panels || localParsed.episodes)) {
+              const normalized = normalizeToCaseFile(localParsed, slug);
               if (isMounted) {
                 setCaseData(normalized);
                 setLoading(false);
@@ -169,7 +267,10 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.case && isMounted) {
-            const normalized = normalizeToCaseFile(data.case, slug);
+            let normalized = normalizeToCaseFile(data.case, slug);
+            if (localParsed) {
+              normalized = mergeCustomVisuals(normalized, localParsed);
+            }
             setCaseData(normalized);
             setLoading(false);
             return;
@@ -181,7 +282,10 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
         if (adminRes.ok) {
           const adminData = await adminRes.json();
           if (adminData.success && adminData.case && isMounted) {
-            const normalized = normalizeToCaseFile(adminData.case, slug);
+            let normalized = normalizeToCaseFile(adminData.case, slug);
+            if (localParsed) {
+              normalized = mergeCustomVisuals(normalized, localParsed);
+            }
             setCaseData(normalized);
             setLoading(false);
             return;

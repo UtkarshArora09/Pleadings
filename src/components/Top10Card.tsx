@@ -36,13 +36,13 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
   const rawCourt = (caseData as any).court;
   const displayCourt = typeof rawCourt === 'string' ? rawCourt : ((rawCourt as any)?.[language] || (rawCourt as any)?.en || 'Supreme Court of India');
 
-  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as any).bannerImage || '/images/cases/ghost-case.jpg';
-
-  const defaultFallback = '/images/cases/ghost-case.jpg';
+  const bannerImg = (caseData as CaseFile).poster?.src || (caseData as any).bannerImage || '';
   const [imgSrc, setImgSrc] = React.useState<string>(bannerImg);
+  const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
     setImgSrc(bannerImg);
+    setHasError(false);
   }, [bannerImg]);
 
   return (
@@ -65,15 +65,26 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
         {/* Portrait Poster Card */}
         <div className="relative w-44 sm:w-48 md:w-52 aspect-[2/3] rounded-md overflow-hidden bg-[#151722] border border-white/10 group-hover:border-[#D4AF37] transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
           {/* Cover Art */}
-          <Image
-            src={imgSrc}
-            alt={String(title)}
-            fill
-            unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:'))}
-            sizes="220px"
-            onError={() => setImgSrc(defaultFallback)}
-            className="object-cover object-center brightness-90 group-hover:brightness-100 transition-transform duration-500 group-hover:scale-110"
-          />
+          {hasError || !imgSrc ? (
+            <div className="w-full h-full flex flex-col items-center justify-center bg-[#121520] border border-red-500/30 p-3 text-center">
+              <span className="text-red-400 font-mono text-[10px] font-bold uppercase tracking-wider mb-1">
+                ✕ Error loading image
+              </span>
+              <span className="text-white/40 text-[9px] font-mono truncate max-w-full px-1">
+                {String(title)}
+              </span>
+            </div>
+          ) : (
+            <Image
+              src={imgSrc}
+              alt={String(title)}
+              fill
+              unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:'))}
+              sizes="220px"
+              onError={() => setHasError(true)}
+              className="object-cover object-center brightness-90 group-hover:brightness-100 transition-transform duration-500 group-hover:scale-110"
+            />
+          )}
 
           {/* Vignette Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />

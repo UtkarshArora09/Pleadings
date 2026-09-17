@@ -16,6 +16,11 @@ interface CaseCardProps {
 export function CaseCard({ caseData, className = '', priority = false }: CaseCardProps) {
   const { language, isBookmarked, toggleBookmark } = useApp();
   const [hasVoted, setHasVoted] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [caseData.poster.src]);
 
   useEffect(() => {
     const saved = localStorage.getItem('pleadings:votes');
@@ -47,14 +52,27 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
       <Link href={`/case/${caseData.slug}`} className="block flex-1">
         {/* Poster Image Container */}
         <div className="relative w-full aspect-[16/10] overflow-hidden bg-black/80">
-          <Image
-            src={caseData.poster.src}
-            alt={caseData.poster.alt || displayTitle}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            priority={priority}
-            className="object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90 group-hover:brightness-100"
-          />
+          {hasError || !caseData.poster.src ? (
+            <div className="w-full h-full flex flex-col items-center justify-center bg-[#12141C] border border-red-500/30 p-3 text-center">
+              <span className="text-red-400 font-mono text-[10px] font-bold uppercase tracking-wider mb-1">
+                ✕ Error loading image
+              </span>
+              <span className="text-white/40 text-[9px] font-mono truncate max-w-full px-1">
+                {displayTitle}
+              </span>
+            </div>
+          ) : (
+            <Image
+              src={caseData.poster.src}
+              alt={caseData.poster.alt || displayTitle}
+              fill
+              unoptimized={typeof caseData.poster.src === 'string' && (caseData.poster.src.startsWith('data:') || caseData.poster.src.startsWith('blob:'))}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              priority={priority}
+              onError={() => setHasError(true)}
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500 brightness-90 group-hover:brightness-100"
+            />
+          )}
 
           {/* Top Overlay Badges */}
           <div className="absolute top-2 left-2 right-2 flex items-center justify-between gap-1 pointer-events-none z-10">

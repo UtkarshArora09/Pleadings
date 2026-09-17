@@ -57,7 +57,7 @@
   "featured": false,
   "publishedAt": "2024-03-10T00:00:00Z",
   "poster": {
-    "src": "/images/cases/shah-bano.jpg",
+    "src": "/images/cases/rinku-rukshar-poster.jpg",
     "alt": "Rinku Rukshar Habeas Corpus Custody Case cover poster",
     "provenance": "illustration"
   },
@@ -175,7 +175,7 @@
         "meta": "Allahabad High Court · Certified Filing Record",
         "sourceUrl": "https://indiankanoon.org/docfragment/150989080/",
         "image": {
-          "src": "/images/cases/maneka-gandhi.jpg",
+          "src": "/images/cases/rinku-rukshar-exhibit.jpg",
           "alt": "Courtroom docket filing",
           "provenance": "archival"
         }
@@ -449,7 +449,7 @@
         }
       },
       "image": {
-        "src": "/images/cases/maneka-gandhi.jpg",
+        "src": "/images/cases/rinku-rukshar-verdict.jpg",
         "alt": "Allahabad High Court Bench delivering ruling",
         "provenance": "archival"
       },
@@ -638,7 +638,7 @@
     "featured": false,
     "publishedAt": "2024-03-10T00:00:00Z",
     "poster": {
-      "src": "/images/cases/shah-bano.jpg",
+      "src": "/images/cases/rinku-rukshar-poster.jpg",
       "alt": "रिंकू रुखसार मामला पोस्टर",
       "provenance": "archival"
     },
