@@ -22,13 +22,44 @@ export async function POST(request: NextRequest) {
     }
 
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
+    const openaiKey = process.env.OPENAI_API_KEY;
     const hfToken = process.env.HF_TOKEN || process.env.HUGGINGFACE_TOKEN;
 
     let imageBuffer: Buffer | null = null;
     let usedProvider = '';
 
-    // 1. ATTEMPT GEMINI IMAGEN 3 (if key provided)
-    if (geminiKey && geminiKey.trim() !== '') {
+    // 1. ATTEMPT OPENAI DALL-E 3 / 2 (if key provided)
+    if (!imageBuffer && openaiKey && openaiKey.trim() !== '') {
+      try {
+        const oaiRes = await fetch('https://api.openai.com/v1/images/generations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${openaiKey.trim()}`,
+          },
+          body: JSON.stringify({
+            prompt: prompt.slice(0, 1000),
+            n: 1,
+            size: '1024x1024',
+            response_format: 'b64_json',
+          }),
+        });
+
+        if (oaiRes.ok) {
+          const oaiData = await oaiRes.json();
+          const b64 = oaiData.data?.[0]?.b64_json;
+          if (b64) {
+            imageBuffer = Buffer.from(b64, 'base64');
+            usedProvider = 'OpenAI DALL-E';
+          }
+        }
+      } catch (oaiErr) {
+        console.warn('OpenAI image generation failed:', oaiErr);
+      }
+    }
+
+    // 2. ATTEMPT GEMINI IMAGEN 3 (if key provided)
+    if (!imageBuffer && geminiKey && geminiKey.trim() !== '') {
       try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${geminiKey.trim()}`;
         const response = await fetch(url, {
@@ -60,7 +91,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 2. ATTEMPT HUGGING FACE INFERENCE (if token provided)
+    // 3. ATTEMPT HUGGING FACE INFERENCE (if token provided)
     if (!imageBuffer && hfToken && hfToken.trim() !== '') {
       try {
         const hfModels = [
@@ -97,27 +128,51 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 3. ATTEMPT HIGH-SPEED FLUX.1 SCHNELL CLOUD GENERATOR (Guaranteed Fallback)
+    // 4. ATTEMPT HIGH-SPEED POLLINATIONS CLOUD GENERATOR (Multi-model cascade)
     if (!imageBuffer) {
-      try {
-        console.log('⚡ Generating high-res 16:9 visual via FLUX.1 Cloud Engine...');
-        const cleanPrompt = encodeURIComponent(prompt.slice(0, 400));
-        const fluxUrl = `https://image.pollinations.ai/prompt/${cleanPrompt}?width=1024&height=576&model=flux&nologo=true&seed=${Date.now()}`;
-        
-        const fluxRes = await fetch(fluxUrl, {
-          method: 'GET',
-          headers: { 'User-Agent': 'Pleadings-Legal-Media/1.0' },
-        });
+      // Clean and sanitize prompt for URL query
+      const cleanPrompt = encodeURIComponent(
+        prompt
+          .replace(/[^\w\s,.-]/gi, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .slice(0, 300)
+      );
 
-        if (fluxRes.ok) {
-          const arrayBuf = await fluxRes.arrayBuffer();
-          if (arrayBuf.byteLength > 2000) {
-            imageBuffer = Buffer.from(arrayBuf);
-            usedProvider = 'FLUX.1 Schnell (High-Res Cloud Engine)';
+      const endpoints = [
+        `https://image.pollinations.ai/prompt/${cleanPrompt}?width=1024&height=576&model=flux&nologo=true&seed=${Math.floor(Math.random() * 999999)}`,
+        `https://image.pollinations.ai/prompt/${cleanPrompt}?width=1024&height=576&model=turbo&nologo=true&seed=${Math.floor(Math.random() * 999999)}`,
+        `https://image.pollinations.ai/prompt/${cleanPrompt}?width=1024&height=576&nologo=true&seed=${Math.floor(Math.random() * 999999)}`,
+      ];
+
+      for (const endpoint of endpoints) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 20000); // 20s timeout
+
+          const fluxRes = await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+              Accept: 'image/jpeg,image/png,image/*',
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Pleadings/1.0',
+            },
+            signal: controller.signal,
+          });
+          clearTimeout(timeoutId);
+
+          if (fluxRes.ok) {
+            const arrayBuf = await fluxRes.arrayBuffer();
+            if (arrayBuf.byteLength > 2000) {
+              imageBuffer = Buffer.from(arrayBuf);
+              usedProvider = endpoint.includes('model=flux')
+                ? 'FLUX.1 Schnell'
+                : 'Pollinations Cloud AI';
+              break;
+            }
           }
+        } catch (fluxErr) {
+          console.warn('Pollinations attempt failed, trying fallback model...', fluxErr);
         }
-      } catch (fluxErr) {
-        console.warn('FLUX cloud engine error:', fluxErr);
       }
     }
 
@@ -126,7 +181,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           error:
-            'All automated AI generators were busy. Please copy the prompt above and upload your image directly using the Upload button.',
+            'All automated AI generators are currently busy or rate-limited. Please copy the prompt and upload your image directly using the Upload button.',
         },
         { status: 502 }
       );

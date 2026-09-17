@@ -49,6 +49,13 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   const [batchGenerating, setBatchGenerating] = useState<boolean>(false);
   const [batchProgress, setBatchProgress] = useState<string>('');
 
+  // Smart LLM Prompt Director State (Groq / Gemini)
+  const [generatingSmartPrompts, setGeneratingSmartPrompts] = useState<boolean>(false);
+  const [smartPromptProvider, setSmartPromptProvider] = useState<string | null>(null);
+  const [selectedArtStyle, setSelectedArtStyle] = useState<string>('Cinematic 35mm Period Film, dramatic lighting');
+  const [activeRefineSlot, setActiveRefineSlot] = useState<'poster' | 'exhibit' | 'verdict' | null>(null);
+  const [customRefineText, setCustomRefineText] = useState<string>('');
+
   useEffect(() => {
     async function loadCase() {
       try {
@@ -161,10 +168,10 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     }
   }, [caseData?.slug, caseData?.title, slug]);
 
-  const handleShufflePrompts = () => {
+  const handleResetBaselinePrompts = () => {
     if (!caseData) return;
     const caseTitleEn = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.en || caseData.slug);
-    const randomized = getCaseVisualPrompts(
+    const baseline = getCaseVisualPrompts(
       {
         title: caseTitleEn,
         court: caseData.court,
@@ -173,17 +180,19 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         categoryTag: caseData.categoryTag,
         slug: caseData.slug || slug,
       },
-      { forceRandom: true }
+      { forceRandom: false }
     );
 
     setPrompts({
-      poster: randomized.poster.prompt,
-      exhibit: randomized.exhibit.prompt,
-      verdict: randomized.verdict.prompt,
-      posterArchetype: randomized.poster.archetypeId,
-      exhibitArchetype: randomized.exhibit.archetypeId,
-      verdictArchetype: randomized.verdict.archetypeId,
+      poster: baseline.poster.prompt,
+      exhibit: baseline.exhibit.prompt,
+      verdict: baseline.verdict.prompt,
+      posterArchetype: baseline.poster.archetypeId,
+      exhibitArchetype: baseline.exhibit.archetypeId,
+      verdictArchetype: baseline.verdict.archetypeId,
     });
+    setSmartPromptProvider('↺ Restored default baseline prompts for this case');
+    setTimeout(() => setSmartPromptProvider(null), 4000);
   };
 
   const handleArchetypeChange = (slot: 'poster' | 'exhibit' | 'verdict', archetypeId: string) => {
@@ -210,6 +219,65 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
       ...prev,
       [slot]: text,
     }));
+  };
+
+  const handleGenerateSmartPrompts = async (
+    customInstruction?: string,
+    targetSlot?: 'all' | 'poster' | 'exhibit' | 'verdict'
+  ) => {
+    if (!caseData || generatingSmartPrompts) return;
+    try {
+      setGeneratingSmartPrompts(true);
+      setImageError(null);
+
+      const res = await fetch('/api/admin/generate-prompts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          caseData: {
+            title: caseData.title,
+            court: caseData.court,
+            year: caseData.year,
+            genre: caseData.categoryTag || caseData.genre,
+            statuteSections: caseData.brief?.chargesApplied?.join(', ') || '',
+            facts: caseData.brief?.facts || caseData.blurb,
+            held: caseData.brief?.held,
+            slug: caseData.slug || slug,
+          },
+          artStyle: selectedArtStyle,
+          customInstruction: customInstruction || undefined,
+          targetSlot: targetSlot || 'all',
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success && data.prompts) {
+        setPrompts((prev) => ({
+          ...prev,
+          ...(targetSlot === 'poster' ? { poster: data.prompts.poster } : {}),
+          ...(targetSlot === 'exhibit' ? { exhibit: data.prompts.exhibit } : {}),
+          ...(targetSlot === 'verdict' ? { verdict: data.prompts.verdict } : {}),
+          ...(!targetSlot || targetSlot === 'all'
+            ? {
+                poster: data.prompts.poster,
+                exhibit: data.prompts.exhibit,
+                verdict: data.prompts.verdict,
+              }
+            : {}),
+        }));
+        setSmartPromptProvider(`⚡ Prompts crafted via ${data.provider}`);
+        setTimeout(() => setSmartPromptProvider(null), 6000);
+        setActiveRefineSlot(null);
+        setCustomRefineText('');
+      } else {
+        throw new Error(data.error || 'Failed to generate prompts');
+      }
+    } catch (err: unknown) {
+      console.error('Smart prompt generation error:', err);
+      setImageError(err instanceof Error ? err.message : 'Smart prompt generation failed');
+    } finally {
+      setGeneratingSmartPrompts(false);
+    }
   };
 
   const handleGenerateAllThree = async () => {
@@ -1011,54 +1079,87 @@ async function compressImageForUpload(
       {activeTab === 'images' && (
         <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-8 shadow-2xl">
           {/* Header & Global Studio Actions */}
-          <div className="pb-5 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
-                <h3 className="text-base font-anton text-white uppercase tracking-wider">
-                  Visual Asset Studio · 12+ Legal Prompt Engine
-                </h3>
+          <div className="pb-5 border-b border-white/10 space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+                  <h3 className="text-base font-anton text-white uppercase tracking-wider">
+                    Visual Asset Studio · 3 Key Case Visuals
+                  </h3>
+                </div>
+                <p className="text-xs text-[#a9a49a] max-w-2xl">
+                  Each case features 3 targeted visuals corresponding to its narrative structure: the <strong>Hero Billboard Cover</strong>, the <strong>Episode 02 Archival Exhibit</strong>, and the <strong>Episode 07 Courtroom Verdict</strong>.
+                </p>
               </div>
-              <p className="text-xs text-[#a9a49a] max-w-2xl">
-                Choose from 12+ authentic legal prompt archetypes (Senior Advocates, Constitution Benches, vintage newspapers, police dockets, chambers, and gavel verdicts). Randomize or customize prompts so no two cases look identical.
-              </p>
-            </div>
 
-            {/* Top Global Actions */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              {/* Shuffle Prompts */}
-              <button
-                type="button"
-                onClick={handleShufflePrompts}
-                disabled={batchGenerating}
-                className="px-3.5 py-2 bg-white/5 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider rounded-xs border border-white/20 transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#D4AF37]"
-                title="Randomly select 3 new distinct prompt templates from the 12+ legal archetypes"
-              >
-                <span>🎲</span>
-                <span>Shuffle 3 Prompts</span>
-              </button>
+              {/* Global Actions */}
+              <div className="flex flex-wrap items-center gap-2.5">
+                {/* 1. Auto-Generate AI Prompts with LLM */}
+                <button
+                  type="button"
+                  onClick={() => handleGenerateSmartPrompts()}
+                  disabled={generatingSmartPrompts || batchGenerating}
+                  className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#F5D061] hover:from-white hover:to-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-[#D4AF37]/30"
+                  title="Use Groq / Gemini AI to craft 3 bespoke prompts based on the exact case facts and scenes"
+                >
+                  {generatingSmartPrompts ? (
+                    <>
+                      <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      <span>Crafting Prompts with AI...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>🧠</span>
+                      <span>Auto-Generate AI Prompts (Groq / Gemini)</span>
+                    </>
+                  )}
+                </button>
 
-              {/* Batch Generate All 3 AI Images */}
-              <button
-                type="button"
-                onClick={handleGenerateAllThree}
-                disabled={batchGenerating || !!generatingTarget}
-                className="px-4 py-2 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-[#D4AF37]/30"
-              >
-                {batchGenerating ? (
-                  <>
-                    <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                    <span>{batchProgress || 'Generating Visuals...'}</span>
-                  </>
-                ) : (
-                  <>
-                    <span>⚡</span>
-                    <span>Generate All 3 AI Images</span>
-                  </>
-                )}
-              </button>
+                {/* 2. Reset to Baseline Prompts */}
+                <button
+                  type="button"
+                  onClick={handleResetBaselinePrompts}
+                  disabled={generatingSmartPrompts || batchGenerating}
+                  className="px-3.5 py-2 bg-white/5 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider rounded-xs border border-white/20 transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#D4AF37]"
+                  title="Reset to clean baseline generic prompts for this case"
+                >
+                  <span>↺</span>
+                  <span>Reset Baseline Prompts</span>
+                </button>
+
+                {/* 3. Batch Generate All 3 AI Images */}
+                <button
+                  type="button"
+                  onClick={handleGenerateAllThree}
+                  disabled={batchGenerating || !!generatingTarget}
+                  className="px-4 py-2 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-[#D4AF37]/30"
+                >
+                  {batchGenerating ? (
+                    <>
+                      <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      <span>{batchProgress || 'Generating Visuals...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>⚡</span>
+                      <span>Generate All 3 AI Images</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
+
+          {smartPromptProvider && (
+            <div className="p-3 bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#D4AF37] rounded-xs text-xs font-mono flex items-center justify-between gap-2 animate-fadeIn">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
+                <span>{smartPromptProvider}</span>
+              </div>
+              <span className="text-[10px] text-white/60">Prompts updated for all 3 scene positions!</span>
+            </div>
+          )}
 
           {batchProgress && (
             <div className="p-3 bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] rounded-xs text-xs font-mono flex items-center gap-2 animate-fadeIn">
@@ -1067,13 +1168,15 @@ async function compressImageForUpload(
             </div>
           )}
 
-          {/* 1. Hero Billboard Poster (21:9 / 16:9) */}
+          {/* 1. Hero Billboard Cover Poster (Top Header & Browse Cards) */}
           <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
             <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-3 gap-2">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-                <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
-                  1. Hero Billboard Cover Poster (16:9 / 21:9)
+                <span className="px-2 py-0.5 bg-[#D4AF37] text-black font-mono font-bold text-[10px] uppercase rounded-2xs">
+                  Hero Cover
+                </span>
+                <span className="text-xs font-mono font-bold text-white uppercase">
+                  1. Case Billboard Poster (Top Hero Banner & Reel Cards)
                 </span>
               </div>
               <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
@@ -1094,30 +1197,11 @@ async function compressImageForUpload(
                     }}
                   />
                 </div>
-                <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Billboard Asset</p>
+                <p className="text-[10px] font-mono text-[#8c887e] text-center">Placement: Top Case Banner & Reel Cards</p>
               </div>
 
-              {/* Prompt, Style Selector & Dual Actions */}
+              {/* Prompt & Actions */}
               <div className="md:col-span-2 space-y-3">
-                {/* Archetype Selector Dropdown */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#12141C] p-2 rounded-xs border border-white/10">
-                  <label className="text-[10px] font-mono uppercase text-[#D4AF37] font-bold flex items-center gap-1.5">
-                    <span>🎨</span>
-                    <span>Prompt Style Archetype:</span>
-                  </label>
-                  <select
-                    value={prompts.posterArchetype}
-                    onChange={(e) => handleArchetypeChange('poster', e.target.value)}
-                    className="bg-[#0A0C10] border border-white/20 text-white text-xs py-1 px-2 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37] cursor-pointer"
-                  >
-                    {LEGAL_PROMPT_ARCHETYPES.map((arch) => (
-                      <option key={arch.id} value={arch.id} className="bg-[#121520] text-white">
-                        {arch.name} ({arch.category})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
                 <div>
                   <div className="flex items-center justify-between mb-1">
                     <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt (Editable)</label>
@@ -1193,9 +1277,11 @@ async function compressImageForUpload(
           <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
             <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-3 gap-2">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-                <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
-                  2. Archival Press Clipping / Case Docket (Episode 2)
+                <span className="px-2 py-0.5 bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] font-mono font-bold text-[10px] uppercase rounded-2xs">
+                  Episode 02
+                </span>
+                <span className="text-xs font-mono font-bold text-white uppercase">
+                  2. Archival Exhibit (Evidence / Police Docket / Newspaper)
                 </span>
               </div>
               <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
@@ -1216,30 +1302,11 @@ async function compressImageForUpload(
                     }}
                   />
                 </div>
-                <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Exhibit Asset</p>
+                <p className="text-[10px] font-mono text-[#8c887e] text-center">Placement: Inside Episode 02 Evidence Layer</p>
               </div>
 
-              {/* Prompt, Style Selector & Dual Actions */}
+              {/* Prompt & Actions */}
               <div className="md:col-span-2 space-y-3">
-                {/* Archetype Selector Dropdown */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#12141C] p-2 rounded-xs border border-white/10">
-                  <label className="text-[10px] font-mono uppercase text-[#D4AF37] font-bold flex items-center gap-1.5">
-                    <span>📰</span>
-                    <span>Prompt Style Archetype:</span>
-                  </label>
-                  <select
-                    value={prompts.exhibitArchetype}
-                    onChange={(e) => handleArchetypeChange('exhibit', e.target.value)}
-                    className="bg-[#0A0C10] border border-white/20 text-white text-xs py-1 px-2 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37] cursor-pointer"
-                  >
-                    {LEGAL_PROMPT_ARCHETYPES.map((arch) => (
-                      <option key={arch.id} value={arch.id} className="bg-[#121520] text-white">
-                        {arch.name} ({arch.category})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
                 <div>
                   <div className="flex items-center justify-between mb-1">
                     <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt (Editable)</label>
@@ -1315,9 +1382,11 @@ async function compressImageForUpload(
           <div className="p-5 bg-black/50 border border-white/10 rounded-xs space-y-4">
             <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-3 gap-2">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-                <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase">
-                  3. Courtroom Verdict & Bench Scene (Episode 7)
+                <span className="px-2 py-0.5 bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] font-mono font-bold text-[10px] uppercase rounded-2xs">
+                  Episode 07
+                </span>
+                <span className="text-xs font-mono font-bold text-white uppercase">
+                  3. Courtroom Verdict (Judicial Bench & Decision Moment)
                 </span>
               </div>
               <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
@@ -1338,30 +1407,11 @@ async function compressImageForUpload(
                     }}
                   />
                 </div>
-                <p className="text-[10px] font-mono text-[#8c887e] text-center">Active Verdict Asset</p>
+                <p className="text-[10px] font-mono text-[#8c887e] text-center">Placement: Inside Episode 07 Verdict & Ratio</p>
               </div>
 
-              {/* Prompt, Style Selector & Dual Actions */}
+              {/* Prompt & Actions */}
               <div className="md:col-span-2 space-y-3">
-                {/* Archetype Selector Dropdown */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#12141C] p-2 rounded-xs border border-white/10">
-                  <label className="text-[10px] font-mono uppercase text-[#D4AF37] font-bold flex items-center gap-1.5">
-                    <span>⚖️</span>
-                    <span>Prompt Style Archetype:</span>
-                  </label>
-                  <select
-                    value={prompts.verdictArchetype}
-                    onChange={(e) => handleArchetypeChange('verdict', e.target.value)}
-                    className="bg-[#0A0C10] border border-white/20 text-white text-xs py-1 px-2 rounded-xs font-mono focus:outline-none focus:border-[#D4AF37] cursor-pointer"
-                  >
-                    {LEGAL_PROMPT_ARCHETYPES.map((arch) => (
-                      <option key={arch.id} value={arch.id} className="bg-[#121520] text-white">
-                        {arch.name} ({arch.category})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
                 <div>
                   <div className="flex items-center justify-between mb-1">
                     <label className="text-[10px] font-mono text-[#a9a49a] uppercase">AI Visual Prompt (Editable)</label>
