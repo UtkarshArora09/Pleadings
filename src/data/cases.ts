@@ -23,7 +23,7 @@ export const CASES_DATA: CaseData[] = [
     matchRate: 98,
     maturityRating: 'U/A 16+',
     rank: 1,
-    bannerImage: '/images/cases/ghost-case.jpg',
+    bannerImage: 'https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg',
     blurb: {
       en: 'A midnight killing in an abandoned aerodrome. Can an honest belief in ghosts save a man from the gallows?',
       hi: 'एक सुनसान हवाई अड्डे पर आधी रात को हुई हत्या। क्या भूतों पर सच्चा विश्वास किसी को फांसी के फंदे से बचा सकता है?',
@@ -56,7 +56,7 @@ export const CASES_DATA: CaseData[] = [
           en: 'Rasgovindpur village, May 1958. An abandoned aerodrome, overrun by jungle, littered with wartime scrap. Villagers swore it was haunted — and would not cross it alone after dark.',
           hi: 'रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा सुनसान हवाई अड्डा, युद्ध के कबाड़ से भरा हुआ। गांव वाले कसम खाते थे कि वहां भूत का साया है — और अंधेरे के बाद कोई भी अकेले वहां से नहीं गुजरता था।',
         },
-        photoExhibitSrc: '/images/cases/ghost-case.jpg',
+        photoExhibitSrc: 'https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg',
         photoExhibitCaption: {
           en: 'Archival crime scene photo: Rasgovindpur abandoned military runway (May 1958).',
           hi: 'घटनास्थल की पुरालेखीय तस्वीर: रसगोविंदपुर हवाई पट्टी (मई 1958)।',
@@ -77,7 +77,7 @@ export const CASES_DATA: CaseData[] = [
           en: 'Meet the people whose lives collided on that midnight in May.',
           hi: 'जानिए उन लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए टकरा गई।',
         },
-        photoExhibitSrc: '/images/cases/ghost_thapa_portrait.jpg',
+        photoExhibitSrc: 'https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-exhibit-1789764259037.jpg',
         photoExhibitCaption: {
           en: 'Orissa Police CID archival suspect photo: Ram Bahadur Thapa holding the khukri (1958).',
           hi: 'उड़ीसा पुलिस सीआईडी पुरालेख: राम बहादुर थापा खुखरी के साथ (1958)।',

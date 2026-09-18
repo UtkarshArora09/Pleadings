@@ -56,9 +56,9 @@
   "featured": true,
   "publishedAt": "2024-01-01T00:00:00Z",
   "poster": {
-    "src": "/images/cases/ghost-case.jpg",
-    "alt": "The Ghost Case poster",
-    "provenance": "archival"
+    "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
+    "alt": "The Ghost Case cover poster",
+    "provenance": "illustration"
   },
   "episodes": [
     {

@@ -4,6 +4,7 @@ import path from 'path';
 import { CaseStore } from '@/lib/db/caseStore';
 import { processCaseIngestion } from '@/lib/ai/pipeline';
 import { isRequestAuthenticated } from '@/lib/auth';
+import { sendAdminCaseCreatedEmail } from '@/lib/email';
 
 export async function GET(request: NextRequest) {
   if (!isRequestAuthenticated(request)) {
@@ -52,6 +53,13 @@ export async function POST(request: NextRequest) {
     // Save to dynamic store with ADMIN_REVIEW status
     const savedCase = CaseStore.create(generatedCase as any);
 
+    // Send Admin Notification Email
+    try {
+      await sendAdminCaseCreatedEmail(savedCase);
+    } catch (emailErr) {
+      console.warn('Admin case creation email notice warning:', emailErr);
+    }
+
     return NextResponse.json({ success: true, case: savedCase });
   } catch (error) {
     console.error('Error ingesting case:', error);
@@ -61,4 +69,5 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
 

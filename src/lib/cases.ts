@@ -29,6 +29,16 @@ const ALL_STATIC_CASES: CaseFile[] = [
   rinkuRuksharCase as unknown as CaseFile,
 ];
 
+import dynamicCasesJson from '@/data/dynamicCases.json';
+
+// Build initial map from dynamicCases.json so all images are instantly available
+const INITIAL_DYNAMIC_MAP = new Map<string, any>();
+if (Array.isArray(dynamicCasesJson)) {
+  dynamicCasesJson.forEach((d: any) => {
+    if (d.slug) INITIAL_DYNAMIC_MAP.set(d.slug.toLowerCase().trim(), d);
+  });
+}
+
 function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile {
   if (!dynamicData) return staticCase;
 
@@ -52,39 +62,58 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
       }
     : staticCase.poster;
 
+  const bannerImg = dynamicData.bannerImage || posterImg?.src || (staticCase as any).bannerImage;
+
+  // Clone episodes and inject dynamic custom visuals
+  const episodes = (staticCase.episodes || []).map((ep, idx) => {
+    const clone = { ...ep };
+    if (idx === 0 && posterImg) {
+      clone.image = posterImg;
+    }
+    const panelExhibit = dynamicData.panels?.[idx]?.photoExhibitSrc;
+    if (panelExhibit) {
+      clone.image = {
+        src: panelExhibit,
+        alt: clone.title || `${titleStr} Exhibit`,
+        provenance: 'archival' as const,
+      };
+    }
+    return clone;
+  });
+
   return {
     ...staticCase,
     ...dynamicData,
     title: titleStr,
     hook: hookStr,
     poster: posterImg,
-    bannerImage: posterImg?.src || (staticCase as any).bannerImage,
+    bannerImage: bannerImg,
+    episodes,
   };
 }
 
 export function getAllCases(): CaseFile[] {
+  let dynamicList: any[] = [];
   try {
-    const dynamicList = CaseStore.getAll();
-    if (Array.isArray(dynamicList) && dynamicList.length > 0) {
-      const dynamicMap = new Map<string, any>();
-      dynamicList.forEach((d) => {
-        if (d.slug) dynamicMap.set(d.slug.toLowerCase().trim(), d);
-      });
+    dynamicList = CaseStore.getAll();
+  } catch {}
 
-      return ALL_STATIC_CASES.map((sc) => {
-        const dyn =
-          dynamicMap.get(sc.slug.toLowerCase().trim()) ||
-          (sc.slug.includes('rinku')
-            ? dynamicMap.get('rinku-rukshar-habeas-corpus-custody-case') ||
-              dynamicMap.get('rinku-rukshar-habeas-corpus-case')
-            : null);
-        return mergeCaseWithDynamic(sc, dyn);
-      });
-    }
-  } catch {
-    // fallback to static cases
+  const dynamicMap = new Map<string, any>(INITIAL_DYNAMIC_MAP);
+  if (Array.isArray(dynamicList) && dynamicList.length > 0) {
+    dynamicList.forEach((d) => {
+      if (d.slug) dynamicMap.set(d.slug.toLowerCase().trim(), d);
+    });
   }
-  return ALL_STATIC_CASES;
+
+  return ALL_STATIC_CASES.map((sc) => {
+    const dyn =
+      dynamicMap.get(sc.slug.toLowerCase().trim()) ||
+      (sc.slug.includes('rinku')
+        ? dynamicMap.get('rinku-rukshar-habeas-corpus-custody-case') ||
+          dynamicMap.get('rinku-rukshar-habeas-corpus-case')
+        : null);
+    return mergeCaseWithDynamic(sc, dyn);
+  });
 }
 
 export function getCaseBySlug(slug: string): CaseFile | null {
@@ -101,16 +130,25 @@ export function getCaseBySlug(slug: string): CaseFile | null {
         c.slug === 'rinku-rukshar-habeas-corpus-case')
   );
 
+  let dynamicCase: any = null;
   try {
-    const dynamicCase = CaseStore.getBySlug(slug);
-    if (dynamicCase) {
-      if (staticCase) {
-        return mergeCaseWithDynamic(staticCase, dynamicCase);
-      }
-      return dynamicCase as unknown as CaseFile;
+    dynamicCase = CaseStore.getBySlug(slug);
+  } catch {}
+
+  if (!dynamicCase) {
+    dynamicCase =
+      INITIAL_DYNAMIC_MAP.get(decoded) ||
+      (decoded.includes('rinku')
+        ? INITIAL_DYNAMIC_MAP.get('rinku-rukshar-habeas-corpus-custody-case') ||
+          INITIAL_DYNAMIC_MAP.get('rinku-rukshar-habeas-corpus-case')
+        : null);
+  }
+
+  if (dynamicCase) {
+    if (staticCase) {
+      return mergeCaseWithDynamic(staticCase, dynamicCase);
     }
-  } catch {
-    // fallback
+    return dynamicCase as unknown as CaseFile;
   }
 
   return staticCase || null;
