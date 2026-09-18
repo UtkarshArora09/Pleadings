@@ -795,7 +795,7 @@
     "featured": true,
     "publishedAt": "2024-01-01T00:00:00Z",
     "poster": {
-      "src": "/images/cases/ghost-case.jpg",
+      "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
       "alt": "भूत वाला मामला पोस्टर",
       "provenance": "archival"
     },
