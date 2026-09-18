@@ -1893,7 +1893,7 @@
     "matchRate": 98,
     "maturityRating": "U/A 16+",
     "rank": 7,
-    "bannerImage": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
+    "bannerImage": "/images/cases/ghost-case.jpg",
     "blurb": {
       "en": "A midnight killing in an abandoned aerodrome. Can an honest belief in ghosts save a man from the gallows?",
       "hi": "एक सुनसान हवाई अड्डे पर आधी रात को हुई हत्या। क्या भूतों पर सच्चा विश्वास किसी को फांसी के फंदे से बचा सकता है?"
@@ -1926,7 +1926,7 @@
           "en": "Rasgovindpur village, May 1958. An abandoned World War II military airstrip surrounded by dense jungle. Every villager swore it was cursed and crawling with vengeful spirits.",
           "hi": "रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा द्वितीय विश्व युद्ध का एक सुनसान सैन्य हवाई अड्डा। गांव का हर व्यक्ति कसम खाता था कि वहां भूत और चुड़ैलों का साया है।"
         },
-        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
         "photoExhibitCaption": {
           "en": "Archival crime scene photo: Rasgovindpur abandoned military runway (May 1958).",
           "hi": "घटनास्थल की पुरालेखीय तस्वीर: रसगोविंदपुर हवाई पट्टी (मई 1958)।"
@@ -1947,7 +1947,7 @@
           "en": "Meet the key figures whose lives collided on that pitch-black midnight in May 1958.",
           "hi": "जानिए उन मुख्य लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए बदल गई।"
         },
-        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-exhibit-1789764259037.jpg",
+        "photoExhibitSrc": "/images/cases/ghost_thapa_portrait.jpg",
         "photoExhibitCaption": {
           "en": "Orissa Police CID archival suspect photo: Ram Bahadur Thapa holding the khukri (1958).",
           "hi": "उड़ीसा पुलिस सीआईडी पुरालेख: राम बहादुर थापा खुखरी के साथ (1958)।"
@@ -2357,9 +2357,9 @@
     "createdAt": "2026-09-04T18:59:11.938Z",
     "updatedAt": "2026-09-16T19:35:52.804Z",
     "poster": {
-      "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
-      "alt": "The Ghost Case cover poster",
-      "provenance": "illustration"
+      "src": "/images/cases/ghost-case.jpg",
+      "alt": "The Ghost Case poster",
+      "provenance": "archival"
     }
   },
   {

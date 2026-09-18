@@ -36,7 +36,7 @@ export default function HomePage() {
       {/* Section 2: Top 10 Landmark Precedents in India */}
       <section
         id="section-top10"
-        className="py-6 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative z-20 md:snap-start"
+        className="mt-6 sm:mt-0 pt-8 sm:pt-10 pb-6 sm:pb-12 md:py-16 md:min-h-[80vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative z-20 md:snap-start w-full overflow-hidden"
       >
         <Top10Carousel cases={top10Cases} />
       </section>
@@ -44,7 +44,7 @@ export default function HomePage() {
       {/* Section 3: Start Here: Essential Precedents */}
       <section
         id="section-essential"
-        className="py-6 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 space-y-6 sm:space-y-8 relative z-20 md:snap-start"
+        className="py-8 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-12 space-y-6 sm:space-y-8 relative z-20 md:snap-start w-full overflow-hidden"
       >
         <div className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-2 border-b border-white/10 pb-3">
@@ -74,9 +74,9 @@ export default function HomePage() {
         </div>
 
         {/* Explore All Link Banner */}
-        <div className="p-5 sm:p-6 bg-[#12141C] border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4 shadow-xl">
-          <div className="space-y-1">
-            <h3 className="font-anton text-lg sm:text-xl text-white uppercase tracking-tight">
+        <div className="p-4 sm:p-6 bg-[#12141C] border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4 shadow-xl w-full overflow-hidden">
+          <div className="space-y-1 max-w-full">
+            <h3 className="font-anton text-base sm:text-xl text-white uppercase tracking-tight break-words">
               Looking for a specific doctrine or court?
             </h3>
             <p className="text-xs text-[#a9a49a] font-sans">
@@ -85,7 +85,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/browse"
-            className="px-5 sm:px-6 py-2.5 bg-[#D4AF37] hover:bg-[#c49f27] text-black font-bold text-xs font-mono uppercase tracking-wider rounded-xs transition-all shadow-md"
+            className="w-full sm:w-auto text-center px-5 sm:px-6 py-2.5 bg-[#D4AF37] hover:bg-[#c49f27] text-black font-bold text-xs font-mono uppercase tracking-wider rounded-xs transition-all shadow-md"
           >
             Open Case Dossier Directory →
           </Link>
@@ -95,7 +95,7 @@ export default function HomePage() {
       {/* Section 4: The Advocate Toolkit & Courtroom Showcase */}
       <section
         id="section-toolkit"
-        className="py-6 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center relative z-20 md:snap-start"
+        className="py-8 sm:py-10 md:py-16 md:min-h-[80vh] flex flex-col justify-center relative z-20 md:snap-start w-full overflow-hidden"
       >
         <CourtroomExperienceShowcase />
       </section>
