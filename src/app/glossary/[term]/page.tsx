@@ -26,21 +26,39 @@ export async function generateMetadata({ params }: TermPageProps): Promise<Metad
 
   if (!item) {
     return {
-      title: 'Legal Term Not Found | Pleadings'
+      title: 'Legal Term Not Found | Pleadings',
     };
   }
 
   const title = `${item.term} — Meaning, Statute & Landmark Case Applications | Pleadings`;
-  const description = `${item.plainMeaning.en} Verified against the original/officially published judgment.`;
+  const description = `${item.plainMeaning.en} Verified against official court judgments.`;
+  const url = `https://pleadings.in/glossary/${item.slug}`;
 
   return {
     title,
     description,
+    keywords: [
+      item.term,
+      `${item.term} legal meaning`,
+      `${item.term} meaning in Hindi`,
+      `${item.term} case laws`,
+      item.statute ? item.statute : 'Indian law doctrine',
+      ...(item.related || []).map((r) => `${r.replace(/-/g, ' ')} meaning`),
+      'Pleadings legal glossary',
+    ],
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title,
       description,
-      siteName: 'Pleadings'
-    }
+      url,
+      siteName: 'Pleadings',
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

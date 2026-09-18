@@ -240,7 +240,7 @@
     },
     "poster": {
       "src": "/images/cases/rinku-rukshar-poster.jpg",
-      "alt": "Rinku Rukshar v. State of U.P. and 4 Others cover poster",
+      "alt": "Rinku Rukshar Habeas Corpus Custody Case cover poster",
       "provenance": "illustration"
     },
     "status": "ADMIN_REVIEW",
@@ -2355,7 +2355,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-04T18:59:11.938Z",
-    "updatedAt": "2026-09-16T19:35:52.804Z"
+    "updatedAt": "2026-09-16T19:35:52.804Z",
+    "poster": {
+      "src": "/images/cases/ghost-case.jpg",
+      "alt": "The Ghost Case poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "nanavati-case",
@@ -2841,7 +2846,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-05T18:59:11.938Z",
-    "updatedAt": "2026-09-14T18:59:11.938Z"
+    "updatedAt": "2026-09-14T18:59:11.938Z",
+    "poster": {
+      "src": "/images/cases/nanavati-case.jpg",
+      "alt": "The Nanavati Case poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "haircut-case",
@@ -3302,7 +3312,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-06T18:59:11.938Z",
-    "updatedAt": "2026-09-14T18:59:11.938Z"
+    "updatedAt": "2026-09-14T18:59:11.938Z",
+    "poster": {
+      "src": "/images/cases/haircut-case.jpg",
+      "alt": "The ₹2 Crore Haircut Case poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "shreya-singhal",
@@ -3765,7 +3780,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-07T18:59:11.938Z",
-    "updatedAt": "2026-09-14T18:59:11.938Z"
+    "updatedAt": "2026-09-14T18:59:11.938Z",
+    "poster": {
+      "src": "/images/cases/shreya-singhal.jpg",
+      "alt": "Shreya Singhal v. Union of India poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "m-c-mehta",
@@ -3774,8 +3794,8 @@
       "hi": "एम.सी. मेहता बनाम भारत संघ"
     },
     "tag": {
-      "en": "Tort Law · absolute liability doctrine",
-      "hi": "टॉर्ट कानून · पूर्ण दायित्व का सिद्धांत"
+      "en": "Oleum Gas Leak",
+      "hi": "Oleum Gas Leak"
     },
     "categoryTag": "Oleum Gas Leak",
     "genre": "tort",
@@ -3789,7 +3809,7 @@
     "matchRate": 96,
     "maturityRating": "U/A 16+",
     "rank": 5,
-    "bannerImage": "/images/cases/m-c-mehta.jpg",
+    "bannerImage": "/images/cases/m-c-mehta-poster-1789683569900.jpg",
     "blurb": {
       "en": "A toxic gas leak in Old Delhi. The Supreme Court creates the revolutionary Doctrine of absolute liability.",
       "hi": "पुरानी दिल्ली में जहरीली गैस का रिसाव। सुप्रीम कोर्ट ने रचा पूर्ण दायित्व (absolute liability) का क्रांतिकारी सिद्धांत।"
@@ -3798,12 +3818,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/1486949/",
     "watermark": "ABSOLUTE",
     "featuredHeroHook": {
-      "en": "Toxic gas over Old Delhi. The birth of absolute liability.",
-      "hi": "पुरानी दिल्ली पर जहरीली गैस का साया। पूर्ण दायित्व सिद्धांत का जन्म।"
+      "en": "A toxic gas leak in Old Delhi. The Supreme Court creates the revolutionary Doctrine of absolute liability.",
+      "hi": "पुरानी दिल्ली में जहरीली गैस का रिसाव। सुप्रीम कोर्ट ने रचा पूर्ण दायित्व (absolute liability) का क्रांतिकारी सिद्धांत।"
     },
     "featuredHeroDesc": {
-      "en": "Just one year after the Bhopal Gas Tragedy, an Oleum gas leak from a chemical plant in Delhi struck the capital. Chief Justice P.N. Bhagwati discarded century-old British rules to invent the \"absolute liability\" doctrine — making hazardous industries 100% liable with zero exceptions.",
-      "hi": "भोपाल गैस त्रासदी के ठीक एक साल बाद दिल्ली में ओलियम गैस का रिसाव हुआ। चीफ जस्टिस पी.एन. भगवती ने 100 साल पुराने ब्रिटिश कानूनों को दरकिनार करते हुए \"पूर्ण दायित्व\" का सिद्धांत बनाया — खतरनाक उद्योगों को बिना किसी अपवाद के 100% जिम्मेदार ठहराया।"
+      "en": "A toxic gas leak in Old Delhi. The Supreme Court creates the revolutionary Doctrine of absolute liability.",
+      "hi": "पुरानी दिल्ली में जहरीली गैस का रिसाव। सुप्रीम कोर्ट ने रचा पूर्ण दायित्व (absolute liability) का क्रांतिकारी सिद्धांत।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -3863,7 +3883,8 @@
           "caption": {
             "en": "Original PIL petition filed by M.C. Mehta following the Oleum gas tragedy.",
             "hi": "ओलियम गैस रिसाव के तुरंत बाद एम.सी. मेहता द्वारा दायर मूल जनहित याचिका।"
-          }
+          },
+          "imageSrc": "/images/cases/m-c-mehta-exhibit-1789683179201.jpg"
         },
         "characters": [
           {
@@ -3904,7 +3925,9 @@
             },
             "badgeEmoji": "👨‍⚖️"
           }
-        ]
+        ],
+        "photoExhibitSrc": "/images/cases/m-c-mehta-exhibit-1789683179201.jpg",
+        "image": "/images/cases/m-c-mehta-exhibit-1789683179201.jpg"
       },
       {
         "id": "panel-3",
@@ -4229,7 +4252,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-08T18:59:11.938Z",
-    "updatedAt": "2026-09-14T18:59:11.938Z"
+    "updatedAt": "2026-09-17T22:19:30.113Z",
+    "poster": {
+      "src": "/images/cases/m-c-mehta-poster-1789683569900.jpg",
+      "alt": "M.C. Mehta v. Union of India cover poster",
+      "provenance": "illustration"
+    }
   },
   {
     "slug": "kesavananda-bharati",
@@ -4732,7 +4760,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-09T18:59:11.939Z",
-    "updatedAt": "2026-09-14T18:59:11.939Z"
+    "updatedAt": "2026-09-14T18:59:11.939Z",
+    "poster": {
+      "src": "/images/cases/kesavananda-bharati.jpg",
+      "alt": "Kesavananda Bharati v. State of Kerala poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "shah-bano",
@@ -5130,7 +5163,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-10T18:59:11.939Z",
-    "updatedAt": "2026-09-16T19:35:58.141Z"
+    "updatedAt": "2026-09-16T19:35:58.141Z",
+    "poster": {
+      "src": "/images/cases/shah-bano.jpg",
+      "alt": "The Shah Bano Case poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "vishaka-case",
@@ -5528,7 +5566,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-11T18:59:11.939Z",
-    "updatedAt": "2026-09-14T18:59:11.939Z"
+    "updatedAt": "2026-09-14T18:59:11.939Z",
+    "poster": {
+      "src": "/images/cases/vishaka-case.jpg",
+      "alt": "Vishaka v. State of Rajasthan poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "maneka-gandhi",
@@ -5928,7 +5971,12 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-12T18:59:11.939Z",
-    "updatedAt": "2026-09-14T19:07:50.914Z"
+    "updatedAt": "2026-09-14T19:07:50.914Z",
+    "poster": {
+      "src": "/images/cases/maneka-gandhi.jpg",
+      "alt": "Maneka Gandhi v. Union of India poster",
+      "provenance": "archival"
+    }
   },
   {
     "slug": "navtej-johar",
@@ -6326,6 +6374,11 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-13T18:59:11.939Z",
-    "updatedAt": "2026-09-14T19:07:47.373Z"
+    "updatedAt": "2026-09-14T19:07:47.373Z",
+    "poster": {
+      "src": "/images/cases/navtej-johar.jpg",
+      "alt": "Navtej Singh Johar v. Union of India poster",
+      "provenance": "archival"
+    }
   }
 ]

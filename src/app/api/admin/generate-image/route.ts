@@ -23,12 +23,55 @@ export async function POST(request: NextRequest) {
 
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
     const openaiKey = process.env.OPENAI_API_KEY;
+    const togetherKey = process.env.TOGETHER_API_KEY || process.env.TOGETHERAI_API_KEY;
+    const deepinfraKey = process.env.DEEPINFRA_TOKEN || process.env.DEEPINFRA_API_KEY;
     const hfToken = process.env.HF_TOKEN || process.env.HUGGINGFACE_TOKEN;
 
     let imageBuffer: Buffer | null = null;
     let usedProvider = '';
 
-    // 1. ATTEMPT OPENAI DALL-E 3 / 2 (if key provided)
+    // 1. ATTEMPT TOGETHER AI FLUX.1 SCHNELL (High-Speed & Ultra-Reliable)
+    if (!imageBuffer && togetherKey && togetherKey.trim() !== '') {
+      try {
+        const togRes = await fetch('https://api.together.xyz/v1/images/generations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${togetherKey.trim()}`,
+          },
+          body: JSON.stringify({
+            model: 'black-forest-labs/FLUX.1-schnell',
+            prompt,
+            width: 1024,
+            height: 576,
+            steps: 4,
+            response_format: 'b64_json',
+          }),
+        });
+
+        if (togRes.ok) {
+          const togData = await togRes.json();
+          const b64 = togData.data?.[0]?.b64_json;
+          if (b64) {
+            imageBuffer = Buffer.from(b64, 'base64');
+            usedProvider = 'Together AI (FLUX.1 Schnell)';
+          } else if (togData.data?.[0]?.url) {
+            const imgFetch = await fetch(togData.data[0].url);
+            if (imgFetch.ok) {
+              imageBuffer = Buffer.from(await imgFetch.arrayBuffer());
+              usedProvider = 'Together AI (FLUX.1 Schnell)';
+            }
+          }
+        } else {
+          const errBody = await togRes.text();
+          console.warn('Together AI error response:', togRes.status, errBody);
+        }
+      } catch (togErr) {
+        console.warn('Together AI generation failed:', togErr);
+      }
+    }
+
+    // 2. ATTEMPT OPENAI DALL-E 3 / 2 (if key provided)
     if (!imageBuffer && openaiKey && openaiKey.trim() !== '') {
       try {
         const oaiRes = await fetch('https://api.openai.com/v1/images/generations', {
@@ -58,7 +101,36 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 2. ATTEMPT GEMINI IMAGEN 3 (if key provided)
+    // 3. ATTEMPT DEEPINFRA FLUX (if key provided)
+    if (!imageBuffer && deepinfraKey && deepinfraKey.trim() !== '') {
+      try {
+        const diRes = await fetch('https://api.deepinfra.com/v1/inference/black-forest-labs/FLUX-1-schnell', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${deepinfraKey.trim()}`,
+          },
+          body: JSON.stringify({
+            prompt,
+            width: 1024,
+            height: 576,
+          }),
+        });
+
+        if (diRes.ok) {
+          const diData = await diRes.json();
+          if (diData.images?.[0]) {
+            const b64 = diData.images[0].replace(/^data:image\/\w+;base64,/, '');
+            imageBuffer = Buffer.from(b64, 'base64');
+            usedProvider = 'DeepInfra (FLUX.1)';
+          }
+        }
+      } catch (diErr) {
+        console.warn('DeepInfra image generation failed:', diErr);
+      }
+    }
+
+    // 4. ATTEMPT GEMINI IMAGEN 3 (if key provided)
     if (!imageBuffer && geminiKey && geminiKey.trim() !== '') {
       try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${geminiKey.trim()}`;
@@ -82,16 +154,13 @@ export async function POST(request: NextRequest) {
             imageBuffer = Buffer.from(data.predictions[0].bytesBase64Encoded, 'base64');
             usedProvider = 'Google Gemini Imagen 3';
           }
-        } else {
-          const errText = await response.text();
-          console.warn('Gemini Imagen 3 returned non-200, activating FLUX fallback:', response.status, errText);
         }
       } catch (geminiErr) {
-        console.warn('Gemini Imagen error, activating FLUX fallback:', geminiErr);
+        console.warn('Gemini Imagen error:', geminiErr);
       }
     }
 
-    // 3. ATTEMPT HUGGING FACE INFERENCE (if token provided)
+    // 5. ATTEMPT HUGGING FACE INFERENCE (if token provided)
     if (!imageBuffer && hfToken && hfToken.trim() !== '') {
       try {
         const hfModels = [

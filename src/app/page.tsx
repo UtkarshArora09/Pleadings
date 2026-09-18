@@ -10,7 +10,11 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Pleadings — Landmark Indian Court Judgments as Verified Stories',
-  description: 'Certified Indian legal precedents transformed into transparent, episodic, source-tiered stories with bilingual support.',
+  description:
+    'Certified Indian legal precedents transformed into transparent, episodic courtroom thrillers, evidence reels, and law student briefs.',
+  alternates: {
+    canonical: 'https://pleadings.in',
+  },
 };
 
 export default function HomePage() {

@@ -3,8 +3,26 @@ import { Header } from '@/components/Header';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Editorial Method & Masthead | Pleadings',
-  description: 'How Pleadings turns certified Indian judgments into transparent, source-tiered episodic stories.'
+  title: 'Editorial Method, Masthead & Fact-Checking Standard | Pleadings',
+  description:
+    'How Pleadings turns certified Indian judgments into transparent, three-tiered verifiable courtroom stories. Verified against official court reports.',
+  keywords: [
+    'Pleadings editorial method',
+    'three-tier legal sourcing',
+    'certified Indian judgments',
+    'judicial fact checking',
+    'Pleadings masthead',
+    'legal journalism India',
+  ],
+  alternates: {
+    canonical: 'https://pleadings.in/about',
+  },
+  openGraph: {
+    title: 'Editorial Method & Masthead | Pleadings',
+    description: 'How Pleadings turns certified Indian judgments into transparent, source-tiered episodic stories.',
+    url: 'https://pleadings.in/about',
+    siteName: 'Pleadings',
+  },
 };
 
 export default function AboutPage() {

@@ -161,16 +161,19 @@ export default function BnsMapperPage() {
                         Pleadings Cases Interpreting This Provision:
                       </span>
                       <div className="flex flex-wrap gap-2">
-                        {matchedCases.map((c) => (
-                          <Link
-                            key={c.slug}
-                            href={`/case/${c.slug}`}
-                            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#D4AF37] hover:text-white px-2.5 py-1 bg-black/40 border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded-xs transition-colors"
-                          >
-                            <span>📖 {c.title} ({c.year})</span>
-                            <span>→</span>
-                          </Link>
-                        ))}
+                        {matchedCases.map((c) => {
+                          const displayTitle = typeof c.title === 'string' ? c.title : ((c.title as any)?.en || c.slug);
+                          return (
+                            <Link
+                              key={c.slug}
+                              href={`/case/${c.slug}`}
+                              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#D4AF37] hover:text-white px-2.5 py-1 bg-black/40 border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded-xs transition-colors"
+                            >
+                              <span>📖 {displayTitle} ({c.year})</span>
+                              <span>→</span>
+                            </Link>
+                          );
+                        })}
                       </div>
                     </div>
                   )}

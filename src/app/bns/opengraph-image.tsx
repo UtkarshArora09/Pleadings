@@ -45,7 +45,7 @@ export default async function Image() {
               lineHeight: 1.15
             }}
           >
-            IPC → BNS Statutory Concordance & Case Mapper
+            IPC to BNS Statutory Concordance & Case Mapper
           </div>
           <div
             style={{
@@ -54,7 +54,7 @@ export default async function Image() {
               fontFamily: 'monospace'
             }}
           >
-            IPC §302 ➔ BNS §103 · CrPC §154 ➔ BNSS §173 · IEA §27 ➔ BSA §23
+            {'IPC §302 -> BNS §103 · CrPC §154 -> BNSS §173 · IEA §27 -> BSA §23'}
           </div>
         </div>
 

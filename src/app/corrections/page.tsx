@@ -3,8 +3,24 @@ import { Header } from '@/components/Header';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Public Corrections Log | Pleadings',
-  description: 'A transparent, dated record of all corrections, clarifications, and citation updates made to Pleadings cases.'
+  title: 'Public Corrections Log & Editorial Transparency | Pleadings',
+  description:
+    'A transparent, dated record of all corrections, clarifications, and statutory citation updates made to Pleadings cases.',
+  keywords: [
+    'Pleadings corrections log',
+    'legal editorial corrections',
+    'Indian law judgment errata',
+    'statutory cross-reference updates',
+  ],
+  alternates: {
+    canonical: 'https://pleadings.in/corrections',
+  },
+  openGraph: {
+    title: 'Public Corrections Log | Pleadings',
+    description: 'A transparent, dated record of all corrections, clarifications, and citation updates made to Pleadings cases.',
+    url: 'https://pleadings.in/corrections',
+    siteName: 'Pleadings',
+  },
 };
 
 const CORRECTIONS_LOG = [
