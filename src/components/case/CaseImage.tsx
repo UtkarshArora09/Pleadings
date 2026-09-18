@@ -27,6 +27,7 @@ export function CaseImage({
   const isIllustration = provenance === 'illustration';
   const resolvedAlt = isIllustration && !alt.startsWith('Illustration:') ? `Illustration: ${alt}` : alt;
   const isDataUri = typeof src === 'string' && (src.startsWith('data:') || src.startsWith('blob:'));
+  const isRemote = typeof src === 'string' && src.startsWith('http');
   const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
@@ -61,7 +62,7 @@ export function CaseImage({
           src={src}
           alt={resolvedAlt}
           fill
-          unoptimized={isDataUri}
+          unoptimized={isDataUri || isRemote}
           priority={priority}
           sizes="(max-width: 768px) 100vw, 50vw"
           onError={() => setHasError(true)}
@@ -73,7 +74,7 @@ export function CaseImage({
           alt={resolvedAlt}
           width={width || 600}
           height={height || 338}
-          unoptimized={isDataUri}
+          unoptimized={isDataUri || isRemote}
           priority={priority}
           onError={() => setHasError(true)}
           className="w-full h-auto object-cover object-center"

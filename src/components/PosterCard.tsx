@@ -124,7 +124,7 @@ export function PosterCard({ caseData }: PosterCardProps) {
                   src={imgSrc}
                   alt={String(title)}
                   fill
-                  unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:'))}
+                  unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:') || imgSrc.startsWith('http'))}
                   sizes="(max-width: 640px) 280px, 330px"
                   onError={() => setHasError(true)}
                   className="object-cover object-center transition-transform duration-500 group-hover:scale-105 brightness-90 group-hover:brightness-100"

@@ -226,7 +226,7 @@ export function ReelPanel({
                         src={curPhotoSrc}
                         alt={photoCaption}
                         fill
-                        unoptimized={typeof curPhotoSrc === 'string' && (curPhotoSrc.startsWith('data:') || curPhotoSrc.startsWith('blob:'))}
+                        unoptimized={typeof curPhotoSrc === 'string' && (curPhotoSrc.startsWith('data:') || curPhotoSrc.startsWith('blob:') || curPhotoSrc.startsWith('http'))}
                         sizes="(max-width: 768px) 100vw, 50vw"
                         onError={() => setHasPhotoError(true)}
                         className="object-cover object-center transform transition-transform duration-700 group-hover:scale-105"

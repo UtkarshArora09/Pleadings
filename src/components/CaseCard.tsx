@@ -86,7 +86,7 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
               src={posterSrc}
               alt={caseData.poster?.alt || displayTitle}
               fill
-              unoptimized={typeof posterSrc === 'string' && (posterSrc.startsWith('data:') || posterSrc.startsWith('blob:'))}
+              unoptimized={typeof posterSrc === 'string' && (posterSrc.startsWith('data:') || posterSrc.startsWith('blob:') || posterSrc.startsWith('http'))}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               priority={priority}
               onError={() => setHasError(true)}

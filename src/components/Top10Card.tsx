@@ -95,7 +95,7 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
               src={imgSrc}
               alt={String(title)}
               fill
-              unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:'))}
+              unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:') || imgSrc.startsWith('http'))}
               sizes="220px"
               onError={() => setHasError(true)}
               className="object-cover object-center brightness-90 group-hover:brightness-100 transition-transform duration-500 group-hover:scale-110"

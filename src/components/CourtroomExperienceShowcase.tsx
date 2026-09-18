@@ -64,13 +64,13 @@ export function CourtroomExperienceShowcase() {
   const current = features[activeTab];
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
+    <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10 overflow-hidden">
       {/* Top Header */}
-      <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+      <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2">
         <span className="inline-block text-[10px] font-bold uppercase tracking-[0.25em] text-[#E50914] bg-[#E50914]/10 border border-[#E50914]/25 px-3 py-1 rounded-xs mb-3">
           {language === 'en' ? 'The Pleadings Experience' : 'प्लीडिंग्स अनुभव'}
         </span>
-        <h2 className="font-anton text-3xl sm:text-4xl md:text-5xl text-white uppercase tracking-tight leading-tight">
+        <h2 className="font-anton text-2xl sm:text-4xl md:text-5xl text-white uppercase tracking-tight leading-tight break-words">
           {language === 'en'
             ? 'Courtroom Drama Meets Legal Precision'
             : 'अदालती रोमांच और कानूनी सटीकता का अनूठा संगम'}
@@ -78,7 +78,7 @@ export function CourtroomExperienceShowcase() {
       </div>
 
       {/* Interactive Tabs Navigation */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-8 sm:mb-10 max-w-4xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-8 sm:mb-10 max-w-4xl mx-auto w-full">
         {(
           [
             { id: 'reels', labelEn: '3-Min Story Reels', labelHi: '3-मिनट रील्स', icon: '⚡' },
@@ -92,28 +92,28 @@ export function CourtroomExperienceShowcase() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-xs text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
+              className={`flex items-center justify-center gap-1.5 sm:gap-2 p-2.5 sm:p-3.5 rounded-xs text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border text-center ${
                 isActive
                   ? 'bg-white text-[#0E1016] border-white shadow-xl scale-[1.02]'
                   : 'bg-[#151720] text-[#a9a49a] border-white/10 hover:border-white/30 hover:text-white'
               }`}
             >
               <span>{tab.icon}</span>
-              <span>{language === 'en' ? tab.labelEn : tab.labelHi}</span>
+              <span className="truncate">{language === 'en' ? tab.labelEn : tab.labelHi}</span>
             </button>
           );
         })}
       </div>
 
       {/* Main Interactive Showcase Split Box */}
-      <div className="bg-[#12141C] border border-white/10 rounded-sm p-6 sm:p-10 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="bg-[#12141C] border border-white/10 rounded-sm p-4 sm:p-8 md:p-10 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center w-full">
         {/* Left Side: Feature Narrative */}
         <div className="lg:col-span-6 flex flex-col justify-center space-y-4">
           <div className="text-[10px] font-mono font-bold tracking-[0.25em] text-[#D4AF37] uppercase">
             {current.badge}
           </div>
 
-          <h3 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight leading-snug">
+          <h3 className="font-anton text-xl sm:text-2xl md:text-3xl text-white uppercase tracking-tight leading-snug break-words">
             {current.title}
           </h3>
 
@@ -130,10 +130,10 @@ export function CourtroomExperienceShowcase() {
             ))}
           </div>
 
-          <div className="pt-4 flex items-center gap-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <Link
               href="/case/nanavati-case"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#E50914] hover:bg-[#b80710] text-white text-xs font-bold uppercase tracking-widest transition-all rounded-xs shadow-md"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#E50914] hover:bg-[#b80710] text-white text-xs font-bold uppercase tracking-widest transition-all rounded-xs shadow-md"
             >
               <span>{language === 'en' ? 'Try Interactive Reel' : 'केस रील शुरू करें'}</span>
               <span>→</span>
@@ -141,7 +141,7 @@ export function CourtroomExperienceShowcase() {
 
             <Link
               href="/browse"
-              className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:underline"
+              className="inline-flex items-center justify-center text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:underline py-2 sm:py-0"
             >
               {language === 'en' ? 'Browse Cases →' : 'सभी केस देखें →'}
             </Link>
@@ -149,7 +149,7 @@ export function CourtroomExperienceShowcase() {
         </div>
 
         {/* Right Side: Live Interactive Demonstration Card */}
-        <div className="lg:col-span-6 flex items-center justify-center">
+        <div className="lg:col-span-6 flex items-center justify-center w-full min-w-0">
           {activeTab === 'reels' && (
             <div className="w-full max-w-md bg-[#181B24] border border-white/15 p-5 sm:p-6 rounded-sm shadow-2xl relative">
               <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10 text-[10px] font-mono text-[#D4AF37] uppercase tracking-wider">
