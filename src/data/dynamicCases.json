@@ -1893,7 +1893,7 @@
     "matchRate": 98,
     "maturityRating": "U/A 16+",
     "rank": 7,
-    "bannerImage": "/images/cases/ghost-case.jpg",
+    "bannerImage": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789761644606.jpg",
     "blurb": {
       "en": "A midnight killing in an abandoned aerodrome. Can an honest belief in ghosts save a man from the gallows?",
       "hi": "एक सुनसान हवाई अड्डे पर आधी रात को हुई हत्या। क्या भूतों पर सच्चा विश्वास किसी को फांसी के फंदे से बचा सकता है?"
@@ -1947,7 +1947,7 @@
           "en": "Meet the key figures whose lives collided on that pitch-black midnight in May 1958.",
           "hi": "जानिए उन मुख्य लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए बदल गई।"
         },
-        "photoExhibitSrc": "/images/cases/ghost_thapa_portrait.jpg",
+        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-exhibit-1789761676634.jpg",
         "photoExhibitCaption": {
           "en": "Orissa Police CID archival suspect photo: Ram Bahadur Thapa holding the khukri (1958).",
           "hi": "उड़ीसा पुलिस सीआईडी पुरालेख: राम बहादुर थापा खुखरी के साथ (1958)।"
@@ -2010,7 +2010,8 @@
             },
             "badgeEmoji": "🥀"
           }
-        ]
+        ],
+        "image": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-exhibit-1789761676634.jpg"
       },
       {
         "id": "panel-3",
@@ -2355,11 +2356,11 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-04T18:59:11.938Z",
-    "updatedAt": "2026-09-16T19:35:52.804Z",
+    "updatedAt": "2026-09-18T20:01:48.254Z",
     "poster": {
-      "src": "/images/cases/ghost-case.jpg",
-      "alt": "The Ghost Case poster",
-      "provenance": "archival"
+      "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789761644606.jpg",
+      "alt": "The Ghost Case cover poster",
+      "provenance": "illustration"
     }
   },
   {

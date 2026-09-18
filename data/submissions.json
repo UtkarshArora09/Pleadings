@@ -1,0 +1,31 @@
+[
+  {
+    "id": "sub_1789763800121_8eoly",
+    "submittedAt": "2026-09-18T20:36:40.121Z",
+    "advocate": {
+      "name": "Utkarsh Arora",
+      "barCouncilNo": "12345/8526",
+      "barAssociation": "hight court",
+      "email": "utkarsh.arora09@gmail.com",
+      "phone": "9305865673",
+      "designation": "Advocate"
+    },
+    "caseDetails": {
+      "title": "one",
+      "court": "Supreme Court of India",
+      "year": "2026",
+      "citation": "two",
+      "statutes": "two",
+      "doctrine": "",
+      "facts": "rgvdcsx",
+      "issues": "",
+      "prosecutionArgs": "",
+      "defenceArgs": "",
+      "holdingAndRatio": "bfvdcsx",
+      "whyItMatters": "vdcx",
+      "judgmentUrl": "",
+      "additionalNotes": "vfdcxs"
+    },
+    "status": "PENDING_VERIFICATION"
+  }
+]
