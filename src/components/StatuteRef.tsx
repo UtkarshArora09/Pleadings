@@ -82,7 +82,7 @@ export function StatuteRefInline({ oldSec, newSec, onClick }: StatuteRefInlinePr
               <p><strong>Legislative Note:</strong> {match?.note || 'Provision updated under the new Bharatiya criminal code framework.'}</p>
               {match?.changed && (
                 <div className="p-2 bg-amber-950/40 border border-amber-600/30 rounded-xs text-[11px] text-amber-300">
-                  ⚠️ Note: Significant statutory or constitutional change occurred in this section.
+                  Notice: Significant statutory or constitutional change occurred in this section.
                 </div>
               )}
             </div>

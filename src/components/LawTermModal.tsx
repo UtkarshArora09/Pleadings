@@ -59,7 +59,7 @@ export function LawTermModal() {
         {glossaryDetails?.plainExplanation && (
           <div className="bg-[#181B28] p-4 rounded-xs border-l-2 border-[#D4AF37] mb-4">
             <span className="text-[9px] font-mono font-bold text-[#D4AF37] uppercase tracking-wider block mb-1">
-              {language === 'en' ? '💡 IN SIMPLE WORDS:' : '💡 सरल शब्दों में:'}
+              {language === 'en' ? 'IN SIMPLE WORDS:' : 'सरल शब्दों में:'}
             </span>
             <p className="text-xs text-[#d5cfc5] leading-relaxed">
               {glossaryDetails.plainExplanation[language] || glossaryDetails.plainExplanation.en}

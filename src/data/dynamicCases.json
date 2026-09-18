@@ -1878,8 +1878,8 @@
       "hi": "भूत वाला मामला"
     },
     "tag": {
-      "en": "IPC 79 · mistake of fact",
-      "hi": "आईपीसी 79 · तथ्य की भूल"
+      "en": "IPC 79",
+      "hi": "IPC 79"
     },
     "categoryTag": "IPC 79",
     "genre": "crime",
@@ -1902,12 +1902,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/1489567/",
     "watermark": "§79",
     "featuredHeroHook": {
-      "en": "He killed a ghost. The High Court believed him.",
-      "hi": "उसने एक भूत को मार डाला। हाई कोर्ट ने उसकी बात मानी।"
+      "en": "A midnight killing in an abandoned aerodrome. Can an honest belief in ghosts save a man from the gallows?",
+      "hi": "एक सुनसान हवाई अड्डे पर आधी रात को हुई हत्या। क्या भूतों पर सच्चा विश्वास किसी को फांसी के फंदे से बचा सकता है?"
     },
     "featuredHeroDesc": {
-      "en": "In 1958, a servant attacked what he believed was a spirit in an abandoned World War II aerodrome. When the \"ghost\" turned out to be a living human, the Orissa High Court had to decide: does an honest mistake of fact protect you from murder?",
-      "hi": "1958 में, एक नौकर ने द्वितीय विश्व युद्ध के सुनसान हवाई अड्डे पर एक रोशनी पर हमला किया जिसे वह भूत समझ रहा था। जब वह रोशनी महुआ बीनने वाली महिलाएं निकलीं, तो अदालत के सामने बड़ा सवाल था: क्या अलौकिक शक्ति में सच्चा विश्वास हत्या से बचा सकता है?"
+      "en": "A midnight killing in an abandoned aerodrome. Can an honest belief in ghosts save a man from the gallows?",
+      "hi": "एक सुनसान हवाई अड्डे पर आधी रात को हुई हत्या। क्या भूतों पर सच्चा विश्वास किसी को फांसी के फंदे से बचा सकता है?"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -2369,8 +2369,8 @@
       "hi": "नानावटी केस"
     },
     "tag": {
-      "en": "IPC 300 · Grave & Sudden Provocation",
-      "hi": "आईपीसी 300 · गंभीर व अचानक उकसावा"
+      "en": "IPC 300",
+      "hi": "IPC 300"
     },
     "categoryTag": "IPC 300",
     "genre": "crime",
@@ -2393,12 +2393,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/1596139/",
     "watermark": "§300",
     "featuredHeroHook": {
-      "en": "Three shots in Colaba. The end of India’s jury system.",
-      "hi": "कोलाबा में तीन गोलियां। भारत में जूरी व्यवस्था का अंत।"
+      "en": "Three bullets in a Bombay bedroom. The sensational trial that killed the jury system in India forever.",
+      "hi": "बॉम्बे के एक बेडरूम में चली तीन गोलियां। वह सनसनीखेज मुकदमा जिसने भारत में जूरी सिस्टम को हमेशा के लिए खत्म कर दिया।"
     },
     "featuredHeroDesc": {
-      "en": "Naval Commander K.M. Nanavati shot his wife’s lover in a crime of passion that captivated the nation. The 8-1 jury verdict in his favor was overturned by the High Court, leading to the historic abolition of jury trials in India.",
-      "hi": "नौसेना कमांडर के.एम. नानावटी ने अपनी पत्नी के प्रेमी को गोली मार दी। जूरी ने 8-1 से उन्हें निर्दोष माना, लेकिन हाई कोर्ट ने इस फैसले को पलट दिया। इस ऐतिहासिक मामले ने भारत में जूरी ट्रायल को हमेशा के लिए समाप्त कर दिया।"
+      "en": "Three bullets in a Bombay bedroom. The sensational trial that killed the jury system in India forever.",
+      "hi": "बॉम्बे के एक बेडरूम में चली तीन गोलियां। वह सनसनीखेज मुकदमा जिसने भारत में जूरी सिस्टम को हमेशा के लिए खत्म कर दिया।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -2860,8 +2860,8 @@
       "hi": "₹2 करोड़ का हेयरकट मामला"
     },
     "tag": {
-      "en": "Consumer Protection · deficiency of service",
-      "hi": "उपभोक्ता संरक्षण · सेवा में कमी"
+      "en": "Consumer Law",
+      "hi": "Consumer Law"
     },
     "categoryTag": "Consumer Law",
     "genre": "consumer",
@@ -2884,12 +2884,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/171887260/",
     "watermark": "₹2CR",
     "featuredHeroHook": {
-      "en": "A ₹2 Crore haircut. The Supreme Court draws the line.",
-      "hi": "₹2 करोड़ का हेयरकट। सुप्रीम कोर्ट ने खींची लक्ष्मण रेखा।"
+      "en": "A botched haircut at a 5-star hotel salon led to a ₹2 Crore compensation award. The Supreme Court stepped in.",
+      "hi": "5-स्टार होटल के सैलून में खराब हेयरकट के लिए ₹2 करोड़ का हर्जाना दिया गया। सुप्रीम कोर्ट ने तय किया कानून का दायरा।"
     },
     "featuredHeroDesc": {
-      "en": "A model walked into a luxury hotel salon for a simple trim and walked out with short chops. The National Consumer Commission awarded her an unprecedented ₹2 Crore. The Supreme Court intervened to draw the line between genuine loss and speculative windfall.",
-      "hi": "एक मॉडल 5-स्टार होटल के सैलून में बाल ट्रिम कराने गई और उसके बाल बहुत छोटे काट दिए गए। उपभोक्ता आयोग ने 2 करोड़ रुपये हर्जाना दे दिया। सुप्रीम कोर्ट ने हस्तक्षेप कर वास्तविक नुकसान और मनमानी रकम के बीच की रेखा तय की।"
+      "en": "A botched haircut at a 5-star hotel salon led to a ₹2 Crore compensation award. The Supreme Court stepped in.",
+      "hi": "5-स्टार होटल के सैलून में खराब हेयरकट के लिए ₹2 करोड़ का हर्जाना दिया गया। सुप्रीम कोर्ट ने तय किया कानून का दायरा।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -3326,8 +3326,8 @@
       "hi": "श्रेया सिंघल बनाम भारत संघ"
     },
     "tag": {
-      "en": "Article 19(1)(a) · Digital Free Speech",
-      "hi": "अनुच्छेद 19(1)(a) · डिजिटल अभिव्यक्ति की स्वतंत्रता"
+      "en": "IT Act 66A",
+      "hi": "IT Act 66A"
     },
     "categoryTag": "IT Act 66A",
     "genre": "cyber",
@@ -3350,12 +3350,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/110813550/",
     "watermark": "§66A",
     "featuredHeroHook": {
-      "en": "Arrested for a Facebook like. The law student who saved online free speech.",
-      "hi": "फेसबुक लाइक के लिए गिरफ्तारी। लॉ स्टूडेंट जिसने इंटरनेट पर अभिव्यक्ति की आजादी बचाई।"
+      "en": "Two girls arrested for a Facebook post. A 21-year-old law student strikes down the dreaded Section 66A.",
+      "hi": "फेसबुक पोस्ट के लिए दो लड़कियों की गिरफ्तारी। 21 साल की लॉ स्टूडेंट ने आईटी एक्ट की धारा 66A को खत्म कराया।"
     },
     "featuredHeroDesc": {
-      "en": "When Maharashtra police arrested two college girls for questioning a city shutdown on Facebook, 21-year-old law student Shreya Singhal filed a PIL. The Supreme Court struck down Section 66A of the IT Act in its entirety, cementing digital free speech in India.",
-      "hi": "जब महाराष्ट्र पुलिस ने फेसबुक पर सवाल उठाने पर दो कॉलेज छात्राओं को गिरफ्तार किया, तो 21 वर्षीय कानून की छात्रा श्रेया सिंघल ने सुप्रीम कोर्ट में जनहित याचिका दायर की। सुप्रीम कोर्ट ने धारा 66A को पूरी तरह असंवैधानिक घोषित कर रद्द कर दिया।"
+      "en": "Two girls arrested for a Facebook post. A 21-year-old law student strikes down the dreaded Section 66A.",
+      "hi": "फेसबुक पोस्ट के लिए दो लड़कियों की गिरफ्तारी। 21 साल की लॉ स्टूडेंट ने आईटी एक्ट की धारा 66A को खत्म कराया।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -4266,8 +4266,8 @@
       "hi": "केशवानंद भारती बनाम केरल राज्य"
     },
     "tag": {
-      "en": "Constitutional Law · Basic Structure Doctrine",
-      "hi": "संवैधानिक कानून · बुनियादी ढांचे का सिद्धांत"
+      "en": "Basic Structure",
+      "hi": "Basic Structure"
     },
     "categoryTag": "Basic Structure",
     "genre": "constitutional",
@@ -4290,12 +4290,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/257876/",
     "watermark": "Basic Structure",
     "featuredHeroHook": {
-      "en": "13 Judges. 68 Days. The case that saved Indian democracy.",
-      "hi": "13 जज। 68 दिन। वह मुकदमा जिसने भारतीय लोकतंत्र को बचाया।"
+      "en": "The 68-day marathon trial by 13 Supreme Court judges that saved the Indian Constitution from tyranny.",
+      "hi": "13 सुप्रीम कोर्ट जजों की 68 दिन लंबी मैराथन सुनवाई जिसने भारतीय संविधान और लोकतंत्र को बचाया।"
     },
     "featuredHeroDesc": {
-      "en": "A seer from Kerala challenged land reforms. In a 703-page epic judgment delivered by the largest bench in Indian history (13 judges, 7-6 split), the Supreme Court ruled that Parliament cannot alter the \"Basic Structure\" of the Constitution.",
-      "hi": "केरल के एक संन्यासी ने भूमि सुधार कानून को चुनौती दी। 13 जजों की सबसे बड़ी संविधान पीठ ने 7-6 के ऐतिहासिक बहुमत से फैसला दिया कि संसद संविधान के \"बुनियादी ढांचे\" को कभी नष्ट नहीं कर सकती।"
+      "en": "The 68-day marathon trial by 13 Supreme Court judges that saved the Indian Constitution from tyranny.",
+      "hi": "13 सुप्रीम कोर्ट जजों की 68 दिन लंबी मैराथन सुनवाई जिसने भारतीय संविधान और लोकतंत्र को बचाया।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -4774,8 +4774,8 @@
       "hi": "शाह बानो मामला"
     },
     "tag": {
-      "en": "CrPC 125 · Maintenance Rights",
-      "hi": "सीआरपीसी 125 · भरण-पोषण का अधिकार"
+      "en": "CRPC 125",
+      "hi": "CRPC 125"
     },
     "categoryTag": "CRPC 125",
     "genre": "constitutional",
@@ -4798,12 +4798,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/823221/",
     "watermark": "§125",
     "featuredHeroHook": {
-      "en": "Denied alimony after 43 years of marriage. She changed Indian law forever.",
-      "hi": "43 साल बाद बिना गुजारा भत्ता छोड़ा गया। उसने भारतीय कानून का इतिहास बदल दिया।"
+      "en": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
+      "hi": "43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।"
     },
     "featuredHeroDesc": {
-      "en": "In 1978, Shah Bano filed for maintenance under Section 125 CrPC. Her wealthy advocate husband claimed personal law absolved him after paying Rs. 3,000 Mehr. The Supreme Court ruled Section 125 is a secular, universal shield for all destitute women.",
-      "hi": "1978 में इंदौर की शाह बानो ने धारा 125 सीआरपीसी के तहत भरण-पोषण की मांग की। सुप्रीम कोर्ट की संविधान पीठ ने फैसला दिया कि भरण-पोषण का कानून धर्मनिरपेक्ष है और हर बेसहारा महिला पर लागू होता है।"
+      "en": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
+      "hi": "43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -5177,8 +5177,8 @@
       "hi": "विशाखा बनाम राजस्थान राज्य"
     },
     "tag": {
-      "en": "Article 21 · Workplace Harassment Guidelines",
-      "hi": "अनुच्छेद 21 · कार्यस्थल यौन उत्पीड़न रोकथाम"
+      "en": "ARTICLE 21",
+      "hi": "ARTICLE 21"
     },
     "categoryTag": "ARTICLE 21",
     "genre": "constitutional",
@@ -5201,12 +5201,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/1031794/",
     "watermark": "VISHAKA",
     "featuredHeroHook": {
-      "en": "No law existed to protect working women. So the Supreme Court wrote one.",
-      "hi": "कामकाजी महिलाओं की सुरक्षा के लिए कोई कानून नहीं था। इसलिए सुप्रीम कोर्ट ने खुद कानून लिखा।"
+      "en": "When a social worker was assaulted for stopping child marriage and the legislature had no law, the Supreme Court created binding law: The Vishaka Guidelines.",
+      "hi": "बाल विवाह रोकने पर सामाजिक कार्यकर्ता पर हमला हुआ और कोई कानून नहीं था, तो सुप्रीम कोर्ट ने कार्यस्थल सुरक्षा के लिए ऐतिहासिक विशाखा गाइडलाइंस बनाईं।"
     },
     "featuredHeroDesc": {
-      "en": "In 1992, Bhanwari Devi, a Rajasthan government saathin, was gang-raped for campaigning against child marriage. The trial court acquitted the accused with shocking misogyny. Women’s rights groups filed a PIL under the name Vishaka. The Supreme Court invoked CEDAW and Articles 14, 19, and 21 to formulate the mandatory Vishaka Guidelines.",
-      "hi": "1992 में बाल विवाह का विरोध करने पर भंवरी देवी के साथ बर्बरता हुई। निचली अदालत ने आरोपियों को बरी कर दिया। इसके विरोध में महिला संगठनों ने \"विशाखा\" नाम से जनहित याचिका दायर की। सुप्रीम कोर्ट ने कार्यस्थल पर यौन उत्पीड़न रोकने के लिए ऐतिहासिक दिशा-निर्देश जारी किए।"
+      "en": "When a social worker was assaulted for stopping child marriage and the legislature had no law, the Supreme Court created binding law: The Vishaka Guidelines.",
+      "hi": "बाल विवाह रोकने पर सामाजिक कार्यकर्ता पर हमला हुआ और कोई कानून नहीं था, तो सुप्रीम कोर्ट ने कार्यस्थल सुरक्षा के लिए ऐतिहासिक विशाखा गाइडलाइंस बनाईं।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -5580,8 +5580,8 @@
       "hi": "मेनका गांधी बनाम भारत संघ"
     },
     "tag": {
-      "en": "Article 21 · Due Process of law",
-      "hi": "अनुच्छेद 21 · सम्यक विधि प्रक्रिया"
+      "en": "Due Process",
+      "hi": "Due Process"
     },
     "categoryTag": "Due Process",
     "genre": "constitutional",
@@ -5604,12 +5604,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/1766147/",
     "watermark": "ART 21",
     "featuredHeroHook": {
-      "en": "They confiscated her passport in the \"public interest\". The Supreme Court rebuilt Article 21.",
-      "hi": "जनहित के नाम पर पासपोर्ट जब्त हुआ। सुप्रीम कोर्ट ने अनुच्छेद 21 की नई परिभाषा लिख दी।"
+      "en": "An impounded passport without reasons given. A constitutional showdown that transformed Article 21 into the Golden Triangle of justice, fairness, and liberty.",
+      "hi": "बिना कारण बताए जब्त किया गया पासपोर्ट। एक ऐसी कानूनी जंग जिसने अनुच्छेद 21 को मनमानी सरकारी शक्ति के खिलाफ सबसे बड़ी ढाल बना दिया।"
     },
     "featuredHeroDesc": {
-      "en": "In July 1977, the Passport Office impounded Maneka Gandhi’s passport under Section 10(3)(c) of the Passports Act without disclosing any reasons. The 7-judge Constitution Bench held that any law depriving personal liberty must pass the test of Articles 14, 19, and 21, and procedure must be just, fair, and reasonable.",
-      "hi": "जुलाई 1977 में पासपोर्ट कार्यालय ने बिना कोई कारण बताए मेनका गांधी का पासपोर्ट जब्त कर लिया। 7 जजों की संविधान पीठ ने फैसला सुनाया कि नागरिकों की आजादी छीनने वाला कोई भी कानून अनुच्छेद 14, 19 और 21 की कसौटी पर न्यायसंगत और उचित होना चाहिए।"
+      "en": "An impounded passport without reasons given. A constitutional showdown that transformed Article 21 into the Golden Triangle of justice, fairness, and liberty.",
+      "hi": "बिना कारण बताए जब्त किया गया पासपोर्ट। एक ऐसी कानूनी जंग जिसने अनुच्छेद 21 को मनमानी सरकारी शक्ति के खिलाफ सबसे बड़ी ढाल बना दिया।"
     },
     "hasJudgeDecision": true,
     "panels": [
@@ -5985,8 +5985,8 @@
       "hi": "नवतेज सिंह जौहर बनाम भारत संघ"
     },
     "tag": {
-      "en": "Section 377 IPC · Decriminalization & Privacy",
-      "hi": "धारा 377 आईपीसी · गैर-अपराधीकरण व निजता"
+      "en": "IPC 377",
+      "hi": "IPC 377"
     },
     "categoryTag": "IPC 377",
     "genre": "constitutional",
@@ -6009,12 +6009,12 @@
     "judgmentUrl": "https://indiankanoon.org/doc/168677580/",
     "watermark": "§377",
     "featuredHeroHook": {
-      "en": "158 years of colonial injustice ended in one unanimous decree.",
-      "hi": "158 साल पुराना औपनिवेशिक अन्याय एक सर्वसम्मत फैसले में समाप्त हुआ।"
+      "en": "A 158-year-old colonial relic criminalizing consensual love. A unanimous 5-judge Constitution Bench struck it down to uphold constitutional morality.",
+      "hi": "158 साल पुराना औपनिवेशिक कानून जो वयस्कों के आपसी प्यार को अपराध मानता था। सुप्रीम कोर्ट की 5 जजों की संविधान पीठ ने इसे सर्वसम्मति से खारिज कर दिया।"
     },
     "featuredHeroDesc": {
-      "en": "Introduced by Lord Macaulay in 1860, Section 377 IPC criminalized \"unnatural offences\". Classical dancer Navtej Singh Johar, chef Ritu Dalmia, and hotelier Aman Nath filed a writ petition asserting their fundamental right to dignity, equality, and privacy. The Supreme Court struck down Section 377 to the extent it criminalized consensual adult intimacy.",
-      "hi": "1860 में अंग्रेजों द्वारा बनाई गई धारा 377 आईपीसी वयस्कों के निजी संबंधों को अपराध बनाती थी। शास्त्रीय नर्तक नवतेज सिंह जौहर और अन्य नागरिकों ने सुप्रीम कोर्ट में याचिका दायर की। 5 जजों की पीठ ने सर्वसम्मति से धारा 377 के उस हिस्से को असंवैधानिक घोषित कर दिया।"
+      "en": "A 158-year-old colonial relic criminalizing consensual love. A unanimous 5-judge Constitution Bench struck it down to uphold constitutional morality.",
+      "hi": "158 साल पुराना औपनिवेशिक कानून जो वयस्कों के आपसी प्यार को अपराध मानता था। सुप्रीम कोर्ट की 5 जजों की संविधान पीठ ने इसे सर्वसम्मति से खारिज कर दिया।"
     },
     "hasJudgeDecision": true,
     "panels": [

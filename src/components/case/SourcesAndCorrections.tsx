@@ -22,7 +22,7 @@ export function SourcesAndCorrections({
     <section className="my-12 p-5 sm:p-7 bg-[#0E1118] border border-white/10 rounded-xs shadow-xl space-y-6 select-none font-sans">
       <div className="flex items-center justify-between pb-2 border-b border-white/10">
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]">
-          🏛️ {lang === 'en' ? 'SOURCES, CITATIONS & EDITORIAL REVIEW' : 'स्रोत, साइटेशन और कानूनी समीक्षा'}
+          {lang === 'en' ? 'SOURCES, CITATIONS & EDITORIAL REVIEW' : 'स्रोत, साइटेशन और कानूनी समीक्षा'}
         </span>
       </div>
 

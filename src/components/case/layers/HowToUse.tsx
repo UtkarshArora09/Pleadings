@@ -13,7 +13,7 @@ export function HowToUse({ propositions, pinpoints, lang = 'en' }: HowToUseProps
     <div className="my-5 p-4 sm:p-5 bg-[#121A16] border-l-4 border-emerald-500 border-y border-r border-emerald-500/20 rounded-r-xs shadow-md space-y-3 select-none">
       <div className="flex items-center gap-2 pb-2 border-b border-emerald-500/20">
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded-2xs border border-emerald-600/30">
-          📜 {lang === 'en' ? 'HOW TO CITE THIS PRECEDENT (FOR COUNSEL)' : 'दलीलों में कैसे उद्धृत करें'}
+          {lang === 'en' ? 'HOW TO CITE THIS PRECEDENT (FOR COUNSEL)' : 'दलीलों में कैसे उद्धृत करें'}
         </span>
       </div>
 

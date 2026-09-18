@@ -35,7 +35,7 @@ const statusConfig: Record<
     text: 'text-amber-300',
     border: 'border-amber-500/40',
     dotColor: 'bg-amber-400',
-    icon: '⚠️'
+    icon: '!'
   },
   OVERRULED: {
     label: 'Overruled',
@@ -51,7 +51,7 @@ const statusConfig: Record<
     text: 'text-sky-300',
     border: 'border-sky-500/40',
     dotColor: 'bg-sky-400',
-    icon: '⚖'
+    icon: '§'
   }
 };
 
@@ -101,7 +101,7 @@ export function StatusBadge({
       >
         <span className={`w-1.5 h-1.5 rounded-full ${cfg.dotColor} animate-pulse`} />
         <span>{cfg.label}</span>
-        {interactive && <span className="opacity-70 text-[9px]">ℹ</span>}
+        {interactive && <span className="opacity-70 text-[9px] font-mono">?</span>}
       </span>
 
       {/* Explanatory Chain Sheet */}

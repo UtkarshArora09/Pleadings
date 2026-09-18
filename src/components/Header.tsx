@@ -47,6 +47,13 @@ export function Header() {
           </Link>
 
           <Link
+            href="/contribute"
+            className="text-[#D4AF37] hover:text-white transition-colors flex items-center gap-1"
+          >
+            <span>{language === 'en' ? '+ Contribute Case' : '+ मामला जोड़ें'}</span>
+          </Link>
+
+          <Link
             href="/browse?tab=saved"
             className="text-[#a9a49a] hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
           >
@@ -99,6 +106,14 @@ export function Header() {
             className="text-sm font-semibold tracking-wider uppercase text-[#F3EFE6] hover:text-[#D4AF37] py-2 border-b border-white/5"
           >
             {language === 'en' ? 'Legal Terms & Doctrines Glossary' : 'कानूनी शब्दावली और सिद्धांत'}
+          </Link>
+
+          <Link
+            href="/contribute"
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-sm font-semibold tracking-wider uppercase text-[#D4AF37] hover:text-white py-2 border-b border-white/5"
+          >
+            {language === 'en' ? '+ Contribute A Case (Advocate Portal)' : '+ नया केस जोड़ें (वकील पोर्टल)'}
           </Link>
 
           <Link

@@ -35,29 +35,13 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
     return acc + count;
   }, 0) || 12;
 
-  const [heroImg, setHeroImg] = useState<string>(activeCase.poster.src || '');
+  const [heroImg, setHeroImg] = useState<string>(activeCase.poster?.src || (activeCase as any).bannerImage || '');
   const [hasHeroError, setHasHeroError] = useState<boolean>(false);
 
   useEffect(() => {
-    let active = activeCase.poster.src || '';
-    if (typeof window !== 'undefined') {
-      try {
-        const cleanSlug = activeCase.slug.toLowerCase().trim();
-        const savedRaw = localStorage.getItem(`pleadings_case_${activeCase.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
-        if (savedRaw) {
-          const parsed = JSON.parse(savedRaw);
-          if (parsed && (parsed.slug === activeCase.slug || parsed.slug === cleanSlug)) {
-            const custom = parsed.poster?.src || parsed.bannerImage || parsed.panels?.[0]?.photoExhibitSrc;
-            if (custom && typeof custom === 'string' && (custom.startsWith('data:') || custom.startsWith('blob:') || custom.startsWith('http'))) {
-              active = custom;
-            }
-          }
-        }
-      } catch {}
-    }
-    setHeroImg(active);
+    setHeroImg(activeCase.poster?.src || (activeCase as any).bannerImage || '');
     setHasHeroError(false);
-  }, [activeCase.poster.src, activeCase.slug]);
+  }, [activeCase.poster?.src, (activeCase as any).bannerImage, activeCase.slug]);
 
   return (
     <section
@@ -132,7 +116,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
               href={`/case/${activeCase.slug}#episode-2`}
               className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 sm:px-6 py-3 bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xs backdrop-blur-md transition-all cursor-pointer border border-white/20"
             >
-              <span>ℹ</span>
+              <span className="font-mono text-xs">§</span>
               <span className="truncate">{language === 'en' ? 'Evidence' : 'साक्ष्य'}</span>
             </Link>
 

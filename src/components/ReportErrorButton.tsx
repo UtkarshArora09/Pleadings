@@ -64,7 +64,7 @@ export function ReportErrorButton({
         onClick={() => setIsOpen(true)}
         className={`inline-flex items-center gap-1.5 text-[11px] font-mono text-white/50 hover:text-[#D4AF37] border-b border-dotted border-white/20 hover:border-[#D4AF37] pb-0.5 transition-all cursor-pointer ${className}`}
       >
-        <span>🚩</span>
+        <span className="text-[#D4AF37] font-bold">!</span>
         <span>Report an error in this record</span>
       </button>
 

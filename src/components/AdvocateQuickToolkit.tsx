@@ -34,7 +34,7 @@ export function AdvocateQuickToolkit() {
         <div className="space-y-1">
           <div className="flex flex-wrap items-center gap-2 mb-1.5">
             <span className="px-2 py-0.5 bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 text-[10px] font-mono font-bold uppercase rounded-2xs tracking-wider">
-              ⚖️ LITIGATION & TRIAL ADVOCACY
+              LITIGATION & TRIAL ADVOCACY
             </span>
             <span className="text-[10px] font-mono text-emerald-400 font-semibold uppercase">
               ● Live 2026 Concordance
@@ -126,7 +126,7 @@ export function AdvocateQuickToolkit() {
           <div className="lg:col-span-7 space-y-4 lg:border-l lg:border-white/10 lg:pl-6 min-w-0">
             <div className="p-3.5 sm:p-4 bg-black/40 border border-white/10 rounded-xs space-y-2">
               <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
-                ★ SUBSTANTIVE LITIGATION NUANCE & STATUTORY HOLDING
+                SUBSTANTIVE LITIGATION NUANCE & STATUTORY HOLDING
               </span>
               <p className="text-xs sm:text-sm text-[#E0DCD3] leading-relaxed font-sans break-words">
                 {activeStatute.note}
@@ -139,16 +139,26 @@ export function AdvocateQuickToolkit() {
                 onClick={handleCopy}
                 className="w-full sm:w-auto px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-bold uppercase rounded-xs transition-all border border-white/15 flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <span>{copied ? '✓ COPIED TO CLIPBOARD' : '📋 COPY CITATION NOTE'}</span>
+                <span>{copied ? '✓ COPIED TO CLIPBOARD' : 'COPY CITATION NOTE'}</span>
               </button>
 
-              <Link
-                href="/browse"
-                className="text-xs font-mono font-bold text-[#D4AF37] hover:underline flex items-center justify-center sm:justify-start gap-1 py-1"
-              >
-                <span>Find Tested Judgments</span>
-                <span>→</span>
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/contribute"
+                  className="text-xs font-mono font-bold text-[#D4AF37] hover:underline flex items-center justify-center sm:justify-start gap-1 py-1"
+                >
+                  <span>+ Submit A Case</span>
+                  <span>→</span>
+                </Link>
+
+                <Link
+                  href="/browse"
+                  className="text-xs font-mono font-bold text-white/70 hover:text-white hover:underline flex items-center justify-center sm:justify-start gap-1 py-1"
+                >
+                  <span>Browse Judgments</span>
+                  <span>→</span>
+                </Link>
+              </div>
             </div>
           </div>
 

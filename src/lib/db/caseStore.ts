@@ -1,13 +1,19 @@
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
 import { CaseData, CaseStatus } from '@/types';
 import { CASES_DATA } from '@/data/cases';
 import { getSupabaseAdmin, getSupabase, isSupabaseConfigured } from '@/lib/supabase';
 
-const DATA_DIR = path.join(process.cwd(), 'src', 'data');
-const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
-const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
+// Helper to safely access node modules only in server environment
+function getNodeModules() {
+  if (typeof window !== 'undefined') return null;
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const os = require('os');
+    return { fs, path, os };
+  } catch {
+    return null;
+  }
+}
 
 // In-memory cache for ultra-fast lookups
 let cachedCases: CaseData[] | null = null;
@@ -17,32 +23,40 @@ const CACHE_TTL_MS = 15000; // 15 seconds cache before checking Supabase updates
 function ensureInitialized(): CaseData[] {
   if (cachedCases && cachedCases.length > 0) return cachedCases;
 
-  // 1. Try reading from TMP_DB_PATH (written by serverless functions)
-  try {
-    if (fs.existsSync(TMP_DB_PATH)) {
-      const raw = fs.readFileSync(TMP_DB_PATH, 'utf-8');
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        cachedCases = parsed;
-        return cachedCases;
-      }
-    }
-  } catch {
-    // continue
-  }
+  const node = getNodeModules();
+  if (node) {
+    const { fs, path, os } = node;
+    const DATA_DIR = path.join(process.cwd(), 'src', 'data');
+    const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
+    const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
 
-  // 2. Try reading from PRIMARY_DB_PATH
-  try {
-    if (fs.existsSync(PRIMARY_DB_PATH)) {
-      const raw = fs.readFileSync(PRIMARY_DB_PATH, 'utf-8');
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        cachedCases = parsed;
-        return cachedCases;
+    // 1. Try reading from TMP_DB_PATH (written by serverless functions)
+    try {
+      if (fs.existsSync(TMP_DB_PATH)) {
+        const raw = fs.readFileSync(TMP_DB_PATH, 'utf-8');
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          cachedCases = parsed;
+          return cachedCases;
+        }
       }
+    } catch {
+      // continue
     }
-  } catch (error) {
-    console.warn('Error reading dynamicCases.json, falling back to seed data:', error);
+
+    // 2. Try reading from PRIMARY_DB_PATH
+    try {
+      if (fs.existsSync(PRIMARY_DB_PATH)) {
+        const raw = fs.readFileSync(PRIMARY_DB_PATH, 'utf-8');
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          cachedCases = parsed;
+          return cachedCases;
+        }
+      }
+    } catch (error) {
+      console.warn('Error reading dynamicCases.json, falling back to seed data:', error);
+    }
   }
 
   // 3. Bootstrap with the 10 landmark cases from CASES_DATA
@@ -59,6 +73,13 @@ function ensureInitialized(): CaseData[] {
 
 function persistCases(cases: CaseData[]): boolean {
   cachedCases = cases;
+  const node = getNodeModules();
+  if (!node) return false;
+
+  const { fs, path, os } = node;
+  const DATA_DIR = path.join(process.cwd(), 'src', 'data');
+  const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
+  const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
   let saved = false;
 
   // Try writing to primary path
@@ -228,20 +249,24 @@ export const CaseStore = {
 
     // Fallback 2: check content/cases/*.json on disk
     try {
-      const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-      const possibleFilenames = [
-        `${cleanSlug}.json`,
-        'rinku-rukshar-habeas-corpus-case.json',
-      ];
-      for (const fn of possibleFilenames) {
-        const caseFilePath = path.join(process.cwd(), 'content', 'cases', fn);
-        if (fs.existsSync(caseFilePath)) {
-          const raw = fs.readFileSync(caseFilePath, 'utf8');
-          const parsed = JSON.parse(raw);
-          if (matchSlug(parsed.slug, slug) || fn.includes('rinku')) {
-            const normalized = normalizeCaseData(parsed);
-            this.create(normalized);
-            return normalized;
+      const node = getNodeModules();
+      if (node) {
+        const { fs, path } = node;
+        const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+        const possibleFilenames = [
+          `${cleanSlug}.json`,
+          'rinku-rukshar-habeas-corpus-case.json',
+        ];
+        for (const fn of possibleFilenames) {
+          const caseFilePath = path.join(process.cwd(), 'content', 'cases', fn);
+          if (fs.existsSync(caseFilePath)) {
+            const raw = fs.readFileSync(caseFilePath, 'utf8');
+            const parsed = JSON.parse(raw);
+            if (matchSlug(parsed.slug, slug) || fn.includes('rinku')) {
+              const normalized = normalizeCaseData(parsed);
+              this.create(normalized);
+              return normalized;
+            }
           }
         }
       }
@@ -277,32 +302,39 @@ export const CaseStore = {
 
     // Async push to Supabase if configured
     if (isSupabaseConfigured()) {
-      const admin = getSupabaseAdmin();
-      if (admin) {
-        Promise.resolve(
-          admin
-            .from('cases')
-            .upsert(
-              {
-                slug: caseToSave.slug,
-                title: caseToSave.title,
-                court: caseToSave.court,
-                year: caseToSave.year,
-                citation: caseToSave.citation,
-                status: caseToSave.status,
-                category_tag: caseToSave.categoryTag,
-                banner_image: caseToSave.bannerImage,
-                data: caseToSave,
-                updated_at: timestamp,
-              },
-              { onConflict: 'slug' }
-            )
-        )
-          .then((res) => {
+      import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
+        try {
+          await saveDynamicCasesToSupabase(updatedList);
+        } catch (e) {
+          console.warn('Supabase storage save error:', e);
+        }
+
+        try {
+          const client = getSupabaseAdmin() || getSupabase();
+          if (client) {
+            const res = await client
+              .from('cases')
+              .upsert(
+                {
+                  slug: caseToSave.slug,
+                  title: caseToSave.title,
+                  court: caseToSave.court,
+                  year: caseToSave.year,
+                  citation: caseToSave.citation,
+                  status: caseToSave.status,
+                  category_tag: caseToSave.categoryTag,
+                  banner_image: caseToSave.bannerImage,
+                  data: caseToSave,
+                  updated_at: timestamp,
+                },
+                { onConflict: 'slug' }
+              );
             if (res.error) console.warn('Supabase upsert error:', res.error.message);
-          })
-          .catch((err: unknown) => console.warn('Supabase upsert exception:', err));
-      }
+          }
+        } catch (err) {
+          console.warn('Supabase upsert exception:', err);
+        }
+      });
     }
 
     return caseToSave;
@@ -333,37 +365,51 @@ export const CaseStore = {
 
       // Async push update to Supabase
       if (isSupabaseConfigured()) {
-        const admin = getSupabaseAdmin();
-        if (admin) {
-          Promise.resolve(
-            admin
-              .from('cases')
-              .upsert(
-                {
-                  slug: updatedCase.slug,
-                  title: updatedCase.title,
-                  court: updatedCase.court,
-                  year: updatedCase.year,
-                  citation: updatedCase.citation,
-                  status: updatedCase.status,
-                  category_tag: updatedCase.categoryTag,
-                  banner_image: updatedCase.bannerImage,
-                  data: updatedCase,
-                  updated_at: new Date().toISOString(),
-                },
-                { onConflict: 'slug' }
-              )
-          )
-            .then((res) => {
+        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
+          try {
+            await saveDynamicCasesToSupabase(updatedList);
+          } catch (e) {
+            console.warn('Supabase storage update error:', e);
+          }
+
+          try {
+            const client = getSupabaseAdmin() || getSupabase();
+            if (client) {
+              const res = await client
+                .from('cases')
+                .upsert(
+                  {
+                    slug: updatedCase.slug,
+                    title: updatedCase.title,
+                    court: updatedCase.court,
+                    year: updatedCase.year,
+                    citation: updatedCase.citation,
+                    status: updatedCase.status,
+                    category_tag: updatedCase.categoryTag,
+                    banner_image: updatedCase.bannerImage,
+                    data: updatedCase,
+                    updated_at: new Date().toISOString(),
+                  },
+                  { onConflict: 'slug' }
+                );
               if (res.error) console.warn('Supabase update error:', res.error.message);
-            })
-            .catch((err: unknown) => console.warn('Supabase update exception:', err));
-        }
+            }
+          } catch (err) {
+            console.warn('Supabase update exception:', err);
+          }
+        });
       }
 
       return updatedCase;
     }
     return null;
+  },
+
+  async getBySlugAsync(slug: string): Promise<CaseData | null> {
+    if (isSupabaseConfigured()) {
+      await this.syncFromSupabase();
+    }
+    return this.getBySlug(slug);
   },
 
   delete(slug: string): boolean {
@@ -373,19 +419,26 @@ export const CaseStore = {
       persistCases(filtered);
 
       if (isSupabaseConfigured()) {
-        const admin = getSupabaseAdmin();
-        if (admin) {
-          Promise.resolve(
-            admin
-              .from('cases')
-              .delete()
-              .eq('slug', slug)
-          )
-            .then((res) => {
+        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
+          try {
+            await saveDynamicCasesToSupabase(filtered);
+          } catch (e) {
+            console.warn('Supabase storage delete error:', e);
+          }
+
+          try {
+            const client = getSupabaseAdmin() || getSupabase();
+            if (client) {
+              const res = await client
+                .from('cases')
+                .delete()
+                .eq('slug', slug);
               if (res.error) console.warn('Supabase delete error:', res.error.message);
-            })
-            .catch((err: unknown) => console.warn('Supabase delete exception:', err));
-        }
+            }
+          } catch (err) {
+            console.warn('Supabase delete exception:', err);
+          }
+        });
       }
       return true;
     }
@@ -399,39 +452,51 @@ export const CaseStore = {
   },
 
   /**
-   * Sync all cases from Supabase into memory and disk cache
+   * Sync all cases from Supabase (storage or table) into memory and disk cache
    */
   async syncFromSupabase(): Promise<boolean> {
-    const client = getSupabase() || getSupabaseAdmin();
-    if (!client) return false;
+    if (!isSupabaseConfigured()) return false;
 
     try {
-      const { data, error } = await client
-        .from('cases')
-        .select('*')
-        .order('updated_at', { ascending: false });
-
-      if (error) {
-        console.warn('Could not fetch from Supabase cases table:', error.message);
-        return false;
-      }
-
-      if (Array.isArray(data) && data.length > 0) {
-        const normalizedList = data.map((row: any) => normalizeCaseData(row));
-        
-        // Merge with existing cases to avoid losing unseeded cases
+      const { loadDynamicCasesFromSupabase } = await import('@/lib/supabase');
+      
+      // 1. Try loading from Supabase Storage JSON (authoritative & works with anon key)
+      const storageCases = await loadDynamicCasesFromSupabase();
+      if (Array.isArray(storageCases) && storageCases.length > 0) {
+        const normalizedList = storageCases.map((row: any) => normalizeCaseData(row));
         const current = ensureInitialized();
         const mergedMap = new Map<string, CaseData>();
-        
-        // Seed first
+
         current.forEach((c) => mergedMap.set(c.slug, c));
-        // Overwrite with Supabase authoritative cloud data
         normalizedList.forEach((c) => mergedMap.set(c.slug, c));
 
         const merged = Array.from(mergedMap.values());
         persistCases(merged);
         lastSupabaseFetchTime = Date.now();
         return true;
+      }
+
+      // 2. Fallback: try querying Supabase 'cases' table
+      const client = getSupabase() || getSupabaseAdmin();
+      if (client) {
+        const { data, error } = await client
+          .from('cases')
+          .select('*')
+          .order('updated_at', { ascending: false });
+
+        if (!error && Array.isArray(data) && data.length > 0) {
+          const normalizedList = data.map((row: any) => normalizeCaseData(row));
+          const current = ensureInitialized();
+          const mergedMap = new Map<string, CaseData>();
+
+          current.forEach((c) => mergedMap.set(c.slug, c));
+          normalizedList.forEach((c) => mergedMap.set(c.slug, c));
+
+          const merged = Array.from(mergedMap.values());
+          persistCases(merged);
+          lastSupabaseFetchTime = Date.now();
+          return true;
+        }
       }
     } catch (err) {
       console.warn('Supabase sync exception:', err);

@@ -35,7 +35,7 @@ export function Flashcards({ flashcards, lang = 'en' }: FlashcardsProps) {
       <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37] px-2.5 py-0.5 bg-[#D4AF37]/15 rounded-2xs border border-[#D4AF37]/30">
-            📇 {lang === 'en' ? 'REVISION FLASHCARDS' : 'रिवीजन फ्लैशकार्ड्स'}
+            {lang === 'en' ? 'REVISION FLASHCARDS' : 'रिवीजन फ्लैशकार्ड्स'}
           </span>
         </div>
         <span className="text-xs font-mono text-white/50">
@@ -76,7 +76,7 @@ export function Flashcards({ flashcards, lang = 'en' }: FlashcardsProps) {
         </div>
 
         <div className="flex items-center justify-between text-[11px] font-mono text-[#D4AF37]">
-          <span>{isFlipped ? '✓ Answer Verified' : '🔍 Tap Card'}</span>
+          <span>{isFlipped ? '✓ Answer Verified' : 'Tap Card'}</span>
           <span className="text-white/40 text-xs">↻ Flip</span>
         </div>
       </div>

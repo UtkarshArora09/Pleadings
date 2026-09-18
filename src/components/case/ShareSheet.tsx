@@ -95,7 +95,7 @@ export function ShareSheet({
         {/* Dynamic Card Preview */}
         <div className="p-4 bg-[#181C28] rounded-xl border border-white/10 text-center space-y-1.5">
           <div className="text-[10px] font-mono uppercase text-[#D4AF37]">
-            {didAgree ? '✓ YOU AGREED WITH THE BENCH' : '⚖ YOU DISSENTED FROM THE BENCH'}
+            {didAgree ? '✓ YOU AGREED WITH THE BENCH' : 'YOU DISSENTED FROM THE BENCH'}
           </div>
           <h3 className="font-serif font-bold text-base text-white">
             {caseTitle}
@@ -116,7 +116,6 @@ export function ShareSheet({
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2.5 w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#20ba5a] text-black font-bold text-sm uppercase tracking-wider rounded-xl transition-all shadow-lg cursor-pointer hover:scale-[1.02]"
           >
-            <span className="text-lg">💬</span>
             <span>Share to WhatsApp</span>
           </a>
 
@@ -125,7 +124,6 @@ export function ShareSheet({
             onClick={handleDownloadStoryImage}
             className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:opacity-90 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md cursor-pointer hover:scale-[1.01]"
           >
-            <span>📸</span>
             <span>Download Instagram Story Card (1080×1350)</span>
           </button>
 
@@ -134,7 +132,6 @@ export function ShareSheet({
             onClick={handleCopy}
             className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs uppercase tracking-wider rounded-xl border border-white/15 transition-all cursor-pointer"
           >
-            <span>🔗</span>
             <span>{copied ? 'Link Copied to Clipboard! ✓' : 'Copy Direct Link'}</span>
           </button>
 
@@ -146,7 +143,7 @@ export function ShareSheet({
               rel="noopener noreferrer"
               className="flex-1 text-center py-2 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded-lg border border-white/10 text-[11px] font-mono transition-colors"
             >
-              Post on 𝕏
+              Post on X
             </a>
             <a
               href={linkedInUrl}

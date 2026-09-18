@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, Suspense } from 'react';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { CaseCard } from '@/components/CaseCard';
@@ -159,15 +160,15 @@ function BrowseContent() {
 
           {/* Search Input */}
           <div className="relative max-w-xl">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm">
-              🔍
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-xs font-bold">
+              §
             </span>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by case title, citation (e.g. AIR 1960), court, or statute..."
-              className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
+              className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-9 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
             />
             {searchQuery && (
               <button
@@ -276,6 +277,27 @@ function BrowseContent() {
           </div>
         </div>
 
+        {/* Advocate Contribution Banner */}
+        <div className="p-5 sm:p-6 bg-gradient-to-r from-[#171924] to-[#12141F] border border-[#D4AF37]/30 rounded-xs flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+          <div className="space-y-1 text-center sm:text-left">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]">
+              ADVOCATE & SCHOLAR NETWORK
+            </span>
+            <h3 className="font-anton text-lg sm:text-xl text-white uppercase tracking-tight">
+              Know a landmark case that should be here?
+            </h3>
+            <p className="text-xs text-[#cbd5e1] font-sans">
+              Contribute case details, factual arguments, and ratio decidendi. Published with full advocate attribution after registry verification.
+            </p>
+          </div>
+          <Link
+            href="/contribute"
+            className="px-5 py-2.5 bg-[#D4AF37] hover:bg-[#c49f27] text-black font-bold text-xs font-mono uppercase tracking-wider rounded-xs transition-all shadow-md flex-shrink-0"
+          >
+            + Submit A Case →
+          </Link>
+        </div>
+
         {/* Results Grid */}
         <div className="space-y-4">
           <div className="flex items-center justify-between text-xs font-mono text-white/60">
@@ -284,7 +306,7 @@ function BrowseContent() {
 
           {filteredCases.length === 0 ? (
             <div className="py-16 text-center bg-[#12141C] border border-white/10 rounded-xs space-y-3">
-              <div className="text-3xl">🔍</div>
+              <div className="text-2xl font-mono text-[#D4AF37]">§</div>
               <h3 className="font-serif font-bold text-lg text-white">No cases match your filters</h3>
               <p className="text-xs text-[#a9a49a]">
                 Try adjusting your search terms or clearing the active filters.

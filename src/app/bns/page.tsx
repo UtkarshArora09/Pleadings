@@ -49,7 +49,6 @@ export default function BnsMapperPage() {
         {/* Header Hero */}
         <div className="space-y-4 border-b border-white/10 pb-8 text-center sm:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xs text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]">
-            <span>⚡</span>
             <span>CRIMINAL CODE TRANSITION CONCORDANCE</span>
           </div>
 
@@ -64,15 +63,15 @@ export default function BnsMapperPage() {
           {/* Search Box */}
           <div className="pt-3 max-w-2xl">
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-lg">
-                🔍
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-sm font-bold">
+                §
               </span>
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search by section (e.g. IPC 302, BNS 103) or offence (e.g. Murder, Defamation)..."
-                className="w-full bg-[#141824] border border-[#D4AF37]/40 rounded-xs pl-12 pr-4 py-3.5 text-sm sm:text-base text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden shadow-xl"
+                className="w-full bg-[#141824] border border-[#D4AF37]/40 rounded-xs pl-10 pr-4 py-3.5 text-sm sm:text-base text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden shadow-xl"
               />
               {query && (
                 <button

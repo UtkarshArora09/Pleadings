@@ -20,27 +20,9 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
   const [posterSrc, setPosterSrc] = useState<string>(caseData.poster?.src || (caseData as any).bannerImage || '');
 
   useEffect(() => {
-    let activeSrc = caseData.poster?.src || (caseData as any).bannerImage || '';
-    if (typeof window !== 'undefined') {
-      try {
-        const cleanSlug = caseData.slug.toLowerCase().trim();
-        const savedRaw = localStorage.getItem(`pleadings_case_${caseData.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
-        if (savedRaw) {
-          const parsed = JSON.parse(savedRaw);
-          if (parsed && (parsed.slug === caseData.slug || parsed.slug === cleanSlug)) {
-            const customImg = parsed.poster?.src || parsed.bannerImage || parsed.panels?.[0]?.photoExhibitSrc;
-            if (customImg && typeof customImg === 'string' && (customImg.startsWith('data:') || customImg.startsWith('blob:') || customImg.startsWith('http'))) {
-              activeSrc = customImg;
-            }
-          }
-        }
-      } catch {
-        // ignore
-      }
-    }
-    setPosterSrc(activeSrc);
+    setPosterSrc(caseData.poster?.src || (caseData as any).bannerImage || '');
     setHasError(false);
-  }, [caseData.slug, caseData.poster?.src]);
+  }, [caseData.slug, caseData.poster?.src, (caseData as any).bannerImage]);
 
   useEffect(() => {
     const saved = localStorage.getItem('pleadings:votes');
@@ -116,7 +98,7 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
             <span className="font-bold text-[#D4AF37] uppercase truncate max-w-[65%]">
               {caseData.court} · {caseData.year}
             </span>
-            <span>⏱ {readTime}</span>
+            <span>{readTime}</span>
           </div>
 
           {/* Title in Netflix Font-Anton Style */}

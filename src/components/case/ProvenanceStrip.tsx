@@ -19,9 +19,9 @@ export function ProvenanceStrip({
     <div
       className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-[11px] sm:text-xs font-mono text-[#a9a49a] border border-white/10 rounded-xs py-2.5 px-3.5 bg-[#12141C]/80 backdrop-blur-md shadow-lg select-none ${className}`}
     >
-      {/* Primary Citation & Scale Icon */}
+      {/* Primary Citation & Section Icon */}
       <div className="flex items-center gap-2 text-white/95">
-        <span className="text-[#D4AF37] text-sm leading-none">⚖</span>
+        <span className="text-[#D4AF37] font-mono text-xs font-bold leading-none">§</span>
         <span className="font-serif text-xs sm:text-sm text-[#E0DCD3]">
           Built from <strong className="text-white font-semibold underline decoration-[#D4AF37]/40 decoration-1 underline-offset-2">{citation}</strong>
         </span>

@@ -113,6 +113,9 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/70">
+            <Link href="/contribute" className="text-[#D4AF37] hover:text-white transition-colors font-bold">
+              + Contribute Case
+            </Link>
             <Link href="/about" className="hover:text-[#D4AF37] transition-colors">
               Editorial Masthead
             </Link>

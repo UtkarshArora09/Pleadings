@@ -81,10 +81,10 @@ export function CourtroomExperienceShowcase() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-8 sm:mb-10 max-w-4xl mx-auto w-full">
         {(
           [
-            { id: 'reels', labelEn: '3-Min Story Reels', labelHi: '3-मिनट रील्स', icon: '⚡' },
-            { id: 'judge', labelEn: 'Judge Simulator', labelHi: 'जज सिमुलेटर', icon: '⚖️' },
-            { id: 'archives', labelEn: 'Vintage Archives', labelHi: 'पुरालेख कटिंग', icon: '📰' },
-            { id: 'briefs', labelEn: 'Instant Briefs', labelHi: 'केस ब्रीफ', icon: '📑' },
+            { id: 'reels', labelEn: '3-Min Story Reels', labelHi: '3-मिनट रील्स', num: '01' },
+            { id: 'judge', labelEn: 'Judge Simulator', labelHi: 'जज सिमुलेटर', num: '02' },
+            { id: 'archives', labelEn: 'Vintage Archives', labelHi: 'पुरालेख कटिंग', num: '03' },
+            { id: 'briefs', labelEn: 'Instant Briefs', labelHi: 'केस ब्रीफ', num: '04' },
           ] as const
         ).map((tab) => {
           const isActive = activeTab === tab.id;
@@ -98,7 +98,7 @@ export function CourtroomExperienceShowcase() {
                   : 'bg-[#151720] text-[#a9a49a] border-white/10 hover:border-white/30 hover:text-white'
               }`}
             >
-              <span>{tab.icon}</span>
+              <span className="text-[10px] font-mono text-[#D4AF37] font-bold">{tab.num} ·</span>
               <span className="truncate">{language === 'en' ? tab.labelEn : tab.labelHi}</span>
             </button>
           );
@@ -157,7 +157,7 @@ export function CourtroomExperienceShowcase() {
                   <span className="w-2 h-2 rounded-full bg-[#E50914] animate-pulse" />
                   <span>EPISODE 04 · CRIME SCENE</span>
                 </span>
-                <span>AUDIO 🔊</span>
+                <span>AUDIO NARRATION</span>
               </div>
               <h4 className="font-anton text-lg text-white uppercase mb-2">
                 {language === 'en' ? 'The Lantern That Cost A Life' : 'वह लालटेन जिसने जान ले ली'}
@@ -177,7 +177,7 @@ export function CourtroomExperienceShowcase() {
           {activeTab === 'judge' && (
             <div className="w-full max-w-md bg-[#181B24] border border-[#D4AF37]/30 p-5 sm:p-6 rounded-sm shadow-2xl relative">
               <div className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-widest mb-1.5 font-bold">
-                ⚖️ {language === 'en' ? 'YOU ARE THE SESSIONS JUDGE' : 'आप हैं सत्र न्यायाधीश'}
+                {language === 'en' ? 'YOU ARE THE SESSIONS JUDGE' : 'आप हैं सत्र न्यायाधीश'}
               </div>
               <h4 className="font-sans font-bold text-sm text-white mb-3 leading-snug">
                 {language === 'en'

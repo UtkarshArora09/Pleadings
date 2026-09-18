@@ -48,25 +48,9 @@ export function PosterCard({ caseData }: PosterCardProps) {
   const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
-    let active = bannerImg;
-    if (typeof window !== 'undefined') {
-      try {
-        const cleanSlug = caseData.slug.toLowerCase().trim();
-        const savedRaw = localStorage.getItem(`pleadings_case_${caseData.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
-        if (savedRaw) {
-          const parsed = JSON.parse(savedRaw);
-          if (parsed && (parsed.slug === caseData.slug || parsed.slug === cleanSlug)) {
-            const custom = parsed.poster?.src || parsed.bannerImage || parsed.panels?.[0]?.photoExhibitSrc;
-            if (custom && typeof custom === 'string' && (custom.startsWith('data:') || custom.startsWith('blob:') || custom.startsWith('http'))) {
-              active = custom;
-            }
-          }
-        }
-      } catch {}
-    }
-    setImgSrc(active);
+    setImgSrc(bannerImg);
     setHasError(false);
-  }, [bannerImg, caseData.slug]);
+  }, [bannerImg]);
 
   return (
     <div className="group relative flex-shrink-0 w-72 sm:w-80 md:w-[330px] cursor-pointer select-none">

@@ -142,7 +142,7 @@ export function VoteGate({
       <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37] px-2.5 py-0.5 bg-[#D4AF37]/15 rounded-2xs border border-[#D4AF37]/30">
-            ⚖ {lang === 'en' ? 'YOU ARE THE JUDGE' : 'आप हैं जज'}
+            {lang === 'en' ? 'YOU ARE THE JUDGE' : 'आप हैं जज'}
           </span>
         </div>
         <span className="text-xs font-mono text-white/60">
@@ -203,7 +203,7 @@ export function VoteGate({
                 <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
                   {isCourtChoice ? (
                     <span className="text-emerald-400 font-bold">
-                      ⚖ {lang === 'en' ? 'Court Ruling' : 'अदालत का फैसला'}
+                      {lang === 'en' ? 'Court Ruling' : 'अदालत का फैसला'}
                     </span>
                   ) : (
                     <span className="text-white/40">
@@ -224,7 +224,7 @@ export function VoteGate({
       {/* Bottom Status / Reveal Notice */}
       {!hasVoted ? (
         <div className="p-3 bg-black/40 border border-white/10 rounded-xs text-center text-xs font-mono text-[#D4AF37]">
-          🔒 {lang === 'en' ? 'Cast your decision above to unlock the court\'s actual ruling.' : 'अदालत का फैसला जानने के लिए ऊपर अपना निर्णय चुनें।'}
+          {lang === 'en' ? 'Cast your decision above to unlock the court\'s actual ruling.' : 'अदालत का फैसला जानने के लिए ऊपर अपना निर्णय चुनें।'}
         </div>
       ) : (
         <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
@@ -232,7 +232,7 @@ export function VoteGate({
             <div className={didAgree ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
               {didAgree
                 ? (lang === 'en' ? '✓ You agreed with the court\'s holding.' : '✓ आप अदालत के फैसले से सहमत रहे।')
-                : (lang === 'en' ? '⚖ You dissented from the court\'s ratio.' : '⚖ आपकी राय अदालत से भिन्न रही।')}
+                : (lang === 'en' ? 'You dissented from the court\'s ratio.' : 'आपकी राय अदालत से भिन्न रही।')}
             </div>
             <div className="text-white/70 text-[11px]">
               {isThresholdMet ? (
@@ -241,7 +241,7 @@ export function VoteGate({
                 </span>
               ) : (
                 <span className="text-[#D4AF37]">
-                  ★ {lang === 'en' ? 'You are one of the first readers to decide this case.' : 'आप इस मामले में निर्णय देने वाले शुरुआती पाठकों में हैं।'}
+                  {lang === 'en' ? 'You are one of the first readers to decide this case.' : 'आप इस मामले में निर्णय देने वाले शुरुआती पाठकों में हैं।'}
                 </span>
               )}
             </div>

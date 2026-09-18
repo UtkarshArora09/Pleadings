@@ -228,55 +228,27 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
 
   useEffect(() => {
     let isMounted = true;
-    let localParsed: any = null;
-
-    // 1. Check local storage first (instant client cache for user-uploaded custom images)
-    if (typeof window !== 'undefined') {
-      try {
-        const cleanSlug = slug.toLowerCase().trim();
-        const savedRaw = localStorage.getItem(`pleadings_case_${slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
-        if (savedRaw) {
-          localParsed = JSON.parse(savedRaw);
-          if (localParsed && (localParsed.slug === slug || localParsed.slug === cleanSlug) && (localParsed.poster?.src || localParsed.bannerImage || localParsed.panels || localParsed.episodes)) {
-            let normalized = normalizeToCaseFile(localParsed, slug);
-            normalized = mergeCustomVisuals(normalized, localParsed);
-            if (isMounted) {
-              setCaseData(normalized);
-              setLoading(false);
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('Error reading dynamic case from localStorage:', err);
-      }
-    }
 
     async function loadClientCase() {
       try {
-        // 2. Fetch from API
+        // Fetch fresh case data from API
         const res = await fetch(`/api/cases/${slug}`);
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.case && isMounted) {
-            let normalized = normalizeToCaseFile(data.case, slug);
-            if (localParsed) {
-              normalized = mergeCustomVisuals(normalized, localParsed);
-            }
+            const normalized = normalizeToCaseFile(data.case, slug);
             setCaseData(normalized);
             setLoading(false);
             return;
           }
         }
 
-        // 3. Fallback: try admin API endpoint if logged in
+        // Fallback: try admin API endpoint if logged in
         const adminRes = await fetch(`/api/admin/cases/${slug}`);
         if (adminRes.ok) {
           const adminData = await adminRes.json();
           if (adminData.success && adminData.case && isMounted) {
-            let normalized = normalizeToCaseFile(adminData.case, slug);
-            if (localParsed) {
-              normalized = mergeCustomVisuals(normalized, localParsed);
-            }
+            const normalized = normalizeToCaseFile(adminData.case, slug);
             setCaseData(normalized);
             setLoading(false);
             return;

@@ -55,7 +55,7 @@ export function SubsequentHistory({ history, lang = 'en' }: SubsequentHistoryPro
     <div className="my-6 p-4 sm:p-5 bg-[#12141C] border border-white/15 rounded-xs space-y-3 select-none">
       <div className="flex items-center justify-between pb-2 border-b border-white/10">
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]">
-          🏛️ {lang === 'en' ? 'SUBSEQUENT JUDICIAL HISTORY' : 'उत्तरवर्ती न्यायिक इतिहास'}
+          {lang === 'en' ? 'SUBSEQUENT JUDICIAL HISTORY' : 'उत्तरवर्ती न्यायिक इतिहास'}
         </span>
         <span className="text-[10px] font-mono text-white/50">
           {history.length} {lang === 'en' ? 'Direct Citations' : 'उल्लेख'}

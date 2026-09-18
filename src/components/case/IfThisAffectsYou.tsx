@@ -19,7 +19,7 @@ export function IfThisAffectsYou({ affectsYou, lang = 'en' }: IfThisAffectsYouPr
     <section className="my-10 p-5 sm:p-7 bg-[#131922] border border-emerald-500/30 rounded-xs shadow-xl space-y-4 select-none">
       <div className="flex items-center gap-2 pb-2 border-b border-white/10">
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-300 bg-emerald-950 px-2.5 py-0.5 rounded-2xs border border-emerald-600/30">
-          💡 {lang === 'en' ? 'IF THIS AFFECTS YOU' : 'यदि आप पर यह लागू होता है'}
+          {lang === 'en' ? 'IF THIS AFFECTS YOU' : 'यदि आप पर यह लागू होता है'}
         </span>
       </div>
 

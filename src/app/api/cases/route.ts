@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server';
 import { CaseStore } from '@/lib/db/caseStore';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const genre = searchParams.get('genre');
     const query = searchParams.get('q')?.toLowerCase();
 
-    let cases = CaseStore.getPublished();
+    const all = await CaseStore.getAllAsync();
+    let cases = all.filter((c) => c.status === 'PUBLISHED' || !c.status);
 
     if (genre && genre !== 'ALL') {
       cases = cases.filter((c) => c.genre === genre || c.categoryTag === genre);

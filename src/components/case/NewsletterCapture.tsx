@@ -36,7 +36,7 @@ export function NewsletterCapture({ lang = 'en' }: NewsletterCaptureProps) {
     <section className="my-10 p-6 sm:p-8 bg-[#12141C] border border-[#D4AF37]/30 rounded-xs shadow-xl space-y-4 select-none">
       <div className="flex items-center gap-2">
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37] px-2.5 py-0.5 bg-[#D4AF37]/15 rounded-2xs border border-[#D4AF37]/30">
-          📬 {lang === 'en' ? 'EVERY TUESDAY' : 'हर मंगलवार'}
+          {lang === 'en' ? 'EVERY TUESDAY' : 'हर मंगलवार'}
         </span>
       </div>
 

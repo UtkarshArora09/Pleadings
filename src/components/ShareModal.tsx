@@ -72,15 +72,13 @@ export function ShareModal() {
             onClick={handleCopyLink}
             className="flex items-center justify-center gap-2 p-3 bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer"
           >
-            <span>🔗</span>
-            <span>{copied ? (language === 'en' ? 'Copied!' : 'कॉपी हुआ!') : (language === 'en' ? 'Copy Link' : 'लिंक कॉपी')}</span>
+            <span>{copied ? (language === 'en' ? '✓ Copied!' : '✓ कॉपी हुआ!') : (language === 'en' ? 'Copy Link' : 'लिंक कॉपी')}</span>
           </button>
 
           <button
             onClick={handleCopyCitation}
             className="flex items-center justify-center gap-2 p-3 bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer"
           >
-            <span>⚖️</span>
             <span>{language === 'en' ? 'Copy Citation' : 'साइटेशन कॉपी'}</span>
           </button>
 
@@ -88,7 +86,6 @@ export function ShareModal() {
             onClick={handleWhatsAppShare}
             className="flex items-center justify-center gap-2 p-3 bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/40 text-[#25D366] text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer"
           >
-            <span>💬</span>
             <span>WhatsApp</span>
           </button>
 
@@ -96,8 +93,7 @@ export function ShareModal() {
             onClick={handleTwitterShare}
             className="flex items-center justify-center gap-2 p-3 bg-[#1DA1F2]/15 hover:bg-[#1DA1F2]/25 border border-[#1DA1F2]/40 text-[#1DA1F2] text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer"
           >
-            <span>𝕏</span>
-            <span>Twitter / 𝕏</span>
+            <span>Twitter / X</span>
           </button>
         </div>
 

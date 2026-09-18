@@ -3,57 +3,68 @@
 import React from 'react';
 import Link from 'next/link';
 
+/**
+ * Classical Architectural Pillar "P" Monogram
+ * As requested: Classical Column stem with crimson red top accent bar, crisp white body.
+ */
 export function MonogramP({ className = 'w-7 h-7' }: { className?: string }) {
   return (
     <svg
       className={className}
-      viewBox="0 0 100 120"
+      viewBox="0 0 90 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="Pleadings Logo Monogram"
+      aria-label="Pleadings Monogram P"
     >
-      {/* Vertical thick pillar / stem with rounded bottom */}
+      {/* 1. Top Crimson Red Accent Bar */}
+      <rect x="6" y="8" width="36" height="4.5" rx="1" fill="#E50914" />
+
+      {/* 2. Top Capital Molding */}
+      <rect x="9" y="12.5" width="30" height="3" rx="0.5" fill="#FFFFFF" />
+
+      {/* 3. Pillar Shaft Base Body */}
+      <rect x="13" y="15.5" width="22" height="63.5" fill="#FFFFFF" />
+
+      {/* 4. Classical Fluting Grooves */}
+      <line x1="17.5" y1="18.5" x2="17.5" y2="76" stroke="#0E1016" strokeWidth="1.8" strokeLinecap="round" />
+      <line x1="24" y1="18.5" x2="24" y2="76" stroke="#0E1016" strokeWidth="1.8" strokeLinecap="round" />
+      <line x1="30.5" y1="18.5" x2="30.5" y2="76" stroke="#0E1016" strokeWidth="1.8" strokeLinecap="round" />
+
+      {/* 5. Lower Base Plinth */}
+      <rect x="9" y="79" width="30" height="3" rx="0.5" fill="#FFFFFF" />
+      <rect x="6" y="82" width="36" height="5" rx="1" fill="#FFFFFF" />
+
+      {/* 6. Serif Bowl of P */}
       <path
-        d="M22 18 C22 13 26 9 31 9 H38 V92 C38 97 34 101 29 101 C25 101 22 97 22 92 V18 Z"
-        fill="#F3EFE6"
-      />
-      {/* Bottom dot below stem */}
-      <circle cx="30" cy="112" r="5" fill="#D4AF37" />
-      {/* Folded paper document bowl */}
-      <path
-        d="M38 9 H72 L86 23 V76 C86 82 81 87 75 87 H38 V9 Z"
-        fill="#F3EFE6"
-      />
-      {/* Folded dog-ear corner triangle cutout */}
-      <path
-        d="M72 9 L86 23 H72 V9 Z"
-        fill="#0E1016"
-      />
-      <path
-        d="M72 9 L86 23"
-        stroke="#D4AF37"
-        strokeWidth="2.5"
+        d="M35 12.5 C 56 12.5, 78 22, 78 43 C 78 63, 58 69.5, 35 69.5 V 59 C 50 59, 63 53.5, 63 43 C 63 32, 50 23, 35 23 Z"
+        fill="#FFFFFF"
       />
     </svg>
   );
 }
 
+/**
+ * Full "Pleadings" Brand Wordmark
+ * First letter P with classical pillar & red accent, followed by elegant serif "leadings".
+ */
 export function Logo({ size = 'medium' }: { size?: 'small' | 'medium' | 'large' }) {
-  const textSize = size === 'small' ? 'text-lg' : size === 'large' ? 'text-3xl' : 'text-xl';
-  const iconSize = size === 'small' ? 'w-6 h-7' : size === 'large' ? 'w-9 h-11' : 'w-7 h-9';
+  const iconSize = size === 'small' ? 'w-6 h-7' : size === 'large' ? 'w-9 h-10' : 'w-7 h-8';
+  const textClass = size === 'small' ? 'text-xl' : size === 'large' ? 'text-3xl' : 'text-2xl';
 
   return (
     <Link
       href="/"
-      className="inline-flex items-center gap-2.5 group focus:outline-none focus:ring-1 focus:ring-[#D4AF37] rounded-md p-1 transition-transform hover:scale-[1.02]"
+      className="inline-flex items-center gap-1 group focus:outline-none rounded-xs transition-transform hover:scale-[1.02]"
     >
-      <MonogramP className={`${iconSize} transition-transform group-hover:rotate-[-2deg]`} />
-      <span
-        className={`font-anton tracking-[0.14em] text-[#F3EFE6] group-hover:text-white uppercase ${textSize} select-none leading-none`}
-        style={{ fontFamily: 'var(--font-anton), sans-serif' }}
-      >
-        PLEADINGS
-      </span>
+      <div className="flex items-center">
+        <MonogramP className={`${iconSize} flex-shrink-0 transition-transform group-hover:scale-105`} />
+        <span
+          className={`font-serif font-bold text-white tracking-tight -ml-1 ${textClass} select-none leading-none`}
+          style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Times New Roman", serif)' }}
+        >
+          leadings
+        </span>
+      </div>
     </Link>
   );
 }

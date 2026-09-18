@@ -126,14 +126,14 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
             }}
           >
             {/* Judicial Seal Watermark */}
-            <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-10 pointer-events-none rounded-full border-4 border-[#1c1b18] flex items-center justify-center font-bold text-4xl">
-              ⚖
+            <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-10 pointer-events-none rounded-full border-4 border-[#1c1b18] flex items-center justify-center font-bold text-4xl font-serif">
+              §
             </div>
 
             {/* Header */}
             <div className="flex items-center justify-between text-[10px] font-sans font-bold tracking-[0.2em] text-[#8C7335] uppercase pb-2 mb-3 border-b border-[#D4AF37]/30">
               <span className="flex items-center gap-1">
-                <span>⚖</span>
+                <span>§</span>
                 <span>{evidence.date}</span>
               </span>
               <span>SESSIONS COURT DOCKET</span>
@@ -173,7 +173,7 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
 
             {/* Header */}
             <div className="flex items-center gap-2 text-[10px] font-mono font-bold tracking-[0.2em] text-[#D4AF37] uppercase pb-2 mb-3 border-b border-[#D4AF37]/30">
-              <span>🏛</span>
+              <span>§</span>
               <span>{evidence.date}</span>
               <span>·</span>
               <span>CERTIFIED DECREE</span>

@@ -41,35 +41,19 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
   const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
-    let active = bannerImg;
-    if (typeof window !== 'undefined') {
-      try {
-        const cleanSlug = caseData.slug.toLowerCase().trim();
-        const savedRaw = localStorage.getItem(`pleadings_case_${caseData.slug}`) || localStorage.getItem(`pleadings_case_${cleanSlug}`);
-        if (savedRaw) {
-          const parsed = JSON.parse(savedRaw);
-          if (parsed && (parsed.slug === caseData.slug || parsed.slug === cleanSlug)) {
-            const custom = parsed.poster?.src || parsed.bannerImage || parsed.panels?.[0]?.photoExhibitSrc;
-            if (custom && typeof custom === 'string' && (custom.startsWith('data:') || custom.startsWith('blob:') || custom.startsWith('http'))) {
-              active = custom;
-            }
-          }
-        }
-      } catch {}
-    }
-    setImgSrc(active);
+    setImgSrc(bannerImg);
     setHasError(false);
-  }, [bannerImg, caseData.slug]);
+  }, [bannerImg]);
 
   return (
     <div className="group relative flex-shrink-0 flex items-center cursor-pointer select-none">
       <Link href={`/case/${caseData.slug}`} className="flex items-center">
         {/* Giant Metallic Rank Number */}
-        <div className="relative z-10 -mr-5 sm:-mr-7 flex-shrink-0 select-none pointer-events-none">
+        <div className="relative z-10 -mr-4 sm:-mr-5 md:-mr-7 flex-shrink-0 select-none pointer-events-none">
           <span
-            className="font-anton text-7xl sm:text-8xl md:text-9xl tracking-tighter leading-none"
+            className="font-anton text-6xl sm:text-8xl md:text-9xl tracking-tighter leading-none"
             style={{
-              WebkitTextStroke: '2px rgba(255,255,255,0.3)',
+              WebkitTextStroke: '1.5px rgba(255,255,255,0.3)',
               color: '#0e1017',
               textShadow: '0 10px 24px rgba(0,0,0,0.95)',
             }}
@@ -79,7 +63,7 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
         </div>
 
         {/* Portrait Poster Card */}
-        <div className="relative w-44 sm:w-48 md:w-52 aspect-[2/3] rounded-md overflow-hidden bg-[#151722] border border-white/10 group-hover:border-[#D4AF37] transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
+        <div className="relative w-36 sm:w-48 md:w-52 aspect-[2/3] rounded-md overflow-hidden bg-[#151722] border border-white/10 group-hover:border-[#D4AF37] transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
           {/* Cover Art */}
           {hasError || !imgSrc ? (
             <div className="w-full h-full flex flex-col items-center justify-center bg-[#121520] border border-red-500/30 p-3 text-center">

@@ -3,6 +3,7 @@ import { CaseStore } from '@/lib/db/caseStore';
 import { getCaseBySlug } from '@/lib/cases';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function GET(
   request: NextRequest,
@@ -14,8 +15,8 @@ export async function GET(
       return NextResponse.json({ success: false, error: 'Slug required' }, { status: 400 });
     }
 
-    // 1. Check dynamic CaseStore first for custom updates or newly ingested cases
-    const dynamicCase = CaseStore.getBySlug(slug);
+    // 1. Check dynamic CaseStore first with Supabase cloud synchronization
+    const dynamicCase = await CaseStore.getBySlugAsync(slug);
     if (dynamicCase) {
       return NextResponse.json({ success: true, case: dynamicCase });
     }

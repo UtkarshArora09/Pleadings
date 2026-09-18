@@ -47,15 +47,15 @@ export default function GlossaryPage() {
           {/* Search Box */}
           <div className="pt-2 max-w-xl">
             <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm">
-                🔍
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-xs font-bold">
+                §
               </span>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search legal doctrines (e.g. Mens Rea, Basic Structure, Due Process)..."
-                className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
+                className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-9 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
               />
               {searchQuery && (
                 <button

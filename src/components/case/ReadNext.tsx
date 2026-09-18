@@ -51,7 +51,7 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
     <section className="my-10 space-y-4 select-none">
       <div className="flex items-center justify-between pb-2 border-b border-white/10">
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]">
-          📚 {lang === 'en' ? 'READ NEXT · RELATED BY DOCTRINE' : 'आगे पढ़ें · संबंधित दृष्टांत'}
+          {lang === 'en' ? 'READ NEXT · RELATED BY DOCTRINE' : 'आगे पढ़ें · संबंधित दृष्टांत'}
         </span>
       </div>
 
