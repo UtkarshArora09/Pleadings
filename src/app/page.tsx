@@ -8,6 +8,9 @@ import { HomeSectionNav } from '@/components/HomeSectionNav';
 import { getAllCases, getFeaturedCases, getTop10Cases } from '@/lib/cases';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata = {
   title: 'Pleadings — Landmark Indian Court Judgments as Verified Stories',
   description:
