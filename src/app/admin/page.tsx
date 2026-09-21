@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { CaseData, CaseStatus } from '@/types';
 
@@ -10,10 +10,19 @@ export default function AdminDashboardPage() {
   const [filter, setFilter] = useState<string>('ALL');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [lastSyncTime, setLastSyncTime] = useState<Date>(new Date());
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const isFetchingRef = useRef<boolean>(false);
 
-  const fetchCases = async () => {
+  const fetchCases = useCallback(async (isSilent = false) => {
+    if (isFetchingRef.current) return;
     try {
-      setLoading(true);
+      isFetchingRef.current = true;
+      if (!isSilent) {
+        setLoading(true);
+      } else {
+        setIsRefreshing(true);
+      }
 
       // 1. Gather any custom / client cases from localStorage
       let localCases: CaseData[] = [];
@@ -38,10 +47,16 @@ export default function AdminDashboardPage() {
         } catch {}
       }
 
-      // 2. Fetch server cases
+      // 2. Fetch fresh server cases with cache-busting timestamp
       let serverCases: CaseData[] = [];
       try {
-        const res = await fetch('/api/admin/cases');
+        const res = await fetch(`/api/admin/cases?_t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+          },
+        });
         if (res.ok) {
           const data = await res.json();
           if (data.success && Array.isArray(data.cases)) {
@@ -52,23 +67,118 @@ export default function AdminDashboardPage() {
         console.warn('Network error fetching admin cases:', netErr);
       }
 
-      // 3. Merge server cases and local cases
+      // 3. Merge: Local drafts first, then authoritative server cases
       const map = new Map<string, CaseData>();
-      serverCases.forEach((c) => map.set(c.slug, c));
       localCases.forEach((c) => map.set(c.slug, c));
+      serverCases.forEach((c) => {
+        const local = map.get(c.slug);
+        const serverViews = typeof c.views === 'number' ? c.views : 0;
+        const localViews = local && typeof local.views === 'number' ? local.views : 0;
+        map.set(c.slug, {
+          ...(local || {}),
+          ...c,
+          views: Math.max(serverViews, localViews),
+        });
+      });
 
       const merged = Array.from(map.values());
       setCases(merged);
+      setLastSyncTime(new Date());
     } catch (err) {
       console.error('Failed to load admin cases:', err);
     } finally {
-      setLoading(false);
+      isFetchingRef.current = false;
+      if (!isSilent) setLoading(false);
+      setIsRefreshing(false);
     }
-  };
-
-  useEffect(() => {
-    fetchCases();
   }, []);
+
+  // Initial load and real-time listeners (BroadcastChannel, Cross-tab Storage, 3s Polling & Focus Refetch)
+  useEffect(() => {
+    fetchCases(false);
+
+    // 1. BroadcastChannel real-time listener for instant 0ms cross-tab view updates
+    let bc: BroadcastChannel | null = null;
+    if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+      try {
+        bc = new BroadcastChannel('pleadings_case_events');
+        bc.onmessage = (event) => {
+          if (event.data?.type === 'CASE_VIEW' && event.data?.slug) {
+            const viewedSlug = event.data.slug;
+            const updatedViews = typeof event.data.views === 'number' ? event.data.views : null;
+            setCases((prevCases) =>
+              prevCases.map((c) => {
+                if (c.slug === viewedSlug) {
+                  return {
+                    ...c,
+                    views: updatedViews !== null ? Math.max(c.views || 0, updatedViews) : (c.views || 0) + 1,
+                  };
+                }
+                return c;
+              })
+            );
+            // Silent refresh to ensure complete state consistency
+            fetchCases(true);
+          }
+        };
+      } catch {}
+    }
+
+    // 2. Storage event for cross-tab view updates
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'pleadings_last_view_event' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (parsed && parsed.slug) {
+            const viewedSlug = parsed.slug;
+            const updatedViews = typeof parsed.views === 'number' ? parsed.views : null;
+            setCases((prevCases) =>
+              prevCases.map((c) => {
+                if (c.slug === viewedSlug) {
+                  return {
+                    ...c,
+                    views: updatedViews !== null ? Math.max(c.views || 0, updatedViews) : (c.views || 0) + 1,
+                  };
+                }
+                return c;
+              })
+            );
+            fetchCases(true);
+          }
+        } catch {}
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+
+    // 3. Fast real-time polling (every 3 seconds)
+    const pollInterval = setInterval(() => {
+      fetchCases(true);
+    }, 3000);
+
+    // 4. Instant refetch when admin tab gains focus or visibility
+    const handleFocus = () => {
+      fetchCases(true);
+    };
+    window.addEventListener('focus', handleFocus);
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        fetchCases(true);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      if (bc) {
+        try {
+          bc.close();
+        } catch {}
+      }
+      window.removeEventListener('storage', handleStorage);
+      clearInterval(pollInterval);
+      window.removeEventListener('focus', handleFocus);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, [fetchCases]);
 
   const handleTogglePublish = async (slug: string, currentStatus?: CaseStatus) => {
     try {
@@ -81,7 +191,7 @@ export default function AdminDashboardPage() {
       });
       const data = await res.json();
       if (data.success) {
-        fetchCases();
+        fetchCases(true);
       }
     } catch (err) {
       console.error('Error toggling publish:', err);
@@ -99,7 +209,7 @@ export default function AdminDashboardPage() {
       const res = await fetch(`/api/admin/cases/${slug}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
-        fetchCases();
+        fetchCases(true);
       }
     } catch (err) {
       console.error('Error deleting case:', err);
@@ -117,7 +227,7 @@ export default function AdminDashboardPage() {
       });
       const data = await res.json();
       if (data.success) {
-        fetchCases();
+        fetchCases(true);
       }
     } catch (err) {
       console.error('Error updating rank:', err);
@@ -155,22 +265,38 @@ export default function AdminDashboardPage() {
             <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               Legal Ingestion & Content System
             </span>
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[9px] font-mono font-bold tracking-wider uppercase ml-2">
+              <span className={`w-1.5 h-1.5 rounded-full bg-emerald-400 ${isRefreshing ? 'animate-ping' : 'animate-pulse'}`} />
+              <span>Real-Time Sync Active</span>
+            </span>
           </div>
           <h1 className="font-anton text-3xl sm:text-4xl text-white uppercase tracking-tight">
             Case Management Studio
           </h1>
           <p className="text-xs text-[#a9a49a] max-w-xl">
-            Admin-controlled pipeline. Create cases, review AI-structured stories, manage Trending Top 10 rankings, and publish directly to live site.
+            Admin-controlled pipeline. Create cases, review AI-structured stories, manage Trending Top 10 rankings, and monitor live reads in real-time.
           </p>
         </div>
 
-        <Link
-          href="/admin/new"
-          className="px-6 py-3.5 bg-[#D4AF37] hover:bg-white text-[#0E1016] font-bold text-xs uppercase tracking-widest transition-all rounded-xs shadow-xl flex items-center justify-center gap-2 self-start md:self-auto cursor-pointer"
-        >
-          <span className="text-base leading-none">+</span>
-          <span>Add New Case</span>
-        </Link>
+        <div className="flex items-center gap-3 self-start md:self-auto">
+          <button
+            onClick={() => fetchCases(false)}
+            disabled={loading || isRefreshing}
+            className="px-4 py-3 bg-[#121520] hover:bg-white/10 text-[#a9a49a] hover:text-white border border-white/15 text-xs font-mono font-bold uppercase tracking-wider transition-all rounded-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            title="Force refresh all cases and view statistics"
+          >
+            <span className={isRefreshing || loading ? 'animate-spin inline-block' : ''}>↻</span>
+            <span>Refresh</span>
+          </button>
+
+          <Link
+            href="/admin/new"
+            className="px-6 py-3.5 bg-[#D4AF37] hover:bg-white text-[#0E1016] font-bold text-xs uppercase tracking-widest transition-all rounded-xs shadow-xl flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span className="text-base leading-none">+</span>
+            <span>Add New Case</span>
+          </Link>
+        </div>
       </div>
 
       {/* Metric Cards */}

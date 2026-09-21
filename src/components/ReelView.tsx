@@ -72,12 +72,36 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
   const isInitialPositioned = useRef<boolean>(false);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
 
-  // Record real view for active case
+  // Record real view for active case and notify real-time listeners
   useEffect(() => {
     const curCase = caseList[activeCaseIndex];
     if (curCase?.slug) {
       try {
-        fetch(`/api/cases/${curCase.slug}/view`, { method: 'POST' }).catch(() => {});
+        const cleanSlug = decodeURIComponent(curCase.slug).trim();
+        fetch(`/api/cases/${encodeURIComponent(cleanSlug)}/view`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data && data.success) {
+              const viewsCount = typeof data.views === 'number' ? data.views : undefined;
+              if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+                try {
+                  const bc = new BroadcastChannel('pleadings_case_events');
+                  bc.postMessage({ type: 'CASE_VIEW', slug: cleanSlug, views: viewsCount, time: Date.now() });
+                  bc.close();
+                } catch {}
+              }
+              try {
+                localStorage.setItem(
+                  'pleadings_last_view_event',
+                  JSON.stringify({ slug: cleanSlug, views: viewsCount, time: Date.now() })
+                );
+              } catch {}
+            }
+          })
+          .catch(() => {});
       } catch {}
     }
   }, [activeCaseIndex, caseList]);

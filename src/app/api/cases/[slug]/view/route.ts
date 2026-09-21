@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CaseStore } from '@/lib/db/caseStore';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
@@ -12,7 +15,10 @@ export async function POST(
     }
 
     const views = CaseStore.recordView(slug);
-    return NextResponse.json({ success: true, slug, views });
+    return NextResponse.json(
+      { success: true, slug, views },
+      { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0' } }
+    );
   } catch (error) {
     console.error('Error recording real case view:', error);
     return NextResponse.json({ success: false, error: 'Failed to record view' }, { status: 500 });
@@ -26,8 +32,11 @@ export async function GET(
   try {
     const { slug } = await params;
     const caseItem = CaseStore.getBySlug(slug);
-    const views = caseItem?.views || 0;
-    return NextResponse.json({ success: true, slug, views });
+    const views = typeof caseItem?.views === 'number' ? caseItem.views : 0;
+    return NextResponse.json(
+      { success: true, slug, views },
+      { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0' } }
+    );
   } catch (error) {
     return NextResponse.json({ success: false, error: 'Failed to get views' }, { status: 500 });
   }

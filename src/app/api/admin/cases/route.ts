@@ -6,6 +6,9 @@ import { processCaseIngestion } from '@/lib/ai/pipeline';
 import { isRequestAuthenticated } from '@/lib/auth';
 import { sendAdminCaseCreatedEmail } from '@/lib/email';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   if (!isRequestAuthenticated(request)) {
     return NextResponse.json({ success: false, error: 'Unauthorized. Admin credentials required.' }, { status: 401 });
@@ -13,7 +16,10 @@ export async function GET(request: NextRequest) {
 
   try {
     const cases = CaseStore.getAll();
-    return NextResponse.json({ success: true, cases });
+    return NextResponse.json(
+      { success: true, cases },
+      { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0' } }
+    );
   } catch (error) {
     console.error('Error fetching admin cases:', error);
     return NextResponse.json({ success: false, error: 'Failed to fetch cases' }, { status: 500 });

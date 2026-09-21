@@ -33,7 +33,21 @@ function ensureInitialized(): CaseData[] {
     const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
     const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
 
-    // 1. Try reading from TMP_DB_PATH (written by serverless functions)
+    // 1. Try reading from PRIMARY_DB_PATH
+    try {
+      if (fs.existsSync(PRIMARY_DB_PATH)) {
+        const raw = fs.readFileSync(PRIMARY_DB_PATH, 'utf-8');
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          cachedCases = parsed;
+          return cachedCases;
+        }
+      }
+    } catch (error) {
+      console.warn('Error reading dynamicCases.json, trying tmp fallback:', error);
+    }
+
+    // 2. Try reading from TMP_DB_PATH (written by serverless functions)
     try {
       if (fs.existsSync(TMP_DB_PATH)) {
         const raw = fs.readFileSync(TMP_DB_PATH, 'utf-8');
@@ -45,20 +59,6 @@ function ensureInitialized(): CaseData[] {
       }
     } catch {
       // continue
-    }
-
-    // 2. Try reading from PRIMARY_DB_PATH
-    try {
-      if (fs.existsSync(PRIMARY_DB_PATH)) {
-        const raw = fs.readFileSync(PRIMARY_DB_PATH, 'utf-8');
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          cachedCases = parsed;
-          return cachedCases;
-        }
-      }
-    } catch (error) {
-      console.warn('Error reading dynamicCases.json, falling back to seed data:', error);
     }
   }
 
@@ -274,21 +274,43 @@ export const CaseStore = {
   },
 
   recordView(slug: string): number {
+    const decodedSlug = decodeURIComponent(slug).trim();
     const all = ensureInitialized();
-    const idx = all.findIndex((c) => matchSlug(c.slug, slug));
+    let idx = all.findIndex((c) => matchSlug(c.slug, decodedSlug));
+
+    if (idx === -1) {
+      const loaded = this.getBySlug(decodedSlug);
+      if (loaded) {
+        const refreshed = ensureInitialized();
+        idx = refreshed.findIndex((c) => matchSlug(c.slug, decodedSlug));
+      }
+    }
+
     if (idx !== -1) {
-      const currentViews = typeof all[idx].views === 'number' ? all[idx].views : 0;
-      all[idx].views = currentViews + 1;
+      const currentViews: number = typeof all[idx].views === 'number' ? (all[idx].views as number) : 0;
+      const newViews = currentViews + 1;
+      all[idx].views = newViews;
       persistCases(all);
 
       if (isSupabaseConfigured()) {
-        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase }) => {
+        const targetSlug = all[idx].slug;
+        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
           try {
             await saveDynamicCasesToSupabase(all);
           } catch {}
+
+          try {
+            const client = getSupabaseAdmin() || getSupabase();
+            if (client) {
+              await client
+                .from('cases')
+                .update({ views: newViews, updated_at: new Date().toISOString() })
+                .eq('slug', targetSlug);
+            }
+          } catch {}
         });
       }
-      return all[idx].views;
+      return newViews;
     }
     return 1;
   },
@@ -342,10 +364,16 @@ export const CaseStore = {
     const existingIdx = all.findIndex((c) => matchSlug(c.slug, normalized.slug));
     
     const timestamp = new Date().toISOString();
+    const existingCase = existingIdx >= 0 ? all[existingIdx] : null;
+    const viewsToKeep = typeof normalized.views === 'number' && normalized.views > 0
+      ? normalized.views
+      : (existingCase && typeof existingCase.views === 'number' ? existingCase.views : 0);
+
     const caseToSave: CaseData = {
       ...normalized,
+      views: viewsToKeep,
       status: normalized.status || 'ADMIN_REVIEW',
-      createdAt: normalized.createdAt || timestamp,
+      createdAt: normalized.createdAt || existingCase?.createdAt || timestamp,
       updatedAt: timestamp,
     };
 
@@ -412,10 +440,16 @@ export const CaseStore = {
 
     if (idx >= 0) {
       const current = ensureInitialized();
+      const currentItem = current[idx];
+      const viewsToKeep = typeof updates.views === 'number' && updates.views > 0
+        ? updates.views
+        : (typeof currentItem.views === 'number' ? currentItem.views : 0);
+
       const updatedCase: CaseData = normalizeCaseData({
-        ...current[idx],
+        ...currentItem,
         ...updates,
-        slug: updates.slug || current[idx].slug,
+        views: viewsToKeep,
+        slug: updates.slug || currentItem.slug,
         updatedAt: new Date().toISOString(),
       });
       const updatedList = [...current];
@@ -527,7 +561,18 @@ export const CaseStore = {
         const mergedMap = new Map<string, CaseData>();
 
         current.forEach((c) => mergedMap.set(c.slug, c));
-        normalizedList.forEach((c) => mergedMap.set(c.slug, c));
+        normalizedList.forEach((incoming) => {
+          const existing = mergedMap.get(incoming.slug);
+          const maxViews = Math.max(
+            typeof existing?.views === 'number' ? existing.views : 0,
+            typeof incoming.views === 'number' ? incoming.views : 0
+          );
+          mergedMap.set(incoming.slug, {
+            ...(existing || {}),
+            ...incoming,
+            views: maxViews,
+          });
+        });
 
         const merged = Array.from(mergedMap.values());
         persistCases(merged);
@@ -549,7 +594,18 @@ export const CaseStore = {
           const mergedMap = new Map<string, CaseData>();
 
           current.forEach((c) => mergedMap.set(c.slug, c));
-          normalizedList.forEach((c) => mergedMap.set(c.slug, c));
+          normalizedList.forEach((incoming) => {
+            const existing = mergedMap.get(incoming.slug);
+            const maxViews = Math.max(
+              typeof existing?.views === 'number' ? existing.views : 0,
+              typeof incoming.views === 'number' ? incoming.views : 0
+            );
+            mergedMap.set(incoming.slug, {
+              ...(existing || {}),
+              ...incoming,
+              views: maxViews,
+            });
+          });
 
           const merged = Array.from(mergedMap.values());
           persistCases(merged);

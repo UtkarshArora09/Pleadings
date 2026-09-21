@@ -229,9 +229,33 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
   useEffect(() => {
     let isMounted = true;
 
-    // Record real view on case load
+    // Record real view on case load and notify real-time listeners
     try {
-      fetch(`/api/cases/${slug}/view`, { method: 'POST' }).catch(() => {});
+      const cleanSlug = decodeURIComponent(slug).trim();
+      fetch(`/api/cases/${encodeURIComponent(cleanSlug)}/view`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.success) {
+            const viewsCount = typeof data.views === 'number' ? data.views : undefined;
+            if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+              try {
+                const bc = new BroadcastChannel('pleadings_case_events');
+                bc.postMessage({ type: 'CASE_VIEW', slug: cleanSlug, views: viewsCount, time: Date.now() });
+                bc.close();
+              } catch {}
+            }
+            try {
+              localStorage.setItem(
+                'pleadings_last_view_event',
+                JSON.stringify({ slug: cleanSlug, views: viewsCount, time: Date.now() })
+              );
+            } catch {}
+          }
+        })
+        .catch(() => {});
     } catch {}
 
     async function loadClientCase() {

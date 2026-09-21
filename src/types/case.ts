@@ -82,6 +82,7 @@ export interface CaseFile {
   readingTime: { story: number; student: number; advocate: number };
   featured: boolean;
   publishedAt: string;
+  views?: number;
   poster: { src: string; alt: string; provenance: "archival" | "illustration" };
   episodes: Episode[];              // exactly 8
   vote: {
