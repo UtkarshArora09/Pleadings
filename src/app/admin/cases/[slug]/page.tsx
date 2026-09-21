@@ -393,7 +393,7 @@ async function compressImageForUpload(
       }
 
       const syncImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
-        let updated = { ...prev };
+        const updated = { ...prev };
         const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
 
         if (tgt === 'poster') {
@@ -510,7 +510,7 @@ async function compressImageForUpload(
       }
 
       const syncImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
-        let updated = { ...prev };
+        const updated = { ...prev };
         const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
 
         if (tgt === 'poster') {

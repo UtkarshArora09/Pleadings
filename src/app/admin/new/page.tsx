@@ -51,7 +51,7 @@ export default function NewCasePage() {
       setCurrentStep('1. Reading admin source document & extracting legal facts...');
       await new Promise((r) => setTimeout(r, 600));
 
-      setCurrentStep('2. Structuring 7-Episode Story Arc (Hook, Personas, Evidence, Arguments, Verdict)...');
+      setCurrentStep('2. Structuring 8-Episode Story Arc (Hook, People, Incident, Timeline, Evidence, Arguments, Verdict, Ratio)...');
       await new Promise((r) => setTimeout(r, 600));
 
       setCurrentStep('3. Translating full case into natural judicial Hindi (en + hi)...');

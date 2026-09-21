@@ -557,8 +557,8 @@
     },
     {
       "n": 8,
-      "kicker": "EPISODE 07 · THE APEX VERDICT",
-      "title": "The Birth of absolute liability.",
+      "kicker": "EPISODE 08 · RATIO & IMPACT",
+      "title": "Jurisprudential Ratio & Lasting Impact",
       "layers": {
         "story": {
           "blocks": [
@@ -1506,28 +1506,10 @@
         "en": "The historic clash between citizens’ right to clean life and heavy industrial enterprise.",
         "hi": "नागरिकों के जीवन के अधिकार और भारी उद्योग के बीच ऐतिहासिक टकराव।"
       },
-      "evidence": {
-        "archiveType": "dossier",
-        "masthead": "SUPREME COURT ARTICLE 32 WRIT PETITION",
-        "date": "DECEMBER 1985 · NEW DELHI",
-        "headline": {
-          "en": "WRIT PETITION (CIVIL) NO. 12739/1985: M.C. MEHTA V. UNION OF INDIA",
-          "hi": "रिट याचिका (सिविल) सं. 12739/1985: एम.सी. मेहता बनाम भारत संघ"
-        },
-        "snippet": {
-          "en": "Environmental advocate M.C. Mehta moves Supreme Court under Article 32 seeking immediate shutdown and relocation of hazardous chemical units situated in densely populated residential areas of Delhi.",
-          "hi": "पर्यावरण वकील एम.सी. मेहता ने दिल्ली के घनी आबादी वाले इलाकों में चल रहे खतरनाक रासायनिक संयंत्रों को तुरंत बंद करने और हटाने की मांग करते हुए सुप्रीम कोर्ट में याचिका दायर की।"
-        },
-        "highlightedPhrase": {
-          "en": "seeking immediate shutdown and relocation of hazardous chemical units in populated areas",
-          "hi": "घनी आबादी वाले इलाकों में चल रहे खतरनाक रासायनिक संयंत्रों को तुरंत बंद करने और हटाने की मांग"
-        },
-        "exhibitNumber": "PIL WRIT #12739/1985",
-        "caption": {
-          "en": "Original PIL petition filed by M.C. Mehta following the Oleum gas tragedy.",
-          "hi": "ओलियम गैस रिसाव के तुरंत बाद एम.सी. मेहता द्वारा दायर मूल जनहित याचिका।"
-        },
-        "imageSrc": "/images/cases/m-c-mehta-exhibit-1789683179201.jpg"
+      "photoExhibitSrc": "/images/cases/m-c-mehta-exhibit-1789683179201.jpg",
+      "photoExhibitCaption": {
+        "en": "Historical exhibit and records for M.C. Mehta v. Union of India.",
+        "hi": "एम.सी. मेहता बनाम भारत संघ के ऐतिहासिक साक्ष्य।"
       },
       "characters": [
         {
@@ -1568,9 +1550,7 @@
           },
           "badgeEmoji": "👨‍⚖️"
         }
-      ],
-      "photoExhibitSrc": "/images/cases/m-c-mehta-exhibit-1789683179201.jpg",
-      "image": "/images/cases/m-c-mehta-exhibit-1789683179201.jpg"
+      ]
     },
     {
       "id": "panel-3",
@@ -1612,10 +1592,48 @@
     },
     {
       "id": "panel-4",
+      "type": "TIMELINE",
+      "eyebrow": {
+        "en": "EPISODE 04 · CHRONOLOGY & DOCKETS",
+        "hi": "एपिसोड 04 · घटनाक्रम व अभिलेख"
+      },
+      "headline": {
+        "en": "Chronological Journey of M.C. Mehta v. Union of India.",
+        "hi": "एम.सी. मेहता बनाम भारत संघ का सिलसिलेवार घटनाक्रम।"
+      },
+      "body": {
+        "en": "• 1987: Supreme Court formulates Absolute Liability doctrine, rejecting Rylands v. Fletcher exceptions.\n• 1991: Public Liability Insurance Act 1991 enacted based on Mehta jurisprudence.\n• 2010: National Green Tribunal Act codifies absolute liability for environmental damage.",
+        "hi": "• 1987: Supreme Court formulates Absolute Liability doctrine, rejecting Rylands v. Fletcher exceptions.\n• 1991: Public Liability Insurance Act 1991 enacted based on Mehta jurisprudence.\n• 2010: National Green Tribunal Act codifies absolute liability for environmental damage."
+      },
+      "evidence": {
+        "archiveType": "police_record",
+        "masthead": "SUPREME COURT OF INDIA DOCKET REGISTRY",
+        "date": "PRIMARY DOCKET · 1987",
+        "headline": {
+          "en": "OFFICIAL PROCEEDING RECORD IN M.C. MEHTA V. UNION OF INDIA",
+          "hi": "एम.सी. मेहता बनाम भारत संघ का आधिकारिक न्यायिक रिकॉर्ड"
+        },
+        "snippet": {
+          "en": "Official court case diary and procedural filings recorded in Supreme Court of India under Oleum Gas Leak.",
+          "hi": "Supreme Court of India में Oleum Gas Leak के तहत दर्ज आधिकारिक वाद सूची।"
+        },
+        "highlightedPhrase": {
+          "en": "Recorded in Supreme Court of India under Oleum Gas Leak",
+          "hi": "Supreme Court of India में Oleum Gas Leak के तहत दर्ज"
+        },
+        "exhibitNumber": "DOCKET #1987/01",
+        "caption": {
+          "en": "Certified procedural dockets and registry chronology.",
+          "hi": "प्रमाणित प्रक्रियात्मक रिकॉर्ड और वाद सूची।"
+        }
+      }
+    },
+    {
+      "id": "panel-5",
       "type": "EVIDENCE",
       "eyebrow": {
-        "en": "EPISODE 04 · SCIENTIFIC COMMITTEE REPORT",
-        "hi": "एपिसोड 04 · वैज्ञानिक जांच रिपोर्ट"
+        "en": "EPISODE 05 · SCIENTIFIC COMMITTEE REPORT",
+        "hi": "एपिसोड 05 · वैज्ञानिक जांच रिपोर्ट"
       },
       "headline": {
         "en": "The Flaw in British Strict Liability (Rylands v. Fletcher).",
@@ -1649,11 +1667,11 @@
       }
     },
     {
-      "id": "panel-5",
+      "id": "panel-6",
       "type": "ARGUMENTS",
       "eyebrow": {
-        "en": "EPISODE 05 · LEGAL INNOVATION",
-        "hi": "एपिसोड 05 · नई कानूनी क्रांति"
+        "en": "EPISODE 06 · LEGAL INNOVATION",
+        "hi": "एपिसोड 06 · नई कानूनी क्रांति"
       },
       "headline": {
         "en": "Strict Liability vs. absolute liability.",
@@ -1662,28 +1680,6 @@
       "body": {
         "en": "The factory argued it had taken all precautions known to science. The Supreme Court declared that Indian law must evolve its own principles rather than copying outdated English common law.",
         "hi": "फैक्ट्री ने दलील दी कि उसने विज्ञान के अनुसार सभी सावधानियां बरती थीं। सुप्रीम कोर्ट ने जवाब दिया कि भारतीय कानून को पुराने अंग्रेजी कानूनों की नकल करने के बजाय अपने नए सिद्धांत बनाने होंगे।"
-      },
-      "evidence": {
-        "archiveType": "newspaper",
-        "masthead": "THE TIMES OF INDIA · NEW DELHI",
-        "date": "06 DECEMBER 1985",
-        "headline": {
-          "en": "GAS TERROR IN CAPITAL: SUPREME COURT TAKES COGNIZANCE OF CHEMICAL THREAT",
-          "hi": "राजधानी में गैस का खौफ: सुप्रीम कोर्ट ने रासायनिक खतरे का स्वतः संज्ञान लिया"
-        },
-        "snippet": {
-          "en": "Front-page coverage: Supreme Court issues stern warning that corporate enterprises manufacturing hazardous chemicals cannot endanger public life and escape financial liability.",
-          "hi": "मुख्य समाचार: सुप्रीम कोर्ट ने सख्त चेतावनी दी कि खतरनाक रसायन बनाने वाली कंपनियां जनता के जीवन को खतरे में डालकर आर्थिक दायित्व से बच नहीं सकतीं।"
-        },
-        "highlightedPhrase": {
-          "en": "corporate enterprises manufacturing hazardous chemicals cannot escape financial liability",
-          "hi": "खतरनाक रसायन बनाने वाली कंपनियां आर्थिक दायित्व से बच नहीं सकतीं"
-        },
-        "exhibitNumber": "EXHIBIT C-1 · FRONT PAGE",
-        "caption": {
-          "en": "Times of India coverage of the Supreme Court emergency intervention.",
-          "hi": "सुप्रीम कोर्ट के आपातकालीन हस्तक्षेप पर टाइम्स ऑफ इंडिया की मुख्य खबर।"
-        }
       },
       "prosecutionArgs": {
         "party": {
@@ -1728,43 +1724,27 @@
             "hi": "खतरनाक उद्योग चलाने वाली कंपनी का समाज के प्रति पूर्ण और अटूट दायित्व है कि कोई नुकसान न हो। इसके तहत बिना किसी अपवाद के 100% जिम्मेदारी होती है।"
           }
         }
-      ]
-    },
-    {
-      "id": "panel-6",
-      "type": "YOU_DECIDE",
-      "eyebrow": {
-        "en": "EPISODE 06 · YOU ARE THE CHIEF JUSTICE",
-        "hi": "एपिसोड 06 · आप हैं चीफ जस्टिस"
-      },
-      "headline": {
-        "en": "Should companies pay even if they were not negligent?",
-        "hi": "क्या बिना गलती साबित हुए भी कंपनी को हर्जाना देना चाहिए?"
-      },
-      "body": {
-        "en": "If a hazardous plant took every safety step prescribed by the government, but a leak still occurs, should it be held 100% liable without any defence?",
-        "hi": "यदि किसी फैक्ट्री ने सरकार द्वारा तय सभी सुरक्षा नियम माने हों, फिर भी गैस लीक हो जाए, तो क्या उसे बिना किसी बचाव के 100% जिम्मेदार मानना चाहिए?"
-      },
+      ],
       "evidence": {
-        "archiveType": "dossier",
-        "masthead": "SUPREME COURT CONSTITUTION BENCH CHAMBER",
-        "date": "DECEMBER 1986",
+        "archiveType": "newspaper",
+        "masthead": "THE TIMES OF INDIA · NEW DELHI",
+        "date": "06 DECEMBER 1985",
         "headline": {
-          "en": "JUDICIAL CONUNDRUM: ENGLISH COMMON LAW OR INDIGENOUS INDIAN JURISPRUDENCE?",
-          "hi": "न्यायिक दुविधा: 19वीं सदी का ब्रिटिश कानून या भारत का अपना नया सिद्धांत?"
+          "en": "GAS TERROR IN CAPITAL: SUPREME COURT TAKES COGNIZANCE OF CHEMICAL THREAT",
+          "hi": "राजधानी में गैस का खौफ: सुप्रीम कोर्ट ने रासायनिक खतरे का स्वतः संज्ञान लिया"
         },
         "snippet": {
-          "en": "CJI P.N. Bhagwati notes: \"We cannot allow our judicial thinking to be constricted by reference to the law as it prevails in England. We have to evolve new principles and lay down new norms which will adequately deal with new problems.\"",
-          "hi": "चीफ जस्टिस भगवती की टिप्पणी: \"हम अपनी न्यायिक सोच को इंग्लैंड के पुराने कानूनों तक सीमित नहीं रख सकते। हमें नई समस्याओं से निपटने के लिए भारत के अपने नए सिद्धांत और मानक बनाने होंगे।\""
+          "en": "Front-page coverage: Supreme Court issues stern warning that corporate enterprises manufacturing hazardous chemicals cannot endanger public life and escape financial liability.",
+          "hi": "मुख्य समाचार: सुप्रीम कोर्ट ने सख्त चेतावनी दी कि खतरनाक रसायन बनाने वाली कंपनियां जनता के जीवन को खतरे में डालकर आर्थिक दायित्व से बच नहीं सकतीं।"
         },
         "highlightedPhrase": {
-          "en": "We have to evolve new principles and lay down new norms to deal with new problems",
-          "hi": "हमें नई समस्याओं से निपटने के लिए भारत के अपने नए सिद्धांत और मानक बनाने होंगे"
+          "en": "corporate enterprises manufacturing hazardous chemicals cannot escape financial liability",
+          "hi": "खतरनाक रसायन बनाने वाली कंपनियां आर्थिक दायित्व से बच नहीं सकतीं"
         },
-        "exhibitNumber": "DELIBERATION DOSSIER · CJI BHAGWATI",
+        "exhibitNumber": "EXHIBIT C-1 · FRONT PAGE",
         "caption": {
-          "en": "Chief Justice Bhagwati bench notes formulating absolute liability.",
-          "hi": "चीफ जस्टिस भगवती के ऐतिहासिक बेंच नोट्स जिन्होंने नए कानून को जन्म दिया।"
+          "en": "Times of India coverage of the Supreme Court emergency intervention.",
+          "hi": "सुप्रीम कोर्ट के आपातकालीन हस्तक्षेप पर टाइम्स ऑफ इंडिया की मुख्य खबर।"
         }
       },
       "judgeDecision": {
@@ -1821,38 +1801,52 @@
         "en": "The Birth of absolute liability.",
         "hi": "पूर्ण दायित्व (absolute liability) सिद्धांत का जन्म।"
       },
-      "stamp": {
-        "en": "absolute liability ESTABLISHED",
-        "hi": "पूर्ण दायित्व सिद्धांत लागू"
-      },
       "body": {
         "en": "Chief Justice P.N. Bhagwati delivered the unanimous 5-judge bench judgment on 20 December 1986.\n\nThe Supreme Court held that where an enterprise engages in hazardous activities, it owes an **absolute and non-delegable duty** to ensure no harm results. If damage occurs, the enterprise must pay compensation regardless of whether it took all precautions.",
         "hi": "20 दिसंबर 1986 को चीफ जस्टिस पी.एन. भगवती की 5 जजों की संविधान पीठ ने सर्वसम्मत फैसला सुनाया।\n\nसुप्रीम कोर्ट ने कहा कि खतरनाक उद्योग चलाने वाले हर उद्यम का समाज के प्रति **पूर्ण और गैर-हस्तांतरणीय कर्तव्य** है। यदि कोई नुकसान होता है, तो कंपनी को हर्जाना देना ही होगा, चाहे उसने कितनी भी सावधानियां क्यों न बरती हों।"
       },
+      "stamp": {
+        "en": "absolute liability ESTABLISHED",
+        "hi": "पूर्ण दायित्व सिद्धांत लागू"
+      }
+    },
+    {
+      "id": "panel-8",
+      "type": "RATIO",
+      "eyebrow": {
+        "en": "EPISODE 08 · LEGAL RATIO & IMPACT",
+        "hi": "एपिसोड 08 · कानूनी सिद्धांत और प्रभाव"
+      },
+      "headline": {
+        "en": "BINDING PRECEDENT & RATIO DECIDENDI",
+        "hi": "बाध्यकारी नजीर व निर्णय-आधार"
+      },
+      "body": {
+        "en": "CJI Bhagwati ruled that Indian jurisprudence must evolve its own principles suitable for its socio-economic conditions rather than relying on 19th-century English common law. An enterprise that profits from danger must internalize all social risks.",
+        "hi": "चीफ जस्टिस भगवती ने कहा कि भारतीय कानून को 19वीं सदी के अंग्रेजी कानूनों पर निर्भर रहने के बजाय अपनी जरूरतों के अनुसार नए सिद्धांत बनाने चाहिए। जो कंपनी खतरे से मुनाफा कमाती है, उसे पूरे नुकसान की भरपाई करनी होगी।"
+      },
       "evidence": {
         "archiveType": "verdict_decree",
-        "masthead": "SUPREME COURT OF INDIA (AIR 1987 SC 1086)",
-        "date": "20 DECEMBER 1986",
+        "masthead": "ALL INDIA REPORTER · SUPREME COURT OF INDIA",
+        "date": "1987 JUDICIAL RECORD",
         "headline": {
-          "en": "HISTORIC RATIO: absolute liability doctrine BORN IN INDIAN JURISPRUDENCE",
-          "hi": "ऐतिहासिक फैसला: भारतीय कानून में पूर्ण दायित्व सिद्धांत की स्थापना"
+          "en": "CERTIFIED RATIO IN M.C. MEHTA V. UNION OF INDIA",
+          "hi": "एम.सी. मेहता बनाम भारत संघ का प्रमाणित निर्णय-आधार"
         },
         "snippet": {
-          "en": "HELD: The enterprise is strictly and absolutely liable to compensate all who are affected. The measure of compensation must be correlated to the magnitude and capacity of the enterprise so it has a deterrent effect.",
-          "hi": "फैसला: प्रभावित सभी लोगों को मुआवजा देना कंपनी का पूर्ण और अंतिम दायित्व है। हर्जाने की राशि कंपनी की आर्थिक क्षमता के अनुरूप होनी चाहिए ताकि कड़ा सबक मिले।"
+          "en": "HELD: Binding interpretation of Oleum Gas Leak under Article 141 of the Constitution of India.",
+          "hi": "निर्णय: भारतीय संविधान के अनुच्छेद 141 के तहत Oleum Gas Leak का बाध्यकारी अर्थ।"
         },
         "highlightedPhrase": {
-          "en": "enterprise is strictly and absolutely liable. Compensation correlated to magnitude of enterprise",
-          "hi": "प्रभावित सभी लोगों को मुआवजा देना कंपनी का पूर्ण दायित्व है। हर्जाना क्षमता के अनुरूप होना चाहिए"
+          "en": "Binding interpretation of Oleum Gas Leak",
+          "hi": "Oleum Gas Leak का बाध्यकारी अर्थ"
         },
-        "exhibitNumber": "APEX DECREE · AIR 1987 SC 1086",
+        "exhibitNumber": "RATIO · Oleum Gas Leak",
         "caption": {
-          "en": "Certified Supreme Court judgment: M.C. Mehta v. Union of India.",
-          "hi": "प्रमाणित सुप्रीम कोर्ट फैसला: एम.सी. मेहता बनाम भारत संघ (ओलियम गैस केस)।"
+          "en": "Certified Supreme Court of India ratio decree.",
+          "hi": "Supreme Court of India का प्रमाणित निर्णय-आधार।"
         }
-      },
-      "citationFooter": "AIR 1987 SC 1086 · Supreme Court of India",
-      "judgmentUrl": "https://indiankanoon.org/doc/1486949/"
+      }
     }
   ],
   "brief": {
@@ -1894,5 +1888,6 @@
     }
   },
   "createdAt": "2026-09-08T18:59:11.938Z",
-  "updatedAt": "2026-09-17T22:12:59.327Z"
+  "updatedAt": "2026-09-17T22:12:59.327Z",
+  "views": 0
 }

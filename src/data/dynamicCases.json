@@ -106,7 +106,7 @@
       },
       {
         "id": "panel-5",
-        "type": "ARGUMENTS",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · PARENS PATRIAE",
           "hi": "एपिसोड 05 · कोर्ट का दायित्व"
@@ -164,7 +164,7 @@
       },
       {
         "id": "panel-6",
-        "type": "VERDICT",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · THE VERDICT",
           "hi": "एपिसोड 06 · ऐतिहासिक फैसला"
@@ -185,7 +185,7 @@
       },
       {
         "id": "panel-7",
-        "type": "RATIO",
+        "type": "VERDICT",
         "eyebrow": {
           "en": "EPISODE 07 · THE RATIO",
           "hi": "एपिसोड 07 · कानूनी नज़ीर"
@@ -200,6 +200,24 @@
         },
         "citationFooter": "2020 Supreme(All) 903 · Allahabad High Court",
         "judgmentUrl": "https://indiankanoon.org/docfragment/150989080/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "Rinku Rukshar v. State of U.P. and 4 Others - Episode 8",
+          "hi": "रिंकू रुखसार बनाम उत्तर प्रदेश राज्य व 4 अन्य - एपिसोड 8"
+        },
+        "body": {
+          "en": "Habeas corpus writ by mother for child custody against father.",
+          "hi": "नाबालिग बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका।"
+        },
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
+        "image": "/images/cases/rinku-rukshar-poster.jpg"
       }
     ],
     "brief": {
@@ -245,7 +263,8 @@
     },
     "status": "ADMIN_REVIEW",
     "createdAt": "2026-09-17T21:33:44.074Z",
-    "updatedAt": "2026-09-17T21:33:44.076Z"
+    "updatedAt": "2026-09-17T21:33:44.076Z",
+    "views": 0
   },
   {
     "slug": "right-to-privacy-case",
@@ -1869,7 +1888,8 @@
         "en": "Active binding precedent under Article 141 of the Constitution of India.",
         "hi": "महत्वपूर्ण न्यायिक मिसाल।"
       }
-    }
+    },
+    "views": 0
   },
   {
     "slug": "ghost-case",
@@ -2360,7 +2380,8 @@
       "src": "/images/cases/ghost-case.jpg",
       "alt": "The Ghost Case poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "nanavati-case",
@@ -2851,7 +2872,8 @@
       "src": "/images/cases/nanavati-case.jpg",
       "alt": "The Nanavati Case poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "haircut-case",
@@ -3032,7 +3054,7 @@
       },
       {
         "id": "panel-4",
-        "type": "EVIDENCE",
+        "type": "TIMELINE",
         "eyebrow": {
           "en": "EPISODE 04 · BILLING & DEFICIENCY EVIDENCE",
           "hi": "एपिसोड 04 · बिलिंग और साक्ष्य"
@@ -3070,7 +3092,7 @@
       },
       {
         "id": "panel-5",
-        "type": "ARGUMENTS",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · SUPREME COURT APPEAL",
           "hi": "एपिसोड 05 · सुप्रीम कोर्ट में बहस"
@@ -3152,7 +3174,7 @@
       },
       {
         "id": "panel-6",
-        "type": "YOU_DECIDE",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · YOU ARE THE JUDGE",
           "hi": "एपिसोड 06 · आप हैं जज"
@@ -3273,6 +3295,24 @@
         },
         "citationFooter": "2023 INSC 124 · Supreme Court of India",
         "judgmentUrl": "https://indiankanoon.org/doc/171887260/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "The ₹2 Crore Haircut Case - Episode 8",
+          "hi": "₹2 करोड़ का हेयरकट मामला - एपिसोड 8"
+        },
+        "body": {
+          "en": "A botched haircut at a 5-star hotel salon led to a ₹2 Crore compensation award. The Supreme Court stepped in.",
+          "hi": "5-स्टार होटल के सैलून में खराब हेयरकट के लिए ₹2 करोड़ का हर्जाना दिया गया। सुप्रीम कोर्ट ने तय किया कानून का दायरा।"
+        },
+        "photoExhibitSrc": "/images/cases/haircut-case.jpg",
+        "image": "/images/cases/haircut-case.jpg"
       }
     ],
     "brief": {
@@ -3317,7 +3357,8 @@
       "src": "/images/cases/haircut-case.jpg",
       "alt": "The ₹2 Crore Haircut Case poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "shreya-singhal",
@@ -3498,7 +3539,7 @@
       },
       {
         "id": "panel-4",
-        "type": "EVIDENCE",
+        "type": "TIMELINE",
         "eyebrow": {
           "en": "EPISODE 04 · EDITORIAL & PRESS CAMPAIGN",
           "hi": "एपिसोड 04 · मीडिया और जनता का विरोध"
@@ -3536,7 +3577,7 @@
       },
       {
         "id": "panel-5",
-        "type": "ARGUMENTS",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · CONSTITUTIONAL ARGUMENTS",
           "hi": "एपिसोड 05 · संवैधानिक बहस"
@@ -3618,7 +3659,7 @@
       },
       {
         "id": "panel-6",
-        "type": "YOU_DECIDE",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · YOU ARE THE JUDGE",
           "hi": "एपिसोड 06 · आप हैं जज"
@@ -3739,6 +3780,24 @@
         },
         "citationFooter": "(2015) 5 SCC 1 · Supreme Court of India",
         "judgmentUrl": "https://indiankanoon.org/doc/110813550/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "Shreya Singhal v. Union of India - Episode 8",
+          "hi": "श्रेया सिंघल बनाम भारत संघ - एपिसोड 8"
+        },
+        "body": {
+          "en": "Two girls arrested for a Facebook post. A 21-year-old law student strikes down the dreaded Section 66A.",
+          "hi": "फेसबुक पोस्ट के लिए दो लड़कियों की गिरफ्तारी। 21 साल की लॉ स्टूडेंट ने आईटी एक्ट की धारा 66A को खत्म कराया।"
+        },
+        "photoExhibitSrc": "/images/cases/shreya-singhal.jpg",
+        "image": "/images/cases/shreya-singhal.jpg"
       }
     ],
     "brief": {
@@ -3785,7 +3844,8 @@
       "src": "/images/cases/shreya-singhal.jpg",
       "alt": "Shreya Singhal v. Union of India poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "m-c-mehta",
@@ -3969,7 +4029,7 @@
       },
       {
         "id": "panel-4",
-        "type": "EVIDENCE",
+        "type": "TIMELINE",
         "eyebrow": {
           "en": "EPISODE 04 · SCIENTIFIC COMMITTEE REPORT",
           "hi": "एपिसोड 04 · वैज्ञानिक जांच रिपोर्ट"
@@ -4007,7 +4067,7 @@
       },
       {
         "id": "panel-5",
-        "type": "ARGUMENTS",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · LEGAL INNOVATION",
           "hi": "एपिसोड 05 · नई कानूनी क्रांति"
@@ -4089,7 +4149,7 @@
       },
       {
         "id": "panel-6",
-        "type": "YOU_DECIDE",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · YOU ARE THE CHIEF JUSTICE",
           "hi": "एपिसोड 06 · आप हैं चीफ जस्टिस"
@@ -4210,6 +4270,24 @@
         },
         "citationFooter": "AIR 1987 SC 1086 · Supreme Court of India",
         "judgmentUrl": "https://indiankanoon.org/doc/1486949/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "M.C. Mehta v. Union of India - Episode 8",
+          "hi": "एम.सी. मेहता बनाम भारत संघ - एपिसोड 8"
+        },
+        "body": {
+          "en": "A toxic gas leak in Old Delhi. The Supreme Court creates the revolutionary Doctrine of absolute liability.",
+          "hi": "पुरानी दिल्ली में जहरीली गैस का रिसाव। सुप्रीम कोर्ट ने रचा पूर्ण दायित्व (absolute liability) का क्रांतिकारी सिद्धांत।"
+        },
+        "photoExhibitSrc": "/images/cases/m-c-mehta-poster-1789683569900.jpg",
+        "image": "/images/cases/m-c-mehta-poster-1789683569900.jpg"
       }
     ],
     "brief": {
@@ -4257,7 +4335,8 @@
       "src": "/images/cases/m-c-mehta-poster-1789683569900.jpg",
       "alt": "M.C. Mehta v. Union of India cover poster",
       "provenance": "illustration"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "kesavananda-bharati",
@@ -4765,7 +4844,8 @@
       "src": "/images/cases/kesavananda-bharati.jpg",
       "alt": "Kesavananda Bharati v. State of Kerala poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "shah-bano",
@@ -4940,7 +5020,7 @@
       },
       {
         "id": "panel-4",
-        "type": "ARGUMENTS",
+        "type": "TIMELINE",
         "eyebrow": {
           "en": "EPISODE 04 · COURTROOM CLASH",
           "hi": "एपिसोड 04 · अदालत में टकराव"
@@ -4986,7 +5066,7 @@
       },
       {
         "id": "panel-5",
-        "type": "YOU_DECIDE",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · YOU ARE THE JUDGE",
           "hi": "एपिसोड 05 · आप हैं जज"
@@ -5044,7 +5124,7 @@
       },
       {
         "id": "panel-6",
-        "type": "VERDICT",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · THE UNANIMOUS VERDICT",
           "hi": "एपिसोड 06 · ऐतिहासिक फैसला"
@@ -5086,7 +5166,7 @@
       },
       {
         "id": "panel-7",
-        "type": "RATIO",
+        "type": "VERDICT",
         "eyebrow": {
           "en": "EPISODE 07 · THE LEGACY",
           "hi": "एपिसोड 07 · कानूनी प्रभाव"
@@ -5123,6 +5203,24 @@
         },
         "citationFooter": "(1985) 2 SCC 556 · Supreme Court of India",
         "judgmentUrl": "https://indiankanoon.org/doc/823221/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "The Shah Bano Case - Episode 8",
+          "hi": "शाह बानो मामला - एपिसोड 8"
+        },
+        "body": {
+          "en": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
+          "hi": "43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।"
+        },
+        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
+        "image": "/images/cases/shah-bano.jpg"
       }
     ],
     "brief": {
@@ -5168,7 +5266,8 @@
       "src": "/images/cases/shah-bano.jpg",
       "alt": "The Shah Bano Case poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "vishaka-case",
@@ -5343,7 +5442,7 @@
       },
       {
         "id": "panel-4",
-        "type": "ARGUMENTS",
+        "type": "TIMELINE",
         "eyebrow": {
           "en": "EPISODE 04 · JURISPRUDENTIAL QUESTION",
           "hi": "एपिसोड 04 · बड़ा संवैधानिक सवाल"
@@ -5389,7 +5488,7 @@
       },
       {
         "id": "panel-5",
-        "type": "YOU_DECIDE",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · YOU ARE THE JUDGE",
           "hi": "एपिसोड 05 · आप हैं जज"
@@ -5447,7 +5546,7 @@
       },
       {
         "id": "panel-6",
-        "type": "VERDICT",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · THE LANDMARK GUIDELINES",
           "hi": "एपिसोड 06 · ऐतिहासिक दिशा-निर्देश"
@@ -5489,7 +5588,7 @@
       },
       {
         "id": "panel-7",
-        "type": "RATIO",
+        "type": "VERDICT",
         "eyebrow": {
           "en": "EPISODE 07 · LEGISLATIVE IMPACT",
           "hi": "एपिसोड 07 · संसद का नया कानून"
@@ -5526,6 +5625,24 @@
         },
         "citationFooter": "(1997) 6 SCC 241 · Supreme Court of India",
         "judgmentUrl": "https://indiankanoon.org/doc/1031794/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "Vishaka v. State of Rajasthan - Episode 8",
+          "hi": "विशाखा बनाम राजस्थान राज्य - एपिसोड 8"
+        },
+        "body": {
+          "en": "When a social worker was assaulted for stopping child marriage and the legislature had no law, the Supreme Court created binding law: The Vishaka Guidelines.",
+          "hi": "बाल विवाह रोकने पर सामाजिक कार्यकर्ता पर हमला हुआ और कोई कानून नहीं था, तो सुप्रीम कोर्ट ने कार्यस्थल सुरक्षा के लिए ऐतिहासिक विशाखा गाइडलाइंस बनाईं।"
+        },
+        "photoExhibitSrc": "/images/cases/vishaka-case.jpg",
+        "image": "/images/cases/vishaka-case.jpg"
       }
     ],
     "brief": {
@@ -5571,7 +5688,8 @@
       "src": "/images/cases/vishaka-case.jpg",
       "alt": "Vishaka v. State of Rajasthan poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "maneka-gandhi",
@@ -5746,7 +5864,7 @@
       },
       {
         "id": "panel-4",
-        "type": "ARGUMENTS",
+        "type": "TIMELINE",
         "eyebrow": {
           "en": "EPISODE 04 · CONSTITUTIONAL SHOWDOWN",
           "hi": "एपिसोड 04 · संवैधानिक महाबहस"
@@ -5792,7 +5910,7 @@
       },
       {
         "id": "panel-5",
-        "type": "YOU_DECIDE",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · YOU ARE THE JUDGE",
           "hi": "एपिसोड 05 · आप हैं जज"
@@ -5850,7 +5968,7 @@
       },
       {
         "id": "panel-6",
-        "type": "VERDICT",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · THE Golden Triangle",
           "hi": "एपिसोड 06 · स्वर्ण त्रिकोण का फैसला"
@@ -5892,7 +6010,7 @@
       },
       {
         "id": "panel-7",
-        "type": "RATIO",
+        "type": "VERDICT",
         "eyebrow": {
           "en": "EPISODE 07 · THE EXPANDED UNIVERSE",
           "hi": "एपिसोड 07 · अधिकारों का अनंत विस्तार"
@@ -5929,6 +6047,24 @@
         },
         "citationFooter": "(1978) 1 SCC 248 · Supreme Court of India",
         "judgmentUrl": "https://indiankanoon.org/doc/1766147/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "Maneka Gandhi v. Union of India - Episode 8",
+          "hi": "मेनका गांधी बनाम भारत संघ - एपिसोड 8"
+        },
+        "body": {
+          "en": "An impounded passport without reasons given. A constitutional showdown that transformed Article 21 into the Golden Triangle of justice, fairness, and liberty.",
+          "hi": "बिना कारण बताए जब्त किया गया पासपोर्ट। एक ऐसी कानूनी जंग जिसने अनुच्छेद 21 को मनमानी सरकारी शक्ति के खिलाफ सबसे बड़ी ढाल बना दिया।"
+        },
+        "photoExhibitSrc": "/images/cases/maneka-gandhi.jpg",
+        "image": "/images/cases/maneka-gandhi.jpg"
       }
     ],
     "brief": {
@@ -5976,7 +6112,8 @@
       "src": "/images/cases/maneka-gandhi.jpg",
       "alt": "Maneka Gandhi v. Union of India poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
   },
   {
     "slug": "navtej-johar",
@@ -6151,7 +6288,7 @@
       },
       {
         "id": "panel-4",
-        "type": "ARGUMENTS",
+        "type": "TIMELINE",
         "eyebrow": {
           "en": "EPISODE 04 · COURTROOM DEBATE",
           "hi": "एपिसोड 04 · संवैधानिक तर्क"
@@ -6197,7 +6334,7 @@
       },
       {
         "id": "panel-5",
-        "type": "YOU_DECIDE",
+        "type": "EVIDENCE",
         "eyebrow": {
           "en": "EPISODE 05 · YOU ARE THE JUDGE",
           "hi": "एपISODE 05 · आप हैं जज"
@@ -6255,7 +6392,7 @@
       },
       {
         "id": "panel-6",
-        "type": "VERDICT",
+        "type": "ARGUMENTS",
         "eyebrow": {
           "en": "EPISODE 06 · THE HISTORIC JUDGMENT",
           "hi": "एपिसोड 06 · ऐतिहासिक फैसला"
@@ -6297,7 +6434,7 @@
       },
       {
         "id": "panel-7",
-        "type": "RATIO",
+        "type": "VERDICT",
         "eyebrow": {
           "en": "EPISODE 07 · constitutional morality",
           "hi": "एपिसोड 07 · संवैधानिक नैतिकता का सिद्धांत"
@@ -6334,6 +6471,24 @@
         },
         "citationFooter": "(2018) 10 SCC 1 · Supreme Court of India",
         "judgmentUrl": "https://indiankanoon.org/doc/168677580/"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
+        },
+        "headline": {
+          "en": "Navtej Singh Johar v. Union of India - Episode 8",
+          "hi": "नवतेज सिंह जौहर बनाम भारत संघ - एपिसोड 8"
+        },
+        "body": {
+          "en": "A 158-year-old colonial relic criminalizing consensual love. A unanimous 5-judge Constitution Bench struck it down to uphold constitutional morality.",
+          "hi": "158 साल पुराना औपनिवेशिक कानून जो वयस्कों के आपसी प्यार को अपराध मानता था। सुप्रीम कोर्ट की 5 जजों की संविधान पीठ ने इसे सर्वसम्मति से खारिज कर दिया।"
+        },
+        "photoExhibitSrc": "/images/cases/navtej-johar.jpg",
+        "image": "/images/cases/navtej-johar.jpg"
       }
     ],
     "brief": {
@@ -6379,6 +6534,1612 @@
       "src": "/images/cases/navtej-johar.jpg",
       "alt": "Navtej Singh Johar v. Union of India poster",
       "provenance": "archival"
-    }
+    },
+    "views": 0
+  },
+  {
+    "slug": "hello-vs-me",
+    "title": {
+      "en": "Hello vs me",
+      "hi": "Hello vs me"
+    },
+    "hook": "Landmark trial on 4 before Supreme Court of India in 2025.",
+    "court": "Supreme Court of India",
+    "year": 2025,
+    "decidedOn": "2025-05-15",
+    "bench": [
+      "Hon'ble Bench of the Supreme Court of India"
+    ],
+    "citations": {
+      "primary": "1",
+      "parallel": [
+        "AIR 2025 Supreme Court of India 101",
+        "(2025) 1 SCC 100"
+      ],
+      "neutral": "2025 INSC 101"
+    },
+    "sourceUrl": "https://indiankanoon.org/",
+    "status": "PUBLISHED",
+    "statuteMap": [
+      {
+        "old": "4",
+        "new": null,
+        "note": "Governing statutory provision in 2025."
+      }
+    ],
+    "doctrines": [
+      "4",
+      "Constitutional Law"
+    ],
+    "categories": [
+      "constitutional",
+      "landmark-precedents"
+    ],
+    "readingTime": {
+      "story": 5,
+      "student": 7,
+      "advocate": 9
+    },
+    "featured": true,
+    "publishedAt": "2026-09-21T11:03:18.263Z",
+    "poster": {
+      "src": "",
+      "alt": "Hello vs me official cover poster",
+      "provenance": "archival"
+    },
+    "episodes": [
+      {
+        "n": 1,
+        "kicker": "EPISODE 01 · THE PREMISE",
+        "title": "Hello vs me: The Catalyst",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "Hello vs me came before the Supreme Court of India in 2025, addressing the critical scope of 4.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: Hello vs me came before the Supreme Court of India in 2025, addressing the critical scope of 4. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Statutory application under 4",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "endHook": "What triggered the historic legal clash?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 2,
+        "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+        "title": "The Parties & The Encounter",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "The conflict arose between the parties regarding statutory compliance, evidentiary threshold, and constitutional rights.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "2025-05-24",
+                    "url": "https://indiankanoon.org/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The conflict arose between the parties regarding statutory compliance, evidentiary threshold, and constitutional rights. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "2025-05-24",
+                    "url": "https://indiankanoon.org/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "2025-05-24",
+                    "url": "https://indiankanoon.org/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Statutory application under 4",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "THE STATESMAN · ARCHIVAL PRESS DISPATCH",
+          "headline": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA",
+          "body": "Court inquiries commence regarding 4. Public attention focuses on landmark hearing.",
+          "meta": "Registry Dispatch · 2025",
+          "sourceUrl": "https://indiankanoon.org/",
+          "image": {
+            "src": "",
+            "alt": "Archival record photograph for Hello vs me",
+            "provenance": "archival"
+          }
+        },
+        "endHook": "How did the investigative authorities construct the record?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 3,
+        "kicker": "EPISODE 03 · THE INVESTIGATION",
+        "title": "Evidence on the Record",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Statutory application under 4",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "endHook": "What did the primary case documents reveal?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 4,
+        "kicker": "EPISODE 04 · PRIMARY DOCKETS",
+        "title": "Police Diary & Statutory Memorandum",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "Official registers and case diary entries documented the factual sequence and statutory triggers under 4.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "2025-05-24",
+                    "url": "https://indiankanoon.org/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: Official registers and case diary entries documented the factual sequence and statutory triggers under 4. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "2025-05-24",
+                    "url": "https://indiankanoon.org/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "2025-05-24",
+                    "url": "https://indiankanoon.org/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Statutory application under 4",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "STATION HOUSE CASE DIARY · OFFICIAL RECORD",
+          "headline": "DAILY DIARY ENTRY · CASE CRIME RECORD",
+          "body": "Formal enquiry memo registered under 4. Material exhibits seized and forwarded for judicial scrutiny.",
+          "meta": "Registry Docket #2025/104",
+          "sourceUrl": "https://indiankanoon.org/"
+        },
+        "endHook": "How did the fierce courtroom battle unfold?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 5,
+        "kicker": "EPISODE 05 · COURTROOM SHOWDOWN",
+        "title": "Prosecution vs. Defence on 4",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Statutory application under 4",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "endHook": "How did the bench evaluate the competing legal arguments?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 6,
+        "kicker": "EPISODE 06 · JUDICIAL DELIBERATION",
+        "title": "The Bench Confronts the Doctrine",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                  "cite": "1"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                  "cite": "1"
+                }
+              }
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                  "cite": "1"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Statutory application under 4",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "quote",
+          "label": "FROM THE CERTIFIED JUDGMENT",
+          "headline": "JUDICIAL DELIBERATION ON 4",
+          "body": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience.",
+          "meta": "Supreme Court of India Judicial Record",
+          "para": 8
+        },
+        "endHook": "What was the decisive verdict?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 7,
+        "kicker": "EPISODE 07 · THE VERDICT",
+        "title": "The Court Ruling & Holding",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+                  "cite": "1"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: In a decisive judgment, the Supreme Court of India established authoritative principles governing 4. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+                  "cite": "1"
+                }
+              }
+            ],
+            "ratio": "The Supreme Court of India held that under 4, legal rights and liabilities must be construed strictly according to statutory purpose.",
+            "obiter": [
+              "Courts must balance individual liberties with systemic state objectives.",
+              "Procedural safeguards are integral to the administration of substantive justice."
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+                  "cite": "1"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Binding interpretation of 4",
+                "para": 8
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "image": {
+          "src": "",
+          "alt": "Supreme Court of India Bench delivering judgment in 2025",
+          "provenance": "archival"
+        },
+        "endHook": "What is the enduring legacy of this precedent?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 8,
+        "kicker": "EPISODE 08 · RATIO & IMPACT",
+        "title": "Jurisprudential Impact & Doctrine",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 12,
+                  "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                  "cite": "1"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence. Application of 4 analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 12,
+                  "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                  "cite": "1"
+                }
+              }
+            ],
+            "ratio": "Authoritative holding on 4.",
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 12,
+                  "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                  "cite": "1"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Leading precedent on 4",
+                "para": 12
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under 4."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "endHook": "Case dossier complete.",
+        "audio": {
+          "durationSec": 180
+        }
+      }
+    ],
+    "vote": {
+      "question": "How should the Supreme Court of India decide this issue under 4?",
+      "context": "Consider whether the statutory conditions of 4 were satisfied on the trial record.",
+      "options": [
+        {
+          "id": "opt-1",
+          "label": "Uphold the statutory claim under 4",
+          "argument": "The legal requirements were met based on the verified trial evidence."
+        },
+        {
+          "id": "opt-2",
+          "label": "Reject the claim for lack of substantive compliance",
+          "argument": "Strict statutory preconditions were not established beyond doubt."
+        }
+      ],
+      "courtChoseOptionId": "opt-1"
+    },
+    "glossary": [
+      {
+        "slug": "mens-rea",
+        "term": "Mens Rea",
+        "inThisCase": "The criminal intention examined under 4."
+      },
+      {
+        "slug": "ratio-decidendi",
+        "term": "Ratio Decidendi",
+        "inThisCase": "The binding legal principle established by the Supreme Court of India."
+      }
+    ],
+    "flashcards": [
+      {
+        "q": "What was the central issue in Hello vs me?",
+        "a": "Interpretation and application of 4 before the Supreme Court of India."
+      },
+      {
+        "q": "What is the core holding?",
+        "a": "The Supreme Court of India established binding rules for due process and statutory burden of proof."
+      }
+    ],
+    "affectsYou": {
+      "heading": "How this ruling protects your rights under 4",
+      "points": [
+        "Guarantees due process and statutory compliance under 4.",
+        "Provides actionable grounds to challenge arbitrary state or private actions."
+      ],
+      "actionLink": {
+        "label": "Verify Full Primary Docket",
+        "url": "https://indiankanoon.org/"
+      }
+    },
+    "timeline": [
+      {
+        "year": 2025,
+        "event": "Supreme Court of India delivers landmark ruling defining 4."
+      },
+      {
+        "year": 2035,
+        "event": "Precedent affirmed and cited by subsequent constitutional benches."
+      }
+    ],
+    "relatedSlugs": [
+      "ghost-case",
+      "nanavati-case"
+    ],
+    "subsequentHistory": [
+      {
+        "type": "followed",
+        "case": "Hello vs me Reference Bench",
+        "year": 2030,
+        "note": "Affirmed as good law."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Supreme Court of India Certified Judgment (2025)",
+        "url": "https://indiankanoon.org/"
+      },
+      {
+        "label": "Archival News & Docket Records (2025)",
+        "url": "https://indiankanoon.org/"
+      }
+    ],
+    "review": {
+      "reviewer": "Adv utk",
+      "enrolment": "D2738",
+      "reviewedOn": "2026-09-21"
+    },
+    "hi": {
+      "title": "Hello vs me",
+      "hook": "Landmark trial on 4 before भारत का सर्वोच्च न्यायालय in 2025.",
+      "court": "भारत का सर्वोच्च न्यायालय",
+      "year": 2025,
+      "decidedOn": "2025-05-15",
+      "bench": [
+        "Hon'ble Bench of the भारत का सर्वोच्च न्यायालय"
+      ],
+      "status": {
+        "code": "GOOD_LAW",
+        "explain": "भारतीय संविधान के अनुच्छेद 141 के तहत सक्रिय बाध्यकारी नज़ीर।",
+        "chain": [
+          {
+            "year": 2025,
+            "event": "भारत का सर्वोच्च न्यायालय ने महत्वपूर्ण निर्णय दिया।"
+          }
+        ]
+      },
+      "statuteMap": [
+        {
+          "old": "4",
+          "new": null,
+          "note": "प्रभावी वैधानिक प्रावधान।"
+        }
+      ],
+      "doctrines": [
+        "संवैधानिक कानून"
+      ],
+      "categories": [
+        "constitutional"
+      ],
+      "readingTime": {
+        "story": 5,
+        "student": 7,
+        "advocate": 9
+      },
+      "featured": true,
+      "publishedAt": "2026-09-21T11:03:18.264Z",
+      "poster": {
+        "src": "",
+        "alt": "Hello vs me आधिकारिक पोस्टर",
+        "provenance": "archival"
+      },
+      "vote": {
+        "question": "न्यायालय को 4 के तहत क्या निर्णय देना चाहिए?",
+        "context": "विचार करें कि क्या साक्ष्यों के आधार पर वैधानिक शर्तें पूरी हुईं।",
+        "options": [
+          {
+            "id": "opt-1",
+            "label": "वैधानिक दावे को स्वीकार करें",
+            "argument": "प्रस्तुत साक्ष्य के आधार पर वैधानिक शर्तें पूरी हैं।"
+          },
+          {
+            "id": "opt-2",
+            "label": "दावे को खारिज करें",
+            "argument": "अनिवार्य वैधानिक शर्तें साबित नहीं हुईं।"
+          }
+        ],
+        "courtChoseOptionId": "opt-1"
+      },
+      "glossary": [
+        {
+          "slug": "mens-rea",
+          "term": "आपराधिक मनःस्थिति",
+          "inThisCase": "4 के तहत इरादे की न्यायिक समीक्षा।"
+        }
+      ],
+      "flashcards": [
+        {
+          "q": "Hello vs me का मुख्य मुद्दा क्या था?",
+          "a": "4 की व्याख्या।"
+        }
+      ],
+      "affectsYou": {
+        "heading": "यह निर्णय आपके अधिकारों की रक्षा कैसे करता है",
+        "points": [
+          "विधि की उचित प्रक्रिया सुनिश्चित करता है।"
+        ]
+      },
+      "timeline": [
+        {
+          "year": 2025,
+          "event": "भारत का सर्वोच्च न्यायालय का ऐतिहासिक निर्णय।"
+        }
+      ],
+      "relatedSlugs": [
+        "ghost-case",
+        "nanavati-case"
+      ],
+      "subsequentHistory": [
+        {
+          "type": "followed",
+          "case": "Hello vs me संदर्भ",
+          "year": 2030,
+          "note": "स्थिर विधि के रूप में स्वीकृत।"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Supreme Court of India प्रमाणित निर्णय",
+          "url": "https://indiankanoon.org/"
+        }
+      ],
+      "episodes": [
+        {
+          "n": 1,
+          "kicker": "EPISODE 01 · THE PREMISE",
+          "title": "Hello vs me: The Catalyst",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "Hello vs me came before the भारत का सर्वोच्च न्यायालय in 2025, addressing the critical scope of 4.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: Hello vs me came before the Supreme Court of India in 2025, addressing the critical scope of 4. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Statutory application under 4",
+                  "para": 8
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "endHook": "What triggered the historic legal clash?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 2,
+          "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+          "title": "The Parties & The Encounter",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The conflict arose between the parties regarding statutory compliance, evidentiary threshold, and संविधानal rights.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "2025-05-24",
+                      "url": "https://indiankanoon.org/"
+                    }
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The conflict arose between the parties regarding statutory compliance, evidentiary threshold, and constitutional rights. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "2025-05-24",
+                      "url": "https://indiankanoon.org/"
+                    }
+                  }
+                }
+              ],
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "2025-05-24",
+                      "url": "https://indiankanoon.org/"
+                    }
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Statutory application under 4",
+                  "para": 8
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "exhibit": {
+            "kind": "record",
+            "label": "THE STATESMAN · ARCHIVAL PRESS DISPATCH",
+            "headline": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA",
+            "body": "Court inquiries commence regarding 4. Public attention focuses on landmark hearing.",
+            "meta": "Registry Dispatch · 2025",
+            "sourceUrl": "https://indiankanoon.org/",
+            "image": {
+              "src": "",
+              "alt": "Archival record photograph for Hello vs me",
+              "provenance": "archival"
+            }
+          },
+          "endHook": "How did the investigative authorities construct the record?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 3,
+          "kicker": "EPISODE 03 · THE INVESTIGATION",
+          "title": "Evidence on the Record",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Statutory application under 4",
+                  "para": 8
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "endHook": "What did the primary case documents reveal?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 4,
+          "kicker": "EPISODE 04 · PRIMARY DOCKETS",
+          "title": "Police Diary & Statutory Memorandum",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "Official registers and case diary entries documented the factual sequence and statutory triggers under 4.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "2025-05-24",
+                      "url": "https://indiankanoon.org/"
+                    }
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: Official registers and case diary entries documented the factual sequence and statutory triggers under 4. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "2025-05-24",
+                      "url": "https://indiankanoon.org/"
+                    }
+                  }
+                }
+              ],
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "2025-05-24",
+                      "url": "https://indiankanoon.org/"
+                    }
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Statutory application under 4",
+                  "para": 8
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "exhibit": {
+            "kind": "record",
+            "label": "STATION HOUSE CASE DIARY · OFFICIAL RECORD",
+            "headline": "DAILY DIARY ENTRY · CASE CRIME RECORD",
+            "body": "Formal enquiry memo registered under 4. Material exhibits seized and forwarded for judicial scrutiny.",
+            "meta": "Registry Docket #2025/104",
+            "sourceUrl": "https://indiankanoon.org/"
+          },
+          "endHook": "How did the fierce courtroom battle unfold?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 5,
+          "kicker": "EPISODE 05 · COURTROOM SHOWDOWN",
+          "title": "अभियोजन पक्ष vs. Defence on 4",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The याचिकाकर्ता argued against arbitrary enforcement, while the प्रतिवादी maintained statutory legitimacy and public interest.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Statutory application under 4",
+                  "para": 8
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "endHook": "How did the bench evaluate the competing legal arguments?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 6,
+          "kicker": "EPISODE 06 · JUDICIAL DELIBERATION",
+          "title": "The Bench Confronts the Doctrine",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The भारत का सर्वोच्च न्यायालय deliberated on संविधानal safeguards, statutory interpretation, and judicial precedents.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                    "cite": "1"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                    "cite": "1"
+                  }
+                }
+              ],
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                    "cite": "1"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Statutory application under 4",
+                  "para": 8
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "exhibit": {
+            "kind": "quote",
+            "label": "FROM THE CERTIFIED JUDGMENT",
+            "headline": "JUDICIAL DELIBERATION ON 4",
+            "body": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience.",
+            "meta": "Supreme Court of India Judicial Record",
+            "para": 8
+          },
+          "endHook": "What was the decisive verdict?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 7,
+          "kicker": "EPISODE 07 · THE VERDICT",
+          "title": "The Court Ruling & Holding",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "In a decisive निर्णय, the भारत का सर्वोच्च न्यायालय established authoritative principles governing 4.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+                    "cite": "1"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: In a decisive judgment, the Supreme Court of India established authoritative principles governing 4. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+                    "cite": "1"
+                  }
+                }
+              ],
+              "ratio": "The Supreme Court of India held that under 4, legal rights and liabilities must be construed strictly according to statutory purpose.",
+              "obiter": [
+                "Courts must balance individual liberties with systemic state objectives.",
+                "Procedural safeguards are integral to the administration of substantive justice."
+              ],
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+                    "cite": "1"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Binding interpretation of 4",
+                  "para": 8
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "image": {
+            "src": "",
+            "alt": "Supreme Court of India Bench delivering judgment in 2025",
+            "provenance": "archival"
+          },
+          "endHook": "What is the enduring legacy of this precedent?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 8,
+          "kicker": "EPISODE 08 · RATIO & IMPACT",
+          "title": "Jurisprudential Impact & Doctrine",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The ruling established binding precedent under अनुच्छेद 141 of the संविधान of India, shaping subsequent jurisprudence.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 12,
+                    "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                    "cite": "1"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence. Application of 4 analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 12,
+                    "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                    "cite": "1"
+                  }
+                }
+              ],
+              "ratio": "Authoritative holding on 4.",
+              "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under 4. Focus on core ratio and burden of proof."
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under 4.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 12,
+                    "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                    "cite": "1"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "proposition": "Leading precedent on 4",
+                  "para": 12
+                }
+              ],
+              "howToUse": [
+                "Cite this precedent when establishing threshold elements under 4."
+              ],
+              "howToDistinguish": [
+                "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+              ]
+            }
+          },
+          "endHook": "Case dossier complete.",
+          "audio": {
+            "durationSec": 180
+          }
+        }
+      ]
+    },
+    "tag": {
+      "en": "4",
+      "hi": "4"
+    },
+    "categoryTag": "4",
+    "genre": "constitutional",
+    "theme": "constitutional-gold",
+    "readTime": {
+      "en": "5 min read",
+      "hi": "5 मिनट"
+    },
+    "blurb": {
+      "en": "Landmark trial on 4 before Supreme Court of India in 2025.",
+      "hi": "Landmark trial on 4 before भारत का सर्वोच्च न्यायालय in 2025."
+    },
+    "citation": "1",
+    "judgmentUrl": "https://indiankanoon.org/",
+    "watermark": "§",
+    "bannerImage": "/images/cases/ghost-case.jpg",
+    "matchRate": 98,
+    "maturityRating": "U/A 13+",
+    "rank": 10,
+    "featuredHeroHook": {
+      "en": "Landmark trial on 4 before Supreme Court of India in 2025.",
+      "hi": "Landmark trial on 4 before भारत का सर्वोच्च न्यायालय in 2025."
+    },
+    "featuredHeroDesc": {
+      "en": "Landmark trial on 4 before Supreme Court of India in 2025.",
+      "hi": "Landmark trial on 4 before भारत का सर्वोच्च न्यायालय in 2025."
+    },
+    "panels": [
+      {
+        "id": "panel-1",
+        "type": "HOOK",
+        "eyebrow": {
+          "en": "EPISODE 01 · THE PREMISE",
+          "hi": "EPISODE 01 · THE PREMISE"
+        },
+        "headline": {
+          "en": "Hello vs me: The Catalyst",
+          "hi": "Hello vs me: The Catalyst"
+        },
+        "body": {
+          "en": "Hello vs me came before the Supreme Court of India in 2025, addressing the critical scope of 4.",
+          "hi": "Hello vs me came before the Supreme Court of India in 2025, addressing the critical scope of 4."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg"
+      },
+      {
+        "id": "panel-2",
+        "type": "PEOPLE",
+        "eyebrow": {
+          "en": "EPISODE 02 · DRAMATIS PERSONAE",
+          "hi": "EPISODE 02 · DRAMATIS PERSONAE"
+        },
+        "headline": {
+          "en": "The Parties & The Encounter",
+          "hi": "The Parties & The Encounter"
+        },
+        "body": {
+          "en": "The conflict arose between the parties regarding statutory compliance, evidentiary threshold, and constitutional rights.",
+          "hi": "The conflict arose between the parties regarding statutory compliance, evidentiary threshold, and constitutional rights."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg",
+        "evidence": {
+          "masthead": "THE STATESMAN · ARCHIVAL PRESS DISPATCH",
+          "date": "Registry Dispatch · 2025",
+          "headline": {
+            "en": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA",
+            "hi": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA"
+          },
+          "snippet": {
+            "en": "Court inquiries commence regarding 4. Public attention focuses on landmark hearing.",
+            "hi": "Court inquiries commence regarding 4. Public attention focuses on landmark hearing."
+          },
+          "imageSrc": "/images/cases/ghost-case.jpg"
+        }
+      },
+      {
+        "id": "panel-3",
+        "type": "INCIDENT",
+        "eyebrow": {
+          "en": "EPISODE 03 · THE INVESTIGATION",
+          "hi": "EPISODE 03 · THE INVESTIGATION"
+        },
+        "headline": {
+          "en": "Evidence on the Record",
+          "hi": "Evidence on the Record"
+        },
+        "body": {
+          "en": "The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports.",
+          "hi": "The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg"
+      },
+      {
+        "id": "panel-4",
+        "type": "TIMELINE",
+        "eyebrow": {
+          "en": "EPISODE 04 · PRIMARY DOCKETS",
+          "hi": "EPISODE 04 · PRIMARY DOCKETS"
+        },
+        "headline": {
+          "en": "Police Diary & Statutory Memorandum",
+          "hi": "Police Diary & Statutory Memorandum"
+        },
+        "body": {
+          "en": "Official registers and case diary entries documented the factual sequence and statutory triggers under 4.",
+          "hi": "Official registers and case diary entries documented the factual sequence and statutory triggers under 4."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg",
+        "evidence": {
+          "masthead": "STATION HOUSE CASE DIARY · OFFICIAL RECORD",
+          "date": "Registry Docket #2025/104",
+          "headline": {
+            "en": "DAILY DIARY ENTRY · CASE CRIME RECORD",
+            "hi": "DAILY DIARY ENTRY · CASE CRIME RECORD"
+          },
+          "snippet": {
+            "en": "Formal enquiry memo registered under 4. Material exhibits seized and forwarded for judicial scrutiny.",
+            "hi": "Formal enquiry memo registered under 4. Material exhibits seized and forwarded for judicial scrutiny."
+          },
+          "imageSrc": "/images/cases/ghost-case.jpg"
+        }
+      },
+      {
+        "id": "panel-5",
+        "type": "EVIDENCE",
+        "eyebrow": {
+          "en": "EPISODE 05 · COURTROOM SHOWDOWN",
+          "hi": "EPISODE 05 · COURTROOM SHOWDOWN"
+        },
+        "headline": {
+          "en": "Prosecution vs. Defence on 4",
+          "hi": "Prosecution vs. Defence on 4"
+        },
+        "body": {
+          "en": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest.",
+          "hi": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg"
+      },
+      {
+        "id": "panel-6",
+        "type": "ARGUMENTS",
+        "eyebrow": {
+          "en": "EPISODE 06 · JUDICIAL DELIBERATION",
+          "hi": "EPISODE 06 · JUDICIAL DELIBERATION"
+        },
+        "headline": {
+          "en": "The Bench Confronts the Doctrine",
+          "hi": "The Bench Confronts the Doctrine"
+        },
+        "body": {
+          "en": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+          "hi": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg",
+        "evidence": {
+          "masthead": "FROM THE CERTIFIED JUDGMENT",
+          "date": "Supreme Court of India Judicial Record",
+          "headline": {
+            "en": "JUDICIAL DELIBERATION ON 4",
+            "hi": "JUDICIAL DELIBERATION ON 4"
+          },
+          "snippet": {
+            "en": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience.",
+            "hi": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience."
+          },
+          "imageSrc": "/images/cases/ghost-case.jpg"
+        }
+      },
+      {
+        "id": "panel-7",
+        "type": "VERDICT",
+        "eyebrow": {
+          "en": "EPISODE 07 · THE VERDICT",
+          "hi": "EPISODE 07 · THE VERDICT"
+        },
+        "headline": {
+          "en": "The Court Ruling & Holding",
+          "hi": "The Court Ruling & Holding"
+        },
+        "body": {
+          "en": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4.",
+          "hi": "In a decisive judgment, the Supreme Court of India established authoritative principles governing 4."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO & IMPACT",
+          "hi": "EPISODE 08 · RATIO & IMPACT"
+        },
+        "headline": {
+          "en": "Jurisprudential Impact & Doctrine",
+          "hi": "Jurisprudential Impact & Doctrine"
+        },
+        "body": {
+          "en": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+          "hi": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence."
+        },
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
+        "image": "/images/cases/ghost-case.jpg"
+      }
+    ],
+    "brief": {
+      "courtAndYear": {
+        "en": "Supreme Court of India (2025)",
+        "hi": "Supreme Court of India (2025)"
+      },
+      "facts": {
+        "en": "Landmark trial on 4 before Supreme Court of India in 2025.",
+        "hi": "Landmark trial on 4 before भारत का सर्वोच्च न्यायालय in 2025."
+      },
+      "issues": {
+        "en": [
+          "How should the Supreme Court of India decide this issue under 4?"
+        ],
+        "hi": [
+          "How should the Supreme Court of India decide this issue under 4?"
+        ]
+      },
+      "chargesApplied": [
+        "4",
+        "Constitutional Law"
+      ],
+      "held": {
+        "en": "Active binding precedent under Article 141 of the Constitution of India.",
+        "hi": "Active binding precedent under Article 141 of the Constitution of India."
+      },
+      "reasoning": {
+        "en": "The court established foundational doctrine under 4.",
+        "hi": "न्यायालय ने 4 के तहत सिद्धांत प्रतिपादित किया।"
+      },
+      "whyItMatters": {
+        "en": "Active binding precedent under Article 141 of the Constitution of India.",
+        "hi": "महत्वपूर्ण न्यायिक मिसाल।"
+      }
+    },
+    "createdAt": "2026-09-21T11:03:18.263Z",
+    "updatedAt": "2026-09-21T11:03:18.291Z",
+    "views": 0
   }
 ]

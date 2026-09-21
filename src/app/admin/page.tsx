@@ -143,6 +143,7 @@ export default function AdminDashboardPage() {
   const publishedCount = cases.filter((c) => c.status === 'PUBLISHED').length;
   const reviewCount = cases.filter((c) => c.status === 'ADMIN_REVIEW' || c.status === 'CONTENT_GENERATED').length;
   const top10Count = cases.filter((c) => c.rank && c.rank <= 10 && c.status === 'PUBLISHED').length;
+  const totalViews = cases.reduce((acc, c) => acc + (typeof c.views === 'number' ? c.views : 0), 0);
 
   return (
     <div className="space-y-8 animate-fadeIn">
@@ -173,10 +174,17 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="bg-[#121520] border border-white/10 p-5 rounded-xs">
           <span className="text-[10px] font-mono uppercase text-[#a9a49a] block mb-1">Total Cases in Store</span>
           <span className="font-anton text-3xl text-white">{cases.length}</span>
+        </div>
+
+        <div className="bg-[#121520] border border-[#D4AF37]/30 p-5 rounded-xs">
+          <span className="text-[10px] font-mono uppercase text-[#D4AF37] block mb-1">Total Case Views</span>
+          <span className="font-anton text-3xl text-[#D4AF37]">
+            {totalViews >= 1000 ? `${(totalViews / 1000).toFixed(1)}k` : totalViews}
+          </span>
         </div>
 
         <div className="bg-[#121520] border border-emerald-500/30 p-5 rounded-xs">
@@ -184,9 +192,9 @@ export default function AdminDashboardPage() {
           <span className="font-anton text-3xl text-emerald-400">{publishedCount}</span>
         </div>
 
-        <div className="bg-[#121520] border border-[#D4AF37]/30 p-5 rounded-xs">
-          <span className="text-[10px] font-mono uppercase text-[#D4AF37] block mb-1">Pending Admin Review</span>
-          <span className="font-anton text-3xl text-[#D4AF37]">{reviewCount}</span>
+        <div className="bg-[#121520] border border-amber-500/30 p-5 rounded-xs">
+          <span className="text-[10px] font-mono uppercase text-amber-400 block mb-1">Pending Admin Review</span>
+          <span className="font-anton text-3xl text-amber-400">{reviewCount}</span>
         </div>
 
         <div className="bg-[#121520] border border-[#E50914]/40 p-5 rounded-xs">
@@ -261,6 +269,7 @@ export default function AdminDashboardPage() {
                   <th className="py-3.5 px-4">Case Title & Citation</th>
                   <th className="py-3.5 px-4">Court & Year</th>
                   <th className="py-3.5 px-4">Genre / Tag</th>
+                  <th className="py-3.5 px-4">Views</th>
                   <th className="py-3.5 px-4">Status</th>
                   <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
@@ -269,6 +278,7 @@ export default function AdminDashboardPage() {
                 {filteredCases.map((caseItem) => {
                   const isPub = caseItem.status === 'PUBLISHED';
                   const isTop10 = caseItem.rank && caseItem.rank <= 10;
+                  const viewsCount = typeof caseItem.views === 'number' ? caseItem.views : 0;
 
                   return (
                     <tr key={caseItem.slug} className="hover:bg-white/[0.02] transition-colors">
@@ -323,6 +333,19 @@ export default function AdminDashboardPage() {
                         </span>
                         <span className="block text-[10px] text-[#8c887e] uppercase mt-1">
                           {caseItem.genre}
+                        </span>
+                      </td>
+
+                      {/* Views Column */}
+                      <td className="py-4 px-4 font-mono">
+                        <div className="flex items-center gap-1.5 text-white">
+                          <span className="text-[#D4AF37] text-xs">👁</span>
+                          <span className="font-bold text-xs">
+                            {viewsCount >= 1000 ? `${(viewsCount / 1000).toFixed(1)}k` : viewsCount}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-[#8c887e] block">
+                          {viewsCount.toLocaleString()} reads
                         </span>
                       </td>
 

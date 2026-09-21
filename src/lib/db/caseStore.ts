@@ -6,8 +6,11 @@ import { getSupabaseAdmin, getSupabase, isSupabaseConfigured } from '@/lib/supab
 function getNodeModules() {
   if (typeof window !== 'undefined') return null;
   try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const fs = require('fs');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const path = require('path');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const os = require('os');
     return { fs, path, os };
   } catch {
@@ -126,12 +129,15 @@ export function normalizeCaseData(raw: any): CaseData {
   const citation = source.citations?.primary || source.citation || `${year} INSC 1`;
   const categoryTag = source.categoryTag || source.category_tag || source.doctrines?.[0] || source.tag?.en || 'Constitutional';
 
+  // Canonical 8 episode types in exact order
+  const CANONICAL_EP_TYPES = ['HOOK', 'PEOPLE', 'INCIDENT', 'TIMELINE', 'EVIDENCE', 'ARGUMENTS', 'VERDICT', 'RATIO'] as const;
+
   // If episodes exist (CaseFile structure), map episodes to panels
   let panels = source.panels;
-  if (!panels || !Array.isArray(panels) || panels.length === 0) {
-    if (source.episodes && Array.isArray(source.episodes)) {
-      panels = source.episodes.map((ep: any, idx: number) => {
-        const epType = idx === 0 ? 'HOOK' : idx === 1 ? 'PEOPLE' : idx === 2 ? 'INCIDENT' : idx === 3 ? 'TIMELINE' : idx === 4 ? 'EVIDENCE' : idx === 5 ? 'ARGUMENTS' : idx === 6 ? 'VERDICT' : 'RATIO';
+  if (!panels || !Array.isArray(panels) || panels.length < 8) {
+    if (source.episodes && Array.isArray(source.episodes) && source.episodes.length >= 8) {
+      panels = source.episodes.slice(0, 8).map((ep: any, idx: number) => {
+        const epType = CANONICAL_EP_TYPES[idx];
         const bodyText = ep.layers?.story?.blocks?.[0]?.text || (Array.isArray(ep.layers?.story?.blocks) ? ep.layers.story.blocks.map((b: any) => b.text).join('\n\n') : '') || ep.title || '';
         return {
           id: `panel-${idx + 1}`,
@@ -150,8 +156,38 @@ export function normalizeCaseData(raw: any): CaseData {
           } : undefined,
         };
       });
+    } else if (Array.isArray(panels) && panels.length > 0) {
+      // Pad or normalize panels to 8
+      const padded = [...panels];
+      while (padded.length < 8) {
+        const nextIdx = padded.length;
+        const epType = CANONICAL_EP_TYPES[nextIdx];
+        padded.push({
+          id: `panel-${nextIdx + 1}`,
+          type: epType,
+          eyebrow: { en: `EPISODE 0${nextIdx + 1} · ${epType}`, hi: `एपिसोड 0${nextIdx + 1} · ${epType}` },
+          headline: { en: `${titleEn} - Episode ${nextIdx + 1}`, hi: `${titleHi} - एपिसोड ${nextIdx + 1}` },
+          body: { en: hookEn, hi: hookHi },
+          photoExhibitSrc: bannerImage,
+          image: bannerImage,
+        });
+      }
+      panels = padded.slice(0, 8).map((p: any, idx: number) => ({
+        ...p,
+        id: `panel-${idx + 1}`,
+        type: CANONICAL_EP_TYPES[idx],
+        eyebrow: p.eyebrow?.en ? p.eyebrow : { en: `EPISODE 0${idx + 1}`, hi: `एपिसोड 0${idx + 1}` },
+      }));
     } else {
-      panels = [];
+      panels = CANONICAL_EP_TYPES.map((epType, idx) => ({
+        id: `panel-${idx + 1}`,
+        type: epType,
+        eyebrow: { en: `EPISODE 0${idx + 1} · ${epType}`, hi: `एपिसोड 0${idx + 1} · ${epType}` },
+        headline: { en: `${titleEn} · Episode ${idx + 1}`, hi: `${titleHi} · एपिसोड ${idx + 1}` },
+        body: { en: hookEn, hi: hookHi },
+        photoExhibitSrc: bannerImage,
+        image: bannerImage,
+      }));
     }
   }
 
@@ -166,6 +202,8 @@ export function normalizeCaseData(raw: any): CaseData {
     whyItMatters: { en: source.status?.explain || 'Essential legal precedent.', hi: 'महत्वपूर्ण न्यायिक मिसाल।' },
   };
 
+  const views = typeof source.views === 'number' ? source.views : 0;
+
   return {
     ...source,
     slug: source.slug,
@@ -176,6 +214,7 @@ export function normalizeCaseData(raw: any): CaseData {
     theme: source.theme || 'constitutional-gold',
     court: court,
     year: year,
+    views: views,
     readTime: source.readTime?.en ? source.readTime : { en: `${source.readingTime?.story || 5} min read`, hi: `${source.readingTime?.story || 5} मिनट` },
     blurb: { en: hookEn, hi: hookHi },
     citation: citation,
@@ -232,6 +271,26 @@ export const CaseStore = {
   getPublished(): CaseData[] {
     const all = this.getAll();
     return all.filter((c) => c.status === 'PUBLISHED' || !c.status);
+  },
+
+  recordView(slug: string): number {
+    const all = ensureInitialized();
+    const idx = all.findIndex((c) => matchSlug(c.slug, slug));
+    if (idx !== -1) {
+      const currentViews = typeof all[idx].views === 'number' ? all[idx].views : 0;
+      all[idx].views = currentViews + 1;
+      persistCases(all);
+
+      if (isSupabaseConfigured()) {
+        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase }) => {
+          try {
+            await saveDynamicCasesToSupabase(all);
+          } catch {}
+        });
+      }
+      return all[idx].views;
+    }
+    return 1;
   },
 
   getBySlug(slug: string): CaseData | null {

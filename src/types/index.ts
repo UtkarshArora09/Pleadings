@@ -240,6 +240,7 @@ export interface CaseData {
     hi: string;
   };
   hasJudgeDecision?: boolean;
+  views?: number;
   panels: StoryPanel[];
   brief: CaseBrief;
   // CMS & Ingestion fields

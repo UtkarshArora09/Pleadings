@@ -557,8 +557,8 @@
     },
     {
       "n": 8,
-      "kicker": "EPISODE 07 · SUPREME COURT VERDICT & RATIO",
-      "title": "The Supreme Court Verdict: ₹2 Cr Set Aside, Reduced to ₹25 Lakhs.",
+      "kicker": "EPISODE 08 · RATIO & IMPACT",
+      "title": "Jurisprudential Ratio & Lasting Impact",
       "layers": {
         "story": {
           "blocks": [
@@ -1415,5 +1415,259 @@
         "url": "https://indiankanoon.org/doc/171887260/"
       }
     ]
-  }
+  },
+  "views": 0,
+  "hasJudgeDecision": true,
+  "panels": [
+    {
+      "id": "panel-1",
+      "type": "HOOK",
+      "eyebrow": {
+        "en": "EPISODE 01 · THE PREMISE",
+        "hi": "एपिसोड 01 · भूमिका"
+      },
+      "headline": {
+        "en": "The ₹2 Crore Haircut Case",
+        "hi": "The ₹2 Crore Haircut Case"
+      },
+      "body": {
+        "en": "The landmark origin of The ₹2 Crore Haircut Case.",
+        "hi": "The ₹2 Crore Haircut Case का ऐतिहासिक पृष्ठभूमि।"
+      },
+      "photoExhibitSrc": "/images/cases/haircut-case.jpg",
+      "photoExhibitCaption": {
+        "en": "Archival record photograph for The ₹2 Crore Haircut Case.",
+        "hi": "The ₹2 Crore Haircut Case का पुरालेखीय चित्र।"
+      }
+    },
+    {
+      "id": "panel-2",
+      "type": "PEOPLE",
+      "eyebrow": {
+        "en": "EPISODE 02 · DRAMATIS PERSONAE",
+        "hi": "एपिसोड 02 · मुख्य पात्र"
+      },
+      "headline": {
+        "en": "The Parties in Conflict.",
+        "hi": "विवाद के मुख्य पक्षकार।"
+      },
+      "body": {
+        "en": "Meet the individuals and jurists behind this historic conflict.",
+        "hi": "जानिए इस ऐतिहासिक संघर्ष के मुख्य किरदारों और न्यायविदों को।"
+      },
+      "photoExhibitSrc": "/images/cases/haircut-case.jpg",
+      "photoExhibitCaption": {
+        "en": "Historical exhibit and records for The ₹2 Crore Haircut Case.",
+        "hi": "The ₹2 Crore Haircut Case के ऐतिहासिक साक्ष्य।"
+      }
+    },
+    {
+      "id": "panel-3",
+      "type": "INCIDENT",
+      "eyebrow": {
+        "en": "EPISODE 03 · THE INCIDENT",
+        "hi": "एपिसोड 03 · विवाद की घटना"
+      },
+      "headline": {
+        "en": "The Catalyst in The ₹2 Crore Haircut Case.",
+        "hi": "The ₹2 Crore Haircut Case की आरंभिक घटना।"
+      },
+      "body": {
+        "en": "The core dispute that triggered formal legal proceedings.",
+        "hi": "वह मुख्य विवाद जिसने कानूनी प्रक्रिया को आरंभ किया।"
+      }
+    },
+    {
+      "id": "panel-4",
+      "type": "TIMELINE",
+      "eyebrow": {
+        "en": "EPISODE 04 · CHRONOLOGY & DOCKETS",
+        "hi": "एपिसोड 04 · घटनाक्रम व अभिलेख"
+      },
+      "headline": {
+        "en": "Chronological Journey of The ₹2 Crore Haircut Case.",
+        "hi": "The ₹2 Crore Haircut Case का सिलसिलेवार घटनाक्रम।"
+      },
+      "body": {
+        "en": "• 2021: NCDRC awards ₹2 Crore compensation for deficient salon haircut.\n• 2023: Supreme Court remands matter, holding compensation must be founded on material evidence of actual loss.",
+        "hi": "• 2021: NCDRC awards ₹2 Crore compensation for deficient salon haircut.\n• 2023: Supreme Court remands matter, holding compensation must be founded on material evidence of actual loss."
+      },
+      "evidence": {
+        "archiveType": "police_record",
+        "masthead": "SUPREME COURT OF INDIA DOCKET REGISTRY",
+        "date": "PRIMARY DOCKET · 2023",
+        "headline": {
+          "en": "OFFICIAL PROCEEDING RECORD IN THE ₹2 CRORE HAIRCUT CASE",
+          "hi": "THE ₹2 CRORE HAIRCUT CASE का आधिकारिक न्यायिक रिकॉर्ड"
+        },
+        "snippet": {
+          "en": "Official court case diary and procedural filings recorded in Supreme Court of India under Constitutional.",
+          "hi": "Supreme Court of India में Constitutional के तहत दर्ज आधिकारिक वाद सूची।"
+        },
+        "highlightedPhrase": {
+          "en": "Recorded in Supreme Court of India under Constitutional",
+          "hi": "Supreme Court of India में Constitutional के तहत दर्ज"
+        },
+        "exhibitNumber": "DOCKET #2023/01",
+        "caption": {
+          "en": "Certified procedural dockets and registry chronology.",
+          "hi": "प्रमाणित प्रक्रियात्मक रिकॉर्ड और वाद सूची।"
+        }
+      }
+    },
+    {
+      "id": "panel-5",
+      "type": "EVIDENCE",
+      "eyebrow": {
+        "en": "EPISODE 05 · THE EVIDENCE & RECORD",
+        "hi": "एपिसोड 05 · मुख्य साक्ष्य व साक्ष्य"
+      },
+      "headline": {
+        "en": "Material Exhibits on Judicial Record.",
+        "hi": "न्यायिक रिकॉर्ड पर मौजूद साक्ष्य।"
+      },
+      "body": {
+        "en": "The primary documents, statutory provisions, and witness testimonies placed before Supreme Court of India.",
+        "hi": "Supreme Court of India के समक्ष प्रस्तुत प्राथमिक दस्तावेज, वैधानिक प्रावधान और गवाहों के बयान।"
+      },
+      "evidence": {
+        "archiveType": "court_decree",
+        "masthead": "OFFICIAL JUDICIAL EXHIBIT · SUPREME COURT OF INDIA",
+        "date": "EXHIBIT RECORD · 2023",
+        "headline": {
+          "en": "MATERIAL EXHIBITS IN THE ₹2 CRORE HAIRCUT CASE",
+          "hi": "THE ₹2 CRORE HAIRCUT CASE के मुख्य साक्ष्य"
+        },
+        "snippet": {
+          "en": "Certified documentary exhibits examining the scope and applicability of Constitutional.",
+          "hi": "Constitutional के दायरे और प्रयोज्यता की जांच करने वाले प्रमाणित दस्तावेज।"
+        },
+        "highlightedPhrase": {
+          "en": "scope and applicability of Constitutional",
+          "hi": "Constitutional का दायरा"
+        },
+        "exhibitNumber": "EXHIBIT E-2023",
+        "caption": {
+          "en": "Archival evidentiary documentation for The ₹2 Crore Haircut Case.",
+          "hi": "The ₹2 Crore Haircut Case का पुरालेखीय साक्ष्य।"
+        }
+      }
+    },
+    {
+      "id": "panel-6",
+      "type": "ARGUMENTS",
+      "eyebrow": {
+        "en": "EPISODE 06 · COURTROOM SHOWDOWN",
+        "hi": "एपिसोड 06 · अदालत में बहस"
+      },
+      "headline": {
+        "en": "Prosecution vs. Defence on Constitutional",
+        "hi": "Constitutional पर पक्ष और विपक्ष की दलीलें"
+      },
+      "body": {
+        "en": "The competing legal arguments debated before Supreme Court of India.",
+        "hi": "Supreme Court of India के समक्ष प्रस्तुत किए गए प्रतिस्पर्धी कानूनी तर्क।"
+      },
+      "judgeDecision": {
+        "question": {
+          "en": "Should the ₹2 Crore compensation be upheld or reduced to a reasonable evidenced amount?",
+          "hi": "Should the ₹2 Crore compensation be upheld or reduced to a reasonable evidenced amount?"
+        },
+        "subtext": {
+          "en": "Balance consumer accountability against the rule that compensation must reflect proven economic loss.",
+          "hi": "Balance consumer accountability against the rule that compensation must reflect proven economic loss."
+        },
+        "options": [
+          {
+            "id": "opt-a",
+            "title": {
+              "en": "Option A · In favour of Petitioner / Defence",
+              "hi": "Option A · In favour of Petitioner / Defence"
+            },
+            "reason": {
+              "en": "Uphold the bona fide protection and constitutional liberty.",
+              "hi": "Uphold the bona fide protection and constitutional liberty."
+            },
+            "simulatedVotesPercent": 55,
+            "isActualVerdict": true
+          },
+          {
+            "id": "opt-b",
+            "title": {
+              "en": "Option B · In favour of State / Strict Liability",
+              "hi": "Option B · In favour of State / Strict Liability"
+            },
+            "reason": {
+              "en": "Enforce strict liability to deter negligence and protect public order.",
+              "hi": "Enforce strict liability to deter negligence and protect public order."
+            },
+            "simulatedVotesPercent": 45,
+            "isActualVerdict": false
+          }
+        ],
+        "judicialRationale": {
+          "en": "The Supreme Court of India balanced individual rights and statutory objectives under Constitutional.",
+          "hi": "Supreme Court of India ने Constitutional के तहत व्यक्तिगत अधिकारों और वैधानिक उद्देश्यों में संतुलन स्थापित किया।"
+        }
+      }
+    },
+    {
+      "id": "panel-7",
+      "type": "VERDICT",
+      "eyebrow": {
+        "en": "EPISODE 07 · THE COURT RULING",
+        "hi": "एपिसोड 07 · अदालत का फैसला"
+      },
+      "headline": {
+        "en": "The Supreme Court of India Verdict",
+        "hi": "Supreme Court of India का ऐतिहासिक निर्णय"
+      },
+      "body": {
+        "en": "The decisive judgment delivered by Supreme Court of India.",
+        "hi": "Supreme Court of India द्वारा दिया गया अंतिम निर्णय।"
+      },
+      "stamp": {
+        "en": "JUDGMENT DELIVERED",
+        "hi": "निर्णय घोषित"
+      }
+    },
+    {
+      "id": "panel-8",
+      "type": "RATIO",
+      "eyebrow": {
+        "en": "EPISODE 08 · LEGAL RATIO & IMPACT",
+        "hi": "एपिसोड 08 · कानूनी सिद्धांत और प्रभाव"
+      },
+      "headline": {
+        "en": "BINDING PRECEDENT & RATIO DECIDENDI",
+        "hi": "बाध्यकारी नजीर व निर्णय-आधार"
+      },
+      "body": {
+        "en": "The Supreme Court of India established binding legal principles under Constitutional, governing future interpretations.",
+        "hi": "Supreme Court of India ने Constitutional के तहत भविष्य के लिए बाध्यकारी कानूनी सिद्धांत स्थापित किए।"
+      },
+      "evidence": {
+        "archiveType": "verdict_decree",
+        "masthead": "ALL INDIA REPORTER · SUPREME COURT OF INDIA",
+        "date": "2023 JUDICIAL RECORD",
+        "headline": {
+          "en": "CERTIFIED RATIO IN THE ₹2 CRORE HAIRCUT CASE",
+          "hi": "THE ₹2 CRORE HAIRCUT CASE का प्रमाणित निर्णय-आधार"
+        },
+        "snippet": {
+          "en": "HELD: Binding interpretation of Constitutional under Article 141 of the Constitution of India.",
+          "hi": "निर्णय: भारतीय संविधान के अनुच्छेद 141 के तहत Constitutional का बाध्यकारी अर्थ।"
+        },
+        "highlightedPhrase": {
+          "en": "Binding interpretation of Constitutional",
+          "hi": "Constitutional का बाध्यकारी अर्थ"
+        },
+        "exhibitNumber": "RATIO · Constitutional",
+        "caption": {
+          "en": "Certified Supreme Court of India ratio decree.",
+          "hi": "Supreme Court of India का प्रमाणित निर्णय-आधार।"
+        }
+      }
+    }
+  ]
 }

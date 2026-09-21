@@ -229,6 +229,11 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
   useEffect(() => {
     let isMounted = true;
 
+    // Record real view on case load
+    try {
+      fetch(`/api/cases/${slug}/view`, { method: 'POST' }).catch(() => {});
+    } catch {}
+
     async function loadClientCase() {
       try {
         // Fetch fresh case data from API

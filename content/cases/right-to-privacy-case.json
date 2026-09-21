@@ -1408,7 +1408,7 @@
       "type": "HOOK",
       "eyebrow": {
         "en": "EPISODE 01 · THE PREMISE",
-        "hi": "EPISODE 01 · THE PREMISE"
+        "hi": "एपिसोड 01 · THE PREMISE"
       },
       "headline": {
         "en": "Justice K.S. Puttaswamy (Retd.) & Anr. v. Union of India & Ors.: The Catalyst",
@@ -1419,14 +1419,17 @@
         "hi": "Justice K.S. Puttaswamy (Retd.), a former judge, challenged the constitutional validity of the Aadhaar scheme and raised concerns regarding the collection and storage of personal and biometric information by the State. During the Aadhaar proceedings, a question arose as to whether the Constitution of India guarantees a fundamental right to privacy. The Union of India relied on earlier decisions, particularly M.P. Sharma v. Satish Chandra and Kharak Singh v. State of Uttar Pradesh, to question the existence of such a fundamental right. A nine-judge Constitution Bench of the Supreme Court was constituted to determine the constitutional status of privacy. On 24 August 2017, the Court unanimously held that the right to privacy is a constitutionally protected fundamental right, forming an intrinsic part of the right to life and personal liberty under Article 21 and also connected with the freedoms guaranteed under Part III of the Constitution. The Court also recognized informational privacy and held that any State interference with privacy must satisfy constitutional requirements including legality, legitimate State aim and proportionality."
       },
       "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg",
-      "image": "/images/cases/kesavananda-bharati.jpg"
+      "photoExhibitCaption": {
+        "en": "Archival record photograph for Justice K.S. Puttaswamy (Retd.) & Anr. v. Union of India & Ors..",
+        "hi": "Justice K.S. Puttaswamy (Retd.) & Anr. v. Union of India & Ors. का पुरालेखीय चित्र।"
+      }
     },
     {
       "id": "panel-2",
       "type": "PEOPLE",
       "eyebrow": {
         "en": "EPISODE 02 · DRAMATIS PERSONAE",
-        "hi": "EPISODE 02 · DRAMATIS PERSONAE"
+        "hi": "एपिसोड 02 · मुख्य पात्र"
       },
       "headline": {
         "en": "The Parties & The Encounter",
@@ -1437,19 +1440,9 @@
         "hi": "Privacy is a constitutionally protected right which emerges primarily from the guarantee of life and personal liberty in Article 21."
       },
       "photoExhibitSrc": "/images/cases/right-to-privacy-case-exhibit-1789592359377.png",
-      "image": "/images/cases/right-to-privacy-case-exhibit-1789592359377.png",
-      "evidence": {
-        "masthead": "THE STATESMAN · ARCHIVAL PRESS DISPATCH",
-        "date": "Registry Dispatch · 2017",
-        "headline": {
-          "en": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA",
-          "hi": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA"
-        },
-        "snippet": {
-          "en": "Court inquiries commence regarding Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy. Public attention focuses on landmark hearing.",
-          "hi": "Court inquiries commence regarding Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy. Public attention focuses on landmark hearing."
-        },
-        "imageSrc": "/images/cases/right-to-privacy-case-exhibit-1789592359377.png"
+      "photoExhibitCaption": {
+        "en": "Historical exhibit and records for Justice K.S. Puttaswamy (Retd.) & Anr. v. Union of India & Ors..",
+        "hi": "Justice K.S. Puttaswamy (Retd.) & Anr. v. Union of India & Ors. के ऐतिहासिक साक्ष्य।"
       }
     },
     {
@@ -1457,7 +1450,7 @@
       "type": "INCIDENT",
       "eyebrow": {
         "en": "EPISODE 03 · THE INVESTIGATION",
-        "hi": "EPISODE 03 · THE INVESTIGATION"
+        "hi": "एपिसोड 03 · THE INVESTIGATION"
       },
       "headline": {
         "en": "Evidence on the Record",
@@ -1467,15 +1460,14 @@
         "en": "The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports.",
         "hi": "The trial and appellate records examined key witness testimonies, documentary proof, and primary investigative reports."
       },
-      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg",
-      "image": "/images/cases/kesavananda-bharati.jpg"
+      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg"
     },
     {
       "id": "panel-4",
       "type": "TIMELINE",
       "eyebrow": {
         "en": "EPISODE 04 · PRIMARY DOCKETS",
-        "hi": "EPISODE 04 · PRIMARY DOCKETS"
+        "hi": "एपिसोड 04 · PRIMARY DOCKETS"
       },
       "headline": {
         "en": "Police Diary & Statutory Memorandum",
@@ -1485,8 +1477,6 @@
         "en": "Official registers and case diary entries documented the factual sequence and statutory triggers under Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy.",
         "hi": "Official registers and case diary entries documented the factual sequence and statutory triggers under Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy."
       },
-      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg",
-      "image": "/images/cases/kesavananda-bharati.jpg",
       "evidence": {
         "masthead": "STATION HOUSE CASE DIARY · OFFICIAL RECORD",
         "date": "Registry Docket #2017/104",
@@ -1499,14 +1489,15 @@
           "hi": "Formal enquiry memo registered under Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy. Material exhibits seized and forwarded for judicial scrutiny."
         },
         "imageSrc": "/images/cases/kesavananda-bharati.jpg"
-      }
+      },
+      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg"
     },
     {
       "id": "panel-5",
       "type": "EVIDENCE",
       "eyebrow": {
         "en": "EPISODE 05 · COURTROOM SHOWDOWN",
-        "hi": "EPISODE 05 · COURTROOM SHOWDOWN"
+        "hi": "एपिसोड 05 · COURTROOM SHOWDOWN"
       },
       "headline": {
         "en": "Prosecution vs. Defence on Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy",
@@ -1516,15 +1507,14 @@
         "en": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest.",
         "hi": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest."
       },
-      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg",
-      "image": "/images/cases/kesavananda-bharati.jpg"
+      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg"
     },
     {
       "id": "panel-6",
       "type": "ARGUMENTS",
       "eyebrow": {
         "en": "EPISODE 06 · JUDICIAL DELIBERATION",
-        "hi": "EPISODE 06 · JUDICIAL DELIBERATION"
+        "hi": "एपिसोड 06 · JUDICIAL DELIBERATION"
       },
       "headline": {
         "en": "The Bench Confronts the Doctrine",
@@ -1534,8 +1524,6 @@
         "en": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
         "hi": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents."
       },
-      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg",
-      "image": "/images/cases/kesavananda-bharati.jpg",
       "evidence": {
         "masthead": "FROM THE CERTIFIED JUDGMENT",
         "date": "Supreme Court of India Judicial Record",
@@ -1548,6 +1536,48 @@
           "hi": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience."
         },
         "imageSrc": "/images/cases/kesavananda-bharati.jpg"
+      },
+      "judgeDecision": {
+        "question": {
+          "en": "How should the Supreme Court of India decide this issue under Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy?",
+          "hi": "How should the Supreme Court of India decide this issue under Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy?"
+        },
+        "subtext": {
+          "en": "Consider whether the statutory conditions of Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy were satisfied on the trial record.",
+          "hi": "Consider whether the statutory conditions of Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy were satisfied on the trial record."
+        },
+        "options": [
+          {
+            "id": "opt-1",
+            "title": {
+              "en": "Uphold the statutory claim under Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy",
+              "hi": "Uphold the statutory claim under Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy"
+            },
+            "reason": {
+              "en": "The legal requirements were met based on the verified trial evidence.",
+              "hi": "The legal requirements were met based on the verified trial evidence."
+            },
+            "simulatedVotesPercent": 55,
+            "isActualVerdict": true
+          },
+          {
+            "id": "opt-2",
+            "title": {
+              "en": "Reject the claim for lack of substantive compliance",
+              "hi": "Reject the claim for lack of substantive compliance"
+            },
+            "reason": {
+              "en": "Strict statutory preconditions were not established beyond doubt.",
+              "hi": "Strict statutory preconditions were not established beyond doubt."
+            },
+            "simulatedVotesPercent": 45,
+            "isActualVerdict": false
+          }
+        ],
+        "judicialRationale": {
+          "en": "The Supreme Court of India balanced individual rights and statutory objectives under Articles 14.",
+          "hi": "Supreme Court of India ने Articles 14 के तहत व्यक्तिगत अधिकारों और वैधानिक उद्देश्यों में संतुलन स्थापित किया।"
+        }
       }
     },
     {
@@ -1555,7 +1585,7 @@
       "type": "VERDICT",
       "eyebrow": {
         "en": "EPISODE 07 · THE VERDICT",
-        "hi": "EPISODE 07 · THE VERDICT"
+        "hi": "एपिसोड 07 · THE VERDICT"
       },
       "headline": {
         "en": "The Court Ruling & Holding",
@@ -1565,15 +1595,18 @@
         "en": "In a decisive judgment, the Supreme Court of India established authoritative principles governing Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy.",
         "hi": "In a decisive judgment, the Supreme Court of India established authoritative principles governing Articles 14, 19 and 21 of the Constitution of India; Fundamental Right to Privacy."
       },
-      "photoExhibitSrc": "/images/cases/right-to-privacy-case-verdict-1789592363052.png",
-      "image": "/images/cases/right-to-privacy-case-verdict-1789592363052.png"
+      "stamp": {
+        "en": "JUDGMENT DELIVERED",
+        "hi": "निर्णय घोषित"
+      },
+      "photoExhibitSrc": "/images/cases/right-to-privacy-case-verdict-1789592363052.png"
     },
     {
       "id": "panel-8",
       "type": "RATIO",
       "eyebrow": {
         "en": "EPISODE 08 · RATIO & IMPACT",
-        "hi": "EPISODE 08 · RATIO & IMPACT"
+        "hi": "एपिसोड 08 · RATIO & IMPACT"
       },
       "headline": {
         "en": "Jurisprudential Impact & Doctrine",
@@ -1583,8 +1616,7 @@
         "en": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
         "hi": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence."
       },
-      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg",
-      "image": "/images/cases/kesavananda-bharati.jpg"
+      "photoExhibitSrc": "/images/cases/kesavananda-bharati.jpg"
     }
   ],
   "brief": {
@@ -1620,5 +1652,7 @@
       "en": "Active binding precedent under Article 141 of the Constitution of India.",
       "hi": "महत्वपूर्ण न्यायिक मिसाल।"
     }
-  }
+  },
+  "views": 0,
+  "hasJudgeDecision": true
 }

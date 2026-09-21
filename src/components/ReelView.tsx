@@ -72,6 +72,16 @@ export function ReelView({ cases, initialCaseSlug }: ReelViewProps) {
   const isInitialPositioned = useRef<boolean>(false);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
 
+  // Record real view for active case
+  useEffect(() => {
+    const curCase = caseList[activeCaseIndex];
+    if (curCase?.slug) {
+      try {
+        fetch(`/api/cases/${curCase.slug}/view`, { method: 'POST' }).catch(() => {});
+      } catch {}
+    }
+  }, [activeCaseIndex, caseList]);
+
   // Instant scroll to initial case on first mount (ZERO travelling animation)
   useEffect(() => {
     const el = horizontalScrollRef.current;
