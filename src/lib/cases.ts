@@ -64,9 +64,15 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
 
   const bannerImg = dynamicData.bannerImage || posterImg?.src || (staticCase as any).bannerImage;
 
-  // Clone episodes and inject dynamic custom visuals
-  const episodes = (staticCase.episodes || []).map((ep, idx) => {
-    const clone = { ...ep };
+  // Source base episodes from dynamicData if available, otherwise staticCase
+  const baseEpisodes = (dynamicData.episodes && Array.isArray(dynamicData.episodes) && dynamicData.episodes.length >= 8)
+    ? dynamicData.episodes
+    : (staticCase.episodes || []);
+
+  // Clone episodes and inject dynamic custom visuals & layer overrides
+  const episodes = baseEpisodes.map((ep: any, idx: number) => {
+    const staticEp = staticCase.episodes?.[idx];
+    const clone = { ...(staticEp || {}), ...ep };
     if (idx === 0 && posterImg) {
       clone.image = posterImg;
     }
@@ -78,8 +84,19 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
         provenance: 'archival' as const,
       };
     }
+    // Ensure layers are preserved
+    if (ep.layers) {
+      clone.layers = {
+        story: ep.layers.story || staticEp?.layers?.story || { blocks: [] },
+        student: ep.layers.student || staticEp?.layers?.student || { blocks: [] },
+        advocate: ep.layers.advocate || staticEp?.layers?.advocate || { blocks: [] },
+      };
+    }
     return clone;
   });
+
+  const flashcards = dynamicData.flashcards || staticCase.flashcards;
+  const subsequentHistory = dynamicData.subsequentHistory || staticCase.subsequentHistory;
 
   return {
     ...staticCase,
@@ -89,6 +106,8 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
     poster: posterImg,
     bannerImage: bannerImg,
     episodes,
+    flashcards,
+    subsequentHistory,
   };
 }
 

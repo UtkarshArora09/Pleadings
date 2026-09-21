@@ -22,7 +22,26 @@ export default function NewCasePage() {
     enrolmentNumber: '',
     rank: 1,
     makeTrendingTop10: true,
+    // Student Layer Inputs
+    studentRatio: '',
+    studentObiter: '',
+    studentExamAngle: '',
+    // Advocate Layer Inputs
+    advocateStrategy: '',
+    advocatePinpoints: '',
+    advocateHowToUse: '',
+    advocateHowToDistinguish: '',
   });
+
+  const [flashcards, setFlashcards] = useState<{ q: string; a: string }[]>([
+    { q: '', a: '' }
+  ]);
+
+  const [subsequentHistory, setSubsequentHistory] = useState<
+    { type: 'followed' | 'distinguished' | 'doubted' | 'overruled' | 'statute'; case: string; year: number; note: string }[]
+  >([
+    { type: 'followed', case: '', year: new Date().getFullYear(), note: '' }
+  ]);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState<string>('');
@@ -51,7 +70,7 @@ export default function NewCasePage() {
       setCurrentStep('1. Reading admin source document & extracting legal facts...');
       await new Promise((r) => setTimeout(r, 600));
 
-      setCurrentStep('2. Structuring 8-Episode Story Arc (Hook, People, Incident, Timeline, Evidence, Arguments, Verdict, Ratio)...');
+      setCurrentStep('2. Structuring 8-Episode Story Arc with Student & Advocate Layers...');
       await new Promise((r) => setTimeout(r, 600));
 
       setCurrentStep('3. Translating full case into natural judicial Hindi (en + hi)...');
@@ -59,12 +78,62 @@ export default function NewCasePage() {
 
       setCurrentStep('4. Generating cinematic AI visual prompts (Hero 16:9, Scene, Courtroom)...');
 
+      // Parse student obiter lines
+      const studentObiterList = formData.studentObiter
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      // Parse advocate how to use and distinguish lines
+      const advocateHowToUseList = formData.advocateHowToUse
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      const advocateHowToDistinguishList = formData.advocateHowToDistinguish
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      // Parse pinpoints e.g. "¶8: Proposition" or "8: Proposition"
+      const pinpointsList: { proposition: string; para: number }[] = [];
+      if (formData.advocatePinpoints) {
+        formData.advocatePinpoints.split('\n').forEach((line) => {
+          const trimmed = line.trim();
+          if (!trimmed) return;
+          const match = trimmed.match(/(?:¶|para|p\.?)?\s*(\d+)\s*[:\-–]\s*(.+)/i);
+          if (match) {
+            pinpointsList.push({
+              para: parseInt(match[1]),
+              proposition: match[2].trim(),
+            });
+          } else {
+            pinpointsList.push({
+              para: 8,
+              proposition: trimmed,
+            });
+          }
+        });
+      }
+
+      const studentFlashcards = flashcards.filter((f) => f.q.trim() && f.a.trim());
+      const advocateSubsequentHistory = subsequentHistory.filter((h) => h.case.trim() && h.note.trim());
+
       const res = await fetch('/api/admin/cases', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           rank: formData.makeTrendingTop10 ? formData.rank : 99,
+          studentRatio: formData.studentRatio || undefined,
+          studentObiter: studentObiterList.length > 0 ? studentObiterList : undefined,
+          studentExamAngle: formData.studentExamAngle || undefined,
+          studentFlashcards: studentFlashcards.length > 0 ? studentFlashcards : undefined,
+          advocateStrategy: formData.advocateStrategy || undefined,
+          advocatePinpoints: pinpointsList.length > 0 ? pinpointsList : undefined,
+          advocateHowToUse: advocateHowToUseList.length > 0 ? advocateHowToUseList : undefined,
+          advocateHowToDistinguish: advocateHowToDistinguishList.length > 0 ? advocateHowToDistinguishList : undefined,
+          advocateSubsequentHistory: advocateSubsequentHistory.length > 0 ? advocateSubsequentHistory : undefined,
         }),
       });
 
@@ -342,6 +411,280 @@ export default function NewCasePage() {
               onChange={(e) => setFormData({ ...formData, judgmentText: e.target.value })}
               className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3 rounded-xs focus:outline-none leading-relaxed font-mono text-xs"
             />
+          </div>
+        </div>
+
+        {/* Step 4: Student Layer & Academic Insights (Admin-Defined) */}
+        <div className="bg-[#121520] border border-sky-500/30 p-6 rounded-xs space-y-4 shadow-xl">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-sky-400" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-sky-400">
+                Step 4 · Student Layer & Exam Angle (Admin-Controlled)
+              </h2>
+            </div>
+            <span className="text-[10px] font-mono text-sky-300/60 uppercase">Shown in Student Mode</span>
+          </div>
+          <p className="text-xs text-[#a9a49a]">
+            Define the authoritative Ratio Decidendi, Obiter Dicta, and CLAT/Judiciary exam notes that law students will see when toggling to Student Mode.
+          </p>
+
+          <div>
+            <label className="block text-[11px] font-mono text-sky-300 uppercase mb-1">
+              Ratio Decidendi (Binding Legal Principle)
+            </label>
+            <textarea
+              rows={2}
+              placeholder="e.g. The Supreme Court held that statutory restrictions under Article 19(2) must satisfy the test of clear proportionality..."
+              value={formData.studentRatio}
+              onChange={(e) => setFormData({ ...formData, studentRatio: e.target.value })}
+              className="w-full bg-[#0A0C10] border border-white/15 focus:border-sky-400 text-sm text-white p-3 rounded-xs focus:outline-none leading-relaxed"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-[11px] font-mono text-sky-300 uppercase mb-1">
+                Obiter Dicta (Persuasive Remarks · 1 per line)
+              </label>
+              <textarea
+                rows={3}
+                placeholder="Courts must balance individual liberties with systemic state objectives.&#10;Procedural safeguards are integral to the administration of substantive justice."
+                value={formData.studentObiter}
+                onChange={(e) => setFormData({ ...formData, studentObiter: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-sky-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-mono text-sky-300 uppercase mb-1">
+                Exam Angle / Key Takeaway for Judiciary & CLAT-PG
+              </label>
+              <textarea
+                rows={3}
+                placeholder="e.g. Tested in CLAT-PG, Judiciary Mains, and AIBE under constitutional free speech thresholds and procedural safeguards."
+                value={formData.studentExamAngle}
+                onChange={(e) => setFormData({ ...formData, studentExamAngle: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-sky-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+              />
+            </div>
+          </div>
+
+          {/* Interactive Student Revision Flashcards */}
+          <div className="pt-3 border-t border-sky-500/20 space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="text-[11px] font-mono text-sky-300 uppercase font-bold flex items-center gap-1.5">
+                <span>🗂️ Student Revision Flashcards (Q&A Cards)</span>
+              </label>
+              <button
+                type="button"
+                onClick={() => setFlashcards([...flashcards, { q: '', a: '' }])}
+                className="text-[10px] font-mono font-bold text-sky-400 hover:text-white uppercase px-2.5 py-1 bg-sky-950/60 border border-sky-500/30 rounded-xs cursor-pointer"
+              >
+                + Add Flashcard
+              </button>
+            </div>
+
+            {flashcards.map((fc, fcIdx) => (
+              <div key={fcIdx} className="p-3 bg-black/40 border border-sky-500/20 rounded-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-sky-400 font-bold">Card #{fcIdx + 1}</span>
+                  {flashcards.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setFlashcards(flashcards.filter((_, i) => i !== fcIdx))}
+                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
+                    >
+                      ✕ Remove
+                    </button>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  placeholder="Question (e.g. What was the central issue in this case?)"
+                  value={fc.q}
+                  onChange={(e) => {
+                    const updated = [...flashcards];
+                    updated[fcIdx].q = e.target.value;
+                    setFlashcards(updated);
+                  }}
+                  className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-sky-400"
+                />
+                <textarea
+                  rows={2}
+                  placeholder="Answer / Key Takeaway for exam revision..."
+                  value={fc.a}
+                  onChange={(e) => {
+                    const updated = [...flashcards];
+                    updated[fcIdx].a = e.target.value;
+                    setFlashcards(updated);
+                  }}
+                  className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-sky-400"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Step 5: Advocate Layer & Litigation Practice (Admin-Defined) */}
+        <div className="bg-[#121520] border border-emerald-500/30 p-6 rounded-xs space-y-4 shadow-xl">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-emerald-400">
+                Step 5 · Advocate Layer & Courtroom Practice (Admin-Controlled)
+              </h2>
+            </div>
+            <span className="text-[10px] font-mono text-emerald-300/60 uppercase">Shown in Advocate Mode</span>
+          </div>
+          <p className="text-xs text-[#a9a49a]">
+            Provide courtroom citations, paragraph pinpoint rules, and practical guidance on how counsel can cite or distinguish this ruling.
+          </p>
+
+          <div>
+            <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
+              Trial Strategy & Litigation Proposition
+            </label>
+            <input
+              type="text"
+              placeholder="e.g. Standard of proof: Prosecution must establish jurisdictional conditions before invocation of special statutory penalties."
+              value={formData.advocateStrategy}
+              onChange={(e) => setFormData({ ...formData, advocateStrategy: e.target.value })}
+              className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
+                Paragraph Pinpoints (¶Para: Rule)
+              </label>
+              <textarea
+                rows={3}
+                placeholder="¶8: Binding rule on threshold burden&#10;¶12: Application to electronic evidence"
+                value={formData.advocatePinpoints}
+                onChange={(e) => setFormData({ ...formData, advocatePinpoints: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
+                How to Cite in Arguments (1 per line)
+              </label>
+              <textarea
+                rows={3}
+                placeholder="Cite when establishing statutory preconditions.&#10;Use to counter arbitrary procedural defaults."
+                value={formData.advocateHowToUse}
+                onChange={(e) => setFormData({ ...formData, advocateHowToUse: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
+                How Opposing Counsel Will Distinguish
+              </label>
+              <textarea
+                rows={3}
+                placeholder="Distinguish where factual exceptions apply.&#10;Distinguish on strict documentary proof."
+                value={formData.advocateHowToDistinguish}
+                onChange={(e) => setFormData({ ...formData, advocateHowToDistinguish: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+              />
+            </div>
+          </div>
+
+          {/* Interactive Advocate Subsequent Judicial Citations */}
+          <div className="pt-3 border-t border-emerald-500/20 space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="text-[11px] font-mono text-emerald-300 uppercase font-bold flex items-center gap-1.5">
+                <span>⚖️ Subsequent Judicial Citations & History</span>
+              </label>
+              <button
+                type="button"
+                onClick={() =>
+                  setSubsequentHistory([
+                    ...subsequentHistory,
+                    { type: 'followed', case: '', year: new Date().getFullYear(), note: '' }
+                  ])
+                }
+                className="text-[10px] font-mono font-bold text-emerald-400 hover:text-white uppercase px-2.5 py-1 bg-emerald-950/60 border border-emerald-500/30 rounded-xs cursor-pointer"
+              >
+                + Add Citation Record
+              </button>
+            </div>
+
+            {subsequentHistory.map((hist, hIdx) => (
+              <div key={hIdx} className="p-3 bg-black/40 border border-emerald-500/20 rounded-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold">Citation Record #{hIdx + 1}</span>
+                  {subsequentHistory.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setSubsequentHistory(subsequentHistory.filter((_, i) => i !== hIdx))}
+                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
+                    >
+                      ✕ Remove
+                    </button>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <input
+                    type="text"
+                    placeholder="Case Name & Citation (e.g. Danial Latifi v. UOI (2001) 7 SCC 740)"
+                    value={hist.case}
+                    onChange={(e) => {
+                      const updated = [...subsequentHistory];
+                      updated[hIdx].case = e.target.value;
+                      setSubsequentHistory(updated);
+                    }}
+                    className="sm:col-span-2 bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-emerald-400"
+                  />
+                  <div className="flex gap-2">
+                    <select
+                      value={hist.type}
+                      onChange={(e) => {
+                        const updated = [...subsequentHistory];
+                        updated[hIdx].type = e.target.value as any;
+                        setSubsequentHistory(updated);
+                      }}
+                      className="flex-1 bg-[#0A0C10] border border-white/10 text-xs text-emerald-300 p-2 rounded-xs focus:border-emerald-400 cursor-pointer"
+                    >
+                      <option value="followed">Followed In</option>
+                      <option value="distinguished">Distinguished</option>
+                      <option value="doubted">Doubted</option>
+                      <option value="overruled">Overruled</option>
+                      <option value="statute">Statute Modified</option>
+                    </select>
+                    <input
+                      type="number"
+                      placeholder="Year"
+                      value={hist.year}
+                      onChange={(e) => {
+                        const updated = [...subsequentHistory];
+                        updated[hIdx].year = parseInt(e.target.value) || new Date().getFullYear();
+                        setSubsequentHistory(updated);
+                      }}
+                      className="w-18 bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs text-center focus:border-emerald-400"
+                    />
+                  </div>
+                </div>
+
+                <textarea
+                  rows={2}
+                  placeholder="Summary of judicial treatment / holding (e.g. Upheld constitutional validity...)"
+                  value={hist.note}
+                  onChange={(e) => {
+                    const updated = [...subsequentHistory];
+                    updated[hIdx].note = e.target.value;
+                    setSubsequentHistory(updated);
+                  }}
+                  className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-emerald-400"
+                />
+              </div>
+            ))}
           </div>
         </div>
 

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { CaseData, StoryPanel } from '@/types';
+import { CaseData, StoryPanel, Episode } from '@/types';
 import {
   getCaseVisualPrompts,
   getArchetypePrompt,
@@ -22,8 +22,9 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'panels' | 'brief' | 'images'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'panels' | 'flashcards' | 'history' | 'brief' | 'images'>('overview');
   const [activeLanguage, setActiveLanguage] = useState<'en' | 'hi'>('en');
+  const [episodeLayersTab, setEpisodeLayersTab] = useState<Record<number, 'story' | 'student' | 'advocate'>>({});
 
   const [copiedPromptId, setCopiedPromptId] = useState<string | null>(null);
   const [uploadingTarget, setUploadingTarget] = useState<string | null>(null);
@@ -770,9 +771,11 @@ async function compressImageForUpload(
       <div className="flex items-center gap-2 border-b border-white/10 pb-2 overflow-x-auto">
         {[
           { id: 'overview', label: '1. Overview & Metadata' },
-          { id: 'panels', label: `2. Story Episodes (${caseData.panels?.length || 8})` },
-          { id: 'brief', label: '3. Legal Brief & Certified Ratio' },
-          { id: 'images', label: '4. AI Visuals & Dual Generator' },
+          { id: 'panels', label: `2. Story & Depth Layers (8 Episodes)` },
+          { id: 'flashcards', label: `3. Student Flashcards (${caseData.flashcards?.length || 0})` },
+          { id: 'history', label: `4. Advocate Citations (${caseData.subsequentHistory?.length || 0})` },
+          { id: 'brief', label: '5. Legal Brief & Certified Ratio' },
+          { id: 'images', label: '6. AI Visuals & Dual Generator' },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -904,78 +907,914 @@ async function compressImageForUpload(
         </div>
       )}
 
-      {/* TAB 2: STORY PANELS */}
+      {/* TAB 2: STORY & DEPTH LAYERS (8 EPISODES) */}
       {activeTab === 'panels' && (
         <div className="space-y-6">
-          {caseData.panels?.map((panel, idx) => (
-            <div key={panel.id || idx} className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold uppercase text-[#D4AF37]">
-                    Episode #{idx + 1} ({panel.type})
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-[#8c887e]">ID: {panel.id || `panel-${idx + 1}`}</span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                    Eyebrow / Episode Tag ({activeLanguage.toUpperCase()})
-                  </label>
-                  <input
-                    type="text"
-                    value={(typeof panel.eyebrow === 'string' ? panel.eyebrow : panel.eyebrow?.[activeLanguage]) || ''}
-                    onChange={(e) => {
-                      const updatedPanels = [...caseData.panels];
-                      const currentEyebrow = typeof updatedPanels[idx].eyebrow === 'object' ? updatedPanels[idx].eyebrow : { en: String(updatedPanels[idx].eyebrow || ''), hi: String(updatedPanels[idx].eyebrow || '') };
-                      updatedPanels[idx].eyebrow = { ...currentEyebrow, [activeLanguage]: e.target.value };
-                      setCaseData({ ...caseData, panels: updatedPanels });
-                    }}
-                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#D4AF37] font-bold p-2.5 rounded-xs"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                    Headline ({activeLanguage.toUpperCase()})
-                  </label>
-                  <input
-                    type="text"
-                    value={(typeof panel.headline === 'string' ? panel.headline : panel.headline?.[activeLanguage]) || ''}
-                    onChange={(e) => {
-                      const updatedPanels = [...caseData.panels];
-                      const currentHeadline = typeof updatedPanels[idx].headline === 'object' ? updatedPanels[idx].headline : { en: String(updatedPanels[idx].headline || ''), hi: String(updatedPanels[idx].headline || '') };
-                      updatedPanels[idx].headline = { ...currentHeadline, [activeLanguage]: e.target.value };
-                      setCaseData({ ...caseData, panels: updatedPanels });
-                    }}
-                    className="w-full bg-[#0A0C10] border border-white/15 text-sm text-white font-bold p-2.5 rounded-xs"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                  Story Content ({activeLanguage.toUpperCase()})
-                </label>
-                <textarea
-                  rows={4}
-                  value={(typeof panel.body === 'string' ? panel.body : panel.body?.[activeLanguage]) || ''}
-                  onChange={(e) => {
-                    const updatedPanels = [...caseData.panels];
-                    const currentBody = typeof updatedPanels[idx].body === 'object' ? updatedPanels[idx].body : { en: String(updatedPanels[idx].body || ''), hi: String(updatedPanels[idx].body || '') };
-                    updatedPanels[idx].body = { ...currentBody, [activeLanguage]: e.target.value };
-                    setCaseData({ ...caseData, panels: updatedPanels });
-                  }}
-                  className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#c9c5bc] p-3 rounded-xs leading-relaxed"
-                />
-              </div>
+          <div className="p-4 bg-black/40 border border-white/10 rounded-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                8-Episode Multi-Layer Architecture
+              </h3>
+              <p className="text-[11px] text-[#a9a49a] mt-0.5">
+                Each episode has 3 synchronized depth layers: <strong>Story</strong> (general reading), <strong>Student</strong> (legal ratio, obiter, exam angle), and <strong>Advocate</strong> (trial practice, pinpoints, citations).
+              </p>
             </div>
-          ))}
+          </div>
+
+          {Array.from({ length: 8 }).map((_, idx) => {
+            const currentLayer = episodeLayersTab[idx] || 'story';
+            const ep: Episode = caseData.episodes?.[idx] || {
+              n: idx + 1,
+              kicker: (typeof caseData.panels?.[idx]?.eyebrow === 'object' ? caseData.panels?.[idx]?.eyebrow?.[activeLanguage] : caseData.panels?.[idx]?.eyebrow) || `EPISODE 0${idx + 1}`,
+              title: (typeof caseData.panels?.[idx]?.headline === 'object' ? caseData.panels?.[idx]?.headline?.[activeLanguage] : caseData.panels?.[idx]?.headline) || `Episode ${idx + 1}`,
+              layers: {
+                story: { blocks: [{ type: 'para' as const, text: (typeof caseData.panels?.[idx]?.body === 'object' ? caseData.panels?.[idx]?.body?.[activeLanguage] : caseData.panels?.[idx]?.body) || '', source: { tier: 'AMBER' as const } }] },
+                student: { blocks: [{ type: 'para' as const, text: `LEGAL ANALYSIS: ${(typeof caseData.panels?.[idx]?.body === 'object' ? caseData.panels?.[idx]?.body?.[activeLanguage] : caseData.panels?.[idx]?.body) || ''}`, source: { tier: 'AMBER' as const } }], ratio: '', obiter: [], examAngle: '' },
+                advocate: { blocks: [{ type: 'para' as const, text: `TRIAL PROPOSITION: Standard of proof.`, source: { tier: 'AMBER' as const } }], pinpoints: [], howToUse: [], howToDistinguish: [] },
+              },
+              endHook: idx < 7 ? 'How did the proceedings unfold?' : 'Case dossier complete.',
+            };
+
+            const ensureEpisodes = (): Episode[] => {
+              if (caseData.episodes && caseData.episodes.length >= 8) return [...caseData.episodes];
+              return Array.from({ length: 8 }).map((_, i) => ({
+                n: i + 1,
+                kicker: (typeof caseData.panels?.[i]?.eyebrow === 'object' ? caseData.panels?.[i]?.eyebrow?.[activeLanguage] : caseData.panels?.[i]?.eyebrow) || `EPISODE 0${i + 1}`,
+                title: (typeof caseData.panels?.[i]?.headline === 'object' ? caseData.panels?.[i]?.headline?.[activeLanguage] : caseData.panels?.[i]?.headline) || `Episode ${i + 1}`,
+                layers: {
+                  story: { blocks: [{ type: 'para' as const, text: (typeof caseData.panels?.[i]?.body === 'object' ? caseData.panels?.[i]?.body?.[activeLanguage] : caseData.panels?.[i]?.body) || '', source: { tier: 'AMBER' as const } }] },
+                  student: { blocks: [{ type: 'para' as const, text: `LEGAL ANALYSIS: ${(typeof caseData.panels?.[i]?.body === 'object' ? caseData.panels?.[i]?.body?.[activeLanguage] : caseData.panels?.[i]?.body) || ''}`, source: { tier: 'AMBER' as const } }], ratio: '', obiter: [], examAngle: '' },
+                  advocate: { blocks: [{ type: 'para' as const, text: `TRIAL PROPOSITION: Standard of proof.`, source: { tier: 'AMBER' as const } }], pinpoints: [], howToUse: [], howToDistinguish: [] },
+                },
+                endHook: i < 7 ? 'How did the proceedings unfold?' : 'Case dossier complete.',
+              }));
+            };
+
+            return (
+              <div key={idx} className="bg-[#121520] border border-white/10 rounded-xs overflow-hidden shadow-xl">
+                {/* Episode Header & 3-Way Layer Switcher */}
+                <div className="p-4 bg-black/60 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                    <span className="font-anton text-base text-white uppercase tracking-wider">
+                      Episode 0{idx + 1} · {ep.title || `Episode ${idx + 1}`}
+                    </span>
+                  </div>
+
+                  {/* Layer Selector Pill */}
+                  <div className="inline-flex items-center p-0.5 bg-[#0A0C10] border border-white/15 rounded-xs">
+                    <button
+                      type="button"
+                      onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'story' })}
+                      className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${
+                        currentLayer === 'story'
+                          ? 'bg-[#D4AF37] text-black shadow-md'
+                          : 'text-[#a9a49a] hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <span>📖</span>
+                      <span>Story Layer</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'student' })}
+                      className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${
+                        currentLayer === 'student'
+                          ? 'bg-sky-400 text-black shadow-md font-bold'
+                          : 'text-[#a9a49a] hover:text-sky-300 hover:bg-white/5'
+                      }`}
+                    >
+                      <span>🎓</span>
+                      <span>Student Layer</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'advocate' })}
+                      className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${
+                        currentLayer === 'advocate'
+                          ? 'bg-emerald-400 text-black shadow-md font-bold'
+                          : 'text-[#a9a49a] hover:text-emerald-300 hover:bg-white/5'
+                      }`}
+                    >
+                      <span>⚖️</span>
+                      <span>Advocate Layer</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-5">
+                  {/* 1. STORY LAYER */}
+                  {currentLayer === 'story' && (
+                    <div className="space-y-4 animate-fadeIn">
+                      <div className="flex items-center gap-2 pb-2 border-b border-white/5 text-[10px] font-mono text-[#D4AF37] uppercase font-bold">
+                        <span>📖 General Story Arc Layer (Public Narrative)</span>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                            Episode Eyebrow / Kicker Tag
+                          </label>
+                          <input
+                            type="text"
+                            value={ep.kicker || ''}
+                            onChange={(e) => {
+                              const epList = ensureEpisodes();
+                              epList[idx] = { ...epList[idx], kicker: e.target.value };
+                              const updatedPanels = [...(caseData.panels || [])];
+                              if (updatedPanels[idx]) {
+                                const curEyebrow = typeof updatedPanels[idx].eyebrow === 'object' ? updatedPanels[idx].eyebrow : { en: '', hi: '' };
+                                updatedPanels[idx] = { ...updatedPanels[idx], eyebrow: { ...curEyebrow, [activeLanguage]: e.target.value } };
+                              }
+                              setCaseData({ ...caseData, episodes: epList, panels: updatedPanels });
+                            }}
+                            className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#D4AF37] font-bold p-2.5 rounded-xs"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                            Episode Title / Headline
+                          </label>
+                          <input
+                            type="text"
+                            value={ep.title || ''}
+                            onChange={(e) => {
+                              const epList = ensureEpisodes();
+                              epList[idx] = { ...epList[idx], title: e.target.value };
+                              const updatedPanels = [...(caseData.panels || [])];
+                              if (updatedPanels[idx]) {
+                                const curHeadline = typeof updatedPanels[idx].headline === 'object' ? updatedPanels[idx].headline : { en: '', hi: '' };
+                                updatedPanels[idx] = { ...updatedPanels[idx], headline: { ...curHeadline, [activeLanguage]: e.target.value } };
+                              }
+                              setCaseData({ ...caseData, episodes: epList, panels: updatedPanels });
+                            }}
+                            className="w-full bg-[#0A0C10] border border-white/15 text-sm text-white font-bold p-2.5 rounded-xs"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                          Story Narrative Body Text ({activeLanguage.toUpperCase()})
+                        </label>
+                        <textarea
+                          rows={4}
+                          value={ep.layers?.story?.blocks?.[0]?.text || ''}
+                          onChange={(e) => {
+                            const epList = ensureEpisodes();
+                            const storyBlocks = [{ ...(epList[idx].layers?.story?.blocks?.[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } }), text: e.target.value }];
+                            epList[idx] = {
+                              ...epList[idx],
+                              layers: {
+                                ...epList[idx].layers,
+                                story: { ...epList[idx].layers?.story, blocks: storyBlocks },
+                              },
+                            };
+                            const updatedPanels = [...(caseData.panels || [])];
+                            if (updatedPanels[idx]) {
+                              const curBody = typeof updatedPanels[idx].body === 'object' ? updatedPanels[idx].body : { en: '', hi: '' };
+                              updatedPanels[idx] = { ...updatedPanels[idx], body: { ...curBody, [activeLanguage]: e.target.value } };
+                            }
+                            setCaseData({ ...caseData, episodes: epList, panels: updatedPanels });
+                          }}
+                          className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#c9c5bc] p-3 rounded-xs leading-relaxed"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-mono text-[#D4AF37] uppercase mb-1">
+                          End Hook / Next Episode Transition
+                        </label>
+                        <input
+                          type="text"
+                          value={ep.endHook || ''}
+                          onChange={(e) => {
+                            const epList = ensureEpisodes();
+                            epList[idx] = { ...epList[idx], endHook: e.target.value };
+                            setCaseData({ ...caseData, episodes: epList });
+                          }}
+                          className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#D4AF37] italic p-2 rounded-xs"
+                          placeholder="↳ The sentence that leads readers to the next episode..."
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 2. STUDENT LAYER */}
+                  {currentLayer === 'student' && (
+                    <div className="space-y-4 animate-fadeIn border-l-2 border-sky-400 pl-4">
+                      <div className="flex items-center gap-2 pb-2 border-b border-sky-500/20 text-[10px] font-mono text-sky-300 uppercase font-bold">
+                        <span>🎓 Student Depth Layer (IRAC Legal Analysis, Ratio Decidendi, Obiter & Exam Angle)</span>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
+                          Student Legal Analysis Text (IRAC Breakdown)
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={ep.layers?.student?.blocks?.[0]?.text || ''}
+                          onChange={(e) => {
+                            const epList = ensureEpisodes();
+                            const studentBlocks = [{ ...(epList[idx].layers?.student?.blocks?.[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } }), text: e.target.value }];
+                            epList[idx] = {
+                              ...epList[idx],
+                              layers: {
+                                ...epList[idx].layers,
+                                student: { ...epList[idx].layers?.student, blocks: studentBlocks },
+                              },
+                            };
+                            setCaseData({ ...caseData, episodes: epList });
+                          }}
+                          className="w-full bg-[#0A0C10] border border-sky-500/30 text-xs text-sky-100 p-3 rounded-xs leading-relaxed"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
+                            Ratio Decidendi (Binding Legal Principle)
+                          </label>
+                          <textarea
+                            rows={2}
+                            value={ep.layers?.student?.ratio || ''}
+                            onChange={(e) => {
+                              const epList = ensureEpisodes();
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  student: { ...epList[idx].layers?.student, ratio: e.target.value },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            placeholder="e.g. Authoritative holding on statutory limits..."
+                            className="w-full bg-[#0A0C10] border border-sky-500/30 text-xs text-white p-2.5 rounded-xs"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
+                            Exam Angle (CLAT-PG / Judiciary Mains Focus)
+                          </label>
+                          <textarea
+                            rows={2}
+                            value={ep.layers?.student?.examAngle || ''}
+                            onChange={(e) => {
+                              const epList = ensureEpisodes();
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  student: { ...epList[idx].layers?.student, examAngle: e.target.value },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            placeholder="e.g. Frequently tested in Judiciary Mains under Section 300 Exception 1..."
+                            className="w-full bg-[#0A0C10] border border-sky-500/30 text-xs text-white p-2.5 rounded-xs"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Obiter Dicta Bullet Manager */}
+                      <div className="space-y-2 pt-2 border-t border-sky-500/10">
+                        <div className="flex items-center justify-between">
+                          <label className="text-[10px] font-mono text-sky-300 uppercase font-bold">
+                            Obiter Dicta (Persuasive Observations)
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const epList = ensureEpisodes();
+                              const currentObiter = epList[idx].layers?.student?.obiter || [];
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  student: { ...epList[idx].layers?.student, obiter: [...currentObiter, ''] },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            className="text-[10px] font-mono text-sky-400 hover:text-white uppercase font-bold cursor-pointer"
+                          >
+                            + Add Obiter Point
+                          </button>
+                        </div>
+
+                        {(ep.layers?.student?.obiter || []).map((ob: string, oIdx: number) => (
+                          <div key={oIdx} className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={ob}
+                              onChange={(e) => {
+                                const epList = ensureEpisodes();
+                                const currentObiter = [...(epList[idx].layers?.student?.obiter || [])];
+                                currentObiter[oIdx] = e.target.value;
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    student: { ...epList[idx].layers?.student, obiter: currentObiter },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="flex-1 bg-[#0A0C10] border border-sky-500/20 text-xs text-white p-2 rounded-xs"
+                              placeholder="Observation point..."
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const epList = ensureEpisodes();
+                                const currentObiter = (epList[idx].layers?.student?.obiter || []).filter((_: any, i: number) => i !== oIdx);
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    student: { ...epList[idx].layers?.student, obiter: currentObiter },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Minority Dissent (Optional) */}
+                      <div className="p-3 bg-black/40 border border-rose-500/20 rounded-xs space-y-2">
+                        <span className="text-[10px] font-mono font-bold text-rose-400 uppercase">
+                          Minority Dissent (Optional)
+                        </span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          <input
+                            type="text"
+                            placeholder="Dissenting Judge (e.g. Justice Subba Rao)"
+                            value={ep.layers?.student?.dissent?.judge || ''}
+                            onChange={(e) => {
+                              const epList = ensureEpisodes();
+                              const curDissent = epList[idx].layers?.student?.dissent || { judge: '', ground: '', text: '' };
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  student: { ...epList[idx].layers?.student, dissent: { ...curDissent, judge: e.target.value } },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            className="bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Core Ground (e.g. Overbreadth of restriction)"
+                            value={ep.layers?.student?.dissent?.ground || ''}
+                            onChange={(e) => {
+                              const epList = ensureEpisodes();
+                              const curDissent = epList[idx].layers?.student?.dissent || { judge: '', ground: '', text: '' };
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  student: { ...epList[idx].layers?.student, dissent: { ...curDissent, ground: e.target.value } },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            className="bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
+                          />
+                        </div>
+                        <textarea
+                          rows={2}
+                          placeholder="Dissenting text / judicial excerpt..."
+                          value={ep.layers?.student?.dissent?.text || ''}
+                          onChange={(e) => {
+                            const epList = ensureEpisodes();
+                            const curDissent = epList[idx].layers?.student?.dissent || { judge: '', ground: '', text: '' };
+                            epList[idx] = {
+                              ...epList[idx],
+                              layers: {
+                                ...epList[idx].layers,
+                                student: { ...epList[idx].layers?.student, dissent: { ...curDissent, text: e.target.value } },
+                              },
+                            };
+                            setCaseData({ ...caseData, episodes: epList });
+                          }}
+                          className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 3. ADVOCATE LAYER */}
+                  {currentLayer === 'advocate' && (
+                    <div className="space-y-4 animate-fadeIn border-l-2 border-emerald-400 pl-4">
+                      <div className="flex items-center gap-2 pb-2 border-b border-emerald-500/20 text-[10px] font-mono text-emerald-300 uppercase font-bold">
+                        <span>⚖️ Advocate Depth Layer (Trial Strategy, Pinpoint Citations, Distinction Hooks)</span>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
+                          Advocate Trial / Practice Proposition Text
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={ep.layers?.advocate?.blocks?.[0]?.text || ''}
+                          onChange={(e) => {
+                            const epList = ensureEpisodes();
+                            const advBlocks = [{ ...(epList[idx].layers?.advocate?.blocks?.[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } }), text: e.target.value }];
+                            epList[idx] = {
+                              ...epList[idx],
+                              layers: {
+                                ...epList[idx].layers,
+                                advocate: { ...epList[idx].layers?.advocate, blocks: advBlocks },
+                              },
+                            };
+                            setCaseData({ ...caseData, episodes: epList });
+                          }}
+                          className="w-full bg-[#0A0C10] border border-emerald-500/30 text-xs text-emerald-100 p-3 rounded-xs leading-relaxed"
+                        />
+                      </div>
+
+                      {/* Paragraph Pinpoints */}
+                      <div className="space-y-2 pt-2 border-t border-emerald-500/10">
+                        <div className="flex items-center justify-between">
+                          <label className="text-[10px] font-mono text-emerald-300 uppercase font-bold">
+                            Paragraph Pinpoints (¶Para: Proposition)
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const epList = ensureEpisodes();
+                              const currentPinpoints = epList[idx].layers?.advocate?.pinpoints || [];
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  advocate: { ...epList[idx].layers?.advocate, pinpoints: [...currentPinpoints, { proposition: '', para: 8 }] },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            className="text-[10px] font-mono text-emerald-400 hover:text-white uppercase font-bold cursor-pointer"
+                          >
+                            + Add Pinpoint
+                          </button>
+                        </div>
+
+                        {(ep.layers?.advocate?.pinpoints || []).map((p: any, pIdx: number) => (
+                          <div key={pIdx} className="flex items-center gap-2">
+                            <span className="text-xs font-mono text-emerald-300">¶</span>
+                            <input
+                              type="number"
+                              value={p.para || 8}
+                              onChange={(e) => {
+                                const epList = ensureEpisodes();
+                                const currentPinpoints = [...(epList[idx].layers?.advocate?.pinpoints || [])];
+                                currentPinpoints[pIdx] = { ...currentPinpoints[pIdx], para: parseInt(e.target.value) || 1 };
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    advocate: { ...epList[idx].layers?.advocate, pinpoints: currentPinpoints },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="w-16 bg-[#0A0C10] border border-emerald-500/30 text-xs text-white p-2 rounded-xs font-mono"
+                              placeholder="Para"
+                            />
+                            <input
+                              type="text"
+                              value={p.proposition || ''}
+                              onChange={(e) => {
+                                const epList = ensureEpisodes();
+                                const currentPinpoints = [...(epList[idx].layers?.advocate?.pinpoints || [])];
+                                currentPinpoints[pIdx] = { ...currentPinpoints[pIdx], proposition: e.target.value };
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    advocate: { ...epList[idx].layers?.advocate, pinpoints: currentPinpoints },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="flex-1 bg-[#0A0C10] border border-emerald-500/30 text-xs text-white p-2 rounded-xs"
+                              placeholder="Legal proposition established in this paragraph..."
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const epList = ensureEpisodes();
+                                const currentPinpoints = (epList[idx].layers?.advocate?.pinpoints || []).filter((_: any, i: number) => i !== pIdx);
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    advocate: { ...epList[idx].layers?.advocate, pinpoints: currentPinpoints },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* How To Cite / Use */}
+                      <div className="space-y-2 pt-2 border-t border-emerald-500/10">
+                        <div className="flex items-center justify-between">
+                          <label className="text-[10px] font-mono text-emerald-300 uppercase font-bold">
+                            How to Cite in Arguments
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const epList = ensureEpisodes();
+                              const currentUse = epList[idx].layers?.advocate?.howToUse || [];
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  advocate: { ...epList[idx].layers?.advocate, howToUse: [...currentUse, ''] },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            className="text-[10px] font-mono text-emerald-400 hover:text-white uppercase font-bold cursor-pointer"
+                          >
+                            + Add Citation Rule
+                          </button>
+                        </div>
+
+                        {(ep.layers?.advocate?.howToUse || []).map((useItem: string, uIdx: number) => (
+                          <div key={uIdx} className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={useItem}
+                              onChange={(e) => {
+                                const epList = ensureEpisodes();
+                                const currentUse = [...(epList[idx].layers?.advocate?.howToUse || [])];
+                                currentUse[uIdx] = e.target.value;
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    advocate: { ...epList[idx].layers?.advocate, howToUse: currentUse },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="flex-1 bg-[#0A0C10] border border-emerald-500/20 text-xs text-white p-2 rounded-xs"
+                              placeholder="Cite this precedent when..."
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const epList = ensureEpisodes();
+                                const currentUse = (epList[idx].layers?.advocate?.howToUse || []).filter((_: any, i: number) => i !== uIdx);
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    advocate: { ...epList[idx].layers?.advocate, howToUse: currentUse },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* How To Distinguish */}
+                      <div className="space-y-2 pt-2 border-t border-emerald-500/10">
+                        <div className="flex items-center justify-between">
+                          <label className="text-[10px] font-mono text-amber-300 uppercase font-bold">
+                            How Opposing Counsel Will Distinguish
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const epList = ensureEpisodes();
+                              const currentDist = epList[idx].layers?.advocate?.howToDistinguish || [];
+                              epList[idx] = {
+                                ...epList[idx],
+                                layers: {
+                                  ...epList[idx].layers,
+                                  advocate: { ...epList[idx].layers?.advocate, howToDistinguish: [...currentDist, ''] },
+                                },
+                              };
+                              setCaseData({ ...caseData, episodes: epList });
+                            }}
+                            className="text-[10px] font-mono text-amber-400 hover:text-white uppercase font-bold cursor-pointer"
+                          >
+                            + Add Distinction Point
+                          </button>
+                        </div>
+
+                        {(ep.layers?.advocate?.howToDistinguish || []).map((distItem: string, dIdx: number) => (
+                          <div key={dIdx} className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={distItem}
+                              onChange={(e) => {
+                                const epList = ensureEpisodes();
+                                const currentDist = [...(epList[idx].layers?.advocate?.howToDistinguish || [])];
+                                currentDist[dIdx] = e.target.value;
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    advocate: { ...epList[idx].layers?.advocate, howToDistinguish: currentDist },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="flex-1 bg-[#0A0C10] border border-amber-500/20 text-xs text-white p-2 rounded-xs"
+                              placeholder="Distinguish where..."
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const epList = ensureEpisodes();
+                                const currentDist = (epList[idx].layers?.advocate?.howToDistinguish || []).filter((_: any, i: number) => i !== dIdx);
+                                epList[idx] = {
+                                  ...epList[idx],
+                                  layers: {
+                                    ...epList[idx].layers,
+                                    advocate: { ...epList[idx].layers?.advocate, howToDistinguish: currentDist },
+                                  },
+                                };
+                                setCaseData({ ...caseData, episodes: epList });
+                              }}
+                              className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 
-      {/* TAB 3: LEGAL BRIEF */}
+      {/* TAB 3: STUDENT FLASHCARDS */}
+      {activeTab === 'flashcards' && (
+        <div className="bg-[#121520] border border-sky-500/30 p-6 rounded-xs space-y-6 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-2 h-2 rounded-full bg-sky-400" />
+                <h3 className="text-sm font-mono font-bold text-sky-400 uppercase tracking-wider">
+                  Student Mode Revision Flashcards
+                </h3>
+              </div>
+              <p className="text-xs text-[#a9a49a]">
+                These interactive Q&A cards appear at the end of the case in <strong>Student Mode</strong> to help law students memorize core ratio and exam issues.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                const current = caseData.flashcards || [];
+                setCaseData({
+                  ...caseData,
+                  flashcards: [...current, { q: 'What is the primary holding?', a: 'The Court held that...' }],
+                });
+              }}
+              className="px-4 py-2 bg-sky-400 hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-md self-start sm:self-auto"
+            >
+              + Add Flashcard
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {(caseData.flashcards || []).length === 0 ? (
+              <div className="p-8 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/50">
+                No flashcards created yet. Click "+ Add Flashcard" to add revision questions for students.
+              </div>
+            ) : (
+              (caseData.flashcards || []).map((card, cIdx) => (
+                <div key={cIdx} className="p-4 bg-black/40 border border-sky-500/20 rounded-xs space-y-3">
+                  <div className="flex items-center justify-between pb-2 border-b border-white/5">
+                    <span className="text-[10px] font-mono font-bold text-sky-300 uppercase">
+                      Flashcard #{cIdx + 1}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = (caseData.flashcards || []).filter((_, i) => i !== cIdx);
+                        setCaseData({ ...caseData, flashcards: updated });
+                      }}
+                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
+                    >
+                      ✕ Delete Flashcard
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                      Question
+                    </label>
+                    <input
+                      type="text"
+                      value={card.q}
+                      onChange={(e) => {
+                        const updated = [...(caseData.flashcards || [])];
+                        updated[cIdx] = { ...updated[cIdx], q: e.target.value };
+                        setCaseData({ ...caseData, flashcards: updated });
+                      }}
+                      className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white font-medium p-2.5 rounded-xs"
+                      placeholder="e.g. What was the central constitutional issue?"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
+                      Answer / Verified Judicial Reasoning
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={card.a}
+                      onChange={(e) => {
+                        const updated = [...(caseData.flashcards || [])];
+                        updated[cIdx] = { ...updated[cIdx], a: e.target.value };
+                        setCaseData({ ...caseData, flashcards: updated });
+                      }}
+                      className="w-full bg-[#0A0C10] border border-emerald-500/30 text-xs text-emerald-100 p-2.5 rounded-xs font-serif italic"
+                      placeholder="e.g. The Court ruled that fundamental rights are not silos..."
+                    />
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* TAB 4: ADVOCATE SUBSEQUENT HISTORY */}
+      {activeTab === 'history' && (
+        <div className="bg-[#121520] border border-emerald-500/30 p-6 rounded-xs space-y-6 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <h3 className="text-sm font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                  Subsequent Judicial History & Citations
+                </h3>
+              </div>
+              <p className="text-xs text-[#a9a49a]">
+                These records appear at the end of the case in <strong>Advocate Mode</strong> to show practicing lawyers whether this ruling has been Followed, Distinguished, Doubted, or Overruled by subsequent benches.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                const current = caseData.subsequentHistory || [];
+                setCaseData({
+                  ...caseData,
+                  subsequentHistory: [
+                    ...current,
+                    { type: 'followed', case: 'Subsequent Reference Case', year: new Date().getFullYear(), note: 'Affirmed and applied to statutory dispute.' },
+                  ],
+                });
+              }}
+              className="px-4 py-2 bg-emerald-400 hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-md self-start sm:self-auto"
+            >
+              + Add Citation Record
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {(caseData.subsequentHistory || []).length === 0 ? (
+              <div className="p-8 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/50">
+                No subsequent citations added. Click "+ Add Citation Record" to add follow-up judgments.
+              </div>
+            ) : (
+              (caseData.subsequentHistory || []).map((item, hIdx) => (
+                <div key={hIdx} className="p-4 bg-black/40 border border-emerald-500/20 rounded-xs space-y-3">
+                  <div className="flex items-center justify-between pb-2 border-b border-white/5">
+                    <span className="text-[10px] font-mono font-bold text-emerald-300 uppercase">
+                      Citation #{hIdx + 1}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = (caseData.subsequentHistory || []).filter((_, i) => i !== hIdx);
+                        setCaseData({ ...caseData, subsequentHistory: updated });
+                      }}
+                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
+                    >
+                      ✕ Delete Citation
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                        Judicial Treatment Type
+                      </label>
+                      <select
+                        value={item.type || 'followed'}
+                        onChange={(e) => {
+                          const updated = [...(caseData.subsequentHistory || [])];
+                          updated[hIdx] = { ...updated[hIdx], type: e.target.value as any };
+                          setCaseData({ ...caseData, subsequentHistory: updated });
+                        }}
+                        className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#D4AF37] font-bold p-2.5 rounded-xs"
+                      >
+                        <option value="followed">FOLLOWED IN (Affirmed)</option>
+                        <option value="distinguished">DISTINGUISHED IN</option>
+                        <option value="doubted">DOUBTED IN</option>
+                        <option value="overruled">OVERRULED BY</option>
+                        <option value="statute">STATUTE MODIFIED</option>
+                      </select>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                        Case Title / Citation
+                      </label>
+                      <input
+                        type="text"
+                        value={item.case}
+                        onChange={(e) => {
+                          const updated = [...(caseData.subsequentHistory || [])];
+                          updated[hIdx] = { ...updated[hIdx], case: e.target.value };
+                          setCaseData({ ...caseData, subsequentHistory: updated });
+                        }}
+                        className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white font-medium p-2.5 rounded-xs"
+                        placeholder="e.g. State of Karnataka v. Union of India (2018)"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                        Year
+                      </label>
+                      <input
+                        type="number"
+                        value={item.year || 2020}
+                        onChange={(e) => {
+                          const updated = [...(caseData.subsequentHistory || [])];
+                          updated[hIdx] = { ...updated[hIdx], year: parseInt(e.target.value) || 2020 };
+                          setCaseData({ ...caseData, subsequentHistory: updated });
+                        }}
+                        className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                        Judicial Treatment Note
+                      </label>
+                      <input
+                        type="text"
+                        value={item.note || ''}
+                        onChange={(e) => {
+                          const updated = [...(caseData.subsequentHistory || [])];
+                          updated[hIdx] = { ...updated[hIdx], note: e.target.value };
+                          setCaseData({ ...caseData, subsequentHistory: updated });
+                        }}
+                        className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs"
+                        placeholder="e.g. Principle affirmed and extended to digital communication."
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* TAB 5: LEGAL BRIEF */}
       {activeTab === 'brief' && (
         <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-6">
           <div>
@@ -997,6 +1836,7 @@ async function compressImageForUpload(
               className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-3 rounded-xs leading-relaxed"
             />
           </div>
+
 
           <div>
             <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">

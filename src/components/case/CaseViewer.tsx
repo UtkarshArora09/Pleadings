@@ -199,8 +199,8 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
 
   // Calculate total paragraphs cited
   const totalParasCited = episodes.reduce((acc, ep) => {
-    const blocks = ep.layers.story.blocks.concat(ep.layers.advocate.blocks);
-    const count = blocks.filter((b) => b.source.tier === 'BLACK').length;
+    const blocks = (ep.layers?.story?.blocks || []).concat(ep.layers?.advocate?.blocks || []);
+    const count = blocks.filter((b) => b?.source?.tier === 'BLACK').length;
     return acc + count;
   }, 0) || 12;
 
@@ -224,25 +224,28 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
       className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden font-sans md:snap-y md:snap-proximity scroll-smooth"
     >
       {/* Sticky Top Navigation Bar */}
-      <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-3 sm:px-6 py-2.5 flex items-center justify-between transition-all">
-        <div className="flex items-center gap-3">
+      <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-2.5 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all gap-1.5 sm:gap-4 max-w-full overflow-hidden">
+        {/* Left: Back Arrow & Case Title */}
+        <div className="flex items-center gap-1.5 sm:gap-3 min-w-0 shrink">
           <Link
             href="/"
-            className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#D4AF37] hover:text-white transition-colors"
+            className="flex items-center gap-1 text-xs font-mono font-bold text-[#D4AF37] hover:text-white transition-colors shrink-0 p-1 -ml-1"
+            title="Back to Library"
           >
-            <span>←</span>
+            <span className="text-sm sm:text-xs">←</span>
             <span className="hidden sm:inline">LIBRARY</span>
           </Link>
 
-          <span className="text-white/20 hidden sm:inline">|</span>
+          <span className="text-white/20 hidden md:inline">|</span>
 
-          <span className="text-xs font-serif font-bold text-white truncate max-w-[140px] sm:max-w-[280px]">
+          {/* Hide title on mobile screens so DepthToggle and Save always fit cleanly without right-edge cut-off */}
+          <span className="text-xs font-serif font-bold text-white truncate hidden md:inline max-w-[140px] lg:max-w-[280px]">
             {displayTitle}
           </span>
         </div>
 
         {/* Center: Depth Toggle (Story / Student / Advocate) */}
-        <div className="flex items-center">
+        <div className="flex items-center justify-center shrink-0">
           <DepthToggle
             currentDepth={depth}
             onChangeDepth={handleDepthChange}
@@ -250,18 +253,19 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           />
         </div>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-2">
+        {/* Right Actions: Save Button */}
+        <div className="flex items-center gap-1.5 shrink-0">
           <button
             onClick={() => toggleBookmark(caseData.slug)}
-            className={`px-2.5 py-1 text-xs rounded-xs border font-mono transition-all cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1 ${
               bookmarked
                 ? 'bg-[#E50914] text-white border-[#E50914]'
                 : 'bg-white/5 hover:bg-white/10 text-white/80 border-white/15'
             }`}
             title={bookmarked ? 'Saved in library' : 'Save case'}
           >
-            {bookmarked ? '✓ SAVED' : '+ SAVE'}
+            <span>{bookmarked ? '✓' : '+'}</span>
+            <span>{bookmarked ? 'SAVED' : 'SAVE'}</span>
           </button>
         </div>
       </header>
@@ -358,7 +362,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
         >
           {episodes.map((ep, epIdx) => {
             const epNum = ep.n || epIdx + 1;
-            const currentLayer = ep.layers[depth] || ep.layers.story;
+            const currentLayer = ep.layers?.[depth] || ep.layers?.story || { blocks: [] };
             const isVerdictEpisode = epNum === 7;
             const isLocked = isVerdictEpisode && !isVerdictUnlocked;
             const nextEpId = epNum < 8 ? `episode-${epNum + 1}` : 'case-dossier';
@@ -411,7 +415,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                 {/* Episode Content with Blur Gate for Locked Verdict */}
                 <div className={`space-y-4 ${isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''}`}>
                   {/* Sourced Blocks */}
-                  {currentLayer.blocks.map((block, bIdx) => {
+                  {(currentLayer.blocks || []).map((block, bIdx) => {
                     const isAmber = block.source.tier === 'AMBER';
                     let isFirstAmber = false;
                     if (isAmber && !hasFoundAmber) {

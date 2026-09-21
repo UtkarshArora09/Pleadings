@@ -34,7 +34,7 @@ export function DepthToggle({
 
   return (
     <div
-      className={`inline-flex items-center p-1 bg-[#12141C]/90 backdrop-blur-md rounded-full border border-white/15 shadow-xl select-none ${className}`}
+      className={`inline-flex items-center p-0.5 sm:p-1 bg-[#12141C]/90 backdrop-blur-md rounded-full border border-white/15 shadow-xl select-none ${className}`}
       role="tablist"
       aria-label="Content Depth Layer"
     >
@@ -46,7 +46,7 @@ export function DepthToggle({
             role="tab"
             aria-selected={isActive}
             onClick={() => onChangeDepth(opt.id)}
-            className={`flex items-center justify-center px-3.5 py-1 sm:py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-all duration-200 cursor-pointer ${
+            className={`flex items-center justify-center px-2.5 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-tight sm:tracking-wider transition-all duration-200 cursor-pointer ${
               isActive
                 ? 'bg-[#D4AF37] text-black shadow-md'
                 : 'text-white/70 hover:text-white hover:bg-white/10'

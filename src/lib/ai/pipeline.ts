@@ -18,6 +18,22 @@ export interface AdminIngestPayload {
   enrolmentNumber?: string;
   bench?: string[];
   decidedOn?: string;
+  // Student Layer Ingestion Fields
+  studentRatio?: string;
+  studentObiter?: string[];
+  studentExamAngle?: string;
+  studentFlashcards?: { q: string; a: string }[];
+  // Advocate Layer Ingestion Fields
+  advocateStrategy?: string;
+  advocatePinpoints?: { proposition: string; para: number }[];
+  advocateHowToUse?: string[];
+  advocateHowToDistinguish?: string[];
+  advocateSubsequentHistory?: {
+    type: 'followed' | 'distinguished' | 'doubted' | 'overruled' | 'statute';
+    case: string;
+    year: number;
+    note: string;
+  }[];
 }
 
 // Generate URL-friendly slug
@@ -287,12 +303,12 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
         alt: `${court} Bench delivering judgment in ${year}`,
         provenance: 'archival' as const,
       },
-      studentRatio: `The ${court} held that under ${statuteSections}, legal rights and liabilities must be construed strictly according to statutory purpose.`,
-      studentObiter: [
+      studentRatio: payload.studentRatio || `The ${court} held that under ${statuteSections}, legal rights and liabilities must be construed strictly according to statutory purpose.`,
+      studentObiter: payload.studentObiter && payload.studentObiter.length > 0 ? payload.studentObiter : [
         'Courts must balance individual liberties with systemic state objectives.',
         'Procedural safeguards are integral to the administration of substantive justice.',
       ],
-      advocatePinpoints: [
+      advocatePinpoints: payload.advocatePinpoints && payload.advocatePinpoints.length > 0 ? payload.advocatePinpoints : [
         {
           proposition: `Binding interpretation of ${statuteSections}`,
           para: 8,
@@ -305,8 +321,8 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
       kicker: 'EPISODE 08 · RATIO & IMPACT',
       title: 'Jurisprudential Impact & Doctrine',
       storyText: p8,
-      studentRatio: `Authoritative holding on ${statuteSections}.`,
-      advocatePinpoints: [
+      studentRatio: payload.studentRatio || `Authoritative holding on ${statuteSections}.`,
+      advocatePinpoints: payload.advocatePinpoints && payload.advocatePinpoints.length > 0 ? payload.advocatePinpoints : [
         {
           proposition: `Leading precedent on ${statuteSections}`,
           para: 12,
@@ -354,7 +370,9 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
 
     const advocateBlock: Block = {
       type: 'para',
-      text: `TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under ${statuteSections}.`,
+      text: payload.advocateStrategy
+        ? `${payload.advocateStrategy} (Episode ${epDef.n})`
+        : `TRIAL PROPOSITION: Standard of proof and paragraph pinpoint under ${statuteSections}.`,
       source,
     };
 
@@ -370,18 +388,22 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
           blocks: [studentBlock],
           ratio: epDef.studentRatio,
           obiter: epDef.studentObiter,
-          examAngle: `Tested in CLAT-PG, Judiciary Mains, and AIBE under ${statuteSections}. Focus on core ratio and burden of proof.`,
+          examAngle: payload.studentExamAngle || `Tested in CLAT-PG, Judiciary Mains, and AIBE under ${statuteSections}. Focus on core ratio and burden of proof.`,
         },
         advocate: {
           blocks: [advocateBlock],
-          pinpoints: epDef.advocatePinpoints || [
+          pinpoints: epDef.advocatePinpoints || (payload.advocatePinpoints && payload.advocatePinpoints.length > 0 ? payload.advocatePinpoints : [
             {
               proposition: `Statutory application under ${statuteSections}`,
               para: 8,
             },
-          ],
-          howToUse: [`Cite this precedent when establishing threshold elements under ${statuteSections}.`],
-          howToDistinguish: [`Distinguish on facts if intentional misconduct or statutory exceptions do not apply.`],
+          ]),
+          howToUse: payload.advocateHowToUse && payload.advocateHowToUse.length > 0
+            ? payload.advocateHowToUse
+            : [`Cite this precedent when establishing threshold elements under ${statuteSections}.`],
+          howToDistinguish: payload.advocateHowToDistinguish && payload.advocateHowToDistinguish.length > 0
+            ? payload.advocateHowToDistinguish
+            : [`Distinguish on facts if intentional misconduct or statutory exceptions do not apply.`],
         },
       },
       exhibit: epDef.exhibit,
@@ -468,14 +490,14 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
         inThisCase: `The binding legal principle established by the ${court}.`,
       },
     ],
-    flashcards: [
+    flashcards: payload.studentFlashcards && payload.studentFlashcards.length > 0 ? payload.studentFlashcards : [
       {
         q: `What was the central issue in ${title}?`,
         a: `Interpretation and application of ${statuteSections} before the ${court}.`,
       },
       {
         q: `What is the core holding?`,
-        a: `The ${court} established binding rules for due process and statutory burden of proof.`,
+        a: payload.studentRatio || `The ${court} established binding rules for due process and statutory burden of proof.`,
       },
     ],
     affectsYou: {
@@ -500,7 +522,7 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
       },
     ],
     relatedSlugs: ['ghost-case', 'nanavati-case'],
-    subsequentHistory: [
+    subsequentHistory: payload.advocateSubsequentHistory && payload.advocateSubsequentHistory.length > 0 ? payload.advocateSubsequentHistory : [
       {
         type: 'followed',
         case: `${title} Reference Bench`,

@@ -1,3 +1,5 @@
+import { Episode } from './case';
+
 export * from './case';
 
 export type Language = 'en' | 'hi';
@@ -243,6 +245,15 @@ export interface CaseData {
   views?: number;
   panels: StoryPanel[];
   brief: CaseBrief;
+  // Deep layer story episodes & modules
+  episodes?: Episode[];
+  flashcards?: { q: string; a: string }[];
+  subsequentHistory?: {
+    type: 'followed' | 'distinguished' | 'doubted' | 'overruled' | 'statute';
+    case: string;
+    year: number;
+    note: string;
+  }[];
   // CMS & Ingestion fields
   status?: CaseStatus;
   createdAt?: string;
@@ -263,5 +274,23 @@ export interface AdminIngestPayload {
   judgmentUrl?: string;
   judgmentText?: string;
   additionalNotes?: string;
+  reviewer?: string;
+  enrolmentNumber?: string;
+  // Student Layer Ingestion Fields
+  studentRatio?: string;
+  studentObiter?: string[];
+  studentExamAngle?: string;
+  studentFlashcards?: { q: string; a: string }[];
+  // Advocate Layer Ingestion Fields
+  advocateStrategy?: string;
+  advocatePinpoints?: { proposition: string; para: number }[];
+  advocateHowToUse?: string[];
+  advocateHowToDistinguish?: string[];
+  advocateSubsequentHistory?: {
+    type: 'followed' | 'distinguished' | 'doubted' | 'overruled' | 'statute';
+    case: string;
+    year: number;
+    note: string;
+  }[];
 }
 

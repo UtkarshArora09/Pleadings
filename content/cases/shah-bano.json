@@ -1,25 +1,29 @@
 {
   "slug": "shah-bano",
   "title": "The Shah Bano Case",
-  "hook": "Denied alimony after 43 years of marriage. She changed Indian law forever.",
+  "hook": "After forty-three years of marriage, a woman found herself divorced and without support.",
   "court": "Supreme Court of India",
   "year": 1985,
-  "decidedOn": "1985-04-15",
+  "decidedOn": "1985-04-23",
   "bench": [
-    "Supreme Court of India Bench"
+    "Chandrachud, Y.V. (C.J.)",
+    "Misra, R.B.",
+    "Desai, D.A.",
+    "Reddy, O. Chinnappa",
+    "Venkataramiah, E.S."
   ],
   "citations": {
     "primary": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945",
     "parallel": [
-      "(1985) 1 SCC 100",
-      "AIR 1985 101"
+      "1985 SCR (3) 844",
+      "1985 SCALE (1) 767"
     ],
     "neutral": "1985 INSC 7"
   },
   "sourceUrl": "https://indiankanoon.org/doc/823221/",
   "status": {
     "code": "PARTLY_SUPERSEDED",
-    "explain": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001).",
+    "explain": "Section 125 CrPC applicability to Muslim women was modified by the Muslim Women (Protection of Rights on Divorce) Act 1986, and later constitutionally harmonized in Danial Latifi (2001).",
     "chain": [
       {
         "year": 1985,
@@ -41,40 +45,54 @@
   },
   "statuteMap": [
     {
-      "old": "CRPC 125",
-      "new": "BNS §103",
-      "note": "Mapped under the new criminal law codes."
+      "old": "CrPC §125",
+      "new": "BNSS §144",
+      "note": "Secular provision for maintenance of wives, children, and parents."
+    },
+    {
+      "old": "CrPC §127(3)(b)",
+      "new": "BNSS §146(3)(b)",
+      "note": "Cancellation of maintenance upon payment of customary dues on divorce."
+    },
+    {
+      "old": "Muslim Personal Law (Shariat) Application Act, 1937 §2",
+      "new": null,
+      "note": "Application of Muslim personal law in matrimonial and maintenance matters."
     }
   ],
   "doctrines": [
-    "CRPC 125"
+    "CrPC Section 125 Secular Application",
+    "Mahr vs. Dues Payable on Divorce",
+    "Uniform Civil Code (Article 44 Directive)"
   ],
   "categories": [
-    "constitutional"
+    "constitutional",
+    "criminal",
+    "family"
   ],
   "readingTime": {
     "story": 4,
     "student": 6,
     "advocate": 8
   },
-  "featured": false,
+  "featured": true,
   "publishedAt": "2024-01-07T00:00:00Z",
   "poster": {
     "src": "/images/cases/shah-bano.jpg",
-    "alt": "The Shah Bano Case poster",
+    "alt": "The Shah Bano Case Poster",
     "provenance": "archival"
   },
   "episodes": [
     {
       "n": 1,
-      "kicker": "EPISODE 01 · THE ABANDONMENT",
-      "title": "43 Years of Marriage. Evicted with Five Children.",
+      "kicker": "EPISODE 01 · THE PREMISE",
+      "title": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn.",
+              "text": "Mohd Ahmed Khan, an advocate by profession, married Shah Bano Begum in 1932. Three sons and two daughters were born of the marriage. In 1975, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 of the Code of Criminal Procedure, asking for Rs. 500 a month in maintenance — pointing to Khan's professional income, which she put at roughly Rs. 60,000 a year.",
               "source": {
                 "tier": "AMBER"
               }
@@ -85,60 +103,46 @@
           "blocks": [
             {
               "type": "para",
-              "text": "FACTUAL MATRIX (Statement of Facts): Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn. The legal controversy originated from whether the act committed fell within the statutory exceptions.",
+              "text": "LEGAL ANALYSIS: This episode establishes the factual foundation — marital duration, the husband's declared income, and the petition's statutory basis. It sets up \"wife\" as the term whose scope will become the case's central question.",
               "source": {
                 "tier": "AMBER"
               }
             }
           ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC."
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "TRIAL COMMENCEMENT & CHARGE-SHEET: Analysis of the initial FIR and charge sheet framing. Standard of proof: prosecution must establish prima facie commission beyond reasonable doubt before statutory exceptions are evaluated.",
+              "text": "TRIAL PROPOSITION: Establishes the marriage's duration and the husband's declared income — relevant to quantum of maintenance, not to the entitlement question the appeal actually turned on.",
               "source": {
                 "tier": "AMBER"
               }
             }
           ],
-          "pinpoints": [
-            {
-              "proposition": "Essential statutory holding",
-              "para": 8
-            }
-          ],
           "howToUse": [
-            "Cite ¶8 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): No holding-level proposition in this episode — foundational facts only. Do not cite this passage as authority; cite Episodes 5, 7, and 8 for the operative holdings."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: A case involving a shorter marriage, or a husband's undisclosed/disputed income, sits on different footing for quantum purposes — though not for the entitlement question this case actually decides."
           ]
         }
       },
-      "endHook": "How would the judges interpret this critical evidence?",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "How did the next phase unfold? Continue to Episode 2 ↓"
     },
     {
       "n": 2,
       "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
-      "title": "The Indigent Mother vs. The Elite Advocate.",
+      "title": "THE PEOPLE BEHIND THE PETITION.",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "Meet the key parties in India’s most polarized legal battle on secularism and gender justice.",
+              "text": "PERSONA 01 — APPELLANT (HUSBAND)\nMohd Ahmed Khan\nAdvocate by profession\nMarried to Shah Bano for over four decades before the dispute reached court. Argued that his obligations under Muslim personal law had already been discharged.\n\nPERSONA 02 — RESPONDENT (WIFE)\nShah Bano Begum\nPetitioner for maintenance\nFiled for maintenance under Section 125 CrPC after being driven from the matrimonial home in 1975.\n\nPERSONA 03 — INTERVENER\nAll India Muslim Personal Law Board\nIntervened in support of Khan's position on the scope of Muslim personal law.\n\nPERSONA 04 — INTERVENER\nBegum Temur Jehan\nSocial worker\nIntervened in support of the counsel appearing for Shah Bano.",
               "source": {
-                "tier": "BLUE",
-                "secondary": {
-                  "publication": "THE TIMES OF INDIA",
-                  "date": "24 APRIL 1985",
-                  "url": "https://indiankanoon.org/doc/823221/"
-                }
+                "tier": "AMBER"
               }
             }
           ]
@@ -147,70 +151,46 @@
           "blocks": [
             {
               "type": "para",
-              "text": "PARTIES & STATUS: Meet the real parties to the proceedings. The petitioner argued lack of mens rea and bona fide error, whereas the State pressed strict statutory liability.",
+              "text": "LEGAL ANALYSIS: Note the interveners. The All India Muslim Personal Law Board's participation shows this was never a private dispute between two people alone — a religious body sought to shape the outcome, signalling the case's stakes beyond its two named parties.",
               "source": {
-                "tier": "BLUE",
-                "secondary": {
-                  "publication": "THE TIMES OF INDIA",
-                  "date": "24 APRIL 1985",
-                  "url": "https://indiankanoon.org/doc/823221/"
-                }
+                "tier": "AMBER"
               }
             }
           ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC."
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "WITNESS DEPOSITIONS & CROSS-EXAMINATION: Deposition analysis of eye-witnesses and official investigation officers. Key cross-examination hooks: establishing lighting conditions, panic reactions, and absence of prior animosity.",
+              "text": "TRIAL PROPOSITION: The intervention of the All India Muslim Personal Law Board signals that the case's ratio was argued and tested against the organised institutional position of Muslim personal law, not just one litigant's private defence.",
               "source": {
-                "tier": "BLUE",
-                "secondary": {
-                  "publication": "THE TIMES OF INDIA",
-                  "date": "24 APRIL 1985",
-                  "url": "https://indiankanoon.org/doc/823221/"
-                }
+                "tier": "AMBER"
               }
             }
           ],
-          "pinpoints": [
-            {
-              "proposition": "Essential statutory holding",
-              "para": 12
-            }
-          ],
           "howToUse": [
-            "Cite ¶12 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): Not a citable holding — background only."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: Not applicable to this episode."
           ]
         }
       },
-      "endHook": "How would the judges interpret this critical evidence?",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "How did the next phase unfold? Continue to Episode 3 ↓"
     },
     {
       "n": 3,
-      "kicker": "EPISODE 03 · THE LEGAL CLAIM",
-      "title": "The Claim: ₹500/month. The Defense: Instant Triple Talaq.",
+      "kicker": "EPISODE 03 · THE DIVORCE, MID-CASE",
+      "title": "A TALAQ ARRIVES WHILE THE PETITION IS STILL PENDING.",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "In April 1978, Shah Bano filed an application under Section 125 CrPC claiming Rs. 500 per month for maintenance.\n\nIn November 1978, the husband pronounced irrevocable Talaq, deposited Rs. 3,000 as Dower/Mehr, and argued he was completely discharged under Islamic law.",
+              "text": "While Shah Bano's maintenance petition was pending before the Magistrate, Khan divorced her by an irrevocable talaq on 6 November 1978. His defence shifted accordingly: the divorce, he argued, ended any obligation to maintain her; he had already paid Rs. 200 a month for about two years, and he had deposited Rs. 3,000 in court as dower (Mahr) for her iddat period. In August 1979, the Magistrate ordered him to pay just Rs. 25 a month. Shah Bano moved the Madhya Pradesh High Court in revision — which, in July 1980, raised the amount to Rs. 179.20 a month. Khan appealed to the Supreme Court by special leave.",
               "source": {
-                "tier": "BLUE",
-                "secondary": {
-                  "publication": "THE TIMES OF INDIA",
-                  "date": "24 APRIL 1985",
-                  "url": "https://indiankanoon.org/doc/823221/"
-                }
+                "tier": "AMBER"
               }
             }
           ]
@@ -219,76 +199,52 @@
           "blocks": [
             {
               "type": "para",
-              "text": "FRAMED ISSUE 1: Did the accused possess criminal intent or knowledge under {{stat:IPC §302|BNS §103}}, or was the act excused under {{term:mistake-of-fact|Mistake of Fact}}?",
+              "text": "LEGAL ANALYSIS: The talaq, delivered mid-litigation, is what actually creates the legal question. Before it, Khan was simply a husband who had driven his wife from the home; after it, the question becomes whether \"wife\" under Section 125's Explanation still reaches a woman who has since been divorced.",
               "source": {
-                "tier": "BLUE",
-                "secondary": {
-                  "publication": "THE TIMES OF INDIA",
-                  "date": "24 APRIL 1985",
-                  "url": "https://indiankanoon.org/doc/823221/"
-                }
+                "tier": "AMBER"
               }
             }
           ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC."
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "EVIDENTIARY RECONSTRUCTION: Pinpoint holding ¶16. When citing this case, rely on paragraph 16 to argue that subjective perception under stress negates culpable malice.",
+              "text": "TRIAL PROPOSITION: The talaq's timing — after the petition was filed, before final disposal — did not defeat the claim; the Court tested entitlement against the Explanation (b) definition of \"wife,\" not against the procedural moment of divorce.",
               "source": {
-                "tier": "BLUE",
-                "secondary": {
-                  "publication": "THE TIMES OF INDIA",
-                  "date": "24 APRIL 1985",
-                  "url": "https://indiankanoon.org/doc/823221/"
-                }
+                "tier": "AMBER"
               }
             }
           ],
           "pinpoints": [
             {
-              "proposition": "Essential statutory holding",
-              "para": 16
+              "proposition": "Wife means a wife as defined, irrespective of the religion professed by her or by her husband. Therefore, a divorced Muslim woman so long as she has not married, is a wife for the purpose of section 125.",
+              "para": 855
             }
           ],
           "howToUse": [
-            "Cite ¶16 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 855A-B; 854B — 'Wife means a wife as defined, irrespective of the religion professed by her or by her husband. Therefore, a divorced Muslim woman so long as she has not married, is a wife for the purpose of section 125.' Cite for: a Muslim woman divorced during or before Section 125 proceedings qualifies as 'wife' under the Explanation, regardless of when in the litigation the divorce occurs."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: A wife who has remarried after divorce falls outside the Explanation's definition entirely — the judgment's protection is expressly limited to a divorced woman 'so long as she has not remarried.'"
           ]
         }
       },
-      "exhibit": {
-        "kind": "record",
-        "label": "INDORE FIRST CLASS MAGISTRATE DOCKET",
-        "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
-        "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
-        "meta": "01 APRIL 1978 · Official Case File",
-        "sourceUrl": "https://indiankanoon.org/doc/823221/"
-      },
-      "endHook": "How would the judges interpret this critical evidence?",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "How did the next phase unfold? Continue to Episode 4 ↓"
     },
     {
       "n": 4,
-      "kicker": "EPISODE 04 · COURTROOM CLASH",
-      "title": "Personal Law vs. Secular Criminal Code.",
+      "kicker": "EPISODE 04 · TWO EARLIER RULINGS, ONE DOUBTING BENCH",
+      "title": "THE COURT HAD ANSWERED THIS BEFORE. NOW A BENCH WASN'T SURE.",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "The constitutional bench examined whether Section 125 CrPC is truly universal across all religions in India.",
+              "text": "Two earlier three-judge decisions of the Supreme Court — Bai Tahira v. Ali Hussain Fidalli Chothia and Fazlunbi v. K. Khader Vali — had already held that Section 125 applied to Muslims, and that a divorced Muslim wife could claim maintenance under it. But when Khan's appeal reached a Bench of Justices Murtaza Fazal Ali and A. Varadarajan, they doubted those rulings, holding that they might conflict with Section 127(3)(b) of the Code and with Section 2 of the Muslim Personal Law (Shariat) Application Act, 1937. On 3 February 1981, they referred the matter to a larger Bench of more than three judges.",
               "source": {
-                "tier": "BLACK",
-                "para": 20,
-                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ]
@@ -297,72 +253,46 @@
           "blocks": [
             {
               "type": "para",
-              "text": "EVIDENTIARY ANALYSIS: The court evaluated the contemporaneous records and depositions. Under Section 105 Evidence Act, the burden of proving legal exceptions lies strictly on the accused.",
+              "text": "LEGAL ANALYSIS: A key procedural point for exams — a smaller Bench that doubts an earlier Bench's ruling cannot simply overrule it. It must refer the matter to a larger Bench, exactly as happened here, which is why this case was ultimately decided by five judges instead of three.",
               "source": {
-                "tier": "BLACK",
-                "para": 20,
-                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC."
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "FORENSIC & EXHIBIT SCRUTINY: Forensic memos and station diary entries prove that the physical artefact was handled without tampering, satisfying Section 27 Evidence Act requirements.",
+              "text": "TRIAL PROPOSITION: A smaller coordinate Bench that doubts an earlier ruling must refer the matter to a larger Bench rather than depart from it directly — the exact mechanism that produced this 5-Judge decision.",
               "source": {
-                "tier": "BLACK",
-                "para": 20,
-                "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
-          "pinpoints": [
-            {
-              "proposition": "Essential statutory holding",
-              "para": 20
-            }
-          ],
           "howToUse": [
-            "Cite ¶20 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): Procedural point; drawn from the Court's own recital of the referral order dated 3 February 1981 (quoted in full in the judgment), not separately pinpointed in the SCR headnote. Cite for: the referral mechanism itself when arguing that a lower or coordinate Bench cannot bypass binding precedent without proper reference."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: Not applicable — this is settled procedure, not a fact pattern to distinguish."
           ]
         }
       },
-      "exhibit": {
-        "kind": "record",
-        "label": "THE TIMES OF INDIA",
-        "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
-        "body": "Archival press reproduction from THE TIMES OF INDIA. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
-        "meta": "24 APRIL 1985 · Historic News Archive",
-        "sourceUrl": "https://indiankanoon.org/doc/823221/"
-      },
-      "endHook": "How would the judges interpret this critical evidence?",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "How did the next phase unfold? Continue to Episode 5 ↓"
     },
     {
       "n": 5,
-      "kicker": "EPISODE 05 · YOU ARE THE JUDGE",
-      "title": "Does Secular Law Override Personal Law for Destitute Women?",
+      "kicker": "EPISODE 05 · COURTROOM SHOWDOWN",
+      "title": "SECTION 125 CrPC VS. THE LIMITS OF IDDAT.",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "Cast your judicial decision before reading the Supreme Court verdict.",
+              "text": "KHAN'S ARGUMENT\nUnder Muslim personal law, a husband's liability to maintain his divorced wife ends with the iddat period — regardless of whether she can support herself afterward. Section 127(3)(b) of the Code required the maintenance order to be cancelled once the wife had received 'the whole of the sum... payable on such divorce' under her personal law — and Mahr, Khan argued, was exactly that sum.\n\nSHAH BANO'S ARGUMENT\nSection 125 is a secular provision of the criminal code, not a codification of any single religion's law, and covers any wife 'unable to maintain herself,' regardless of her faith. Mahr is not a sum payable 'on divorce' at all — it is payable in consideration of the marriage itself, merely falling due (in its deferred form) on the marriage's dissolution.",
               "source": {
-                "tier": "BLACK",
-                "para": 24,
-                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ]
@@ -371,64 +301,52 @@
           "blocks": [
             {
               "type": "para",
-              "text": "PROSECUTION vs DEFENCE SUBMISSIONS: Prosecution argued reckless disregard for human safety; Defence argued {{term:bona-fide|Bona Fide}} belief under sudden emergency.",
+              "text": "LEGAL ANALYSIS: This is the doctrinal core for exam answers — two statutory provisions in tension. Section 125's broad, religion-neutral definition of 'wife' against Section 127(3)(b)'s exception for sums 'payable on divorce' under personal law. Learn exactly what each side argued Mahr actually was.",
               "source": {
-                "tier": "BLACK",
-                "para": 24,
-                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC."
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "BAR ADMISSIBILITY & CITATION RULES: Cite parallel precedents and establish that subjective belief held in good faith meets the {{term:mens-rea|Mens Rea}} threshold.",
+              "text": "TRIAL PROPOSITION: The core statutory-interplay holding — deferred Mahr, though it falls due on dissolution of the marriage, is not a sum 'payable on divorce' within Section 127(3)(b), because it is consideration for the marriage, not for the divorce.",
               "source": {
-                "tier": "BLACK",
-                "para": 24,
-                "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
           "pinpoints": [
             {
-              "proposition": "Essential statutory holding",
-              "para": 24
+              "proposition": "Divorce may be a convenient or identifiable point of time at which the deferred amount has to be paid by the husband to the wife. But, the payment of the amount is not occasioned by the divorce...",
+              "para": 863
             }
           ],
           "howToUse": [
-            "Cite ¶24 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 863B-D; 863D-G; 863H — 'Divorce may be a convenient or identifiable point of time at which the deferred amount has to be paid by the husband to the wife. But, the payment of the amount is not occasioned by the divorce...' Cite for: the proposition that a sum merely coinciding with, or contingent on, dissolution of marriage is not automatically a sum 'payable on divorce' under Section 127(3)(b)."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: A personal-law regime where a sum is expressly and solely triggered by the divorce itself (not merely payable in consideration of the marriage and falling due on its end) would sit outside this reasoning — the Court's logic turns specifically on Mahr being marriage-consideration, not divorce-consideration."
           ]
         }
       },
-      "endHook": "How would the judges interpret this critical evidence?",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "How did the next phase unfold? Continue to Episode 6 ↓"
     },
     {
       "n": 6,
-      "kicker": "EPISODE 06 · THE UNANIMOUS VERDICT",
-      "title": "23 April 1985: Section 125 CrPC is Secular and Universal.",
+      "kicker": "EPISODE 06 · YOU ARE THE JUDGE",
+      "title": "DOES A SECULAR STATUTE REACH INTO PERSONAL LAW?",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "A unanimous 5-judge Constitution Bench led by CJI Chandrachud held:\n\n**\"Section 125 CrPC is a secular provision designed to prevent destitution. It cuts across the barriers of religion and applies equally to all wives, children, and parents.\"**\n\nThe court ordered the husband to pay maintenance, establishing gender justice as a paramount constitutional principle.",
+              "text": "A woman married for more than four decades is left without means to support herself once her husband, exercising a right his personal law gives him, ends the marriage. He says he's already paid what the law requires. She says she still can't maintain herself, and the law owes her more.\n\nTwo real positions sat before the Bench:\n\n> Uphold Khan's argument — liability ends at iddat once Mahr is paid; allow the appeal.\n\n> Uphold Shah Bano's claim — Section 125 reaches her regardless of personal law; dismiss the appeal.",
               "source": {
-                "tier": "BLACK",
-                "para": 28,
-                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ]
@@ -437,64 +355,46 @@
           "blocks": [
             {
               "type": "para",
-              "text": "JUDICIAL DELIBERATION: The bench weighed whether a reasonable person in the accused's position and environment would have formed the same mistaken factual conclusion.",
+              "text": "LEGAL ANALYSIS: The Court's actual method here is worth noting for exams — it did not simply weigh which law should 'win.' It first asked whether a real conflict between Section 125 and Muslim personal law existed at all, before deciding which would prevail.",
               "source": {
-                "tier": "BLACK",
-                "para": 28,
-                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC."
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "BENCH ARGUMENT STRATEGY: Address the bench on why criminal punishment requires conscious blameworthiness, distinguishing accidental harm from intentional cruelty.",
+              "text": "TRIAL PROPOSITION: Framing episode only — no independent holding to cite here.",
               "source": {
-                "tier": "BLACK",
-                "para": 28,
-                "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
-          "pinpoints": [
-            {
-              "proposition": "Essential statutory holding",
-              "para": 28
-            }
-          ],
           "howToUse": [
-            "Cite ¶28 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): Not applicable."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: Not applicable."
           ]
         }
       },
-      "endHook": "How would the judges interpret this critical evidence?",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "How did the next phase unfold? Continue to Episode 7 ↓"
     },
     {
       "n": 7,
-      "kicker": "EPISODE 07 · THE LEGACY",
-      "title": "The Danial Latifi Precedent: Enduring Protection.",
+      "kicker": "EPISODE 07 · THE COURT'S RULING",
+      "title": "THE APPEAL FAILS. THE MAINTENANCE STANDS.",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "Although the subsequent 1986 Act attempted to restrict Section 125, the Supreme Court in **Danial Latifi v. Union of India (2001)** interpreted the law to require husbands to make a \"reasonable and fair provision\" for the wife’s ENTIRE life within the Iddat period.\n\nShah Bano’s courageous crusade laid the bedrock for modern gender equality in Indian family jurisprudence.",
+              "text": "The five-judge Bench, led by Chief Justice Y.V. Chandrachud, dismissed Khan's appeal and confirmed the Madhya Pradesh High Court's order — directing him to pay Rs. 10,000 in costs to Shah Bano. This was the Supreme Court's final disposition of the matter. The Court held that 'wife' under Section 125's Explanation includes a divorced woman who has not remarried, with no religious qualification attached, and that a Muslim husband's obligation does not automatically end at iddat if his divorced wife remains unable to maintain herself. It further held that Mahr is not a sum 'payable on divorce' under Section 127(3)(b), since it is paid in consideration of the marriage, not the divorce — so Khan's Rs. 3,000 deposit could not cancel the order. The Bench affirmed Bai Tahira and Fazlunbi as correctly decided, with one narrow correction on the Mahr/127(3)(b) point, and pointed to Aiyats 241 and 242 of the Quran as themselves supporting a duty of provision for divorced women.",
               "source": {
-                "tier": "BLACK",
-                "para": 32,
-                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ]
@@ -503,81 +403,57 @@
           "blocks": [
             {
               "type": "para",
-              "text": "RATIO DECIDENDI & HOLDING: The court delivered the authoritative ruling on statutory interpretation, laying down the binding legal threshold for future cases.",
+              "text": "LEGAL ANALYSIS: Memorize the outcome precisely — appeal dismissed, Madhya Pradesh High Court's order confirmed, Rs. 10,000 costs awarded to the respondent. Note also that Bai Tahira and Fazlunbi were not overruled — they were affirmed, with only a narrow correction on the Mahr/127(3)(b) point.",
               "source": {
-                "tier": "BLACK",
-                "para": 32,
-                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
-          "ratio": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband.",
-          "obiter": [
-            "The observations regarding systemic police investigation reforms constitute persuasive obiter dicta."
-          ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC."
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "APEX COURT HOLDING & PINPOINTS: Pinpoint ¶32. The court established that Section 79 IPC applies when an honest mistake of fact eliminates criminal intent.",
+              "text": "TRIAL PROPOSITION: The ratio-bearing holding — Section 125 is secular in character, and a divorced Muslim wife unable to maintain herself is entitled to apply under it, beyond the iddat period. This is the Court's final disposition (Gate 2 confirmed) — safe to cite without a procedural-posture caveat.",
               "source": {
-                "tier": "BLACK",
-                "para": 32,
-                "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
           "pinpoints": [
             {
-              "proposition": "Essential statutory holding",
-              "para": 32
+              "proposition": "A divorced Muslim wife is, therefore, entitled to apply for maintenance under section 125 of the Code.",
+              "para": 865
+            },
+            {
+              "proposition": "Rejection of the argument that a Muslim husband's liability is limited to the iddat period despite the wife's continuing inability to maintain herself.",
+              "para": 838
             }
           ],
           "howToUse": [
-            "Cite ¶32 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 865H, 866A-C — 'A divorced Muslim wife is, therefore, entitled to apply for maintenance under section 125 of the Code.'",
+            "PINPOINT: 838H, 851A-B — rejection of the argument that a Muslim husband's liability is limited to the iddat period despite the wife's continuing inability to maintain herself. Cite for: the core holding on Section 125's applicability to Muslims, and the 'unable to maintain herself' standard displacing any personal-law iddat cap."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: This holding is expressly conditioned on the wife being 'unable to maintain herself.' Per PINPOINT: 858D-G; 859C-D, a divorced wife shown to be capable of self-maintenance falls back to the personal-law position — liability ceasing at iddat. A respondent with demonstrated means of self-support is materially distinguishable on this fact alone."
           ]
         }
       },
-      "exhibit": {
-        "kind": "quote",
-        "label": "RATIO DECIDENDI",
-        "headline": "Holding of the Bench · Supreme Court of India",
-        "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
-        "meta": "AIR 1985 · Certified Law Report",
-        "para": 32
-      },
-      "image": {
-        "src": "/images/cases/shah-bano.jpg",
-        "alt": "The Shah Bano Case courtroom scene",
-        "provenance": "archival"
-      },
-      "endHook": "How would the judges interpret this critical evidence?",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "How did the next phase unfold? Continue to Episode 8 ↓"
     },
     {
       "n": 8,
-      "kicker": "EPISODE 08 · RATIO & IMPACT",
-      "title": "Jurisprudential Ratio & Lasting Impact",
+      "kicker": "EPISODE 08 · LEGAL RATIO & IMPACT",
+      "title": "SECTION 125 IS SECULAR. IT DOES NOT ASK YOUR RELIGION.",
       "layers": {
         "story": {
           "blocks": [
             {
               "type": "para",
-              "text": "Although the subsequent 1986 Act attempted to restrict Section 125, the Supreme Court in **Danial Latifi v. Union of India (2001)** interpreted the law to require husbands to make a \"reasonable and fair provision\" for the wife’s ENTIRE life within the Iddat period.\n\nShah Bano’s courageous crusade laid the bedrock for modern gender equality in Indian family jurisprudence.",
+              "text": "Section 125 CrPC is a provision of general, secular application that does not yield to personal law. A divorced Muslim wife unable to maintain herself is entitled to maintenance under it, even beyond the iddat period — because Mahr is not a sum 'payable on divorce' within Section 127(3)(b), and because Muslim personal law, on the Court's reading, does not contemplate leaving an indigent divorced wife without support at all.\n\nThe Court also placed on record a separate observation — not part of its operative holding — regretting that Article 44 of the Constitution, the directive to secure a Uniform Civil Code, remained unimplemented, and urging the State to act on it.",
               "source": {
-                "tier": "BLACK",
-                "para": 36,
-                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ]
@@ -586,1120 +462,161 @@
           "blocks": [
             {
               "type": "para",
-              "text": "CONSTITUTIONAL & STATUTORY AFTERMATH: The judgment became landmark jurisprudence on criminal culpability and due process.",
+              "text": "LEGAL ANALYSIS: This is the case to cite for 'Section 125 CrPC is secular and religion-neutral in application' and for 'Mahr is not a sum payable on divorce under Section 127(3)(b).' Keep the Article 44 / Uniform Civil Code passage separate in your notes — the judgment itself frames it as an 'Observation,' not as part of the operative ratio.",
               "source": {
-                "tier": "BLACK",
-                "para": 36,
-                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
-          "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CrPC 125 · Maintenance Rights. Focus on the evidentiary threshold and burden of proof."
+          "ratio": "Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.",
+          "examAngle": "Provisions Involved: CrPC §125 (maintenance of wives, children, parents); CrPC §127(3)(b); §2, Muslim Personal Law (Shariat) Application Act, 1937; Article 44, Constitution of India (obiter only)\nPrecedents Relied On / Affirmed: Bai Tahira v. Ali Hussain Fidalli Chothia [1979] 2 SCR 75; Fazlunbi v. K. Khader Vali [1980] 3 SCR 1127; Jagir Kaur v. Jaswant Singh [1964] 2 SCR 73; Nanak Chand v. Shri Chandra Kishore Agarwala [1970] 1 SCR 565; Hamira Bibi v. Zubaida Bibi 43 IA 294; Syed Sabir Hussain v. Farzand Hasan 65 IA 119"
         },
         "advocate": {
           "blocks": [
             {
               "type": "para",
-              "text": "PRECEDENT VALUE & SUBSEQUENT CITATION: How to apply this ruling in contemporary trial courts under the Bharatiya Nyaya Sanhita framework.",
+              "text": "TRIAL PROPOSITION: The general proposition that Section 125 CrPC is religion-neutral, plus a caution on the non-binding Article 44 observation.",
               "source": {
-                "tier": "BLACK",
-                "para": 36,
-                "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
+                "tier": "AMBER"
               }
             }
           ],
           "pinpoints": [
             {
-              "proposition": "Essential statutory holding",
-              "para": 36
+              "proposition": "Section 125 is truly secular in character... Whether the spouses are Hindus or Muslims, Christians or Parsis, Pagans or Heathens, is wholly irrelevant in the application of these provisions.",
+              "para": 834
             }
           ],
           "howToUse": [
-            "Cite ¶36 to establish the threshold test under CrPC 125 · Maintenance Rights."
+            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 834D-E; 855E-G — 'Section 125 is truly secular in character... Whether the spouses are Hindus or Muslims, Christians or Parsis, Pagans or Heathens, is wholly irrelevant in the application of these provisions.' Cite for: the general, religion-neutral character of Section 125 CrPC (now mirrored in Section 144, Bharatiya Nagarik Suraksha Sanhita, 2023) in any matter involving maintenance across personal-law lines."
           ],
           "howToDistinguish": [
-            "Opposing counsel will distinguish if conscious premeditation or recklessness is established on record."
+            "HOW OPPOSING COUNSEL WILL DISTINGUISH: The Article 44/Uniform Civil Code passage is expressly headed 'OBSERVATION' in the report and is not part of the operative ratio. A submission that relies on this case for a Uniform Civil Code argument can be met with the objection that the passage is obiter, not binding precedent — the binding holding is confined to Sections 125 and 127(3)(b) CrPC."
           ]
         }
       },
-      "endHook": "The judgment remains a foundational precedent in Indian jurisprudence.",
-      "audio": {
-        "durationSec": 240
-      }
+      "endHook": "Case dossier complete."
     }
   ],
   "vote": {
-    "question": "Should Section 125 CrPC apply equally to a divorced Muslim woman unable to maintain herself?",
-    "context": "Section 125 is part of the criminal procedure code intended to prevent destitution.",
+    "question": "Does Section 125 CrPC override Muslim Personal Law regarding maintenance of a divorced wife after the Iddat period?",
+    "context": "The Constitution Bench had to decide if a secular criminal procedural remedy overrides religious personal law when a divorced wife is indigent.",
     "options": [
       {
-        "id": "opt-a",
-        "label": "Option A · In favour of Petitioner / Defence",
-        "argument": "Uphold the bona fide protection and constitutional liberty."
+        "id": "opt-1",
+        "label": "Personal Law Prevails",
+        "argument": "Maintenance is strictly limited to the Iddat period and Mehr as prescribed by personal law."
       },
       {
-        "id": "opt-b",
-        "label": "Option B · In favour of State / Strict Liability",
-        "argument": "Enforce strict liability to deter negligence and protect public order."
+        "id": "opt-2",
+        "label": "Section 125 Overrides",
+        "argument": "Section 125 CrPC is a secular, universal anti-vagrancy measure applying regardless of religion."
       }
     ],
-    "courtChoseOptionId": "opt-a"
+    "courtChoseOptionId": "opt-2"
   },
   "glossary": [
     {
-      "slug": "mens-rea",
-      "term": "Mens Rea",
-      "inThisCase": "The court analyzed whether the accused possessed the requisite guilty mind under the circumstances."
+      "slug": "iddat",
+      "term": "Iddat",
+      "inThisCase": "The period of waiting observed by a Muslim woman following the dissolution of marriage or death of her husband, during which she cannot remarry."
     },
     {
-      "slug": "bona-fide",
-      "term": "Bona Fide",
-      "inThisCase": "Examined whether the actions met the standard of good faith and due care."
+      "slug": "mahr",
+      "term": "Mahr / Dower",
+      "inThisCase": "A mandatory payment, in the form of money or possessions paid or promised by the groom to the bride at the time of Islamic marriage."
+    },
+    {
+      "slug": "talaq-ul-biddat",
+      "term": "Irrevocable Talaq",
+      "inThisCase": "An instantaneous and irreversible dissolution of marriage pronounced by the husband."
     }
   ],
   "flashcards": [
     {
-      "q": "Which court decided The Shah Bano Case and in what year?",
-      "a": "Supreme Court of India in the year 1985."
+      "q": "What was the central question in Mohd. Ahmed Khan v. Shah Bano Begum (1985)?",
+      "a": "Whether Section 125 of the Code of Criminal Procedure applies to a divorced Muslim woman unable to maintain herself, even beyond the iddat period and despite payment of Mahr."
     },
     {
-      "q": "What was the primary legal issue addressed in this case?",
-      "a": "CrPC 125 · Maintenance Rights"
+      "q": "What was the Supreme Court's holding on Section 125 CrPC and personal law?",
+      "a": "Section 125 CrPC is a secular provision of general application designed to prevent vagrancy and applies to all citizens irrespective of religion."
     },
     {
-      "q": "What is the core Ratio Decidendi of the judgment?",
-      "a": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband."
+      "q": "Why did the Court hold Mahr does not trigger Section 127(3)(b) CrPC?",
+      "a": "Mahr is paid in consideration of the marriage, not the divorce. Hence, it is not a sum 'payable on divorce' under Section 127(3)(b)."
     },
     {
-      "q": "What is the primary citation for this ruling?",
-      "a": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-    },
-    {
-      "q": "What is the current legal status of this precedent?",
-      "a": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001)."
+      "q": "What was the Bench composition and author of the judgment?",
+      "a": "5-Judge Constitution Bench headed and authored by Chief Justice Y.V. Chandrachud (with Misra, Desai, Reddy, and Venkataramiah, JJ.)."
     }
   ],
   "affectsYou": {
-    "heading": "Legal Takeaways from The Shah Bano Case",
+    "heading": "Why the Shah Bano precedent protects rights today",
     "points": [
-      "Precedent establishes binding guidelines across all subordinate courts.",
-      "Applicable provisions must be evaluated based on the exact factual matrix."
+      "Establishes that economic vulnerability takes precedence over personal law exemptions in criminal maintenance petitions.",
+      "Reaffirms the principle that statutory social-welfare legislation applies universally across religious identities in India.",
+      "Directly led to the 1986 Act and the Danial Latifi constitutional compromise ensuring long-term financial security for divorced women."
     ],
     "actionLink": {
-      "label": "View Certified Judgment",
-      "url": "https://indiankanoon.org/doc/823221/"
+      "label": "Read Danial Latifi Harmonization",
+      "url": "https://indiankanoon.org/doc/744031/"
     }
   },
   "timeline": [
     {
+      "year": 1932,
+      "event": "Mohd Ahmed Khan marries Shah Bano Begum."
+    },
+    {
+      "year": 1975,
+      "event": "Khan drives Shah Bano out of the matrimonial home."
+    },
+    {
+      "year": 1978,
+      "event": "Shah Bano files petition under Section 125 CrPC; Khan pronounces irrevocable talaq."
+    },
+    {
+      "year": 1979,
+      "event": "Judicial Magistrate Indore awards Rs. 25 per month."
+    },
+    {
+      "year": 1980,
+      "event": "Madhya Pradesh High Court enhances maintenance to Rs. 179.20 per month."
+    },
+    {
+      "year": 1981,
+      "event": "Supreme Court 2-judge bench refers the matter to a 5-judge Constitution Bench."
+    },
+    {
       "year": 1985,
-      "event": "Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women."
-    },
-    {
-      "year": 1986,
-      "event": "Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986."
-    },
-    {
-      "year": 2001,
-      "event": "Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life."
-    },
-    {
-      "year": 2019,
-      "event": "Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
+      "event": "Supreme Court dismisses husband's appeal and affirms Section 125's secular application."
     }
-  ],
-  "relatedSlugs": [
-    "ghost-case",
-    "nanavati-case"
   ],
   "subsequentHistory": [
     {
-      "type": "followed",
-      "case": "Subsequent High Court & Supreme Court Decisions",
-      "year": 1990,
-      "note": "Affirmed and applied in subsequent landmark jurisprudence."
-    }
-  ],
-  "sources": [
-    {
-      "label": "Indian Kanoon Certified Record",
-      "url": "https://indiankanoon.org/doc/823221/"
+      "citation": "Danial Latifi v. Union of India (2001) 7 SCC 740",
+      "status": "AFFIRMED / HARMONIZED",
+      "court": "Supreme Court of India (5-Judge Bench)",
+      "year": 2001,
+      "summary": "Upheld the constitutional validity of the 1986 Muslim Women Act by interpreting Section 3(1)(a) to mean that a reasonable and fair provision must be made within the iddat period for the divorced wife's entire future life, reaffirming the essence of Shah Bano."
     },
     {
-      "label": "Supreme Court of India / High Court Registry",
-      "url": "https://main.sci.gov.in/"
+      "citation": "Shabana Bano v. Imran Khan (2010) 1 SCC 216",
+      "status": "AFFIRMED",
+      "court": "Supreme Court of India",
+      "year": 2010,
+      "summary": "Reiterated that a divorced Muslim woman is entitled to claim maintenance under Section 125 CrPC as long as she does not remarry, even after expiry of the iddat period."
+    },
+    {
+      "citation": "Mohd Abdul Samad v. State of Telangana (2024) 8 SCC 419",
+      "status": "AFFIRMED",
+      "court": "Supreme Court of India",
+      "year": 2024,
+      "summary": "Reaffirmed that Section 125 CrPC is an independent secular remedy available to divorced Muslim women in addition to the 1986 Act."
     }
   ],
   "review": {
-    "reviewer": "Adv. Girish Kr. Srivastava",
-    "enrolment": "D/842/1991",
-    "reviewedOn": "2026-03-12"
-  },
-  "hi": {
-    "title": "शाह बानो मामला",
-    "hook": "43 साल बाद बिना गुजारा भत्ता छोड़ा गया। उसने भारतीय कानून का इतिहास",
-    "court": "Supreme Court of India",
-    "year": 1985,
-    "decidedOn": "1985-04-15",
-    "bench": [
-      "Supreme Court of India पीठ"
-    ],
-    "status": {
-      "code": "PARTLY_SUPERSEDED",
-      "explain": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001).",
-      "chain": [
-        {
-          "year": 1985,
-          "event": "Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women."
-        },
-        {
-          "year": 1986,
-          "event": "Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986."
-        },
-        {
-          "year": 2001,
-          "event": "Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life."
-        },
-        {
-          "year": 2019,
-          "event": "Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
-        }
-      ]
-    },
-    "statuteMap": [
-      {
-        "old": "CRPC 125",
-        "new": "BNS §103",
-        "note": "Mapped under the new criminal law codes."
-      }
-    ],
-    "doctrines": [
-      "CRPC 125"
-    ],
-    "categories": [
-      "constitutional"
-    ],
-    "readingTime": {
-      "story": 4,
-      "student": 6,
-      "advocate": 8
-    },
-    "featured": false,
-    "publishedAt": "2024-01-07T00:00:00Z",
-    "poster": {
-      "src": "/images/cases/shah-bano.jpg",
-      "alt": "शाह बानो मामला पोस्टर",
-      "provenance": "archival"
-    },
-    "episodes": [
-      {
-        "n": 1,
-        "kicker": "एपिसोड 01 · बेसहारा छोड़ना",
-        "title": "43 साल का वैवाहिक जीवन और पांच बच्चों के साथ निष्कासन।",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 1): इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 1): साक्ष्य और गवाहों के बयानों का विश्लेषण। इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      },
-      {
-        "n": 2,
-        "kicker": "एपिसोड 02 · मुख्य पात्र",
-        "title": "एक बेसहारा मां बनाम शहर का दिग्गज वकील।",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।",
-                "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "THE TIMES OF INDIA",
-                    "date": "24 APRIL 1985",
-                    "url": "https://indiankanoon.org/doc/823221/"
-                  }
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 2): जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।",
-                "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "THE TIMES OF INDIA",
-                    "date": "24 APRIL 1985",
-                    "url": "https://indiankanoon.org/doc/823221/"
-                  }
-                }
-              }
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 2): साक्ष्य और गवाहों के बयानों का विश्लेषण। जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।",
-                "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "THE TIMES OF INDIA",
-                    "date": "24 APRIL 1985",
-                    "url": "https://indiankanoon.org/doc/823221/"
-                  }
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 12
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      },
-      {
-        "n": 3,
-        "kicker": "एपिसोड 03 · ₹500 का भरण-पोषण",
-        "title": "मांग: ₹500 महीना। बचाव: तीन तलाक का सहारा।",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।",
-                "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "THE TIMES OF INDIA",
-                    "date": "24 APRIL 1985",
-                    "url": "https://indiankanoon.org/doc/823221/"
-                  }
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 3): अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।",
-                "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "THE TIMES OF INDIA",
-                    "date": "24 APRIL 1985",
-                    "url": "https://indiankanoon.org/doc/823221/"
-                  }
-                }
-              }
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 3): साक्ष्य और गवाहों के बयानों का विश्लेषण। अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।",
-                "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "THE TIMES OF INDIA",
-                    "date": "24 APRIL 1985",
-                    "url": "https://indiankanoon.org/doc/823221/"
-                  }
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 16
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "exhibit": {
-          "kind": "record",
-          "label": "INDORE FIRST CLASS MAGISTRATE DOCKET",
-          "headline": "OFFICIAL FIRST INFORMATION REPORT & INVESTIGATION LOG",
-          "body": "Recorded at the police station immediately following the incident. Recovered depositions, site map memo, and contemporaneous statements entered in case diary.",
-          "meta": "01 APRIL 1978 · Official Case File",
-          "sourceUrl": "https://indiankanoon.org/doc/823221/"
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      },
-      {
-        "n": 4,
-        "kicker": "एपिसोड 04 · अदालत में टकराव",
-        "title": "पर्सनल लॉ बनाम धर्मनिरपेक्ष आपराधिक संहिता।",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 20,
-                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 4): संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 20,
-                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 4): साक्ष्य और गवाहों के बयानों का विश्लेषण। संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 20,
-                  "paraText": "From the Certified Judgment ¶20: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 20
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "exhibit": {
-          "kind": "record",
-          "label": "THE TIMES OF INDIA",
-          "headline": "CONTEMPORARY NEWS REPORT: COURT HEARS STIRRING TRIAL ARGUMENTS",
-          "body": "Archival press reproduction from THE TIMES OF INDIA. \"Crowds gathered as counsel debated the legal boundaries between intentional crime and tragic mistake...\"",
-          "meta": "24 APRIL 1985 · Historic News Archive",
-          "sourceUrl": "https://indiankanoon.org/doc/823221/"
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      },
-      {
-        "n": 5,
-        "kicker": "एपिसोड 05 · आप हैं जज",
-        "title": "क्या बेसहारा महिलाओं के लिए धर्मनिरपेक्ष कानून पर्सनल लॉ से ऊपर है?",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 24,
-                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 5): सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 24,
-                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 5): साक्ष्य और गवाहों के बयानों का विश्लेषण। सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 24,
-                  "paraText": "From the Certified Judgment ¶24: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 24
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      },
-      {
-        "n": 6,
-        "kicker": "एपिसोड 06 · ऐतिहासिक फैसला",
-        "title": "23 अप्रैल 1985: धारा 125 सीआरपीसी धर्मनिरपेक्ष और सार्वभौमिक है।",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**\"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।\"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 28,
-                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 6): सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**\"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।\"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 28,
-                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 6): साक्ष्य और गवाहों के बयानों का विश्लेषण। सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**\"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।\"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 28,
-                  "paraText": "From the Certified Judgment ¶28: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 28
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      },
-      {
-        "n": 7,
-        "kicker": "एपिसोड 07 · कानूनी प्रभाव",
-        "title": "दानियाल लतीफी फैसला: महिलाओं के अधिकारों की रक्षा।",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 32,
-                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 7): यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 32,
-                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "ratio": "अदालत द्वारा स्थापित मुख्य विधिक सिद्धांत।",
-            "obiter": [
-              "प्रक्रियात्मक सुधारों से संबंधित प्रासंगिक टिप्पणियां।"
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 7): साक्ष्य और गवाहों के बयानों का विश्लेषण। यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 32,
-                  "paraText": "From the Certified Judgment ¶32: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 32
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "exhibit": {
-          "kind": "quote",
-          "label": "RATIO DECIDENDI",
-          "headline": "Holding of the Bench · Supreme Court of India",
-          "body": "The court examined the statutory scheme and held that the legal defence was firmly established on the facts.",
-          "meta": "AIR 1985 · Certified Law Report",
-          "para": 32
-        },
-        "image": {
-          "src": "/images/cases/shah-bano.jpg",
-          "alt": "The Shah Bano Case courtroom scene",
-          "provenance": "archival"
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      },
-      {
-        "n": 8,
-        "kicker": "एपिसोड 08 · कार्यवाही",
-        "title": "एपिसोड 8",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अदालत के समक्ष कानूनी कार्यवाही।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 36,
-                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "कानूनी विश्लेषण (कड़ी 8): अदालत की कार्यवाही।",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 36,
-                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "examAngle": "न्यायिक सेवा और विधि परीक्षाओं के लिए अत्यधिक महत्वपूर्ण।"
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "अधिवक्ता दृष्टिकोण (कड़ी 8): साक्ष्य और गवाहों के बयानों का विश्लेषण। ",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 36,
-                  "paraText": "From the Certified Judgment ¶36: \"The court examined the depositions on record and held that the statutory requirements must be strictly interpreted in accordance with the Constitution.\"",
-                  "cite": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Essential statutory holding",
-                "para": 36
-              }
-            ],
-            "howToUse": [
-              "तथ्यों के आधार पर इस सिद्धांत को उद्धृत करें।"
-            ],
-            "howToDistinguish": [
-              "विपक्षी वकील वास्तविक इरादे और साक्ष्य के आधार पर अंतर कर सकते हैं।"
-            ]
-          }
-        },
-        "endHook": "इस कानूनी मोड़ पर अदालत क्या निर्णय लेगी?",
-        "audio": {
-          "durationSec": 240
-        }
-      }
-    ],
-    "vote": {
-      "question": "क्या धारा 125 सीआरपीसी तलाकशुदा मुस्लिम महिला पर भी समान रूप से लागू होनी चाहिए?",
-      "context": "धारा 125 आपराधिक प्रक्रिया का हिस्सा है जिसका उद्देश्य बेसहारा महिलाओं को भुखमरी से बचाना है।",
-      "options": [
-        {
-          "id": "opt-a",
-          "label": "विकल्प A · बचाव पक्ष के पक्ष में",
-          "argument": "सद्भाव और व्यक्तिगत स्वतंत्रता के अधिकार को बरकरार रखें।"
-        },
-        {
-          "id": "opt-b",
-          "label": "विकल्प B · अभियोजन पक्ष के पक्ष में",
-          "argument": "सख्त दायित्व लागू करें और लापरवाही को दंडित करें।"
-        }
-      ],
-      "courtChoseOptionId": "opt-a"
-    },
-    "glossary": [
-      {
-        "slug": "mens-rea",
-        "term": "Mens Rea",
-        "inThisCase": "अदालत ने जांच की कि क्या अभियुक्त के पास आपराधिक मंशा थी।"
-      }
-    ],
-    "flashcards": [
-      {
-        "q": "Which court decided The Shah Bano Case and in what year?",
-        "a": "Supreme Court of India in the year 1985."
-      },
-      {
-        "q": "What was the primary legal issue addressed in this case?",
-        "a": "CrPC 125 · Maintenance Rights"
-      },
-      {
-        "q": "What is the core Ratio Decidendi of the judgment?",
-        "a": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband."
-      },
-      {
-        "q": "What is the primary citation for this ruling?",
-        "a": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945"
-      },
-      {
-        "q": "What is the current legal status of this precedent?",
-        "a": "Section 125 CrPC applicability to Muslim women was modified by 1986 Act, then harmonized in Danial Latifi (2001)."
-      }
-    ],
-    "affectsYou": {
-      "heading": "कानूनी निष्कर्ष",
-      "points": [
-        "अदालत का फैसला निचली अदालतों के लिए बाध्यकारी है।"
-      ]
-    },
-    "timeline": [
-      {
-        "year": 1985,
-        "event": "Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women."
-      },
-      {
-        "year": 1986,
-        "event": "Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986."
-      },
-      {
-        "year": 2001,
-        "event": "Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life."
-      },
-      {
-        "year": 2019,
-        "event": "Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
-      }
-    ],
-    "relatedSlugs": [
-      "ghost-case",
-      "nanavati-case"
-    ],
-    "subsequentHistory": [
-      {
-        "type": "followed",
-        "case": "Subsequent High Court Decisions",
-        "year": 1990,
-        "note": "Affirmed and applied in subsequent landmark jurisprudence."
-      }
-    ],
-    "sources": [
-      {
-        "label": "इंडियन कानून प्रमाणित रिकॉर्ड",
-        "url": "https://indiankanoon.org/doc/823221/"
-      }
-    ]
-  },
-  "views": 0,
-  "hasJudgeDecision": true,
-  "panels": [
-    {
-      "id": "panel-1",
-      "type": "HOOK",
-      "eyebrow": {
-        "en": "EPISODE 01 · THE PREMISE",
-        "hi": "एपिसोड 01 · भूमिका"
-      },
-      "headline": {
-        "en": "The Shah Bano Case",
-        "hi": "The Shah Bano Case"
-      },
-      "body": {
-        "en": "The landmark origin of The Shah Bano Case.",
-        "hi": "The Shah Bano Case का ऐतिहासिक पृष्ठभूमि।"
-      },
-      "photoExhibitSrc": "/images/cases/shah-bano.jpg",
-      "photoExhibitCaption": {
-        "en": "Archival record photograph for The Shah Bano Case.",
-        "hi": "The Shah Bano Case का पुरालेखीय चित्र।"
-      }
-    },
-    {
-      "id": "panel-2",
-      "type": "PEOPLE",
-      "eyebrow": {
-        "en": "EPISODE 02 · DRAMATIS PERSONAE",
-        "hi": "एपिसोड 02 · मुख्य पात्र"
-      },
-      "headline": {
-        "en": "The Parties in Conflict.",
-        "hi": "विवाद के मुख्य पक्षकार।"
-      },
-      "body": {
-        "en": "Meet the individuals and jurists behind this historic conflict.",
-        "hi": "जानिए इस ऐतिहासिक संघर्ष के मुख्य किरदारों और न्यायविदों को।"
-      },
-      "photoExhibitSrc": "/images/cases/shah-bano.jpg",
-      "photoExhibitCaption": {
-        "en": "Historical exhibit and records for The Shah Bano Case.",
-        "hi": "The Shah Bano Case के ऐतिहासिक साक्ष्य।"
-      }
-    },
-    {
-      "id": "panel-3",
-      "type": "INCIDENT",
-      "eyebrow": {
-        "en": "EPISODE 03 · THE INCIDENT",
-        "hi": "एपिसोड 03 · विवाद की घटना"
-      },
-      "headline": {
-        "en": "The Catalyst in The Shah Bano Case.",
-        "hi": "The Shah Bano Case की आरंभिक घटना।"
-      },
-      "body": {
-        "en": "The core dispute that triggered formal legal proceedings.",
-        "hi": "वह मुख्य विवाद जिसने कानूनी प्रक्रिया को आरंभ किया।"
-      }
-    },
-    {
-      "id": "panel-4",
-      "type": "TIMELINE",
-      "eyebrow": {
-        "en": "EPISODE 04 · CHRONOLOGY & DOCKETS",
-        "hi": "एपिसोड 04 · घटनाक्रम व अभिलेख"
-      },
-      "headline": {
-        "en": "Chronological Journey of The Shah Bano Case.",
-        "hi": "The Shah Bano Case का सिलसिलेवार घटनाक्रम।"
-      },
-      "body": {
-        "en": "• 1985: Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women.\n• 1986: Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986.\n• 2001: Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life.\n• 2019: Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq.",
-        "hi": "• 1985: Supreme Court holds Section 125 CrPC applies universally to divorced Muslim women.\n• 1986: Parliament passes Muslim Women (Protection of Rights on Divorce) Act 1986.\n• 2001: Danial Latifi v. UOI upholds 1986 Act by interpreting reasonable and fair provision to cover entire life.\n• 2019: Muslim Women (Protection of Rights on Marriage) Act criminalizes instant Triple Talaq."
-      },
-      "evidence": {
-        "archiveType": "police_record",
-        "masthead": "SUPREME COURT OF INDIA DOCKET REGISTRY",
-        "date": "PRIMARY DOCKET · 1985",
-        "headline": {
-          "en": "OFFICIAL PROCEEDING RECORD IN THE SHAH BANO CASE",
-          "hi": "THE SHAH BANO CASE का आधिकारिक न्यायिक रिकॉर्ड"
-        },
-        "snippet": {
-          "en": "Official court case diary and procedural filings recorded in Supreme Court of India under Constitutional.",
-          "hi": "Supreme Court of India में Constitutional के तहत दर्ज आधिकारिक वाद सूची।"
-        },
-        "highlightedPhrase": {
-          "en": "Recorded in Supreme Court of India under Constitutional",
-          "hi": "Supreme Court of India में Constitutional के तहत दर्ज"
-        },
-        "exhibitNumber": "DOCKET #1985/01",
-        "caption": {
-          "en": "Certified procedural dockets and registry chronology.",
-          "hi": "प्रमाणित प्रक्रियात्मक रिकॉर्ड और वाद सूची।"
-        }
-      }
-    },
-    {
-      "id": "panel-5",
-      "type": "EVIDENCE",
-      "eyebrow": {
-        "en": "EPISODE 05 · THE EVIDENCE & RECORD",
-        "hi": "एपिसोड 05 · मुख्य साक्ष्य व साक्ष्य"
-      },
-      "headline": {
-        "en": "Material Exhibits on Judicial Record.",
-        "hi": "न्यायिक रिकॉर्ड पर मौजूद साक्ष्य।"
-      },
-      "body": {
-        "en": "The primary documents, statutory provisions, and witness testimonies placed before Supreme Court of India.",
-        "hi": "Supreme Court of India के समक्ष प्रस्तुत प्राथमिक दस्तावेज, वैधानिक प्रावधान और गवाहों के बयान।"
-      },
-      "evidence": {
-        "archiveType": "court_decree",
-        "masthead": "OFFICIAL JUDICIAL EXHIBIT · SUPREME COURT OF INDIA",
-        "date": "EXHIBIT RECORD · 1985",
-        "headline": {
-          "en": "MATERIAL EXHIBITS IN THE SHAH BANO CASE",
-          "hi": "THE SHAH BANO CASE के मुख्य साक्ष्य"
-        },
-        "snippet": {
-          "en": "Certified documentary exhibits examining the scope and applicability of Constitutional.",
-          "hi": "Constitutional के दायरे और प्रयोज्यता की जांच करने वाले प्रमाणित दस्तावेज।"
-        },
-        "highlightedPhrase": {
-          "en": "scope and applicability of Constitutional",
-          "hi": "Constitutional का दायरा"
-        },
-        "exhibitNumber": "EXHIBIT E-1985",
-        "caption": {
-          "en": "Archival evidentiary documentation for The Shah Bano Case.",
-          "hi": "The Shah Bano Case का पुरालेखीय साक्ष्य।"
-        }
-      }
-    },
-    {
-      "id": "panel-6",
-      "type": "ARGUMENTS",
-      "eyebrow": {
-        "en": "EPISODE 06 · COURTROOM SHOWDOWN",
-        "hi": "एपिसोड 06 · अदालत में बहस"
-      },
-      "headline": {
-        "en": "Prosecution vs. Defence on Constitutional",
-        "hi": "Constitutional पर पक्ष और विपक्ष की दलीलें"
-      },
-      "body": {
-        "en": "The competing legal arguments debated before Supreme Court of India.",
-        "hi": "Supreme Court of India के समक्ष प्रस्तुत किए गए प्रतिस्पर्धी कानूनी तर्क।"
-      },
-      "judgeDecision": {
-        "question": {
-          "en": "Should Section 125 CrPC apply equally to a divorced Muslim woman unable to maintain herself?",
-          "hi": "Should Section 125 CrPC apply equally to a divorced Muslim woman unable to maintain herself?"
-        },
-        "subtext": {
-          "en": "Section 125 is part of the criminal procedure code intended to prevent destitution.",
-          "hi": "Section 125 is part of the criminal procedure code intended to prevent destitution."
-        },
-        "options": [
-          {
-            "id": "opt-a",
-            "title": {
-              "en": "Option A · In favour of Petitioner / Defence",
-              "hi": "Option A · In favour of Petitioner / Defence"
-            },
-            "reason": {
-              "en": "Uphold the bona fide protection and constitutional liberty.",
-              "hi": "Uphold the bona fide protection and constitutional liberty."
-            },
-            "simulatedVotesPercent": 55,
-            "isActualVerdict": true
-          },
-          {
-            "id": "opt-b",
-            "title": {
-              "en": "Option B · In favour of State / Strict Liability",
-              "hi": "Option B · In favour of State / Strict Liability"
-            },
-            "reason": {
-              "en": "Enforce strict liability to deter negligence and protect public order.",
-              "hi": "Enforce strict liability to deter negligence and protect public order."
-            },
-            "simulatedVotesPercent": 45,
-            "isActualVerdict": false
-          }
-        ],
-        "judicialRationale": {
-          "en": "The Supreme Court of India balanced individual rights and statutory objectives under Constitutional.",
-          "hi": "Supreme Court of India ने Constitutional के तहत व्यक्तिगत अधिकारों और वैधानिक उद्देश्यों में संतुलन स्थापित किया।"
-        }
-      }
-    },
-    {
-      "id": "panel-7",
-      "type": "VERDICT",
-      "eyebrow": {
-        "en": "EPISODE 07 · THE COURT RULING",
-        "hi": "एपिसोड 07 · अदालत का फैसला"
-      },
-      "headline": {
-        "en": "The Supreme Court of India Verdict",
-        "hi": "Supreme Court of India का ऐतिहासिक निर्णय"
-      },
-      "body": {
-        "en": "The decisive judgment delivered by Supreme Court of India.",
-        "hi": "Supreme Court of India द्वारा दिया गया अंतिम निर्णय।"
-      },
-      "stamp": {
-        "en": "JUDGMENT DELIVERED",
-        "hi": "निर्णय घोषित"
-      }
-    },
-    {
-      "id": "panel-8",
-      "type": "RATIO",
-      "eyebrow": {
-        "en": "EPISODE 08 · LEGAL RATIO & IMPACT",
-        "hi": "एपिसोड 08 · कानूनी सिद्धांत और प्रभाव"
-      },
-      "headline": {
-        "en": "BINDING PRECEDENT & RATIO DECIDENDI",
-        "hi": "बाध्यकारी नजीर व निर्णय-आधार"
-      },
-      "body": {
-        "en": "The Supreme Court of India established binding legal principles under Constitutional, governing future interpretations.",
-        "hi": "Supreme Court of India ने Constitutional के तहत भविष्य के लिए बाध्यकारी कानूनी सिद्धांत स्थापित किए।"
-      },
-      "evidence": {
-        "archiveType": "verdict_decree",
-        "masthead": "ALL INDIA REPORTER · SUPREME COURT OF INDIA",
-        "date": "1985 JUDICIAL RECORD",
-        "headline": {
-          "en": "CERTIFIED RATIO IN THE SHAH BANO CASE",
-          "hi": "THE SHAH BANO CASE का प्रमाणित निर्णय-आधार"
-        },
-        "snippet": {
-          "en": "HELD: Binding interpretation of Constitutional under Article 141 of the Constitution of India.",
-          "hi": "निर्णय: भारतीय संविधान के अनुच्छेद 141 के तहत Constitutional का बाध्यकारी अर्थ।"
-        },
-        "highlightedPhrase": {
-          "en": "Binding interpretation of Constitutional",
-          "hi": "Constitutional का बाध्यकारी अर्थ"
-        },
-        "exhibitNumber": "RATIO · Constitutional",
-        "caption": {
-          "en": "Certified Supreme Court of India ratio decree.",
-          "hi": "Supreme Court of India का प्रमाणित निर्णय-आधार।"
-        }
-      }
-    }
-  ]
+    "reviewer": "Constitutional & Criminal Law Editorial Board",
+    "reviewedOn": "1985-04-23"
+  }
 }
