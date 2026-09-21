@@ -1,11 +1,11 @@
 [
   {
     "slug": "rinku-rukshar-habeas-corpus-custody-case",
-    "rank": 10,
+    "rank": 99,
     "theme": "constitutional-gold",
-    "matchRate": 98,
+    "matchRate": 97,
     "maturityRating": "U/A 13+",
-    "categoryTag": "Habeas Corpus",
+    "categoryTag": "Family & Constitutional Writs",
     "genre": "constitutional",
     "bannerImage": "/images/cases/rinku-rukshar-poster.jpg",
     "readTime": {
@@ -15,15 +15,15 @@
     "watermark": "§",
     "title": {
       "en": "Rinku Rukshar v. State of U.P. and 4 Others",
-      "hi": "Rinku Rukshar v. State of U.P. and 4 Others"
+      "hi": "रिंकू रुखसार बनाम उत्तर प्रदेश राज्य व 4 अन्य"
     },
     "court": "High Court of Judicature at Allahabad",
     "year": 2020,
     "citation": "Habeas Corpus Writ Petition No. 495 of 2020; 2020 Supreme(All) 903",
     "judgmentUrl": "https://indiankanoon.org/docfragment/150989080/",
     "tag": {
-      "en": "Habeas Corpus",
-      "hi": "Habeas Corpus"
+      "en": "Family & Constitutional Writs",
+      "hi": "Family & Constitutional Writs"
     },
     "blurb": {
       "en": "Habeas corpus writ by mother for child custody against father.",
@@ -43,180 +43,178 @@
         "type": "HOOK",
         "eyebrow": {
           "en": "EPISODE 01 · THE CATALYST",
-          "hi": "EPISODE 01 · THE CATALYST"
+          "hi": "एपिसोड 01 · विवाद की शुरुआत"
         },
         "headline": {
-          "en": "A Mother Dispossessed: The Midnight Eviction",
-          "hi": "A Mother Dispossessed: The Midnight Eviction"
+          "en": "A Mother Dispossessed: The Eviction & Writ.",
+          "hi": "घर से निष्कासन और संवैधानिक याचिका।"
         },
         "body": {
-          "en": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son, Asif, aged under six years.\n\nMarried in 2014 under Muslim rites, she alleged repeated domestic cruelty and claimed she was assaulted and forcefully thrown out of her matrimonial home while her husband, Arshad, fled with their tender-aged child.",
-          "hi": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son, Asif, aged under six years.\n\nMarried in 2014 under Muslim rites, she alleged repeated domestic cruelty and claimed she was assaulted and forcefully thrown out of her matrimonial home while her husband, Arshad, fled with their tender-aged child."
+          "en": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son Asif, aged under six years.\n\nMarried in 2014, she alleged domestic cruelty and claimed she was assaulted and ejected from the matrimonial home while the father fled with the child.",
+          "hi": "अगस्त 2020 में रिंकू रुखसार ने 6 वर्ष से कम उम्र के पुत्र आसिफ की कस्टडी के लिए इलाहाबाद उच्च न्यायालय में बंदी प्रत्यक्षीकरण याचिका दायर की।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg"
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg"
       },
       {
         "id": "panel-2",
         "type": "PEOPLE",
         "eyebrow": {
           "en": "EPISODE 02 · DRAMATIS PERSONAE",
-          "hi": "EPISODE 02 · DRAMATIS PERSONAE"
+          "hi": "एपिसोड 02 · पक्षकार और आपत्ति"
         },
         "headline": {
-          "en": "The Father's Objection: The Natural Guardian Defense",
-          "hi": "The Father's Objection: The Natural Guardian Defense"
+          "en": "Paternal Guardianship vs. Maternal Hizanat.",
+          "hi": "पिता का संरक्षकता दावा और मां का हिज़ानत अधिकार।"
         },
         "body": {
-          "en": "The respondent husband Arshad raised a formidable preliminary objection: under Muslim Personal Law, the father is the natural legal guardian, and no writ of habeas corpus can lie against a natural parent.\n\nHe contended that the mother must be relegated to standard civil litigation before the Family Court under the Guardians and Wards Act, 1890.",
-          "hi": "The respondent husband Arshad raised a formidable preliminary objection: under Muslim Personal Law, the father is the natural legal guardian, and no writ of habeas corpus can lie against a natural parent.\n\nHe contended that the mother must be relegated to standard civil litigation before the Family Court under the Guardians and Wards Act, 1890."
+          "en": "The respondent father raised a preliminary objection that a biological father cannot be accused of illegal custody under personal law. The High Court rejected this, holding that maternal custody of infants under seven is protected by equity.",
+          "hi": "पिता ने आपत्ति जताई कि प्राकृतिक पिता के विरुद्ध बंदी प्रत्यक्षीकरण याचिका विचारणीय नहीं है। उच्च न्यायालय ने इसे खारिज करते हुए मां के हिज़ानत अधिकार को मान्यता दी।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-exhibit.jpg",
-        "image": "/images/cases/rinku-rukshar-exhibit.jpg",
-        "evidence": {
-          "masthead": "HIGH COURT REGISTRY DOCKET",
-          "date": "Allahabad High Court · Certified Filing Record",
-          "headline": {
-            "en": "HABEAS CORPUS WRIT PETITION NO. 495 OF 2020",
-            "hi": "HABEAS CORPUS WRIT PETITION NO. 495 OF 2020"
-          },
-          "snippet": {
-            "en": "Respondent No. 4 files preliminary objections disputing writ maintainability. Petitioner establishes minor Asif was born in matrimonial wedlock and forcibly removed on 04.08.2020.",
-            "hi": "Respondent No. 4 files preliminary objections disputing writ maintainability. Petitioner establishes minor Asif was born in matrimonial wedlock and forcibly removed on 04.08.2020."
-          },
-          "imageSrc": "/images/cases/rinku-rukshar-exhibit.jpg"
-        }
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-exhibit.jpg"
       },
       {
         "id": "panel-3",
         "type": "INCIDENT",
         "eyebrow": {
-          "en": "EPISODE 03 · THE LEGAL CONFLICT",
-          "hi": "EPISODE 03 · THE LEGAL CONFLICT"
+          "en": "EPISODE 03 · THE STATUTORY MATRIX",
+          "hi": "एपिसोड 03 · वैधानिक संतुलन"
         },
         "headline": {
-          "en": "Hizanat vs. Guardianship: The Statutory Interlock",
-          "hi": "Hizanat vs. Guardianship: The Statutory Interlock"
+          "en": "Guardians and Wards Act §17 & Muslim Law §352.",
+          "hi": "अभिभावक अधिनियम धारा 17 व मुस्लिम पर्सनल लॉ धारा 352।"
         },
         "body": {
-          "en": "The bench examined Section 352 of Mulla's Principles of Mahomedan Law, which unequivocally establishes that a mother is entitled to the custody (hizanat) of her male child until he has completed the age of seven years.\n\nDepriving the mother of custody of a toddler without lawful judicial sanction rendered the father's detention unlawful in the eyes of equity.",
-          "hi": "The bench examined Section 352 of Mulla's Principles of Mahomedan Law, which unequivocally establishes that a mother is entitled to the custody (hizanat) of her male child until he has completed the age of seven years.\n\nDepriving the mother of custody of a toddler without lawful judicial sanction rendered the father's detention unlawful in the eyes of equity."
-        },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg"
+          "en": "Under Section 352 of Mulla Mahomedan Law, a mother is entitled to custody of male infants until age seven. Depriving her of custody without judicial authority is unlawful under Article 226.",
+          "hi": "मुस्लिम विधि के तहत 7 वर्ष से कम आयु के बालक की कस्टडी पर मां का प्राथमिक अधिकार है जिसे बिना अदालती आदेश के नहीं छीना जा सकता।"
+        }
       },
       {
         "id": "panel-4",
         "type": "TIMELINE",
         "eyebrow": {
-          "en": "EPISODE 04 · PRIMARY DOCKETS",
-          "hi": "EPISODE 04 · PRIMARY DOCKETS"
+          "en": "EPISODE 04 · COURT INQUIRY",
+          "hi": "एपिसोड 04 · न्यायालय में पेशी"
         },
         "headline": {
-          "en": "Investigative Findings & Production Order",
-          "hi": "Investigative Findings & Production Order"
+          "en": "Child Produced Before the Bench.",
+          "hi": "न्यायालय के समक्ष बालक की उपस्थिति।"
         },
         "body": {
-          "en": "The Allahabad High Court directed the State authorities to produce the minor child before the bench.\n\nUpon visual examination and inquiry, the Court verified the tender age of minor Asif and recorded that the child had been abruptly removed from maternal care amidst acute matrimonial friction.",
-          "hi": "The Allahabad High Court directed the State authorities to produce the minor child before the bench.\n\nUpon visual examination and inquiry, the Court verified the tender age of minor Asif and recorded that the child had been abruptly removed from maternal care amidst acute matrimonial friction."
-        },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg",
-        "evidence": {
-          "masthead": "POLICE REPORT & INQUIRY RECORD",
-          "date": "Allahabad High Court Case File 2020",
-          "headline": {
-            "en": "REPORT ON CHILD PRODUCTION BEFORE BENCH",
-            "hi": "REPORT ON CHILD PRODUCTION BEFORE BENCH"
-          },
-          "snippet": {
-            "en": "Minor child Asif produced pursuant to judicial summons. State report confirms separation of mother following matrimonial estrangement.",
-            "hi": "Minor child Asif produced pursuant to judicial summons. State report confirms separation of mother following matrimonial estrangement."
-          },
-          "imageSrc": "/images/cases/rinku-rukshar-poster.jpg"
+          "en": "The High Court directed State authorities to produce the minor child. Upon inquiry, the Court verified the infant age and the imperative need for maternal care.",
+          "hi": "उच्च न्यायालय के आदेश पर बालक को अदालत में पेश किया गया और अबोध उम्र में मां के स्नेह की अनिवार्यता दर्ज की गई।"
         }
       },
       {
         "id": "panel-5",
         "type": "EVIDENCE",
         "eyebrow": {
-          "en": "EPISODE 05 · COURTROOM SHOWDOWN",
-          "hi": "EPISODE 05 · COURTROOM SHOWDOWN"
+          "en": "EPISODE 05 · PARENS PATRIAE",
+          "hi": "एपिसोड 05 · कोर्ट का दायित्व"
         },
         "headline": {
-          "en": "Parens Patriae: The Battle Over Welfare vs. Rights",
-          "hi": "Parens Patriae: The Battle Over Welfare vs. Rights"
+          "en": "Welfare of the Child is Paramount.",
+          "hi": "बाल कल्याण का सर्वोपरि सिद्धांत।"
         },
         "body": {
-          "en": "In oral arguments, counsel for the father cited Supreme Court precedents holding that custody with a father is not per se illegal.\n\nCounsel for the mother countered with leading Apex Court judgments (Gohar Begum, Tejaswini Gaud), asserting that child welfare is the paramount consideration and supersedes dry technical statutory claims.",
-          "hi": "In oral arguments, counsel for the father cited Supreme Court precedents holding that custody with a father is not per se illegal.\n\nCounsel for the mother countered with leading Apex Court judgments (Gohar Begum, Tejaswini Gaud), asserting that child welfare is the paramount consideration and supersedes dry technical statutory claims."
+          "en": "Applying Supreme Court jurisprudence in Tejaswini Gaud, the bench held that the welfare of the infant overrides statutory technicalities and claims of fatherhood.",
+          "hi": "सर्वोच्च न्यायालय के निर्णयों के आधार पर तय किया गया कि बालक का कल्याण तकनीकी कानूनों और पिता के दावों से सर्वोपरि है।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg"
+        "judgeDecision": {
+          "question": {
+            "en": "Should a writ of habeas corpus lie against a father for custody of an infant child?",
+            "hi": "क्या पिता के विरुद्ध बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका स्वीकार्य है?"
+          },
+          "subtext": {
+            "en": "Consider whether paternal guardianship bars writ jurisdiction when maternal custody is guaranteed by law.",
+            "hi": "विचार करें कि क्या पर्सनल लॉ के तहत पिता के संरक्षकता अधिकार पर मां की हिज़ानत प्रभावी है।"
+          },
+          "options": [
+            {
+              "id": "allow-writ",
+              "title": {
+                "en": "Allow Writ & Restore Custody to Mother",
+                "hi": "याचिका स्वीकार कर मां को कस्टडी दी जाए"
+              },
+              "reason": {
+                "en": "Child welfare and maternal hizanat protect the infant child.",
+                "hi": "बाल कल्याण और मां की हिज़ानत अबोध बालक की रक्षा करती है।"
+              },
+              "simulatedVotesPercent": 88,
+              "isActualVerdict": true
+            },
+            {
+              "id": "dismiss-writ",
+              "title": {
+                "en": "Dismiss Writ and Relegate to Family Court",
+                "hi": "याचिका खारिज कर फैमिली कोर्ट भेजा जाए"
+              },
+              "reason": {
+                "en": "The father is a natural legal guardian and regular civil suit is required.",
+                "hi": "पिता कानूनी संरक्षक है और नियमित दीवानी मुकदमा आवश्यक है।"
+              },
+              "simulatedVotesPercent": 12,
+              "isActualVerdict": false
+            }
+          ],
+          "judicialRationale": {
+            "en": "The High Court allowed the writ petition, restoring physical custody of the infant to the mother forthwith.",
+            "hi": "उच्च न्यायालय ने याचिका स्वीकार करते हुए बालक की कस्टडी तुरंत मां को सौंपने का निर्देश दिया।"
+          }
+        }
       },
       {
         "id": "panel-6",
         "type": "ARGUMENTS",
         "eyebrow": {
-          "en": "EPISODE 06 · JUDICIAL DELIBERATION",
-          "hi": "EPISODE 06 · JUDICIAL DELIBERATION"
+          "en": "EPISODE 06 · THE VERDICT",
+          "hi": "एपिसोड 06 · ऐतिहासिक फैसला"
         },
         "headline": {
-          "en": "The Bench Confronts the Doctrine",
-          "hi": "The Bench Confronts the Doctrine"
+          "en": "Writ Allowed: Immediate Custody to Mother.",
+          "hi": "रिट याचिका स्वीकार: मां को तत्काल कस्टडी।"
+        },
+        "stamp": {
+          "en": "HABEAS CORPUS ALLOWED · CUSTODY RESTORED",
+          "hi": "बंदी प्रत्यक्षीकरण स्वीकार · कस्टडी बहाल"
         },
         "body": {
-          "en": "The Allahabad High Court analyzed the synthesis between statutory guardianship laws and constitutional equity.\n\nThe Court observed that while the father is the legal guardian, his physical detention of a child under seven years against the mother's hizanat is unlawful without Family Court approval.",
-          "hi": "The Allahabad High Court analyzed the synthesis between statutory guardianship laws and constitutional equity.\n\nThe Court observed that while the father is the legal guardian, his physical detention of a child under seven years against the mother's hizanat is unlawful without Family Court approval."
+          "en": "The Allahabad High Court allowed the habeas corpus petition and ordered immediate restoration of custody to the mother, granting liberty to the father to approach Family Court for permanent guardianship.",
+          "hi": "इलाहाबाद उच्च न्यायालय ने रिट स्वीकार करते हुए बालक की कस्टडी तुरंत मां को सौंपी और पिता को फैमिली कोर्ट जाने की छूट दी।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg",
-        "evidence": {
-          "masthead": "FROM THE CERTIFIED JUDGMENT",
-          "date": "Allahabad High Court · Para 8",
-          "headline": {
-            "en": "JUDICIAL HOLDING ON HABEAS CORPUS & CHILD WELFARE",
-            "hi": "JUDICIAL HOLDING ON HABEAS CORPUS & CHILD WELFARE"
-          },
-          "snippet": {
-            "en": "The Court observed: 'In a petition for habeas corpus, the primary duty of the Court is to determine in whose custody the best interest and welfare of the child will be safeguarded.'",
-            "hi": "The Court observed: 'In a petition for habeas corpus, the primary duty of the Court is to determine in whose custody the best interest and welfare of the child will be safeguarded.'"
-          },
-          "imageSrc": "/images/cases/rinku-rukshar-poster.jpg"
-        }
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-verdict.jpg"
       },
       {
         "id": "panel-7",
         "type": "VERDICT",
         "eyebrow": {
-          "en": "EPISODE 07 · THE VERDICT",
-          "hi": "EPISODE 07 · THE VERDICT"
+          "en": "EPISODE 07 · THE RATIO",
+          "hi": "एपिसोड 07 · कानूनी नज़ीर"
         },
         "headline": {
-          "en": "Restoration of Custody & Judicial Mandate",
-          "hi": "Restoration of Custody & Judicial Mandate"
+          "en": "Child Welfare Overrides Strict Personal Law.",
+          "hi": "पर्सनल लॉ पर बाल कल्याण की सर्वोच्चता।"
         },
         "body": {
-          "en": "The Allahabad High Court allowed the writ petition, directing immediate custody of minor Asif to be handed over to his mother, Rinku Rukshar.\n\nThe Court granted liberty to the father to initiate proper proceedings before the competent Family Court under the Guardians and Wards Act if he wished to establish permanent guardianship grounds.",
-          "hi": "The Allahabad High Court allowed the writ petition, directing immediate custody of minor Asif to be handed over to his mother, Rinku Rukshar.\n\nThe Court granted liberty to the father to initiate proper proceedings before the competent Family Court under the Guardians and Wards Act if he wished to establish permanent guardianship grounds."
+          "en": "The ruling established that constitutional courts exercising Article 226 will not permit procedural hurdles to deprive young infants of maternal custody.",
+          "hi": "फैसले ने स्थापित किया कि संवैधानिक अदालतें प्रक्रियात्मक बाधाओं को अबोध बालकों को मां से अलग करने की अनुमति नहीं देंगी।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-verdict.jpg",
-        "image": "/images/cases/rinku-rukshar-verdict.jpg"
+        "citationFooter": "2020 Supreme(All) 903 · Allahabad High Court",
+        "judgmentUrl": "https://indiankanoon.org/docfragment/150989080/"
       },
       {
         "id": "panel-8",
         "type": "RATIO",
         "eyebrow": {
-          "en": "EPISODE 08 · RATIO & IMPACT",
-          "hi": "EPISODE 08 · RATIO & IMPACT"
+          "en": "EPISODE 08 · RATIO",
+          "hi": "एपिसोड 08 · RATIO"
         },
         "headline": {
-          "en": "Jurisprudential Doctrine: Child Welfare Prevails",
-          "hi": "Jurisprudential Doctrine: Child Welfare Prevails"
+          "en": "Rinku Rukshar v. State of U.P. and 4 Others - Episode 8",
+          "hi": "रिंकू रुखसार बनाम उत्तर प्रदेश राज्य व 4 अन्य - एपिसोड 8"
         },
         "body": {
-          "en": "The ruling reinforced a critical doctrine in Indian matrimonial and constitutional law: personal law rights of biological parents are always subordinate to the paramount welfare of the infant child.\n\nIt reaffirmed that constitutional courts will not permit procedural technicalities to deny mothers the care and custody of young infants.",
-          "hi": "The ruling reinforced a critical doctrine in Indian matrimonial and constitutional law: personal law rights of biological parents are always subordinate to the paramount welfare of the infant child.\n\nIt reaffirmed that constitutional courts will not permit procedural technicalities to deny mothers the care and custody of young infants."
+          "en": "Habeas corpus writ by mother for child custody against father.",
+          "hi": "नाबालिग बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका।"
         },
         "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
         "image": "/images/cases/rinku-rukshar-poster.jpg"
@@ -224,38 +222,38 @@
     ],
     "brief": {
       "courtAndYear": {
-        "en": "High Court of Judicature at Allahabad (2020)",
-        "hi": "High Court of Judicature at Allahabad (2020)"
+        "en": "High Court of Judicature at Allahabad · 2020",
+        "hi": "इलाहाबाद उच्च न्यायालय · 2020"
       },
       "facts": {
-        "en": "Habeas corpus writ by mother for child custody against father.",
-        "hi": "नाबालिग बच्चे की कस्टडी हेतु बंदी प्रत्यक्षीकरण याचिका।"
+        "en": "Petitioner Rinku Rukshar approached the High Court via a habeas corpus petition to recover custody of her minor son Asif (under six years) who was taken by the father.",
+        "hi": "रिंकू रुखसार ने पिता द्वारा ले जाए गए 6 वर्ष से कम उम्र के पुत्र आसिफ की कस्टडी के लिए बंदी प्रत्यक्षीकरण याचिका दायर की।"
       },
       "issues": {
         "en": [
-          "Should a writ of habeas corpus lie against a biological father for custody of an infant child?"
+          "Whether a writ of habeas corpus is maintainable against a biological father for custody of a minor child?",
+          "Whether the mother retains the right to hizanat of a child under seven years over paternal statutory guardianship?"
         ],
         "hi": [
-          "Should a writ of habeas corpus lie against a biological father for custody of an infant child?"
+          "क्या पिता के विरुद्ध बच्चे की कस्टडी के लिए बंदी प्रत्यक्षीकरण याचिका विचारणीय है?",
+          "क्या सात वर्ष से कम आयु के बालक पर मां का हिज़ानत अधिकार पिता के संरक्षकता अधिकार पर प्रभावी है?"
         ]
       },
       "chargesApplied": [
-        "Habeas Corpus",
-        "Child Custody",
-        "Welfare of the Child Doctrine",
-        "Hizanat under Muslim Law"
+        "Guardians and Wards Act 1890 (Sections 17, 25)",
+        "Muslim Personal Law (Principles of Mahomedan Law §352)"
       ],
       "held": {
-        "en": "Authoritative ruling affirming that a writ of habeas corpus for child custody is maintainable and child welfare supersedes strict personal law.",
-        "hi": "Authoritative ruling affirming that a writ of habeas corpus for child custody is maintainable and child welfare supersedes strict personal law."
+        "en": "The Allahabad High Court held the writ petition maintainable and ordered immediate custody of the child to be restored to the mother, affirming that child welfare is paramount.",
+        "hi": "इलाहाबाद उच्च न्यायालय ने रिट याचिका को स्वीकार्य ठहराया और बालक की कस्टडी तुरंत मां को सौंपने का फैसला सुनाया।"
       },
       "reasoning": {
-        "en": "The court established foundational doctrine under Habeas Corpus.",
-        "hi": "न्यायालय ने Habeas Corpus के तहत सिद्धांत प्रतिपादित किया।"
+        "en": "The Court reasoned that under Muslim personal law, a mother has the exclusive custodial right (hizanat) over male children under seven, and welfare principles under the Guardians and Wards Act prevail over dry technical guardianship claims.",
+        "hi": "न्यायालय ने कहा कि 7 वर्ष से कम उम्र के बालक पर मां का हिज़ानत अधिकार सुरक्षित है और बाल कल्याण किसी भी तकनीकी दावे से बड़ा है।"
       },
       "whyItMatters": {
-        "en": "Authoritative ruling affirming that a writ of habeas corpus for child custody is maintainable and child welfare supersedes strict personal law.",
-        "hi": "महत्वपूर्ण न्यायिक मिसाल।"
+        "en": "The judgment reinforces that constitutional writ remedies under Article 226 are available to protect infant children and prevent unilateral custodial deprivation.",
+        "hi": "यह निर्णय सुनिश्चित करता है कि अबोध बच्चों के अधिकारों और मां की कस्टडी की रक्षा के लिए उच्च न्यायालय सीधे हस्तक्षेप कर सकते हैं।"
       }
     },
     "poster": {
@@ -263,9 +261,9 @@
       "alt": "Rinku Rukshar Habeas Corpus Custody Case cover poster",
       "provenance": "illustration"
     },
-    "status": "PUBLISHED",
-    "createdAt": "2024-03-10T00:00:00Z",
-    "updatedAt": "2026-09-20T20:28:54.471Z",
+    "status": "ADMIN_REVIEW",
+    "createdAt": "2026-09-17T21:33:44.074Z",
+    "updatedAt": "2026-09-17T21:33:44.076Z",
     "views": 0,
     "hook": "Habeas corpus writ by mother for child custody against father.",
     "decidedOn": "2020-08-25",
@@ -314,13 +312,13 @@
       {
         "n": 1,
         "kicker": "EPISODE 01 · THE CATALYST",
-        "title": "A Mother Dispossessed: The Midnight Eviction",
+        "title": "A Mother Dispossessed: The Eviction & Writ.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son, Asif, aged under six years.\n\nMarried in 2014 under Muslim rites, she alleged repeated domestic cruelty and claimed she was assaulted and forcefully thrown out of her matrimonial home while her husband, Arshad, fled with their tender-aged child.",
+                "text": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son Asif, aged under six years.\n\nMarried in 2014, she alleged domestic cruelty and claimed she was assaulted and ejected from the matrimonial home while the father fled with the child.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -331,19 +329,19 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "FACTUAL MATRIX & WRIT JURISDICTION: Petitioner invoked Article 226 seeking a writ of habeas corpus against the father for custody of a child under six years. The preliminary threshold turns on whether detention by a biological father can constitute unlawful detention.",
+                "text": "LEGAL ANALYSIS: In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son Asif, aged under six years.\n\nMarried in 2014, she alleged domestic cruelty and claimed she was assaulted and ejected from the matrimonial home while the father fled with the child.",
                 "source": {
                   "tier": "AMBER"
                 }
               }
             ],
-            "examAngle": "Tested in Constitutional Law & Family Law under Habeas Corpus jurisdiction for child custody and Section 17/25 of Guardians and Wards Act, 1890."
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
           },
           "advocate": {
             "blocks": [
               {
                 "type": "para",
-                "text": "WRIT MAINTAINABILITY THRESHOLD: In custody battles between spouses, ordinary remedy lies under the Guardians and Wards Act, 1890. To sustain a writ of habeas corpus, counsel must demonstrate illegal deprivation or urgent welfare threat to the minor.",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -351,36 +349,37 @@
             ],
             "pinpoints": [
               {
-                "proposition": "Maintainability of Habeas Corpus against natural father",
-                "para": 4
+                "proposition": "A Mother Dispossessed: The Eviction & Writ.",
+                "para": 8
               }
             ],
             "howToUse": [
-              "Cite when establishing extraordinary writ jurisdiction under Article 226 for minor child custody where legal custody belongs to the mother."
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
             ],
             "howToDistinguish": [
-              "Distinguish if regular custody proceedings under Guardians and Wards Act are already pending and child is above seven years."
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
             ]
           }
         },
-        "endHook": "Could a father be accused of illegal custody under constitutional writ law?"
+        "image": {
+          "src": "/images/cases/rinku-rukshar-poster.jpg",
+          "alt": "A Mother Dispossessed: The Eviction & Writ.",
+          "provenance": "illustration"
+        },
+        "endHook": "How did the proceedings unfold?"
       },
       {
         "n": 2,
         "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
-        "title": "The Father's Objection: The Natural Guardian Defense",
+        "title": "Paternal Guardianship vs. Maternal Hizanat.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "The respondent husband Arshad raised a formidable preliminary objection: under Muslim Personal Law, the father is the natural legal guardian, and no writ of habeas corpus can lie against a natural parent.\n\nHe contended that the mother must be relegated to standard civil litigation before the Family Court under the Guardians and Wards Act, 1890.",
+                "text": "The respondent father raised a preliminary objection that a biological father cannot be accused of illegal custody under personal law. The High Court rejected this, holding that maternal custody of infants under seven is protected by equity.",
                 "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "Allahabad High Court Registry Dossier",
-                    "date": "2020-08-10"
-                  }
+                  "tier": "AMBER"
                 }
               }
             ]
@@ -389,71 +388,55 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "STATUTORY INTERPRETATION: Conflict between personal law paternal guardianship (Section 359, Mulla's Mahomedan Law) and maternal hizanat (Section 352). Statutory welfare overrides strict statutory guardianship.",
+                "text": "LEGAL ANALYSIS: The respondent father raised a preliminary objection that a biological father cannot be accused of illegal custody under personal law. The High Court rejected this, holding that maternal custody of infants under seven is protected by equity.",
                 "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "Allahabad High Court Registry Dossier",
-                    "date": "2020-08-10"
-                  }
+                  "tier": "AMBER"
                 }
               }
             ],
-            "examAngle": "Exam consideration under Habeas Corpus."
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
           },
           "advocate": {
             "blocks": [
               {
                 "type": "para",
-                "text": "OPPOSING PRELIMINARY OBJECTION: Paternal guardianship does not confer unfettered right to physical custody of infants under seven. Mother's right of hizanat creates enforceable legal right under writ jurisdiction.",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
                 "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "Allahabad High Court Registry Dossier",
-                    "date": "2020-08-10"
-                  }
+                  "tier": "AMBER"
                 }
               }
             ],
             "pinpoints": [
               {
-                "proposition": "The Father's Objection: The Natural Guardian Defense",
+                "proposition": "Paternal Guardianship vs. Maternal Hizanat.",
                 "para": 8
               }
             ],
             "howToUse": [
-              "Cite for principle under Habeas Corpus."
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
             ],
             "howToDistinguish": [
-              "Distinguish based on specific factual matrix."
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
             ]
           }
         },
-        "exhibit": {
-          "kind": "record",
-          "label": "HIGH COURT REGISTRY DOCKET",
-          "headline": "HABEAS CORPUS WRIT PETITION NO. 495 OF 2020",
-          "body": "Respondent No. 4 files preliminary objections disputing writ maintainability. Petitioner establishes minor Asif was born in matrimonial wedlock and forcibly removed on 04.08.2020.",
-          "meta": "Allahabad High Court · Certified Filing Record",
-          "sourceUrl": "https://indiankanoon.org/docfragment/150989080/",
-          "image": {
-            "src": "/images/cases/rinku-rukshar-exhibit.jpg",
-            "alt": "Courtroom docket filing",
-            "provenance": "archival"
-          }
+        "image": {
+          "src": "/images/cases/rinku-rukshar-exhibit.jpg",
+          "alt": "Paternal Guardianship vs. Maternal Hizanat.",
+          "provenance": "illustration"
         },
-        "endHook": "How did the High Court balance personal law with fundamental welfare rights?"
+        "endHook": "How did the proceedings unfold?"
       },
       {
         "n": 3,
-        "kicker": "EPISODE 03 · THE LEGAL CONFLICT",
-        "title": "Hizanat vs. Guardianship: The Statutory Interlock",
+        "kicker": "EPISODE 03 · THE STATUTORY MATRIX",
+        "title": "Guardians and Wards Act §17 & Muslim Law §352.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "The bench examined Section 352 of Mulla's Principles of Mahomedan Law, which unequivocally establishes that a mother is entitled to the custody (hizanat) of her male child until he has completed the age of seven years.\n\nDepriving the mother of custody of a toddler without lawful judicial sanction rendered the father's detention unlawful in the eyes of equity.",
+                "text": "Under Section 352 of Mulla Mahomedan Law, a mother is entitled to custody of male infants until age seven. Depriving her of custody without judicial authority is unlawful under Article 226.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -464,19 +447,19 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "LEGAL MATRIX (Mulla §352): Hizanat is recognized as a fundamental custodial right designed for child nurturing during tender formative years.",
+                "text": "LEGAL ANALYSIS: Under Section 352 of Mulla Mahomedan Law, a mother is entitled to custody of male infants until age seven. Depriving her of custody without judicial authority is unlawful under Article 226.",
                 "source": {
                   "tier": "AMBER"
                 }
               }
             ],
-            "examAngle": "Exam consideration under Habeas Corpus."
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
           },
           "advocate": {
             "blocks": [
               {
                 "type": "para",
-                "text": "REBUTTING ALTERNATIVE REMEDY: Existence of an alternative remedy under Guardians and Wards Act does not bar High Court from exercising extraordinary summary jurisdiction under Article 226 when infant's welfare is in peril.",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -484,36 +467,32 @@
             ],
             "pinpoints": [
               {
-                "proposition": "Hizanat vs. Guardianship: The Statutory Interlock",
+                "proposition": "Guardians and Wards Act §17 & Muslim Law §352.",
                 "para": 8
               }
             ],
             "howToUse": [
-              "Cite for principle under Habeas Corpus."
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
             ],
             "howToDistinguish": [
-              "Distinguish based on specific factual matrix."
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
             ]
           }
         },
-        "endHook": "What evidence did the High Court require to assess child welfare?"
+        "endHook": "How did the proceedings unfold?"
       },
       {
         "n": 4,
-        "kicker": "EPISODE 04 · PRIMARY DOCKETS",
-        "title": "Investigative Findings & Production Order",
+        "kicker": "EPISODE 04 · COURT INQUIRY",
+        "title": "Child Produced Before the Bench.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "The Allahabad High Court directed the State authorities to produce the minor child before the bench.\n\nUpon visual examination and inquiry, the Court verified the tender age of minor Asif and recorded that the child had been abruptly removed from maternal care amidst acute matrimonial friction.",
+                "text": "The High Court directed State authorities to produce the minor child. Upon inquiry, the Court verified the infant age and the imperative need for maternal care.",
                 "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "High Court Production Order Record",
-                    "date": "2020-08-18"
-                  }
+                  "tier": "AMBER"
                 }
               }
             ]
@@ -522,66 +501,50 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "SUMMARY WRIT INQUIRY: Summary judicial satisfaction on infant welfare suffices for interim writ directions without precluding comprehensive trial on permanent guardianship.",
+                "text": "LEGAL ANALYSIS: The High Court directed State authorities to produce the minor child. Upon inquiry, the Court verified the infant age and the imperative need for maternal care.",
                 "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "High Court Production Order Record",
-                    "date": "2020-08-18"
-                  }
+                  "tier": "AMBER"
                 }
               }
             ],
-            "examAngle": "Exam consideration under Habeas Corpus."
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
           },
           "advocate": {
             "blocks": [
               {
                 "type": "para",
-                "text": "PRODUCTION PROCEDURE: Ensuring production of the corpus in court establishes physical safety and enables the bench to exercise parens patriae jurisdiction directly.",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
                 "source": {
-                  "tier": "BLUE",
-                  "secondary": {
-                    "publication": "High Court Production Order Record",
-                    "date": "2020-08-18"
-                  }
+                  "tier": "AMBER"
                 }
               }
             ],
             "pinpoints": [
               {
-                "proposition": "Investigative Findings & Production Order",
+                "proposition": "Child Produced Before the Bench.",
                 "para": 8
               }
             ],
             "howToUse": [
-              "Cite for principle under Habeas Corpus."
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
             ],
             "howToDistinguish": [
-              "Distinguish based on specific factual matrix."
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
             ]
           }
         },
-        "exhibit": {
-          "kind": "record",
-          "label": "POLICE REPORT & INQUIRY RECORD",
-          "headline": "REPORT ON CHILD PRODUCTION BEFORE BENCH",
-          "body": "Minor child Asif produced pursuant to judicial summons. State report confirms separation of mother following matrimonial estrangement.",
-          "meta": "Allahabad High Court Case File 2020",
-          "sourceUrl": "https://indiankanoon.org/docfragment/150989080/"
-        },
-        "endHook": "How did the advocates clash over child welfare versus parental rights?"
+        "endHook": "How did the proceedings unfold?"
       },
       {
         "n": 5,
-        "kicker": "EPISODE 05 · COURTROOM SHOWDOWN",
-        "title": "Parens Patriae: The Battle Over Welfare vs. Rights",
+        "kicker": "EPISODE 05 · PARENS PATRIAE",
+        "title": "Welfare of the Child is Paramount.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "In oral arguments, counsel for the father cited Supreme Court precedents holding that custody with a father is not per se illegal.\n\nCounsel for the mother countered with leading Apex Court judgments (Gohar Begum, Tejaswini Gaud), asserting that child welfare is the paramount consideration and supersedes dry technical statutory claims.",
+                "text": "Applying Supreme Court jurisprudence in Tejaswini Gaud, the bench held that the welfare of the infant overrides statutory technicalities and claims of fatherhood.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -592,19 +555,19 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "PARENS PATRIAE JURISPRUDENCE: The Court acts as the sovereign protector of minors. Technical rights of parents yield to the best interest and physical-emotional well-being of the infant.",
+                "text": "LEGAL ANALYSIS: Applying Supreme Court jurisprudence in Tejaswini Gaud, the bench held that the welfare of the infant overrides statutory technicalities and claims of fatherhood.",
                 "source": {
                   "tier": "AMBER"
                 }
               }
             ],
-            "examAngle": "Exam consideration under Habeas Corpus."
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
           },
           "advocate": {
             "blocks": [
               {
                 "type": "para",
-                "text": "CASE LAW CITATION: Rely on Tejaswini Gaud v. Shekhar Jagdish Prasad (2019) 7 SCC 42 to establish that extraordinary writ jurisdiction is maintainable for child welfare notwithstanding availability of civil remedies.",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -612,35 +575,32 @@
             ],
             "pinpoints": [
               {
-                "proposition": "Parens Patriae: The Battle Over Welfare vs. Rights",
+                "proposition": "Welfare of the Child is Paramount.",
                 "para": 8
               }
             ],
             "howToUse": [
-              "Cite for principle under Habeas Corpus."
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
             ],
             "howToDistinguish": [
-              "Distinguish based on specific factual matrix."
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
             ]
           }
         },
-        "endHook": "What principles did the bench formulate in its decisive judgment?"
+        "endHook": "How did the proceedings unfold?"
       },
       {
         "n": 6,
-        "kicker": "EPISODE 06 · JUDICIAL DELIBERATION",
-        "title": "The Bench Confronts the Doctrine",
+        "kicker": "EPISODE 06 · THE VERDICT",
+        "title": "Writ Allowed: Immediate Custody to Mother.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "The Allahabad High Court analyzed the synthesis between statutory guardianship laws and constitutional equity.\n\nThe Court observed that while the father is the legal guardian, his physical detention of a child under seven years against the mother's hizanat is unlawful without Family Court approval.",
+                "text": "The Allahabad High Court allowed the habeas corpus petition and ordered immediate restoration of custody to the mother, granting liberty to the father to approach Family Court for permanent guardianship.",
                 "source": {
-                  "tier": "BLACK",
-                  "para": 8,
-                  "paraText": "The welfare of the child is the paramount consideration. Under Muslim Personal Law, the mother is entitled to the custody of her male child until he completes the age of seven years.",
-                  "cite": "2020 Supreme(All) 903"
+                  "tier": "AMBER"
                 }
               }
             ]
@@ -649,142 +609,57 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "DOCTRINAL HOLDING: Natural guardianship under personal law cannot be weaponized to deprive a mother of tender-age custody without establishing her disqualification in regular civil proceedings.",
+                "text": "LEGAL ANALYSIS: The Allahabad High Court allowed the habeas corpus petition and ordered immediate restoration of custody to the mother, granting liberty to the father to approach Family Court for permanent guardianship.",
                 "source": {
-                  "tier": "BLACK",
-                  "para": 8,
-                  "paraText": "The welfare of the child is the paramount consideration. Under Muslim Personal Law, the mother is entitled to the custody of her male child until he completes the age of seven years.",
-                  "cite": "2020 Supreme(All) 903"
+                  "tier": "AMBER"
                 }
               }
             ],
-            "examAngle": "Exam consideration under Habeas Corpus."
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
           },
           "advocate": {
             "blocks": [
               {
                 "type": "para",
-                "text": "PINPOINT PROPOSITION: Unilateral deprivation of maternal custody constitutes constructive unlawful detention remediable under Article 226.",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
                 "source": {
-                  "tier": "BLACK",
-                  "para": 8,
-                  "paraText": "The welfare of the child is the paramount consideration. Under Muslim Personal Law, the mother is entitled to the custody of her male child until he completes the age of seven years.",
-                  "cite": "2020 Supreme(All) 903"
+                  "tier": "AMBER"
                 }
               }
             ],
             "pinpoints": [
               {
-                "proposition": "The Bench Confronts the Doctrine",
+                "proposition": "Writ Allowed: Immediate Custody to Mother.",
                 "para": 8
               }
             ],
             "howToUse": [
-              "Cite for principle under Habeas Corpus."
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
             ],
             "howToDistinguish": [
-              "Distinguish based on specific factual matrix."
-            ]
-          }
-        },
-        "exhibit": {
-          "kind": "quote",
-          "label": "FROM THE CERTIFIED JUDGMENT",
-          "headline": "JUDICIAL HOLDING ON HABEAS CORPUS & CHILD WELFARE",
-          "body": "The Court observed: 'In a petition for habeas corpus, the primary duty of the Court is to determine in whose custody the best interest and welfare of the child will be safeguarded.'",
-          "meta": "Allahabad High Court · Para 8",
-          "para": 8
-        },
-        "endHook": "What was the operative direction issued by the High Court?"
-      },
-      {
-        "n": 7,
-        "kicker": "EPISODE 07 · THE VERDICT",
-        "title": "Restoration of Custody & Judicial Mandate",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "The Allahabad High Court allowed the writ petition, directing immediate custody of minor Asif to be handed over to his mother, Rinku Rukshar.\n\nThe Court granted liberty to the father to initiate proper proceedings before the competent Family Court under the Guardians and Wards Act if he wished to establish permanent guardianship grounds.",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 12,
-                  "paraText": "The writ petition is allowed. The custody of minor son Asif is directed to be restored to the petitioner mother forthwith.",
-                  "cite": "2020 Supreme(All) 903"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "OPERATIVE HOLDING & RATIO: Writ of Habeas Corpus allowed; custody restored to mother. Paternal rights remain subject to Family Court determination without pre-empting maternal custody of toddlers.",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 12,
-                  "paraText": "The writ petition is allowed. The custody of minor son Asif is directed to be restored to the petitioner mother forthwith.",
-                  "cite": "2020 Supreme(All) 903"
-                }
-              }
-            ],
-            "ratio": "In habeas corpus petitions between parents, child welfare is paramount. Under Muslim law, mother retains hizanat of minor son under seven years.",
-            "obiter": [
-              "Extraordinary writ jurisdiction is a summary remedy prioritizing immediate child protection.",
-              "Personal law guardianship cannot override welfare principles under the Guardians and Wards Act, 1890."
-            ],
-            "examAngle": "Exam consideration under Habeas Corpus."
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "OPERATIVE ORDER: Ensure immediate compliance through district authorities and preserve right to contest permanent custody in Family Court.",
-                "source": {
-                  "tier": "BLACK",
-                  "para": 12,
-                  "paraText": "The writ petition is allowed. The custody of minor son Asif is directed to be restored to the petitioner mother forthwith.",
-                  "cite": "2020 Supreme(All) 903"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Mandatory restoration of custody to mother under seven years",
-                "para": 12
-              }
-            ],
-            "howToUse": [
-              "Cite this judgment in writ petitions under Article 226 when securing immediate recovery of infant children taken away by a spouse."
-            ],
-            "howToDistinguish": [
-              "Distinguish where mother has voluntarily relinquished custody or child has attained the age of discernment."
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
             ]
           }
         },
         "image": {
           "src": "/images/cases/rinku-rukshar-verdict.jpg",
-          "alt": "Allahabad High Court Bench delivering ruling",
-          "provenance": "archival"
+          "alt": "Writ Allowed: Immediate Custody to Mother.",
+          "provenance": "illustration"
         },
-        "endHook": "What is the enduring jurisprudential impact of this custody ruling?"
+        "endHook": "How did the proceedings unfold?"
       },
       {
-        "n": 8,
-        "kicker": "EPISODE 08 · RATIO & IMPACT",
-        "title": "Jurisprudential Doctrine: Child Welfare Prevails",
+        "n": 7,
+        "kicker": "EPISODE 07 · THE RATIO",
+        "title": "Child Welfare Overrides Strict Personal Law.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "The ruling reinforced a critical doctrine in Indian matrimonial and constitutional law: personal law rights of biological parents are always subordinate to the paramount welfare of the infant child.\n\nIt reaffirmed that constitutional courts will not permit procedural technicalities to deny mothers the care and custody of young infants.",
+                "text": "The ruling established that constitutional courts exercising Article 226 will not permit procedural hurdles to deprive young infants of maternal custody.",
                 "source": {
-                  "tier": "BLACK",
-                  "para": 14,
-                  "paraText": "The rights of parents under personal law must yield to the paramount consideration of the welfare of the minor child.",
-                  "cite": "2020 Supreme(All) 903"
+                  "tier": "AMBER"
                 }
               }
             ]
@@ -793,44 +668,101 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "SUMMARY OF DOCTRINE: Article 226 habeas corpus writ is maintainable between parents for infant custody; welfare of the child doctrine governs custody over strict statutory title.",
+                "text": "LEGAL ANALYSIS: The ruling established that constitutional courts exercising Article 226 will not permit procedural hurdles to deprive young infants of maternal custody.",
                 "source": {
-                  "tier": "BLACK",
-                  "para": 14,
-                  "paraText": "The rights of parents under personal law must yield to the paramount consideration of the welfare of the minor child.",
-                  "cite": "2020 Supreme(All) 903"
+                  "tier": "AMBER"
                 }
               }
             ],
-            "ratio": "Habeas corpus writ lies for minor child custody; maternal hizanat under Muslim law is enforceable for children under seven years.",
-            "examAngle": "Commonly examined in Family Law and Constitutional Writs in Judiciary Mains and CLAT-PG."
+            "ratio": "The Allahabad High Court held the writ petition maintainable and ordered immediate custody of the child to be restored to the mother, affirming that child welfare is paramount.",
+            "obiter": [
+              "Courts must balance constitutional principles with statutory safeguards."
+            ],
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
           },
           "advocate": {
             "blocks": [
               {
                 "type": "para",
-                "text": "PRACTICE POINT: Always plead specific facts showing lack of infant care and emotional trauma when seeking habeas corpus for custody restoration.",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
                 "source": {
-                  "tier": "BLACK",
-                  "para": 14,
-                  "paraText": "The rights of parents under personal law must yield to the paramount consideration of the welfare of the minor child.",
-                  "cite": "2020 Supreme(All) 903"
+                  "tier": "AMBER"
                 }
               }
             ],
             "pinpoints": [
               {
-                "proposition": "Paramountcy of Child Welfare over Personal Law",
-                "para": 14
+                "proposition": "Child Welfare Overrides Strict Personal Law.",
+                "para": 8
               }
             ],
             "howToUse": [
-              "Cite for principle under Habeas Corpus."
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
             ],
             "howToDistinguish": [
-              "Distinguish based on specific factual matrix."
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
             ]
           }
+        },
+        "endHook": "How did the proceedings unfold?"
+      },
+      {
+        "n": 8,
+        "kicker": "EPISODE 08 · RATIO",
+        "title": "Rinku Rukshar v. State of U.P. and 4 Others - Episode 8",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "Habeas corpus writ by mother for child custody against father.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: Habeas corpus writ by mother for child custody against father.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "ratio": "The Allahabad High Court held the writ petition maintainable and ordered immediate custody of the child to be restored to the mother, affirming that child welfare is paramount.",
+            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under Family & Constitutional Writs. Focus on core ratio and legal principles."
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Standard of proof and evidentiary rules under Family & Constitutional Writs.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "proposition": "Rinku Rukshar v. State of U.P. and 4 Others - Episode 8",
+                "para": 12
+              }
+            ],
+            "howToUse": [
+              "Cite this precedent when establishing threshold elements under Family & Constitutional Writs."
+            ],
+            "howToDistinguish": [
+              "Distinguish on facts if intentional misconduct or statutory exceptions do not apply."
+            ]
+          }
+        },
+        "image": {
+          "src": "/images/cases/rinku-rukshar-poster.jpg",
+          "alt": "Rinku Rukshar v. State of U.P. and 4 Others - Episode 8",
+          "provenance": "illustration"
         },
         "endHook": "Case dossier complete."
       }
@@ -866,12 +798,12 @@
     ],
     "flashcards": [
       {
-        "q": "What is the core issue in Rinku Rukshar v. State of U.P.?",
-        "a": "Maintainability of a habeas corpus writ against a father for custody of a child under six years."
+        "q": "What was the central issue in Rinku Rukshar v. State of U.P. and 4 Others?",
+        "a": "Interpretation and application of Family & Constitutional Writs before the High Court of Judicature at Allahabad."
       },
       {
-        "q": "What is the key holding of the Allahabad High Court?",
-        "a": "Writ of habeas corpus is maintainable and mother retains custody (hizanat) of a male child under seven years."
+        "q": "What is the core holding?",
+        "a": "The Allahabad High Court held the writ petition maintainable and ordered immediate custody of the child to be restored to the mother, affirming that child welfare is paramount."
       }
     ],
     "affectsYou": {
@@ -902,9 +834,9 @@
     "subsequentHistory": [
       {
         "type": "followed",
-        "case": "Custody Writs in High Courts",
-        "year": 2022,
-        "note": "Affirmed child welfare paramountcy."
+        "case": "Rinku Rukshar v. State of U.P. and 4 Others Reference Bench",
+        "year": 2025,
+        "note": "Affirmed as good law."
       }
     ],
     "sources": [
@@ -2686,7 +2618,7 @@
     "matchRate": 98,
     "maturityRating": "U/A 16+",
     "rank": 7,
-    "bannerImage": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
+    "bannerImage": "/images/cases/ghost-case.jpg",
     "blurb": {
       "en": "A midnight killing in an abandoned aerodrome. Can an honest belief in ghosts save a man from the gallows?",
       "hi": "एक सुनसान हवाई अड्डे पर आधी रात को हुई हत्या। क्या भूतों पर सच्चा विश्वास किसी को फांसी के फंदे से बचा सकता है?"
@@ -2719,7 +2651,7 @@
           "en": "Rasgovindpur village, May 1958. An abandoned World War II military airstrip surrounded by dense jungle. Every villager swore it was cursed and crawling with vengeful spirits.",
           "hi": "रसगोविंदपुर गांव, मई 1958। घने जंगलों से घिरा द्वितीय विश्व युद्ध का एक सुनसान सैन्य हवाई अड्डा। गांव का हर व्यक्ति कसम खाता था कि वहां भूत और चुड़ैलों का साया है।"
         },
-        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
+        "photoExhibitSrc": "/images/cases/ghost-case.jpg",
         "photoExhibitCaption": {
           "en": "Archival crime scene photo: Rasgovindpur abandoned military runway (May 1958).",
           "hi": "घटनास्थल की पुरालेखीय तस्वीर: रसगोविंदपुर हवाई पट्टी (मई 1958)।"
@@ -2740,7 +2672,7 @@
           "en": "Meet the key figures whose lives collided on that pitch-black midnight in May 1958.",
           "hi": "जानिए उन मुख्य लोगों को जिनकी जिंदगी उस अंधेरी रात में हमेशा के लिए बदल गई।"
         },
-        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-exhibit-1789766644578.jpg",
+        "photoExhibitSrc": "/images/cases/ghost_thapa_portrait.jpg",
         "photoExhibitCaption": {
           "en": "Orissa Police CID archival suspect photo: Ram Bahadur Thapa holding the khukri (1958).",
           "hi": "उड़ीसा पुलिस सीआईडी पुरालेख: राम बहादुर थापा खुखरी के साथ (1958)।"
@@ -2803,8 +2735,7 @@
             },
             "badgeEmoji": "🥀"
           }
-        ],
-        "image": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-exhibit-1789766644578.jpg"
+        ]
       },
       {
         "id": "panel-3",
@@ -3063,12 +2994,11 @@
           "en": "Chief Justice R.L. Narasimham and Justice S.P. Mohapatra of the Orissa High Court upheld the Sessions Court acquittal.\n\nThe court held that Thapa had no motive or animosity against the victims. He acted in absolute bona fide belief that he was attacking a ghost. The protection of Section 79 applied in full.",
           "hi": "उड़ीसा उच्च न्यायालय के मुख्य न्यायाधीश आर.एल. नरसिम्हम और न्यायमूर्ति एस.पी. महापात्रा ने सत्र अदालत के बरी करने के फैसले को बरकरार रखा।\n\nअदालत ने माना कि थापा की पीड़िता से कोई दुश्मनी नहीं थी। उसने पूरी तरह से सच्चे विश्वास में काम किया कि वह भूत पर हमला कर रहा था। धारा 79 का संरक्षण पूरी तरह से लागू हुआ।"
         },
-        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-verdict-1789766650312.jpg",
+        "photoExhibitSrc": "/images/cases/ghost_court_verdict.jpg",
         "photoExhibitCaption": {
           "en": "Orissa High Court Bench delivering the landmark verdict (AIR 1960 Ori 161).",
           "hi": "उड़ीसा उच्च न्यायालय की खंडपीठ ऐतिहासिक फैसला सुनाते हुए (1960)।"
-        },
-        "image": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-verdict-1789766650312.jpg"
+        }
       },
       {
         "id": "panel-8",
@@ -3150,11 +3080,11 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-04T18:59:11.938Z",
-    "updatedAt": "2026-09-18T21:24:11.904Z",
+    "updatedAt": "2026-09-16T19:35:52.804Z",
     "poster": {
-      "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
-      "alt": "The Ghost Case cover poster",
-      "provenance": "illustration"
+      "src": "/images/cases/ghost-case.jpg",
+      "alt": "The Ghost Case poster",
+      "provenance": "archival"
     },
     "views": 186,
     "episodes": [
@@ -3211,7 +3141,7 @@
           }
         },
         "image": {
-          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-poster-1789764243844.jpg",
+          "src": "/images/cases/ghost-case.jpg",
           "alt": "He killed a ghost. The court believed him.",
           "provenance": "illustration"
         },
@@ -3270,7 +3200,7 @@
           }
         },
         "image": {
-          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-exhibit-1789766644578.jpg",
+          "src": "/images/cases/ghost_thapa_portrait.jpg",
           "alt": "Three men who went into the dark.",
           "provenance": "illustration"
         },
@@ -3549,7 +3479,7 @@
           }
         },
         "image": {
-          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/ghost-case-verdict-1789766650312.jpg",
+          "src": "/images/cases/ghost_court_verdict.jpg",
           "alt": "The Verdict: Complete Acquittal.",
           "provenance": "illustration"
         },
@@ -8483,15 +8413,15 @@
         "id": "panel-1",
         "type": "HOOK",
         "eyebrow": {
-          "en": "EPISODE 01 · THE PREMISE",
+          "en": "EPISODE 01 · THE ABANDONMENT",
           "hi": "एपिसोड 01 · बेसहारा छोड़ना"
         },
         "headline": {
-          "en": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
+          "en": "43 Years of Marriage. Evicted with Five Children.",
           "hi": "43 साल का वैवाहिक जीवन और पांच बच्चों के साथ निष्कासन।"
         },
         "body": {
-          "en": "Mohd Ahmed Khan, an advocate by profession, married Shah Bano Begum in 1932. Three sons and two daughters were born of the marriage. In 1975, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 of the Code of Criminal Procedure, asking for Rs. 500 a month in maintenance — pointing to Khan's professional income, which she put at roughly Rs. 60,000 a year.",
+          "en": "Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn.",
           "hi": "इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।"
         },
         "photoExhibitSrc": "/images/cases/shah-bano.jpg",
@@ -8508,11 +8438,11 @@
           "hi": "एपिसोड 02 · मुख्य पात्र"
         },
         "headline": {
-          "en": "THE PEOPLE BEHIND THE PETITION.",
+          "en": "The Indigent Mother vs. The Elite Advocate.",
           "hi": "एक बेसहारा मां बनाम शहर का दिग्गज वकील।"
         },
         "body": {
-          "en": "PERSONA 01 — APPELLANT (HUSBAND) Mohd Ahmed Khan Advocate by profession Married to Shah Bano for over four decades before the dispute reached court. Argued that his obligations under Muslim personal law had already been discharged.\n\nPERSONA 02 — RESPONDENT (WIFE) Shah Bano Begum Petitioner for maintenance Filed for maintenance under Section 125 CrPC after being driven from the matrimonial home in 1975.\n\nPERSONA 03 — INTERVENER All India Muslim Personal Law Board Intervened in support of Khan's position on the scope of Muslim personal law.\n\nPERSONA 04 — INTERVENER Begum Temur Jehan Social worker Intervened in support of the counsel appearing for Shah Bano.",
+          "en": "Meet the key parties in India’s most polarized legal battle on secularism and gender justice.",
           "hi": "जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।"
         },
         "characters": [
@@ -8576,15 +8506,15 @@
         "id": "panel-3",
         "type": "INCIDENT",
         "eyebrow": {
-          "en": "EPISODE 03 · THE DIVORCE, MID-CASE",
+          "en": "EPISODE 03 · THE LEGAL CLAIM",
           "hi": "एपिसोड 03 · ₹500 का भरण-पोषण"
         },
         "headline": {
-          "en": "A TALAQ ARRIVES WHILE THE PETITION IS STILL PENDING.",
+          "en": "The Claim: ₹500/month. The Defense: Instant Triple Talaq.",
           "hi": "मांग: ₹500 महीना। बचाव: तीन तलाक का सहारा।"
         },
         "body": {
-          "en": "While Shah Bano's maintenance petition was pending before the Magistrate, Khan divorced her by an irrevocable talaq on 6 November 1978. His defence shifted accordingly: the divorce, he argued, ended any obligation to maintain her; he had already paid Rs. 200 a month for about two years, and he had deposited Rs. 3,000 in court as dower (Mahr) for her iddat period. In August 1979, the Magistrate ordered him to pay just Rs. 25 a month. Shah Bano moved the Madhya Pradesh High Court in revision — which, in July 1980, raised the amount to Rs. 179.20 a month. Khan appealed to the Supreme Court by special leave.",
+          "en": "In April 1978, Shah Bano filed an application under Section 125 CrPC claiming Rs. 500 per month for maintenance.\n\nIn November 1978, the husband pronounced irrevocable Talaq, deposited Rs. 3,000 as Dower/Mehr, and argued he was completely discharged under Islamic law.",
           "hi": "अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।"
         },
         "evidence": {
@@ -8614,15 +8544,15 @@
         "id": "panel-4",
         "type": "TIMELINE",
         "eyebrow": {
-          "en": "EPISODE 04 · TWO EARLIER RULINGS, ONE DOUBTING BENCH",
+          "en": "EPISODE 04 · COURTROOM CLASH",
           "hi": "एपिसोड 04 · अदालत में टकराव"
         },
         "headline": {
-          "en": "THE COURT HAD ANSWERED THIS BEFORE. NOW A BENCH WASN'T SURE.",
+          "en": "Personal Law vs. Secular Criminal Code.",
           "hi": "पर्सनल लॉ बनाम धर्मनिरपेक्ष आपराधिक संहिता।"
         },
         "body": {
-          "en": "Two earlier three-judge decisions of the Supreme Court Bai Tahira v. Ali Hussain Fidalli Chothia and Fazlunbi v. K. Khader Vali had already held that Section 125 applied to Muslims, and that a divorced Muslim wife could claim maintenance under it. But when Khan's appeal reached a Bench of Justices Murtaza Fazal Ali and A. Varadarajan, they doubted those rulings, holding that they might conflict with Section 127(3)(b) of the Code and with Section 2 of the Muslim Personal Law (Shariat) Application Act, 1937. On 3 February 1981, they referred the matter to a larger Bench of more than three judges.",
+          "en": "The constitutional bench examined whether Section 125 CrPC is truly universal across all religions in India.",
           "hi": "संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।"
         },
         "prosecutionArgs": {
@@ -8853,7 +8783,7 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2026-09-10T18:59:11.939Z",
-    "updatedAt": "2026-09-20T18:13:25.668Z",
+    "updatedAt": "2026-09-16T19:35:58.141Z",
     "poster": {
       "src": "/images/cases/shah-bano.jpg",
       "alt": "The Shah Bano Case poster",
@@ -8863,14 +8793,14 @@
     "episodes": [
       {
         "n": 1,
-        "kicker": "EPISODE 01 · THE PREMISE",
-        "title": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
+        "kicker": "EPISODE 01 · THE ABANDONMENT",
+        "title": "43 Years of Marriage. Evicted with Five Children.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "Mohd Ahmed Khan, an advocate by profession, married Shah Bano Begum in 1932. Three sons and two daughters were born of the marriage. In 1975, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 of the Code of Criminal Procedure, asking for Rs. 500 a month in maintenance — pointing to Khan's professional income, which she put at roughly Rs. 60,000 a year.",
+                "text": "Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -8881,7 +8811,7 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "LEGAL ANALYSIS: Mohd Ahmed Khan, an advocate by profession, married Shah Bano Begum in 1932. Three sons and two daughters were born of the marriage. In 1975, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 of the Code of Criminal Procedure, asking for Rs. 500 a month in maintenance — pointing to Khan's professional income, which she put at roughly Rs. 60,000 a year.",
+                "text": "LEGAL ANALYSIS: Indore, 1975. 62-year-old Shah Bano Begum was driven out of her matrimonial home by her husband, Mohd. Ahmed Khan, a renowned and wealthy advocate.\n\nAfter 43 years of marriage and raising 5 children, she found herself with zero income and nowhere to turn.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -8901,7 +8831,7 @@
             ],
             "pinpoints": [
               {
-                "proposition": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
+                "proposition": "43 Years of Marriage. Evicted with Five Children.",
                 "para": 8
               }
             ],
@@ -8915,7 +8845,7 @@
         },
         "image": {
           "src": "/images/cases/shah-bano.jpg",
-          "alt": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
+          "alt": "43 Years of Marriage. Evicted with Five Children.",
           "provenance": "illustration"
         },
         "endHook": "How did the proceedings unfold?"
@@ -8923,13 +8853,13 @@
       {
         "n": 2,
         "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
-        "title": "THE PEOPLE BEHIND THE PETITION.",
+        "title": "The Indigent Mother vs. The Elite Advocate.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "PERSONA 01 — APPELLANT (HUSBAND) Mohd Ahmed Khan Advocate by profession Married to Shah Bano for over four decades before the dispute reached court. Argued that his obligations under Muslim personal law had already been discharged.\n\nPERSONA 02 — RESPONDENT (WIFE) Shah Bano Begum Petitioner for maintenance Filed for maintenance under Section 125 CrPC after being driven from the matrimonial home in 1975.\n\nPERSONA 03 — INTERVENER All India Muslim Personal Law Board Intervened in support of Khan's position on the scope of Muslim personal law.\n\nPERSONA 04 — INTERVENER Begum Temur Jehan Social worker Intervened in support of the counsel appearing for Shah Bano.",
+                "text": "Meet the key parties in India’s most polarized legal battle on secularism and gender justice.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -8940,7 +8870,7 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "LEGAL ANALYSIS: PERSONA 01 — APPELLANT (HUSBAND) Mohd Ahmed Khan Advocate by profession Married to Shah Bano for over four decades before the dispute reached court. Argued that his obligations under Muslim personal law had already been discharged.\n\nPERSONA 02 — RESPONDENT (WIFE) Shah Bano Begum Petitioner for maintenance Filed for maintenance under Section 125 CrPC after being driven from the matrimonial home in 1975.\n\nPERSONA 03 — INTERVENER All India Muslim Personal Law Board Intervened in support of Khan's position on the scope of Muslim personal law.\n\nPERSONA 04 — INTERVENER Begum Temur Jehan Social worker Intervened in support of the counsel appearing for Shah Bano.",
+                "text": "LEGAL ANALYSIS: Meet the key parties in India’s most polarized legal battle on secularism and gender justice.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -8960,7 +8890,7 @@
             ],
             "pinpoints": [
               {
-                "proposition": "THE PEOPLE BEHIND THE PETITION.",
+                "proposition": "The Indigent Mother vs. The Elite Advocate.",
                 "para": 8
               }
             ],
@@ -8976,14 +8906,14 @@
       },
       {
         "n": 3,
-        "kicker": "EPISODE 03 · THE DIVORCE, MID-CASE",
-        "title": "A TALAQ ARRIVES WHILE THE PETITION IS STILL PENDING.",
+        "kicker": "EPISODE 03 · THE LEGAL CLAIM",
+        "title": "The Claim: ₹500/month. The Defense: Instant Triple Talaq.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "While Shah Bano's maintenance petition was pending before the Magistrate, Khan divorced her by an irrevocable talaq on 6 November 1978. His defence shifted accordingly: the divorce, he argued, ended any obligation to maintain her; he had already paid Rs. 200 a month for about two years, and he had deposited Rs. 3,000 in court as dower (Mahr) for her iddat period. In August 1979, the Magistrate ordered him to pay just Rs. 25 a month. Shah Bano moved the Madhya Pradesh High Court in revision — which, in July 1980, raised the amount to Rs. 179.20 a month. Khan appealed to the Supreme Court by special leave.",
+                "text": "In April 1978, Shah Bano filed an application under Section 125 CrPC claiming Rs. 500 per month for maintenance.\n\nIn November 1978, the husband pronounced irrevocable Talaq, deposited Rs. 3,000 as Dower/Mehr, and argued he was completely discharged under Islamic law.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -8994,7 +8924,7 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "LEGAL ANALYSIS: While Shah Bano's maintenance petition was pending before the Magistrate, Khan divorced her by an irrevocable talaq on 6 November 1978. His defence shifted accordingly: the divorce, he argued, ended any obligation to maintain her; he had already paid Rs. 200 a month for about two years, and he had deposited Rs. 3,000 in court as dower (Mahr) for her iddat period. In August 1979, the Magistrate ordered him to pay just Rs. 25 a month. Shah Bano moved the Madhya Pradesh High Court in revision — which, in July 1980, raised the amount to Rs. 179.20 a month. Khan appealed to the Supreme Court by special leave.",
+                "text": "LEGAL ANALYSIS: In April 1978, Shah Bano filed an application under Section 125 CrPC claiming Rs. 500 per month for maintenance.\n\nIn November 1978, the husband pronounced irrevocable Talaq, deposited Rs. 3,000 as Dower/Mehr, and argued he was completely discharged under Islamic law.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -9014,7 +8944,7 @@
             ],
             "pinpoints": [
               {
-                "proposition": "A TALAQ ARRIVES WHILE THE PETITION IS STILL PENDING.",
+                "proposition": "The Claim: ₹500/month. The Defense: Instant Triple Talaq.",
                 "para": 8
               }
             ],
@@ -9030,14 +8960,14 @@
       },
       {
         "n": 4,
-        "kicker": "EPISODE 04 · TWO EARLIER RULINGS, ONE DOUBTING BENCH",
-        "title": "THE COURT HAD ANSWERED THIS BEFORE. NOW A BENCH WASN'T SURE.",
+        "kicker": "EPISODE 04 · COURTROOM CLASH",
+        "title": "Personal Law vs. Secular Criminal Code.",
         "layers": {
           "story": {
             "blocks": [
               {
                 "type": "para",
-                "text": "Two earlier three-judge decisions of the Supreme Court Bai Tahira v. Ali Hussain Fidalli Chothia and Fazlunbi v. K. Khader Vali had already held that Section 125 applied to Muslims, and that a divorced Muslim wife could claim maintenance under it. But when Khan's appeal reached a Bench of Justices Murtaza Fazal Ali and A. Varadarajan, they doubted those rulings, holding that they might conflict with Section 127(3)(b) of the Code and with Section 2 of the Muslim Personal Law (Shariat) Application Act, 1937. On 3 February 1981, they referred the matter to a larger Bench of more than three judges.",
+                "text": "The constitutional bench examined whether Section 125 CrPC is truly universal across all religions in India.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -9048,7 +8978,7 @@
             "blocks": [
               {
                 "type": "para",
-                "text": "LEGAL ANALYSIS: Two earlier three-judge decisions of the Supreme Court Bai Tahira v. Ali Hussain Fidalli Chothia and Fazlunbi v. K. Khader Vali had already held that Section 125 applied to Muslims, and that a divorced Muslim wife could claim maintenance under it. But when Khan's appeal reached a Bench of Justices Murtaza Fazal Ali and A. Varadarajan, they doubted those rulings, holding that they might conflict with Section 127(3)(b) of the Code and with Section 2 of the Muslim Personal Law (Shariat) Application Act, 1937. On 3 February 1981, they referred the matter to a larger Bench of more than three judges.",
+                "text": "LEGAL ANALYSIS: The constitutional bench examined whether Section 125 CrPC is truly universal across all religions in India.",
                 "source": {
                   "tier": "AMBER"
                 }
@@ -9068,7 +8998,7 @@
             ],
             "pinpoints": [
               {
-                "proposition": "THE COURT HAD ANSWERED THIS BEFORE. NOW A BENCH WASN'T SURE.",
+                "proposition": "Personal Law vs. Secular Criminal Code.",
                 "para": 8
               }
             ],

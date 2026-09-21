@@ -38,7 +38,7 @@ function ReadNextPoster({ src, alt }: { src: string; alt: string }) {
 }
 
 export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
-  if (!relatedSlugs || relatedSlugs.length === 0) return null;
+  if (!relatedSlugs || !Array.isArray(relatedSlugs) || relatedSlugs.length === 0) return null;
 
   const cases = relatedSlugs
     .map((slug) => getCaseBySlug(slug))

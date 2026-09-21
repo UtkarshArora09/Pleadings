@@ -11,7 +11,7 @@ interface WhatChangedSinceProps {
 }
 
 export function WhatChangedSince({ timeline, lang = 'en' }: WhatChangedSinceProps) {
-  if (!timeline || timeline.length === 0) return null;
+  if (!timeline || !Array.isArray(timeline) || timeline.length === 0) return null;
 
   return (
     <section className="my-10 p-5 sm:p-7 bg-[#12141C] border border-white/10 rounded-xs shadow-xl space-y-5 select-none">

@@ -13,7 +13,7 @@ interface IfThisAffectsYouProps {
 }
 
 export function IfThisAffectsYou({ affectsYou, lang = 'en' }: IfThisAffectsYouProps) {
-  if (!affectsYou) return null;
+  if (!affectsYou || !affectsYou.points || affectsYou.points.length === 0) return null;
 
   return (
     <section className="my-10 p-5 sm:p-7 bg-[#131922] border border-emerald-500/30 rounded-xs shadow-xl space-y-4 select-none">
