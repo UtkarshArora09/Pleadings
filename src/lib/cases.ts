@@ -97,6 +97,7 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
 
   const flashcards = dynamicData.flashcards || staticCase.flashcards;
   const subsequentHistory = dynamicData.subsequentHistory || staticCase.subsequentHistory;
+  const advocateReference = dynamicData.advocateReference || staticCase.advocateReference;
 
   return {
     ...staticCase,
@@ -108,6 +109,7 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
     episodes,
     flashcards,
     subsequentHistory,
+    advocateReference,
   };
 }
 

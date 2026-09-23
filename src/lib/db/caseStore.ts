@@ -330,6 +330,7 @@ export function normalizeCaseData(raw: any): CaseData {
     episodes: episodes,
     flashcards: flashcards,
     subsequentHistory: subsequentHistory,
+    advocateReference: source.advocateReference || undefined,
     status: source.status?.code ? (source.status?.code === 'GOOD_LAW' ? 'PUBLISHED' : 'ADMIN_REVIEW') : (source.status || 'ADMIN_REVIEW'),
     createdAt: source.createdAt || source.created_at || source.publishedAt || new Date().toISOString(),
     updatedAt: source.updatedAt || source.updated_at || new Date().toISOString(),

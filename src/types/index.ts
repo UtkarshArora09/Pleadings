@@ -254,6 +254,7 @@ export interface CaseData {
     year: number;
     note: string;
   }[];
+  advocateReference?: import('./case').AdvocateReference;
   // CMS & Ingestion fields
   status?: CaseStatus;
   createdAt?: string;
@@ -276,12 +277,15 @@ export interface AdminIngestPayload {
   additionalNotes?: string;
   reviewer?: string;
   enrolmentNumber?: string;
+  bench?: string[];
+  decidedOn?: string;
   // Student Layer Ingestion Fields
   studentRatio?: string;
   studentObiter?: string[];
   studentExamAngle?: string;
   studentFlashcards?: { q: string; a: string }[];
   // Advocate Layer Ingestion Fields
+  advocateTrialPropositions?: string[];
   advocateStrategy?: string;
   advocatePinpoints?: { proposition: string; para: number }[];
   advocateHowToUse?: string[];
@@ -292,5 +296,7 @@ export interface AdminIngestPayload {
     year: number;
     note: string;
   }[];
+  advocateReference?: import('./case').AdvocateReference;
 }
+
 

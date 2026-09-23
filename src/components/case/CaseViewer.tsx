@@ -23,8 +23,7 @@ import { DissentPanel } from './layers/DissentPanel';
 import { ExamAngle } from './layers/ExamAngle';
 import { Flashcards } from './layers/Flashcards';
 import { SubsequentHistory } from './layers/SubsequentHistory';
-import { HowToUse } from './layers/HowToUse';
-import { HowToDistinguish } from './layers/HowToDistinguish';
+import { AdvocateReference } from './layers/AdvocateReference';
 import { useApp } from '@/context/AppContext';
 
 interface CaseViewerProps {
@@ -447,21 +446,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                     </div>
                   )}
 
-                  {/* Advocate Layer: Pinpoints / HowToUse / HowToDistinguish */}
-                  {depth === 'advocate' && (
-                    <div className="space-y-4 pt-2">
-                      <HowToUse
-                        pinpoints={currentLayer.pinpoints}
-                        propositions={currentLayer.howToUse}
-                        lang={language}
-                      />
-                      <HowToDistinguish
-                        distinctions={currentLayer.howToDistinguish}
-                        lang={language}
-                      />
-                    </div>
-                  )}
-
                   {/* Exhibit Card (if any in this episode) */}
                   {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
 
@@ -475,12 +459,12 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
 
                 {/* Quick Continue to Next Episode Button */}
                 <div className="pt-3 flex items-center justify-between border-t border-white/5 text-xs font-mono">
-                  <span className="text-white/40">Episode {epNum} of 8</span>
+                  <span className="text-white/40">Episode {epNum} of {caseData.episodes?.length || 8}</span>
                   <button
                     onClick={() => scrollToEpisode(nextEpId)}
                     className="flex items-center gap-1.5 text-[#D4AF37] hover:text-white font-bold uppercase transition-colors cursor-pointer"
                   >
-                    <span>{epNum < 8 ? `Continue to Episode ${epNum + 1}` : 'View Ratio & Impact'}</span>
+                    <span>{epNum < (caseData.episodes?.length || 8) ? `Continue to Episode ${epNum + 1}` : 'View Ratio & Impact'}</span>
                     <span>↓</span>
                   </button>
                 </div>
@@ -499,9 +483,15 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             <Flashcards flashcards={caseData.flashcards} lang={language} />
           )}
 
-          {/* Advocate Mode End: Subsequent History */}
-          {depth === 'advocate' && caseData.subsequentHistory && (
-            <SubsequentHistory history={caseData.subsequentHistory} lang={language} />
+          {/* Advocate Mode End: Consolidated Advocate Reference Block */}
+          {depth === 'advocate' && (
+            <AdvocateReference
+              reference={caseData.advocateReference}
+              subsequentHistory={caseData.subsequentHistory}
+              primaryCitation={caseData.citations?.primary}
+              parallelCitations={caseData.citations?.parallel}
+              lang={language}
+            />
           )}
 
           {/* 1. If This Affects You */}

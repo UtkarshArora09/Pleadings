@@ -65,6 +65,38 @@ export interface CaseStatus {
   chain: { year: number; event: string }[];
 }
 
+export interface AdvocateStatutoryText {
+  statute: string;
+  text: string;
+}
+
+export interface AdvocateHolding {
+  number: string;
+  holding: string;
+  pinpoint: string;
+}
+
+export interface AdvocatePrecedent {
+  caseName: string;
+  citation: string;
+  treatment: 'Affirmed' | 'Applied' | 'Followed' | 'Referred to' | 'Distinguished' | 'Doubted' | 'Overruled' | string;
+}
+
+export interface AdvocateCitatorEntry {
+  code: string; // e.g. "F (Followed)", "RF (Referred)", "D (Distinguished)"
+  citation: string;
+  points?: string;
+}
+
+export interface AdvocateReference {
+  statutoryText?: AdvocateStatutoryText[];
+  holdings?: AdvocateHolding[];
+  precedents?: AdvocatePrecedent[];
+  citatorHistory?: AdvocateCitatorEntry[];
+  citatorDisclaimer?: string;
+  parallelCitations?: string[];
+}
+
 export interface CaseFile {
   slug: string;
   title: string;
@@ -84,7 +116,7 @@ export interface CaseFile {
   publishedAt: string;
   views?: number;
   poster: { src: string; alt: string; provenance: "archival" | "illustration" };
-  episodes: Episode[];              // exactly 8
+  episodes: Episode[];              // default 8
   vote: {
     question: string;
     context: string;
@@ -100,7 +132,9 @@ export interface CaseFile {
   timeline: { year: number; event: string }[];
   relatedSlugs: string[];
   subsequentHistory: { type: "followed" | "distinguished" | "doubted" | "overruled" | "statute"; case: string; year: number; note: string }[];
+  advocateReference?: AdvocateReference;
   sources: { label: string; url: string }[];
   review: { reviewer: string; enrolment: string; reviewedOn: string };
   hi: Omit<CaseFile, "hi" | "slug" | "citations" | "sourceUrl" | "review">;
 }
+

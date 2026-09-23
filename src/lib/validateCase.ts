@@ -108,6 +108,38 @@ const EpisodeSchema = z.object({
   }).optional()
 });
 
+const AdvocateStatutoryTextSchema = z.object({
+  statute: z.string(),
+  text: z.string()
+});
+
+const AdvocateHoldingSchema = z.object({
+  number: z.string(),
+  holding: z.string(),
+  pinpoint: z.string()
+});
+
+const AdvocatePrecedentSchema = z.object({
+  caseName: z.string(),
+  citation: z.string(),
+  treatment: z.string()
+});
+
+const AdvocateCitatorEntrySchema = z.object({
+  code: z.string(),
+  citation: z.string(),
+  points: z.string().optional()
+});
+
+export const AdvocateReferenceSchema = z.object({
+  statutoryText: z.array(AdvocateStatutoryTextSchema).optional(),
+  holdings: z.array(AdvocateHoldingSchema).optional(),
+  precedents: z.array(AdvocatePrecedentSchema).optional(),
+  citatorHistory: z.array(AdvocateCitatorEntrySchema).optional(),
+  citatorDisclaimer: z.string().optional(),
+  parallelCitations: z.array(z.string()).optional()
+});
+
 export const CaseFileSchema = z.object({
   slug: z.string(),
   title: z.string(),
@@ -151,7 +183,7 @@ export const CaseFileSchema = z.object({
     alt: z.string(),
     provenance: z.enum(['archival', 'illustration'])
   }),
-  episodes: z.array(EpisodeSchema).length(8, "A case must have exactly 8 episodes."),
+  episodes: z.array(EpisodeSchema).min(1, "A case must have at least 1 episode."),
   vote: z.object({
     question: z.string(),
     context: z.string(),
@@ -188,7 +220,8 @@ export const CaseFileSchema = z.object({
     case: z.string(),
     year: z.number(),
     note: z.string()
-  })),
+  })).optional().default([]),
+  advocateReference: AdvocateReferenceSchema.optional(),
   sources: z.array(z.object({
     label: z.string(),
     url: z.string()
@@ -200,6 +233,7 @@ export const CaseFileSchema = z.object({
   }),
   hi: z.any()
 });
+
 
 export function validateCase(caseData: unknown): { success: boolean; errors?: string[]; warnings?: string[] } {
   const result = CaseFileSchema.safeParse(caseData);

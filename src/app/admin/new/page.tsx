@@ -29,8 +29,8 @@ export default function NewCasePage() {
     // Advocate Layer Inputs
     advocateStrategy: '',
     advocatePinpoints: '',
-    advocateHowToUse: '',
-    advocateHowToDistinguish: '',
+    advocateTrialPropositions: '',
+    parallelCitations: '',
   });
 
   const [flashcards, setFlashcards] = useState<{ q: string; a: string }[]>([
@@ -84,14 +84,15 @@ export default function NewCasePage() {
         .map((s) => s.trim())
         .filter(Boolean);
 
-      // Parse advocate how to use and distinguish lines
-      const advocateHowToUseList = formData.advocateHowToUse
+      // Parse advocate trial propositions lines
+      const advocateTrialPropositionsList = formData.advocateTrialPropositions
         .split('\n')
         .map((s) => s.trim())
         .filter(Boolean);
 
-      const advocateHowToDistinguishList = formData.advocateHowToDistinguish
-        .split('\n')
+      // Parse parallel citations
+      const parallelCitationsList = formData.parallelCitations
+        .split(/[,\n]/)
         .map((s) => s.trim())
         .filter(Boolean);
 
@@ -131,9 +132,11 @@ export default function NewCasePage() {
           studentFlashcards: studentFlashcards.length > 0 ? studentFlashcards : undefined,
           advocateStrategy: formData.advocateStrategy || undefined,
           advocatePinpoints: pinpointsList.length > 0 ? pinpointsList : undefined,
-          advocateHowToUse: advocateHowToUseList.length > 0 ? advocateHowToUseList : undefined,
-          advocateHowToDistinguish: advocateHowToDistinguishList.length > 0 ? advocateHowToDistinguishList : undefined,
+          advocateTrialPropositions: advocateTrialPropositionsList.length > 0 ? advocateTrialPropositionsList : undefined,
           advocateSubsequentHistory: advocateSubsequentHistory.length > 0 ? advocateSubsequentHistory : undefined,
+          advocateReference: parallelCitationsList.length > 0 ? {
+            parallelCitations: parallelCitationsList
+          } : undefined,
         }),
       });
 
@@ -538,16 +541,16 @@ export default function NewCasePage() {
             <span className="text-[10px] font-mono text-emerald-300/60 uppercase">Shown in Advocate Mode</span>
           </div>
           <p className="text-xs text-[#a9a49a]">
-            Provide courtroom citations, paragraph pinpoint rules, and practical guidance on how counsel can cite or distinguish this ruling.
+            Provide courtroom citations, trial propositions per episode, paragraph pinpoints, and parallel law report citations.
           </p>
 
           <div>
             <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
-              Trial Strategy & Litigation Proposition
+              Overall Case Proposition / Key Takeaway
             </label>
             <input
               type="text"
-              placeholder="e.g. Standard of proof: Prosecution must establish jurisdictional conditions before invocation of special statutory penalties."
+              placeholder="e.g. Standard of proof: Section 125 CrPC is a secular, summary remedy applicable uniformly across all personal laws."
               value={formData.advocateStrategy}
               onChange={(e) => setFormData({ ...formData, advocateStrategy: e.target.value })}
               className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
@@ -557,11 +560,24 @@ export default function NewCasePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
+                Trial Propositions (1 per line)
+              </label>
+              <textarea
+                rows={3}
+                placeholder="TRIAL PROPOSITION: A neglected wife is entitled to invoke s. 125 independent of personal law.&#10;TRIAL PROPOSITION: Mahr is not an amount payable on divorce under s. 127(3)(b)."
+                value={formData.advocateTrialPropositions}
+                onChange={(e) => setFormData({ ...formData, advocateTrialPropositions: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
                 Paragraph Pinpoints (¶Para: Rule)
               </label>
               <textarea
                 rows={3}
-                placeholder="¶8: Binding rule on threshold burden&#10;¶12: Application to electronic evidence"
+                placeholder="¶8: Section 125 CrPC applies to all citizens&#10;¶11: Surah Al-Baqarah verses impose maintenance obligation"
                 value={formData.advocatePinpoints}
                 onChange={(e) => setFormData({ ...formData, advocatePinpoints: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
@@ -570,26 +586,13 @@ export default function NewCasePage() {
 
             <div>
               <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
-                How to Cite in Arguments (1 per line)
+                Parallel Citations (1 per line or comma-separated)
               </label>
               <textarea
                 rows={3}
-                placeholder="Cite when establishing statutory preconditions.&#10;Use to counter arbitrary procedural defaults."
-                value={formData.advocateHowToUse}
-                onChange={(e) => setFormData({ ...formData, advocateHowToUse: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
-                How Opposing Counsel Will Distinguish
-              </label>
-              <textarea
-                rows={3}
-                placeholder="Distinguish where factual exceptions apply.&#10;Distinguish on strict documentary proof."
-                value={formData.advocateHowToDistinguish}
-                onChange={(e) => setFormData({ ...formData, advocateHowToDistinguish: e.target.value })}
+                placeholder="AIR 1985 SC 945&#10;(1985) 2 SCC 556&#10;(1985) 3 SCR 844&#10;1985 Cri LJ 875"
+                value={formData.parallelCitations}
+                onChange={(e) => setFormData({ ...formData, parallelCitations: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
               />
             </div>

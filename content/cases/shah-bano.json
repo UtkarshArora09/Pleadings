@@ -16,7 +16,9 @@
     "primary": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945",
     "parallel": [
       "1985 SCR (3) 844",
-      "1985 SCALE (1) 767"
+      "1985 SCALE (1) 767",
+      "1985 Cri LJ 875",
+      "87 Bom LR 435"
     ],
     "neutral": "1985 INSC 7"
   },
@@ -120,12 +122,6 @@
                 "tier": "AMBER"
               }
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): No holding-level proposition in this episode — foundational facts only. Do not cite this passage as authority; cite Episodes 5, 7, and 8 for the operative holdings."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: A case involving a shorter marriage, or a husband's undisclosed/disputed income, sits on different footing for quantum purposes — though not for the entitlement question this case actually decides."
           ]
         }
       },
@@ -168,12 +164,6 @@
                 "tier": "AMBER"
               }
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): Not a citable holding — background only."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: Not applicable to this episode."
           ]
         }
       },
@@ -222,12 +212,6 @@
               "proposition": "Wife means a wife as defined, irrespective of the religion professed by her or by her husband. Therefore, a divorced Muslim woman so long as she has not married, is a wife for the purpose of section 125.",
               "para": 855
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 855A-B; 854B — 'Wife means a wife as defined, irrespective of the religion professed by her or by her husband. Therefore, a divorced Muslim woman so long as she has not married, is a wife for the purpose of section 125.' Cite for: a Muslim woman divorced during or before Section 125 proceedings qualifies as 'wife' under the Explanation, regardless of when in the litigation the divorce occurs."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: A wife who has remarried after divorce falls outside the Explanation's definition entirely — the judgment's protection is expressly limited to a divorced woman 'so long as she has not remarried.'"
           ]
         }
       },
@@ -270,12 +254,6 @@
                 "tier": "AMBER"
               }
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): Procedural point; drawn from the Court's own recital of the referral order dated 3 February 1981 (quoted in full in the judgment), not separately pinpointed in the SCR headnote. Cite for: the referral mechanism itself when arguing that a lower or coordinate Bench cannot bypass binding precedent without proper reference."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: Not applicable — this is settled procedure, not a fact pattern to distinguish."
           ]
         }
       },
@@ -324,12 +302,6 @@
               "proposition": "Divorce may be a convenient or identifiable point of time at which the deferred amount has to be paid by the husband to the wife. But, the payment of the amount is not occasioned by the divorce...",
               "para": 863
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 863B-D; 863D-G; 863H — 'Divorce may be a convenient or identifiable point of time at which the deferred amount has to be paid by the husband to the wife. But, the payment of the amount is not occasioned by the divorce...' Cite for: the proposition that a sum merely coinciding with, or contingent on, dissolution of marriage is not automatically a sum 'payable on divorce' under Section 127(3)(b)."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: A personal-law regime where a sum is expressly and solely triggered by the divorce itself (not merely payable in consideration of the marriage and falling due on its end) would sit outside this reasoning — the Court's logic turns specifically on Mahr being marriage-consideration, not divorce-consideration."
           ]
         }
       },
@@ -372,12 +344,6 @@
                 "tier": "AMBER"
               }
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): Not applicable."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: Not applicable."
           ]
         }
       },
@@ -430,13 +396,6 @@
               "proposition": "Rejection of the argument that a Muslim husband's liability is limited to the iddat period despite the wife's continuing inability to maintain herself.",
               "para": 838
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 865H, 866A-C — 'A divorced Muslim wife is, therefore, entitled to apply for maintenance under section 125 of the Code.'",
-            "PINPOINT: 838H, 851A-B — rejection of the argument that a Muslim husband's liability is limited to the iddat period despite the wife's continuing inability to maintain herself. Cite for: the core holding on Section 125's applicability to Muslims, and the 'unable to maintain herself' standard displacing any personal-law iddat cap."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: This holding is expressly conditioned on the wife being 'unable to maintain herself.' Per PINPOINT: 858D-G; 859C-D, a divorced wife shown to be capable of self-maintenance falls back to the personal-law position — liability ceasing at iddat. A respondent with demonstrated means of self-support is materially distinguishable on this fact alone."
           ]
         }
       },
@@ -486,18 +445,136 @@
               "proposition": "Section 125 is truly secular in character... Whether the spouses are Hindus or Muslims, Christians or Parsis, Pagans or Heathens, is wholly irrelevant in the application of these provisions.",
               "para": 834
             }
-          ],
-          "howToUse": [
-            "HOW TO CITE THIS PRECEDENT (FOR COUNSEL): PINPOINT: 834D-E; 855E-G — 'Section 125 is truly secular in character... Whether the spouses are Hindus or Muslims, Christians or Parsis, Pagans or Heathens, is wholly irrelevant in the application of these provisions.' Cite for: the general, religion-neutral character of Section 125 CrPC (now mirrored in Section 144, Bharatiya Nagarik Suraksha Sanhita, 2023) in any matter involving maintenance across personal-law lines."
-          ],
-          "howToDistinguish": [
-            "HOW OPPOSING COUNSEL WILL DISTINGUISH: The Article 44/Uniform Civil Code passage is expressly headed 'OBSERVATION' in the report and is not part of the operative ratio. A submission that relies on this case for a Uniform Civil Code argument can be met with the objection that the passage is obiter, not binding precedent — the binding holding is confined to Sections 125 and 127(3)(b) CrPC."
           ]
         }
       },
       "endHook": "Case dossier complete."
     }
   ],
+  "advocateReference": {
+    "statutoryText": [
+      {
+        "act": "Code of Criminal Procedure, 1973",
+        "section": "s. 125(1)(a) & Explanation (b)",
+        "quotedText": "125. (1) If any person having sufficient means neglects or refuses to maintain—\n(a) his wife, unable to maintain herself,\n...\na Magistrate of the first class may, upon proof of such neglect or refusal, order such person to make a monthly allowance for the maintenance of his wife...\n\nExplanation.—For the purposes of this Chapter,—\n...\n(b) \"wife\" includes a woman who has been divorced by, or has obtained a divorce from, her husband and has not remarried.",
+        "pinpoint": "854E-G, 855B"
+      },
+      {
+        "act": "Code of Criminal Procedure, 1973",
+        "section": "s. 127(3)(b)",
+        "quotedText": "127. (3) Where any order has been made under section 125 in favour of a woman who has been divorced by, or has obtained a divorce from, her husband, the Magistrate shall, if he is satisfied that—\n...\n(b) the woman has been divorced by her husband and that she has received, whether before or after the date of the said order, the whole of the sum which, under any customary or personal law applicable to the parties, was payable on such divorce, cancel such order...",
+        "pinpoint": "860D-F"
+      }
+    ],
+    "holdings": [
+      {
+        "number": "1",
+        "holding": "Section 125 is truly secular in character. It applies to all citizens irrespective of religion. Personal law does not override the statutory obligation under Chapter IX of the Code.",
+        "pinpoint": "854D-E, 855E-G"
+      },
+      {
+        "number": "2.1",
+        "holding": "Explanation (b) to s. 125(1) contains no words of limitation based on religion. A divorced Muslim woman who has not remarried is a 'wife' within the meaning of the section.",
+        "pinpoint": "855A-B"
+      },
+      {
+        "number": "2.2",
+        "holding": "The obligation of a Muslim husband to maintain his divorced wife who is unable to maintain herself does not cease with the expiration of the iddat period.",
+        "pinpoint": "856B-C, 865H"
+      },
+      {
+        "number": "3.1",
+        "holding": "Mahr (dower) is paid as a mark of respect for the wife and in consideration of the marriage, not in consideration of divorce.",
+        "pinpoint": "861B-C, 863A-B"
+      },
+      {
+        "number": "3.3",
+        "holding": "Deferred Mahr falls due on dissolution of marriage, but payment of the amount is not occasioned by the divorce. It is an obligation arising out of the contract of marriage itself.",
+        "pinpoint": "863B-D"
+      },
+      {
+        "number": "3.4",
+        "holding": "Mahr is not a sum 'payable on divorce' within the meaning of s. 127(3)(b) CrPC.",
+        "pinpoint": "863G-H"
+      },
+      {
+        "number": "3.5",
+        "holding": "Payment of Mahr and iddat maintenance does not entitle the husband to an order of cancellation under s. 127(3)(b).",
+        "pinpoint": "864A-B"
+      },
+      {
+        "number": "3.6",
+        "holding": "Bai Tahira v. Ali Hussain Fidalli Chothia (1979) 2 SCC 316 and Fazlunbi v. K. Khader Vali (1980) 4 SCC 125 affirmed as correctly decided on the liability of the husband under s. 125, but the observation in Bai Tahira that Mahr is payable on divorce corrected.",
+        "pinpoint": "864D-H"
+      }
+    ],
+    "precedents": [
+      {
+        "caseName": "Bai Tahira v. Ali Hussain Fidalli Chothia",
+        "citation": "[1979] 2 SCR 75; (1979) 2 SCC 316",
+        "treatment": "Affirmed with correction",
+        "proposition": "Affirmed on husband's liability under s. 125; holding that Mahr is a sum payable on divorce disapproved/corrected."
+      },
+      {
+        "caseName": "Fazlunbi v. K. Khader Vali",
+        "citation": "[1980] 3 SCR 1127; (1980) 4 SCC 125",
+        "treatment": "Affirmed",
+        "proposition": "Affirmed in full on applicability of s. 125 to Muslim divorced wives."
+      },
+      {
+        "caseName": "Jagir Kaur v. Jaswant Singh",
+        "citation": "[1964] 2 SCR 73; AIR 1963 SC 1521",
+        "treatment": "Referred to",
+        "proposition": "On the nature and purpose of Chapter IX CrPC as a measure of social justice."
+      },
+      {
+        "caseName": "Nanak Chand v. Shri Chandra Kishore Agarwala",
+        "citation": "[1970] 1 SCR 565; (1969) 3 SCC 802",
+        "treatment": "Referred to",
+        "proposition": "On s. 488 of the old Code applying to all persons irrespective of religion."
+      },
+      {
+        "caseName": "Hamira Bibi v. Zubaida Bibi",
+        "citation": "43 IA 294; AIR 1916 PC 46",
+        "treatment": "Referred to",
+        "proposition": "On the nature and definition of Mahr under Muslim law."
+      },
+      {
+        "caseName": "Syed Sabir Hussain v. Farzand Hasan",
+        "citation": "65 IA 119; AIR 1938 PC 80",
+        "treatment": "Referred to",
+        "proposition": "On Mahr being an obligation arising out of the marriage contract."
+      }
+    ],
+    "citatorHistory": [
+      {
+        "code": "F",
+        "citation": "1986 SC 587 (4)",
+        "point": "Applied on s. 125 secular applicability to divorced Muslim wives"
+      },
+      {
+        "code": "RF",
+        "citation": "1987 SC 1103 (4)",
+        "point": "Discussed on personal law and statutory social-welfare legislation"
+      },
+      {
+        "code": "D",
+        "citation": "1988 SC 644 (6)",
+        "point": "Distinguished on facts regarding independent income of the respondent"
+      }
+    ],
+    "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter.",
+    "parallelCitations": [
+      "AIR 1985 SC 945",
+      "(1985) 2 SCC 556",
+      "(1985) 3 SCR 844",
+      "1985 Cri LJ 875",
+      "1985 SCC (Cri) 257",
+      "1985 (1) SCALE 767",
+      "1985 (1) Crimes 1014",
+      "87 Bom LR 435"
+    ]
+  },
   "vote": {
     "question": "Does Section 125 CrPC override Muslim Personal Law regarding maintenance of a divorced wife after the Iddat period?",
     "context": "The Constitution Bench had to decide if a secular criminal procedural remedy overrides religious personal law when a divorced wife is indigent.",
