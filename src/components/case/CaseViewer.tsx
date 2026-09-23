@@ -24,6 +24,8 @@ import { ExamAngle } from './layers/ExamAngle';
 import { Flashcards } from './layers/Flashcards';
 import { SubsequentHistory } from './layers/SubsequentHistory';
 import { AdvocateReference } from './layers/AdvocateReference';
+import { EpisodeQuestionCard } from './layers/EpisodeQuestionCard';
+import { LawyerEpisodeStream } from './layers/LawyerEpisodeStream';
 import { useApp } from '@/context/AppContext';
 
 interface CaseViewerProps {
@@ -206,15 +208,35 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   // Track first AMBER block
   let hasFoundAmber = false;
 
-  const episodeRailItems = [
-    { id: 'case-header', label: 'BRIEF', epNumber: '00' },
-    ...episodes.map((_, i) => ({
-      id: `episode-${i + 1}`,
-      label: `EP ${i + 1}`,
-      epNumber: `0${i + 1}`,
-    })),
-    { id: 'case-dossier', label: 'RATIO', epNumber: '09' },
-  ];
+  const lawyerEps = caseData.lawyerEpisodes && caseData.lawyerEpisodes.length > 0
+    ? caseData.lawyerEpisodes
+    : [
+        { id: 'lawyer-ep-1', n: 1, kicker: 'LAWYER EP 01', title: 'Statutory Text' },
+        { id: 'lawyer-ep-2', n: 2, kicker: 'LAWYER EP 02', title: 'Court Holdings' },
+        { id: 'lawyer-ep-3', n: 3, kicker: 'LAWYER EP 03', title: 'Precedents' },
+        { id: 'lawyer-ep-4', n: 4, kicker: 'LAWYER EP 04', title: 'Citator History' },
+        { id: 'lawyer-ep-5', n: 5, kicker: 'LAWYER EP 05', title: 'Citation Index' },
+      ];
+
+  const episodeRailItems = depth === 'advocate'
+    ? [
+        { id: 'case-header', label: 'BRIEF', epNumber: '00' },
+        ...lawyerEps.map((ep, i) => ({
+          id: ep.id || `lawyer-ep-${i + 1}`,
+          label: `ADV ${i + 1}`,
+          epNumber: `0${i + 1}`,
+        })),
+        { id: 'case-dossier', label: 'INDEX', epNumber: '06' },
+      ]
+    : [
+        { id: 'case-header', label: 'BRIEF', epNumber: '00' },
+        ...episodes.map((_, i) => ({
+          id: `episode-${i + 1}`,
+          label: `EP ${i + 1}`,
+          epNumber: `0${i + 1}`,
+        })),
+        { id: 'case-dossier', label: 'RATIO', epNumber: '09' },
+      ];
 
   return (
     <div
@@ -344,133 +366,154 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           {/* Quick Scroll Indicator to Episode 1 */}
           <div className="pt-4 flex justify-center">
             <button
-              onClick={() => scrollToEpisode('episode-1')}
+              onClick={() => scrollToEpisode(depth === 'advocate' ? (lawyerEps[0]?.id || 'lawyer-ep-1') : 'episode-1')}
               className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-[#D4AF37] hover:text-black font-bold text-xs uppercase tracking-widest rounded-xs transition-all cursor-pointer text-white"
             >
-              <span>Begin Episode 1</span>
+              <span>{depth === 'advocate' ? 'Begin Advocate Episode 1' : 'Begin Episode 1'}</span>
               <span>↓</span>
             </button>
           </div>
         </section>
 
-        {/* Episodes 1 through 8 Container with 180ms Crossfade */}
+        {/* Dedicated Mode Streams with 180ms Crossfade */}
         <div
           className={`transition-opacity duration-180 ${
             isCrossfading ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          {episodes.map((ep, epIdx) => {
-            const epNum = ep.n || epIdx + 1;
-            const currentLayer = ep.layers?.[depth] || ep.layers?.story || { blocks: [] };
-            const isVerdictEpisode = epNum === 7;
-            const isLocked = isVerdictEpisode && !isVerdictUnlocked;
-            const nextEpId = epNum < 8 ? `episode-${epNum + 1}` : 'case-dossier';
+          {depth === 'advocate' ? (
+            /* Advocate / Lawyer Mode: 5 Dedicated Lawyer Episodes Flow */
+            <LawyerEpisodeStream
+              lawyerEpisodes={caseData.lawyerEpisodes}
+              advocateReference={caseData.advocateReference}
+              subsequentHistory={caseData.subsequentHistory}
+              primaryCitation={caseData.citations?.primary}
+              parallelCitations={caseData.citations?.parallel}
+              lang={language}
+            />
+          ) : (
+            /* Story & Student Mode: Standard Story & Student Episodes Flow */
+            episodes.map((ep, epIdx) => {
+              const epNum = ep.n || epIdx + 1;
+              const currentLayer = ep.layers?.[depth] || ep.layers?.story || { blocks: [] };
+              const isVerdictEpisode = epNum === 7;
+              const isLocked = isVerdictEpisode && !isVerdictUnlocked;
+              const nextEpId = epNum < episodes.length ? `episode-${epNum + 1}` : 'case-dossier';
 
-            return (
-              <article
-                key={epNum}
-                ref={(el) => {
-                  episodeRefs.current[epIdx] = el;
-                }}
-                onMouseEnter={() => setActiveEpisodeAnchor(epNum)}
-                className="py-8 sm:py-12 md:py-16 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-t border-white/10 space-y-5 relative scroll-mt-16"
-                id={`episode-${epNum}`}
-              >
-                {/* Episode Kicker & Title */}
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                    <span>{ep.kicker}</span>
-                    <span className="text-white/40">{epNum} / 8</span>
+              return (
+                <article
+                  key={epNum}
+                  ref={(el) => {
+                    episodeRefs.current[epIdx] = el;
+                  }}
+                  onMouseEnter={() => setActiveEpisodeAnchor(epNum)}
+                  className="py-8 sm:py-12 md:py-16 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-t border-white/10 space-y-5 relative scroll-mt-16"
+                  id={`episode-${epNum}`}
+                >
+                  {/* Episode Kicker & Title */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                      <span>{ep.kicker}</span>
+                      <span className="text-white/40">{epNum} / {episodes.length || 8}</span>
+                    </div>
+                    <h2 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight leading-snug">
+                      {ep.title}
+                    </h2>
                   </div>
-                  <h2 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight leading-snug">
-                    {ep.title}
-                  </h2>
-                </div>
 
-                {/* Optional Episode Visual Image (only if not identical to exhibit image below) */}
-                {ep.image && epIdx !== 0 && (!ep.exhibit?.image || ep.exhibit.image.src !== ep.image.src) && (
-                  <CaseImage
-                    src={ep.image.src}
-                    alt={ep.image.alt}
-                    provenance={ep.image.provenance}
-                    aspectRatio="aspect-[16/9]"
-                  />
-                )}
-
-                {/* Episode 7: Vote Gate */}
-                {isVerdictEpisode && (
-                  <VoteGate
-                    slug={caseData.slug}
-                    caseTitle={displayTitle}
-                    question={caseData.vote.question}
-                    context={caseData.vote.context}
-                    options={caseData.vote.options}
-                    courtChoseOptionId={caseData.vote.courtChoseOptionId}
-                    onUnlocked={() => setIsVerdictUnlocked(true)}
-                    lang={language}
-                  />
-                )}
-
-                {/* Episode Content with Blur Gate for Locked Verdict */}
-                <div className={`space-y-4 ${isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''}`}>
-                  {/* Sourced Blocks */}
-                  {(currentLayer.blocks || []).map((block, bIdx) => {
-                    const isAmber = block.source.tier === 'AMBER';
-                    let isFirstAmber = false;
-                    if (isAmber && !hasFoundAmber) {
-                      hasFoundAmber = true;
-                      isFirstAmber = true;
-                    }
-
-                    return (
-                      <SourcedBlock
-                        key={bIdx}
-                        block={block}
-                        isFirstAmber={isFirstAmber}
-                        onOpenSource={(src) => setActiveSource(src)}
-                        onOpenTerm={(term) => setActiveTermSlug(term)}
-                      />
-                    );
-                  })}
-
-                  {/* Student Layer: Ratio / Obiter / Dissent / Exam Angle */}
-                  {depth === 'student' && (
-                    <div className="space-y-4 pt-2">
-                      <RatioObiterSplit
-                        ratio={currentLayer.ratio}
-                        obiter={currentLayer.obiter}
-                        lang={language}
-                      />
-                      <DissentPanel dissent={currentLayer.dissent} lang={language} />
-                      <ExamAngle examAngle={currentLayer.examAngle} lang={language} />
-                    </div>
+                  {/* Optional Episode Visual Image */}
+                  {ep.image && epIdx !== 0 && (!ep.exhibit?.image || ep.exhibit.image.src !== ep.image.src) && (
+                    <CaseImage
+                      src={ep.image.src}
+                      alt={ep.image.alt}
+                      provenance={ep.image.provenance}
+                      aspectRatio="aspect-[16/9]"
+                    />
                   )}
 
-                  {/* Exhibit Card (if any in this episode) */}
-                  {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
-
-                  {/* End Hook */}
-                  {epIdx < 7 && ep.endHook && (
-                    <div className="pt-3 text-xs sm:text-sm font-mono text-[#D4AF37] italic border-t border-white/5">
-                      ↳ {ep.endHook}
-                    </div>
+                  {/* Episode 7: Vote Gate */}
+                  {isVerdictEpisode && (
+                    <VoteGate
+                      slug={caseData.slug}
+                      caseTitle={displayTitle}
+                      question={caseData.vote.question}
+                      context={caseData.vote.context}
+                      options={caseData.vote.options}
+                      courtChoseOptionId={caseData.vote.courtChoseOptionId}
+                      onUnlocked={() => setIsVerdictUnlocked(true)}
+                      lang={language}
+                    />
                   )}
-                </div>
 
-                {/* Quick Continue to Next Episode Button */}
-                <div className="pt-3 flex items-center justify-between border-t border-white/5 text-xs font-mono">
-                  <span className="text-white/40">Episode {epNum} of {caseData.episodes?.length || 8}</span>
-                  <button
-                    onClick={() => scrollToEpisode(nextEpId)}
-                    className="flex items-center gap-1.5 text-[#D4AF37] hover:text-white font-bold uppercase transition-colors cursor-pointer"
-                  >
-                    <span>{epNum < (caseData.episodes?.length || 8) ? `Continue to Episode ${epNum + 1}` : 'View Ratio & Impact'}</span>
-                    <span>↓</span>
-                  </button>
-                </div>
-              </article>
-            );
-          })}
+                  {/* Episode Content with Blur Gate for Locked Verdict */}
+                  <div className={`space-y-4 ${isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''}`}>
+                    {/* Sourced Blocks */}
+                    {(currentLayer.blocks || []).map((block, bIdx) => {
+                      const isAmber = block.source.tier === 'AMBER';
+                      let isFirstAmber = false;
+                      if (isAmber && !hasFoundAmber) {
+                        hasFoundAmber = true;
+                        isFirstAmber = true;
+                      }
+
+                      return (
+                        <SourcedBlock
+                          key={bIdx}
+                          block={block}
+                          isFirstAmber={isFirstAmber}
+                          onOpenSource={(src) => setActiveSource(src)}
+                          onOpenTerm={(term) => setActiveTermSlug(term)}
+                        />
+                      );
+                    })}
+
+                    {/* Student Layer: Ratio / Obiter / Dissent / Exam Angle + Interactive Questions */}
+                    {depth === 'student' && (
+                      <div className="space-y-4 pt-2">
+                        <RatioObiterSplit
+                          ratio={currentLayer.ratio}
+                          obiter={currentLayer.obiter}
+                          lang={language}
+                        />
+                        <DissentPanel dissent={currentLayer.dissent} lang={language} />
+                        <ExamAngle examAngle={currentLayer.examAngle} lang={language} />
+
+                        {/* Interactive Per-Episode Student Questions & Flashcards (Admin Customizable) */}
+                        {currentLayer.questions && currentLayer.questions.length > 0 && (
+                          <EpisodeQuestionCard
+                            questions={currentLayer.questions}
+                            episodeNum={epNum}
+                          />
+                        )}
+                      </div>
+                    )}
+
+                    {/* Exhibit Card (if any in this episode) */}
+                    {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
+
+                    {/* End Hook */}
+                    {epIdx < (episodes.length - 1) && ep.endHook && (
+                      <div className="pt-3 text-xs sm:text-sm font-mono text-[#D4AF37] italic border-t border-white/5">
+                        ↳ {ep.endHook}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Quick Continue to Next Episode Button */}
+                  <div className="pt-3 flex items-center justify-between border-t border-white/5 text-xs font-mono">
+                    <span className="text-white/40">Episode {epNum} of {episodes.length || 8}</span>
+                    <button
+                      onClick={() => scrollToEpisode(nextEpId)}
+                      className="flex items-center gap-1.5 text-[#D4AF37] hover:text-white font-bold uppercase transition-colors cursor-pointer"
+                    >
+                      <span>{epNum < episodes.length ? `Continue to Episode ${epNum + 1}` : 'View Ratio & Impact'}</span>
+                      <span>↓</span>
+                    </button>
+                  </div>
+                </article>
+              );
+            })
+          )}
         </div>
 
         {/* Section 9: End-of-Case Dossier Snap Section */}

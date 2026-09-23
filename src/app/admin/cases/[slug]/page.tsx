@@ -771,9 +771,9 @@ async function compressImageForUpload(
       <div className="flex items-center gap-2 border-b border-white/10 pb-2 overflow-x-auto">
         {[
           { id: 'overview', label: '1. Overview & Metadata' },
-          { id: 'panels', label: `2. Episodes & Layers (${caseData.episodes?.length || 8})` },
+          { id: 'panels', label: `2. Story & Student Episodes (${caseData.episodes?.length || 8})` },
           { id: 'flashcards', label: `3. Student Flashcards (${caseData.flashcards?.length || 0})` },
-          { id: 'history', label: `4. Advocate Reference & Citations` },
+          { id: 'history', label: `4. Lawyer Episodes (5 Core + Custom)` },
           { id: 'brief', label: '5. Legal Brief & Certified Ratio' },
           { id: 'images', label: '6. AI Visuals & Dual Generator' },
         ].map((tab) => (
@@ -992,7 +992,7 @@ async function compressImageForUpload(
                     </div>
 
                     <div className="flex items-center gap-3">
-                      {/* Layer Selector Pill */}
+                      {/* Layer Selector Pill: Story / Student */}
                       <div className="inline-flex items-center p-0.5 bg-[#0A0C10] border border-white/15 rounded-xs">
                         <button
                           type="button"
@@ -1018,19 +1018,6 @@ async function compressImageForUpload(
                         >
                           <span>🎓</span>
                           <span>Student</span>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'advocate' })}
-                          className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${
-                            currentLayer === 'advocate'
-                              ? 'bg-emerald-400 text-black shadow-md font-bold'
-                              : 'text-[#a9a49a] hover:text-emerald-300 hover:bg-white/5'
-                          }`}
-                        >
-                          <span>⚖️</span>
-                          <span>Advocate</span>
                         </button>
                       </div>
 
@@ -1134,7 +1121,7 @@ async function compressImageForUpload(
 
                     {/* 2. STUDENT LAYER */}
                     {currentLayer === 'student' && (
-                      <div className="space-y-4 animate-fadeIn border-l-2 border-sky-400 pl-4">
+                      <div className="space-y-5 animate-fadeIn border-l-2 border-sky-400 pl-4">
                         <div className="flex items-center gap-2 pb-2 border-b border-sky-500/20 text-[10px] font-mono text-sky-300 uppercase font-bold">
                           <span>🎓 Student Depth Layer (IRAC Legal Analysis, Ratio Decidendi, Obiter & Exam Angle)</span>
                         </div>
@@ -1341,135 +1328,260 @@ async function compressImageForUpload(
                             className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
                           />
                         </div>
-                      </div>
-                    )}
 
-                    {/* 3. ADVOCATE LAYER */}
-                    {currentLayer === 'advocate' && (
-                      <div className="space-y-4 animate-fadeIn border-l-2 border-emerald-400 pl-4">
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-emerald-500/20 gap-1">
-                          <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-300 uppercase font-bold">
-                            <span>⚖️ Advocate Layer (Trial Proposition & Pinpoints)</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-white/40 italic">
-                            Only names the legal point illustrated by facts (no hypothetical strategy)
-                          </span>
-                        </div>
+                        {/* Interactive Student Practice Questions & Mini-Flashcards */}
+                        <div className="p-4 bg-black/50 border border-sky-500/30 rounded-xs space-y-4">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-sky-500/20">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-mono font-bold text-sky-400">🎓</span>
+                                <h5 className="text-xs font-mono font-bold text-sky-300 uppercase tracking-wider">
+                                  Episode 0{idx + 1} Interactive Student Questions & Flashcards
+                                </h5>
+                              </div>
+                              <p className="text-[11px] text-[#a9a49a]">
+                                Admin-controlled questions shown to law students inside this episode. Leave empty to omit.
+                              </p>
+                            </div>
 
-                        <div>
-                          <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1 font-bold">
-                            Trial Proposition Text (TRIAL PROPOSITION: ...)
-                          </label>
-                          <textarea
-                            rows={3}
-                            value={ep.layers?.advocate?.blocks?.[0]?.text || ''}
-                            onChange={(e) => {
-                              const epList = ensureEpisodes();
-                              const advBlocks = [{ ...(epList[idx].layers?.advocate?.blocks?.[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } }), text: e.target.value }];
-                              epList[idx] = {
-                                ...epList[idx],
-                                layers: {
-                                  ...epList[idx].layers,
-                                  advocate: { ...epList[idx].layers?.advocate, blocks: advBlocks },
-                                },
-                              };
-                              setCaseData({ ...caseData, episodes: epList });
-                            }}
-                            placeholder="TRIAL PROPOSITION: One sentence naming the legal point that this episode's facts or reasoning illustrate..."
-                            className="w-full bg-[#0A0C10] border border-emerald-500/30 text-xs text-emerald-100 p-3 rounded-xs leading-relaxed font-mono"
-                          />
-                          <p className="text-[10px] text-white/50 font-mono mt-1">
-                            💡 Tip: Enter the factual/statutory point illustrated by this episode. Consolidated statutory text, holdings, and citators are managed in Tab 4.
-                          </p>
-                        </div>
-
-                        {/* Paragraph Pinpoints */}
-                        <div className="space-y-2 pt-2 border-t border-emerald-500/10">
-                          <div className="flex items-center justify-between">
-                            <label className="text-[10px] font-mono text-emerald-300 uppercase font-bold">
-                              Paragraph Pinpoints (¶Para: Proposition)
-                            </label>
                             <button
                               type="button"
                               onClick={() => {
                                 const epList = ensureEpisodes();
-                                const currentPinpoints = epList[idx].layers?.advocate?.pinpoints || [];
+                                const curQuestions = epList[idx].layers?.student?.questions || [];
                                 epList[idx] = {
                                   ...epList[idx],
                                   layers: {
                                     ...epList[idx].layers,
-                                    advocate: { ...epList[idx].layers?.advocate, pinpoints: [...currentPinpoints, { proposition: '', para: 8 }] },
+                                    student: {
+                                      ...epList[idx].layers?.student,
+                                      questions: [
+                                        ...curQuestions,
+                                        {
+                                          q: '',
+                                          a: '',
+                                          options: ['', ''],
+                                          correctOptionIdx: 0,
+                                          explanation: '',
+                                        },
+                                      ],
+                                    },
                                   },
                                 };
                                 setCaseData({ ...caseData, episodes: epList });
                               }}
-                              className="text-[10px] font-mono text-emerald-400 hover:text-white uppercase font-bold cursor-pointer"
+                              className="px-3 py-1.5 bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/30 text-sky-300 text-xs font-mono font-bold uppercase rounded-xs cursor-pointer self-start sm:self-auto"
                             >
-                              + Add Pinpoint
+                              + Add Question
                             </button>
                           </div>
 
-                          {(ep.layers?.advocate?.pinpoints || []).map((p: any, pIdx: number) => (
-                            <div key={pIdx} className="flex items-center gap-2">
-                              <span className="text-xs font-mono text-emerald-300">¶</span>
-                              <input
-                                type="number"
-                                value={p.para || 8}
-                                onChange={(e) => {
-                                  const epList = ensureEpisodes();
-                                  const currentPinpoints = [...(epList[idx].layers?.advocate?.pinpoints || [])];
-                                  currentPinpoints[pIdx] = { ...currentPinpoints[pIdx], para: parseInt(e.target.value) || 1 };
-                                  epList[idx] = {
-                                    ...epList[idx],
-                                    layers: {
-                                      ...epList[idx].layers,
-                                      advocate: { ...epList[idx].layers?.advocate, pinpoints: currentPinpoints },
-                                    },
-                                  };
-                                  setCaseData({ ...caseData, episodes: epList });
-                                }}
-                                className="w-16 bg-[#0A0C10] border border-emerald-500/30 text-xs text-white p-2 rounded-xs font-mono"
-                                placeholder="Para"
-                              />
-                              <input
-                                type="text"
-                                value={p.proposition || ''}
-                                onChange={(e) => {
-                                  const epList = ensureEpisodes();
-                                  const currentPinpoints = [...(epList[idx].layers?.advocate?.pinpoints || [])];
-                                  currentPinpoints[pIdx] = { ...currentPinpoints[pIdx], proposition: e.target.value };
-                                  epList[idx] = {
-                                    ...epList[idx],
-                                    layers: {
-                                      ...epList[idx].layers,
-                                      advocate: { ...epList[idx].layers?.advocate, pinpoints: currentPinpoints },
-                                    },
-                                  };
-                                  setCaseData({ ...caseData, episodes: epList });
-                                }}
-                                className="flex-1 bg-[#0A0C10] border border-emerald-500/30 text-xs text-white p-2 rounded-xs"
-                                placeholder="Legal proposition established in this paragraph..."
-                              />
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  const epList = ensureEpisodes();
-                                  const currentPinpoints = (epList[idx].layers?.advocate?.pinpoints || []).filter((_: any, i: number) => i !== pIdx);
-                                  epList[idx] = {
-                                    ...epList[idx],
-                                    layers: {
-                                      ...epList[idx].layers,
-                                      advocate: { ...epList[idx].layers?.advocate, pinpoints: currentPinpoints },
-                                    },
-                                  };
-                                  setCaseData({ ...caseData, episodes: epList });
-                                }}
-                                className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
-                              >
-                                ✕
-                              </button>
+                          {(!ep.layers?.student?.questions || ep.layers?.student?.questions.length === 0) ? (
+                            <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
+                              No interactive questions added for Episode {idx + 1}. Click "+ Add Question" to create one.
                             </div>
-                          ))}
+                          ) : (
+                            <div className="space-y-4">
+                              {ep.layers.student.questions.map((qItem, qIdx) => (
+                                <div key={qIdx} className="p-3.5 bg-[#0A0C10] border border-sky-500/20 rounded-xs space-y-3">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-mono text-sky-400 font-bold uppercase">
+                                      Question #{qIdx + 1}
+                                    </span>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        const epList = ensureEpisodes();
+                                        const curQuestions = (epList[idx].layers?.student?.questions || []).filter((_, i) => i !== qIdx);
+                                        epList[idx] = {
+                                          ...epList[idx],
+                                          layers: {
+                                            ...epList[idx].layers,
+                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                          },
+                                        };
+                                        setCaseData({ ...caseData, episodes: epList });
+                                      }}
+                                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
+                                    >
+                                      ✕ Delete Question
+                                    </button>
+                                  </div>
+
+                                  <div>
+                                    <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
+                                      Question Prompt
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value={qItem.q}
+                                      onChange={(e) => {
+                                        const epList = ensureEpisodes();
+                                        const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
+                                        curQuestions[qIdx] = { ...curQuestions[qIdx], q: e.target.value };
+                                        epList[idx] = {
+                                          ...epList[idx],
+                                          layers: {
+                                            ...epList[idx].layers,
+                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                          },
+                                        };
+                                        setCaseData({ ...caseData, episodes: epList });
+                                      }}
+                                      placeholder="e.g. Which statutory section governs this legal issue?"
+                                      className="w-full bg-[#121520] border border-sky-500/20 text-xs text-white p-2.5 rounded-xs font-medium"
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
+                                      Verified Legal Answer / Key Point
+                                    </label>
+                                    <textarea
+                                      rows={2}
+                                      value={qItem.a}
+                                      onChange={(e) => {
+                                        const epList = ensureEpisodes();
+                                        const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
+                                        curQuestions[qIdx] = { ...curQuestions[qIdx], a: e.target.value };
+                                        epList[idx] = {
+                                          ...epList[idx],
+                                          layers: {
+                                            ...epList[idx].layers,
+                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                          },
+                                        };
+                                        setCaseData({ ...caseData, episodes: epList });
+                                      }}
+                                      placeholder="e.g. The Court established that..."
+                                      className="w-full bg-[#121520] border border-emerald-500/20 text-xs text-emerald-200 p-2.5 rounded-xs font-serif"
+                                    />
+                                  </div>
+
+                                  {/* Optional Multiple Choice Options */}
+                                  <div className="space-y-2 pt-1 border-t border-sky-500/10">
+                                    <div className="flex items-center justify-between">
+                                      <label className="text-[10px] font-mono text-sky-300 uppercase">
+                                        Multiple-Choice Options (Optional)
+                                      </label>
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          const epList = ensureEpisodes();
+                                          const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
+                                          const curOpts = curQuestions[qIdx].options || [];
+                                          curQuestions[qIdx] = { ...curQuestions[qIdx], options: [...curOpts, ''] };
+                                          epList[idx] = {
+                                            ...epList[idx],
+                                            layers: {
+                                              ...epList[idx].layers,
+                                              student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                            },
+                                          };
+                                          setCaseData({ ...caseData, episodes: epList });
+                                        }}
+                                        className="text-[10px] font-mono text-sky-400 hover:text-white uppercase font-bold cursor-pointer"
+                                      >
+                                        + Add Option Choice
+                                      </button>
+                                    </div>
+
+                                    {(qItem.options || []).map((opt, optIdx) => (
+                                      <div key={optIdx} className="flex items-center gap-2">
+                                        <input
+                                          type="radio"
+                                          name={`correct-opt-${idx}-${qIdx}`}
+                                          checked={qItem.correctOptionIdx === optIdx}
+                                          onChange={() => {
+                                            const epList = ensureEpisodes();
+                                            const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
+                                            curQuestions[qIdx] = { ...curQuestions[qIdx], correctOptionIdx: optIdx };
+                                            epList[idx] = {
+                                              ...epList[idx],
+                                              layers: {
+                                                ...epList[idx].layers,
+                                                student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                              },
+                                            };
+                                            setCaseData({ ...caseData, episodes: epList });
+                                          }}
+                                          title="Mark as correct answer"
+                                          className="accent-sky-400 cursor-pointer"
+                                        />
+                                        <span className="text-[10px] font-mono text-white/50">{String.fromCharCode(65 + optIdx)}.</span>
+                                        <input
+                                          type="text"
+                                          value={opt}
+                                          onChange={(e) => {
+                                            const epList = ensureEpisodes();
+                                            const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
+                                            const curOpts = [...(curQuestions[qIdx].options || [])];
+                                            curOpts[optIdx] = e.target.value;
+                                            curQuestions[qIdx] = { ...curQuestions[qIdx], options: curOpts };
+                                            epList[idx] = {
+                                              ...epList[idx],
+                                              layers: {
+                                                ...epList[idx].layers,
+                                                student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                              },
+                                            };
+                                            setCaseData({ ...caseData, episodes: epList });
+                                          }}
+                                          placeholder={`Option ${String.fromCharCode(65 + optIdx)}`}
+                                          className="flex-1 bg-[#121520] border border-white/10 text-xs text-white p-1.5 rounded-xs"
+                                        />
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            const epList = ensureEpisodes();
+                                            const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
+                                            const curOpts = (curQuestions[qIdx].options || []).filter((_, i) => i !== optIdx);
+                                            curQuestions[qIdx] = { ...curQuestions[qIdx], options: curOpts };
+                                            epList[idx] = {
+                                              ...epList[idx],
+                                              layers: {
+                                                ...epList[idx].layers,
+                                                student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                              },
+                                            };
+                                            setCaseData({ ...caseData, episodes: epList });
+                                          }}
+                                          className="text-xs text-red-400 hover:text-red-300 font-mono px-1 cursor-pointer"
+                                        >
+                                          ✕
+                                        </button>
+                                      </div>
+                                    ))}
+                                  </div>
+
+                                  <div>
+                                    <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                                      Explanation / Legal Authority (Optional)
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value={qItem.explanation || ''}
+                                      onChange={(e) => {
+                                        const epList = ensureEpisodes();
+                                        const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
+                                        curQuestions[qIdx] = { ...curQuestions[qIdx], explanation: e.target.value };
+                                        epList[idx] = {
+                                          ...epList[idx],
+                                          layers: {
+                                            ...epList[idx].layers,
+                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
+                                          },
+                                        };
+                                        setCaseData({ ...caseData, episodes: epList });
+                                      }}
+                                      placeholder="e.g. As affirmed in para 14 of the judgment..."
+                                      className="w-full bg-[#121520] border border-white/10 text-xs text-white/80 p-2 rounded-xs"
+                                    />
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}
@@ -1576,7 +1688,7 @@ async function compressImageForUpload(
         </div>
       )}
 
-      {/* TAB 4: ADVOCATE REFERENCE & CITATIONS (5-PART CONSOLIDATED BLOCK) */}
+      {/* TAB 4: ADVOCATE REFERENCE & CITATIONS (5 CORE + CUSTOM LAWYER EPISODES) */}
       {activeTab === 'history' && (() => {
         const advRef = caseData.advocateReference || {};
         const statutoryText = advRef.statutoryText || [];
@@ -1587,9 +1699,76 @@ async function compressImageForUpload(
         const citatorDisclaimer = advRef.citatorDisclaimer ||
           "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter.";
 
+        const customLawyerEpisodes: import('@/types').LawyerEpisode[] = (caseData.lawyerEpisodes || []).filter(
+          (ep) => !['STATUTORY_TEXT', 'ENUMERATED_HOLDINGS', 'PRECEDENTS_DISCUSSED', 'CITATOR_HISTORY', 'PARALLEL_CITATIONS'].includes(ep.type || '')
+        );
+
+        const buildAllLawyerEpisodes = (ref: typeof advRef, customs: import('@/types').LawyerEpisode[]) => [
+          {
+            id: 'lawyer-ep-1',
+            n: 1,
+            type: 'STATUTORY_TEXT' as const,
+            kicker: 'LAWYER EPISODE 01 · STATUTORY TEXT',
+            title: 'Statutory Text As Reproduced In The Judgment',
+            description: 'Verbatim statutory provisions and sections reproduced in full by the court.',
+            statutoryText: ref.statutoryText || [],
+          },
+          {
+            id: 'lawyer-ep-2',
+            n: 2,
+            type: 'ENUMERATED_HOLDINGS' as const,
+            kicker: 'LAWYER EPISODE 02 · COURT HOLDINGS',
+            title: "The Court's Enumerated Holdings",
+            description: "Operative conclusions and findings of law with precise pinpoint citations.",
+            holdings: ref.holdings || [],
+          },
+          {
+            id: 'lawyer-ep-3',
+            n: 3,
+            type: 'PRECEDENTS_DISCUSSED' as const,
+            kicker: 'LAWYER EPISODE 03 · PRECEDENT TREATMENT',
+            title: 'Precedents Discussed In This Judgment',
+            description: 'Prior authorities cited and their specific judicial treatment by the bench.',
+            precedents: ref.precedents || [],
+          },
+          {
+            id: 'lawyer-ep-4',
+            n: 4,
+            type: 'CITATOR_HISTORY' as const,
+            kicker: 'LAWYER EPISODE 04 · CITATOR RECORD',
+            title: 'Subsequent Citator History',
+            description: 'Treatment of this precedent in subsequent judicial decisions.',
+            citatorHistory: ref.citatorHistory || [],
+            citatorDisclaimer: ref.citatorDisclaimer,
+          },
+          {
+            id: 'lawyer-ep-5',
+            n: 5,
+            type: 'PARALLEL_CITATIONS' as const,
+            kicker: 'LAWYER EPISODE 05 · CITATION INDEX',
+            title: 'Full Parallel Citation Index',
+            description: 'Certified reporter volume and page references across major law reports.',
+            parallelCitations: ref.parallelCitations || [],
+          },
+          ...customs,
+        ];
+
         const updateAdvRef = (partial: Partial<import('@/types').AdvocateReference>) => {
           const updatedRef = { ...advRef, ...partial };
-          setCaseData({ ...caseData, advocateReference: updatedRef });
+          const updatedLawyerEps = buildAllLawyerEpisodes(updatedRef, customLawyerEpisodes);
+          setCaseData({
+            ...caseData,
+            advocateReference: updatedRef,
+            lawyerEpisodes: updatedLawyerEps,
+          });
+        };
+
+        const updateCustomLawyerEpisodes = (updatedCustoms: import('@/types').LawyerEpisode[]) => {
+          const updatedLawyerEps = buildAllLawyerEpisodes(advRef, updatedCustoms);
+          setCaseData({
+            ...caseData,
+            lawyerEpisodes: updatedLawyerEps,
+          });
         };
 
         return (
@@ -1599,11 +1778,11 @@ async function compressImageForUpload(
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                 <h3 className="text-base font-anton text-white uppercase tracking-wider">
-                  Consolidated Advocate Reference Studio
+                  Dedicated Lawyer Episodes Studio (5 Core + Custom Episodes)
                 </h3>
               </div>
               <p className="text-xs text-[#a9a49a] max-w-2xl leading-relaxed">
-                Working citation toolkit for practicing lawyers. Populates the 5 consolidated reference parts rendered at the conclusion of Advocate mode. Every line traces directly to certified court record.
+                Independent reading flow for advocates and legal practitioners. Decoupled from the story narrative. Contains the 5 certified lawyer episodes plus any custom episodes added by the admin.
               </p>
             </div>
 
@@ -2076,6 +2255,139 @@ async function compressImageForUpload(
                         ✕
                       </button>
                     </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* PART 6: ADDITIONAL CUSTOM LAWYER EPISODES */}
+            <div className="p-5 bg-black/40 border border-emerald-500/20 rounded-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-white/10">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono font-bold text-emerald-400">+</span>
+                    <h4 className="font-anton text-sm text-white uppercase tracking-wider">
+                      Additional Custom Lawyer Episodes ({customLawyerEpisodes.length})
+                    </h4>
+                  </div>
+                  <p className="text-[11px] text-[#a9a49a]">
+                    Add custom episodes to Lawyer mode (e.g. Procedural History, Detailed Arguments of Senior Counsel, Full High Court History, etc.).
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextNum = 6 + customLawyerEpisodes.length;
+                    const newCustomEp: import('@/types').LawyerEpisode = {
+                      id: `lawyer-ep-${nextNum}`,
+                      n: nextNum,
+                      type: 'CUSTOM',
+                      kicker: `LAWYER EPISODE 0${nextNum} · CUSTOM RECORD`,
+                      title: `Episode ${nextNum} Title`,
+                      description: `Detailed lawyer notes and judicial record.`,
+                      paragraphs: [''],
+                    };
+                    updateCustomLawyerEpisodes([...customLawyerEpisodes, newCustomEp]);
+                  }}
+                  className="px-3.5 py-2 bg-emerald-500 hover:bg-white text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-md self-start sm:self-auto flex items-center gap-1.5"
+                >
+                  <span>+</span>
+                  <span>Add Custom Lawyer Episode</span>
+                </button>
+              </div>
+
+              {customLawyerEpisodes.length === 0 ? (
+                <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
+                  No additional custom lawyer episodes added. Click "+ Add Custom Lawyer Episode" if you wish to add Episode 6, Episode 7, etc.
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {customLawyerEpisodes.map((cEp, cIdx) => (
+                    <div key={cIdx} className="p-4 bg-[#0A0C10] border border-emerald-500/20 rounded-xs space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase">
+                          Custom Lawyer Episode #{cIdx + 1} (Episode 0{cEp.n || 6 + cIdx})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = customLawyerEpisodes.filter((_, i) => i !== cIdx);
+                            updateCustomLawyerEpisodes(updated);
+                          }}
+                          className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
+                        >
+                          ✕ Delete Episode
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                            Episode Kicker
+                          </label>
+                          <input
+                            type="text"
+                            value={cEp.kicker}
+                            onChange={(e) => {
+                              const updated = [...customLawyerEpisodes];
+                              updated[cIdx] = { ...updated[cIdx], kicker: e.target.value };
+                              updateCustomLawyerEpisodes(updated);
+                            }}
+                            className="w-full bg-[#121520] border border-white/15 text-xs text-emerald-300 font-bold p-2 rounded-xs"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                            Episode Title
+                          </label>
+                          <input
+                            type="text"
+                            value={cEp.title}
+                            onChange={(e) => {
+                              const updated = [...customLawyerEpisodes];
+                              updated[cIdx] = { ...updated[cIdx], title: e.target.value };
+                              updateCustomLawyerEpisodes(updated);
+                            }}
+                            className="w-full bg-[#121520] border border-white/15 text-xs text-white font-bold p-2 rounded-xs"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                          Description
+                        </label>
+                        <input
+                          type="text"
+                          value={cEp.description || ''}
+                          onChange={(e) => {
+                            const updated = [...customLawyerEpisodes];
+                            updated[cIdx] = { ...updated[cIdx], description: e.target.value };
+                            updateCustomLawyerEpisodes(updated);
+                          }}
+                          className="w-full bg-[#121520] border border-white/15 text-xs text-white/80 p-2 rounded-xs"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
+                          Episode Content / Paragraphs
+                        </label>
+                        <textarea
+                          rows={4}
+                          value={(cEp.paragraphs || []).join('\n\n')}
+                          onChange={(e) => {
+                            const updated = [...customLawyerEpisodes];
+                            updated[cIdx] = { ...updated[cIdx], paragraphs: e.target.value.split('\n\n').map(p => p.trim()).filter(Boolean) };
+                            updateCustomLawyerEpisodes(updated);
+                          }}
+                          placeholder="Enter paragraph text (separate paragraphs with blank lines)..."
+                          className="w-full bg-[#121520] border border-emerald-500/20 text-xs text-white p-2.5 rounded-xs leading-relaxed"
+                        />
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}

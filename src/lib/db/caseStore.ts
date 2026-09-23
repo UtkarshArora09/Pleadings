@@ -85,30 +85,90 @@ function persistCases(cases: CaseData[]): boolean {
   const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
   let saved = false;
 
-  // Try writing to primary path
+  // 1. Try writing directly to primary path
   try {
-    if (!fs.existsSync(/*turbopackIgnore: true*/ DATA_DIR)) {
-      fs.mkdirSync(/*turbopackIgnore: true*/ DATA_DIR, { recursive: true });
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-    const tempFile = `${PRIMARY_DB_PATH}.tmp`;
-    fs.writeFileSync(/*turbopackIgnore: true*/ tempFile, JSON.stringify(cases, null, 2), 'utf-8');
-    fs.renameSync(/*turbopackIgnore: true*/ tempFile, PRIMARY_DB_PATH);
+    fs.writeFileSync(PRIMARY_DB_PATH, JSON.stringify(cases, null, 2), 'utf-8');
     saved = true;
-  } catch {
-    // Primary path is read-only in Vercel serverless
+  } catch (e) {
+    // Primary path may be read-only in Vercel serverless
   }
 
-  // Always write to /tmp on serverless
+  // 2. Also write to /tmp on serverless
   try {
-    const tmpTemp = `${TMP_DB_PATH}.tmp`;
-    fs.writeFileSync(/*turbopackIgnore: true*/ tmpTemp, JSON.stringify(cases, null, 2), 'utf-8');
-    fs.renameSync(/*turbopackIgnore: true*/ tmpTemp, TMP_DB_PATH);
+    fs.writeFileSync(TMP_DB_PATH, JSON.stringify(cases, null, 2), 'utf-8');
     saved = true;
-  } catch (tmpErr) {
-    console.warn('Failed to write to /tmp dynamic cases:', tmpErr);
+  } catch {
+    // ignore
   }
 
   return saved;
+}
+
+export function buildDefaultLawyerEpisodes(source: any): import('@/types/case').LawyerEpisode[] {
+  if (source.lawyerEpisodes && Array.isArray(source.lawyerEpisodes) && source.lawyerEpisodes.length > 0) {
+    return source.lawyerEpisodes;
+  }
+
+  const advRef = source.advocateReference || {};
+  const statutoryText = advRef.statutoryText || [];
+  const holdings = advRef.holdings || [];
+  const precedents = advRef.precedents || [];
+  const citatorHistory = advRef.citatorHistory || [];
+  const citatorDisclaimer = advRef.citatorDisclaimer ||
+    "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter.";
+  const parallelCitations = advRef.parallelCitations || source.citations?.parallel || [];
+
+  return [
+    {
+      id: 'lawyer-ep-1',
+      n: 1,
+      type: 'STATUTORY_TEXT',
+      kicker: 'LAWYER EPISODE 01 · STATUTORY TEXT',
+      title: 'Statutory Text As Reproduced In The Judgment',
+      description: 'Verbatim statutory provisions and sections reproduced in full by the court.',
+      statutoryText: statutoryText,
+    },
+    {
+      id: 'lawyer-ep-2',
+      n: 2,
+      type: 'ENUMERATED_HOLDINGS',
+      kicker: 'LAWYER EPISODE 02 · COURT HOLDINGS',
+      title: "The Court's Enumerated Holdings",
+      description: "Operative conclusions and findings of law with precise pinpoint citations.",
+      holdings: holdings,
+    },
+    {
+      id: 'lawyer-ep-3',
+      n: 3,
+      type: 'PRECEDENTS_DISCUSSED',
+      kicker: 'LAWYER EPISODE 03 · PRECEDENT TREATMENT',
+      title: 'Precedents Discussed In This Judgment',
+      description: 'Prior authorities cited and their specific judicial treatment by the bench.',
+      precedents: precedents,
+    },
+    {
+      id: 'lawyer-ep-4',
+      n: 4,
+      type: 'CITATOR_HISTORY',
+      kicker: 'LAWYER EPISODE 04 · CITATOR HISTORY',
+      title: 'Subsequent Citator History',
+      description: 'Recorded citator history entries and subsequent judicial references.',
+      citatorHistory: citatorHistory,
+      citatorDisclaimer: citatorDisclaimer,
+    },
+    {
+      id: 'lawyer-ep-5',
+      n: 5,
+      type: 'PARALLEL_CITATIONS',
+      kicker: 'LAWYER EPISODE 05 · PARALLEL CITATIONS',
+      title: 'Full Parallel Citation Index',
+      description: 'Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.',
+      parallelCitations: parallelCitations,
+    },
+  ];
 }
 
 export function normalizeCaseData(raw: any): CaseData {
@@ -322,16 +382,19 @@ export function normalizeCaseData(raw: any): CaseData {
     poster: source.poster || { src: bannerImage, alt: `${titleEn} cover poster`, provenance: 'illustration' },
     matchRate: source.matchRate || 98,
     maturityRating: source.maturityRating || 'U/A 13+',
-    rank: source.rank || 10,
+    rank: typeof source.rank === 'number' ? source.rank : 10,
     featuredHeroHook: { en: hookEn, hi: hookHi },
     featuredHeroDesc: { en: hookEn, hi: hookHi },
     panels: panels,
     brief: brief,
     episodes: episodes,
+    lawyerEpisodes: buildDefaultLawyerEpisodes(source),
     flashcards: flashcards,
     subsequentHistory: subsequentHistory,
     advocateReference: source.advocateReference || undefined,
-    status: source.status?.code ? (source.status?.code === 'GOOD_LAW' ? 'PUBLISHED' : 'ADMIN_REVIEW') : (source.status || 'ADMIN_REVIEW'),
+    status: source.status === 'DRAFT' || source.status === 'ADMIN_REVIEW'
+      ? source.status
+      : (source.status?.code ? (source.status?.code === 'GOOD_LAW' ? 'PUBLISHED' : 'ADMIN_REVIEW') : (source.status || 'PUBLISHED')),
     createdAt: source.createdAt || source.created_at || source.publishedAt || new Date().toISOString(),
     updatedAt: source.updatedAt || source.updated_at || new Date().toISOString(),
   };
@@ -372,7 +435,7 @@ export const CaseStore = {
 
   getPublished(): CaseData[] {
     const all = this.getAll();
-    return all.filter((c) => c.status === 'PUBLISHED' || !c.status);
+    return all.filter((c) => c.status === 'PUBLISHED');
   },
 
   recordView(slug: string): number {
@@ -442,8 +505,8 @@ export const CaseStore = {
         ];
         for (const fn of possibleFilenames) {
           const caseFilePath = path.join(process.cwd(), 'content', 'cases', fn);
-          if (fs.existsSync(/*turbopackIgnore: true*/ caseFilePath)) {
-            const raw = fs.readFileSync(/*turbopackIgnore: true*/ caseFilePath, 'utf8');
+          if (fs.existsSync(caseFilePath)) {
+            const raw = fs.readFileSync(caseFilePath, 'utf8');
             const parsed = JSON.parse(raw);
             if (matchSlug(parsed.slug, slug) || fn.includes('rinku')) {
               const normalized = normalizeCaseData(parsed);
@@ -488,6 +551,20 @@ export const CaseStore = {
     }
 
     persistCases(updatedList);
+
+    // Sync to content/cases/${slug}.json on disk
+    try {
+      const node = getNodeModules();
+      if (node) {
+        const { fs, path } = node;
+        const casesDir = path.join(process.cwd(), 'content', 'cases');
+        if (!fs.existsSync(casesDir)) fs.mkdirSync(casesDir, { recursive: true });
+        const filePath = path.join(casesDir, `${caseToSave.slug}.json`);
+        fs.writeFileSync(filePath, JSON.stringify(caseToSave, null, 2), 'utf-8');
+      }
+    } catch (diskErr) {
+      console.warn('Could not write disk case file:', diskErr);
+    }
 
     // Async push to Supabase if configured
     if (isSupabaseConfigured()) {
@@ -558,6 +635,20 @@ export const CaseStore = {
       updatedList[idx] = updatedCase;
       persistCases(updatedList);
 
+      // Sync to content/cases/${slug}.json on disk
+      try {
+        const node = getNodeModules();
+        if (node) {
+          const { fs, path } = node;
+          const casesDir = path.join(process.cwd(), 'content', 'cases');
+          if (!fs.existsSync(casesDir)) fs.mkdirSync(casesDir, { recursive: true });
+          const filePath = path.join(casesDir, `${updatedCase.slug}.json`);
+          fs.writeFileSync(filePath, JSON.stringify(updatedCase, null, 2), 'utf-8');
+        }
+      } catch (diskErr) {
+        console.warn('Could not sync update to disk file:', diskErr);
+      }
+
       // Async push update to Supabase
       if (isSupabaseConfigured()) {
         import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
@@ -612,6 +703,27 @@ export const CaseStore = {
     const filtered = all.filter((c) => !matchSlug(c.slug, slug));
     if (filtered.length !== all.length) {
       persistCases(filtered);
+
+      // Remove from content/cases/${slug}.json on disk
+      try {
+        const node = getNodeModules();
+        if (node) {
+          const { fs, path } = node;
+          const casesDir = path.join(process.cwd(), 'content', 'cases');
+          const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+          const possiblePaths = [
+            path.join(casesDir, `${slug}.json`),
+            path.join(casesDir, `${cleanSlug}.json`),
+          ];
+          for (const p of possiblePaths) {
+            if (fs.existsSync(p)) {
+              fs.unlinkSync(p);
+            }
+          }
+        }
+      } catch (diskErr) {
+        console.warn('Could not delete disk case file:', diskErr);
+      }
 
       if (isSupabaseConfigured()) {
         import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {

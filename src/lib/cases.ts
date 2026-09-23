@@ -65,7 +65,7 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
   const bannerImg = dynamicData.bannerImage || posterImg?.src || (staticCase as any).bannerImage;
 
   // Source base episodes from dynamicData if available, otherwise staticCase
-  const baseEpisodes = (dynamicData.episodes && Array.isArray(dynamicData.episodes) && dynamicData.episodes.length >= 8)
+  const baseEpisodes = (dynamicData.episodes && Array.isArray(dynamicData.episodes) && dynamicData.episodes.length > 0)
     ? dynamicData.episodes
     : (staticCase.episodes || []);
 
@@ -98,6 +98,9 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
   const flashcards = dynamicData.flashcards || staticCase.flashcards;
   const subsequentHistory = dynamicData.subsequentHistory || staticCase.subsequentHistory;
   const advocateReference = dynamicData.advocateReference || staticCase.advocateReference;
+  const lawyerEpisodes = dynamicData.lawyerEpisodes || (staticCase as any).lawyerEpisodes;
+  const rank = typeof dynamicData.rank === 'number' ? dynamicData.rank : (staticCase as any).rank || 10;
+  const status = dynamicData.status || staticCase.status;
 
   return {
     ...staticCase,
@@ -107,6 +110,9 @@ function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile 
     poster: posterImg,
     bannerImage: bannerImg,
     episodes,
+    lawyerEpisodes,
+    rank,
+    status,
     flashcards,
     subsequentHistory,
     advocateReference,
@@ -126,20 +132,47 @@ export function getAllCases(): CaseFile[] {
     });
   }
 
-  return ALL_STATIC_CASES.map((sc) => {
+  // Merge static cases
+  const seenSlugs = new Set<string>();
+  const mergedStatic = ALL_STATIC_CASES.map((sc) => {
+    const slugKey = sc.slug.toLowerCase().trim();
+    seenSlugs.add(slugKey);
     const dyn =
-      dynamicMap.get(sc.slug.toLowerCase().trim()) ||
+      dynamicMap.get(slugKey) ||
       (sc.slug.includes('rinku')
         ? dynamicMap.get('rinku-rukshar-habeas-corpus-custody-case') ||
           dynamicMap.get('rinku-rukshar-habeas-corpus-case')
         : null);
     return mergeCaseWithDynamic(sc, dyn);
   });
+
+  // Add any dynamically created cases that aren't in ALL_STATIC_CASES
+  const extraDynamic: CaseFile[] = [];
+  if (Array.isArray(dynamicList)) {
+    dynamicList.forEach((d) => {
+      if (d.slug && !seenSlugs.has(d.slug.toLowerCase().trim())) {
+        seenSlugs.add(d.slug.toLowerCase().trim());
+        extraDynamic.push(d as unknown as CaseFile);
+      }
+    });
+  }
+
+  return [...mergedStatic, ...extraDynamic];
+}
+
+export function getPublishedCases(): CaseFile[] {
+  const all = getAllCases();
+  return all.filter((c) => (c as any).status === 'PUBLISHED' || !(c as any).status || (c as any).status?.code === 'GOOD_LAW');
 }
 
 export function getCaseBySlug(slug: string): CaseFile | null {
   if (!slug) return null;
   const decoded = decodeURIComponent(slug).trim().toLowerCase();
+
+  let dynamicCase: any = null;
+  try {
+    dynamicCase = CaseStore.getBySlug(slug);
+  } catch {}
 
   const staticCase = ALL_STATIC_CASES.find(
     (c) =>
@@ -150,20 +183,6 @@ export function getCaseBySlug(slug: string): CaseFile | null {
       (decoded === 'rinku-rukshar-habeas-corpus-custody-case' &&
         c.slug === 'rinku-rukshar-habeas-corpus-case')
   );
-
-  let dynamicCase: any = null;
-  try {
-    dynamicCase = CaseStore.getBySlug(slug);
-  } catch {}
-
-  if (!dynamicCase) {
-    dynamicCase =
-      INITIAL_DYNAMIC_MAP.get(decoded) ||
-      (decoded.includes('rinku')
-        ? INITIAL_DYNAMIC_MAP.get('rinku-rukshar-habeas-corpus-custody-case') ||
-          INITIAL_DYNAMIC_MAP.get('rinku-rukshar-habeas-corpus-case')
-        : null);
-  }
 
   if (dynamicCase) {
     if (staticCase) {
@@ -176,23 +195,17 @@ export function getCaseBySlug(slug: string): CaseFile | null {
 }
 
 export function getAllCaseSlugs(): string[] {
-  const slugs = ALL_STATIC_CASES.map((c) => c.slug);
-  if (!slugs.includes('rinku-rukshar-habeas-corpus-custody-case')) {
-    slugs.push('rinku-rukshar-habeas-corpus-custody-case');
-  }
-  if (!slugs.includes('rinku-rukshar-habeas-corpus-case')) {
-    slugs.push('rinku-rukshar-habeas-corpus-case');
-  }
-  return slugs;
+  const all = getAllCases();
+  return all.map((c) => c.slug);
 }
 
 export function getFeaturedCases(): CaseFile[] {
-  const all = getAllCases();
+  const all = getPublishedCases();
   return all.filter((c) => c.featured).slice(0, 5);
 }
 
 export function getTop10Cases(): CaseFile[] {
-  const all = getAllCases();
+  const all = getPublishedCases();
   return [...all]
     .filter((c) => {
       const r = (c as any).rank;
@@ -208,7 +221,7 @@ export function getTop10Cases(): CaseFile[] {
 }
 
 export function getLatestCases(): CaseFile[] {
-  const all = getAllCases();
+  const all = getPublishedCases();
   return [...all]
     .sort(
       (a, b) =>

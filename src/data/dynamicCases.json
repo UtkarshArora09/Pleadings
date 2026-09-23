@@ -1037,7 +1037,58 @@
           "endHook": "क्या पिता के खिलाफ रिट याचिका विचारणीय है?"
         }
       ]
-    }
+    },
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": [
+          "2020 Supreme(All) 903",
+          "2020 (8) ADJ 412"
+        ]
+      }
+    ]
   },
   {
     "slug": "right-to-privacy-case",
@@ -2662,7 +2713,58 @@
         "hi": "महत्वपूर्ण न्यायिक मिसाल।"
       }
     },
-    "views": 0
+    "views": 0,
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": [
+          "AIR 2017 Supreme Court of India 101",
+          "(2017) 1 SCC 100"
+        ]
+      }
+    ]
   },
   {
     "slug": "ghost-case",
@@ -3156,7 +3258,7 @@
       "alt": "The Ghost Case cover poster",
       "provenance": "illustration"
     },
-    "views": 272,
+    "views": 366,
     "episodes": [
       {
         "n": 1,
@@ -3627,6 +3729,54 @@
         "case": "The Ghost Case Reference Bench",
         "year": 1964,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -4120,7 +4270,7 @@
       "alt": "The Nanavati Case poster",
       "provenance": "archival"
     },
-    "views": 0,
+    "views": 1,
     "episodes": [
       {
         "n": 1,
@@ -4591,6 +4741,54 @@
         "case": "The Nanavati Case Reference Bench",
         "year": 1966,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -5543,6 +5741,54 @@
         "case": "The ₹2 Crore Haircut Case Reference Bench",
         "year": 2028,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -6497,6 +6743,54 @@
         "case": "Shreya Singhal v. Union of India Reference Bench",
         "year": 2020,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -7460,6 +7754,54 @@
         "case": "M.C. Mehta v. Union of India Reference Bench",
         "year": 1992,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -8437,6 +8779,54 @@
         "year": 1978,
         "note": "Affirmed as good law."
       }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
+      }
     ]
   },
   {
@@ -8853,15 +9243,15 @@
         "hi": "यह भारतीय कानूनी इतिहास का मील का पत्थर है जिसने धर्मनिरपेक्ष कानूनों और पर्सनल लॉ के बीच संतुलन स्थापित किया और महिलाओं के भरण-पोषण अधिकारों को सशक्त बनाया।"
       }
     },
-    "status": "PUBLISHED",
+    "status": "DRAFT",
     "createdAt": "2026-09-10T18:59:11.939Z",
-    "updatedAt": "2026-09-21T22:06:21.075Z",
+    "updatedAt": "2026-09-23T20:20:37.594Z",
     "poster": {
       "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/shah-bano-poster-1790028267542.jpg",
       "alt": "The Shah Bano Case cover poster",
       "provenance": "illustration"
     },
-    "views": 7,
+    "views": 8,
     "episodes": [
       {
         "n": 1,
@@ -9341,6 +9731,54 @@
         "case": "The Shah Bano Case Reference Bench",
         "year": 1990,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -10230,6 +10668,54 @@
         "case": "Vishaka v. State of Rajasthan Reference Bench",
         "year": 2002,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -11122,6 +11608,54 @@
         "year": 1983,
         "note": "Affirmed as good law."
       }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
+      }
     ]
   },
   {
@@ -12010,6 +12544,54 @@
         "case": "Navtej Singh Johar v. Union of India Reference Bench",
         "year": 2023,
         "note": "Affirmed as good law."
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": []
       }
     ]
   },
@@ -13616,6 +14198,57 @@
     },
     "createdAt": "2026-09-21T11:03:18.263Z",
     "updatedAt": "2026-09-21T11:03:18.291Z",
-    "views": 0
+    "views": 0,
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": []
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": []
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": []
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
+        "title": "Subsequent Citator History",
+        "description": "Recorded citator history entries and subsequent judicial references.",
+        "citatorHistory": [],
+        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
+        "title": "Full Parallel Citation Index",
+        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
+        "parallelCitations": [
+          "AIR 2025 Supreme Court of India 101",
+          "(2025) 1 SCC 100"
+        ]
+      }
+    ]
   }
 ]

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pleadings — Case Upload Template & Ingestion Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  @page {
+    size: A4;
+    margin: 16mm 14mm;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1d24;
+    background: #ffffff;
+    line-height: 1.5;
+    font-size: 11pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    border-bottom: 2.5px solid #D4AF37;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .title-group h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 20pt;
+    color: #0E1016;
+    margin: 0 0 4px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .title-group p {
+    margin: 0;
+    font-size: 9.5pt;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .badge {
+    background: #0E1016;
+    color: #D4AF37;
+    font-size: 8.5pt;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  .rule-box {
+    background: #fdfbf7;
+    border-left: 4px solid #D4AF37;
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .rule-box h3 {
+    margin: 0 0 4px 0;
+    font-size: 10pt;
+    font-weight: 700;
+    color: #8c6d17;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .rule-box p {
+    margin: 0;
+    font-size: 9pt;
+    color: #444;
+  }
+
+  h2 {
+    font-size: 13pt;
+    color: #0E1016;
+    border-bottom: 1.5px solid #e2e4e8;
+    padding-bottom: 5px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h2 .num {
+    background: #D4AF37;
+    color: #0E1016;
+    font-size: 9pt;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+    font-size: 9pt;
+  }
+
+  th, td {
+    border: 1px solid #e0e3e8;
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: #f4f6f9;
+    font-weight: 700;
+    color: #222;
+    text-transform: uppercase;
+    font-size: 8pt;
+    letter-spacing: 0.5px;
+  }
+
+  .field-req {
+    color: #c92a2a;
+    font-weight: 700;
+  }
+
+  .section-card {
+    background: #fafbfc;
+    border: 1px solid #e1e4e8;
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+
+  .section-card h4 {
+    margin: 0 0 6px 0;
+    font-size: 10pt;
+    color: #0E1016;
+    font-weight: 700;
+  }
+
+  .section-card p {
+    margin: 0 0 6px 0;
+    font-size: 9pt;
+    color: #555;
+  }
+
+  .code-block {
+    background: #1a1e27;
+    color: #e6edf3;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.8pt;
+    padding: 12px 14px;
+    border-radius: 4px;
+    overflow-x: auto;
+    line-height: 1.45;
+    margin: 10px 0;
+    white-space: pre-wrap;
+  }
+
+  .disclaimer-banner {
+    background: #fff9db;
+    border: 1px solid #ffe066;
+    color: #8c6d17;
+    padding: 8px 12px;
+    font-size: 8.5pt;
+    border-radius: 4px;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .footer {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    font-size: 8pt;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="header">
+    <div class="title-group">
+      <h1>PLEADINGS</h1>
+      <p>Landmark Case Ingestion & Advocate Reference Template</p>
+    </div>
+    <div class="badge">Official Protocol · v2.0</div>
+  </div>
+
+  <div class="rule-box">
+    <h3>Strict Verbatim Standard (Core Platform Promise)</h3>
+    <p><strong>Nothing added that is not in the case.</strong> Do not generate hypothetical litigation strategies, counsel tactics, or speculative arguments. All facts, trial propositions, statutory quotes, holdings, precedents, and citations must trace directly to the certified judgment or official law report metadata.</p>
+  </div>
+
+  <h2><span class="num">1</span> Case Metadata (Basic Record)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Field Name</th>
+        <th style="width: 15%;">Type</th>
+        <th>Description & Required Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Case Title <span class="field-req">*</span></strong></td>
+        <td>Text</td>
+        <td>Full formal legal title (e.g., <em>Shreya Singhal v. Union of India</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>Editorial Short Title</strong></td>
+        <td>Text</td>
+        <td>Reader-friendly name (e.g., <em>The Section 66A Free Speech Case</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>Court & Year <span class="field-req">*</span></strong></td>
+        <td>Text / Int</td>
+        <td>Court Name & Decision Year (e.g., <em>Supreme Court of India · 2015</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>Bench Composition</strong></td>
+        <td>Array</td>
+        <td>Coram of judges (e.g., <em>["Chelameswar, J.", "Ghose, P.C., J."]</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>Legal Genre <span class="field-req">*</span></strong></td>
+        <td>Select</td>
+        <td><code>constitutional</code> | <code>crime</code> | <code>cyber</code> | <code>consumer</code> | <code>tort</code></td>
+      </tr>
+      <tr>
+        <td><strong>Statute & Sections <span class="field-req">*</span></strong></td>
+        <td>Text</td>
+        <td>Key sections involved (e.g., <em>Section 66A IT Act, 2000; Art. 19(1)(a)</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>Primary Citation</strong></td>
+        <td>Text</td>
+        <td>Primary law report cite (e.g., <em>(2015) 5 SCC 1</em> or <em>AIR 2015 SC 1523</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>Judgment Source URL</strong></td>
+        <td>URL</td>
+        <td>Verified public court record link (IndianKanoon, SCI e-SCR, etc.)</td>
+      </tr>
+      <tr>
+        <td><strong>Reviewer & Bar No. <span class="field-req">*</span></strong></td>
+        <td>Text</td>
+        <td>Reviewing Advocate Name & Bar Enrolment (e.g., <em>Adv. Counsel · D/1042/2012</em>)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">2</span> Story Episodes & Depth Layers</h2>
+  <p style="font-size: 9pt; color: #444; margin-bottom: 10px;">Cases are broken down into sequential episodes (dynamic count, typically 8 episodes). Each episode requires three synchronized layers:</p>
+
+  <div class="section-card">
+    <h4>Layer A: General Story Narrative</h4>
+    <p>Factual, engaging storytelling for general readers. Must include <strong>Episode Title</strong>, <strong>Kicker</strong> (e.g., <em>EPISODE 01 · THE PREMISE</em>), and 1–2 paragraphs describing the facts and timeline.</p>
+  </div>
+
+  <div class="section-card">
+    <h4>Layer B: Student Depth (Academic & Exam Focus)</h4>
+    <p><strong>Legal Analysis</strong>: 1 concise paragraph highlighting doctrinal significance.<br>
+    <strong>Ratio Decidendi</strong>: Clear binding legal rule.<br>
+    <strong>Exam Angle</strong>: Relevance for CLAT-PG, Judiciary Mains, and AIBE.</p>
+  </div>
+
+  <div class="section-card">
+    <h4>Layer C: Advocate Depth (Clean Trial Propositions)</h4>
+    <p><strong>TRIAL PROPOSITION</strong>: Exactly <strong>one clean sentence</strong> naming the legal point that this episode's facts or reasoning illustrate.<br>
+    <em>Example:</em> <code>TRIAL PROPOSITION: Section 66A of the IT Act creates a chilling effect on legitimate free speech and is void for vagueness.</code><br>
+    <strong>Paragraph Pinpoints</strong>: Precise paragraph numbers (e.g., <code>¶8</code>, <code>¶104</code>) quoting the specific rule.</p>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page-break"></div>
+
+  <div class="header">
+    <div class="title-group">
+      <h1>PLEADINGS</h1>
+      <p>5-Part Consolidated Advocate Reference Specification</p>
+    </div>
+    <div class="badge">Reference Dossier</div>
+  </div>
+
+  <h2><span class="num">3</span> The 5-Part Consolidated Advocate Reference Block</h2>
+  <p style="font-size: 9pt; color: #444; margin-bottom: 12px;">Appears once at the end of the case dossier (after the final episode) when toggled to <strong>Advocate Depth</strong>. Contains 5 authoritative sections:</p>
+
+  <div class="section-card">
+    <h4>Part 1 · Statutory Text As Reproduced In The Judgment</h4>
+    <p>Quote verbatim any section(s) of law the judgment reproduces in full. Attribute exactly to the Act and Section.</p>
+    <div class="code-block">{
+  "act": "Information Technology Act, 2000",
+  "section": "s. 66A",
+  "quotedText": ""66A. Punishment for sending offensive messages through communication service, etc.—Any person who sends, by means of a computer resource or a communication device..."",
+  "pinpoint": "SCR Page 12, Para 4"
+}</div>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 2 · The Court's Enumerated Holdings</h4>
+    <p>Numbered list of operative legal conclusions with precise pinpoint citations (SCR/SCC page & column or paragraph numbers).</p>
+    <div class="code-block">{
+  "number": "1",
+  "holding": "Section 66A of the Information Technology Act is unconstitutional and violates Article 19(1)(a).",
+  "pinpoint": "¶111, SCC p. 64"
+}</div>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 3 · Precedents Discussed In This Judgment</h4>
+    <p>Table of authorities cited inside the judgment with the court's verbatim treatment verb (<em>Affirmed, Applied, Followed, Referred to, Distinguished, Doubted, Overruled</em>).</p>
+    <div class="code-block">{
+  "caseName": "Romesh Thappar v. State of Madras",
+  "citation": "[1950] SCR 594",
+  "treatment": "Followed",
+  "proposition": "On clear and present danger threshold for public order restrictions"
+}</div>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 4 · Subsequent Citator History</h4>
+    <p>Citator metadata entries recorded in the law report with standard codes (<code>F</code>, <code>RF</code>, <code>D</code>, <code>O</code>) plus the mandatory disclaimer.</p>
+    <div class="disclaimer-banner">
+      <strong>Mandatory Citator Notice:</strong> "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 5 · Full Parallel Citation Index</h4>
+    <p>Comprehensive list of parallel reporter citations for cross-referencing in any court.</p>
+    <div class="code-block">"parallelCitations": [
+  "AIR 2015 SC 1523",
+  "(2015) 5 SCC 1",
+  "(2015) 2 SCR 1",
+  "2015 Cri LJ 2001",
+  "2015 (2) SCALE 1"
+]</div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page-break"></div>
+
+  <div class="header">
+    <div class="title-group">
+      <h1>PLEADINGS</h1>
+      <p>Complete Ingestion JSON Payload</p>
+    </div>
+    <div class="badge">JSON Schema</div>
+  </div>
+
+  <h2><span class="num">4</span> Ready-to-Use Case Payload Template</h2>
+  <div class="code-block">{
+  "slug": "case-slug-here",
+  "title": "Petitioner Name v. Respondent Name",
+  "shortTitle": "The Landmark Subject Case",
+  "court": "Supreme Court of India",
+  "year": 2024,
+  "decidedOn": "2024-03-15",
+  "bench": ["Chief Justice Name, C.J.", "Justice Name, J."],
+  "genre": "constitutional",
+  "statuteSections": "Section 123 of XYZ Act, 2000; Article 21",
+  "citation": "(2024) 1 SCC 100",
+  "judgmentUrl": "https://indiankanoon.org/doc/123456/",
+  "reviewer": "Adv. Lead Counsel",
+  "enrolmentNumber": "D/1042/2012",
+  "episodes": [
+    {
+      "n": 1,
+      "kicker": "EPISODE 01 · THE PREMISE",
+      "title": "HOW THE DISPUTE AROSE",
+      "layers": {
+        "story": {
+          "blocks": [{ "type": "para", "text": "Factual background narrative..." }]
+        },
+        "student": {
+          "blocks": [{ "type": "para", "text": "LEGAL ANALYSIS: Core exam concept..." }],
+          "ratio": "The central ratio decidendi established in this case."
+        },
+        "advocate": {
+          "blocks": [{ "type": "para", "text": "TRIAL PROPOSITION: One-sentence legal point illustrated by this episode." }],
+          "pinpoints": [{ "para": 14, "proposition": "Quoted principle from paragraph 14" }]
+        }
+      }
+    }
+  ],
+  "advocateReference": {
+    "statutoryText": [
+      {
+        "act": "Name of Statute, Year",
+        "section": "s. 123(1)",
+        "quotedText": ""Verbatim quote of the statutory section from judgment..."",
+        "pinpoint": "SCR Page 10, Para 4"
+      }
+    ],
+    "holdings": [
+      {
+        "number": "1",
+        "holding": "The Court held that procedural prerequisites are mandatory before invocation.",
+        "pinpoint": "¶42, SCC p. 88"
+      }
+    ],
+    "precedents": [
+      {
+        "caseName": "Earlier Precedent v. State",
+        "citation": "(2010) 2 SCC 50",
+        "treatment": "Followed",
+        "proposition": "On strict compliance with statutory safeguards"
+      }
+    ],
+    "citatorHistory": [
+      { "code": "F (Followed)", "citation": "2025 SC 100", "points": "(4)" }
+    ],
+    "parallelCitations": [
+      "AIR 2024 SC 500",
+      "(2024) 1 SCC 100",
+      "2024 SCR (1) 200"
+    ]
+  },
+  "flashcards": [
+    { "q": "What test did the Court establish?", "a": "The three-fold proportionality test." }
+  ]
+}</div>
+
+  <div class="footer">
+    <span>Pleadings Legal Editorial Platform · Admin Ingestion Protocol</span>
+    <span>https://pleadings.in</span>
+  </div>
+
+</body>
+</html>

@@ -31,12 +31,21 @@ export interface Exhibit {
   image?: { src: string; alt: string; provenance: "archival" | "illustration" };
 }
 
+export interface StudentQuestion {
+  q: string;
+  a: string;
+  options?: string[];
+  correctOptionIdx?: number;
+  explanation?: string;
+}
+
 export interface EpisodeLayer {
   blocks: Block[];
   ratio?: string;
   obiter?: string[];
   dissent?: { judge: string; ground: string; text: string };
   examAngle?: string;
+  questions?: StudentQuestion[]; // Admin-customizable per-episode student questions
   pinpoints?: { proposition: string; para: number }[];
   howToUse?: string[];
   howToDistinguish?: string[];
@@ -49,7 +58,7 @@ export interface Episode {
   layers: {
     story: EpisodeLayer;
     student: EpisodeLayer;
-    advocate: EpisodeLayer;
+    advocate?: EpisodeLayer;
   };
   exhibit?: Exhibit;
   image?: { src: string; alt: string; provenance: "archival" | "illustration" };
@@ -97,6 +106,23 @@ export interface AdvocateReference {
   parallelCitations?: string[];
 }
 
+export interface LawyerEpisode {
+  id: string;
+  n: number;
+  type: 'STATUTORY_TEXT' | 'ENUMERATED_HOLDINGS' | 'PRECEDENTS_DISCUSSED' | 'CITATOR_HISTORY' | 'PARALLEL_CITATIONS' | 'CUSTOM';
+  kicker: string;
+  title: string;
+  description?: string;
+  blocks?: Block[];
+  statutoryText?: AdvocateStatutoryText[];
+  holdings?: AdvocateHolding[];
+  precedents?: AdvocatePrecedent[];
+  citatorHistory?: AdvocateCitatorEntry[];
+  citatorDisclaimer?: string;
+  parallelCitations?: string[];
+  paragraphs?: string[];
+}
+
 export interface CaseFile {
   slug: string;
   title: string;
@@ -116,7 +142,8 @@ export interface CaseFile {
   publishedAt: string;
   views?: number;
   poster: { src: string; alt: string; provenance: "archival" | "illustration" };
-  episodes: Episode[];              // default 8
+  episodes: Episode[];              // Story and Student episodes
+  lawyerEpisodes?: LawyerEpisode[]; // 5 dedicated lawyer episodes + custom lawyer episodes
   vote: {
     question: string;
     context: string;

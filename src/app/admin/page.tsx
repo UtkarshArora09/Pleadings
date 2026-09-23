@@ -184,6 +184,9 @@ export default function AdminDashboardPage() {
     try {
       setActionLoading(slug);
       const isPublished = currentStatus === 'PUBLISHED';
+      setCases((prev) =>
+        prev.map((c) => (c.slug === slug ? { ...c, status: isPublished ? ('DRAFT' as CaseStatus) : ('PUBLISHED' as CaseStatus) } : c))
+      );
       const res = await fetch(`/api/admin/cases/${slug}/publish`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -195,6 +198,7 @@ export default function AdminDashboardPage() {
       }
     } catch (err) {
       console.error('Error toggling publish:', err);
+      fetchCases(true);
     } finally {
       setActionLoading(null);
     }
@@ -206,6 +210,7 @@ export default function AdminDashboardPage() {
     }
     try {
       setActionLoading(slug);
+      setCases((prev) => prev.filter((c) => c.slug !== slug));
       const res = await fetch(`/api/admin/cases/${slug}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
@@ -213,6 +218,7 @@ export default function AdminDashboardPage() {
       }
     } catch (err) {
       console.error('Error deleting case:', err);
+      fetchCases(true);
     } finally {
       setActionLoading(null);
     }
@@ -220,6 +226,9 @@ export default function AdminDashboardPage() {
 
   const handleUpdateRank = async (slug: string, newRank: number) => {
     try {
+      setCases((prev) =>
+        prev.map((c) => (c.slug === slug ? { ...c, rank: newRank } : c))
+      );
       const res = await fetch(`/api/admin/cases/${slug}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -231,6 +240,7 @@ export default function AdminDashboardPage() {
       }
     } catch (err) {
       console.error('Error updating rank:', err);
+      fetchCases(true);
     }
   };
 

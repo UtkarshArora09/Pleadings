@@ -247,6 +247,7 @@ export interface CaseData {
   brief: CaseBrief;
   // Deep layer story episodes & modules
   episodes?: Episode[];
+  lawyerEpisodes?: import('./case').LawyerEpisode[];
   flashcards?: { q: string; a: string }[];
   subsequentHistory?: {
     type: 'followed' | 'distinguished' | 'doubted' | 'overruled' | 'statute';
