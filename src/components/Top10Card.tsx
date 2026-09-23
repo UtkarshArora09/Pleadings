@@ -12,6 +12,20 @@ interface Top10CardProps {
   index: number;
 }
 
+function formatDisplayTag(rawTag?: string): string {
+  if (!rawTag) return 'LANDMARK';
+  const first = rawTag.split(/[;\n]/)[0].trim();
+  const cleaned = first.replace(/\([^)]*\)/g, '').trim();
+  if (cleaned.length > 18) {
+    if (/muslim personal law/i.test(cleaned)) return 'CrPC §125';
+    if (/constitution/i.test(cleaned)) return 'Constitution';
+    if (/guardians/i.test(cleaned)) return 'Custody';
+    if (/information technology/i.test(cleaned)) return 'IT Act';
+    return cleaned.slice(0, 16) + '…';
+  }
+  return cleaned || 'LANDMARK';
+}
+
 export function Top10Card({ caseData, index }: Top10CardProps) {
   const { language, toggleBookmark, isBookmarked } = useApp();
   const rank = index + 1;
@@ -90,9 +104,9 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
 
           {/* Top category badge */}
-          <div className="absolute top-2.5 left-2.5 z-10">
-            <span className="bg-[#E50914] text-white text-[9px] font-black uppercase tracking-[0.15em] px-2 py-0.5 rounded-xs shadow-md">
-              {categoryTag}
+          <div className="absolute top-2.5 left-2.5 z-10 max-w-[85%] pointer-events-none overflow-hidden">
+            <span className="block truncate whitespace-nowrap bg-[#E50914] text-white text-[9px] font-black uppercase tracking-[0.12em] px-2 py-0.5 rounded-xs shadow-md">
+              {formatDisplayTag(categoryTag)}
             </span>
           </div>
 

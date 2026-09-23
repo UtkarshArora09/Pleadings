@@ -11,6 +11,20 @@ interface PosterCardProps {
   caseData: CaseFile | CaseData;
 }
 
+function formatDisplayTag(rawTag?: string): string {
+  if (!rawTag) return 'LANDMARK';
+  const first = rawTag.split(/[;\n]/)[0].trim();
+  const cleaned = first.replace(/\([^)]*\)/g, '').trim();
+  if (cleaned.length > 18) {
+    if (/muslim personal law/i.test(cleaned)) return 'CrPC §125';
+    if (/constitution/i.test(cleaned)) return 'Constitution';
+    if (/guardians/i.test(cleaned)) return 'Custody';
+    if (/information technology/i.test(cleaned)) return 'IT Act';
+    return cleaned.slice(0, 16) + '…';
+  }
+  return cleaned || 'LANDMARK';
+}
+
 export function PosterCard({ caseData }: PosterCardProps) {
   const { language, toggleBookmark, isBookmarked } = useApp();
   const bookmarked = isBookmarked(caseData.slug);
@@ -61,10 +75,10 @@ export function PosterCard({ caseData }: PosterCardProps) {
           {/* Top Bar: Clean Tag & Bookmark */}
           <div className="flex items-center justify-between gap-2 mb-3">
             <span
-              className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-xs bg-white/5 border border-white/10"
+              className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-xs bg-white/5 border border-white/10 truncate max-w-[150px] whitespace-nowrap"
               style={{ color: accentColor }}
             >
-              {categoryTag}
+              {formatDisplayTag(categoryTag)}
             </span>
 
             <div className="flex items-center gap-2">
