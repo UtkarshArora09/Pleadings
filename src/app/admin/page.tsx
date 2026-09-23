@@ -24,30 +24,7 @@ export default function AdminDashboardPage() {
         setIsRefreshing(true);
       }
 
-      // 1. Gather any custom / client cases from localStorage
-      let localCases: CaseData[] = [];
-      if (typeof window !== 'undefined') {
-        try {
-          const userListRaw = localStorage.getItem('pleadings_user_cases');
-          if (userListRaw) {
-            localCases = JSON.parse(userListRaw);
-          }
-          for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key && key.startsWith('pleadings_case_')) {
-              const itemRaw = localStorage.getItem(key);
-              if (itemRaw) {
-                const item = JSON.parse(itemRaw);
-                if (item && item.slug && !localCases.some((c) => c.slug === item.slug)) {
-                  localCases.push(item);
-                }
-              }
-            }
-          }
-        } catch {}
-      }
-
-      // 2. Fetch fresh server cases with cache-busting timestamp
+      // 1. Fetch fresh server cases with cache-busting timestamp (Authoritative Single Source of Truth)
       let serverCases: CaseData[] = [];
       try {
         const res = await fetch(`/api/admin/cases?_t=${Date.now()}`, {
@@ -67,23 +44,27 @@ export default function AdminDashboardPage() {
         console.warn('Network error fetching admin cases:', netErr);
       }
 
-      // 3. Merge: Local drafts first, then authoritative server cases
-      const map = new Map<string, CaseData>();
-      localCases.forEach((c) => map.set(c.slug, c));
-      serverCases.forEach((c) => {
-        const local = map.get(c.slug);
-        const serverViews = typeof c.views === 'number' ? c.views : 0;
-        const localViews = local && typeof local.views === 'number' ? local.views : 0;
-        map.set(c.slug, {
-          ...(local || {}),
-          ...c,
-          views: Math.max(serverViews, localViews),
-        });
-      });
+      if (serverCases.length > 0) {
+        setCases(serverCases);
+        setLastSyncTime(new Date());
 
-      const merged = Array.from(map.values());
-      setCases(merged);
-      setLastSyncTime(new Date());
+        // Clean up any stale deleted cases in browser localStorage
+        if (typeof window !== 'undefined') {
+          try {
+            const validSlugs = new Set(serverCases.map((c) => c.slug));
+            localStorage.removeItem('pleadings_user_cases');
+            for (let i = localStorage.length - 1; i >= 0; i--) {
+              const key = localStorage.key(i);
+              if (key && key.startsWith('pleadings_case_')) {
+                const slugFromKey = key.replace('pleadings_case_', '');
+                if (!validSlugs.has(slugFromKey)) {
+                  localStorage.removeItem(key);
+                }
+              }
+            }
+          } catch {}
+        }
+      }
     } catch (err) {
       console.error('Failed to load admin cases:', err);
     } finally {
@@ -211,7 +192,22 @@ export default function AdminDashboardPage() {
     try {
       setActionLoading(slug);
       setCases((prev) => prev.filter((c) => c.slug !== slug));
-      const res = await fetch(`/api/admin/cases/${slug}`, { method: 'DELETE' });
+
+      // Clean local storage immediately
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.removeItem(`pleadings_case_${slug}`);
+          const raw = localStorage.getItem('pleadings_user_cases');
+          if (raw) {
+            const list = JSON.parse(raw);
+            if (Array.isArray(list)) {
+              localStorage.setItem('pleadings_user_cases', JSON.stringify(list.filter((c: any) => c.slug !== slug)));
+            }
+          }
+        } catch {}
+      }
+
+      const res = await fetch(`/api/admin/cases/${encodeURIComponent(slug)}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
         fetchCases(true);
