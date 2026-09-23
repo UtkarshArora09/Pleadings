@@ -413,19 +413,9 @@ function matchSlug(caseSlug?: string, querySlug?: string): boolean {
   const b = normalize(querySlug);
   if (a === b) return true;
 
-  // Check prefix/suffix variations (e.g. "the-shah-bano-case" vs "shah-bano")
-  const stripCommon = (s: string) => s.replace(/^the-/, '').replace(/-case$/, '');
-  if (stripCommon(a) === stripCommon(b) && stripCommon(a).length > 2) return true;
-
   if (
     (a === 'rinku-rukshar-habeas-corpus-custody-case' || a === 'rinku-rukshar-habeas-corpus-case') &&
     (b === 'rinku-rukshar-habeas-corpus-custody-case' || b === 'rinku-rukshar-habeas-corpus-case')
-  ) {
-    return true;
-  }
-  if (
-    (a.includes('shah-bano') || a.includes('mohd-ahmed-khan')) &&
-    (b.includes('shah-bano') || b.includes('mohd-ahmed-khan'))
   ) {
     return true;
   }

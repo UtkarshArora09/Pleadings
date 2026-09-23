@@ -11,6 +11,8 @@ interface CasePageProps {
   }>;
 }
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 export const dynamicParams = true;
 
 function getCaseForPage(slug: string): CaseFile | null {
@@ -18,17 +20,16 @@ function getCaseForPage(slug: string): CaseFile | null {
   const decoded = decodeURIComponent(slug).trim();
   const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
 
-  const staticCase = getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
-  if (staticCase) return staticCase;
-
   const rawDynamicCase = CaseStore.getBySlug(decoded) || CaseStore.getBySlug(cleanSlug);
   if (rawDynamicCase) {
+    const staticCase = getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
     const dyn = rawDynamicCase as any;
     const titleStr = typeof dyn.title === 'string' ? dyn.title : (dyn.title?.en || dyn.slug);
     const hookStr = typeof dyn.hook === 'string' ? dyn.hook : (dyn.hook?.en || dyn.blurb?.en || '');
     const posterImg = dyn.poster || { src: dyn.bannerImage || '/images/cases/ghost-case.jpg', alt: `${titleStr} poster`, provenance: 'illustration' as const };
 
     return {
+      ...(staticCase || {}),
       ...dyn,
       slug: dyn.slug,
       title: titleStr,
@@ -47,36 +48,17 @@ function getCaseForPage(slug: string): CaseFile | null {
       featured: typeof dyn.featured === 'boolean' ? dyn.featured : true,
       publishedAt: dyn.publishedAt || dyn.createdAt || new Date().toISOString(),
       poster: posterImg,
-      episodes: dyn.episodes || [],
-      vote: dyn.vote || {
-        question: `How should the court decide this issue?`,
-        context: `Consider the verified evidence.`,
-        options: [
-          { id: 'opt-1', label: 'Uphold the statutory claim', argument: 'The legal requirements were met based on the trial evidence.' },
-          { id: 'opt-2', label: 'Reject the claim', argument: 'Strict statutory preconditions were not established.' }
-        ],
-        courtChoseOptionId: 'opt-1'
-      },
-      glossary: dyn.glossary || [],
-      flashcards: dyn.flashcards || [],
-      affectsYou: dyn.affectsYou || {
-        heading: `How this ruling protects your rights`,
-        points: [`Guarantees due process and constitutional safeguards.`],
-      },
-      timeline: dyn.timeline || [{ year: dyn.year || 2024, event: 'Judgment delivered' }],
-      relatedSlugs: dyn.relatedSlugs || ['ghost-case', 'nanavati-case'],
-      subsequentHistory: dyn.subsequentHistory || [],
-      sources: dyn.sources || [{ label: 'Verified against the original/officially published judgment', url: dyn.judgmentUrl || 'https://indiankanoon.org/' }],
-      review: dyn.review || { reviewer: 'Adv. Girish Kr. Srivastava', enrolment: 'D/842/1991', reviewedOn: new Date().toISOString().split('T')[0] },
+      episodes: dyn.episodes || staticCase?.episodes || [],
+      lawyerEpisodes: dyn.lawyerEpisodes || (staticCase as any)?.lawyerEpisodes,
+      flashcards: dyn.flashcards || staticCase?.flashcards || [],
+      subsequentHistory: dyn.subsequentHistory || staticCase?.subsequentHistory || [],
     } as unknown as CaseFile;
   }
 
-  return null;
-}
+  const staticCase = getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
+  if (staticCase) return staticCase;
 
-export async function generateStaticParams() {
-  const slugs = getAllCaseSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return null;
 }
 
 // Helper to generate hyper-targeted search keywords per case

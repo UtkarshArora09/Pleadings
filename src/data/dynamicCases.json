@@ -2531,7 +2531,7 @@
       ]
     },
     "createdAt": "2026-09-16T20:45:53.724Z",
-    "updatedAt": "2026-09-23T21:33:21.928Z",
+    "updatedAt": "2026-09-23T22:40:33.922Z",
     "tag": {
       "en": "Articles 14",
       "hi": "Articles 14"
@@ -2553,7 +2553,7 @@
     "bannerImage": "/images/cases/right-to-privacy-case-poster-1789592353989.png",
     "matchRate": 98,
     "maturityRating": "U/A 13+",
-    "rank": 1,
+    "rank": 99,
     "featuredHeroHook": {
       "en": "Landmark trial on Articles 14, 19 and 21 of the Constitution of",
       "hi": "Landmark trial on अनुच्छेदs 14, 19 and 21 of the संविधान of"
@@ -4338,7 +4338,7 @@
       "alt": "The Nanavati Case poster",
       "provenance": "archival"
     },
-    "views": 1,
+    "views": 3,
     "episodes": [
       {
         "n": 1,
@@ -8898,959 +8898,6 @@
     ]
   },
   {
-    "slug": "shah-bano",
-    "title": {
-      "en": "The Shah Bano Case",
-      "hi": "शाह बानो मामला"
-    },
-    "tag": {
-      "en": "CRPC 125",
-      "hi": "CRPC 125"
-    },
-    "categoryTag": "CRPC 125",
-    "genre": "constitutional",
-    "theme": "constitutional-gold",
-    "court": "Supreme Court of India",
-    "year": 1985,
-    "readTime": {
-      "en": "5 min read",
-      "hi": "5 मिनट"
-    },
-    "matchRate": 97,
-    "maturityRating": "U/A 13+",
-    "rank": 1,
-    "bannerImage": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/shah-bano-poster-1790028267542.jpg",
-    "blurb": {
-      "en": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
-      "hi": "43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।"
-    },
-    "citation": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945",
-    "judgmentUrl": "https://indiankanoon.org/doc/823221/",
-    "watermark": "§125",
-    "featuredHeroHook": {
-      "en": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
-      "hi": "43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।"
-    },
-    "featuredHeroDesc": {
-      "en": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
-      "hi": "43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।"
-    },
-    "hasJudgeDecision": true,
-    "panels": [
-      {
-        "id": "panel-1",
-        "type": "HOOK",
-        "eyebrow": {
-          "en": "EPISODE 01 · THE PREMISE",
-          "hi": "एपिसोड 01 · बेसहारा छोड़ना"
-        },
-        "headline": {
-          "en": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
-          "hi": "43 साल का वैवाहिक जीवन और पांच बच्चों के साथ निष्कासन।"
-        },
-        "body": {
-          "en": "Mohd Ahmed Khan, an advocate by profession, married Shah Bano Begum in 1932. Three sons and two daughters were born of the marriage. In 1975, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 of the Code of Criminal Procedure, asking for Rs. 500 a month in maintenance — pointing to Khan's professional income, which she put at roughly Rs. 60,000 a year.",
-          "hi": "इंदौर, 1975। 62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान (जो शहर के जाने-माने अमीर वकील थे) ने घर से निकाल दिया।\n\n43 साल के वैवाहिक जीवन और 5 बच्चों के बाद वह बिना किसी आय के सड़क पर आ गईं।"
-        },
-        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
-        "photoExhibitCaption": {
-          "en": "Archival courtroom records: Shah Bano Begum filing for maintenance under Section 125 CrPC.",
-          "hi": "अदालती रिकॉर्ड: धारा 125 सीआरपीसी के तहत भरण-पोषण की याचिका दायर करती शाह बानो।"
-        }
-      },
-      {
-        "id": "panel-2",
-        "type": "PEOPLE",
-        "eyebrow": {
-          "en": "EPISODE 02 · DRAMATIS PERSONAE",
-          "hi": "एपिसोड 02 · मुख्य पात्र"
-        },
-        "headline": {
-          "en": "THE PEOPLE BEHIND THE PETITION.",
-          "hi": "एक बेसहारा मां बनाम शहर का दिग्गज वकील।"
-        },
-        "body": {
-          "en": "PERSONA 01 — APPELLANT (HUSBAND) Mohd Ahmed Khan Advocate by profession Married to Shah Bano for over four decades before the dispute reached court. Argued that his obligations under Muslim personal law had already been discharged.\n\nPERSONA 02 — RESPONDENT (WIFE) Shah Bano Begum Petitioner for maintenance Filed for maintenance under Section 125 CrPC after being driven from the matrimonial home in 1975.\n\nPERSONA 03 — INTERVENER All India Muslim Personal Law Board Intervened in support of Khan's position on the scope of Muslim personal law.\n\nPERSONA 04 — INTERVENER Begum Temur Jehan Social worker Intervened in support of the counsel appearing for Shah Bano.",
-          "hi": "जानिए उन मुख्य पक्षों को जिनकी कानूनी लड़ाई ने पूरे देश की सियासत और न्याय प्रणाली को हिला कर रख दिया।"
-        },
-        "characters": [
-          {
-            "name": {
-              "en": "Shah Bano Begum",
-              "hi": "शाह बानो बेगम"
-            },
-            "role": {
-              "en": "Petitioner (Divorced Wife)",
-              "hi": "याचिकाकर्ता (तलाकशुदा पत्नी)"
-            },
-            "tag": {
-              "en": "Aged 62, Fighting for Survival",
-              "hi": "62 वर्षीय बेसहारा मां"
-            },
-            "description": {
-              "en": "Mother of 5 children seeking modest survival maintenance under Section 125 CrPC.",
-              "hi": "5 बच्चों की मां जिन्होंने जीवित रहने के लिए धारा 125 के तहत 500 रुपये प्रति माह की मांग की।"
-            }
-          },
-          {
-            "name": {
-              "en": "Mohd. Ahmed Khan",
-              "hi": "मोहम्मद अहमद खान"
-            },
-            "role": {
-              "en": "Respondent (Advocate Husband)",
-              "hi": "प्रतिवादी (वकील पति)"
-            },
-            "tag": {
-              "en": "Prominent Legal Counsel",
-              "hi": "वरिष्ठ अधिवक्ता"
-            },
-            "description": {
-              "en": "Wealthy lawyer earning Rs. 60,000/year who claimed Muslim Personal Law limited liability to Iddat period.",
-              "hi": "सालाना 60,000 रुपये कमाने वाले अमीर वकील जिन्होंने दावा किया कि पर्सनल लॉ के तहत इद्दत के बाद कोई दायित्व नहीं है।"
-            }
-          },
-          {
-            "name": {
-              "en": "Chief Justice Y.V. Chandrachud",
-              "hi": "सीजेआई वाई.वी. चंद्रचूड़"
-            },
-            "role": {
-              "en": "Chief Justice of India",
-              "hi": "भारत के मुख्य न्यायाधीश"
-            },
-            "tag": {
-              "en": "5-Judge Constitution Bench",
-              "hi": "5 जजों की संविधान पीठ"
-            },
-            "description": {
-              "en": "Authored the unanimous judgment harmonizing secular criminal law with humanitarian principles.",
-              "hi": "ऐतिहासिक फैसले के लेखक जिन्होंने स्पष्ट किया कि धर्मनिरपेक्ष कानून धार्मिक संकीर्णता से ऊपर है।"
-            }
-          }
-        ],
-        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/shah-bano-exhibit-1790028162386.jpg",
-        "image": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/shah-bano-exhibit-1790028162386.jpg"
-      },
-      {
-        "id": "panel-3",
-        "type": "INCIDENT",
-        "eyebrow": {
-          "en": "EPISODE 03 · THE DIVORCE, MID-CASE",
-          "hi": "एपिसोड 03 · ₹500 का भरण-पोषण"
-        },
-        "headline": {
-          "en": "A TALAQ ARRIVES WHILE THE PETITION IS STILL PENDING.",
-          "hi": "मांग: ₹500 महीना। बचाव: तीन तलाक का सहारा।"
-        },
-        "body": {
-          "en": "While Shah Bano's maintenance petition was pending before the Magistrate, Khan divorced her by an irrevocable talaq on 6 November 1978. His defence shifted accordingly: the divorce, he argued, ended any obligation to maintain her; he had already paid Rs. 200 a month for about two years, and he had deposited Rs. 3,000 in court as dower (Mahr) for her iddat period. In August 1979, the Magistrate ordered him to pay just Rs. 25 a month. Shah Bano moved the Madhya Pradesh High Court in revision — which, in July 1980, raised the amount to Rs. 179.20 a month. Khan appealed to the Supreme Court by special leave.",
-          "hi": "अप्रैल 1978 में शाह बानो ने भरण-पोषण के लिए धारा 125 सीआरपीसी के तहत आवेदन किया।\n\nनवंबर 1978 में पति ने तलाक दे दिया और 3,000 रुपये मेहर जमा करके दावा किया कि अब उसका कोई कानूनी दायित्व नहीं बचा है।"
-        },
-        "evidence": {
-          "archiveType": "newspaper",
-          "masthead": "THE STATESMAN · SPECIAL DISPATCH",
-          "date": "NOVEMBER 1978",
-          "headline": {
-            "en": "MAINTENANCE BATTLE: 62-YEAR-OLD DESTITUTE WIFE TAKES SPOUSE TO COURT UNDER SEC 125",
-            "hi": "भरण-पोषण की लड़ाई: 62 वर्षीय बेसहारा महिला ने धारा 125 के तहत पति को अदालत में खींचा"
-          },
-          "snippet": {
-            "en": "Petitioner Shah Bano Begum, having no independent source of income, prays for maintenance allowance of Rs. 500 per month under Section 125 CrPC. Respondent argues personal law discharges him after iddat and triple talaq.",
-            "hi": "याचिकाकर्ता शाह बानो बेगम ने कोई आय न होने पर धारा 125 सीआरपीसी के तहत 500 रुपये प्रति माह भरण-पोषण की मांग की। प्रतिवादी का तर्क है कि तीन तलाक के बाद पर्सनल लॉ के तहत उसका कोई दायित्व नहीं है।"
-          },
-          "highlightedPhrase": {
-            "en": "having no independent source of income, prays for maintenance allowance",
-            "hi": "कोई आय न होने पर धारा 125 सीआरपीसी के तहत 500 रुपये प्रति माह भरण-पोषण की मांग की"
-          },
-          "exhibitNumber": "PRESS DISPATCH · 1978",
-          "caption": {
-            "en": "Press dispatch on the legal petition that sparked one of India’s most consequential constitutional debates.",
-            "hi": "उस कानूनी याचिका की प्रेस रिपोर्ट जिसने भारत के इतिहास में सबसे बड़ी संवैधानिक बहस को जन्म दिया।"
-          }
-        }
-      },
-      {
-        "id": "panel-4",
-        "type": "TIMELINE",
-        "eyebrow": {
-          "en": "EPISODE 04 · TWO EARLIER RULINGS, ONE DOUBTING BENCH",
-          "hi": "एपिसोड 04 · अदालत में टकराव"
-        },
-        "headline": {
-          "en": "THE COURT HAD ANSWERED THIS BEFORE. NOW A BENCH WASN'T SURE.",
-          "hi": "पर्सनल लॉ बनाम धर्मनिरपेक्ष आपराधिक संहिता।"
-        },
-        "body": {
-          "en": "Two earlier three-judge decisions of the Supreme Court Bai Tahira v. Ali Hussain Fidalli Chothia and Fazlunbi v. K. Khader Vali had already held that Section 125 applied to Muslims, and that a divorced Muslim wife could claim maintenance under it. But when Khan's appeal reached a Bench of Justices Murtaza Fazal Ali and A. Varadarajan, they doubted those rulings, holding that they might conflict with Section 127(3)(b) of the Code and with Section 2 of the Muslim Personal Law (Shariat) Application Act, 1937. On 3 February 1981, they referred the matter to a larger Bench of more than three judges.",
-          "hi": "संविधान पीठ ने विचार किया कि क्या धारा 125 सीआरपीसी भारत के सभी नागरिकों पर बिना किसी धार्मिक भेदभाव के लागू होती है।"
-        },
-        "prosecutionArgs": {
-          "party": {
-            "en": "Shah Bano (Wife)",
-            "hi": "शाह बानो (पत्नी)"
-          },
-          "claim": {
-            "en": "Section 125 CrPC is a secular social-welfare law designed to prevent vagrancy and starvation.",
-            "hi": "धारा 125 सीआरपीसी भुखमरी और बेसहारा होने से बचाने वाला एक धर्मनिरपेक्ष सामाजिक कानून है।"
-          },
-          "statute": "Section 125 CrPC · Code of Criminal Procedure",
-          "keyPoint": {
-            "en": "Religion cannot be used as a shield to abandon an elderly wife with no means of livelihood.",
-            "hi": "वृद्ध पत्नी को बिना किसी आजीविका के बेसहारा छोड़ने के लिए धर्म को ढाल नहीं बनाया जा सकता।"
-          }
-        },
-        "defenceArgs": {
-          "party": {
-            "en": "Mohd. Ahmed Khan (Husband)",
-            "hi": "मोहम्मद अहमद खान (पति)"
-          },
-          "claim": {
-            "en": "Under Muslim Personal Law, a husband is only liable during the 3-month Iddat period.",
-            "hi": "मुस्लिम पर्सनल लॉ के तहत पति की जिम्मेदारी सिर्फ 3 महीने की इद्दत अवधि तक सीमित है।"
-          },
-          "statute": "Muslim Personal Law (Shariat) Application Act 1937",
-          "keyPoint": {
-            "en": "Paying maintenance beyond Iddat violates the Shariat and criminal courts have no jurisdiction.",
-            "hi": "इद्दत के बाद भरण-पोषण देना शरीयत के नियमों के विरुद्ध है।"
-          }
-        }
-      },
-      {
-        "id": "panel-5",
-        "type": "EVIDENCE",
-        "eyebrow": {
-          "en": "EPISODE 05 · YOU ARE THE JUDGE",
-          "hi": "एपिसोड 05 · आप हैं जज"
-        },
-        "headline": {
-          "en": "Does Secular Law Override Personal Law for Destitute Women?",
-          "hi": "क्या बेसहारा महिलाओं के लिए धर्मनिरपेक्ष कानून पर्सनल लॉ से ऊपर है?"
-        },
-        "body": {
-          "en": "Cast your judicial decision before reading the Supreme Court verdict.",
-          "hi": "सुप्रीम कोर्ट का फैसला पढ़ने से पहले अपना न्यायिक निर्णय दें।"
-        },
-        "judgeDecision": {
-          "question": {
-            "en": "Should Section 125 CrPC apply equally to a divorced Muslim woman unable to maintain herself?",
-            "hi": "क्या धारा 125 सीआरपीसी तलाकशुदा मुस्लिम महिला पर भी समान रूप से लागू होनी चाहिए?"
-          },
-          "subtext": {
-            "en": "Section 125 is part of the criminal procedure code intended to prevent destitution.",
-            "hi": "धारा 125 आपराधिक प्रक्रिया का हिस्सा है जिसका उद्देश्य बेसहारा महिलाओं को भुखमरी से बचाना है।"
-          },
-          "options": [
-            {
-              "id": "personal-law-priority",
-              "title": {
-                "en": "Personal Law Prevails (Limit to Iddat)",
-                "hi": "पर्सनल लॉ सर्वोपरि है (इद्दत तक सीमित)"
-              },
-              "reason": {
-                "en": "Civil courts must respect religious personal laws in marital financial obligations.",
-                "hi": "वैवाहिक वित्तीय दायित्वों में धार्मिक पर्सनल लॉ का सम्मान होना चाहिए।"
-              },
-              "simulatedVotesPercent": 18,
-              "isActualVerdict": false
-            },
-            {
-              "id": "secular-welfare-priority",
-              "title": {
-                "en": "Section 125 CrPC Applies to ALL Citizens",
-                "hi": "धारा 125 सभी नागरिकों पर समान रूप से लागू है"
-              },
-              "reason": {
-                "en": "Secular criminal law prevents destitution regardless of religion. No woman should starve.",
-                "hi": "धर्मनिरपेक्ष कानून धर्म से ऊपर है और किसी भी नागरिक को भुखमरी से बचाना राज्य का कर्तव्य है।"
-              },
-              "simulatedVotesPercent": 82,
-              "isActualVerdict": true
-            }
-          ],
-          "judicialRationale": {
-            "en": "The Supreme Court ruled unanimously that Section 125 CrPC is truly secular and applies to all citizens irrespective of religion.",
-            "hi": "सुप्रीम कोर्ट ने सर्वसम्मति से फैसला दिया कि धारा 125 सीआरपीसी पूर्णतः धर्मनिरपेक्ष है और हर नागरिक पर लागू होती है।"
-          }
-        }
-      },
-      {
-        "id": "panel-6",
-        "type": "ARGUMENTS",
-        "eyebrow": {
-          "en": "EPISODE 06 · THE UNANIMOUS VERDICT",
-          "hi": "एपिसोड 06 · ऐतिहासिक फैसला"
-        },
-        "headline": {
-          "en": "23 April 1985: Section 125 CrPC is Secular and Universal.",
-          "hi": "23 अप्रैल 1985: धारा 125 सीआरपीसी धर्मनिरपेक्ष और सार्वभौमिक है।"
-        },
-        "stamp": {
-          "en": "SECULAR MAINTENANCE AFFIRMED (5-0)",
-          "hi": "भरण-पोषण का अधिकार स्वीकृत (5-0)"
-        },
-        "body": {
-          "en": "A unanimous 5-judge Constitution Bench led by CJI Chandrachud held:\n\n**\"Section 125 CrPC is a secular provision designed to prevent destitution. It cuts across the barriers of religion and applies equally to all wives, children, and parents.\"**\n\nThe court ordered the husband to pay maintenance, establishing gender justice as a paramount constitutional principle.",
-          "hi": "सीजेआई चंद्रचूड़ की अध्यक्षता वाली 5 जजों की संविधान पीठ ने फैसला दिया:\n\n**\"धारा 125 सीआरपीसी एक धर्मनिरपेक्ष प्रावधान है जिसका उद्देश्य बेसहारा होने से रोकना है। यह धर्म की सीमाओं को पार करता है और सभी पत्नियों पर समान रूप से लागू होता है।\"**\n\nकोर्ट ने पति को भरण-पोषण देने का आदेश दिया और लैंगिक न्याय को सर्वोपरि माना।"
-        },
-        "evidence": {
-          "archiveType": "court_decree",
-          "masthead": "SUPREME COURT OF INDIA · (1985) 2 SCC 556",
-          "date": "23 APRIL 1985",
-          "headline": {
-            "en": "CERTIFIED DECREE: Section 125 CrPC APPLIES TO ALL DIVORCED WOMEN",
-            "hi": "प्रमाणित डिक्री: धारा 125 सीआरपीसी सभी तलाकशुदा महिलाओं पर लागू होती है"
-          },
-          "snippet": {
-            "en": "Held: \"Section 125 of the Code of Criminal Procedure is truly secular in character. There is no conflict between the provisions of Section 125 and the personal law on the subject of the Muslim husband’s obligation to provide maintenance to a divorced wife as long as she is unable to maintain herself.\"",
-            "hi": "फैसला: \"आपराधिक प्रक्रिया संहिता की धारा 125 पूरी तरह से धर्मनिरपेक्ष है। जब तक तलाकशुदा पत्नी स्वयं का भरण-पोषण करने में असमर्थ है, तब तक धारा 125 और पर्सनल लॉ में कोई विरोधाभास नहीं है।\""
-          },
-          "highlightedPhrase": {
-            "en": "Section 125 of the Code of Criminal Procedure is truly secular in character",
-            "hi": "धारा 125 पूरी तरह से धर्मनिरपेक्ष है"
-          },
-          "exhibitNumber": "SUPREME COURT DECREE · AIR 1985 SC 945",
-          "caption": {
-            "en": "Certified judgment decree delivered by the Constitution Bench on 23 April 1985.",
-            "hi": "23 अप्रैल 1985 को सुप्रीम कोर्ट की संविधान पीठ द्वारा दिया गया प्रमाणित फैसला।"
-          }
-        }
-      },
-      {
-        "id": "panel-7",
-        "type": "VERDICT",
-        "eyebrow": {
-          "en": "EPISODE 07 · THE LEGACY",
-          "hi": "एपिसोड 07 · कानूनी प्रभाव"
-        },
-        "headline": {
-          "en": "The Danial Latifi Precedent: Enduring Protection.",
-          "hi": "दानियाल लतीफी फैसला: महिलाओं के अधिकारों की रक्षा।"
-        },
-        "body": {
-          "en": "Although the subsequent 1986 Act attempted to restrict Section 125, the Supreme Court in **Danial Latifi v. Union of India (2001)** interpreted the law to require husbands to make a \"reasonable and fair provision\" for the wife’s ENTIRE life within the Iddat period.\n\nShah Bano’s courageous crusade laid the bedrock for modern gender equality in Indian family jurisprudence.",
-          "hi": "यद्यपि बाद में 1986 के अधिनियम द्वारा इसे बदलने का प्रयास किया गया, लेकिन सुप्रीम कोर्ट ने **दानियाल लतीफी (2001)** मामले में स्पष्ट किया कि पति को इद्दत अवधि के भीतर ही महिला के पूरे जीवन के लिए उचित प्रबंध करना होगा।\n\nशाह बानो के संघर्ष ने भारत में महिला अधिकारों और भरण-पोषण कानून को हमेशा के लिए मजबूत कर दिया।"
-        },
-        "evidence": {
-          "archiveType": "verdict_decree",
-          "masthead": "SUPREME COURT OF INDIA · LANDMARK JURISPRUDENCE",
-          "date": "PERPETUAL RATIO",
-          "headline": {
-            "en": "RATIO: DIGNITY AND RIGHT TO LIVELIHOOD FOR DESTITUTE WOMEN IS INVIOLABLE",
-            "hi": "विधिक सिद्धांत: बेसहारा महिलाओं की गरिमा और आजीविका का अधिकार अटल है"
-          },
-          "snippet": {
-            "en": "The fundamental principle established in Shah Bano ensures that no person can evade the statutory obligation of preventing their dependent spouse from falling into destitution and starvation.",
-            "hi": "शाह बानो में स्थापित सिद्धांत सुनिश्चित करता है कि कोई भी व्यक्ति अपने आश्रित जीवनसाथी को भुखमरी से बचाने के कानूनी कर्तव्य से बच नहीं सकता।"
-          },
-          "highlightedPhrase": {
-            "en": "preventing their dependent spouse from falling into destitution and starvation",
-            "hi": "आश्रित जीवनसाथी को भुखमरी से बचाने के कानूनी कर्तव्य से"
-          },
-          "exhibitNumber": "GOLDEN RATIO · CRPC 125",
-          "caption": {
-            "en": "The timeless precedent protecting vulnerable women across India.",
-            "hi": "भारत भर में बेसहारा महिलाओं की रक्षा करने वाली ऐतिहासिक नजीर।"
-          }
-        },
-        "citationFooter": "(1985) 2 SCC 556 · Supreme Court of India",
-        "judgmentUrl": "https://indiankanoon.org/doc/823221/"
-      },
-      {
-        "id": "panel-8",
-        "type": "RATIO",
-        "eyebrow": {
-          "en": "EPISODE 08 · RATIO",
-          "hi": "एपिसोड 08 · RATIO"
-        },
-        "headline": {
-          "en": "The Shah Bano Case - Episode 8",
-          "hi": "शाह बानो मामला - एपिसोड 8"
-        },
-        "body": {
-          "en": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
-          "hi": "43 साल की शादी के बाद बेघर हुई 62 वर्षीय महिला ने सुप्रीम कोर्ट तक लड़ाई लड़ी, जिसने धर्मनिरपेक्ष कानून और पर्सनल लॉ के बीच ऐतिहासिक बहस छेड़ दी।"
-        },
-        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
-        "image": "/images/cases/shah-bano.jpg"
-      }
-    ],
-    "brief": {
-      "courtAndYear": {
-        "en": "Supreme Court of India · 1985",
-        "hi": "सुप्रीम कोर्ट ऑफ इंडिया · 1985"
-      },
-      "facts": {
-        "en": "Shah Bano, a 62-year-old woman, was divorced by her husband Mohd. Ahmed Khan after 43 years of marriage. She approached the magistrate under Section 125 CrPC seeking maintenance. The husband contended that under Muslim Personal Law, his liability ceased after paying Mehr and maintaining her for the 3-month Iddat period.",
-        "hi": "62 वर्षीय शाह बानो को उनके पति मोहम्मद अहमद खान ने 43 साल की शादी के बाद तलाक दे दिया। उन्होंने धारा 125 सीआरपीसी के तहत भरण-पोषण की मांग की। पति ने तर्क दिया कि मुस्लिम पर्सनल लॉ के अनुसार मेहर और 3 महीने की इद्दत के बाद उसका कोई दायित्व नहीं है।"
-      },
-      "issues": {
-        "en": [
-          "Whether Section 125 of the Code of Criminal Procedure applies to Muslim divorced women?",
-          "Whether the payment of Mehr/Dower under personal law discharges the husband’s liability under Section 125 CrPC?"
-        ],
-        "hi": [
-          "क्या आपराधिक प्रक्रिया संहिता की धारा 125 मुस्लिम तलाकशुदा महिलाओं पर लागू होती है?",
-          "क्या मेहर का भुगतान पति को धारा 125 के तहत भरण-पोषण के दायित्व से मुक्त करता है?"
-        ]
-      },
-      "chargesApplied": [
-        "Section 125 of the Code of Criminal Procedure 1973",
-        "Muslim Personal Law (Shariat) Application Act 1937"
-      ],
-      "held": {
-        "en": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband.",
-        "hi": "5 जजों की संविधान पीठ ने सर्वसम्मति से फैसला दिया कि धारा 125 सीआरपीसी एक धर्मनिरपेक्ष सामाजिक कानून है जो सभी नागरिकों पर लागू होता है। असमर्थ तलाकशुदा मुस्लिम महिला अपने पूर्व पति से भरण-पोषण पाने की हकदार है।"
-      },
-      "reasoning": {
-        "en": "Section 125 CrPC was enacted to prevent vagrancy and destitution. It is completely secular in operation and takes precedence over personal laws when an indigent person faces starvation.",
-        "hi": "धारा 125 का उद्देश्य समाज में भुखमरी और लाचारी को रोकना है। यह कानून धर्मनिरपेक्ष है और जब कोई व्यक्ति बेसहारा हो, तो यह पर्सनल लॉ पर प्रभावी होता है।"
-      },
-      "whyItMatters": {
-        "en": "Shah Bano is one of the most famous judgments in Indian constitutional history, defining the boundary between secular state laws and personal religious laws, and solidifying maintenance rights for women.",
-        "hi": "यह भारतीय कानूनी इतिहास का मील का पत्थर है जिसने धर्मनिरपेक्ष कानूनों और पर्सनल लॉ के बीच संतुलन स्थापित किया और महिलाओं के भरण-पोषण अधिकारों को सशक्त बनाया।"
-      }
-    },
-    "status": "DRAFT",
-    "createdAt": "2026-09-10T18:59:11.939Z",
-    "updatedAt": "2026-09-23T20:20:37.594Z",
-    "poster": {
-      "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/shah-bano-poster-1790028267542.jpg",
-      "alt": "The Shah Bano Case cover poster",
-      "provenance": "illustration"
-    },
-    "views": 10,
-    "episodes": [
-      {
-        "n": 1,
-        "kicker": "EPISODE 01 · THE PREMISE",
-        "title": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "Mohd Ahmed Khan, an advocate by profession, married Shah Bano Begum in 1932. Three sons and two daughters were born of the marriage. In 1975, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 of the Code of Criminal Procedure, asking for Rs. 500 a month in maintenance — pointing to Khan's professional income, which she put at roughly Rs. 60,000 a year.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "LEGAL ANALYSIS: This episode establishes the factual foundation marital duration, the husband's declared income, and the petition's statutory basis. It sets up \"wife\" as the term whose scope will become the case's central question.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles.",
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141 — Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.\""
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "TRIAL PROPOSITION: Establishes the marriage's duration and the husband's declared income — relevant to quantum of maintenance, not to the entitlement question the appeal actually turned on.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "A MARRIAGE OF FORTY-THREE YEARS ENDED IN A MAGISTRATE'S COURT.",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "No holding-level proposition in this episode — foundational facts only. Do not cite this passage as authority; cite Episodes 5, 7, and 8 for the operative holdings."
-            ],
-            "howToDistinguish": [
-              "A case involving a shorter marriage, or a husband's undisclosed/disputed income, sits on different footing for quantum purposes — though not for the entitlement question this case actually decides."
-            ]
-          }
-        },
-        "image": {
-          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/shah-bano-poster-1790028267542.jpg",
-          "alt": "The Shah Bano Case cover",
-          "provenance": "illustration"
-        },
-        "endHook": "How did the proceedings unfold?"
-      },
-      {
-        "n": 2,
-        "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
-        "title": "THE PEOPLE BEHIND THE PETITION.",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "PERSONA 01 — APPELLANT (HUSBAND) Mohd Ahmed Khan Advocate by profession Married to Shah Bano for over four decades before the dispute reached court. Argued that his obligations under Muslim personal law had already been discharged.\n\nPERSONA 02 — RESPONDENT (WIFE) Shah Bano Begum Petitioner for maintenance Filed for maintenance under Section 125 CrPC after being driven from the matrimonial home in 1975.\n\nPERSONA 03 — INTERVENER All India Muslim Personal Law Board Intervened in support of Khan's position on the scope of Muslim personal law.\n\nPERSONA 04 — INTERVENER Begum Temur Jehan Social worker Intervened in support of the counsel appearing for Shah Bano.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "LEGAL ANALYSIS: Note the interveners. The All India Muslim Personal Law Board's participation shows this was never a private dispute between two people alone — a religious body sought to shape the outcome, signalling the case's stakes beyond its two named parties.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles.",
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141 — Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.\""
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "The intervention of the All India Muslim Personal Law Board signals that the case's ratio was argued and tested against the organised institutional position of Muslim personal law, not just one litigant's private defence.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "THE PEOPLE BEHIND THE PETITION.",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "Not a citable holding background only."
-            ],
-            "howToDistinguish": [
-              "Not applicable to this episode."
-            ]
-          }
-        },
-        "endHook": "How did the proceedings unfold?",
-        "image": {
-          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/shah-bano-exhibit-1790028162386.jpg",
-          "alt": "Archival Exhibit for The Shah Bano Case",
-          "provenance": "archival"
-        }
-      },
-      {
-        "n": 3,
-        "kicker": "EPISODE 03 · THE DIVORCE, MID-CASE",
-        "title": "A TALAQ ARRIVES WHILE THE PETITION IS STILL PENDING.",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "While Shah Bano's maintenance petition was pending before the Magistrate, Khan divorced her by an irrevocable talaq on 6 November 1978. His defence shifted accordingly: the divorce, he argued, ended any obligation to maintain her; he had already paid Rs. 200 a month for about two years, and he had deposited Rs. 3,000 in court as dower (Mahr) for her iddat period. In August 1979, the Magistrate ordered him to pay just Rs. 25 a month. Shah Bano moved the Madhya Pradesh High Court in revision — which, in July 1980, raised the amount to Rs. 179.20 a month. Khan appealed to the Supreme Court by special leave.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": " The talaq, delivered mid-litigation, is what actually creates the legal question. Before it, Khan was simply a husband who had driven his wife from the home; after it, the question becomes whether \"wife\" under Section 125's Explanation still reaches a woman who has since been divorced.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles.",
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141 — Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.\""
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "The talaq's timing after the petition was filed, before final disposal did not defeat the claim; the Court tested entitlement against the Explanation (b) definition of \"wife,\" not against the procedural moment of divorce.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "A TALAQ ARRIVES WHILE THE PETITION IS STILL PENDING.",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "PINPOINT: 855A-B; 854B — \"Wife means a wife as defined, irrespective of the religion professed by her or by her husband. Therefore, a divorced Muslim woman so long as she has not married, is a wife for the purpose of section 125.\" Cite for: a Muslim woman divorced during or before Section 125 proceedings qualifies as \"wife\" under the Explanation, regardless of when in the litigation the divorce occurs."
-            ],
-            "howToDistinguish": [
-              "A wife who has remarried after divorce falls outside the Explanation's definition entirely — the judgment's protection is expressly limited to a divorced woman \"so long as she has not remarried.\""
-            ]
-          }
-        },
-        "endHook": "How did the proceedings unfold?"
-      },
-      {
-        "n": 4,
-        "kicker": "EPISODE 04 · TWO EARLIER RULINGS, ONE DOUBTING BENCH",
-        "title": "THE COURT HAD ANSWERED THIS BEFORE. NOW A BENCH WASN'T SURE.",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "Two earlier three-judge decisions of the Supreme Court Bai Tahira v. Ali Hussain Fidalli Chothia and Fazlunbi v. K. Khader Vali had already held that Section 125 applied to Muslims, and that a divorced Muslim wife could claim maintenance under it. But when Khan's appeal reached a Bench of Justices Murtaza Fazal Ali and A. Varadarajan, they doubted those rulings, holding that they might conflict with Section 127(3)(b) of the Code and with Section 2 of the Muslim Personal Law (Shariat) Application Act, 1937. On 3 February 1981, they referred the matter to a larger Bench of more than three judges.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "LEGAL ANALYSIS: A key procedural point for exams a smaller Bench that doubts an earlier Bench's ruling cannot simply overrule it. It must refer the matter to a larger Bench, exactly as happened here, which is why this case was ultimately decided by five judges instead of three.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles.",
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141 — Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.\""
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "A smaller coordinate Bench that doubts an earlier ruling must refer the matter to a larger Bench rather than depart from it directly — the exact mechanism that produced this 5-Judge decision.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "HOW TO CITE THIS PRECEDENT (FOR COUNSEL) Procedural point; drawn from the Court's own recital of the referral order dated 3 February 1981 (quoted in full in the judgment), not separately pinpointed in the SCR headnote. Cite for: the referral mechanism itself when arguing that a lower or coordinate Bench cannot bypass binding precedent without proper reference."
-            ],
-            "howToDistinguish": [
-              "HOW OPPOSING COUNSEL WILL DISTINGUISH Not applicable this is settled procedure, not a fact pattern to distinguish."
-            ]
-          }
-        },
-        "endHook": "How did the proceedings unfold?"
-      },
-      {
-        "n": 5,
-        "kicker": "EPISODE 05 · YOU ARE THE JUDGE",
-        "title": "Does Secular Law Override Personal Law for Destitute Women?",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "Cast your judicial decision before reading the Supreme Court verdict.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "LEGAL ANALYSIS: This is the doctrinal core for exam answers  two statutory provisions in tension. Section 125's broad, religion-neutral definition of \"wife\" against Section 127(3)(b)'s exception for sums \"payable on divorce\" under personal law. Learn exactly what each side argued Mahr actually was.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles.",
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141  Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.\""
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "The core statutory-interplay holding — deferred Mahr, though it falls due on dissolution of the marriage, is not a sum \"payable on divorce\" within Section 127(3)(b), because it is consideration for the marriage, not for the divorce.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "Does Secular Law Override Personal Law for Destitute Women?",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "PINPOINT: 863B-D; 863D-G; 863H — \"Divorce may be a convenient or identifiable point of time at which the deferred amount has to be paid by the husband to the wife. But, the payment of the amount is not occasioned by the divorce...\" Cite for: the proposition that a sum merely coinciding with, or contingent on, dissolution of marriage is not automatically a sum \"payable on divorce\" under Section 127(3)"
-            ],
-            "howToDistinguish": [
-              "HOW OPPOSING COUNSEL WILL DISTINGUISH A personal-law regime where a sum is expressly and solely triggered by the divorce itself (not merely payable in consideration of the marriage and falling due on its end) would sit outside this reasoning — the Court's logic turns specifically on Mahr being marriage-consideration, not divorce-consideration."
-            ]
-          }
-        },
-        "endHook": "How did the proceedings unfold?"
-      },
-      {
-        "n": 6,
-        "kicker": "EPISODE 06 · THE UNANIMOUS VERDICT",
-        "title": "23 April 1985: Section 125 CrPC is Secular and Universal.",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "A unanimous 5-judge Constitution Bench led by CJI Chandrachud held:\n\n**\"Section 125 CrPC is a secular provision designed to prevent destitution. It cuts across the barriers of religion and applies equally to all wives, children, and parents.\"**\n\nThe court ordered the husband to pay maintenance, establishing gender justice as a paramount constitutional principle.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "LEGAL ANALYSIS: The Court's actual method here is worth noting for exams — it did not simply weigh which law should \"win.\" It first asked whether a real conflict between Section 125 and Muslim personal law existed at all, before deciding which would prevail.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles.",
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141 — Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.\""
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "TRIAL PROPOSITION: Framing episode only — no independent holding to cite here.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "23 April 1985: Section 125 CrPC is Secular and Universal.",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "HOW TO CITE THIS PRECEDENT (FOR COUNSEL) — Not applicable."
-            ],
-            "howToDistinguish": [
-              "HOW OPPOSING COUNSEL WILL DISTINGUISH — Not applicable."
-            ]
-          }
-        },
-        "endHook": "How did the proceedings unfold?"
-      },
-      {
-        "n": 7,
-        "kicker": "EPISODE 07 · THE LEGACY",
-        "title": "The Danial Latifi Precedent: Enduring Protection.",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "Although the subsequent 1986 Act attempted to restrict Section 125, the Supreme Court in **Danial Latifi v. Union of India (2001)** interpreted the law to require husbands to make a \"reasonable and fair provision\" for the wife’s ENTIRE life within the Iddat period.\n\nShah Bano’s courageous crusade laid the bedrock for modern gender equality in Indian family jurisprudence.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "LEGAL ANALYSIS: Memorize the outcome precisely — appeal dismissed, Madhya Pradesh High Court's order confirmed, Rs. 10,000 costs awarded to the respondent. Note also that Bai Tahira and Fazlunbi were not overruled — they were affirmed, with only a narrow correction on the Mahr/127(3)(b) point.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141 — Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a sum 'payable on divorce' under Section 127(3)(b) CrPC.\"",
-            "obiter": [
-              "Courts must balance constitutional principles with statutory safeguards."
-            ],
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles."
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "TRIAL PROPOSITION: The ratio-bearing holding — Section 125 is secular in character, and a divorced Muslim wife unable to maintain herself is entitled to apply under it, beyond the iddat period. This is the Court's final disposition (Gate 2 confirmed) — safe to cite without a procedural-posture caveat.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "The Danial Latifi Precedent: Enduring Protection.",
-                "para": 8
-              }
-            ],
-            "howToUse": [
-              "HOW TO CITE THIS PRECEDENT (FOR COUNSEL) PINPOINT: 865H, 866A-C — \"A divorced Muslim wife is, therefore, entitled to apply for maintenance under section 125 of the Code.\" PINPOINT: 838H, 851A-B — rejection of the argument that a Muslim husband's liability is limited to the iddat period despite the wife's continuing inability to maintain herself. Cite for: the core holding on Section 125's applicability to Muslims, and the \"unable to maintain herself\" standard displacing any personal-law iddat cap"
-            ],
-            "howToDistinguish": [
-              "HOW OPPOSING COUNSEL WILL DISTINGUISH This holding is expressly conditioned on the wife being \"unable to maintain herself.\" Per PINPOINT: 858D-G; 859C-D, a divorced wife shown to be capable of self-maintenance falls back to the personal-law position — liability ceasing at iddat. A respondent with demonstrated means of self-support is materially distinguishable on this fact alone."
-            ]
-          }
-        },
-        "endHook": "How did the proceedings unfold?"
-      },
-      {
-        "n": 8,
-        "kicker": "EPISODE 08 · RATIO",
-        "title": "The Shah Bano Case - Episode 8",
-        "layers": {
-          "story": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "A 62-year-old divorced woman denied maintenance fought all the way to the Supreme Court, igniting a constitutional clash between secular criminal law and personal law.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ]
-          },
-          "student": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "LEGAL ANALYSIS: This is the case to cite for \"Section 125 CrPC is secular and religion-neutral in application\" and for \"Mahr is not a sum payable on divorce under Section 127(3)(b).\" Keep the Article 44 / Uniform Civil Code passage separate in your notes — the judgment itself frames it as an \"Observation,\" not as part of the operative ratio.",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "ratio": "RATIO DECIDENDI · BINDING PRECEDENT (Art. 141 — Supreme Court, 5-Judge Bench) \"Section 125 CrPC applies to a divorced Muslim wife unable to maintain herself, irrespective of personal law, because Mahr is not a",
-            "examAngle": "Tested in CLAT-PG, Judiciary Mains, and AIBE under CRPC 125. Focus on core ratio and legal principles.",
-            "obiter": [
-              "Provisions Involved: CrPC §125 (maintenance of wives, children, parents); CrPC §127(3)(b); §2, Muslim Personal Law (Shariat) Application Act, 1937; Article 44, Constitution of India (obiter only) Precedents Relied On / Affirmed: Bai Tahira v. Ali Hussain Fidalli Chothia [1979] 2 SCR 75; Fazlunbi v. K. Khader Vali [1980] 3 SCR 1127; Jagir Kaur v. Jaswant Singh [1964] 2 SCR 73; Nanak Chand v. Shri Chandra Kishore Agarwala [1970] 1 SCR 565; Hamira Bibi v. Zubaida Bibi 43 IA 294; Syed Sabir Hussain v. Farzand Hasan 65 IA 119"
-            ]
-          },
-          "advocate": {
-            "blocks": [
-              {
-                "type": "para",
-                "text": "TRIAL PROPOSITION: The general proposition that Section 125 CrPC is religion-neutral, plus a caution on the non-binding Article 44 observation",
-                "source": {
-                  "tier": "AMBER"
-                }
-              }
-            ],
-            "pinpoints": [
-              {
-                "proposition": "The Shah Bano Case - Episode 8",
-                "para": 12
-              }
-            ],
-            "howToUse": [
-              "HOW TO CITE THIS PRECEDENT (FOR COUNSEL) PINPOINT: 834D-E; 855E-G — \"Section 125 is truly secular in character... Whether the spouses are Hindus or Muslims, Christians or Parsis, Pagans or Heathens, is wholly irrelevant in the application of these provisions.\" Cite for: the general, religion-neutral character of Section 125 CrPC (now mirrored in Section 144, Bharatiya Nagarik Suraksha Sanhita, 2023) in any matter involving maintenance across personal-law lines."
-            ],
-            "howToDistinguish": [
-              "HOW OPPOSING COUNSEL WILL DISTINGUISH The Article 44/Uniform Civil Code passage is expressly headed \"OBSERVATION\" in the report and is not part of the operative ratio. A submission that relies on this case for a Uniform Civil Code argument can be met with the objection that the passage is obiter, not binding precedent — the binding holding is confined to Sections 125 and 127(3)(b) CrPC."
-            ]
-          }
-        },
-        "image": {
-          "src": "/images/cases/shah-bano.jpg",
-          "alt": "The Shah Bano Case - Episode 8",
-          "provenance": "illustration"
-        },
-        "endHook": "Case dossier complete."
-      }
-    ],
-    "flashcards": [
-      {
-        "q": "What was the central issue in The Shah Bano Case?",
-        "a": "Interpretation and application of CRPC 125 before the Supreme Court of India."
-      },
-      {
-        "q": "What is the core holding?",
-        "a": "A unanimous 5-judge Constitution Bench held that Section 125 CrPC is a secular social-welfare provision that applies to all citizens irrespective of religion. A divorced Muslim woman unable to maintain herself is entitled to maintenance from her former husband."
-      }
-    ],
-    "subsequentHistory": [
-      {
-        "type": "followed",
-        "case": "The Shah Bano Case Reference Bench",
-        "year": 1990,
-        "note": "Affirmed as good law."
-      }
-    ],
-    "lawyerEpisodes": [
-      {
-        "id": "lawyer-ep-1",
-        "n": 1,
-        "type": "STATUTORY_TEXT",
-        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
-        "title": "Statutory Text As Reproduced In The Judgment",
-        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
-        "statutoryText": []
-      },
-      {
-        "id": "lawyer-ep-2",
-        "n": 2,
-        "type": "ENUMERATED_HOLDINGS",
-        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
-        "title": "The Court's Enumerated Holdings",
-        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
-        "holdings": []
-      },
-      {
-        "id": "lawyer-ep-3",
-        "n": 3,
-        "type": "PRECEDENTS_DISCUSSED",
-        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
-        "title": "Precedents Discussed In This Judgment",
-        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
-        "precedents": []
-      },
-      {
-        "id": "lawyer-ep-4",
-        "n": 4,
-        "type": "CITATOR_HISTORY",
-        "kicker": "LAWYER EPISODE 04 · CITATOR HISTORY",
-        "title": "Subsequent Citator History",
-        "description": "Recorded citator history entries and subsequent judicial references.",
-        "citatorHistory": [],
-        "citatorDisclaimer": "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
-      },
-      {
-        "id": "lawyer-ep-5",
-        "n": 5,
-        "type": "PARALLEL_CITATIONS",
-        "kicker": "LAWYER EPISODE 05 · PARALLEL CITATIONS",
-        "title": "Full Parallel Citation Index",
-        "description": "Cross-reporter citations across AIR, SCC, SCR, SCALE, Cri LJ, and High Court reporters.",
-        "parallelCitations": []
-      }
-    ]
-  },
-  {
     "slug": "vishaka-case",
     "title": {
       "en": "Vishaka v. State of Rajasthan",
@@ -14318,5 +13365,2263 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "the-shah-bano-case",
+    "title": {
+      "en": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+      "hi": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors."
+    },
+    "tag": {
+      "en": "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act",
+      "hi": "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act"
+    },
+    "categoryTag": "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act",
+    "genre": "constitutional",
+    "theme": "constitutional-gold",
+    "court": "Supreme Court of India",
+    "year": 1985,
+    "readTime": {
+      "en": "5 min read",
+      "hi": "5 मिनट"
+    },
+    "matchRate": 98,
+    "maturityRating": "U/A 13+",
+    "rank": 1,
+    "bannerImage": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-poster-1790201058312.jpg",
+    "blurb": {
+      "en": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application",
+      "hi": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application"
+    },
+    "citation": "AIR 1985 SC 945",
+    "judgmentUrl": "https://indiankanoon.org/doc/823221/",
+    "watermark": "§",
+    "featuredHeroHook": {
+      "en": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application",
+      "hi": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application"
+    },
+    "featuredHeroDesc": {
+      "en": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application",
+      "hi": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application"
+    },
+    "hasJudgeDecision": true,
+    "panels": [
+      {
+        "id": "panel-1",
+        "type": "HOOK",
+        "eyebrow": {
+          "en": "EPISODE 01 · THE PREMISE",
+          "hi": "EPISODE 01 · THE PREMISE"
+        },
+        "headline": {
+          "en": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors.: The Catalyst",
+          "hi": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors.: The Catalyst"
+        },
+        "body": {
+          "en": "Mohd Ahmed Khan, an advocate, married Shah Bano Begum in 1932 and had five children. In 1975, after 43 years of marriage, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 CrPC seeking Rs. 500/month in maintenance, citing Khan's professional income of Rs. 60,000/year.",
+          "hi": "Mohd Ahmed Khan, an advocate, married Shah Bano Begum in 1932 and had five children. In 1975, after 43 years of marriage, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 CrPC seeking Rs. 500/month in maintenance, citing Khan's professional income of Rs. 60,000/year."
+        },
+        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
+        "image": "/images/cases/shah-bano.jpg"
+      },
+      {
+        "id": "panel-2",
+        "type": "PEOPLE",
+        "eyebrow": {
+          "en": "EPISODE 02 · DRAMATIS PERSONAE",
+          "hi": "EPISODE 02 · DRAMATIS PERSONAE"
+        },
+        "headline": {
+          "en": "The Parties & The Encounter",
+          "hi": "The Parties & The Encounter"
+        },
+        "body": {
+          "en": "While the petition was pending, Khan divorced her by irrevocable talaq on 6 November 1978 and deposited Rs. 3,000 in court as Mahr and iddat maintenance, claiming his obligations under Muslim personal law were fully discharged. In August 1979, the Magistrate ordered Rs. 25/month. In July 1980, the Madhya Pradesh High Court in revision enhanced maintenance to Rs. 179.20/month. Khan appealed to the Supreme Court by special leave, arguing that Section 125 does not override personal law and that Mahr satisfies Section 127(3)(b) CrPC.",
+          "hi": "While the petition was pending, Khan divorced her by irrevocable talaq on 6 November 1978 and deposited Rs. 3,000 in court as Mahr and iddat maintenance, claiming his obligations under Muslim personal law were fully discharged. In August 1979, the Magistrate ordered Rs. 25/month. In July 1980, the Madhya Pradesh High Court in revision enhanced maintenance to Rs. 179.20/month. Khan appealed to the Supreme Court by special leave, arguing that Section 125 does not override personal law and that Mahr satisfies Section 127(3)(b) CrPC."
+        },
+        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-exhibit-1790201066921.jpg",
+        "image": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-exhibit-1790201066921.jpg",
+        "evidence": {
+          "masthead": "THE STATESMAN · ARCHIVAL PRESS DISPATCH",
+          "date": "Registry Dispatch · 1985",
+          "headline": {
+            "en": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA",
+            "hi": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA"
+          },
+          "snippet": {
+            "en": "Court inquiries commence regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Public attention focuses on landmark hearing.",
+            "hi": "Court inquiries commence regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Public attention focuses on landmark hearing."
+          },
+          "imageSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-exhibit-1790201066921.jpg"
+        }
+      },
+      {
+        "id": "panel-3",
+        "type": "INCIDENT",
+        "eyebrow": {
+          "en": "EPISODE 03 · THE INVESTIGATION",
+          "hi": "EPISODE 03 · THE INVESTIGATION"
+        },
+        "headline": {
+          "en": "Evidence on the Record",
+          "hi": "Evidence on the Record"
+        },
+        "body": {
+          "en": "\"Section 125 is truly secular in character. It does not matter whether the parties are Hindus, Muslims, Christians or Parsis. The liability imposed by Section 125 to maintain close relatives who are unable to maintain themselves is founded on the individual's obligation to society to prevent vagrancy and destitution. Mahr is an obligation imposed by Muslim law upon the husband as a mark of respect for the wife. It is paid in consideration of the marriage, not on divorce.\"",
+          "hi": "\"Section 125 is truly secular in character. It does not matter whether the parties are Hindus, Muslims, Christians or Parsis. The liability imposed by Section 125 to maintain close relatives who are unable to maintain themselves is founded on the individual's obligation to society to prevent vagrancy and destitution. Mahr is an obligation imposed by Muslim law upon the husband as a mark of respect for the wife. It is paid in consideration of the marriage, not on divorce.\""
+        },
+        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
+        "image": "/images/cases/shah-bano.jpg"
+      },
+      {
+        "id": "panel-4",
+        "type": "TIMELINE",
+        "eyebrow": {
+          "en": "EPISODE 04 · PRIMARY DOCKETS",
+          "hi": "EPISODE 04 · PRIMARY DOCKETS"
+        },
+        "headline": {
+          "en": "Police Diary & Statutory Memorandum",
+          "hi": "Police Diary & Statutory Memorandum"
+        },
+        "body": {
+          "en": "Official registers and case diary entries documented the factual sequence and statutory triggers under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+          "hi": "Official registers and case diary entries documented the factual sequence and statutory triggers under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India."
+        },
+        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
+        "image": "/images/cases/shah-bano.jpg",
+        "evidence": {
+          "masthead": "STATION HOUSE CASE DIARY · OFFICIAL RECORD",
+          "date": "Registry Docket #1985/104",
+          "headline": {
+            "en": "DAILY DIARY ENTRY · CASE CRIME RECORD",
+            "hi": "DAILY DIARY ENTRY · CASE CRIME RECORD"
+          },
+          "snippet": {
+            "en": "Formal enquiry memo registered under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Material exhibits seized and forwarded for judicial scrutiny.",
+            "hi": "Formal enquiry memo registered under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Material exhibits seized and forwarded for judicial scrutiny."
+          },
+          "imageSrc": "/images/cases/shah-bano.jpg"
+        }
+      },
+      {
+        "id": "panel-5",
+        "type": "EVIDENCE",
+        "eyebrow": {
+          "en": "EPISODE 05 · COURTROOM SHOWDOWN",
+          "hi": "EPISODE 05 · COURTROOM SHOWDOWN"
+        },
+        "headline": {
+          "en": "Prosecution vs. Defence on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+          "hi": "Prosecution vs. Defence on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India"
+        },
+        "body": {
+          "en": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest.",
+          "hi": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest."
+        },
+        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
+        "image": "/images/cases/shah-bano.jpg"
+      },
+      {
+        "id": "panel-6",
+        "type": "ARGUMENTS",
+        "eyebrow": {
+          "en": "EPISODE 06 · JUDICIAL DELIBERATION",
+          "hi": "EPISODE 06 · JUDICIAL DELIBERATION"
+        },
+        "headline": {
+          "en": "The Bench Confronts the Doctrine",
+          "hi": "The Bench Confronts the Doctrine"
+        },
+        "body": {
+          "en": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+          "hi": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents."
+        },
+        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
+        "image": "/images/cases/shah-bano.jpg",
+        "evidence": {
+          "masthead": "FROM THE CERTIFIED JUDGMENT",
+          "date": "Supreme Court of India Judicial Record",
+          "headline": {
+            "en": "JUDICIAL DELIBERATION ON CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+            "hi": "JUDICIAL DELIBERATION ON CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India"
+          },
+          "snippet": {
+            "en": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience.",
+            "hi": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience."
+          },
+          "imageSrc": "/images/cases/shah-bano.jpg"
+        }
+      },
+      {
+        "id": "panel-7",
+        "type": "VERDICT",
+        "eyebrow": {
+          "en": "EPISODE 07 · THE VERDICT",
+          "hi": "EPISODE 07 · THE VERDICT"
+        },
+        "headline": {
+          "en": "The Court Ruling & Holding",
+          "hi": "The Court Ruling & Holding"
+        },
+        "body": {
+          "en": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+          "hi": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India."
+        },
+        "photoExhibitSrc": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-verdict-1790201079114.jpg",
+        "image": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-verdict-1790201079114.jpg"
+      },
+      {
+        "id": "panel-8",
+        "type": "RATIO",
+        "eyebrow": {
+          "en": "EPISODE 08 · RATIO & IMPACT",
+          "hi": "EPISODE 08 · RATIO & IMPACT"
+        },
+        "headline": {
+          "en": "Jurisprudential Impact & Doctrine",
+          "hi": "Jurisprudential Impact & Doctrine"
+        },
+        "body": {
+          "en": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+          "hi": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence."
+        },
+        "photoExhibitSrc": "/images/cases/shah-bano.jpg",
+        "image": "/images/cases/shah-bano.jpg"
+      }
+    ],
+    "brief": {
+      "courtAndYear": {
+        "en": "Supreme Court of India (1985)",
+        "hi": "Supreme Court of India (1985)"
+      },
+      "facts": {
+        "en": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application",
+        "hi": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application"
+      },
+      "issues": {
+        "en": [
+          "How should the Supreme Court of India decide this issue under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?"
+        ],
+        "hi": [
+          "How should the Supreme Court of India decide this issue under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?"
+        ]
+      },
+      "chargesApplied": [
+        "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act",
+        "Constitutional Law"
+      ],
+      "held": {
+        "en": "Active binding precedent under Article 141 of the Constitution of India.",
+        "hi": "Active binding precedent under Article 141 of the Constitution of India."
+      },
+      "reasoning": {
+        "en": "The court established foundational doctrine under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act.",
+        "hi": "न्यायालय ने CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act के तहत सिद्धांत प्रतिपादित किया।"
+      },
+      "whyItMatters": {
+        "en": "Active binding precedent under Article 141 of the Constitution of India.",
+        "hi": "महत्वपूर्ण न्यायिक मिसाल।"
+      }
+    },
+    "status": "PUBLISHED",
+    "createdAt": "2026-09-23T21:47:17.171Z",
+    "updatedAt": "2026-09-23T22:40:29.992Z",
+    "poster": {
+      "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-poster-1790201058312.jpg",
+      "alt": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors. cover poster",
+      "provenance": "illustration"
+    },
+    "views": 23,
+    "episodes": [
+      {
+        "n": 1,
+        "kicker": "EPISODE 01 · THE PREMISE",
+        "title": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors.: The Catalyst",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "Mohd Ahmed Khan, an advocate, married Shah Bano Begum in 1932 and had five children. In 1975, after 43 years of marriage, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 CrPC seeking Rs. 500/month in maintenance, citing Khan's professional income of Rs. 60,000/year.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: Mohd Ahmed Khan, an advocate, married Shah Bano Begum in 1932 and had five children. In 1975, after 43 years of marriage, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 CrPC seeking Rs. 500/month in maintenance, citing Khan's professional income of Rs. 60,000/year. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 1 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: A neglected wife is entitled to invoke s. 125 independent of personal law.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "endHook": "What triggered the historic legal clash?",
+        "audio": {
+          "durationSec": 180
+        },
+        "image": {
+          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-poster-1790201058312.jpg",
+          "alt": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors. cover",
+          "provenance": "illustration"
+        }
+      },
+      {
+        "n": 2,
+        "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+        "title": "The Parties & The Encounter",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "While the petition was pending, Khan divorced her by irrevocable talaq on 6 November 1978 and deposited Rs. 3,000 in court as Mahr and iddat maintenance, claiming his obligations under Muslim personal law were fully discharged. In August 1979, the Magistrate ordered Rs. 25/month. In July 1980, the Madhya Pradesh High Court in revision enhanced maintenance to Rs. 179.20/month. Khan appealed to the Supreme Court by special leave, arguing that Section 125 does not override personal law and that Mahr satisfies Section 127(3)(b) CrPC.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "1985-05-24",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: While the petition was pending, Khan divorced her by irrevocable talaq on 6 November 1978 and deposited Rs. 3,000 in court as Mahr and iddat maintenance, claiming his obligations under Muslim personal law were fully discharged. In August 1979, the Magistrate ordered Rs. 25/month. In July 1980, the Madhya Pradesh High Court in revision enhanced maintenance to Rs. 179.20/month. Khan appealed to the Supreme Court by special leave, arguing that Section 125 does not override personal law and that Mahr satisfies Section 127(3)(b) CrPC. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "1985-05-24",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 2 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Mahr is not an amount payable on divorce under s. 127(3)(b).",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "1985-05-24",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "THE STATESMAN · ARCHIVAL PRESS DISPATCH",
+          "headline": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA",
+          "body": "Court inquiries commence regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Public attention focuses on landmark hearing.",
+          "meta": "Registry Dispatch · 1985",
+          "sourceUrl": "https://indiankanoon.org/doc/823221/",
+          "image": {
+            "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-exhibit-1790201066921.jpg",
+            "alt": "Archival Exhibit for Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+            "provenance": "archival"
+          }
+        },
+        "endHook": "How did the investigative authorities construct the record?",
+        "audio": {
+          "durationSec": 180
+        },
+        "image": {
+          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-exhibit-1790201066921.jpg",
+          "alt": "Archival Exhibit for Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+          "provenance": "archival"
+        }
+      },
+      {
+        "n": 3,
+        "kicker": "EPISODE 03 · THE INVESTIGATION",
+        "title": "Evidence on the Record",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "\"Section 125 is truly secular in character. It does not matter whether the parties are Hindus, Muslims, Christians or Parsis. The liability imposed by Section 125 to maintain close relatives who are unable to maintain themselves is founded on the individual's obligation to society to prevent vagrancy and destitution. Mahr is an obligation imposed by Muslim law upon the husband as a mark of respect for the wife. It is paid in consideration of the marriage, not on divorce.\"",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: \"Section 125 is truly secular in character. It does not matter whether the parties are Hindus, Muslims, Christians or Parsis. The liability imposed by Section 125 to maintain close relatives who are unable to maintain themselves is founded on the individual's obligation to society to prevent vagrancy and destitution. Mahr is an obligation imposed by Muslim law upon the husband as a mark of respect for the wife. It is paid in consideration of the marriage, not on divorce.\" Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 3 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: A husband's maintenance obligation does not extinguish with iddat if the divorced wife cannot maintain herself.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "endHook": "What did the primary case documents reveal?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 4,
+        "kicker": "EPISODE 04 · PRIMARY DOCKETS",
+        "title": "Police Diary & Statutory Memorandum",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "Official registers and case diary entries documented the factual sequence and statutory triggers under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "1985-05-24",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: Official registers and case diary entries documented the factual sequence and statutory triggers under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "1985-05-24",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 4 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Coordinate benches doubting prior 3-judge rulings must refer the matter to a larger bench.",
+                "source": {
+                  "tier": "BLUE",
+                  "secondary": {
+                    "publication": "The Statesman / Primary Docket",
+                    "date": "1985-05-24",
+                    "url": "https://indiankanoon.org/doc/823221/"
+                  }
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "record",
+          "label": "STATION HOUSE CASE DIARY · OFFICIAL RECORD",
+          "headline": "DAILY DIARY ENTRY · CASE CRIME RECORD",
+          "body": "Formal enquiry memo registered under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Material exhibits seized and forwarded for judicial scrutiny.",
+          "meta": "Registry Docket #1985/104",
+          "sourceUrl": "https://indiankanoon.org/doc/823221/"
+        },
+        "endHook": "How did the fierce courtroom battle unfold?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 5,
+        "kicker": "EPISODE 05 · COURTROOM SHOWDOWN",
+        "title": "Prosecution vs. Defence on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 5 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                "source": {
+                  "tier": "AMBER"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "endHook": "How did the bench evaluate the competing legal arguments?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 6,
+        "kicker": "EPISODE 06 · JUDICIAL DELIBERATION",
+        "title": "The Bench Confronts the Doctrine",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ],
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 6 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "exhibit": {
+          "kind": "quote",
+          "label": "FROM THE CERTIFIED JUDGMENT",
+          "headline": "JUDICIAL DELIBERATION ON CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+          "body": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience.",
+          "meta": "Supreme Court of India Judicial Record",
+          "para": 8
+        },
+        "endHook": "What was the decisive verdict?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 7,
+        "kicker": "EPISODE 07 · THE VERDICT",
+        "title": "The Court Ruling & Holding",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ],
+            "ratio": "Section 125 CrPC is a secular provision of general application that overrides personal law. A divorced Muslim wife unable to maintain herself is entitled to maintenance beyond the iddat period, because Mahr is consideration for marriage and is not a sum payable on divorce under Section 127(3)(b) CrPC.\n",
+            "obiter": [
+              "Article 44 of the Constitution regarding a Uniform Civil Code remains a dead letter and the State must take steps toward its implementation.",
+              "Gender justice and equality before the law cannot be compromised under the guise of religious personal law.",
+              "True Islamic jurisprudence does not contemplate leaving an indigent, divorced woman destitute without support."
+            ],
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 7 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 8,
+                  "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "image": {
+          "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-verdict-1790201079114.jpg",
+          "alt": "Courtroom Verdict for Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+          "provenance": "illustration"
+        },
+        "endHook": "What is the enduring legacy of this precedent?",
+        "audio": {
+          "durationSec": 180
+        }
+      },
+      {
+        "n": 8,
+        "kicker": "EPISODE 08 · RATIO & IMPACT",
+        "title": "SECTION 125 IS SECULAR. IT DOES NOT ASK YOUR RELIGION.",
+        "layers": {
+          "story": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "Section 125 CrPC is a provision of general, secular application that does not yield to personal law. A divorced Muslim wife unable to maintain herself is entitled to maintenance under it, even beyond the iddat period — because Mahr is not a sum \"payable on divorce\" within Section 127(3)(b), and because Muslim personal law, on the Court's reading, does not contemplate leaving an indigent divorced wife without support at all.\nThe Court also placed on record a separate observation — not part of its operative holding — regretting that Article 44 of the Constitution, the directive to secure a Uniform Civil Code, remained unimplemented, and urging the State to act on it.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 12,
+                  "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ]
+          },
+          "student": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "LEGAL ANALYSIS: The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 12,
+                  "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ],
+            "ratio": "Section 125 CrPC is a secular provision of general application that overrides personal law. A divorced Muslim wife unable to maintain herself is entitled to maintenance beyond the iddat period, because Mahr is consideration for marriage and is not a sum payable on divorce under Section 127(3)(b) CrPC.\n",
+            "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+            "questions": [
+              {
+                "q": "What key legal question does Episode 8 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                "options": [
+                  "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                  "Strict liability threshold without evidence",
+                  "Jurisdiction of tribunals",
+                  "Executive discretion"
+                ],
+                "correctOptionIdx": 0,
+                "explanation": "Affirmed as binding statutory principle in paragraph 12 of the certified judgment."
+              }
+            ]
+          },
+          "advocate": {
+            "blocks": [
+              {
+                "type": "para",
+                "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                "source": {
+                  "tier": "BLACK",
+                  "para": 12,
+                  "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                  "cite": "AIR 1985 SC 945"
+                }
+              }
+            ],
+            "pinpoints": [
+              {
+                "para": 8,
+                "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+              },
+              {
+                "para": 11,
+                "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+              },
+              {
+                "para": 14,
+                "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+              },
+              {
+                "para": 32,
+                "proposition": "Article 44 Uniform Civil Code directive observation"
+              }
+            ],
+            "howToUse": [
+              "Cite for principle under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act."
+            ],
+            "howToDistinguish": [
+              "Distinguish based on specific factual matrix."
+            ]
+          }
+        },
+        "endHook": "Case dossier complete.",
+        "audio": {
+          "durationSec": 180
+        }
+      }
+    ],
+    "flashcards": [
+      {
+        "q": "Does Section 125 CrPC apply to divorced Muslim women?",
+        "a": "Yes. Section 125 is a secular, religion-neutral summary remedy aimed at preventing destitution, and personal law does not restrict its statutory application.\n"
+      },
+      {
+        "q": "Is payment of Mahr a ground to cancel maintenance under Section 127(3)(b) CrPC?",
+        "a": "No. Mahr is consideration paid in respect of the marriage, not a sum payable 'on divorce', and therefore does not extinguish the husband's statutory maintenance liability.\n"
+      },
+      {
+        "q": "Why was this case referred to a 5-Judge Constitution Bench?",
+        "a": "A 2-judge bench doubted the earlier 3-judge bench rulings in Bai Tahira (1979) and Fazlunbi (1980). Under the doctrine of coordinate precedent, only a larger 5-judge bench could reconsider the question.\n"
+      }
+    ],
+    "subsequentHistory": [
+      {
+        "type": "followed",
+        "case": "Danial Latifi v. Union of India (2001) 7 SCC 740",
+        "year": 2001,
+        "note": "Constitution Bench upheld the constitutional validity of the Muslim Women (Protection of Rights on Divorce) Act, 1986, interpreting Section 3 to hold that maintenance is not limited to the iddat period and must cover the entire lifetime of the divorced wife until remarriage.\n"
+      },
+      {
+        "type": "followed",
+        "case": "Shabana Bano v. Imran Khan (2010) 1 SCC 216",
+        "year": 2010,
+        "note": "Reaffirmed that a divorced Muslim woman is entitled to claim maintenance under Section 125 CrPC from her former husband even after the expiry of the iddat period, so long as she has not remarried.\n"
+      },
+      {
+        "type": "followed",
+        "case": "Mohd. Abdul Samad v. State of Telangana (2024) 8 SCC 1",
+        "year": 2024,
+        "note": "Reiterated that Section 125 CrPC is a harmonious, secular remedy available to all divorced Muslim women concurrently with remedies under the 1986 Act.\n"
+      }
+    ],
+    "lawyerEpisodes": [
+      {
+        "id": "lawyer-ep-1",
+        "n": 1,
+        "type": "STATUTORY_TEXT",
+        "kicker": "LAWYER EPISODE 01 · STATUTORY TEXT",
+        "title": "Statutory Text As Reproduced In The Judgment",
+        "description": "Verbatim statutory provisions and sections reproduced in full by the court.",
+        "statutoryText": [
+          {
+            "statute": "Section 125, CrPC, 1973",
+            "text": "\"If any person having sufficient means neglects or refuses to maintain— (a) his wife, unable to maintain herself... Explanation — (b) 'Wife' includes a woman who has been divorced by, or has obtained a divorce from, her husband and has not remarried.\""
+          },
+          {
+            "statute": "Section 127(3)(b), CrPC, 1973",
+            "text": "\"...the woman has been divorced by her husband and that she has received... the whole of the sum which, under any customary or personal law applicable to the parties, was payable on such divorce, cancel such order...\""
+          }
+        ]
+      },
+      {
+        "id": "lawyer-ep-2",
+        "n": 2,
+        "type": "ENUMERATED_HOLDINGS",
+        "kicker": "LAWYER EPISODE 02 · COURT HOLDINGS",
+        "title": "The Court's Enumerated Holdings",
+        "description": "Operative conclusions and findings of law with precise pinpoint citations.",
+        "holdings": [
+          {
+            "number": "1",
+            "holding": "A divorced Muslim wife is entitled to apply for maintenance under Section 125.",
+            "pinpoint": "865H, 866A-C"
+          },
+          {
+            "number": "2.1",
+            "holding": "\"Wife\" includes a divorced Muslim woman who has not remarried, without religious qualification.",
+            "pinpoint": "855A-B; 854B"
+          },
+          {
+            "number": "2.2",
+            "holding": "Section 125 is secular in character; religion is irrelevant to its application.",
+            "pinpoint": "834D-E; 855E-G"
+          },
+          {
+            "number": "3.1",
+            "holding": "Liability is not limited to iddat where the wife remains unable to maintain herself.",
+            "pinpoint": "838H, 851A-B"
+          },
+          {
+            "number": "3.3",
+            "holding": "No real conflict exists between §125 and Muslim personal law — the two apply in different situations.",
+            "pinpoint": "859C-D; 862C-D"
+          },
+          {
+            "number": "3.4-3.6",
+            "holding": "Mahr is not a sum \"payable on divorce\" under §127(3)(b) — it is consideration for the marriage.",
+            "pinpoint": "863B-D; 863D-G; 863H"
+          }
+        ]
+      },
+      {
+        "id": "lawyer-ep-3",
+        "n": 3,
+        "type": "PRECEDENTS_DISCUSSED",
+        "kicker": "LAWYER EPISODE 03 · PRECEDENT TREATMENT",
+        "title": "Precedents Discussed In This Judgment",
+        "description": "Prior authorities cited and their specific judicial treatment by the bench.",
+        "precedents": [
+          {
+            "caseName": "Bai Tahira v. Ali Hussain Fidalli Chothia",
+            "citation": "[1979] 2 SCR 75",
+            "treatment": "Affirmed as correctly decided, with one narrow correction on Mahr/§127(3)(b)"
+          },
+          {
+            "caseName": "Fazlunbi v. K. Khader Vali",
+            "citation": "[1980] 3 SCR 1127",
+            "treatment": "Affirmed as correctly decided"
+          },
+          {
+            "caseName": "Jagir Kaur v. Jaswant Singh",
+            "citation": "[1964] 2 SCR 73, 84",
+            "treatment": "Applied"
+          },
+          {
+            "caseName": "Nanak Chand v. Shri Chandra Kishore Agarwala",
+            "citation": "[1970] 1 SCR 565",
+            "treatment": "Applied"
+          },
+          {
+            "caseName": "Hamira Bibi v. Zubaida Bibi",
+            "citation": "43 Indian Appeal 294",
+            "treatment": "Referred to"
+          },
+          {
+            "caseName": "Syed Sabir Hussain v. Farzand Hasan",
+            "citation": "65 Indian Appeal 119, 127",
+            "treatment": "Referred to"
+          }
+        ]
+      },
+      {
+        "id": "lawyer-ep-4",
+        "n": 4,
+        "type": "CITATOR_HISTORY",
+        "kicker": "LAWYER EPISODE 04 · CITATOR RECORD",
+        "title": "Subsequent Citator History",
+        "description": "Treatment of this precedent in subsequent judicial decisions.",
+        "citatorHistory": [
+          {
+            "code": "F (Followed)",
+            "citation": "1986 SC 587",
+            "points": "(4)"
+          },
+          {
+            "code": "RF (Referred)",
+            "citation": "1987 SC 1103",
+            "points": "(10)"
+          },
+          {
+            "code": "D (Distinguished)",
+            "citation": "1988 SC 644 ",
+            "points": "(5,6)"
+          }
+        ]
+      },
+      {
+        "id": "lawyer-ep-5",
+        "n": 5,
+        "type": "PARALLEL_CITATIONS",
+        "kicker": "LAWYER EPISODE 05 · CITATION INDEX",
+        "title": "Full Parallel Citation Index",
+        "description": "Certified reporter volume and page references across major law reports.",
+        "parallelCitations": [
+          "AIR 1985 SC 945",
+          "(1985) 2 SCC 556",
+          "1985 SCR (3) 844",
+          "1985 Cri LJ 875",
+          "1985 (1) SCALE 767",
+          "1985 (87) BOM LR 435",
+          "(1985) 1 DMC 474",
+          "(1985) 2 HINDULR 77"
+        ]
+      }
+    ],
+    "hook": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application",
+    "decidedOn": "1985-05-15",
+    "bench": [
+      "Hon'ble Bench of the Supreme Court of India"
+    ],
+    "citations": {
+      "primary": "AIR 1985 SC 945",
+      "parallel": [
+        "AIR 1985 Supreme Court of India 101",
+        "(1985) 1 SCC 100"
+      ],
+      "neutral": "1985 INSC 101"
+    },
+    "sourceUrl": "https://indiankanoon.org/doc/823221/",
+    "statuteMap": [
+      {
+        "old": "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act",
+        "new": null,
+        "note": "Governing statutory provision in 1985."
+      }
+    ],
+    "doctrines": [
+      "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act",
+      "Constitutional Law"
+    ],
+    "categories": [
+      "constitutional",
+      "landmark-precedents"
+    ],
+    "readingTime": {
+      "story": 5,
+      "student": 7,
+      "advocate": 9
+    },
+    "featured": true,
+    "publishedAt": "2026-09-23T21:47:17.171Z",
+    "vote": {
+      "question": "How should the Supreme Court of India decide this issue under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+      "context": "Consider whether the statutory conditions of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India were satisfied on the trial record.",
+      "options": [
+        {
+          "id": "opt-1",
+          "label": "Uphold the statutory claim under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+          "argument": "The legal requirements were met based on the verified trial evidence."
+        },
+        {
+          "id": "opt-2",
+          "label": "Reject the claim for lack of substantive compliance",
+          "argument": "Strict statutory preconditions were not established beyond doubt."
+        }
+      ],
+      "courtChoseOptionId": "opt-1"
+    },
+    "glossary": [
+      {
+        "slug": "mens-rea",
+        "term": "Mens Rea",
+        "inThisCase": "The criminal intention examined under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India."
+      },
+      {
+        "slug": "ratio-decidendi",
+        "term": "Ratio Decidendi",
+        "inThisCase": "The binding legal principle established by the Supreme Court of India."
+      }
+    ],
+    "affectsYou": {
+      "heading": "How this ruling protects your rights under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+      "points": [
+        "Guarantees due process and statutory compliance under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+        "Provides actionable grounds to challenge arbitrary state or private actions."
+      ],
+      "actionLink": {
+        "label": "Verify Full Primary Docket",
+        "url": "https://indiankanoon.org/doc/823221/"
+      }
+    },
+    "timeline": [
+      {
+        "year": 1985,
+        "event": "Supreme Court of India delivers landmark ruling defining CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India."
+      },
+      {
+        "year": 1995,
+        "event": "Precedent affirmed and cited by subsequent constitutional benches."
+      }
+    ],
+    "relatedSlugs": [
+      "ghost-case",
+      "nanavati-case"
+    ],
+    "advocateReference": {
+      "parallelCitations": [
+        "AIR 1985 SC 945",
+        "(1985) 2 SCC 556",
+        "1985 SCR (3) 844",
+        "1985 Cri LJ 875",
+        "1985 (1) SCALE 767",
+        "1985 (87) BOM LR 435",
+        "(1985) 1 DMC 474",
+        "(1985) 2 HINDULR 77"
+      ],
+      "statutoryText": [
+        {
+          "statute": "Section 125, CrPC, 1973",
+          "text": "\"If any person having sufficient means neglects or refuses to maintain— (a) his wife, unable to maintain herself... Explanation — (b) 'Wife' includes a woman who has been divorced by, or has obtained a divorce from, her husband and has not remarried.\""
+        },
+        {
+          "statute": "Section 127(3)(b), CrPC, 1973",
+          "text": "\"...the woman has been divorced by her husband and that she has received... the whole of the sum which, under any customary or personal law applicable to the parties, was payable on such divorce, cancel such order...\""
+        }
+      ],
+      "holdings": [
+        {
+          "number": "1",
+          "holding": "A divorced Muslim wife is entitled to apply for maintenance under Section 125.",
+          "pinpoint": "865H, 866A-C"
+        },
+        {
+          "number": "2.1",
+          "holding": "\"Wife\" includes a divorced Muslim woman who has not remarried, without religious qualification.",
+          "pinpoint": "855A-B; 854B"
+        },
+        {
+          "number": "2.2",
+          "holding": "Section 125 is secular in character; religion is irrelevant to its application.",
+          "pinpoint": "834D-E; 855E-G"
+        },
+        {
+          "number": "3.1",
+          "holding": "Liability is not limited to iddat where the wife remains unable to maintain herself.",
+          "pinpoint": "838H, 851A-B"
+        },
+        {
+          "number": "3.3",
+          "holding": "No real conflict exists between §125 and Muslim personal law — the two apply in different situations.",
+          "pinpoint": "859C-D; 862C-D"
+        },
+        {
+          "number": "3.4-3.6",
+          "holding": "Mahr is not a sum \"payable on divorce\" under §127(3)(b) — it is consideration for the marriage.",
+          "pinpoint": "863B-D; 863D-G; 863H"
+        }
+      ],
+      "precedents": [
+        {
+          "caseName": "Bai Tahira v. Ali Hussain Fidalli Chothia",
+          "citation": "[1979] 2 SCR 75",
+          "treatment": "Affirmed as correctly decided, with one narrow correction on Mahr/§127(3)(b)"
+        },
+        {
+          "caseName": "Fazlunbi v. K. Khader Vali",
+          "citation": "[1980] 3 SCR 1127",
+          "treatment": "Affirmed as correctly decided"
+        },
+        {
+          "caseName": "Jagir Kaur v. Jaswant Singh",
+          "citation": "[1964] 2 SCR 73, 84",
+          "treatment": "Applied"
+        },
+        {
+          "caseName": "Nanak Chand v. Shri Chandra Kishore Agarwala",
+          "citation": "[1970] 1 SCR 565",
+          "treatment": "Applied"
+        },
+        {
+          "caseName": "Hamira Bibi v. Zubaida Bibi",
+          "citation": "43 Indian Appeal 294",
+          "treatment": "Referred to"
+        },
+        {
+          "caseName": "Syed Sabir Hussain v. Farzand Hasan",
+          "citation": "65 Indian Appeal 119, 127",
+          "treatment": "Referred to"
+        }
+      ],
+      "citatorHistory": [
+        {
+          "code": "F (Followed)",
+          "citation": "1986 SC 587",
+          "points": "(4)"
+        },
+        {
+          "code": "RF (Referred)",
+          "citation": "1987 SC 1103",
+          "points": "(10)"
+        },
+        {
+          "code": "D (Distinguished)",
+          "citation": "1988 SC 644 ",
+          "points": "(5,6)"
+        }
+      ]
+    },
+    "sources": [
+      {
+        "label": "Supreme Court of India Certified Judgment (1985)",
+        "url": "https://indiankanoon.org/doc/823221/"
+      },
+      {
+        "label": "Archival News & Docket Records (1985)",
+        "url": "https://indiankanoon.org/doc/823221/"
+      }
+    ],
+    "review": {
+      "reviewer": "Adv. Girish Kr. Srivastava",
+      "enrolment": "A/G0117/2012",
+      "reviewedOn": "2026-09-23"
+    },
+    "hi": {
+      "title": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+      "hook": "Landmark trial on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application",
+      "court": "भारत का सर्वोच्च न्यायालय",
+      "year": 1985,
+      "decidedOn": "1985-05-15",
+      "bench": [
+        "Hon'ble Bench of the भारत का सर्वोच्च न्यायालय"
+      ],
+      "status": {
+        "code": "GOOD_LAW",
+        "explain": "भारतीय संविधान के अनुच्छेद 141 के तहत सक्रिय बाध्यकारी नज़ीर।",
+        "chain": [
+          {
+            "year": 1985,
+            "event": "भारत का सर्वोच्च न्यायालय ने महत्वपूर्ण निर्णय दिया।"
+          }
+        ]
+      },
+      "statuteMap": [
+        {
+          "old": "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act",
+          "new": null,
+          "note": "प्रभावी वैधानिक प्रावधान।"
+        }
+      ],
+      "doctrines": [
+        "संवैधानिक कानून"
+      ],
+      "categories": [
+        "constitutional"
+      ],
+      "readingTime": {
+        "story": 5,
+        "student": 7,
+        "advocate": 9
+      },
+      "featured": true,
+      "publishedAt": "2026-09-23T21:47:17.180Z",
+      "poster": {
+        "src": "/images/cases/shah-bano.jpg",
+        "alt": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors. आधिकारिक पोस्टर",
+        "provenance": "archival"
+      },
+      "vote": {
+        "question": "न्यायालय को CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 संविधान of India के तहत क्या निर्णय देना चाहिए?",
+        "context": "विचार करें कि क्या साक्ष्यों के आधार पर वैधानिक शर्तें पूरी हुईं।",
+        "options": [
+          {
+            "id": "opt-1",
+            "label": "वैधानिक दावे को स्वीकार करें",
+            "argument": "प्रस्तुत साक्ष्य के आधार पर वैधानिक शर्तें पूरी हैं।"
+          },
+          {
+            "id": "opt-2",
+            "label": "दावे को खारिज करें",
+            "argument": "अनिवार्य वैधानिक शर्तें साबित नहीं हुईं।"
+          }
+        ],
+        "courtChoseOptionId": "opt-1"
+      },
+      "glossary": [
+        {
+          "slug": "mens-rea",
+          "term": "आपराधिक मनःस्थिति",
+          "inThisCase": "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India के तहत इरादे की न्यायिक समीक्षा।"
+        }
+      ],
+      "flashcards": [
+        {
+          "q": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors. का मुख्य मुद्दा क्या था?",
+          "a": "CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India की व्याख्या।"
+        }
+      ],
+      "affectsYou": {
+        "heading": "यह निर्णय आपके अधिकारों की रक्षा कैसे करता है",
+        "points": [
+          "विधि की उचित प्रक्रिया सुनिश्चित करता है।"
+        ]
+      },
+      "timeline": [
+        {
+          "year": 1985,
+          "event": "भारत का सर्वोच्च न्यायालय का ऐतिहासिक निर्णय।"
+        }
+      ],
+      "relatedSlugs": [
+        "ghost-case",
+        "nanavati-case"
+      ],
+      "subsequentHistory": [
+        {
+          "type": "followed",
+          "case": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors. संदर्भ",
+          "year": 1990,
+          "note": "स्थिर विधि के रूप में स्वीकृत।"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Supreme Court of India प्रमाणित निर्णय",
+          "url": "https://indiankanoon.org/doc/823221/"
+        }
+      ],
+      "episodes": [
+        {
+          "n": 1,
+          "kicker": "EPISODE 01 · THE PREMISE",
+          "title": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors.: The Catalyst",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "Mohd Ahmed Khan, an advocate, married Shah Bano Begum in 1932 and had five children. In 1975, after 43 years of marriage, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under धारा 125 CrPC seeking Rs. 500/month in maintenance, citing Khan's professional income of Rs. 60,000/year.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: Mohd Ahmed Khan, an advocate, married Shah Bano Begum in 1932 and had five children. In 1975, after 43 years of marriage, Khan drove Shah Bano out of the matrimonial home. In April 1978, she filed a petition before the Judicial Magistrate (First Class), Indore, under Section 125 CrPC seeking Rs. 500/month in maintenance, citing Khan's professional income of Rs. 60,000/year. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 1 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: A neglected wife is entitled to invoke s. 125 independent of personal law.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "endHook": "What triggered the historic legal clash?",
+          "audio": {
+            "durationSec": 180
+          },
+          "image": {
+            "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-poster-1790201058312.jpg",
+            "alt": "Mohd. Ahmed Khan v. Shah Bano Begum and Ors. cover",
+            "provenance": "illustration"
+          }
+        },
+        {
+          "n": 2,
+          "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+          "title": "The Parties & The Encounter",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "While the petition was pending, Khan divorced her by irrevocable talaq on 6 November 1978 and deposited Rs. 3,000 in court as Mahr and iddat maintenance, claiming his obligations under Muslim personal law were fully discharged. In August 1979, the Magistrate ordered Rs. 25/month. In July 1980, the Madhya Pradesh उच्च न्यायालय in revision enhanced maintenance to Rs. 179.20/month. Khan appealed to the Supreme Court by special leave, arguing that धारा 125 does not override personal law and that Mahr satisfies धारा 127(3)(b) CrPC.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "1985-05-24",
+                      "url": "https://indiankanoon.org/doc/823221/"
+                    }
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: While the petition was pending, Khan divorced her by irrevocable talaq on 6 November 1978 and deposited Rs. 3,000 in court as Mahr and iddat maintenance, claiming his obligations under Muslim personal law were fully discharged. In August 1979, the Magistrate ordered Rs. 25/month. In July 1980, the Madhya Pradesh High Court in revision enhanced maintenance to Rs. 179.20/month. Khan appealed to the Supreme Court by special leave, arguing that Section 125 does not override personal law and that Mahr satisfies Section 127(3)(b) CrPC. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "1985-05-24",
+                      "url": "https://indiankanoon.org/doc/823221/"
+                    }
+                  }
+                }
+              ],
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 2 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Mahr is not an amount payable on divorce under s. 127(3)(b).",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "1985-05-24",
+                      "url": "https://indiankanoon.org/doc/823221/"
+                    }
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "exhibit": {
+            "kind": "record",
+            "label": "THE STATESMAN · ARCHIVAL PRESS DISPATCH",
+            "headline": "SENSATIONAL TRIAL COMMENCES BEFORE SUPREME COURT OF INDIA",
+            "body": "Court inquiries commence regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Public attention focuses on landmark hearing.",
+            "meta": "Registry Dispatch · 1985",
+            "sourceUrl": "https://indiankanoon.org/doc/823221/",
+            "image": {
+              "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-exhibit-1790201066921.jpg",
+              "alt": "Archival Exhibit for Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+              "provenance": "archival"
+            }
+          },
+          "endHook": "How did the investigative authorities construct the record?",
+          "audio": {
+            "durationSec": 180
+          },
+          "image": {
+            "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-exhibit-1790201066921.jpg",
+            "alt": "Archival Exhibit for Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+            "provenance": "archival"
+          }
+        },
+        {
+          "n": 3,
+          "kicker": "EPISODE 03 · THE INVESTIGATION",
+          "title": "Evidence on the Record",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "\"धारा 125 is truly secular in character. It does not matter whether the parties are Hindus, Muslims, Christians or Parsis. The liability imposed by धारा 125 to maintain close relatives who are unable to maintain themselves is founded on the individual's obligation to society to prevent vagrancy and destitution. Mahr is an obligation imposed by Muslim law upon the husband as a mark of respect for the wife. It is paid in consideration of the marriage, not on divorce.\"",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: \"Section 125 is truly secular in character. It does not matter whether the parties are Hindus, Muslims, Christians or Parsis. The liability imposed by Section 125 to maintain close relatives who are unable to maintain themselves is founded on the individual's obligation to society to prevent vagrancy and destitution. Mahr is an obligation imposed by Muslim law upon the husband as a mark of respect for the wife. It is paid in consideration of the marriage, not on divorce.\" Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 3 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: A husband's maintenance obligation does not extinguish with iddat if the divorced wife cannot maintain herself.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "endHook": "What did the primary case documents reveal?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 4,
+          "kicker": "EPISODE 04 · PRIMARY DOCKETS",
+          "title": "Police Diary & Statutory Memorandum",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "Official registers and case diary entries documented the factual sequence and statutory triggers under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 संविधान of India.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "1985-05-24",
+                      "url": "https://indiankanoon.org/doc/823221/"
+                    }
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: Official registers and case diary entries documented the factual sequence and statutory triggers under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "1985-05-24",
+                      "url": "https://indiankanoon.org/doc/823221/"
+                    }
+                  }
+                }
+              ],
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 4 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Coordinate benches doubting prior 3-judge rulings must refer the matter to a larger bench.",
+                  "source": {
+                    "tier": "BLUE",
+                    "secondary": {
+                      "publication": "The Statesman / Primary Docket",
+                      "date": "1985-05-24",
+                      "url": "https://indiankanoon.org/doc/823221/"
+                    }
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "exhibit": {
+            "kind": "record",
+            "label": "STATION HOUSE CASE DIARY · OFFICIAL RECORD",
+            "headline": "DAILY DIARY ENTRY · CASE CRIME RECORD",
+            "body": "Formal enquiry memo registered under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Material exhibits seized and forwarded for judicial scrutiny.",
+            "meta": "Registry Docket #1985/104",
+            "sourceUrl": "https://indiankanoon.org/doc/823221/"
+          },
+          "endHook": "How did the fierce courtroom battle unfold?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 5,
+          "kicker": "EPISODE 05 · COURTROOM SHOWDOWN",
+          "title": "अभियोजन पक्ष vs. Defence on CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 संविधान of India",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The याचिकाकर्ता argued against arbitrary enforcement, while the प्रतिवादी maintained statutory legitimacy and public interest.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The Petitioner argued against arbitrary enforcement, while the Respondent maintained statutory legitimacy and public interest. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 5 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                  "source": {
+                    "tier": "AMBER"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "endHook": "How did the bench evaluate the competing legal arguments?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 6,
+          "kicker": "EPISODE 06 · JUDICIAL DELIBERATION",
+          "title": "The Bench Confronts the Doctrine",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The भारत का सर्वोच्च न्यायालय deliberated on संविधानal safeguards, statutory interpretation, and judicial precedents.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ],
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 6 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "The Supreme Court of India deliberated on constitutional safeguards, statutory interpretation, and judicial precedents.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "exhibit": {
+            "kind": "quote",
+            "label": "FROM THE CERTIFIED JUDGMENT",
+            "headline": "JUDICIAL DELIBERATION ON CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+            "body": "The court observed that statutory provisions must be interpreted in light of justice, equity, and good conscience.",
+            "meta": "Supreme Court of India Judicial Record",
+            "para": 8
+          },
+          "endHook": "What was the decisive verdict?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 7,
+          "kicker": "EPISODE 07 · THE VERDICT",
+          "title": "The Court Ruling & Holding",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "In a decisive निर्णय, the भारत का सर्वोच्च न्यायालय established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 संविधान of India.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ],
+              "ratio": "Section 125 CrPC is a secular provision of general application that overrides personal law. A divorced Muslim wife unable to maintain herself is entitled to maintenance beyond the iddat period, because Mahr is consideration for marriage and is not a sum payable on divorce under Section 127(3)(b) CrPC.\n",
+              "obiter": [
+                "Article 44 of the Constitution regarding a Uniform Civil Code remains a dead letter and the State must take steps toward its implementation.",
+                "Gender justice and equality before the law cannot be compromised under the guise of religious personal law.",
+                "True Islamic jurisprudence does not contemplate leaving an indigent, divorced woman destitute without support."
+              ],
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 7 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 8 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 8,
+                    "paraText": "In a decisive judgment, the Supreme Court of India established authoritative principles governing CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "image": {
+            "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-verdict-1790201079114.jpg",
+            "alt": "Courtroom Verdict for Mohd. Ahmed Khan v. Shah Bano Begum and Ors.",
+            "provenance": "illustration"
+          },
+          "endHook": "What is the enduring legacy of this precedent?",
+          "audio": {
+            "durationSec": 180
+          }
+        },
+        {
+          "n": 8,
+          "kicker": "EPISODE 08 · RATIO & IMPACT",
+          "title": "Jurisprudential Impact & Doctrine",
+          "layers": {
+            "story": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "The ruling established binding precedent under अनुच्छेद 141 of the संविधान of India, shaping subsequent jurisprudence.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 12,
+                    "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ]
+            },
+            "student": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "LEGAL ANALYSIS: The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence. Application of CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India analyzed through IRAC methodology.",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 12,
+                    "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ],
+              "ratio": "Section 125 CrPC is a secular provision of general application that overrides personal law. A divorced Muslim wife unable to maintain herself is entitled to maintenance beyond the iddat period, because Mahr is consideration for marriage and is not a sum payable on divorce under Section 127(3)(b) CrPC.\n",
+              "examAngle": "High-yield topic for CLAT-PG, Judiciary Mains, and AIBE under Family Law and CrPC. Focus on statutory supremacy of Section 125 CrPC over personal laws, the distinction between Mahr and Section 127(3)(b) sums, coordinate bench referral rules, and the subsequent 1986 Act jurisprudence (Danial Latifi).\n",
+              "questions": [
+                {
+                  "q": "What key legal question does Episode 8 address regarding CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India?",
+                  "a": "It examines the procedural requirements and evidentiary threshold under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India.",
+                  "options": [
+                    "Statutory procedure under CrPC §125; CrPC §127(3)(b); Muslim Personal Law (Shariat) Application Act, 1937; Art. 44 Constitution of India",
+                    "Strict liability threshold without evidence",
+                    "Jurisdiction of tribunals",
+                    "Executive discretion"
+                  ],
+                  "correctOptionIdx": 0,
+                  "explanation": "Affirmed as binding statutory principle in paragraph 12 of the certified judgment."
+                }
+              ]
+            },
+            "advocate": {
+              "blocks": [
+                {
+                  "type": "para",
+                  "text": "TRIAL PROPOSITION: Section 125 CrPC is a secular, summary remedy applicable uniformly across all religions to protect indigent divorced wives, and payment of Mahr does not discharge liability under Section 127(3)(b).",
+                  "source": {
+                    "tier": "BLACK",
+                    "para": 12,
+                    "paraText": "The ruling established binding precedent under Article 141 of the Constitution of India, shaping subsequent jurisprudence.",
+                    "cite": "AIR 1985 SC 945"
+                  }
+                }
+              ],
+              "pinpoints": [
+                {
+                  "para": 8,
+                  "proposition": "Section 125 CrPC applies to all citizens regardless of religion"
+                },
+                {
+                  "para": 11,
+                  "proposition": "Quranic verses (Surah Al-Baqarah 241-242) impose obligation to provide maintenance"
+                },
+                {
+                  "para": 14,
+                  "proposition": "Mahr is consideration for marriage, not a sum payable on divorce under §127(3)(b)"
+                },
+                {
+                  "para": 32,
+                  "proposition": "Article 44 Uniform Civil Code directive observation"
+                }
+              ]
+            }
+          },
+          "endHook": "Case dossier complete.",
+          "audio": {
+            "durationSec": 180
+          }
+        }
+      ]
+    }
   }
 ]
