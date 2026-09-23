@@ -7,7 +7,7 @@ import haircutCase from '@/content/cases/haircut-case.json';
 import shreyaSinghal from '@/content/cases/shreya-singhal.json';
 import mcMehta from '@/content/cases/m-c-mehta.json';
 import kesavanandaBharati from '@/content/cases/kesavananda-bharati.json';
-import shahBano from '@/content/cases/shah-bano.json';
+import theShahBanoCase from '@/content/cases/the-shah-bano-case.json';
 import vishakaCase from '@/content/cases/vishaka-case.json';
 import manekaGandhi from '@/content/cases/maneka-gandhi.json';
 import navtejJohar from '@/content/cases/navtej-johar.json';
@@ -21,7 +21,7 @@ const ALL_STATIC_CASES: CaseFile[] = [
   shreyaSinghal as unknown as CaseFile,
   mcMehta as unknown as CaseFile,
   kesavanandaBharati as unknown as CaseFile,
-  shahBano as unknown as CaseFile,
+  theShahBanoCase as unknown as CaseFile,
   vishakaCase as unknown as CaseFile,
   manekaGandhi as unknown as CaseFile,
   navtejJohar as unknown as CaseFile,
@@ -176,8 +176,7 @@ export function getCaseBySlug(slug: string): CaseFile | null {
       c.slug === cleanSlug ||
       c.slug.toLowerCase() === decoded ||
       c.slug.toLowerCase() === cleanSlug ||
-      (decoded.includes('shah-bano') && c.slug.includes('shah-bano')) ||
-      ((decoded.includes('rinku') || cleanSlug.includes('rinku')) && c.slug.includes('rinku'))
+      (decoded.startsWith('rinku') && c.slug.includes('rinku'))
   );
 
   if (dynamicCase) {

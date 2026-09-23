@@ -507,8 +507,8 @@ export const CaseStore = {
         const { fs, path } = node;
         const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9_-]/g, '-');
         const caseFilePath = path.join(process.cwd(), 'content', 'cases', `${cleanSlug}.json`);
-        if (fs.existsSync(caseFilePath)) {
-          const raw = fs.readFileSync(caseFilePath, 'utf8');
+        if (fs.existsSync(/*turbopackIgnore: true*/ caseFilePath)) {
+          const raw = fs.readFileSync(/*turbopackIgnore: true*/ caseFilePath, 'utf8');
           const parsed = JSON.parse(raw);
           if (matchSlug(parsed.slug, slug)) {
             const normalized = normalizeCaseData(parsed);
@@ -558,9 +558,9 @@ export const CaseStore = {
       if (node) {
         const { fs, path } = node;
         const casesDir = path.join(process.cwd(), 'content', 'cases');
-        if (!fs.existsSync(casesDir)) fs.mkdirSync(casesDir, { recursive: true });
+        if (!fs.existsSync(/*turbopackIgnore: true*/ casesDir)) fs.mkdirSync(/*turbopackIgnore: true*/ casesDir, { recursive: true });
         const filePath = path.join(casesDir, `${caseToSave.slug}.json`);
-        fs.writeFileSync(filePath, JSON.stringify(caseToSave, null, 2), 'utf-8');
+        fs.writeFileSync(/*turbopackIgnore: true*/ filePath, JSON.stringify(caseToSave, null, 2), 'utf-8');
       }
     } catch (diskErr) {
       console.warn('Could not write disk case file:', diskErr);
@@ -641,9 +641,9 @@ export const CaseStore = {
         if (node) {
           const { fs, path } = node;
           const casesDir = path.join(process.cwd(), 'content', 'cases');
-          if (!fs.existsSync(casesDir)) fs.mkdirSync(casesDir, { recursive: true });
+          if (!fs.existsSync(/*turbopackIgnore: true*/ casesDir)) fs.mkdirSync(/*turbopackIgnore: true*/ casesDir, { recursive: true });
           const filePath = path.join(casesDir, `${updatedCase.slug}.json`);
-          fs.writeFileSync(filePath, JSON.stringify(updatedCase, null, 2), 'utf-8');
+          fs.writeFileSync(/*turbopackIgnore: true*/ filePath, JSON.stringify(updatedCase, null, 2), 'utf-8');
         }
       } catch (diskErr) {
         console.warn('Could not sync update to disk file:', diskErr);
@@ -716,8 +716,8 @@ export const CaseStore = {
             path.join(casesDir, `${cleanSlug}.json`),
           ];
           for (const p of possiblePaths) {
-            if (fs.existsSync(p)) {
-              fs.unlinkSync(p);
+            if (fs.existsSync(/*turbopackIgnore: true*/ p)) {
+              fs.unlinkSync(/*turbopackIgnore: true*/ p);
             }
           }
         }
@@ -770,26 +770,24 @@ export const CaseStore = {
       // 1. Try loading from Supabase Storage JSON (authoritative & works with anon key)
       const storageCases = await loadDynamicCasesFromSupabase();
       if (Array.isArray(storageCases) && storageCases.length > 0) {
-        const normalizedList = storageCases.map((row: any) => normalizeCaseData(row));
         const current = ensureInitialized();
-        const mergedMap = new Map<string, CaseData>();
+        const currentMap = new Map<string, CaseData>();
+        current.forEach((c) => currentMap.set(c.slug, c));
 
-        current.forEach((c) => mergedMap.set(c.slug, c));
-        normalizedList.forEach((incoming) => {
-          const existing = mergedMap.get(incoming.slug);
+        const normalizedList: CaseData[] = storageCases.map((row: any) => {
+          const norm = normalizeCaseData(row);
+          const existing = currentMap.get(norm.slug);
           const maxViews = Math.max(
             typeof existing?.views === 'number' ? existing.views : 0,
-            typeof incoming.views === 'number' ? incoming.views : 0
+            typeof norm.views === 'number' ? norm.views : 0
           );
-          mergedMap.set(incoming.slug, {
-            ...(existing || {}),
-            ...incoming,
+          return {
+            ...norm,
             views: maxViews,
-          });
+          };
         });
 
-        const merged = Array.from(mergedMap.values());
-        persistCases(merged);
+        persistCases(normalizedList);
         lastSupabaseFetchTime = Date.now();
         return true;
       }
@@ -803,26 +801,24 @@ export const CaseStore = {
           .order('updated_at', { ascending: false });
 
         if (!error && Array.isArray(data) && data.length > 0) {
-          const normalizedList = data.map((row: any) => normalizeCaseData(row));
           const current = ensureInitialized();
-          const mergedMap = new Map<string, CaseData>();
+          const currentMap = new Map<string, CaseData>();
+          current.forEach((c) => currentMap.set(c.slug, c));
 
-          current.forEach((c) => mergedMap.set(c.slug, c));
-          normalizedList.forEach((incoming) => {
-            const existing = mergedMap.get(incoming.slug);
+          const normalizedList: CaseData[] = data.map((row: any) => {
+            const norm = normalizeCaseData(row);
+            const existing = currentMap.get(norm.slug);
             const maxViews = Math.max(
               typeof existing?.views === 'number' ? existing.views : 0,
-              typeof incoming.views === 'number' ? incoming.views : 0
+              typeof norm.views === 'number' ? norm.views : 0
             );
-            mergedMap.set(incoming.slug, {
-              ...(existing || {}),
-              ...incoming,
+            return {
+              ...norm,
               views: maxViews,
-            });
+            };
           });
 
-          const merged = Array.from(mergedMap.values());
-          persistCases(merged);
+          persistCases(normalizedList);
           lastSupabaseFetchTime = Date.now();
           return true;
         }

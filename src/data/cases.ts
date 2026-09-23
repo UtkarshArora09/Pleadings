@@ -2139,7 +2139,7 @@ export const CASES_DATA: CaseData[] = [
     "updatedAt": "2026-09-21T12:37:57.044Z"
   },
   {
-    "slug": "shah-bano",
+    "slug": "the-shah-bano-case",
     "title": {
       "en": "The Shah Bano Case",
       "hi": "शाह बानो मामला"
@@ -2164,9 +2164,9 @@ export const CASES_DATA: CaseData[] = [
     "citation": "Mohd. Ahmed Khan v. Shah Bano Begum, (1985) 2 SCC 556, AIR 1985 SC 945",
     "judgmentUrl": "https://indiankanoon.org/doc/823221/",
     "watermark": "§",
-    "bannerImage": "/images/cases/shah-bano.jpg",
+    "bannerImage": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-poster-1790201058312.jpg",
     "poster": {
-      "src": "/images/cases/shah-bano.jpg",
+      "src": "https://voiwlmpqjugullytuixe.supabase.co/storage/v1/object/public/case-images/cases/the-shah-bano-case-poster-1790201058312.jpg",
       "alt": "The Shah Bano Case cover poster",
       "provenance": "illustration"
     },

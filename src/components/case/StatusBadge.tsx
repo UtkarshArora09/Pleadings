@@ -62,7 +62,12 @@ export function StatusBadge({
   className = ''
 }: StatusBadgeProps) {
   const [showModal, setShowModal] = useState(false);
-  const cfg = statusConfig[status.code] || statusConfig.GOOD_LAW;
+  const statusCode = (typeof status === 'object' && status?.code) ? status.code : 'GOOD_LAW';
+  const cfg = statusConfig[statusCode] || statusConfig.GOOD_LAW;
+  const explainText = (typeof status === 'object' && status?.explain)
+    ? status.explain
+    : 'This landmark ruling remains authoritative and governing law.';
+  const chainList = (typeof status === 'object' && Array.isArray(status?.chain)) ? status.chain : [];
 
   const sizeClasses = {
     sm: 'text-[9px] px-1.5 py-0.5 gap-1',
@@ -97,7 +102,7 @@ export function StatusBadge({
             : 'select-none'
         } ${className}`}
         title={interactive ? 'Click to see how this precedent changed over time' : cfg.label}
-        data-status-code={status.code}
+        data-status-code={statusCode}
       >
         <span className={`w-1.5 h-1.5 rounded-full ${cfg.dotColor} animate-pulse`} />
         <span>{cfg.label}</span>
@@ -145,18 +150,18 @@ export function StatusBadge({
                   How This Law Stands Today
                 </h3>
                 <p className="text-xs sm:text-sm text-[#E0DCD3] leading-relaxed">
-                  {status.explain}
+                  {explainText}
                 </p>
               </div>
 
               {/* Chain of Events Timeline */}
-              {status.chain && status.chain.length > 0 && (
+              {chainList.length > 0 && (
                 <div className="pt-3 border-t border-white/10">
                   <h4 className="text-[11px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold mb-3">
                     Precedent & Statutory Chain of Events
                   </h4>
                   <div className="relative pl-5 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#D4AF37]/30">
-                    {status.chain.map((item, idx) => (
+                    {chainList.map((item, idx) => (
                       <div key={idx} className="relative group">
                         <div className="absolute -left-[17px] top-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] border-2 border-[#12141C]" />
                         <div className="font-mono text-xs font-bold text-[#D4AF37]">

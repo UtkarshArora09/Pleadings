@@ -1,19 +1,50 @@
 'use client';
 
-import React, { useState, useMemo, Suspense } from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { CaseCard } from '@/components/CaseCard';
-import { getAllCases } from '@/lib/cases';
+import { getPublishedCases } from '@/lib/cases';
 import { useApp } from '@/context/AppContext';
+import { CaseFile } from '@/types/case';
 
 function BrowseContent() {
   const { bookmarkedSlugs } = useApp();
   const searchParams = useSearchParams();
   const initialTab = searchParams.get('tab') === 'saved' ? 'SAVED' : 'ALL';
 
-  const allCases = useMemo(() => getAllCases(), []);
+  const [allCases, setAllCases] = useState<any[]>(() => {
+    try {
+      return getPublishedCases();
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadFreshCases() {
+      try {
+        const res = await fetch(`/api/cases?_t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && Array.isArray(data.cases) && isMounted) {
+            setAllCases(data.cases);
+          }
+        }
+      } catch (err) {
+        console.warn('Failed to load fresh cases on browse:', err);
+      }
+    }
+    loadFreshCases();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Filter States
   const [selectedTab, setSelectedTab] = useState<string>(initialTab);
@@ -27,52 +58,69 @@ function BrowseContent() {
   // Extract filter options dynamically from data
   const courts = useMemo(() => {
     const set = new Set<string>();
-    allCases.forEach((c) => set.add(c.court));
+    allCases.forEach((c) => {
+      const courtName = typeof c.court === 'string' ? c.court : (c.court?.en || '');
+      if (courtName) set.add(courtName);
+    });
     return Array.from(set);
   }, [allCases]);
 
   const doctrines = useMemo(() => {
     const set = new Set<string>();
-    allCases.forEach((c) => c.doctrines.forEach((d) => set.add(d)));
-    return Array.from(set);
+    allCases.forEach((c) => {
+      const docs = c.doctrines || (c.categoryTag ? [c.categoryTag] : (c.tag?.en ? [c.tag.en] : []));
+      docs.forEach((d: string) => {
+        if (d && typeof d === 'string') set.add(d.trim());
+      });
+    });
+    return Array.from(set).filter(Boolean);
   }, [allCases]);
 
   // Filtering Logic
   const filteredCases = useMemo(() => {
     return allCases.filter((caseItem) => {
+      const itemDocs = caseItem.doctrines || (caseItem.categoryTag ? [caseItem.categoryTag] : (caseItem.tag?.en ? [caseItem.tag.en] : []));
+      const titleStr = typeof caseItem.title === 'string' ? caseItem.title : (caseItem.title?.en || caseItem.slug);
+      const hookStr = typeof caseItem.hook === 'string' ? caseItem.hook : (caseItem.hook?.en || caseItem.blurb?.en || caseItem.featuredHeroHook?.en || '');
+      const courtStr = typeof caseItem.court === 'string' ? caseItem.court : (caseItem.court?.en || 'Supreme Court of India');
+      const primaryCitation = caseItem.citations?.primary || caseItem.citation || '';
+      const statusCode = caseItem.status?.code || (caseItem.status === 'PUBLISHED' ? 'GOOD_LAW' : (typeof caseItem.status === 'string' ? caseItem.status : 'GOOD_LAW'));
+
       // Tab filter
       if (selectedTab === 'SAVED') {
         if (!bookmarkedSlugs.includes(caseItem.slug)) return false;
       }
 
       // Court filter
-      if (selectedCourt !== 'ALL' && caseItem.court !== selectedCourt) {
+      if (selectedCourt !== 'ALL' && courtStr !== selectedCourt) {
         return false;
       }
 
       // Status filter
-      if (selectedStatus !== 'ALL' && caseItem.status.code !== selectedStatus) {
+      if (selectedStatus !== 'ALL' && statusCode !== selectedStatus) {
         return false;
       }
 
       // Decade filter
       if (selectedDecade !== 'ALL') {
         const decadeNum = parseInt(selectedDecade, 10);
-        if (caseItem.year < decadeNum || caseItem.year >= decadeNum + 10) {
+        const yr = caseItem.year || 2020;
+        if (yr < decadeNum || yr >= decadeNum + 10) {
           return false;
         }
       }
 
       // Doctrine filter
-      if (selectedDoctrine !== 'ALL' && !caseItem.doctrines.includes(selectedDoctrine)) {
+      if (selectedDoctrine !== 'ALL' && !itemDocs.some((d: string) => d.toLowerCase() === selectedDoctrine.toLowerCase())) {
         return false;
       }
 
       // Reading time filter
-      if (selectedReadTime === 'SHORT' && (caseItem.readingTime?.story || 5) > 5) {
+      const readTimeNum = caseItem.readingTime?.story || (typeof caseItem.readTime === 'number' ? caseItem.readTime : 5);
+      if (selectedReadTime === 'SHORT' && readTimeNum > 5) {
         return false;
       }
-      if (selectedReadTime === 'LONG' && (caseItem.readingTime?.story || 5) <= 5) {
+      if (selectedReadTime === 'LONG' && readTimeNum <= 5) {
         return false;
       }
 
@@ -80,14 +128,14 @@ function BrowseContent() {
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase().trim();
         const matchTitle =
-          caseItem.title.toLowerCase().includes(q) ||
-          (caseItem.hi?.title && caseItem.hi.title.toLowerCase().includes(q));
+          titleStr.toLowerCase().includes(q) ||
+          (caseItem.hi?.title && String(caseItem.hi.title).toLowerCase().includes(q));
         const matchHook =
-          caseItem.hook.toLowerCase().includes(q) ||
-          (caseItem.hi?.hook && caseItem.hi.hook.toLowerCase().includes(q));
-        const matchCourt = caseItem.court.toLowerCase().includes(q);
-        const matchCitation = caseItem.citations.primary.toLowerCase().includes(q);
-        const matchDoctrines = caseItem.doctrines.some((d) => d.toLowerCase().includes(q));
+          hookStr.toLowerCase().includes(q) ||
+          (caseItem.hi?.hook && String(caseItem.hi.hook).toLowerCase().includes(q));
+        const matchCourt = courtStr.toLowerCase().includes(q);
+        const matchCitation = primaryCitation.toLowerCase().includes(q);
+        const matchDoctrines = itemDocs.some((d: string) => d.toLowerCase().includes(q));
 
         return matchTitle || matchHook || matchCourt || matchCitation || matchDoctrines;
       }

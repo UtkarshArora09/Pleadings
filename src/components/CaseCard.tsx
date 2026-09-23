@@ -41,10 +41,11 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
   const activeContent = language === 'hi' && caseData.hi ? caseData.hi : caseData;
   const rawTitle = activeContent.title;
   const displayTitle = typeof rawTitle === 'string' ? rawTitle : ((rawTitle as any)?.[language] || (rawTitle as any)?.en || caseData.slug);
-  const rawHook = activeContent.hook;
+  const rawHook = activeContent.hook || (activeContent as any).blurb || (activeContent as any).featuredHeroHook;
   const displayHook = typeof rawHook === 'string' ? rawHook : ((rawHook as any)?.[language] || (rawHook as any)?.en || '');
-  const doctrine = (activeContent.doctrines && activeContent.doctrines[0]) || 'Constitutional Law';
-  const readTime = `${caseData.readingTime?.story || 5} min`;
+  const doctrine = (activeContent.doctrines && activeContent.doctrines[0]) || (activeContent as any).categoryTag || (activeContent as any).tag?.en || 'Constitutional Law';
+  const rawReadTime = caseData.readingTime?.story ?? (caseData as any).readTime;
+  const readTime = typeof rawReadTime === 'number' ? `${rawReadTime} min` : typeof rawReadTime === 'string' ? rawReadTime : ((rawReadTime as any)?.[language] || (rawReadTime as any)?.en || '5 min');
   const bookmarked = isBookmarked(caseData.slug);
 
   return (

@@ -5,7 +5,7 @@ import { Top10Carousel } from '@/components/Top10Carousel';
 import { PosterCard } from '@/components/PosterCard';
 import { CourtroomExperienceShowcase } from '@/components/CourtroomExperienceShowcase';
 import { HomeSectionNav } from '@/components/HomeSectionNav';
-import { getAllCases, getFeaturedCases, getTop10Cases } from '@/lib/cases';
+import { getAllCases, getPublishedCases, getFeaturedCases, getTop10Cases } from '@/lib/cases';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -21,7 +21,7 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  const allCases = getAllCases();
+  const allCases = getPublishedCases();
   const top10Cases = getTop10Cases();
   const featuredCase = getFeaturedCases()[0] || allCases[0];
 
@@ -67,7 +67,7 @@ export default function HomePage() {
 
           {/* Grid of Poster Cards */}
           <div className="flex items-center gap-4 overflow-x-auto pb-4 pt-1 scrollbar-none">
-            {allCases.map((caseItem) => (
+            {allCases.map((caseItem: any) => (
               <PosterCard key={caseItem.slug} caseData={caseItem} />
             ))}
           </div>
