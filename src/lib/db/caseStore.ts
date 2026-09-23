@@ -402,12 +402,30 @@ export function normalizeCaseData(raw: any): CaseData {
 
 function matchSlug(caseSlug?: string, querySlug?: string): boolean {
   if (!caseSlug || !querySlug) return false;
-  const a = caseSlug.toLowerCase().trim();
-  const b = querySlug.toLowerCase().trim();
+  const normalize = (s: string) =>
+    decodeURIComponent(s)
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-');
+
+  const a = normalize(caseSlug);
+  const b = normalize(querySlug);
   if (a === b) return true;
+
+  // Check prefix/suffix variations (e.g. "the-shah-bano-case" vs "shah-bano")
+  const stripCommon = (s: string) => s.replace(/^the-/, '').replace(/-case$/, '');
+  if (stripCommon(a) === stripCommon(b) && stripCommon(a).length > 2) return true;
+
   if (
     (a === 'rinku-rukshar-habeas-corpus-custody-case' || a === 'rinku-rukshar-habeas-corpus-case') &&
     (b === 'rinku-rukshar-habeas-corpus-custody-case' || b === 'rinku-rukshar-habeas-corpus-case')
+  ) {
+    return true;
+  }
+  if (
+    (a.includes('shah-bano') || a.includes('mohd-ahmed-khan')) &&
+    (b.includes('shah-bano') || b.includes('mohd-ahmed-khan'))
   ) {
     return true;
   }
@@ -489,7 +507,6 @@ export const CaseStore = {
     const staticCase = CASES_DATA.find((c) => matchSlug(c.slug, slug));
     if (staticCase) {
       const normalized = normalizeCaseData(staticCase);
-      this.create(normalized);
       return normalized;
     }
 
@@ -498,21 +515,14 @@ export const CaseStore = {
       const node = getNodeModules();
       if (node) {
         const { fs, path } = node;
-        const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-        const possibleFilenames = [
-          `${cleanSlug}.json`,
-          'rinku-rukshar-habeas-corpus-case.json',
-        ];
-        for (const fn of possibleFilenames) {
-          const caseFilePath = path.join(process.cwd(), 'content', 'cases', fn);
-          if (fs.existsSync(caseFilePath)) {
-            const raw = fs.readFileSync(caseFilePath, 'utf8');
-            const parsed = JSON.parse(raw);
-            if (matchSlug(parsed.slug, slug) || fn.includes('rinku')) {
-              const normalized = normalizeCaseData(parsed);
-              this.create(normalized);
-              return normalized;
-            }
+        const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9_-]/g, '-');
+        const caseFilePath = path.join(process.cwd(), 'content', 'cases', `${cleanSlug}.json`);
+        if (fs.existsSync(caseFilePath)) {
+          const raw = fs.readFileSync(caseFilePath, 'utf8');
+          const parsed = JSON.parse(raw);
+          if (matchSlug(parsed.slug, slug)) {
+            const normalized = normalizeCaseData(parsed);
+            return normalized;
           }
         }
       }

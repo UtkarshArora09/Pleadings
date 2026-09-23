@@ -726,7 +726,7 @@ async function compressImageForUpload(
 
           {/* Live Preview Button */}
           <Link
-            href={`/case/${caseData.slug}`}
+            href={`/case/${encodeURIComponent((caseData.slug || slug).toLowerCase().trim().replace(/[\s_]+/g, '-'))}`}
             target="_blank"
             className="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xs text-xs font-mono uppercase tracking-wider transition-all border border-white/10 flex items-center gap-1"
           >

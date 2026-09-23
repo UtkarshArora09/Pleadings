@@ -42,184 +42,251 @@
         "id": "panel-1",
         "type": "HOOK",
         "eyebrow": {
-          "en": "EPISODE 01 · THE CATALYST",
-          "hi": "EPISODE 01 · THE CATALYST"
+          "en": "EPISODE 01 · THE PREMISE",
+          "hi": "एपिसोड 01 · भूमिका"
         },
         "headline": {
-          "en": "A Mother Dispossessed: The Midnight Eviction",
-          "hi": "A Mother Dispossessed: The Midnight Eviction"
+          "en": "Rinku Rukshar v. State of U.P. and 4 Others",
+          "hi": "Rinku Rukshar v. State of U.P. and 4 Others"
         },
         "body": {
-          "en": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son, Asif, aged under six years.\n\nMarried in 2014 under Muslim rites, she alleged repeated domestic cruelty and claimed she was assaulted and forcefully thrown out of her matrimonial home while her husband, Arshad, fled with their tender-aged child.",
-          "hi": "In August 2020, petitioner Rinku Rukshar approached the Allahabad High Court via a writ of habeas corpus seeking the production and restoration of her minor son, Asif, aged under six years.\n\nMarried in 2014 under Muslim rites, she alleged repeated domestic cruelty and claimed she was assaulted and forcefully thrown out of her matrimonial home while her husband, Arshad, fled with their tender-aged child."
+          "en": "The landmark origin of Rinku Rukshar v. State of U.P. and 4 Others.",
+          "hi": "Rinku Rukshar v. State of U.P. and 4 Others का ऐतिहासिक पृष्ठभूमि।"
         },
         "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg"
+        "photoExhibitCaption": {
+          "en": "Archival record photograph for Rinku Rukshar v. State of U.P. and 4 Others.",
+          "hi": "Rinku Rukshar v. State of U.P. and 4 Others का पुरालेखीय चित्र।"
+        }
       },
       {
         "id": "panel-2",
         "type": "PEOPLE",
         "eyebrow": {
           "en": "EPISODE 02 · DRAMATIS PERSONAE",
-          "hi": "EPISODE 02 · DRAMATIS PERSONAE"
+          "hi": "एपिसोड 02 · मुख्य पात्र"
         },
         "headline": {
-          "en": "The Father's Objection: The Natural Guardian Defense",
-          "hi": "The Father's Objection: The Natural Guardian Defense"
+          "en": "The Parties in Conflict.",
+          "hi": "विवाद के मुख्य पक्षकार।"
         },
         "body": {
-          "en": "The respondent husband Arshad raised a formidable preliminary objection: under Muslim Personal Law, the father is the natural legal guardian, and no writ of habeas corpus can lie against a natural parent.\n\nHe contended that the mother must be relegated to standard civil litigation before the Family Court under the Guardians and Wards Act, 1890.",
-          "hi": "The respondent husband Arshad raised a formidable preliminary objection: under Muslim Personal Law, the father is the natural legal guardian, and no writ of habeas corpus can lie against a natural parent.\n\nHe contended that the mother must be relegated to standard civil litigation before the Family Court under the Guardians and Wards Act, 1890."
+          "en": "Meet the individuals and jurists behind this historic conflict.",
+          "hi": "जानिए इस ऐतिहासिक संघर्ष के मुख्य किरदारों और न्यायविदों को।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-exhibit.jpg",
-        "image": "/images/cases/rinku-rukshar-exhibit.jpg",
-        "evidence": {
-          "masthead": "HIGH COURT REGISTRY DOCKET",
-          "date": "Allahabad High Court · Certified Filing Record",
-          "headline": {
-            "en": "HABEAS CORPUS WRIT PETITION NO. 495 OF 2020",
-            "hi": "HABEAS CORPUS WRIT PETITION NO. 495 OF 2020"
-          },
-          "snippet": {
-            "en": "Respondent No. 4 files preliminary objections disputing writ maintainability. Petitioner establishes minor Asif was born in matrimonial wedlock and forcibly removed on 04.08.2020.",
-            "hi": "Respondent No. 4 files preliminary objections disputing writ maintainability. Petitioner establishes minor Asif was born in matrimonial wedlock and forcibly removed on 04.08.2020."
-          },
-          "imageSrc": "/images/cases/rinku-rukshar-exhibit.jpg"
+        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
+        "photoExhibitCaption": {
+          "en": "Historical exhibit and records for Rinku Rukshar v. State of U.P. and 4 Others.",
+          "hi": "Rinku Rukshar v. State of U.P. and 4 Others के ऐतिहासिक साक्ष्य।"
         }
       },
       {
         "id": "panel-3",
         "type": "INCIDENT",
         "eyebrow": {
-          "en": "EPISODE 03 · THE LEGAL CONFLICT",
-          "hi": "EPISODE 03 · THE LEGAL CONFLICT"
+          "en": "EPISODE 03 · THE INCIDENT",
+          "hi": "एपिसोड 03 · विवाद की घटना"
         },
         "headline": {
-          "en": "Hizanat vs. Guardianship: The Statutory Interlock",
-          "hi": "Hizanat vs. Guardianship: The Statutory Interlock"
+          "en": "The Catalyst in Rinku Rukshar v. State of U.P. and 4 Others.",
+          "hi": "Rinku Rukshar v. State of U.P. and 4 Others की आरंभिक घटना।"
         },
         "body": {
-          "en": "The bench examined Section 352 of Mulla's Principles of Mahomedan Law, which unequivocally establishes that a mother is entitled to the custody (hizanat) of her male child until he has completed the age of seven years.\n\nDepriving the mother of custody of a toddler without lawful judicial sanction rendered the father's detention unlawful in the eyes of equity.",
-          "hi": "The bench examined Section 352 of Mulla's Principles of Mahomedan Law, which unequivocally establishes that a mother is entitled to the custody (hizanat) of her male child until he has completed the age of seven years.\n\nDepriving the mother of custody of a toddler without lawful judicial sanction rendered the father's detention unlawful in the eyes of equity."
-        },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg"
+          "en": "The core dispute that triggered formal legal proceedings.",
+          "hi": "वह मुख्य विवाद जिसने कानूनी प्रक्रिया को आरंभ किया।"
+        }
       },
       {
         "id": "panel-4",
         "type": "TIMELINE",
         "eyebrow": {
-          "en": "EPISODE 04 · PRIMARY DOCKETS",
-          "hi": "EPISODE 04 · PRIMARY DOCKETS"
+          "en": "EPISODE 04 · CHRONOLOGY & DOCKETS",
+          "hi": "एपिसोड 04 · घटनाक्रम व अभिलेख"
         },
         "headline": {
-          "en": "Investigative Findings & Production Order",
-          "hi": "Investigative Findings & Production Order"
+          "en": "Chronological Journey of Rinku Rukshar v. State of U.P. and 4 Others.",
+          "hi": "Rinku Rukshar v. State of U.P. and 4 Others का सिलसिलेवार घटनाक्रम।"
         },
         "body": {
-          "en": "The Allahabad High Court directed the State authorities to produce the minor child before the bench.\n\nUpon visual examination and inquiry, the Court verified the tender age of minor Asif and recorded that the child had been abruptly removed from maternal care amidst acute matrimonial friction.",
-          "hi": "The Allahabad High Court directed the State authorities to produce the minor child before the bench.\n\nUpon visual examination and inquiry, the Court verified the tender age of minor Asif and recorded that the child had been abruptly removed from maternal care amidst acute matrimonial friction."
+          "en": "• 2014: Marriage solemnized under Muslim personal law.\n• 2020: Allahabad High Court delivers landmark child custody habeas corpus judgment.",
+          "hi": "• 2014: Marriage solemnized under Muslim personal law.\n• 2020: Allahabad High Court delivers landmark child custody habeas corpus judgment."
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg",
         "evidence": {
-          "masthead": "POLICE REPORT & INQUIRY RECORD",
-          "date": "Allahabad High Court Case File 2020",
+          "archiveType": "police_record",
+          "masthead": "HIGH COURT OF JUDICATURE AT ALLAHABAD DOCKET REGISTRY",
+          "date": "PRIMARY DOCKET · 2020",
           "headline": {
-            "en": "REPORT ON CHILD PRODUCTION BEFORE BENCH",
-            "hi": "REPORT ON CHILD PRODUCTION BEFORE BENCH"
+            "en": "OFFICIAL PROCEEDING RECORD IN RINKU RUKSHAR V. STATE OF U.P. AND 4 OTHERS",
+            "hi": "RINKU RUKSHAR V. STATE OF U.P. AND 4 OTHERS का आधिकारिक न्यायिक रिकॉर्ड"
           },
           "snippet": {
-            "en": "Minor child Asif produced pursuant to judicial summons. State report confirms separation of mother following matrimonial estrangement.",
-            "hi": "Minor child Asif produced pursuant to judicial summons. State report confirms separation of mother following matrimonial estrangement."
+            "en": "Official court case diary and procedural filings recorded in High Court of Judicature at Allahabad under Constitutional.",
+            "hi": "High Court of Judicature at Allahabad में Constitutional के तहत दर्ज आधिकारिक वाद सूची।"
           },
-          "imageSrc": "/images/cases/rinku-rukshar-poster.jpg"
+          "highlightedPhrase": {
+            "en": "Recorded in High Court of Judicature at Allahabad under Constitutional",
+            "hi": "High Court of Judicature at Allahabad में Constitutional के तहत दर्ज"
+          },
+          "exhibitNumber": "DOCKET #2020/01",
+          "caption": {
+            "en": "Certified procedural dockets and registry chronology.",
+            "hi": "प्रमाणित प्रक्रियात्मक रिकॉर्ड और वाद सूची।"
+          }
         }
       },
       {
         "id": "panel-5",
         "type": "EVIDENCE",
         "eyebrow": {
-          "en": "EPISODE 05 · COURTROOM SHOWDOWN",
-          "hi": "EPISODE 05 · COURTROOM SHOWDOWN"
+          "en": "EPISODE 05 · THE EVIDENCE & RECORD",
+          "hi": "एपिसोड 05 · मुख्य साक्ष्य व साक्ष्य"
         },
         "headline": {
-          "en": "Parens Patriae: The Battle Over Welfare vs. Rights",
-          "hi": "Parens Patriae: The Battle Over Welfare vs. Rights"
+          "en": "Material Exhibits on Judicial Record.",
+          "hi": "न्यायिक रिकॉर्ड पर मौजूद साक्ष्य।"
         },
         "body": {
-          "en": "In oral arguments, counsel for the father cited Supreme Court precedents holding that custody with a father is not per se illegal.\n\nCounsel for the mother countered with leading Apex Court judgments (Gohar Begum, Tejaswini Gaud), asserting that child welfare is the paramount consideration and supersedes dry technical statutory claims.",
-          "hi": "In oral arguments, counsel for the father cited Supreme Court precedents holding that custody with a father is not per se illegal.\n\nCounsel for the mother countered with leading Apex Court judgments (Gohar Begum, Tejaswini Gaud), asserting that child welfare is the paramount consideration and supersedes dry technical statutory claims."
+          "en": "The primary documents, statutory provisions, and witness testimonies placed before High Court of Judicature at Allahabad.",
+          "hi": "High Court of Judicature at Allahabad के समक्ष प्रस्तुत प्राथमिक दस्तावेज, वैधानिक प्रावधान और गवाहों के बयान।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg"
+        "evidence": {
+          "archiveType": "court_decree",
+          "masthead": "OFFICIAL JUDICIAL EXHIBIT · HIGH COURT OF JUDICATURE AT ALLAHABAD",
+          "date": "EXHIBIT RECORD · 2020",
+          "headline": {
+            "en": "MATERIAL EXHIBITS IN RINKU RUKSHAR V. STATE OF U.P. AND 4 OTHERS",
+            "hi": "RINKU RUKSHAR V. STATE OF U.P. AND 4 OTHERS के मुख्य साक्ष्य"
+          },
+          "snippet": {
+            "en": "Certified documentary exhibits examining the scope and applicability of Constitutional.",
+            "hi": "Constitutional के दायरे और प्रयोज्यता की जांच करने वाले प्रमाणित दस्तावेज।"
+          },
+          "highlightedPhrase": {
+            "en": "scope and applicability of Constitutional",
+            "hi": "Constitutional का दायरा"
+          },
+          "exhibitNumber": "EXHIBIT E-2020",
+          "caption": {
+            "en": "Archival evidentiary documentation for Rinku Rukshar v. State of U.P. and 4 Others.",
+            "hi": "Rinku Rukshar v. State of U.P. and 4 Others का पुरालेखीय साक्ष्य।"
+          }
+        }
       },
       {
         "id": "panel-6",
         "type": "ARGUMENTS",
         "eyebrow": {
-          "en": "EPISODE 06 · JUDICIAL DELIBERATION",
-          "hi": "EPISODE 06 · JUDICIAL DELIBERATION"
+          "en": "EPISODE 06 · COURTROOM SHOWDOWN",
+          "hi": "एपिसोड 06 · अदालत में बहस"
         },
         "headline": {
-          "en": "The Bench Confronts the Doctrine",
-          "hi": "The Bench Confronts the Doctrine"
+          "en": "Prosecution vs. Defence on Constitutional",
+          "hi": "Constitutional पर पक्ष और विपक्ष की दलीलें"
         },
         "body": {
-          "en": "The Allahabad High Court analyzed the synthesis between statutory guardianship laws and constitutional equity.\n\nThe Court observed that while the father is the legal guardian, his physical detention of a child under seven years against the mother's hizanat is unlawful without Family Court approval.",
-          "hi": "The Allahabad High Court analyzed the synthesis between statutory guardianship laws and constitutional equity.\n\nThe Court observed that while the father is the legal guardian, his physical detention of a child under seven years against the mother's hizanat is unlawful without Family Court approval."
+          "en": "The competing legal arguments debated before High Court of Judicature at Allahabad.",
+          "hi": "High Court of Judicature at Allahabad के समक्ष प्रस्तुत किए गए प्रतिस्पर्धी कानूनी तर्क।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg",
-        "evidence": {
-          "masthead": "FROM THE CERTIFIED JUDGMENT",
-          "date": "Allahabad High Court · Para 8",
-          "headline": {
-            "en": "JUDICIAL HOLDING ON HABEAS CORPUS & CHILD WELFARE",
-            "hi": "JUDICIAL HOLDING ON HABEAS CORPUS & CHILD WELFARE"
+        "judgeDecision": {
+          "question": {
+            "en": "Should a writ of habeas corpus lie against a biological father for custody of an infant child?",
+            "hi": "Should a writ of habeas corpus lie against a biological father for custody of an infant child?"
           },
-          "snippet": {
-            "en": "The Court observed: 'In a petition for habeas corpus, the primary duty of the Court is to determine in whose custody the best interest and welfare of the child will be safeguarded.'",
-            "hi": "The Court observed: 'In a petition for habeas corpus, the primary duty of the Court is to determine in whose custody the best interest and welfare of the child will be safeguarded.'"
+          "subtext": {
+            "en": "Consider whether paternal guardianship under personal law bars extraordinary writ jurisdiction when maternal custody is guaranteed by law.",
+            "hi": "Consider whether paternal guardianship under personal law bars extraordinary writ jurisdiction when maternal custody is guaranteed by law."
           },
-          "imageSrc": "/images/cases/rinku-rukshar-poster.jpg"
+          "options": [
+            {
+              "id": "opt-1",
+              "title": {
+                "en": "Allow the writ and restore custody to the mother",
+                "hi": "Allow the writ and restore custody to the mother"
+              },
+              "reason": {
+                "en": "Child welfare is paramount and maternal custody (hizanat) protects the infant.",
+                "hi": "Child welfare is paramount and maternal custody (hizanat) protects the infant."
+              },
+              "simulatedVotesPercent": 55,
+              "isActualVerdict": true
+            },
+            {
+              "id": "opt-2",
+              "title": {
+                "en": "Dismiss the writ and direct parties to Family Court",
+                "hi": "Dismiss the writ and direct parties to Family Court"
+              },
+              "reason": {
+                "en": "The father is a natural legal guardian and custody dispute requires regular trial.",
+                "hi": "The father is a natural legal guardian and custody dispute requires regular trial."
+              },
+              "simulatedVotesPercent": 45,
+              "isActualVerdict": false
+            }
+          ],
+          "judicialRationale": {
+            "en": "The High Court of Judicature at Allahabad balanced individual rights and statutory objectives under Constitutional.",
+            "hi": "High Court of Judicature at Allahabad ने Constitutional के तहत व्यक्तिगत अधिकारों और वैधानिक उद्देश्यों में संतुलन स्थापित किया।"
+          }
         }
       },
       {
         "id": "panel-7",
         "type": "VERDICT",
         "eyebrow": {
-          "en": "EPISODE 07 · THE VERDICT",
-          "hi": "EPISODE 07 · THE VERDICT"
+          "en": "EPISODE 07 · THE COURT RULING",
+          "hi": "एपिसोड 07 · अदालत का फैसला"
         },
         "headline": {
-          "en": "Restoration of Custody & Judicial Mandate",
-          "hi": "Restoration of Custody & Judicial Mandate"
+          "en": "The High Court of Judicature at Allahabad Verdict",
+          "hi": "High Court of Judicature at Allahabad का ऐतिहासिक निर्णय"
         },
         "body": {
-          "en": "The Allahabad High Court allowed the writ petition, directing immediate custody of minor Asif to be handed over to his mother, Rinku Rukshar.\n\nThe Court granted liberty to the father to initiate proper proceedings before the competent Family Court under the Guardians and Wards Act if he wished to establish permanent guardianship grounds.",
-          "hi": "The Allahabad High Court allowed the writ petition, directing immediate custody of minor Asif to be handed over to his mother, Rinku Rukshar.\n\nThe Court granted liberty to the father to initiate proper proceedings before the competent Family Court under the Guardians and Wards Act if he wished to establish permanent guardianship grounds."
+          "en": "The decisive judgment delivered by High Court of Judicature at Allahabad.",
+          "hi": "High Court of Judicature at Allahabad द्वारा दिया गया अंतिम निर्णय।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-verdict.jpg",
-        "image": "/images/cases/rinku-rukshar-verdict.jpg"
+        "stamp": {
+          "en": "JUDGMENT DELIVERED",
+          "hi": "निर्णय घोषित"
+        }
       },
       {
         "id": "panel-8",
         "type": "RATIO",
         "eyebrow": {
-          "en": "EPISODE 08 · RATIO & IMPACT",
-          "hi": "EPISODE 08 · RATIO & IMPACT"
+          "en": "EPISODE 08 · LEGAL RATIO & IMPACT",
+          "hi": "एपिसोड 08 · कानूनी सिद्धांत और प्रभाव"
         },
         "headline": {
-          "en": "Jurisprudential Doctrine: Child Welfare Prevails",
-          "hi": "Jurisprudential Doctrine: Child Welfare Prevails"
+          "en": "BINDING PRECEDENT & RATIO DECIDENDI",
+          "hi": "बाध्यकारी नजीर व निर्णय-आधार"
         },
         "body": {
-          "en": "The ruling reinforced a critical doctrine in Indian matrimonial and constitutional law: personal law rights of biological parents are always subordinate to the paramount welfare of the infant child.\n\nIt reaffirmed that constitutional courts will not permit procedural technicalities to deny mothers the care and custody of young infants.",
-          "hi": "The ruling reinforced a critical doctrine in Indian matrimonial and constitutional law: personal law rights of biological parents are always subordinate to the paramount welfare of the infant child.\n\nIt reaffirmed that constitutional courts will not permit procedural technicalities to deny mothers the care and custody of young infants."
+          "en": "The High Court of Judicature at Allahabad established binding legal principles under Constitutional, governing future interpretations.",
+          "hi": "High Court of Judicature at Allahabad ने Constitutional के तहत भविष्य के लिए बाध्यकारी कानूनी सिद्धांत स्थापित किए।"
         },
-        "photoExhibitSrc": "/images/cases/rinku-rukshar-poster.jpg",
-        "image": "/images/cases/rinku-rukshar-poster.jpg"
+        "evidence": {
+          "archiveType": "verdict_decree",
+          "masthead": "ALL INDIA REPORTER · HIGH COURT OF JUDICATURE AT ALLAHABAD",
+          "date": "2020 JUDICIAL RECORD",
+          "headline": {
+            "en": "CERTIFIED RATIO IN RINKU RUKSHAR V. STATE OF U.P. AND 4 OTHERS",
+            "hi": "RINKU RUKSHAR V. STATE OF U.P. AND 4 OTHERS का प्रमाणित निर्णय-आधार"
+          },
+          "snippet": {
+            "en": "HELD: Binding interpretation of Constitutional under Article 141 of the Constitution of India.",
+            "hi": "निर्णय: भारतीय संविधान के अनुच्छेद 141 के तहत Constitutional का बाध्यकारी अर्थ।"
+          },
+          "highlightedPhrase": {
+            "en": "Binding interpretation of Constitutional",
+            "hi": "Constitutional का बाध्यकारी अर्थ"
+          },
+          "exhibitNumber": "RATIO · Constitutional",
+          "caption": {
+            "en": "Certified High Court of Judicature at Allahabad ratio decree.",
+            "hi": "High Court of Judicature at Allahabad का प्रमाणित निर्णय-आधार।"
+          }
+        }
       }
     ],
     "brief": {
@@ -265,7 +332,7 @@
     },
     "status": "PUBLISHED",
     "createdAt": "2024-03-10T00:00:00Z",
-    "updatedAt": "2026-09-20T20:28:54.471Z",
+    "updatedAt": "2026-09-23T22:20:08.954Z",
     "views": 0,
     "hook": "Habeas corpus writ by mother for child custody against father.",
     "decidedOn": "2020-08-25",
@@ -1088,7 +1155,8 @@
           "2020 (8) ADJ 412"
         ]
       }
-    ]
+    ],
+    "hasJudgeDecision": true
   },
   {
     "slug": "right-to-privacy-case",
@@ -2463,7 +2531,7 @@
       ]
     },
     "createdAt": "2026-09-16T20:45:53.724Z",
-    "updatedAt": "2026-09-16T21:24:38.895Z",
+    "updatedAt": "2026-09-23T21:33:21.928Z",
     "tag": {
       "en": "Articles 14",
       "hi": "Articles 14"
@@ -2485,7 +2553,7 @@
     "bannerImage": "/images/cases/right-to-privacy-case-poster-1789592353989.png",
     "matchRate": 98,
     "maturityRating": "U/A 13+",
-    "rank": 99,
+    "rank": 1,
     "featuredHeroHook": {
       "en": "Landmark trial on Articles 14, 19 and 21 of the Constitution of",
       "hi": "Landmark trial on अनुच्छेदs 14, 19 and 21 of the संविधान of"
@@ -3258,7 +3326,7 @@
       "alt": "The Ghost Case cover poster",
       "provenance": "illustration"
     },
-    "views": 366,
+    "views": 387,
     "episodes": [
       {
         "n": 1,
@@ -9251,7 +9319,7 @@
       "alt": "The Shah Bano Case cover poster",
       "provenance": "illustration"
     },
-    "views": 8,
+    "views": 10,
     "episodes": [
       {
         "n": 1,

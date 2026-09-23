@@ -15,10 +15,13 @@ export const dynamicParams = true;
 
 function getCaseForPage(slug: string): CaseFile | null {
   if (!slug) return null;
-  const staticCase = getCaseBySlug(slug);
+  const decoded = decodeURIComponent(slug).trim();
+  const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+
+  const staticCase = getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
   if (staticCase) return staticCase;
 
-  const rawDynamicCase = CaseStore.getBySlug(slug);
+  const rawDynamicCase = CaseStore.getBySlug(decoded) || CaseStore.getBySlug(cleanSlug);
   if (rawDynamicCase) {
     const dyn = rawDynamicCase as any;
     const titleStr = typeof dyn.title === 'string' ? dyn.title : (dyn.title?.en || dyn.slug);

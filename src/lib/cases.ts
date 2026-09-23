@@ -125,63 +125,59 @@ export function getAllCases(): CaseFile[] {
     dynamicList = CaseStore.getAll();
   } catch {}
 
-  const dynamicMap = new Map<string, any>(INITIAL_DYNAMIC_MAP);
-  if (Array.isArray(dynamicList) && dynamicList.length > 0) {
-    dynamicList.forEach((d) => {
-      if (d.slug) dynamicMap.set(d.slug.toLowerCase().trim(), d);
-    });
+  if (!Array.isArray(dynamicList) || dynamicList.length === 0) {
+    return ALL_STATIC_CASES;
   }
 
-  // Merge static cases
-  const seenSlugs = new Set<string>();
-  const mergedStatic = ALL_STATIC_CASES.map((sc) => {
-    const slugKey = sc.slug.toLowerCase().trim();
-    seenSlugs.add(slugKey);
-    const dyn =
-      dynamicMap.get(slugKey) ||
-      (sc.slug.includes('rinku')
-        ? dynamicMap.get('rinku-rukshar-habeas-corpus-custody-case') ||
-          dynamicMap.get('rinku-rukshar-habeas-corpus-case')
-        : null);
-    return mergeCaseWithDynamic(sc, dyn);
+  const staticMap = new Map<string, CaseFile>();
+  ALL_STATIC_CASES.forEach((sc) => {
+    staticMap.set(sc.slug.toLowerCase().trim(), sc);
   });
 
-  // Add any dynamically created cases that aren't in ALL_STATIC_CASES
-  const extraDynamic: CaseFile[] = [];
-  if (Array.isArray(dynamicList)) {
-    dynamicList.forEach((d) => {
-      if (d.slug && !seenSlugs.has(d.slug.toLowerCase().trim())) {
-        seenSlugs.add(d.slug.toLowerCase().trim());
-        extraDynamic.push(d as unknown as CaseFile);
-      }
-    });
-  }
+  return dynamicList.map((dyn) => {
+    const slugKey = (dyn.slug || '').toLowerCase().trim();
+    const staticMatch =
+      staticMap.get(slugKey) ||
+      (slugKey.includes('rinku') ? staticMap.get('rinku-rukshar-habeas-corpus-case') : undefined);
 
-  return [...mergedStatic, ...extraDynamic];
+    if (staticMatch) {
+      return mergeCaseWithDynamic(staticMatch, dyn);
+    }
+    return dyn as unknown as CaseFile;
+  });
 }
 
 export function getPublishedCases(): CaseFile[] {
   const all = getAllCases();
-  return all.filter((c) => (c as any).status === 'PUBLISHED' || !(c as any).status || (c as any).status?.code === 'GOOD_LAW');
+  return all.filter((c) => {
+    const s = (c as any).status;
+    if (s === 'DRAFT' || s === 'ARCHIVED' || s === 'ADMIN_REVIEW') return false;
+    if (s === 'PUBLISHED') return true;
+    if (typeof s === 'object' && s?.code) {
+      return s.code === 'GOOD_LAW';
+    }
+    return true;
+  });
 }
 
 export function getCaseBySlug(slug: string): CaseFile | null {
   if (!slug) return null;
   const decoded = decodeURIComponent(slug).trim().toLowerCase();
+  const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
 
   let dynamicCase: any = null;
   try {
-    dynamicCase = CaseStore.getBySlug(slug);
+    dynamicCase = CaseStore.getBySlug(decoded) || CaseStore.getBySlug(cleanSlug);
   } catch {}
 
   const staticCase = ALL_STATIC_CASES.find(
     (c) =>
       c.slug === decoded ||
+      c.slug === cleanSlug ||
       c.slug.toLowerCase() === decoded ||
-      (decoded === 'rinku-rukshar-habeas-corpus-case' &&
-        c.slug === 'rinku-rukshar-habeas-corpus-custody-case') ||
-      (decoded === 'rinku-rukshar-habeas-corpus-custody-case' &&
-        c.slug === 'rinku-rukshar-habeas-corpus-case')
+      c.slug.toLowerCase() === cleanSlug ||
+      (decoded.includes('shah-bano') && c.slug.includes('shah-bano')) ||
+      ((decoded.includes('rinku') || cleanSlug.includes('rinku')) && c.slug.includes('rinku'))
   );
 
   if (dynamicCase) {
