@@ -50,14 +50,6 @@ export function SourcedBlock({
 
   return (
     <div className="my-3 sm:my-4">
-      {/* Amber one-time inline notice */}
-      {isAmber && isFirstAmber && (
-        <div className="mb-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-[#D4AF37]/10 border border-[#D4AF37]/25 text-[11px] font-mono text-[#D4AF37]">
-          <span>ℹ</span>
-          <span>Scene reconstruction — not from the record.</span>
-        </div>
-      )}
-
       {/* Block by Type */}
       {type === 'para' && (
         <p
