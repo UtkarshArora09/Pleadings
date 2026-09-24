@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getCaseBySlug, getAllCases, getAllCaseSlugs } from '@/lib/cases';
+import { getCaseBySlug, getCaseBySlugAsync, getAllCases, getAllCasesAsync, getAllCaseSlugs } from '@/lib/cases';
 import { CaseStore } from '@/lib/db/caseStore';
 import { CaseFile } from '@/types/case';
 import { CasePageClient } from '@/components/case/CasePageClient';
@@ -15,50 +15,15 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const dynamicParams = true;
 
-function getCaseForPage(slug: string): CaseFile | null {
+async function getCaseForPage(slug: string): Promise<CaseFile | null> {
   if (!slug) return null;
   const decoded = decodeURIComponent(slug).trim();
   const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
 
-  const rawDynamicCase = CaseStore.getBySlug(decoded) || CaseStore.getBySlug(cleanSlug);
-  if (rawDynamicCase) {
-    const staticCase = getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
-    const dyn = rawDynamicCase as any;
-    const titleStr = typeof dyn.title === 'string' ? dyn.title : (dyn.title?.en || dyn.slug);
-    const hookStr = typeof dyn.hook === 'string' ? dyn.hook : (dyn.hook?.en || dyn.blurb?.en || '');
-    const posterImg = dyn.poster || { src: dyn.bannerImage || '/images/cases/ghost-case.jpg', alt: `${titleStr} poster`, provenance: 'illustration' as const };
+  const caseItem = (await getCaseBySlugAsync(decoded)) || (await getCaseBySlugAsync(cleanSlug));
+  if (caseItem) return caseItem;
 
-    return {
-      ...(staticCase || {}),
-      ...dyn,
-      slug: dyn.slug,
-      title: titleStr,
-      hook: hookStr,
-      court: dyn.court || 'Supreme Court of India',
-      year: dyn.year || 2024,
-      decidedOn: dyn.decidedOn || `${dyn.year || 2024}-05-15`,
-      bench: dyn.bench || [`Hon'ble Bench of the ${dyn.court || 'Supreme Court of India'}`],
-      citations: dyn.citations || { primary: dyn.citation || `${dyn.year || 2024} INSC 1`, parallel: [] },
-      sourceUrl: dyn.sourceUrl || dyn.judgmentUrl || 'https://indiankanoon.org/',
-      status: dyn.status?.code ? dyn.status : { code: 'GOOD_LAW', explain: 'Active precedent', chain: [{ year: dyn.year || 2024, event: 'Delivered' }] },
-      statuteMap: dyn.statuteMap || [{ old: dyn.categoryTag || 'Constitution', new: null, note: 'Governing statute' }],
-      doctrines: dyn.doctrines || [dyn.categoryTag || 'Constitutional Law'],
-      categories: dyn.categories || [dyn.genre || 'constitutional'],
-      readingTime: dyn.readingTime || { story: 5, student: 7, advocate: 9 },
-      featured: typeof dyn.featured === 'boolean' ? dyn.featured : true,
-      publishedAt: dyn.publishedAt || dyn.createdAt || new Date().toISOString(),
-      poster: posterImg,
-      episodes: dyn.episodes || staticCase?.episodes || [],
-      lawyerEpisodes: dyn.lawyerEpisodes || (staticCase as any)?.lawyerEpisodes,
-      flashcards: dyn.flashcards || staticCase?.flashcards || [],
-      subsequentHistory: dyn.subsequentHistory || staticCase?.subsequentHistory || [],
-    } as unknown as CaseFile;
-  }
-
-  const staticCase = getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
-  if (staticCase) return staticCase;
-
-  return null;
+  return getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
 }
 
 // Helper to generate hyper-targeted search keywords per case
@@ -203,7 +168,7 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
 
 export async function generateMetadata({ params }: CasePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const caseItem = getCaseForPage(slug);
+  const caseItem = await getCaseForPage(slug);
 
   if (!caseItem) {
     const humanTitle = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
@@ -268,9 +233,9 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
 
 export default async function CasePage({ params }: CasePageProps) {
   const { slug } = await params;
-  const currentCase = getCaseForPage(slug);
+  const currentCase = await getCaseForPage(slug);
 
-  const allCases = getAllCases();
+  const allCases = await getAllCasesAsync();
   const currentIndex = currentCase ? allCases.findIndex((c) => c.slug === currentCase.slug) : -1;
   const nextSlug = currentIndex >= 0 && currentIndex < allCases.length - 1
     ? allCases[currentIndex + 1].slug

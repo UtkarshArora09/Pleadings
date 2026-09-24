@@ -18,7 +18,7 @@ export async function POST(
     const body = await request.json().catch(() => ({}));
     const publish = body.publish !== undefined ? Boolean(body.publish) : true;
 
-    const updated = CaseStore.setPublishStatus(slug, publish);
+    const updated = await CaseStore.setPublishStatus(slug, publish);
 
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Case not found' }, { status: 404 });

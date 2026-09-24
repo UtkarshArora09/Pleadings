@@ -1,154 +1,87 @@
 import { CaseFile } from '@/types/case';
 import { CaseStore } from '@/lib/db/caseStore';
 
-import ghostCase from '@/content/cases/ghost-case.json';
-import nanavatiCase from '@/content/cases/nanavati-case.json';
-import haircutCase from '@/content/cases/haircut-case.json';
-import shreyaSinghal from '@/content/cases/shreya-singhal.json';
-import mcMehta from '@/content/cases/m-c-mehta.json';
-import kesavanandaBharati from '@/content/cases/kesavananda-bharati.json';
-import theShahBanoCase from '@/content/cases/the-shah-bano-case.json';
-import vishakaCase from '@/content/cases/vishaka-case.json';
-import manekaGandhi from '@/content/cases/maneka-gandhi.json';
-import navtejJohar from '@/content/cases/navtej-johar.json';
-import rightToPrivacyCase from '@/content/cases/right-to-privacy-case.json';
-import rinkuRuksharCase from '@/content/cases/rinku-rukshar-habeas-corpus-case.json';
-
-const ALL_STATIC_CASES: CaseFile[] = [
-  ghostCase as unknown as CaseFile,
-  nanavatiCase as unknown as CaseFile,
-  haircutCase as unknown as CaseFile,
-  shreyaSinghal as unknown as CaseFile,
-  mcMehta as unknown as CaseFile,
-  kesavanandaBharati as unknown as CaseFile,
-  theShahBanoCase as unknown as CaseFile,
-  vishakaCase as unknown as CaseFile,
-  manekaGandhi as unknown as CaseFile,
-  navtejJohar as unknown as CaseFile,
-  rightToPrivacyCase as unknown as CaseFile,
-  rinkuRuksharCase as unknown as CaseFile,
-];
-
-import dynamicCasesJson from '@/data/dynamicCases.json';
-
-// Build initial map from dynamicCases.json so all images are instantly available
-const INITIAL_DYNAMIC_MAP = new Map<string, any>();
-if (Array.isArray(dynamicCasesJson)) {
-  dynamicCasesJson.forEach((d: any) => {
-    if (d.slug) INITIAL_DYNAMIC_MAP.set(d.slug.toLowerCase().trim(), d);
-  });
-}
-
-function mergeCaseWithDynamic(staticCase: CaseFile, dynamicData: any): CaseFile {
-  if (!dynamicData) return staticCase;
-
+function formatCaseDataToCaseFile(dyn: any): CaseFile {
   const titleStr =
-    typeof dynamicData.title === 'string'
-      ? dynamicData.title
-      : dynamicData.title?.en || staticCase.title;
+    typeof dyn.title === 'string'
+      ? dyn.title
+      : dyn.title?.en || dyn.slug || 'Untitled Case';
 
   const hookStr =
-    typeof dynamicData.hook === 'string'
-      ? dynamicData.hook
-      : dynamicData.hook?.en || dynamicData.blurb?.en || staticCase.hook;
+    typeof dyn.hook === 'string'
+      ? dyn.hook
+      : dyn.hook?.en || dyn.blurb?.en || dyn.featuredHeroHook?.en || '';
 
-  const posterImg = dynamicData.poster?.src
-    ? dynamicData.poster
-    : dynamicData.bannerImage
+  const posterImg = dyn.poster?.src
+    ? dyn.poster
+    : dyn.bannerImage
     ? {
-        src: dynamicData.bannerImage,
+        src: dyn.bannerImage,
         alt: `${titleStr} cover poster`,
         provenance: 'illustration' as const,
       }
-    : staticCase.poster;
+    : { src: '/images/cases/ghost-case.jpg', alt: `${titleStr} poster`, provenance: 'illustration' as const };
 
-  const bannerImg = dynamicData.bannerImage || posterImg?.src || (staticCase as any).bannerImage;
-
-  // Source base episodes from dynamicData if available, otherwise staticCase
-  const baseEpisodes = (dynamicData.episodes && Array.isArray(dynamicData.episodes) && dynamicData.episodes.length > 0)
-    ? dynamicData.episodes
-    : (staticCase.episodes || []);
-
-  // Clone episodes and inject dynamic custom visuals & layer overrides
-  const episodes = baseEpisodes.map((ep: any, idx: number) => {
-    const staticEp = staticCase.episodes?.[idx];
-    const clone = { ...(staticEp || {}), ...ep };
-    if (idx === 0 && posterImg) {
-      clone.image = posterImg;
-    }
-    const panelExhibit = dynamicData.panels?.[idx]?.photoExhibitSrc;
-    if (panelExhibit) {
-      clone.image = {
-        src: panelExhibit,
-        alt: clone.title || `${titleStr} Exhibit`,
-        provenance: 'archival' as const,
-      };
-    }
-    // Ensure layers are preserved
-    if (ep.layers) {
-      clone.layers = {
-        story: ep.layers.story || staticEp?.layers?.story || { blocks: [] },
-        student: ep.layers.student || staticEp?.layers?.student || { blocks: [] },
-        advocate: ep.layers.advocate || staticEp?.layers?.advocate || { blocks: [] },
-      };
-    }
-    return clone;
-  });
-
-  const flashcards = dynamicData.flashcards || staticCase.flashcards;
-  const subsequentHistory = dynamicData.subsequentHistory || staticCase.subsequentHistory;
-  const advocateReference = dynamicData.advocateReference || staticCase.advocateReference;
-  const lawyerEpisodes = dynamicData.lawyerEpisodes || (staticCase as any).lawyerEpisodes;
-  const rank = typeof dynamicData.rank === 'number' ? dynamicData.rank : (staticCase as any).rank || 10;
-  const status = dynamicData.status || staticCase.status;
+  const bannerImg = dyn.bannerImage || posterImg?.src || '/images/cases/ghost-case.jpg';
+  const court = dyn.court || 'Supreme Court of India';
+  const year = typeof dyn.year === 'number' ? dyn.year : 2020;
+  const citation = dyn.citation || dyn.citations?.primary || `${year} INSC 1`;
+  const categoryTag = dyn.categoryTag || dyn.category_tag || dyn.doctrines?.[0] || dyn.tag?.en || 'Constitutional';
 
   return {
-    ...staticCase,
-    ...dynamicData,
+    ...dyn,
+    slug: dyn.slug,
     title: titleStr,
     hook: hookStr,
+    court,
+    year,
+    decidedOn: dyn.decidedOn || `${year}-05-15`,
+    bench: dyn.bench || [`Hon'ble Bench of the ${court}`],
+    citations: dyn.citations || { primary: citation, parallel: [] },
+    sourceUrl: dyn.sourceUrl || dyn.judgmentUrl || 'https://indiankanoon.org/',
+    status: dyn.status?.code ? dyn.status : { code: dyn.status === 'PUBLISHED' ? 'GOOD_LAW' : 'OVERRULED', explain: 'Active precedent', chain: [{ year, event: 'Delivered' }] },
+    statuteMap: dyn.statuteMap || [{ old: categoryTag, new: null, note: 'Governing statute' }],
+    doctrines: dyn.doctrines || [categoryTag],
+    categories: dyn.categories || [dyn.genre || 'constitutional'],
+    readingTime: dyn.readingTime || { story: 5, student: 7, advocate: 9 },
+    featured: typeof dyn.featured === 'boolean' ? dyn.featured : true,
+    publishedAt: dyn.publishedAt || dyn.createdAt || new Date().toISOString(),
     poster: posterImg,
     bannerImage: bannerImg,
-    episodes,
-    lawyerEpisodes,
-    rank,
-    status,
-    flashcards,
-    subsequentHistory,
-    advocateReference,
-  };
+    episodes: dyn.episodes || dyn.panels || [],
+    lawyerEpisodes: dyn.lawyerEpisodes,
+    rank: typeof dyn.rank === 'number' ? dyn.rank : 10,
+    flashcards: dyn.flashcards || [],
+    subsequentHistory: dyn.subsequentHistory || [],
+    advocateReference: dyn.advocateReference,
+  } as unknown as CaseFile;
 }
 
 export function getAllCases(): CaseFile[] {
-  let dynamicList: any[] = [];
-  try {
-    dynamicList = CaseStore.getAll();
-  } catch {}
+  const dynamicList = CaseStore.getAll();
+  return dynamicList.map(formatCaseDataToCaseFile);
+}
 
-  if (!Array.isArray(dynamicList) || dynamicList.length === 0) {
-    return ALL_STATIC_CASES;
-  }
-
-  const staticMap = new Map<string, CaseFile>();
-  ALL_STATIC_CASES.forEach((sc) => {
-    staticMap.set(sc.slug.toLowerCase().trim(), sc);
-  });
-
-  return dynamicList.map((dyn) => {
-    const slugKey = (dyn.slug || '').toLowerCase().trim();
-    const staticMatch =
-      staticMap.get(slugKey) ||
-      (slugKey.includes('rinku') ? staticMap.get('rinku-rukshar-habeas-corpus-case') : undefined);
-
-    if (staticMatch) {
-      return mergeCaseWithDynamic(staticMatch, dyn);
-    }
-    return dyn as unknown as CaseFile;
-  });
+export async function getAllCasesAsync(): Promise<CaseFile[]> {
+  const dynamicList = await CaseStore.getAllAsync();
+  return dynamicList.map(formatCaseDataToCaseFile);
 }
 
 export function getPublishedCases(): CaseFile[] {
   const all = getAllCases();
+  return all.filter((c) => {
+    const s = (c as any).status;
+    if (s === 'DRAFT' || s === 'ARCHIVED' || s === 'ADMIN_REVIEW') return false;
+    if (s === 'PUBLISHED') return true;
+    if (typeof s === 'object' && s?.code) {
+      return s.code === 'GOOD_LAW';
+    }
+    return true;
+  });
+}
+
+export async function getPublishedCasesAsync(): Promise<CaseFile[]> {
+  const all = await getAllCasesAsync();
   return all.filter((c) => {
     const s = (c as any).status;
     if (s === 'DRAFT' || s === 'ARCHIVED' || s === 'ADMIN_REVIEW') return false;
@@ -165,28 +98,23 @@ export function getCaseBySlug(slug: string): CaseFile | null {
   const decoded = decodeURIComponent(slug).trim().toLowerCase();
   const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
 
-  let dynamicCase: any = null;
-  try {
-    dynamicCase = CaseStore.getBySlug(decoded) || CaseStore.getBySlug(cleanSlug);
-  } catch {}
-
-  const staticCase = ALL_STATIC_CASES.find(
-    (c) =>
-      c.slug === decoded ||
-      c.slug === cleanSlug ||
-      c.slug.toLowerCase() === decoded ||
-      c.slug.toLowerCase() === cleanSlug ||
-      (decoded.startsWith('rinku') && c.slug.includes('rinku'))
-  );
-
+  const dynamicCase = CaseStore.getBySlug(decoded) || CaseStore.getBySlug(cleanSlug);
   if (dynamicCase) {
-    if (staticCase) {
-      return mergeCaseWithDynamic(staticCase, dynamicCase);
-    }
-    return dynamicCase as unknown as CaseFile;
+    return formatCaseDataToCaseFile(dynamicCase);
   }
+  return null;
+}
 
-  return staticCase || null;
+export async function getCaseBySlugAsync(slug: string): Promise<CaseFile | null> {
+  if (!slug) return null;
+  const decoded = decodeURIComponent(slug).trim().toLowerCase();
+  const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+
+  const dynamicCase = await CaseStore.getBySlugAsync(decoded) || await CaseStore.getBySlugAsync(cleanSlug);
+  if (dynamicCase) {
+    return formatCaseDataToCaseFile(dynamicCase);
+  }
+  return null;
 }
 
 export function getAllCaseSlugs(): string[] {

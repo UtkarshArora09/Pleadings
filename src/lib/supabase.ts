@@ -1,38 +1,53 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-const supabaseAnonKey =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  process.env.SUPABASE_ANON_KEY ||
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
-  process.env.SUPABASE_PUBLISHABLE_KEY ||
-  '';
-const supabaseServiceKey =
-  process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  process.env.SUPABASE_SERVICE_KEY ||
-  supabaseAnonKey;
+// Prioritize IPv4 on Node.js runtime to prevent connect timeouts on dual-stack hosts
+if (typeof window === 'undefined') {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const dns = require('dns');
+    if (dns && typeof dns.setDefaultResultOrder === 'function') {
+      dns.setDefaultResultOrder('ipv4first');
+    }
+  } catch {}
+}
+
+function getCredentials() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
+  const supabaseAnonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    '';
+  const supabaseServiceKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_SERVICE_KEY ||
+    supabaseAnonKey;
+
+  return { supabaseUrl: supabaseUrl.trim(), supabaseAnonKey: supabaseAnonKey.trim(), supabaseServiceKey: supabaseServiceKey.trim() };
+}
 
 let supabaseAnonClient: SupabaseClient | null = null;
 let supabaseAdminClient: SupabaseClient | null = null;
 
 export function isSupabaseConfigured(): boolean {
+  const { supabaseUrl, supabaseAnonKey, supabaseServiceKey } = getCredentials();
   return Boolean(
     supabaseUrl &&
-    supabaseUrl.trim() !== '' &&
     supabaseUrl.startsWith('http') &&
-    supabaseAnonKey &&
-    supabaseAnonKey.trim() !== ''
+    (supabaseAnonKey || supabaseServiceKey)
   );
 }
 
 /**
- * Returns the public Supabase client (safe for browser & server queries)
+ * Returns the public Supabase client (safe for browser & client-side queries)
  */
 export function getSupabase(): SupabaseClient | null {
   if (!isSupabaseConfigured()) return null;
 
+  const { supabaseUrl, supabaseAnonKey, supabaseServiceKey } = getCredentials();
   if (!supabaseAnonClient) {
-    supabaseAnonClient = createClient(supabaseUrl.trim(), supabaseAnonKey.trim(), {
+    supabaseAnonClient = createClient(supabaseUrl, supabaseAnonKey || supabaseServiceKey, {
       auth: { persistSession: false },
     });
   }
@@ -41,23 +56,24 @@ export function getSupabase(): SupabaseClient | null {
 
 /**
  * Returns the Admin Supabase client with Service Role privileges
- * (Used on server-side API routes for database writes & storage uploads)
+ * (Used on server-side API routes and database operations)
  */
 export function getSupabaseAdmin(): SupabaseClient | null {
   if (!isSupabaseConfigured()) return null;
 
+  const { supabaseUrl, supabaseAnonKey, supabaseServiceKey } = getCredentials();
   if (!supabaseAdminClient) {
-    const key = (supabaseServiceKey && supabaseServiceKey.trim() !== '')
-      ? supabaseServiceKey.trim()
-      : supabaseAnonKey.trim();
-
-    supabaseAdminClient = createClient(supabaseUrl.trim(), key, {
+    const key = supabaseServiceKey || supabaseAnonKey;
+    supabaseAdminClient = createClient(supabaseUrl, key, {
       auth: { persistSession: false },
     });
   }
   return supabaseAdminClient;
 }
 
+/**
+ * Upload image to public storage bucket 'case-images'
+ */
 export async function uploadImageToSupabase(
   buffer: Buffer,
   fileName: string,
@@ -70,8 +86,7 @@ export async function uploadImageToSupabase(
     const bucketName = 'case-images';
     const filePath = `cases/${fileName}`;
 
-    // Upload image to public bucket
-    const { data, error } = await client.storage
+    const { error } = await client.storage
       .from(bucketName)
       .upload(filePath, buffer, {
         contentType,
@@ -83,7 +98,6 @@ export async function uploadImageToSupabase(
       return null;
     }
 
-    // Get public URL
     const { data: publicUrlData } = client.storage.from(bucketName).getPublicUrl(filePath);
     return publicUrlData?.publicUrl || null;
   } catch (err) {
@@ -93,64 +107,181 @@ export async function uploadImageToSupabase(
 }
 
 /**
- * Persist dynamic cases JSON to Supabase Storage bucket ('case-images/data/dynamicCases.json')
+ * Fetch all cases directly from Supabase 'cases' table
  */
-export async function saveDynamicCasesToSupabase(cases: any[]): Promise<boolean> {
+export async function fetchCasesFromSupabase(): Promise<any[] | null> {
   const client = getSupabaseAdmin() || getSupabase();
-  if (!client) return false;
-
-  try {
-    const bucketName = 'case-images';
-    const filePath = 'data/dynamicCases.json';
-    const jsonBuffer = Buffer.from(JSON.stringify(cases, null, 2), 'utf-8');
-
-    const { error } = await client.storage
-      .from(bucketName)
-      .upload(filePath, jsonBuffer, {
-        contentType: 'application/json',
-        upsert: true,
-      });
-
-    if (error) {
-      console.warn('Supabase save dynamic cases error:', error.message);
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.warn('Supabase save dynamic cases exception:', err);
-    return false;
-  }
-}
-
-/**
- * Load dynamic cases JSON from Supabase Storage bucket ('case-images/data/dynamicCases.json')
- */
-export async function loadDynamicCasesFromSupabase(): Promise<any[] | null> {
-  const client = getSupabase() || getSupabaseAdmin();
   if (!client) return null;
 
   try {
-    const bucketName = 'case-images';
-    const filePath = 'data/dynamicCases.json';
+    const { data, error } = await client
+      .from('cases')
+      .select('*')
+      .order('slug', { ascending: true });
 
-    const { data, error } = await client.storage
-      .from(bucketName)
-      .download(filePath);
-
-    if (error || !data) {
+    if (error) {
+      console.warn('Supabase fetch cases table error:', error.message);
       return null;
     }
 
-    const text = await data.text();
-    const parsed = JSON.parse(text);
-    return Array.isArray(parsed) ? parsed : null;
+    if (Array.isArray(data)) {
+      return data.map((row) => row.data || row);
+    }
+    return null;
   } catch (err) {
+    console.warn('Supabase fetch cases exception:', err);
     return null;
   }
 }
 
 /**
- * Save an advocate case contribution submission to Supabase Storage
+ * Fetch single case by slug from Supabase 'cases' table
+ */
+export async function fetchCaseBySlugFromSupabase(slug: string): Promise<any | null> {
+  const client = getSupabaseAdmin() || getSupabase();
+  if (!client || !slug) return null;
+
+  try {
+    const { data, error } = await client
+      .from('cases')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (error || !data) {
+      return null;
+    }
+
+    return data.data || data;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Upsert case directly into Supabase 'cases' table
+ */
+export async function upsertCaseToSupabase(caseData: any): Promise<boolean> {
+  const client = getSupabaseAdmin() || getSupabase();
+  if (!client || !caseData?.slug) return false;
+
+  try {
+    const title = typeof caseData.title === 'string'
+      ? { en: caseData.title, hi: caseData.title }
+      : (caseData.title || { en: caseData.slug, hi: caseData.slug });
+
+    const payload = {
+      slug: caseData.slug,
+      title: title,
+      court: caseData.court || 'Supreme Court of India',
+      year: Number(caseData.year) || 2020,
+      citation: caseData.citation || caseData.citations?.primary || '',
+      status: caseData.status || 'PUBLISHED',
+      category_tag: caseData.categoryTag || caseData.category_tag || 'Constitutional',
+      banner_image: caseData.bannerImage || caseData.banner_image || caseData.poster?.src || '',
+      data: caseData,
+      updated_at: new Date().toISOString(),
+    };
+
+    const { error } = await client
+      .from('cases')
+      .upsert(payload, { onConflict: 'slug' });
+
+    if (error) {
+      console.warn('Supabase upsert case error:', error.message);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn('Supabase upsert case exception:', err);
+    return false;
+  }
+}
+
+/**
+ * Delete case from Supabase 'cases' table
+ */
+export async function deleteCaseFromSupabase(slug: string): Promise<boolean> {
+  const client = getSupabaseAdmin() || getSupabase();
+  if (!client || !slug) return false;
+
+  try {
+    const { error } = await client
+      .from('cases')
+      .delete()
+      .eq('slug', slug);
+
+    if (error) {
+      console.warn('Supabase delete case error:', error.message);
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Update case status in Supabase 'cases' table
+ */
+export async function updateCaseStatusInSupabase(slug: string, status: string, fullData?: any): Promise<boolean> {
+  const client = getSupabaseAdmin() || getSupabase();
+  if (!client || !slug) return false;
+
+  try {
+    const updateObj: any = {
+      status,
+      updated_at: new Date().toISOString(),
+    };
+
+    if (fullData) {
+      updateObj.data = {
+        ...fullData,
+        status,
+        updatedAt: new Date().toISOString(),
+      };
+    }
+
+    const { error } = await client
+      .from('cases')
+      .update(updateObj)
+      .eq('slug', slug);
+
+    return !error;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Increment view count in Supabase 'cases' table
+ */
+export async function incrementCaseViewsInSupabase(slug: string, newViews: number, fullData?: any): Promise<void> {
+  const client = getSupabaseAdmin() || getSupabase();
+  if (!client || !slug) return;
+
+  try {
+    const updateObj: any = {
+      updated_at: new Date().toISOString(),
+    };
+
+    if (fullData) {
+      updateObj.data = {
+        ...fullData,
+        views: newViews,
+        updatedAt: new Date().toISOString(),
+      };
+    }
+
+    await client
+      .from('cases')
+      .update(updateObj)
+      .eq('slug', slug);
+  } catch {}
+}
+
+/**
+ * Save an advocate case contribution submission
  */
 export async function saveSubmissionToSupabase(submission: any): Promise<boolean> {
   const client = getSupabaseAdmin() || getSupabase();
@@ -173,14 +304,8 @@ export async function saveSubmissionToSupabase(submission: any): Promise<boolean
         upsert: true,
       });
 
-    if (error) {
-      console.warn('Supabase save submission error:', error.message);
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.warn('Supabase save submission exception:', err);
+    return !error;
+  } catch {
     return false;
   }
 }
-

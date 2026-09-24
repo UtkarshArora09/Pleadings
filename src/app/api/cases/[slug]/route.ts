@@ -15,16 +15,14 @@ export async function GET(
       return NextResponse.json({ success: false, error: 'Slug required' }, { status: 400 });
     }
 
-    // 1. Check dynamic CaseStore first with Supabase cloud synchronization
     const dynamicCase = await CaseStore.getBySlugAsync(slug);
     if (dynamicCase) {
       return NextResponse.json({ success: true, case: dynamicCase });
     }
 
-    // 2. Check static cases
-    const staticCase = getCaseBySlug(slug);
-    if (staticCase) {
-      return NextResponse.json({ success: true, case: staticCase });
+    const fallbackCase = getCaseBySlug(slug);
+    if (fallbackCase) {
+      return NextResponse.json({ success: true, case: fallbackCase });
     }
 
     return NextResponse.json({ success: false, error: 'Case not found' }, { status: 404 });

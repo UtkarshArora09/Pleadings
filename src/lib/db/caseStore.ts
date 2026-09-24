@@ -1,111 +1,18 @@
 import { CaseData, CaseStatus } from '@/types';
-import { CASES_DATA } from '@/data/cases';
-import { getSupabaseAdmin, getSupabase, isSupabaseConfigured } from '@/lib/supabase';
+import {
+  fetchCasesFromSupabase,
+  fetchCaseBySlugFromSupabase,
+  upsertCaseToSupabase,
+  deleteCaseFromSupabase,
+  updateCaseStatusInSupabase,
+  incrementCaseViewsInSupabase,
+  isSupabaseConfigured,
+} from '@/lib/supabase';
 
-// Helper to safely access node modules only in server environment
-function getNodeModules() {
-  if (typeof window !== 'undefined') return null;
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const fs = require('fs');
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const path = require('path');
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const os = require('os');
-    return { fs, path, os };
-  } catch {
-    return null;
-  }
-}
-
-// In-memory cache for ultra-fast lookups
+// In-memory cache for ultra-fast server/SSR lookups
 let cachedCases: CaseData[] | null = null;
 let lastSupabaseFetchTime = 0;
-const CACHE_TTL_MS = 15000; // 15 seconds cache before checking Supabase updates
-
-function ensureInitialized(): CaseData[] {
-  if (cachedCases && cachedCases.length > 0) return cachedCases;
-
-  const node = getNodeModules();
-  if (node) {
-    const { fs, path, os } = node;
-    const DATA_DIR = path.join(process.cwd(), 'src', 'data');
-    const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
-    const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
-
-    // 1. Try reading from PRIMARY_DB_PATH
-    try {
-      if (fs.existsSync(/*turbopackIgnore: true*/ PRIMARY_DB_PATH)) {
-        const raw = fs.readFileSync(/*turbopackIgnore: true*/ PRIMARY_DB_PATH, 'utf-8');
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          cachedCases = parsed;
-          return cachedCases;
-        }
-      }
-    } catch (error) {
-      console.warn('Error reading dynamicCases.json, trying tmp fallback:', error);
-    }
-
-    // 2. Try reading from TMP_DB_PATH (written by serverless functions)
-    try {
-      if (fs.existsSync(/*turbopackIgnore: true*/ TMP_DB_PATH)) {
-        const raw = fs.readFileSync(/*turbopackIgnore: true*/ TMP_DB_PATH, 'utf-8');
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          cachedCases = parsed;
-          return cachedCases;
-        }
-      }
-    } catch {
-      // continue
-    }
-  }
-
-  // 3. Bootstrap with the 10 landmark cases from CASES_DATA
-  const seedCases: CaseData[] = CASES_DATA.map((c, idx) => ({
-    ...c,
-    status: 'PUBLISHED' as CaseStatus,
-    createdAt: new Date(Date.now() - (10 - idx) * 86400000).toISOString(),
-    updatedAt: new Date().toISOString(),
-  }));
-
-  cachedCases = seedCases;
-  return cachedCases;
-}
-
-function persistCases(cases: CaseData[]): boolean {
-  cachedCases = cases;
-  const node = getNodeModules();
-  if (!node) return false;
-
-  const { fs, path, os } = node;
-  const DATA_DIR = path.join(process.cwd(), 'src', 'data');
-  const PRIMARY_DB_PATH = path.join(DATA_DIR, 'dynamicCases.json');
-  const TMP_DB_PATH = path.join(os.tmpdir(), 'dynamicCases.json');
-  let saved = false;
-
-  // 1. Try writing directly to primary path
-  try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    fs.writeFileSync(PRIMARY_DB_PATH, JSON.stringify(cases, null, 2), 'utf-8');
-    saved = true;
-  } catch (e) {
-    // Primary path may be read-only in Vercel serverless
-  }
-
-  // 2. Also write to /tmp on serverless
-  try {
-    fs.writeFileSync(TMP_DB_PATH, JSON.stringify(cases, null, 2), 'utf-8');
-    saved = true;
-  } catch {
-    // ignore
-  }
-
-  return saved;
-}
+const CACHE_TTL_MS = 60000; // 1 minute in-memory cache TTL before refreshing from DB
 
 export function buildDefaultLawyerEpisodes(source: any): import('@/types/case').LawyerEpisode[] {
   if (source.lawyerEpisodes && Array.isArray(source.lawyerEpisodes) && source.lawyerEpisodes.length > 0) {
@@ -174,7 +81,7 @@ export function buildDefaultLawyerEpisodes(source: any): import('@/types/case').
 export function normalizeCaseData(raw: any): CaseData {
   if (!raw) return {} as CaseData;
 
-  // If raw comes from Supabase JSON column 'data'
+  // If raw comes from Supabase JSON column 'data' or top-level row
   const source = raw.data || raw;
 
   const titleEn = typeof source.title === 'string' ? source.title : (source.title?.en || source.slug || 'Untitled Case');
@@ -192,7 +99,6 @@ export function normalizeCaseData(raw: any): CaseData {
   // Canonical 8 episode types in exact order
   const CANONICAL_EP_TYPES = ['HOOK', 'PEOPLE', 'INCIDENT', 'TIMELINE', 'EVIDENCE', 'ARGUMENTS', 'VERDICT', 'RATIO'] as const;
 
-  // If episodes exist (CaseFile structure), map episodes to panels
   let panels = source.panels;
   if (!panels || !Array.isArray(panels) || panels.length < 8) {
     if (source.episodes && Array.isArray(source.episodes) && source.episodes.length >= 8) {
@@ -217,7 +123,6 @@ export function normalizeCaseData(raw: any): CaseData {
         };
       });
     } else if (Array.isArray(panels) && panels.length > 0) {
-      // Pad or normalize panels to 8
       const padded = [...panels];
       while (padded.length < 8) {
         const nextIdx = padded.length;
@@ -251,7 +156,6 @@ export function normalizeCaseData(raw: any): CaseData {
     }
   }
 
-  // Ensure episodes exist with all 3 layers (story, student, advocate)
   let episodes = source.episodes;
   if (!episodes || !Array.isArray(episodes) || episodes.length < 8) {
     episodes = panels.map((p: any, idx: number) => {
@@ -286,7 +190,6 @@ export function normalizeCaseData(raw: any): CaseData {
       };
     });
   } else {
-    // If episodes exist, make sure each episode has valid layers structure
     episodes = episodes.slice(0, 8).map((ep: any, idx: number) => {
       const p = panels[idx];
       const storyBlocks = ep.layers?.story?.blocks || [
@@ -329,7 +232,6 @@ export function normalizeCaseData(raw: any): CaseData {
     });
   }
 
-  // Ensure brief exists
   const brief = source.brief || {
     courtAndYear: { en: `${court} (${year})`, hi: `${court} (${year})` },
     facts: { en: hookEn, hi: hookHi },
@@ -424,407 +326,230 @@ function matchSlug(caseSlug?: string, querySlug?: string): boolean {
 
 export const CaseStore = {
   /**
-   * Synchronous getter with Supabase background sync
+   * Synchronous getter with in-memory caching
    */
   getAll(): CaseData[] {
-    // If Supabase is configured and TTL expired, trigger background sync
-    if (isSupabaseConfigured() && Date.now() - lastSupabaseFetchTime > CACHE_TTL_MS) {
-      this.syncFromSupabase().catch((err) => console.warn('Supabase sync warning:', err));
+    if (cachedCases && cachedCases.length > 0) {
+      // Refresh cache in background if TTL expired
+      if (isSupabaseConfigured() && Date.now() - lastSupabaseFetchTime > CACHE_TTL_MS) {
+        this.syncFromSupabase().catch(() => {});
+      }
+      return cachedCases;
     }
-    return ensureInitialized();
+    return cachedCases || [];
   },
 
+  /**
+   * Authoritative async getter directly from Supabase PostgreSQL Database
+   */
   async getAllAsync(): Promise<CaseData[]> {
-    if (isSupabaseConfigured()) {
-      await this.syncFromSupabase();
-    }
-    return ensureInitialized();
+    await this.syncFromSupabase();
+    return cachedCases || [];
   },
 
+  /**
+   * Get all published cases
+   */
   getPublished(): CaseData[] {
     const all = this.getAll();
     return all.filter((c) => c.status === 'PUBLISHED');
   },
 
+  /**
+   * Record view count directly into Supabase
+   */
   recordView(slug: string): number {
     const decodedSlug = decodeURIComponent(slug).trim();
-    const all = ensureInitialized();
-    let idx = all.findIndex((c) => matchSlug(c.slug, decodedSlug));
-
-    if (idx === -1) {
-      const loaded = this.getBySlug(decodedSlug);
-      if (loaded) {
-        const refreshed = ensureInitialized();
-        idx = refreshed.findIndex((c) => matchSlug(c.slug, decodedSlug));
-      }
-    }
+    const all = this.getAll();
+    const idx = all.findIndex((c) => matchSlug(c.slug, decodedSlug));
 
     if (idx !== -1) {
-      const currentViews: number = typeof all[idx].views === 'number' ? (all[idx].views as number) : 0;
+      const currentViews = typeof all[idx].views === 'number' ? all[idx].views : 0;
       const newViews = currentViews + 1;
       all[idx].views = newViews;
-      persistCases(all);
 
       if (isSupabaseConfigured()) {
-        const targetSlug = all[idx].slug;
-        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
-          try {
-            await saveDynamicCasesToSupabase(all);
-          } catch {}
-
-          try {
-            const client = getSupabaseAdmin() || getSupabase();
-            if (client) {
-              await client
-                .from('cases')
-                .update({ views: newViews, updated_at: new Date().toISOString() })
-                .eq('slug', targetSlug);
-            }
-          } catch {}
-        });
+        incrementCaseViewsInSupabase(all[idx].slug, newViews, all[idx]);
       }
       return newViews;
     }
     return 1;
   },
 
+  /**
+   * Synchronously get case by slug from memory
+   */
   getBySlug(slug: string): CaseData | null {
+    if (!slug) return null;
     const all = this.getAll();
     const found = all.find((c) => matchSlug(c.slug, slug));
     if (found) return normalizeCaseData(found);
-
-    // Fallback 1: check static CASES_DATA
-    const staticCase = CASES_DATA.find((c) => matchSlug(c.slug, slug));
-    if (staticCase) {
-      const normalized = normalizeCaseData(staticCase);
-      return normalized;
-    }
-
-    // Fallback 2: check content/cases/*.json on disk
-    try {
-      const node = getNodeModules();
-      if (node) {
-        const { fs, path } = node;
-        const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9_-]/g, '-');
-        const caseFilePath = path.join(process.cwd(), 'content', 'cases', `${cleanSlug}.json`);
-        if (fs.existsSync(/*turbopackIgnore: true*/ caseFilePath)) {
-          const raw = fs.readFileSync(/*turbopackIgnore: true*/ caseFilePath, 'utf8');
-          const parsed = JSON.parse(raw);
-          if (matchSlug(parsed.slug, slug)) {
-            const normalized = normalizeCaseData(parsed);
-            return normalized;
-          }
-        }
-      }
-    } catch (err) {
-      console.warn(`Could not read case from content/cases/${slug}.json:`, err);
-    }
-
     return null;
   },
 
-  create(newCase: any): CaseData {
+  /**
+   * Authoritative async case retrieval by slug from Supabase
+   */
+  async getBySlugAsync(slug: string): Promise<CaseData | null> {
+    if (!slug) return null;
+
+    if (isSupabaseConfigured()) {
+      const dbCase = await fetchCaseBySlugFromSupabase(slug);
+      if (dbCase) {
+        const normalized = normalizeCaseData(dbCase);
+        // Update item in local cache
+        if (cachedCases) {
+          const idx = cachedCases.findIndex((c) => matchSlug(c.slug, slug));
+          if (idx >= 0) {
+            cachedCases[idx] = normalized;
+          } else {
+            cachedCases.push(normalized);
+          }
+        }
+        return normalized;
+      }
+    }
+
+    return this.getBySlug(slug);
+  },
+
+  /**
+   * Create new case directly in Supabase
+   */
+  async create(newCase: any): Promise<CaseData> {
     const normalized = normalizeCaseData(newCase);
-    const all = ensureInitialized();
-    const existingIdx = all.findIndex((c) => matchSlug(c.slug, normalized.slug));
-    
     const timestamp = new Date().toISOString();
-    const existingCase = existingIdx >= 0 ? all[existingIdx] : null;
-    const viewsToKeep = typeof normalized.views === 'number' && normalized.views > 0
-      ? normalized.views
-      : (existingCase && typeof existingCase.views === 'number' ? existingCase.views : 0);
 
     const caseToSave: CaseData = {
       ...normalized,
-      views: viewsToKeep,
+      views: typeof normalized.views === 'number' ? normalized.views : 0,
       status: normalized.status || 'ADMIN_REVIEW',
-      createdAt: normalized.createdAt || existingCase?.createdAt || timestamp,
+      createdAt: normalized.createdAt || timestamp,
       updatedAt: timestamp,
     };
 
-    let updatedList: CaseData[];
-    if (existingIdx >= 0) {
-      updatedList = [...all];
-      updatedList[existingIdx] = caseToSave;
-    } else {
-      updatedList = [caseToSave, ...all];
-    }
-
-    persistCases(updatedList);
-
-    // Sync to content/cases/${slug}.json on disk
-    try {
-      const node = getNodeModules();
-      if (node) {
-        const { fs, path } = node;
-        const casesDir = path.join(process.cwd(), 'content', 'cases');
-        if (!fs.existsSync(/*turbopackIgnore: true*/ casesDir)) fs.mkdirSync(/*turbopackIgnore: true*/ casesDir, { recursive: true });
-        const filePath = path.join(casesDir, `${caseToSave.slug}.json`);
-        fs.writeFileSync(/*turbopackIgnore: true*/ filePath, JSON.stringify(caseToSave, null, 2), 'utf-8');
-      }
-    } catch (diskErr) {
-      console.warn('Could not write disk case file:', diskErr);
-    }
-
-    // Async push to Supabase if configured
+    // Upsert directly to Supabase Database
     if (isSupabaseConfigured()) {
-      import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
-        try {
-          await saveDynamicCasesToSupabase(updatedList);
-        } catch (e) {
-          console.warn('Supabase storage save error:', e);
-        }
+      await upsertCaseToSupabase(caseToSave);
+    }
 
-        try {
-          const client = getSupabaseAdmin() || getSupabase();
-          if (client) {
-            const res = await client
-              .from('cases')
-              .upsert(
-                {
-                  slug: caseToSave.slug,
-                  title: caseToSave.title,
-                  court: caseToSave.court,
-                  year: caseToSave.year,
-                  citation: caseToSave.citation,
-                  status: caseToSave.status,
-                  category_tag: caseToSave.categoryTag,
-                  banner_image: caseToSave.bannerImage,
-                  data: caseToSave,
-                  updated_at: timestamp,
-                },
-                { onConflict: 'slug' }
-              );
-            if (res.error) console.warn('Supabase upsert error:', res.error.message);
-          }
-        } catch (err) {
-          console.warn('Supabase upsert exception:', err);
-        }
-      });
+    // Update in-memory cache
+    if (!cachedCases) cachedCases = [];
+    const existingIdx = cachedCases.findIndex((c) => matchSlug(c.slug, caseToSave.slug));
+    if (existingIdx >= 0) {
+      cachedCases[existingIdx] = caseToSave;
+    } else {
+      cachedCases.unshift(caseToSave);
     }
 
     return caseToSave;
   },
 
-  update(slug: string, updates: Partial<CaseData>): CaseData | null {
-    const all = ensureInitialized();
-    let idx = all.findIndex((c) => matchSlug(c.slug, slug));
-    if (idx < 0) {
-      const loaded = this.getBySlug(slug);
-      if (loaded) {
-        const refreshed = ensureInitialized();
-        idx = refreshed.findIndex((c) => matchSlug(c.slug, slug));
+  /**
+   * Update existing case directly in Supabase
+   */
+  async update(slug: string, updates: Partial<CaseData>): Promise<CaseData | null> {
+    let currentItem = this.getBySlug(slug);
+    if (!currentItem && isSupabaseConfigured()) {
+      currentItem = await this.getBySlugAsync(slug);
+    }
+
+    if (!currentItem) return null;
+
+    const viewsToKeep = typeof updates.views === 'number' && updates.views > 0
+      ? updates.views
+      : (typeof currentItem.views === 'number' ? currentItem.views : 0);
+
+    const updatedCase: CaseData = normalizeCaseData({
+      ...currentItem,
+      ...updates,
+      views: viewsToKeep,
+      slug: updates.slug || currentItem.slug,
+      updatedAt: new Date().toISOString(),
+    });
+
+    // Write directly to Supabase Database
+    if (isSupabaseConfigured()) {
+      await upsertCaseToSupabase(updatedCase);
+    }
+
+    // Update local cache
+    if (cachedCases) {
+      const idx = cachedCases.findIndex((c) => matchSlug(c.slug, slug));
+      if (idx >= 0) {
+        cachedCases[idx] = updatedCase;
+      } else {
+        cachedCases.push(updatedCase);
       }
     }
 
-    if (idx >= 0) {
-      const current = ensureInitialized();
-      const currentItem = current[idx];
-      const viewsToKeep = typeof updates.views === 'number' && updates.views > 0
-        ? updates.views
-        : (typeof currentItem.views === 'number' ? currentItem.views : 0);
+    return updatedCase;
+  },
 
-      const updatedCase: CaseData = normalizeCaseData({
+  /**
+   * Delete case directly from Supabase
+   */
+  async delete(slug: string): Promise<boolean> {
+    if (isSupabaseConfigured()) {
+      await deleteCaseFromSupabase(slug);
+    }
+
+    if (cachedCases) {
+      cachedCases = cachedCases.filter((c) => !matchSlug(c.slug, slug));
+    }
+
+    return true;
+  },
+
+  /**
+   * Set publish status (PUBLISHED or DRAFT) directly in Supabase
+   */
+  async setPublishStatus(slug: string, publish: boolean): Promise<CaseData | null> {
+    const status: CaseStatus = publish ? 'PUBLISHED' : 'DRAFT';
+    let currentItem = this.getBySlug(slug);
+    if (!currentItem && isSupabaseConfigured()) {
+      currentItem = await this.getBySlugAsync(slug);
+    }
+
+    if (currentItem) {
+      const updatedCase: CaseData = {
         ...currentItem,
-        ...updates,
-        views: viewsToKeep,
-        slug: updates.slug || currentItem.slug,
+        status,
         updatedAt: new Date().toISOString(),
-      });
-      const updatedList = [...current];
-      updatedList[idx] = updatedCase;
-      persistCases(updatedList);
+      };
 
-      // Sync to content/cases/${slug}.json on disk
-      try {
-        const node = getNodeModules();
-        if (node) {
-          const { fs, path } = node;
-          const casesDir = path.join(process.cwd(), 'content', 'cases');
-          if (!fs.existsSync(/*turbopackIgnore: true*/ casesDir)) fs.mkdirSync(/*turbopackIgnore: true*/ casesDir, { recursive: true });
-          const filePath = path.join(casesDir, `${updatedCase.slug}.json`);
-          fs.writeFileSync(/*turbopackIgnore: true*/ filePath, JSON.stringify(updatedCase, null, 2), 'utf-8');
-        }
-      } catch (diskErr) {
-        console.warn('Could not sync update to disk file:', diskErr);
+      if (isSupabaseConfigured()) {
+        await updateCaseStatusInSupabase(slug, status, updatedCase);
       }
 
-      // Async push update to Supabase
-      if (isSupabaseConfigured()) {
-        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
-          try {
-            await saveDynamicCasesToSupabase(updatedList);
-          } catch (e) {
-            console.warn('Supabase storage update error:', e);
-          }
-
-          try {
-            const client = getSupabaseAdmin() || getSupabase();
-            if (client) {
-              const res = await client
-                .from('cases')
-                .upsert(
-                  {
-                    slug: updatedCase.slug,
-                    title: updatedCase.title,
-                    court: updatedCase.court,
-                    year: updatedCase.year,
-                    citation: updatedCase.citation,
-                    status: updatedCase.status,
-                    category_tag: updatedCase.categoryTag,
-                    banner_image: updatedCase.bannerImage,
-                    data: updatedCase,
-                    updated_at: new Date().toISOString(),
-                  },
-                  { onConflict: 'slug' }
-                );
-              if (res.error) console.warn('Supabase update error:', res.error.message);
-            }
-          } catch (err) {
-            console.warn('Supabase update exception:', err);
-          }
-        });
+      if (cachedCases) {
+        const idx = cachedCases.findIndex((c) => matchSlug(c.slug, slug));
+        if (idx >= 0) {
+          cachedCases[idx] = updatedCase;
+        }
       }
 
       return updatedCase;
     }
+
     return null;
   },
 
-  async getBySlugAsync(slug: string): Promise<CaseData | null> {
-    if (isSupabaseConfigured()) {
-      await this.syncFromSupabase();
-    }
-    return this.getBySlug(slug);
-  },
-
-  delete(slug: string): boolean {
-    const all = ensureInitialized();
-    const filtered = all.filter((c) => !matchSlug(c.slug, slug));
-    if (filtered.length !== all.length) {
-      persistCases(filtered);
-
-      // Remove from content/cases/${slug}.json on disk
-      try {
-        const node = getNodeModules();
-        if (node) {
-          const { fs, path } = node;
-          const casesDir = path.join(process.cwd(), 'content', 'cases');
-          const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-          const possiblePaths = [
-            path.join(casesDir, `${slug}.json`),
-            path.join(casesDir, `${cleanSlug}.json`),
-          ];
-          for (const p of possiblePaths) {
-            if (fs.existsSync(/*turbopackIgnore: true*/ p)) {
-              fs.unlinkSync(/*turbopackIgnore: true*/ p);
-            }
-          }
-        }
-      } catch (diskErr) {
-        console.warn('Could not delete disk case file:', diskErr);
-      }
-
-      if (isSupabaseConfigured()) {
-        import('@/lib/supabase').then(async ({ saveDynamicCasesToSupabase, getSupabaseAdmin, getSupabase }) => {
-          try {
-            await saveDynamicCasesToSupabase(filtered);
-          } catch (e) {
-            console.warn('Supabase storage delete error:', e);
-          }
-
-          try {
-            const client = getSupabaseAdmin() || getSupabase();
-            if (client) {
-              const res = await client
-                .from('cases')
-                .delete()
-                .eq('slug', slug);
-              if (res.error) console.warn('Supabase delete error:', res.error.message);
-            }
-          } catch (err) {
-            console.warn('Supabase delete exception:', err);
-          }
-        });
-      }
-      return true;
-    }
-    return false;
-  },
-
-  setPublishStatus(slug: string, publish: boolean): CaseData | null {
-    return this.update(slug, {
-      status: publish ? 'PUBLISHED' : 'DRAFT',
-    });
-  },
-
   /**
-   * Sync all cases from Supabase (storage or table) into memory and disk cache
+   * Sync all cases directly from Supabase PostgreSQL Database into memory cache
    */
   async syncFromSupabase(): Promise<boolean> {
     if (!isSupabaseConfigured()) return false;
 
     try {
-      const { loadDynamicCasesFromSupabase } = await import('@/lib/supabase');
-      
-      // 1. Try loading from Supabase Storage JSON (authoritative & works with anon key)
-      const storageCases = await loadDynamicCasesFromSupabase();
-      if (Array.isArray(storageCases) && storageCases.length > 0) {
-        const current = ensureInitialized();
-        const currentMap = new Map<string, CaseData>();
-        current.forEach((c) => currentMap.set(c.slug, c));
-
-        const normalizedList: CaseData[] = storageCases.map((row: any) => {
-          const norm = normalizeCaseData(row);
-          const existing = currentMap.get(norm.slug);
-          const maxViews = Math.max(
-            typeof existing?.views === 'number' ? existing.views : 0,
-            typeof norm.views === 'number' ? norm.views : 0
-          );
-          return {
-            ...norm,
-            views: maxViews,
-          };
-        });
-
-        persistCases(normalizedList);
+      const dbCases = await fetchCasesFromSupabase();
+      if (Array.isArray(dbCases) && dbCases.length > 0) {
+        cachedCases = dbCases.map(normalizeCaseData);
         lastSupabaseFetchTime = Date.now();
         return true;
       }
-
-      // 2. Fallback: try querying Supabase 'cases' table
-      const client = getSupabase() || getSupabaseAdmin();
-      if (client) {
-        const { data, error } = await client
-          .from('cases')
-          .select('*')
-          .order('updated_at', { ascending: false });
-
-        if (!error && Array.isArray(data) && data.length > 0) {
-          const current = ensureInitialized();
-          const currentMap = new Map<string, CaseData>();
-          current.forEach((c) => currentMap.set(c.slug, c));
-
-          const normalizedList: CaseData[] = data.map((row: any) => {
-            const norm = normalizeCaseData(row);
-            const existing = currentMap.get(norm.slug);
-            const maxViews = Math.max(
-              typeof existing?.views === 'number' ? existing.views : 0,
-              typeof norm.views === 'number' ? norm.views : 0
-            );
-            return {
-              ...norm,
-              views: maxViews,
-            };
-          });
-
-          persistCases(normalizedList);
-          lastSupabaseFetchTime = Date.now();
-          return true;
-        }
-      }
     } catch (err) {
-      console.warn('Supabase sync exception:', err);
+      console.warn('Supabase database sync exception:', err);
     }
     return false;
   },

@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 import { CaseStore } from '@/lib/db/caseStore';
 import { processCaseIngestion } from '@/lib/ai/pipeline';
 import { isRequestAuthenticated } from '@/lib/auth';
@@ -44,20 +42,8 @@ export async function POST(request: NextRequest) {
     // Process using AI extraction & structuring pipeline
     const generatedCase = await processCaseIngestion(body);
 
-    // Persist as JSON file in content/cases/
-    try {
-      const casesDir = path.join(process.cwd(), 'content', 'cases');
-      if (!fs.existsSync(casesDir)) {
-        fs.mkdirSync(casesDir, { recursive: true });
-      }
-      const caseFilePath = path.join(casesDir, `${generatedCase.slug}.json`);
-      fs.writeFileSync(caseFilePath, JSON.stringify(generatedCase, null, 2), 'utf8');
-    } catch (fsErr) {
-      console.warn('Could not write case file directly to disk (serverless mode):', fsErr);
-    }
-
-    // Save to dynamic store with ADMIN_REVIEW status
-    const savedCase = CaseStore.create(generatedCase as any);
+    // Save directly to Supabase Database with ADMIN_REVIEW status
+    const savedCase = await CaseStore.create(generatedCase as any);
 
     // Send Admin Notification Email
     try {
@@ -75,5 +61,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-

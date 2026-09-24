@@ -5,7 +5,7 @@ import { Top10Carousel } from '@/components/Top10Carousel';
 import { PosterCard } from '@/components/PosterCard';
 import { CourtroomExperienceShowcase } from '@/components/CourtroomExperienceShowcase';
 import { HomeSectionNav } from '@/components/HomeSectionNav';
-import { getAllCases, getPublishedCases, getFeaturedCases, getTop10Cases } from '@/lib/cases';
+import { getAllCases, getPublishedCases, getPublishedCasesAsync, getFeaturedCases, getTop10Cases } from '@/lib/cases';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -20,10 +20,21 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
-  const allCases = getPublishedCases();
-  const top10Cases = getTop10Cases();
-  const featuredCase = getFeaturedCases()[0] || allCases[0];
+export default async function HomePage() {
+  const allCases = await getPublishedCasesAsync();
+  const top10Cases = [...allCases]
+    .filter((c) => {
+      const r = (c as any).rank;
+      if (typeof r === 'number' && r > 10) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      const rankA = typeof (a as any).rank === 'number' ? (a as any).rank : 100;
+      const rankB = typeof (b as any).rank === 'number' ? (b as any).rank : 100;
+      return rankA - rankB;
+    })
+    .slice(0, 10);
+  const featuredCase = allCases.find((c) => c.featured) || allCases[0];
 
   return (
     <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#0E1016] text-[#F3EFE6] relative md:snap-y md:snap-proximity scroll-smooth">

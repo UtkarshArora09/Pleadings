@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const query = searchParams.get('q')?.toLowerCase();
 
     const all = await CaseStore.getAllAsync();
-    let cases = all.filter((c) => c.status === 'PUBLISHED' || !c.status);
+    let cases = all.filter((c) => c.status === 'PUBLISHED');
 
     if (genre && genre !== 'ALL') {
       cases = cases.filter((c) => c.genre === genre || c.categoryTag === genre);
@@ -20,11 +20,11 @@ export async function GET(request: Request) {
     if (query) {
       cases = cases.filter(
         (c) =>
-          c.title.en.toLowerCase().includes(query) ||
-          c.title.hi.toLowerCase().includes(query) ||
-          c.court.toLowerCase().includes(query) ||
-          c.citation.toLowerCase().includes(query) ||
-          c.tag.en.toLowerCase().includes(query)
+          c.title?.en?.toLowerCase()?.includes(query) ||
+          c.title?.hi?.toLowerCase()?.includes(query) ||
+          c.court?.toLowerCase()?.includes(query) ||
+          c.citation?.toLowerCase()?.includes(query) ||
+          c.tag?.en?.toLowerCase()?.includes(query)
       );
     }
 
