@@ -185,6 +185,8 @@ export function normalizeCaseData(raw: any): CaseData {
             howToDistinguish: [`Distinguish on facts if intentional misconduct or statutory exceptions do not apply.`],
           },
         },
+        personas: (epNum === 2 ? (source.characters || p.characters) : undefined),
+        characters: (epNum === 2 ? (source.characters || p.characters) : undefined),
         image: p.image || p.photoExhibitSrc ? { src: p.image || p.photoExhibitSrc, alt: headlineText, provenance: 'illustration' as const } : undefined,
         endHook: epNum < 8 ? 'How did the proceedings unfold?' : 'Case dossier complete.',
       };
@@ -207,6 +209,8 @@ export function normalizeCaseData(raw: any): CaseData {
         n: ep.n || idx + 1,
         kicker: ep.kicker || (p?.eyebrow ? (typeof p.eyebrow === 'string' ? p.eyebrow : p.eyebrow.en) : `EPISODE 0${idx + 1}`),
         title: ep.title || (p?.headline ? (typeof p.headline === 'string' ? p.headline : p.headline.en) : `Episode ${idx + 1}`),
+        personas: ep.personas || (idx === 1 ? (source.characters || ep.characters) : undefined),
+        characters: ep.characters || (idx === 1 ? (source.characters || ep.personas) : undefined),
         layers: {
           story: {
             ...ep.layers?.story,
@@ -332,7 +336,7 @@ export const CaseStore = {
     if (cachedCases && cachedCases.length > 0) {
       // Refresh cache in background if TTL expired
       if (isSupabaseConfigured() && Date.now() - lastSupabaseFetchTime > CACHE_TTL_MS) {
-        this.syncFromSupabase().catch(() => {});
+        this.syncFromSupabase().catch(() => { });
       }
       return cachedCases;
     }

@@ -26,6 +26,8 @@ import { SubsequentHistory } from './layers/SubsequentHistory';
 import { AdvocateReference } from './layers/AdvocateReference';
 import { EpisodeQuestionCard } from './layers/EpisodeQuestionCard';
 import { LawyerEpisodeStream } from './layers/LawyerEpisodeStream';
+import { CharacterRoster } from '@/components/CharacterRoster';
+import { hasPersonaFormat, extractPersonasFromText } from '@/lib/parsePersonas';
 import { useApp } from '@/context/AppContext';
 
 interface CaseViewerProps {
@@ -211,32 +213,32 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const lawyerEps = caseData.lawyerEpisodes && caseData.lawyerEpisodes.length > 0
     ? caseData.lawyerEpisodes
     : [
-        { id: 'lawyer-ep-1', n: 1, kicker: 'LAWYER EP 01', title: 'Statutory Text' },
-        { id: 'lawyer-ep-2', n: 2, kicker: 'LAWYER EP 02', title: 'Court Holdings' },
-        { id: 'lawyer-ep-3', n: 3, kicker: 'LAWYER EP 03', title: 'Precedents' },
-        { id: 'lawyer-ep-4', n: 4, kicker: 'LAWYER EP 04', title: 'Citator History' },
-        { id: 'lawyer-ep-5', n: 5, kicker: 'LAWYER EP 05', title: 'Citation Index' },
-      ];
+      { id: 'lawyer-ep-1', n: 1, kicker: 'LAWYER EP 01', title: 'Statutory Text' },
+      { id: 'lawyer-ep-2', n: 2, kicker: 'LAWYER EP 02', title: 'Court Holdings' },
+      { id: 'lawyer-ep-3', n: 3, kicker: 'LAWYER EP 03', title: 'Precedents' },
+      { id: 'lawyer-ep-4', n: 4, kicker: 'LAWYER EP 04', title: 'Citator History' },
+      { id: 'lawyer-ep-5', n: 5, kicker: 'LAWYER EP 05', title: 'Citation Index' },
+    ];
 
   const episodeRailItems = depth === 'advocate'
     ? [
-        { id: 'case-header', label: 'BRIEF', epNumber: '00' },
-        ...lawyerEps.map((ep, i) => ({
-          id: ep.id || `lawyer-ep-${i + 1}`,
-          label: `ADV ${i + 1}`,
-          epNumber: `0${i + 1}`,
-        })),
-        { id: 'case-dossier', label: 'INDEX', epNumber: '06' },
-      ]
+      { id: 'case-header', label: 'BRIEF', epNumber: '00' },
+      ...lawyerEps.map((ep, i) => ({
+        id: ep.id || `lawyer-ep-${i + 1}`,
+        label: `ADV ${i + 1}`,
+        epNumber: `0${i + 1}`,
+      })),
+      { id: 'case-dossier', label: 'INDEX', epNumber: '06' },
+    ]
     : [
-        { id: 'case-header', label: 'BRIEF', epNumber: '00' },
-        ...episodes.map((_, i) => ({
-          id: `episode-${i + 1}`,
-          label: `EP ${i + 1}`,
-          epNumber: `0${i + 1}`,
-        })),
-        { id: 'case-dossier', label: 'RATIO', epNumber: '09' },
-      ];
+      { id: 'case-header', label: 'BRIEF', epNumber: '00' },
+      ...episodes.map((_, i) => ({
+        id: `episode-${i + 1}`,
+        label: `EP ${i + 1}`,
+        epNumber: `0${i + 1}`,
+      })),
+      { id: 'case-dossier', label: 'RATIO', epNumber: '09' },
+    ];
 
   return (
     <div
@@ -278,11 +280,10 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
         <div className="flex items-center gap-1.5 shrink-0">
           <button
             onClick={() => toggleBookmark(caseData.slug)}
-            className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1 ${
-              bookmarked
+            className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1 ${bookmarked
                 ? 'bg-[#E50914] text-white border-[#E50914]'
                 : 'bg-white/5 hover:bg-white/10 text-white/80 border-white/15'
-            }`}
+              }`}
             title={bookmarked ? 'Saved in library' : 'Save case'}
           >
             <span>{bookmarked ? '✓' : '+'}</span>
@@ -306,11 +307,10 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
               aria-label={item.label}
             >
               <span
-                className={`block rounded-full transition-all duration-300 ${
-                  isActive
+                className={`block rounded-full transition-all duration-300 ${isActive
                     ? 'w-1.5 h-4 bg-white/80'
                     : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
-                }`}
+                  }`}
               />
             </button>
           );
@@ -377,9 +377,8 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
 
         {/* Dedicated Mode Streams with 180ms Crossfade */}
         <div
-          className={`transition-opacity duration-180 ${
-            isCrossfading ? 'opacity-0' : 'opacity-100'
-          }`}
+          className={`transition-opacity duration-180 ${isCrossfading ? 'opacity-0' : 'opacity-100'
+            }`}
         >
           {depth === 'advocate' ? (
             /* Advocate / Lawyer Mode: 5 Dedicated Lawyer Episodes Flow */
@@ -447,25 +446,62 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
 
                   {/* Episode Content with Blur Gate for Locked Verdict */}
                   <div className={`space-y-4 ${isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''}`}>
-                    {/* Sourced Blocks */}
-                    {(currentLayer.blocks || []).map((block, bIdx) => {
-                      const isAmber = block.source.tier === 'AMBER';
-                      let isFirstAmber = false;
-                      if (isAmber && !hasFoundAmber) {
-                        hasFoundAmber = true;
-                        isFirstAmber = true;
-                      }
+                    {/* Sourced Blocks and Dynamic Persona Columns (Story & Student Modes) */}
+                    {(() => {
+                      const explicitPersonas = (ep.personas && ep.personas.length > 0)
+                        ? ep.personas
+                        : (ep.characters && ep.characters.length > 0)
+                        ? ep.characters
+                        : null;
+
+                      let hasRenderedPersonas = false;
+
+                      const renderedBlocks = (currentLayer.blocks || []).map((block, bIdx) => {
+                        const isAmber = block.source?.tier === 'AMBER';
+                        let isFirstAmber = false;
+                        if (isAmber && !hasFoundAmber) {
+                          hasFoundAmber = true;
+                          isFirstAmber = true;
+                        }
+
+                        // If text contains embedded personas (e.g. PERSONA 1 ... PERSONA 2 ...)
+                        if (hasPersonaFormat(block.text)) {
+                          hasRenderedPersonas = true;
+                          const parsed = extractPersonasFromText(block.text);
+                          return (
+                            <CharacterRoster
+                              key={bIdx}
+                              personas={parsed}
+                            />
+                          );
+                        }
+
+                        return (
+                          <SourcedBlock
+                            key={bIdx}
+                            block={block}
+                            isFirstAmber={isFirstAmber}
+                            onOpenSource={(src) => setActiveSource(src)}
+                            onOpenTerm={(term) => setActiveTermSlug(term)}
+                          />
+                        );
+                      });
+
+                      // If episode has explicit personas configured and wasn't parsed from raw text
+                      const explicitPersonaRoster = (!hasRenderedPersonas && explicitPersonas && (depth === 'story' || depth === 'student')) ? (
+                        <CharacterRoster
+                          key="explicit-personas"
+                          personas={explicitPersonas}
+                        />
+                      ) : null;
 
                       return (
-                        <SourcedBlock
-                          key={bIdx}
-                          block={block}
-                          isFirstAmber={isFirstAmber}
-                          onOpenSource={(src) => setActiveSource(src)}
-                          onOpenTerm={(term) => setActiveTermSlug(term)}
-                        />
+                        <>
+                          {renderedBlocks}
+                          {explicitPersonaRoster}
+                        </>
                       );
-                    })}
+                    })()}
 
                     {/* Student Layer: Ratio / Obiter / Dissent / Exam Angle + Interactive Questions */}
                     {depth === 'student' && (

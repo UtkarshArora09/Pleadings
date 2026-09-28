@@ -33,6 +33,14 @@ export default function NewCasePage() {
     parallelCitations: '',
   });
 
+  const [personas, setPersonas] = useState<
+    { name: string; role: string; tag: string; description: string }[]
+  >([
+    { name: '', role: 'Petitioner / Accused', tag: 'Aggrieved Party', description: '' },
+    { name: '', role: 'Respondent / State', tag: 'Opposing Authority', description: '' },
+    { name: '', role: 'Key Witness / Eyewitness', tag: 'Primary Evidence', description: '' },
+  ]);
+
   const [flashcards, setFlashcards] = useState<{ q: string; a: string }[]>([
     { q: '', a: '' }
   ]);
@@ -119,6 +127,7 @@ export default function NewCasePage() {
 
       const studentFlashcards = flashcards.filter((f) => f.q.trim() && f.a.trim());
       const advocateSubsequentHistory = subsequentHistory.filter((h) => h.case.trim() && h.note.trim());
+      const validPersonas = personas.filter((p) => p.name.trim() || p.description.trim());
 
       const res = await fetch('/api/admin/cases', {
         method: 'POST',
@@ -126,6 +135,7 @@ export default function NewCasePage() {
         body: JSON.stringify({
           ...formData,
           rank: formData.makeTrendingTop10 ? formData.rank : 99,
+          personas: validPersonas.length > 0 ? validPersonas : undefined,
           studentRatio: formData.studentRatio || undefined,
           studentObiter: studentObiterList.length > 0 ? studentObiterList : undefined,
           studentExamAngle: formData.studentExamAngle || undefined,
@@ -414,6 +424,125 @@ export default function NewCasePage() {
               onChange={(e) => setFormData({ ...formData, judgmentText: e.target.value })}
               className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3 rounded-xs focus:outline-none leading-relaxed font-mono text-xs"
             />
+          </div>
+        </div>
+
+        {/* Step 3.5: Episode 02 · Dramatis Personae (Dynamic Personas 1 till 6 / N) */}
+        <div className="bg-[#121520] border border-[#D4AF37]/30 p-6 rounded-xs space-y-4 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-white/10 gap-2">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                  Episode 02 · Dramatis Personae ({personas.length} Personas)
+                </h2>
+              </div>
+              <p className="text-xs text-[#a9a49a] mt-1">
+                Configure key litigants, bench, and witnesses. Displayed in both Story & Student modes as distinct column cards.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                const nextNum = personas.length + 1;
+                setPersonas([
+                  ...personas,
+                  {
+                    name: '',
+                    role: nextNum === 1 ? 'Petitioner / Accused' : nextNum === 2 ? 'Respondent / State' : nextNum === 3 ? 'Victim / Complainant' : nextNum === 4 ? 'Key Witness' : nextNum === 5 ? 'Coram / Bench' : 'Senior Counsel',
+                    tag: 'Legal Litigant',
+                    description: '',
+                  },
+                ]);
+              }}
+              className="px-3 py-1.5 bg-[#D4AF37]/20 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black border border-[#D4AF37]/40 text-xs font-mono font-bold uppercase rounded-xs transition-all cursor-pointer flex items-center gap-1 self-start sm:self-auto"
+            >
+              <span>+</span>
+              <span>Add Persona</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {personas.map((persona, pIdx) => (
+              <div key={pIdx} className="bg-black/40 border border-white/10 hover:border-[#D4AF37]/50 p-4 rounded-xs space-y-3 transition-all">
+                <div className="flex items-center justify-between pb-1.5 border-b border-white/5">
+                  <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
+                    PERSONA 0{pIdx + 1}
+                  </span>
+                  {personas.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setPersonas(personas.filter((_, i) => i !== pIdx))}
+                      className="text-[10px] font-mono text-red-400 hover:text-red-300 uppercase cursor-pointer"
+                    >
+                      ✕ Remove
+                    </button>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Name / Litigant Title</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Shah Bano Begum"
+                    value={persona.name}
+                    onChange={(e) => {
+                      const updated = [...personas];
+                      updated[pIdx].name = e.target.value;
+                      setPersonas(updated);
+                    }}
+                    className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs font-bold"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Role Pill</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Petitioner / Wife"
+                      value={persona.role}
+                      onChange={(e) => {
+                        const updated = [...personas];
+                        updated[pIdx].role = e.target.value;
+                        setPersonas(updated);
+                      }}
+                      className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Tag / Title</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Indigent Wife"
+                      value={persona.tag}
+                      onChange={(e) => {
+                        const updated = [...personas];
+                        updated[pIdx].tag = e.target.value;
+                        setPersonas(updated);
+                      }}
+                      className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Description</label>
+                  <textarea
+                    rows={3}
+                    placeholder="Key facts and relevance in this case..."
+                    value={persona.description}
+                    onChange={(e) => {
+                      const updated = [...personas];
+                      updated[pIdx].description = e.target.value;
+                      setPersonas(updated);
+                    }}
+                    className="w-full bg-[#121520] border border-white/10 text-xs text-[#c9c5bc] p-2 rounded-xs"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

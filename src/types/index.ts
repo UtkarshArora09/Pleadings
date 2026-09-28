@@ -112,18 +112,18 @@ export interface JudgeDecision {
 export interface StoryPanel {
   id: string;
   type:
-    | 'HOOK'
-    | 'PEOPLE'
-    | 'INCIDENT'
-    | 'TIMELINE'
-    | 'EVIDENCE'
-    | 'ARGUMENTS'
-    | 'YOU_DECIDE'
-    | 'VERDICT'
-    | 'RATIO'
-    | 'SETUP'
-    | 'LAW'
-    | 'AFTERMATH';
+  | 'HOOK'
+  | 'PEOPLE'
+  | 'INCIDENT'
+  | 'TIMELINE'
+  | 'EVIDENCE'
+  | 'ARGUMENTS'
+  | 'YOU_DECIDE'
+  | 'VERDICT'
+  | 'RATIO'
+  | 'SETUP'
+  | 'LAW'
+  | 'AFTERMATH';
   eyebrow: {
     en: string;
     hi: string;
@@ -280,6 +280,7 @@ export interface AdminIngestPayload {
   enrolmentNumber?: string;
   bench?: string[];
   decidedOn?: string;
+  personas?: import('./case').PersonaItem[];
   // Student Layer Ingestion Fields
   studentRatio?: string;
   studentObiter?: string[];

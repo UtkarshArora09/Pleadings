@@ -3,7 +3,8 @@
 import React, { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { CaseData, StoryPanel, Episode } from '@/types';
+import { CaseData, StoryPanel, Episode, PersonaItem } from '@/types';
+import { extractPersonasFromText, hasPersonaFormat } from '@/lib/parsePersonas';
 import {
   getCaseVisualPrompts,
   getArchetypePrompt,
@@ -230,10 +231,10 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
           ...(targetSlot === 'verdict' ? { verdict: data.prompts.verdict } : {}),
           ...(!targetSlot || targetSlot === 'all'
             ? {
-                poster: data.prompts.poster,
-                exhibit: data.prompts.exhibit,
-                verdict: data.prompts.verdict,
-              }
+              poster: data.prompts.poster,
+              exhibit: data.prompts.exhibit,
+              verdict: data.prompts.verdict,
+            }
             : {}),
         }));
         setSmartPromptProvider(`⚡ Prompts crafted via ${data.provider}`);
@@ -279,77 +280,77 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     }
   };
 
-async function compressImageForUpload(
-  file: File,
-  maxWidth = 1024,
-  maxHeight = 576,
-  quality = 0.65
-): Promise<{ blob: Blob; dataUrl: string; fileName: string }> {
-  return new Promise((resolve) => {
-    if (file.type === 'image/svg+xml') {
+  async function compressImageForUpload(
+    file: File,
+    maxWidth = 1024,
+    maxHeight = 576,
+    quality = 0.65
+  ): Promise<{ blob: Blob; dataUrl: string; fileName: string }> {
+    return new Promise((resolve) => {
+      if (file.type === 'image/svg+xml') {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = (reader.result as string) || '';
+          resolve({ blob: file, dataUrl, fileName: file.name });
+        };
+        reader.onerror = () => resolve({ blob: file, dataUrl: '', fileName: file.name });
+        reader.readAsDataURL(file);
+        return;
+      }
+
       const reader = new FileReader();
-      reader.onload = () => {
-        const dataUrl = (reader.result as string) || '';
-        resolve({ blob: file, dataUrl, fileName: file.name });
+      reader.onload = (readerEvent) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth || height > maxHeight) {
+            const ratio = Math.min(maxWidth / width, maxHeight / height);
+            width = Math.round(width * ratio);
+            height = Math.round(height * ratio);
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            const dataUrl = (readerEvent.target?.result as string) || '';
+            resolve({ blob: file, dataUrl, fileName: file.name });
+            return;
+          }
+
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const outputType = 'image/jpeg';
+          const dataUrl = canvas.toDataURL(outputType, quality);
+
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || 'photo';
+                resolve({ blob, dataUrl, fileName: `${baseName}.jpg` });
+              } else {
+                resolve({ blob: file, dataUrl, fileName: file.name });
+              }
+            },
+            outputType,
+            quality
+          );
+        };
+        img.onerror = () => {
+          const dataUrl = (readerEvent.target?.result as string) || '';
+          resolve({ blob: file, dataUrl, fileName: file.name });
+        };
+        img.src = (readerEvent.target?.result as string) || '';
       };
       reader.onerror = () => resolve({ blob: file, dataUrl: '', fileName: file.name });
       reader.readAsDataURL(file);
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (readerEvent) => {
-      const img = new Image();
-      img.onload = () => {
-        let width = img.width;
-        let height = img.height;
-
-        if (width > maxWidth || height > maxHeight) {
-          const ratio = Math.min(maxWidth / width, maxHeight / height);
-          width = Math.round(width * ratio);
-          height = Math.round(height * ratio);
-        }
-
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          const dataUrl = (readerEvent.target?.result as string) || '';
-          resolve({ blob: file, dataUrl, fileName: file.name });
-          return;
-        }
-
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(img, 0, 0, width, height);
-
-        const outputType = 'image/jpeg';
-        const dataUrl = canvas.toDataURL(outputType, quality);
-
-        canvas.toBlob(
-          (blob) => {
-            if (blob) {
-              const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || 'photo';
-              resolve({ blob, dataUrl, fileName: `${baseName}.jpg` });
-            } else {
-              resolve({ blob: file, dataUrl, fileName: file.name });
-            }
-          },
-          outputType,
-          quality
-        );
-      };
-      img.onerror = () => {
-        const dataUrl = (readerEvent.target?.result as string) || '';
-        resolve({ blob: file, dataUrl, fileName: file.name });
-      };
-      img.src = (readerEvent.target?.result as string) || '';
-    };
-    reader.onerror = () => resolve({ blob: file, dataUrl: '', fileName: file.name });
-    reader.readAsDataURL(file);
-  });
-}
+    });
+  }
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'poster' | 'exhibit' | 'verdict') => {
     const file = e.target.files?.[0];
@@ -611,7 +612,7 @@ async function compressImageForUpload(
       if (typeof window !== 'undefined') {
         try {
           localStorage.setItem(`pleadings_case_${slug}`, JSON.stringify(locallyUpdated));
-        } catch {}
+        } catch { }
       }
 
       const res = await fetch(`/api/admin/cases/${slug}/publish`, {
@@ -660,11 +661,10 @@ async function compressImageForUpload(
             </Link>
             <span className="text-white/20">|</span>
             <span
-              className={`text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs inline-flex items-center gap-1 ${
-                isPublished
+              className={`text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs inline-flex items-center gap-1 ${isPublished
                   ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                   : 'bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/40'
-              }`}
+                }`}
             >
               <span className={`w-1.5 h-1.5 rounded-full ${isPublished ? 'bg-emerald-400' : 'bg-[#D4AF37]'}`} />
               <span>{caseData.status || 'ADMIN_REVIEW'}</span>
@@ -708,17 +708,15 @@ async function compressImageForUpload(
           <div className="flex items-center gap-1 bg-black/40 border border-white/10 p-0.5 rounded-xs">
             <button
               onClick={() => setActiveLanguage('en')}
-              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all cursor-pointer ${
-                activeLanguage === 'en' ? 'bg-[#D4AF37] text-[#0E1016]' : 'text-[#a9a49a] hover:text-white'
-              }`}
+              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all cursor-pointer ${activeLanguage === 'en' ? 'bg-[#D4AF37] text-[#0E1016]' : 'text-[#a9a49a] hover:text-white'
+                }`}
             >
               EN
             </button>
             <button
               onClick={() => setActiveLanguage('hi')}
-              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all cursor-pointer ${
-                activeLanguage === 'hi' ? 'bg-[#D4AF37] text-[#0E1016]' : 'text-[#a9a49a] hover:text-white'
-              }`}
+              className={`px-2.5 py-1 text-[10px] font-mono font-bold uppercase rounded-xs transition-all cursor-pointer ${activeLanguage === 'hi' ? 'bg-[#D4AF37] text-[#0E1016]' : 'text-[#a9a49a] hover:text-white'
+                }`}
             >
               हिंदी
             </button>
@@ -747,11 +745,10 @@ async function compressImageForUpload(
           <button
             onClick={handleTogglePublish}
             disabled={saving}
-            className={`px-5 py-2 text-xs font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-lg ${
-              isPublished
+            className={`px-5 py-2 text-xs font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-lg ${isPublished
                 ? 'bg-amber-500 hover:bg-amber-400 text-[#0E1016]'
                 : 'bg-emerald-500 hover:bg-emerald-400 text-[#0E1016]'
-            }`}
+              }`}
           >
             {isPublished ? 'Unpublish Case' : '🚀 Publish Case Live'}
           </button>
@@ -780,11 +777,10 @@ async function compressImageForUpload(
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`px-4 py-2 text-xs font-mono font-semibold uppercase tracking-wider rounded-xs transition-all cursor-pointer whitespace-nowrap ${
-              activeTab === tab.id
+            className={`px-4 py-2 text-xs font-mono font-semibold uppercase tracking-wider rounded-xs transition-all cursor-pointer whitespace-nowrap ${activeTab === tab.id
                 ? 'bg-[#D4AF37] text-[#0E1016] font-bold shadow-md'
                 : 'bg-white/5 text-[#a9a49a] hover:text-white border border-white/10'
-            }`}
+              }`}
           >
             {tab.label}
           </button>
@@ -997,11 +993,10 @@ async function compressImageForUpload(
                         <button
                           type="button"
                           onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'story' })}
-                          className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${
-                            currentLayer === 'story'
+                          className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${currentLayer === 'story'
                               ? 'bg-[#D4AF37] text-black shadow-md'
                               : 'text-[#a9a49a] hover:text-white hover:bg-white/5'
-                          }`}
+                            }`}
                         >
                           <span>📖</span>
                           <span>Story</span>
@@ -1010,11 +1005,10 @@ async function compressImageForUpload(
                         <button
                           type="button"
                           onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'student' })}
-                          className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${
-                            currentLayer === 'student'
+                          className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${currentLayer === 'student'
                               ? 'bg-sky-400 text-black shadow-md font-bold'
                               : 'text-[#a9a49a] hover:text-sky-300 hover:bg-white/5'
-                          }`}
+                            }`}
                         >
                           <span>🎓</span>
                           <span>Student</span>
@@ -1099,6 +1093,155 @@ async function compressImageForUpload(
                             className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#c9c5bc] p-3 rounded-xs leading-relaxed"
                           />
                         </div>
+
+                        {/* Dynamic Dramatis Personae Columns Manager (Episode 2 / Personas) */}
+                        {((idx === 1) || (ep.personas && ep.personas.length > 0) || hasPersonaFormat(ep.layers?.story?.blocks?.[0]?.text)) && (() => {
+                          const currentPersonas: PersonaItem[] = (ep.personas && ep.personas.length > 0)
+                            ? ep.personas
+                            : (ep.characters && ep.characters.length > 0)
+                            ? ep.characters
+                            : hasPersonaFormat(ep.layers?.story?.blocks?.[0]?.text)
+                            ? extractPersonasFromText(ep.layers?.story?.blocks?.[0]?.text)
+                            : [
+                                { name: 'Petitioner / Accused', role: 'Primary Litigant', tag: 'Aggrieved Party', description: '' },
+                                { name: 'Respondent / State', role: 'Opposite Party', tag: 'Defending Party', description: '' },
+                                { name: 'Trial Court / Coram', role: 'Adjudicating Body', tag: 'Court of Record', description: '' },
+                              ];
+
+                          const updatePersonas = (newPersonas: PersonaItem[]) => {
+                            const epList = ensureEpisodes();
+                            epList[idx] = {
+                              ...epList[idx],
+                              personas: newPersonas,
+                              characters: newPersonas,
+                            };
+                            setCaseData({ ...caseData, episodes: epList });
+                          };
+
+                          return (
+                            <div className="bg-black/50 border border-[#D4AF37]/40 p-4 rounded-xs space-y-3.5 my-3">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-white/10 gap-2">
+                                <div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
+                                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#D4AF37]">
+                                      Dramatis Personae Columns Manager ({currentPersonas.length} Personas)
+                                    </h4>
+                                  </div>
+                                  <p className="text-[11px] text-[#a9a49a] mt-0.5">
+                                    Rendered in both Story & Student modes as distinct stacked cards (Persona 1 to N).
+                                  </p>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const nextPNum = currentPersonas.length + 1;
+                                    const updated = [
+                                      ...currentPersonas,
+                                      {
+                                        name: '',
+                                        role: nextPNum === 1 ? 'Petitioner' : nextPNum === 2 ? 'Respondent' : nextPNum === 3 ? 'Key Witness' : nextPNum === 4 ? 'Intervener' : 'Bench / Coram',
+                                        tag: 'Litigant Entity',
+                                        description: '',
+                                      },
+                                    ];
+                                    updatePersonas(updated);
+                                  }}
+                                  className="px-3 py-1.5 bg-[#D4AF37]/20 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black border border-[#D4AF37]/40 text-xs font-mono font-bold uppercase rounded-xs transition-all cursor-pointer flex items-center gap-1 self-start sm:self-auto"
+                                >
+                                  <span>+</span>
+                                  <span>Add Persona</span>
+                                </button>
+                              </div>
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                                {currentPersonas.map((persona, pIdx) => (
+                                  <div key={pIdx} className="bg-[#141722] border border-white/10 hover:border-[#D4AF37]/50 p-3.5 rounded-xs space-y-2.5 transition-all">
+                                    <div className="flex items-center justify-between pb-1 border-b border-white/5">
+                                      <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
+                                        PERSONA 0{pIdx + 1}
+                                      </span>
+                                      {currentPersonas.length > 1 && (
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            const filtered = currentPersonas.filter((_, i) => i !== pIdx);
+                                            updatePersonas(filtered);
+                                          }}
+                                          className="text-[10px] font-mono text-red-400 hover:text-red-300 uppercase cursor-pointer"
+                                        >
+                                          ✕ Remove
+                                        </button>
+                                      )}
+                                    </div>
+
+                                    <div>
+                                      <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Name / Litigant Title</label>
+                                      <input
+                                        type="text"
+                                        placeholder="e.g. Shah Bano Begum"
+                                        value={persona.name}
+                                        onChange={(e) => {
+                                          const updated = [...currentPersonas];
+                                          updated[pIdx] = { ...updated[pIdx], name: e.target.value };
+                                          updatePersonas(updated);
+                                        }}
+                                        className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs font-bold"
+                                      />
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-2">
+                                      <div>
+                                        <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Role Pill</label>
+                                        <input
+                                          type="text"
+                                          placeholder="e.g. Petitioner / Divorced Wife"
+                                          value={persona.role}
+                                          onChange={(e) => {
+                                            const updated = [...currentPersonas];
+                                            updated[pIdx] = { ...updated[pIdx], role: e.target.value };
+                                            updatePersonas(updated);
+                                          }}
+                                          className="w-full bg-[#0A0C10] border border-white/10 text-xs text-[#D4AF37] p-2 rounded-xs"
+                                        />
+                                      </div>
+                                      <div>
+                                        <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Tag / Designation</label>
+                                        <input
+                                          type="text"
+                                          placeholder="e.g. Aggrieved Litigant"
+                                          value={persona.tag || ''}
+                                          onChange={(e) => {
+                                            const updated = [...currentPersonas];
+                                            updated[pIdx] = { ...updated[pIdx], tag: e.target.value };
+                                            updatePersonas(updated);
+                                          }}
+                                          className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
+                                        />
+                                      </div>
+                                    </div>
+
+                                    <div>
+                                      <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Persona Description</label>
+                                      <textarea
+                                        rows={3}
+                                        placeholder="Details of this persona's role, background, claims, and actions..."
+                                        value={persona.description}
+                                        onChange={(e) => {
+                                          const updated = [...currentPersonas];
+                                          updated[pIdx] = { ...updated[pIdx], description: e.target.value };
+                                          updatePersonas(updated);
+                                        }}
+                                        className="w-full bg-[#0A0C10] border border-white/10 text-xs text-[#c9c5bc] p-2 rounded-xs leading-relaxed"
+                                      />
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })()}
 
                         <div>
                           <label className="block text-[10px] font-mono text-[#D4AF37] uppercase mb-1">

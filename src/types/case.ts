@@ -51,6 +51,20 @@ export interface EpisodeLayer {
   howToDistinguish?: string[];
 }
 
+export interface PersonaItem {
+  name: string;
+  role: string;
+  tag?: string;
+  description: string;
+  badgeEmoji?: string;
+  hi?: {
+    name?: string;
+    role?: string;
+    tag?: string;
+    description?: string;
+  };
+}
+
 export interface Episode {
   n: number;
   kicker: string;           // "EPISODE 03 · THE MIDNIGHT ENCOUNTER"
@@ -60,6 +74,8 @@ export interface Episode {
     student: EpisodeLayer;
     advocate?: EpisodeLayer;
   };
+  personas?: PersonaItem[];
+  characters?: PersonaItem[];
   exhibit?: Exhibit;
   image?: { src: string; alt: string; provenance: "archival" | "illustration" };
   endHook: string;          // the line that pulls the reader to the next episode

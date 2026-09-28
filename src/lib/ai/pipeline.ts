@@ -1,6 +1,7 @@
-import { CaseFile, Episode, Exhibit, Block, CaseStatusCode } from '@/types/case';
+import { CaseFile, Episode, Exhibit, Block, CaseStatusCode, PersonaItem } from '@/types/case';
 import { validateCase } from '@/lib/validateCase';
 import { getCaseVisualPrompts } from '@/lib/ai/visualPrompts';
+import { extractPersonasFromText, hasPersonaFormat } from '@/lib/parsePersonas';
 
 export interface AdminIngestPayload {
   title: string;
@@ -18,6 +19,7 @@ export interface AdminIngestPayload {
   enrolmentNumber?: string;
   bench?: string[];
   decidedOn?: string;
+  personas?: PersonaItem[];
   // Student Layer Ingestion Fields
   studentRatio?: string;
   studentObiter?: string[];
@@ -222,6 +224,37 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
   const hookWords = `Landmark trial on ${statuteSections} before ${court} in ${year}.`.split(' ');
   const hook = hookWords.slice(0, 12).join(' ');
 
+  // Compute Dynamic Personas for Episode 02 (Dramatis Personae)
+  let ep2Personas: PersonaItem[] = [];
+  if (payload.personas && payload.personas.length > 0) {
+    ep2Personas = payload.personas;
+  } else if (hasPersonaFormat(p2)) {
+    ep2Personas = extractPersonasFromText(p2);
+  } else if (hasPersonaFormat(factsSummary)) {
+    ep2Personas = extractPersonasFromText(factsSummary);
+  } else {
+    ep2Personas = [
+      {
+        name: `${title.split('v.')[0]?.trim() || 'Petitioner'}`,
+        role: 'The Petitioner / Aggrieved Litigant',
+        tag: 'Litigant Party',
+        description: `The primary claimant initiating the proceedings regarding ${statuteSections}.`,
+      },
+      {
+        name: `${title.split('v.')[1]?.trim() || 'State of India / Respondent'}`,
+        role: 'The Respondent / Opposite Party',
+        tag: 'Opposing Litigant',
+        description: `Contested the statutory claims and defended legal procedure under ${statuteSections}.`,
+      },
+      {
+        name: `${court} Bench & Officers`,
+        role: 'Adjudicating Authority',
+        tag: 'Court Coram',
+        description: `Heard the evidentiary arguments and delivered the authoritative judgment.`,
+      },
+    ];
+  }
+
   // Construct 8 Contractual Episodes
   const episodeDefinitions = [
     {
@@ -236,6 +269,8 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
       kicker: 'EPISODE 02 · DRAMATIS PERSONAE',
       title: 'The Parties & The Encounter',
       storyText: p2,
+      personas: ep2Personas,
+      characters: ep2Personas,
       exhibit: {
         kind: 'record' as const,
         label: 'THE STATESMAN · ARCHIVAL PRESS DISPATCH',
@@ -340,13 +375,13 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
 
     const source = isBlack
       ? {
-          tier: 'BLACK' as const,
-          para: epDef.n === 8 ? 12 : 8,
-          paraText: epDef.storyText,
-          cite: citation,
-        }
+        tier: 'BLACK' as const,
+        para: epDef.n === 8 ? 12 : 8,
+        paraText: epDef.storyText,
+        cite: citation,
+      }
       : tier === 'BLUE'
-      ? {
+        ? {
           tier: 'BLUE' as const,
           secondary: {
             publication: 'The Statesman / Primary Docket',
@@ -354,7 +389,7 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
             url: judgmentUrl,
           },
         }
-      : {
+        : {
           tier: 'AMBER' as const,
         };
 
@@ -419,6 +454,8 @@ export async function processCaseIngestion(payload: AdminIngestPayload): Promise
           ]),
         },
       },
+      personas: (epDef as any).personas,
+      characters: (epDef as any).characters,
       exhibit: epDef.exhibit,
       image: epDef.image,
       endHook: epDef.endHook,

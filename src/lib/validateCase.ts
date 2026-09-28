@@ -85,6 +85,20 @@ const EpisodeLayerSchema = z.object({
   howToDistinguish: z.array(z.string()).optional()
 });
 
+const PersonaItemSchema = z.object({
+  name: z.string(),
+  role: z.string(),
+  tag: z.string().optional(),
+  description: z.string(),
+  badgeEmoji: z.string().optional(),
+  hi: z.object({
+    name: z.string().optional(),
+    role: z.string().optional(),
+    tag: z.string().optional(),
+    description: z.string().optional(),
+  }).optional(),
+});
+
 const EpisodeSchema = z.object({
   n: z.number(),
   kicker: z.string(),
@@ -94,6 +108,8 @@ const EpisodeSchema = z.object({
     student: EpisodeLayerSchema,
     advocate: EpisodeLayerSchema
   }),
+  personas: z.array(PersonaItemSchema).optional(),
+  characters: z.array(PersonaItemSchema).optional(),
   exhibit: ExhibitSchema.optional(),
   image: z.object({
     src: z.string(),
