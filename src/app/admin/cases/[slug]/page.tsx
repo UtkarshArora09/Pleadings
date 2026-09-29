@@ -117,8 +117,10 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     setTimeout(() => setCopiedPromptId(null), 2500);
   };
 
+  const promptsInitialized = React.useRef(false);
   useEffect(() => {
-    if (caseData) {
+    if (caseData && !promptsInitialized.current) {
+      promptsInitialized.current = true;
       const caseTitleEn = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.en || caseData.slug);
       const generated = getCaseVisualPrompts({
         title: caseTitleEn,
@@ -138,7 +140,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         verdictArchetype: prev.verdictArchetype || generated.verdict.archetypeId,
       }));
     }
-  }, [caseData?.slug, caseData?.title, slug]);
+  }, [caseData, slug]);
 
   const handleResetBaselinePrompts = () => {
     if (!caseData) return;
@@ -788,120 +790,148 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
       </div>
 
       {/* TAB 1: OVERVIEW METADATA */}
-      {activeTab === 'overview' && (
-        <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {activeTab === 'overview' && (() => {
+        const getTitleValue = () => {
+          if (!caseData) return '';
+          if (typeof caseData.title === 'string') return activeLanguage === 'en' ? caseData.title : '';
+          return caseData.title?.[activeLanguage] ?? '';
+        };
+
+        const getBlurbValue = () => {
+          if (!caseData) return '';
+          if (typeof caseData.blurb === 'string') return activeLanguage === 'en' ? caseData.blurb : '';
+          if (caseData.blurb && typeof caseData.blurb === 'object') {
+            return caseData.blurb[activeLanguage] ?? '';
+          }
+          return (caseData as any).hook ?? '';
+        };
+
+        return (
+          <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
+                  Title ({activeLanguage.toUpperCase()})
+                </label>
+                <input
+                  type="text"
+                  value={getTitleValue()}
+                  onChange={(e) => {
+                    const currentTitle = typeof caseData.title === 'object' && caseData.title !== null
+                      ? caseData.title
+                      : { en: typeof caseData.title === 'string' ? caseData.title : '', hi: '' };
+                    setCaseData({
+                      ...caseData,
+                      title: { ...currentTitle, [activeLanguage]: e.target.value },
+                    });
+                  }}
+                  className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
+                  Category Tag / Statute
+                </label>
+                <input
+                  type="text"
+                  value={caseData.categoryTag ?? ''}
+                  onChange={(e) => setCaseData({ ...caseData, categoryTag: e.target.value })}
+                  className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-bold p-2.5 rounded-xs"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Court</label>
+                <input
+                  type="text"
+                  value={caseData.court ?? ''}
+                  onChange={(e) => setCaseData({ ...caseData, court: e.target.value })}
+                  className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Year</label>
+                <input
+                  type="number"
+                  value={caseData.year !== undefined && !isNaN(caseData.year) ? caseData.year : ''}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setCaseData({ ...caseData, year: val === '' ? ('' as any) : (parseInt(val) || 0) });
+                  }}
+                  className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Legal Genre</label>
+                <select
+                  value={caseData.genre || 'constitutional'}
+                  onChange={(e) => setCaseData({ ...caseData, genre: e.target.value as any })}
+                  className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-bold p-2.5 rounded-xs"
+                >
+                  <option value="constitutional">Constitutional</option>
+                  <option value="crime">Criminal / Crime Noir</option>
+                  <option value="cyber">Cyber Law</option>
+                  <option value="consumer">Consumer Protection</option>
+                  <option value="tort">Corporate & Tort</option>
+                </select>
+              </div>
+            </div>
+
             <div>
               <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
-                Title ({activeLanguage.toUpperCase()})
+                Catalog Blurb ({activeLanguage.toUpperCase()})
               </label>
-              <input
-                type="text"
-                value={(typeof caseData.title === 'string' ? caseData.title : caseData.title?.[activeLanguage]) || ''}
-                onChange={(e) =>
+              <textarea
+                rows={3}
+                value={getBlurbValue()}
+                onChange={(e) => {
+                  const currentBlurb = typeof caseData.blurb === 'object' && caseData.blurb !== null
+                    ? caseData.blurb
+                    : { en: typeof caseData.blurb === 'string' ? caseData.blurb : (caseData as any).hook || '', hi: '' };
+                  const newBlurb = { ...currentBlurb, [activeLanguage]: e.target.value };
                   setCaseData({
                     ...caseData,
-                    title: { ...(typeof caseData.title === 'object' ? caseData.title : { en: String(caseData.title || ''), hi: String(caseData.title || '') }), [activeLanguage]: e.target.value },
-                  })
-                }
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
+                    blurb: newBlurb,
+                    ...((caseData as any)?.hook !== undefined ? { hook: activeLanguage === 'en' ? e.target.value : (caseData as any).hook } : {}),
+                  } as any);
+                }}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3 rounded-xs"
               />
             </div>
 
-            <div>
-              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
-                Category Tag / Statute
-              </label>
-              <input
-                type="text"
-                value={caseData.categoryTag || ''}
-                onChange={(e) => setCaseData({ ...caseData, categoryTag: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-bold p-2.5 rounded-xs"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
+                  Official Law Citation
+                </label>
+                <input
+                  type="text"
+                  value={caseData.citation ?? ''}
+                  onChange={(e) => setCaseData({ ...caseData, citation: e.target.value })}
+                  className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs font-mono"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
+                  Certified Judgment URL
+                </label>
+                <input
+                  type="url"
+                  value={caseData.judgmentUrl ?? ''}
+                  onChange={(e) => setCaseData({ ...caseData, judgmentUrl: e.target.value })}
+                  className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs font-mono"
+                />
+              </div>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Court</label>
-              <input
-                type="text"
-                value={caseData.court || ''}
-                onChange={(e) => setCaseData({ ...caseData, court: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Year</label>
-              <input
-                type="number"
-                value={caseData.year || 2020}
-                onChange={(e) => setCaseData({ ...caseData, year: parseInt(e.target.value) || 2020 })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">Legal Genre</label>
-              <select
-                value={caseData.genre || 'constitutional'}
-                onChange={(e) => setCaseData({ ...caseData, genre: e.target.value as any })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-bold p-2.5 rounded-xs"
-              >
-                <option value="constitutional">Constitutional</option>
-                <option value="crime">Criminal / Crime Noir</option>
-                <option value="cyber">Cyber Law</option>
-                <option value="consumer">Consumer Protection</option>
-                <option value="tort">Corporate & Tort</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
-              Catalog Blurb ({activeLanguage.toUpperCase()})
-            </label>
-            <textarea
-              rows={3}
-              value={(typeof caseData.blurb === 'string' ? caseData.blurb : caseData.blurb?.[activeLanguage]) || (caseData as any).hook || ''}
-              onChange={(e) =>
-                setCaseData({
-                  ...caseData,
-                  blurb: { ...(typeof caseData.blurb === 'object' ? caseData.blurb : { en: String(caseData.blurb || (caseData as any).hook || ''), hi: String(caseData.blurb || (caseData as any).hook || '') }), [activeLanguage]: e.target.value },
-                })
-              }
-              className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3 rounded-xs"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
-                Official Law Citation
-              </label>
-              <input
-                type="text"
-                value={caseData.citation || ''}
-                onChange={(e) => setCaseData({ ...caseData, citation: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs font-mono"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
-                Certified Judgment URL
-              </label>
-              <input
-                type="url"
-                value={caseData.judgmentUrl || ''}
-                onChange={(e) => setCaseData({ ...caseData, judgmentUrl: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-2.5 rounded-xs font-mono"
-              />
-            </div>
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* TAB 2: STORY & DEPTH LAYERS (CUSTOMIZABLE EPISODES) */}
       {activeTab === 'panels' && (() => {

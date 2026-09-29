@@ -8,9 +8,13 @@ function formatCaseDataToCaseFile(dyn: any): CaseFile {
       : dyn.title?.en || dyn.slug || 'Untitled Case';
 
   const hookStr =
-    typeof dyn.hook === 'string'
-      ? dyn.hook
-      : dyn.hook?.en || dyn.blurb?.en || dyn.featuredHeroHook?.en || '';
+    typeof dyn.blurb === 'string'
+      ? dyn.blurb
+      : (dyn.blurb?.en !== undefined
+          ? dyn.blurb.en
+          : (typeof dyn.hook === 'string'
+              ? dyn.hook
+              : (dyn.hook?.en || dyn.featuredHeroHook?.en || '')));
 
   const posterImg = dyn.poster?.src
     ? dyn.poster

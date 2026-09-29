@@ -84,17 +84,41 @@ export function normalizeCaseData(raw: any): CaseData {
   // If raw comes from Supabase JSON column 'data' or top-level row
   const source = raw.data || raw;
 
-  const titleEn = typeof source.title === 'string' ? source.title : (source.title?.en || source.slug || 'Untitled Case');
-  const titleHi = typeof source.title === 'string' ? source.title : (source.title?.hi || titleEn);
+  const titleEn = typeof source.title === 'string'
+    ? source.title
+    : (source.title?.en !== undefined ? source.title.en : (source.slug || 'Untitled Case'));
+  const titleHi = typeof source.title === 'string'
+    ? source.title
+    : (source.title?.hi !== undefined ? source.title.hi : titleEn);
 
-  const hookEn = typeof source.hook === 'string' ? source.hook : (source.blurb?.en || source.featuredHeroHook?.en || '');
-  const hookHi = typeof source.hi?.hook === 'string' ? source.hi.hook : (source.blurb?.hi || source.featuredHeroHook?.hi || hookEn);
+  const blurbEn = typeof source.blurb === 'string'
+    ? source.blurb
+    : (source.blurb?.en !== undefined
+        ? source.blurb.en
+        : (typeof source.hook === 'string'
+            ? source.hook
+            : (typeof source.featuredHeroHook === 'string'
+                ? source.featuredHeroHook
+                : (source.featuredHeroHook?.en ?? ''))));
+
+  const blurbHi = typeof source.blurb === 'string'
+    ? source.blurb
+    : (source.blurb?.hi !== undefined
+        ? source.blurb.hi
+        : (typeof source.hi?.hook === 'string'
+            ? source.hi.hook
+            : (typeof source.featuredHeroHook === 'string'
+                ? source.featuredHeroHook
+                : (source.featuredHeroHook?.hi ?? blurbEn))));
 
   const bannerImage = source.bannerImage || source.banner_image || source.poster?.src || '/images/cases/ghost-case.jpg';
-  const court = source.court || 'Supreme Court of India';
-  const year = source.year || 2020;
-  const citation = source.citations?.primary || source.citation || `${year} INSC 1`;
-  const categoryTag = source.categoryTag || source.category_tag || source.doctrines?.[0] || source.tag?.en || 'Constitutional';
+  const court = source.court !== undefined ? source.court : 'Supreme Court of India';
+  const year = typeof source.year === 'number' && !isNaN(source.year) ? source.year : (parseInt(source.year) || 2020);
+  const citation = source.citation !== undefined ? source.citation : (source.citations?.primary || `${year} INSC 1`);
+  const categoryTag = source.categoryTag !== undefined
+    ? source.categoryTag
+    : (source.category_tag || source.doctrines?.[0] || (typeof source.tag === 'string' ? source.tag : source.tag?.en) || 'Constitutional');
+  const judgmentUrl = source.judgmentUrl !== undefined ? source.judgmentUrl : (source.sourceUrl || 'https://indiankanoon.org/');
 
   // Canonical 8 episode types in exact order
   const CANONICAL_EP_TYPES = ['HOOK', 'PEOPLE', 'INCIDENT', 'TIMELINE', 'EVIDENCE', 'ARGUMENTS', 'VERDICT', 'RATIO'] as const;
@@ -132,7 +156,7 @@ export function normalizeCaseData(raw: any): CaseData {
           type: epType,
           eyebrow: { en: `EPISODE 0${nextIdx + 1} · ${epType}`, hi: `एपिसोड 0${nextIdx + 1} · ${epType}` },
           headline: { en: `${titleEn} - Episode ${nextIdx + 1}`, hi: `${titleHi} - एपिसोड ${nextIdx + 1}` },
-          body: { en: hookEn, hi: hookHi },
+          body: { en: blurbEn, hi: blurbHi },
           photoExhibitSrc: bannerImage,
           image: bannerImage,
         });
@@ -149,7 +173,7 @@ export function normalizeCaseData(raw: any): CaseData {
         type: epType,
         eyebrow: { en: `EPISODE 0${idx + 1} · ${epType}`, hi: `एपिसोड 0${idx + 1} · ${epType}` },
         headline: { en: `${titleEn} · Episode ${idx + 1}`, hi: `${titleHi} · एपिसोड ${idx + 1}` },
-        body: { en: hookEn, hi: hookHi },
+        body: { en: blurbEn, hi: blurbHi },
         photoExhibitSrc: bannerImage,
         image: bannerImage,
       }));
@@ -160,7 +184,7 @@ export function normalizeCaseData(raw: any): CaseData {
   if (!episodes || !Array.isArray(episodes) || episodes.length < 8) {
     episodes = panels.map((p: any, idx: number) => {
       const epNum = idx + 1;
-      const bodyText = typeof p.body === 'string' ? p.body : (p.body?.en || hookEn);
+      const bodyText = typeof p.body === 'string' ? p.body : (p.body?.en || blurbEn);
       const headlineText = typeof p.headline === 'string' ? p.headline : (p.headline?.en || `${titleEn} · Episode ${epNum}`);
       const eyebrowText = typeof p.eyebrow === 'string' ? p.eyebrow : (p.eyebrow?.en || `EPISODE 0${epNum}`);
 
@@ -195,10 +219,10 @@ export function normalizeCaseData(raw: any): CaseData {
     episodes = episodes.slice(0, 8).map((ep: any, idx: number) => {
       const p = panels[idx];
       const storyBlocks = ep.layers?.story?.blocks || [
-        { type: 'para' as const, text: typeof p?.body === 'string' ? p.body : (p?.body?.en || hookEn), source: { tier: 'AMBER' as const } }
+        { type: 'para' as const, text: typeof p?.body === 'string' ? p.body : (p?.body?.en || blurbEn), source: { tier: 'AMBER' as const } }
       ];
       const studentBlocks = ep.layers?.student?.blocks || [
-        { type: 'para' as const, text: `LEGAL ANALYSIS: ${storyBlocks[0]?.text || hookEn}`, source: { tier: 'AMBER' as const } }
+        { type: 'para' as const, text: `LEGAL ANALYSIS: ${storyBlocks[0]?.text || blurbEn}`, source: { tier: 'AMBER' as const } }
       ];
       const advocateBlocks = ep.layers?.advocate?.blocks || [
         { type: 'para' as const, text: `TRIAL PROPOSITION: Standard of proof under ${categoryTag}.`, source: { tier: 'AMBER' as const } }
@@ -238,7 +262,7 @@ export function normalizeCaseData(raw: any): CaseData {
 
   const brief = source.brief || {
     courtAndYear: { en: `${court} (${year})`, hi: `${court} (${year})` },
-    facts: { en: hookEn, hi: hookHi },
+    facts: { en: blurbEn, hi: blurbHi },
     issues: { en: [source.vote?.question || `Constitutional validity and legal threshold in ${titleEn}`], hi: [source.vote?.question || `${titleEn} में कानूनी प्रश्न`] },
     chargesApplied: source.doctrines || [categoryTag],
     held: { en: source.status?.explain || source.vote?.courtChoseOptionId || 'Judgment rendered by the Bench.', hi: source.status?.explain || 'न्यायालय द्वारा दिया गया निर्णय।' },
@@ -280,17 +304,18 @@ export function normalizeCaseData(raw: any): CaseData {
     year: year,
     views: views,
     readTime: source.readTime?.en ? source.readTime : { en: `${source.readingTime?.story || 5} min read`, hi: `${source.readingTime?.story || 5} मिनट` },
-    blurb: { en: hookEn, hi: hookHi },
+    blurb: { en: blurbEn, hi: blurbHi },
+    hook: blurbEn,
     citation: citation,
-    judgmentUrl: source.judgmentUrl || source.sourceUrl || 'https://indiankanoon.org/',
+    judgmentUrl: judgmentUrl,
     watermark: source.watermark || '§',
     bannerImage: bannerImage,
     poster: source.poster || { src: bannerImage, alt: `${titleEn} cover poster`, provenance: 'illustration' },
     matchRate: source.matchRate || 98,
     maturityRating: source.maturityRating || 'U/A 13+',
     rank: typeof source.rank === 'number' ? source.rank : 10,
-    featuredHeroHook: { en: hookEn, hi: hookHi },
-    featuredHeroDesc: { en: hookEn, hi: hookHi },
+    featuredHeroHook: { en: blurbEn, hi: blurbHi },
+    featuredHeroDesc: { en: blurbEn, hi: blurbHi },
     panels: panels,
     brief: brief,
     episodes: episodes,
@@ -464,9 +489,14 @@ export const CaseStore = {
       ? updates.views
       : (typeof currentItem.views === 'number' ? currentItem.views : 0);
 
+    const updatedHook = typeof updates.blurb === 'object' && updates.blurb !== null && updates.blurb.en !== undefined
+      ? updates.blurb.en
+      : (typeof updates.blurb === 'string' ? updates.blurb : (updates as any).hook);
+
     const updatedCase: CaseData = normalizeCaseData({
       ...currentItem,
       ...updates,
+      ...(updatedHook !== undefined ? { hook: updatedHook } : {}),
       views: viewsToKeep,
       slug: updates.slug || currentItem.slug,
       updatedAt: new Date().toISOString(),

@@ -14,7 +14,14 @@ interface CasePageClientProps {
 
 function normalizeToCaseFile(raw: any, slug: string): CaseFile {
   const titleStr = typeof raw.title === 'string' ? raw.title : (raw.title?.en || raw.title?.hi || slug);
-  const hookStr = typeof raw.hook === 'string' ? raw.hook : (raw.hook?.en || raw.blurb?.en || raw.featuredHeroHook?.en || '');
+  const hookStr =
+    typeof raw.blurb === 'string'
+      ? raw.blurb
+      : (raw.blurb?.en !== undefined
+          ? raw.blurb.en
+          : (typeof raw.hook === 'string'
+              ? raw.hook
+              : (raw.hook?.en || raw.featuredHeroHook?.en || '')));
   const posterImg = raw.poster || {
     src: raw.bannerImage || '',
     alt: `${titleStr} cover poster`,
