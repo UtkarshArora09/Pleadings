@@ -246,6 +246,8 @@ export interface CaseData {
   panels: StoryPanel[];
   brief: CaseBrief;
   // Deep layer story episodes & modules
+  personas?: import('./case').PersonaItem[];
+  characters?: import('./case').PersonaItem[];
   episodes?: Episode[];
   lawyerEpisodes?: import('./case').LawyerEpisode[];
   flashcards?: { q: string; a: string }[];

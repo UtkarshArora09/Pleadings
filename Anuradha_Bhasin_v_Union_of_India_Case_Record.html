@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pleadings — Landmark Case Ingestion Record: Anuradha Bhasin v. Union of India</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  @page {
+    size: A4;
+    margin: 14mm 12mm;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1d24;
+    background: #ffffff;
+    line-height: 1.45;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    border-bottom: 2.5px solid #D4AF37;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .title-group h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 18pt;
+    color: #0E1016;
+    margin: 0 0 3px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .title-group p {
+    margin: 0;
+    font-size: 8.5pt;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .badge {
+    background: #0E1016;
+    color: #D4AF37;
+    font-size: 8pt;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  .rule-box {
+    background: #fdfbf7;
+    border-left: 4px solid #D4AF37;
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .rule-box h3 {
+    margin: 0 0 3px 0;
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #8c6d17;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .rule-box p {
+    margin: 0;
+    font-size: 8.5pt;
+    color: #444;
+  }
+
+  h2 {
+    font-size: 12pt;
+    color: #0E1016;
+    border-bottom: 1.5px solid #e2e4e8;
+    padding-bottom: 4px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h2 .num {
+    background: #D4AF37;
+    color: #0E1016;
+    font-size: 8.5pt;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+    font-size: 8.5pt;
+  }
+
+  th, td {
+    border: 1px solid #e0e3e8;
+    padding: 6px 9px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: #f4f6f9;
+    font-weight: 700;
+    color: #222;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.5px;
+  }
+
+  .field-req {
+    color: #c92a2a;
+    font-weight: 700;
+  }
+
+  .section-card {
+    background: #fafbfc;
+    border: 1px solid #e1e4e8;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+
+  .section-card h4 {
+    margin: 0 0 4px 0;
+    font-size: 9.5pt;
+    color: #0E1016;
+    font-weight: 700;
+  }
+
+  .section-card p {
+    margin: 0 0 4px 0;
+    font-size: 8.5pt;
+    color: #444;
+  }
+
+  .code-block {
+    background: #1a1e27;
+    color: #e6edf3;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    padding: 10px 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+    line-height: 1.4;
+    margin: 8px 0;
+    white-space: pre-wrap;
+  }
+
+  .disclaimer-banner {
+    background: #fff9db;
+    border: 1px solid #ffe066;
+    color: #8c6d17;
+    padding: 6px 10px;
+    font-size: 8pt;
+    border-radius: 4px;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .persona-card {
+    background: #ffffff;
+    border: 1px solid #dcdfe4;
+    border-top: 2.5px solid #D4AF37;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 8pt;
+  }
+
+  .persona-card strong {
+    color: #0E1016;
+    display: block;
+    font-size: 8.5pt;
+    margin-bottom: 2px;
+  }
+
+  .persona-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    background: #eee;
+    padding: 1px 4px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .footer {
+    margin-top: 20px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    font-size: 7.5pt;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+  <!-- PAGE 1: CASE METADATA & BRIEF -->
+  <div class="header">
+    <div class="title-group">
+      <h1>PLEADINGS</h1>
+      <p>Official Landmark Case Record & Ingestion Dossier</p>
+    </div>
+    <div class="badge">Supreme Court Certified · 2020</div>
+  </div>
+
+  <div class="rule-box">
+    <h3>Case Identification & Core Ratio</h3>
+    <p><strong>Case Title:</strong> Anuradha Bhasin v. Union of India and Others<br>
+    <strong>Primary Citation:</strong> (2020) 3 SCC 637 · <strong>Parallel Citation:</strong> AIR 2020 SC 1308 | (2020) 1 Scale 691<br>
+    <strong>Holding:</strong> Freedom of speech and trade over the internet are constitutionally protected under Article 19(1)(a) and 19(1)(g). Indefinite internet suspensions violate the constitutional doctrine of proportionality.</p>
+  </div>
+
+  <h2><span class="num">1</span> Overview & Case Metadata</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Field</th>
+        <th style="width: 25%;">Value</th>
+        <th>Legal Scope & Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Formal Case Title</strong></td>
+        <td><strong>Anuradha Bhasin v. Union of India</strong></td>
+        <td>Full formal title of the Writ Petition before the Supreme Court.</td>
+      </tr>
+      <tr>
+        <td><strong>Editorial Short Name</strong></td>
+        <td>The Kashmir Internet Blackout Case</td>
+        <td>Reader-friendly landmark name for public reference.</td>
+      </tr>
+      <tr>
+        <td><strong>Court & Year</strong></td>
+        <td>Supreme Court of India · 2020</td>
+        <td>Decided on January 10, 2020.</td>
+      </tr>
+      <tr>
+        <td><strong>Coram of Judges</strong></td>
+        <td>Ramana, N.V., J.<br>Reddy, R.S., J.<br>Gavai, B.R., J.</td>
+        <td>Three-Judge Special Constitutional Bench.</td>
+      </tr>
+      <tr>
+        <td><strong>Legal Genre & Tag</strong></td>
+        <td><code>constitutional</code></td>
+        <td>Article 19(1)(a); Article 19(1)(g); Section 144 CrPC; Telecom Rules, 2017.</td>
+      </tr>
+      <tr>
+        <td><strong>Law Citations</strong></td>
+        <td>(2020) 3 SCC 637<br>AIR 2020 SC 1308</td>
+        <td>Primary SCC law report citation and official parallel reports.</td>
+      </tr>
+      <tr>
+        <td><strong>Judgment Source URL</strong></td>
+        <td>https://indiankanoon.org/doc/823221/</td>
+        <td>Certified IndianKanoon public docket link.</td>
+      </tr>
+      <tr>
+        <td><strong>Reviewing Advocate</strong></td>
+        <td>Adv. Girish Kr. Srivastava · D/842/1991</td>
+        <td>Verified Supreme Court Bar Enrolment Reviewer.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">2</span> Dramatis Personae (Key Contenders)</h2>
+  <div class="persona-grid">
+    <div class="persona-card">
+      <strong>Anuradha Bhasin</strong>
+      <span class="persona-tag">Primary Petitioner · Aggrieved Editor</span>
+      <p>Executive Editor of Kashmir Times who challenged the communication shutdown that halted print newspaper distribution.</p>
+    </div>
+    <div class="persona-card">
+      <strong>Ghulam Nabi Azad</strong>
+      <span class="persona-tag">Co-Petitioner · Member of Parliament</span>
+      <p>Leader of the Opposition who challenged travel bans and indiscriminate Section 144 CrPC curfew orders.</p>
+    </div>
+    <div class="persona-card">
+      <strong>Union of India & J&K Admin</strong>
+      <span class="persona-tag">The Respondent · State Authority</span>
+      <p>Defended security restrictions citing anti-terror operations, cross-border infiltration, and public peace.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">3</span> Case Brief & Certified Ratio</h2>
+  <div class="section-card">
+    <h4>Facts & Procedural Genesis</h4>
+    <p>Following security advisories and constitutional alterations regarding Article 370 in early August 2019, the State imposed widespread communication blackouts, cutting mobile, broadband, and landline services across Jammu & Kashmir, paired with district-wide Section 144 CrPC movement restrictions.</p>
+  </div>
+  <div class="section-card">
+    <h4>Core Issues Examined by the Court</h4>
+    <p>1. Whether freedom of speech and expression and the right to carry on trade/business over the internet are fundamental rights under Article 19.<br>
+    2. Whether the indefinite suspension of telecom services without publishing executive orders violates the doctrine of proportionality.<br>
+    3. Whether Section 144 of the CrPC can be used to prevent legitimate democratic assembly and expression.</p>
+  </div>
+  <div class="section-card">
+    <h4>Operative Held & Judicial Reasoning</h4>
+    <p><strong>Held:</strong> Freedom of speech and trade over the internet is constitutionally protected under Articles 19(1)(a) and 19(1)(g). Indefinite internet suspensions are impermissible. All restriction orders must be published and periodically reviewed every 7 working days by a Review Committee.<br>
+    <strong>Reasoning:</strong> The Court applied the four-pronged test of proportionality: legitimate goal, rational nexus, least intrusive means, and absence of disproportionate impact.</p>
+  </div>
+
+  <!-- PAGE 2: 8 EPISODES & 3-TIER LAYERS -->
+  <div class="page-break"></div>
+
+  <div class="header">
+    <div class="title-group">
+      <h1>PLEADINGS</h1>
+      <p>8-Episode Synchronized Story & Depth Layer Structure</p>
+    </div>
+    <div class="badge">Episodes 01 – 08</div>
+  </div>
+
+  <h2><span class="num">4</span> The 8-Episode Sequential Arc</h2>
+
+  <div class="section-card">
+    <h4>EPISODE 01 · THE PREMISE: The Midnight Communications Blackout</h4>
+    <p><strong>Story Narrative:</strong> On August 4, 2019, all mobile networks, broadband connections, and landlines were terminated across Jammu & Kashmir without advance warning or published executive decrees.<br>
+    <strong>Student Layer (Ratio & Obiter):</strong> Ratio: Internet medium is protected under Article 19(1)(a). Obiter: The digital sphere is indispensable to democratic participation. Exam Angle: Proportionality review of telecom shutdowns for CLAT-PG.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: Indefinite suspension of internet connectivity without temporal boundaries is ultra vires Article 19 and the Telecom Suspension Rules, 2017. [¶24, ¶88]</code></p>
+  </div>
+
+  <div class="section-card">
+    <h4>EPISODE 02 · DRAMATIS PERSONAE: The Editor, the Parliamentarian, and the State</h4>
+    <p><strong>Story Narrative:</strong> Anuradha Bhasin and Ghulam Nabi Azad moved the Supreme Court under Article 32, alleging total suppression of press freedom and basic liberties.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: Blanket communication curbs that completely paralyze newspaper publication violate the freedom of the press under Article 19(1)(a). [¶31]</code></p>
+  </div>
+
+  <div class="section-card">
+    <h4>EPISODE 03 · THE INVESTIGATION: The Veil of Unpublished Orders</h4>
+    <p><strong>Story Narrative:</strong> When asked to produce the restriction orders, the State initially claimed executive privilege, arguing national security shielded the orders from public disclosure.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: The State must publish all executive orders restricting fundamental liberties so affected citizens can seek judicial review. [¶18, ¶26]</code></p>
+  </div>
+
+  <div class="section-card">
+    <h4>EPISODE 04 · THE CONTROVERSY: Section 144 as a Weapon of Convenience</h4>
+    <p><strong>Story Narrative:</strong> District Magistrates routinely issued repetitive Section 144 CrPC curfew orders covering entire regions for months without citing specific imminent danger.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: Section 144 CrPC cannot be used as a routine administrative tool to suppress legitimate expression or dissent. [¶42, ¶99]</code></p>
+  </div>
+
+  <div class="section-card">
+    <h4>EPISODE 05 · COURTROOM ARGUMENTS: National Security vs. Democratic Rights</h4>
+    <p><strong>Story Narrative:</strong> The Solicitor General argued that cross-border terrorism necessitated preemptive curbs; Senior Counsel argued that security cannot extinguish constitutional existence.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: National security claims do not grant the State total immunity from constitutional proportionality scrutiny. [¶64, ¶71]</code></p>
+  </div>
+
+  <div class="section-card">
+    <h4>EPISODE 06 · JUDICIAL DELIBERATION: The Four-Pronged Proportionality Standard</h4>
+    <p><strong>Story Narrative:</strong> The Bench examined international human rights standards and domestic constitutional tests, applying the Modern Dental College and Puttaswamy proportionality doctrines.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: State restrictions on fundamental rights must adopt the least restrictive measure available to achieve legitimate aims. [¶102, ¶108]</code></p>
+  </div>
+
+  <div class="section-card">
+    <h4>EPISODE 07 · THE RATIO & OPERATIVE HOLDING: The Mandate of Periodic Review</h4>
+    <p><strong>Story Narrative:</strong> The Supreme Court directed immediate review of all suspension orders, ordered restoration of essential websites, and mandated 7-day review cycles.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: An order suspending telecom services under the 2017 Rules cannot be permanent and must be reviewed every 7 working days. [¶124, ¶130]</code></p>
+  </div>
+
+  <div class="section-card">
+    <h4>EPISODE 08 · PRECEDENTIAL LEGACY: The Global Digital Charter</h4>
+    <p><strong>Story Narrative:</strong> Anuradha Bhasin became India's foundational digital rights jurisprudence, cited across common law jurisdictions balancing cybersecurity and civil liberty.<br>
+    <strong>Advocate Layer:</strong> <code>TRIAL PROPOSITION: The right to internet access as a conduit for trade, profession, and speech is non-negotiable in 21st-century jurisprudence. [¶142]</code></p>
+  </div>
+
+  <!-- PAGE 3: LAWYER EPISODES (5 CORE) & STUDENT FLASHCARDS -->
+  <div class="page-break"></div>
+
+  <div class="header">
+    <div class="title-group">
+      <h1>PLEADINGS</h1>
+      <p>5-Part Dedicated Lawyer Episodes Dossier & Student Flashcards</p>
+    </div>
+    <div class="badge">Advocate Reference</div>
+  </div>
+
+  <h2><span class="num">5</span> Dedicated Lawyer Episodes (5 Core Modules)</h2>
+
+  <div class="section-card">
+    <h4>Part 1 · Statutory Text As Reproduced In The Judgment</h4>
+    <p><strong>1. Temporary Suspension of Telecom Services Rules, 2017 — Rule 2(2):</strong><br>
+    <em>"An order issued by the competent authority... shall not be valid for more than seven working days unless confirmed by the Review Committee."</em> (Pinpoint: SCR p. 45, Para 38)</p>
+    <p><strong>2. Constitution of India — Article 19(1)(a) & 19(1)(g):</strong><br>
+    <em>"All citizens shall have the right to freedom of speech and expression; and to practise any profession, or to carry on any occupation, trade or business."</em></p>
+    <p><strong>3. Code of Criminal Procedure, 1973 — Section 144:</strong><br>
+    <em>"Power to issue order in urgent cases of nuisance or apprehended danger."</em></p>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 2 · The Court's Enumerated Holdings</h4>
+    <p><strong>Holding 1:</strong> Freedom of speech and expression and the freedom to practice any trade or business through the medium of the internet is constitutionally protected under Article 19(1)(a) and 19(1)(g). [¶111, SCC p. 680]<br>
+    <strong>Holding 2:</strong> An order suspending internet services indefinitely is impermissible under the Temporary Suspension of Telecom Services Rules, 2017. [¶124, SCC p. 688]<br>
+    <strong>Holding 3:</strong> Section 144 CrPC cannot be used as a tool to prevent the legitimate expression of democratic opinions. [¶99, SCC p. 675]<br>
+    <strong>Holding 4:</strong> The State is obligated to publish all suspension and restriction orders to ensure transparent judicial review. [¶18, SCC p. 650]</p>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 3 · Precedents Discussed In This Judgment</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Precedent Case</th>
+          <th>Citation</th>
+          <th>Treatment</th>
+          <th>Judicial Principle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sakal Papers (P) Ltd. v. Union of India</strong></td>
+          <td>[1962] 3 SCR 842</td>
+          <td><strong>Followed</strong></td>
+          <td>State cannot restrict newspaper publication through indirect economic/operational curbs.</td>
+        </tr>
+        <tr>
+          <td><strong>Bennett Coleman & Co. v. Union of India</strong></td>
+          <td>(1972) 2 SCC 788</td>
+          <td><strong>Followed</strong></td>
+          <td>Freedom of speech encompasses the freedom of circulation and publication tools.</td>
+        </tr>
+        <tr>
+          <td><strong>Modern Dental College v. State of M.P.</strong></td>
+          <td>(2016) 7 SCC 353</td>
+          <td><strong>Applied</strong></td>
+          <td>Four-pronged proportionality test for fundamental rights restrictions.</td>
+        </tr>
+        <tr>
+          <td><strong>K.S. Puttaswamy v. Union of India</strong></td>
+          <td>(2017) 10 SCC 1</td>
+          <td><strong>Followed</strong></td>
+          <td>Proportionality standard to prevent arbitrary executive invasions into liberty.</td>
+        </tr>
+        <tr>
+          <td><strong>Ram Jethmalani v. Union of India</strong></td>
+          <td>(2011) 8 SCC 1</td>
+          <td><strong>Followed</strong></td>
+          <td>The State cannot issue secretive orders that obstruct citizens from seeking judicial review.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 4 · Subsequent Citator History</h4>
+    <p><strong>Citator Entries:</strong><br>
+    • <code>F (Followed)</code> — <em>Foundation for Media Professionals v. Union of India</em> (2020) 5 SCC 746 (4G Restoration Case)<br>
+    • <code>F (Followed)</code> — <em>Internet Freedom Foundation v. Union of India</em> (2021) 2 SCC 110<br>
+    • <code>RF (Referred to)</code> — <em>Manohar Lal Sharma v. Union of India (Pegasus Case)</em> (2022) 1 SCC 715</p>
+    <div class="disclaimer-banner">
+      <strong>Mandatory Citator Notice:</strong> "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h4>Part 5 · Full Parallel Citation Index</h4>
+    <div class="code-block">"parallelCitations": [
+  "AIR 2020 SC 1308",
+  "(2020) 3 SCC 637",
+  "(2020) 1 Scale 691",
+  "(2020) 1 Mad LJ 574",
+  "2020 (77) OCR 784",
+  "AIRONLINE 2020 SC 17"
+]</div>
+  </div>
+
+  <h2><span class="num">6</span> Student Mode Revision Flashcards</h2>
+  <div class="section-card">
+    <p><strong>Flashcard #1 · Question:</strong> Is internet access constitutionally protected under Indian fundamental rights?<br>
+    <strong>Verified Judicial Answer:</strong> Yes. While not a standalone right, the Supreme Court held that freedom of speech (Art. 19(1)(a)) and the right to carry on trade/profession (Art. 19(1)(g)) using the internet as a medium are fundamental rights. [Pinpoint: (2020) 3 SCC 637, ¶111]</p>
+  </div>
+  <div class="section-card">
+    <p><strong>Flashcard #2 · Question:</strong> Can the Government impose indefinite internet shutdowns in India?<br>
+    <strong>Verified Judicial Answer:</strong> No. Indefinite shutdowns are unconstitutional. All suspension orders must be temporary, reasoned, published, and reviewed every 7 working days by a statutory Review Committee. [Pinpoint: Rule 2(2), Telecom Rules 2017; ¶124]</p>
+  </div>
+  <div class="section-card">
+    <p><strong>Flashcard #3 · Question:</strong> What test must the State satisfy before restricting telecommunications or applying Section 144 CrPC?<br>
+    <strong>Verified Judicial Answer:</strong> The State must satisfy the doctrine of proportionality: (1) Legitimate state goal, (2) Rational nexus, (3) Least restrictive measure available, and (4) Proportional balance of impact. [Pinpoint: ¶102]</p>
+  </div>
+
+  <div class="footer">
+    <span>Pleadings Landmark Legal Editorial Platform · Admin Ingestion & OCR Certification Dossier</span>
+    <span>https://pleadings.in</span>
+  </div>
+
+</body>
+</html>

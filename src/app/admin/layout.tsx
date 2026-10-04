@@ -97,6 +97,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               Case Catalog
             </Link>
             <Link
+              href="/admin/ocr"
+              className={`hover:text-[#D4AF37] transition-colors flex items-center gap-1.5 px-2.5 py-1 rounded-xs border ${
+                pathname === '/admin/ocr'
+                  ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-[#D4AF37] font-bold'
+                  : 'bg-white/5 border-white/10 text-amber-300 hover:border-[#D4AF37]/50'
+              }`}
+            >
+              <span>⚡</span>
+              <span>OCR Scanner</span>
+            </Link>
+            <Link
               href="/admin/new"
               className={`hover:text-[#D4AF37] transition-colors flex items-center gap-1 ${
                 pathname === '/admin/new' ? 'text-[#D4AF37] font-bold' : 'text-[#D4AF37]/80'

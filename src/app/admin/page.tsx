@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { CaseData, CaseStatus } from '@/types';
+import OcrScannerModal from '@/components/admin/OcrScannerModal';
 
 export default function AdminDashboardPage() {
   const [cases, setCases] = useState<CaseData[]>([]);
@@ -12,6 +13,7 @@ export default function AdminDashboardPage() {
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [lastSyncTime, setLastSyncTime] = useState<Date>(new Date());
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [isOcrModalOpen, setIsOcrModalOpen] = useState<boolean>(false);
   const isFetchingRef = useRef<boolean>(false);
 
   const fetchCases = useCallback(async (isSilent = false) => {
@@ -284,23 +286,71 @@ export default function AdminDashboardPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 self-start md:self-auto">
+        <div className="flex flex-wrap items-center gap-2.5 self-start md:self-auto">
           <button
             onClick={() => fetchCases(false)}
             disabled={loading || isRefreshing}
-            className="px-4 py-3 bg-[#121520] hover:bg-white/10 text-[#a9a49a] hover:text-white border border-white/15 text-xs font-mono font-bold uppercase tracking-wider transition-all rounded-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            className="px-3.5 py-3 bg-[#121520] hover:bg-white/10 text-[#a9a49a] hover:text-white border border-white/15 text-xs font-mono font-bold uppercase tracking-wider transition-all rounded-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
             title="Force refresh all cases and view statistics"
           >
             <span className={isRefreshing || loading ? 'animate-spin inline-block' : ''}>↻</span>
-            <span>Refresh</span>
+            <span className="hidden sm:inline">Refresh</span>
+          </button>
+
+          <button
+            onClick={() => setIsOcrModalOpen(true)}
+            className="px-4 py-3 bg-[#D4AF37]/15 hover:bg-[#D4AF37]/25 text-[#D4AF37] border border-[#D4AF37]/40 hover:border-[#D4AF37] text-xs font-mono font-bold uppercase tracking-wider transition-all rounded-xs flex items-center gap-2 cursor-pointer shadow-md"
+            title="Upload any judgment PDF for AI optical character recognition & automatic case creation"
+          >
+            <span>⚡</span>
+            <span>OCR & PDF Scanner</span>
           </button>
 
           <Link
             href="/admin/new"
-            className="px-6 py-3.5 bg-[#D4AF37] hover:bg-white text-[#0E1016] font-bold text-xs uppercase tracking-widest transition-all rounded-xs shadow-xl flex items-center justify-center gap-2 cursor-pointer"
+            className="px-5 py-3 bg-[#D4AF37] hover:bg-white text-[#0E1016] font-bold text-xs uppercase tracking-widest transition-all rounded-xs shadow-xl flex items-center justify-center gap-2 cursor-pointer"
           >
             <span className="text-base leading-none">+</span>
             <span>Add New Case</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* OCR Quick Ingestion Banner */}
+      <div className="bg-gradient-to-r from-[#161B28] via-[#121520] to-[#161B28] border border-[#D4AF37]/30 p-5 rounded-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-xs bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl text-[#D4AF37] shrink-0">
+            ⚡
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#D4AF37]">
+                Smart Judicial Document Ingestion
+              </span>
+              <span className="px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[9px] font-mono font-bold uppercase rounded-full">
+                Multimodal AI OCR Active
+              </span>
+            </div>
+            <p className="text-xs text-white/90 mt-0.5">
+              Upload court judgment PDFs or case dockets. Automatically extracts facts, coram, ratio, holdings, precedents, and generates 8-episode synchronized story layers for verification.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+          <button
+            onClick={() => setIsOcrModalOpen(true)}
+            className="px-4 py-2.5 bg-[#D4AF37] hover:bg-[#E5C158] text-[#0E1016] font-bold text-xs font-mono uppercase tracking-wider rounded-xs transition-all shadow-lg flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>📤</span>
+            <span>Scan PDF Document</span>
+          </button>
+
+          <Link
+            href="/admin/ocr"
+            className="px-3.5 py-2.5 bg-white/5 hover:bg-white/10 text-[#a9a49a] hover:text-white border border-white/10 text-xs font-mono uppercase tracking-wider rounded-xs transition-all"
+          >
+            Full Studio ↗
           </Link>
         </div>
       </div>
@@ -544,6 +594,15 @@ export default function AdminDashboardPage() {
           </div>
         </div>
       )}
+
+      {/* OCR & PDF Document Scanner Modal */}
+      <OcrScannerModal
+        isOpen={isOcrModalOpen}
+        onClose={() => setIsOcrModalOpen(false)}
+        onCaseIngested={() => {
+          fetchCases(false);
+        }}
+      />
     </div>
   );
 }

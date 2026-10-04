@@ -3,6 +3,7 @@ import { CaseStore } from '@/lib/db/caseStore';
 import { processCaseIngestion } from '@/lib/ai/pipeline';
 import { isRequestAuthenticated } from '@/lib/auth';
 import { sendAdminCaseCreatedEmail } from '@/lib/email';
+import { CaseData } from '@/types';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -32,18 +33,50 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    if (!body.title || !body.court || !body.year || !body.genre || !body.statuteSections) {
+    const titleStr = typeof body.title === 'string'
+      ? body.title
+      : (body.title?.en || body.slug || '');
+
+    const courtStr = body.court || 'Supreme Court of India';
+    const yearNum = typeof body.year === 'number' ? body.year : parseInt(body.year) || new Date().getFullYear();
+    const genreStr = body.genre || 'constitutional';
+    const statuteSectionsStr = body.statuteSections || body.categoryTag || body.brief?.chargesApplied?.join('; ') || 'Constitutional Law';
+
+    if (!titleStr.trim()) {
       return NextResponse.json(
-        { success: false, error: 'Missing required case metadata fields.' },
+        { success: false, error: 'Missing required case title.' },
         { status: 400 }
       );
     }
 
-    // Process using AI extraction & structuring pipeline
-    const generatedCase = await processCaseIngestion(body);
+    let caseToSave: CaseData;
 
-    // Save directly to Supabase Database with ADMIN_REVIEW status
-    const savedCase = await CaseStore.create(generatedCase as any);
+    // Check if body is an already structured CaseData (e.g. from OCR scanner or direct review)
+    if (body.episodes && Array.isArray(body.episodes) && body.episodes.length > 0) {
+      caseToSave = {
+        ...body,
+        court: courtStr,
+        year: yearNum,
+        genre: genreStr,
+        categoryTag: body.categoryTag || statuteSectionsStr,
+        updatedAt: new Date().toISOString(),
+      };
+    } else {
+      // Process using AI extraction & structuring pipeline from raw form fields
+      const generated = await processCaseIngestion({
+        ...body,
+        title: titleStr,
+        court: courtStr,
+        year: yearNum,
+        genre: genreStr,
+        statuteSections: statuteSectionsStr,
+        factsSummary: body.factsSummary || body.brief?.facts?.en || titleStr,
+      });
+      caseToSave = generated as unknown as CaseData;
+    }
+
+    // Save directly to Supabase Database / CaseStore
+    const savedCase = await CaseStore.create(caseToSave as any);
 
     // Send Admin Notification Email
     try {

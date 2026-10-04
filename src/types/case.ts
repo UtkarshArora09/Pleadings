@@ -93,6 +93,10 @@ export interface CaseStatus {
 export interface AdvocateStatutoryText {
   statute: string;
   text: string;
+  act?: string;
+  section?: string;
+  quotedText?: string;
+  pinpoint?: string;
 }
 
 export interface AdvocateHolding {

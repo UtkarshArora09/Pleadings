@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function NewCasePage() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [formData, setFormData] = useState({
     title: '',
     shortTitle: '',
@@ -18,8 +20,8 @@ export default function NewCasePage() {
     judgmentUrl: '',
     judgmentText: '',
     additionalNotes: '',
-    reviewer: '',
-    enrolmentNumber: '',
+    reviewer: 'Adv. Girish Kr. Srivastava',
+    enrolmentNumber: 'D/842/1991',
     rank: 1,
     makeTrendingTop10: true,
     // Student Layer Inputs
@@ -54,6 +56,104 @@ export default function NewCasePage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+
+  // OCR Auto-Fill State
+  const [ocrLoading, setOcrLoading] = useState<boolean>(false);
+  const [ocrSuccessMsg, setOcrSuccessMsg] = useState<string | null>(null);
+  const [dragActive, setDragActive] = useState<boolean>(false);
+
+  const handleOcrFile = async (file: File | null, isSample = false) => {
+    try {
+      setOcrLoading(true);
+      setError(null);
+      setOcrSuccessMsg(null);
+
+      let res: Response;
+      if (isSample) {
+        res = await fetch('/api/admin/ocr?sample=true');
+      } else if (file) {
+        const data = new FormData();
+        data.append('file', file);
+        res = await fetch('/api/admin/ocr', {
+          method: 'POST',
+          body: data,
+        });
+      } else {
+        return;
+      }
+
+      const data = await res.json();
+      if (!data.success || !data.case) {
+        throw new Error(data.error || 'Failed to extract case details via OCR.');
+      }
+
+      const c = data.case;
+
+      // Extract student obiter
+      const studentObiterList: string[] = [];
+      if (c.episodes && Array.isArray(c.episodes)) {
+        c.episodes.forEach((ep: any) => {
+          if (ep.layers?.student?.obiter) {
+            studentObiterList.push(...ep.layers.student.obiter);
+          }
+        });
+      }
+
+      // Extract advocate trial propositions
+      const trialProps: string[] = [];
+      const pinpoints: string[] = [];
+      if (c.episodes && Array.isArray(c.episodes)) {
+        c.episodes.forEach((ep: any) => {
+          const advText = ep.layers?.advocate?.blocks?.[0]?.text;
+          if (advText) {
+            trialProps.push(advText.replace(/^TRIAL PROPOSITION:\s*/i, ''));
+          }
+          if (ep.layers?.advocate?.pinpoints) {
+            ep.layers.advocate.pinpoints.forEach((p: any) => {
+              pinpoints.push(`¶${p.para}: ${p.proposition}`);
+            });
+          }
+        });
+      }
+
+      // Populate form
+      setFormData((prev) => ({
+        ...prev,
+        title: c.title?.en || prev.title,
+        shortTitle: c.featuredHeroHook?.en || prev.shortTitle,
+        citation: c.citation || prev.citation,
+        court: c.court || prev.court,
+        year: c.year || prev.year,
+        genre: c.genre || prev.genre,
+        statuteSections: c.brief?.chargesApplied?.join('; ') || c.categoryTag || prev.statuteSections,
+        factsSummary: c.brief?.facts?.en || c.episodes?.[0]?.layers?.story?.blocks?.[0]?.text || prev.factsSummary,
+        judgmentUrl: c.judgmentUrl || prev.judgmentUrl,
+        studentRatio: c.brief?.held?.en || c.episodes?.[6]?.layers?.student?.ratio || prev.studentRatio,
+        studentObiter: studentObiterList.join('\n') || prev.studentObiter,
+        studentExamAngle: c.episodes?.[0]?.layers?.student?.examAngle || prev.studentExamAngle,
+        advocateTrialPropositions: trialProps.join('\n') || prev.advocateTrialPropositions,
+        advocatePinpoints: pinpoints.join('\n') || prev.advocatePinpoints,
+        parallelCitations: c.advocateReference?.parallelCitations?.join(', ') || prev.parallelCitations,
+        reviewer: 'Adv. Girish Kr. Srivastava',
+        enrolmentNumber: 'D/842/1991',
+      }));
+
+      if (c.personas && Array.isArray(c.personas) && c.personas.length > 0) {
+        setPersonas(c.personas);
+      }
+
+      if (c.flashcards && Array.isArray(c.flashcards) && c.flashcards.length > 0) {
+        setFlashcards(c.flashcards);
+      }
+
+      setOcrSuccessMsg(`✓ Successfully auto-filled all case fields from "${isSample ? 'Pleadings Sample Template PDF' : file?.name}" via Multimodal OCR.`);
+    } catch (ocrErr: any) {
+      console.error('OCR Ingestion error:', ocrErr);
+      setError(ocrErr.message || 'Failed to auto-populate from PDF.');
+    } finally {
+      setOcrLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -186,6 +286,97 @@ export default function NewCasePage() {
           ✕ {error}
         </div>
       )}
+
+      {ocrSuccessMsg && (
+        <div className="p-4 bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 rounded-xs text-xs font-mono flex items-center gap-2 animate-fadeIn">
+          <span className="text-base">✓</span>
+          <div>{ocrSuccessMsg}</div>
+        </div>
+      )}
+
+      {/* Quick OCR Document Scanner Dropzone */}
+      <div className="bg-gradient-to-r from-[#161B28] via-[#121520] to-[#161B28] border border-[#D4AF37]/40 p-5 rounded-xs space-y-4 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+          <div className="flex items-center gap-2.5">
+            <span className="w-8 h-8 rounded-xs bg-[#D4AF37]/20 border border-[#D4AF37]/50 flex items-center justify-center text-base text-[#D4AF37]">
+              ⚡
+            </span>
+            <div>
+              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-[#D4AF37]">
+                Smart OCR Auto-Fill Engine
+              </h3>
+              <p className="text-xs text-[#a9a49a]">
+                Upload a case PDF or judgment docket to auto-populate the entire form instantly.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/admin/ocr"
+            className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 text-[#a9a49a] hover:text-white rounded-xs text-xs font-mono uppercase tracking-wider transition-all self-start sm:self-auto"
+          >
+            Open Standalone Studio ↗
+          </Link>
+        </div>
+
+        <div
+          onDragEnter={(e) => { e.preventDefault(); setDragActive(true); }}
+          onDragLeave={(e) => { e.preventDefault(); setDragActive(false); }}
+          onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+          onDrop={(e) => {
+            e.preventDefault();
+            setDragActive(false);
+            if (e.dataTransfer.files?.[0]) {
+              handleOcrFile(e.dataTransfer.files[0], false);
+            }
+          }}
+          onClick={() => fileInputRef.current?.click()}
+          className={`border-2 border-dashed rounded-xs p-6 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-2.5 ${
+            dragActive
+              ? 'border-[#D4AF37] bg-[#D4AF37]/10'
+              : 'border-white/15 bg-black/30 hover:border-[#D4AF37]/50 hover:bg-black/50'
+          }`}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/pdf,image/png,image/jpeg,image/webp"
+            onChange={(e) => {
+              if (e.target.files?.[0]) {
+                handleOcrFile(e.target.files[0], false);
+              }
+            }}
+            className="hidden"
+          />
+
+          {ocrLoading ? (
+            <div className="flex items-center gap-3 py-2">
+              <div className="w-5 h-5 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin" />
+              <span className="text-xs font-mono text-[#D4AF37] font-bold uppercase tracking-wider animate-pulse">
+                Multimodal OCR & Entity Extraction in progress...
+              </span>
+            </div>
+          ) : (
+            <>
+              <p className="text-xs text-white font-medium">
+                Drag & drop Judgment PDF here or <span className="text-[#D4AF37] font-bold underline">browse file</span>
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOcrFile(null, true);
+                  }}
+                  className="px-3 py-1 bg-[#D4AF37]/15 hover:bg-[#D4AF37]/25 border border-[#D4AF37]/30 text-[#D4AF37] rounded-xs text-[10px] font-mono uppercase tracking-wider transition-all"
+                >
+                  🧪 Test With Sample Template PDF
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
 
       {/* Ingestion Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
