@@ -1,6 +1,8 @@
 import { CaseData, StoryPanel, Episode, CaseStatus, PersonaItem } from '@/types';
 import { slugify } from '@/lib/ai/pipeline';
 import { getCaseVisualPrompts } from '@/lib/ai/visualPrompts';
+import { extractTextFromPdfBuffer } from './pdfExtractor';
+import { parseLegalDocumentText } from './legalDocumentParser';
 
 export interface ScanDocumentOptions {
   fileBase64?: string;
@@ -63,12 +65,10 @@ OUTPUT FORMAT: Strict valid JSON matching the specified schema.`;
 
 // Gemini models in order of capability & speed
 const GEMINI_MODELS = [
-  'gemini-flash-lite-latest',
-  'gemini-3.5-flash-lite',
-  'gemini-3.5-flash',
-  'gemini-3.7-flash',
-  'gemini-3.8-flash',
-  'gemini-flash-latest'
+  'gemini-2.0-flash',
+  'gemini-1.5-flash',
+  'gemini-1.5-pro',
+  'gemini-2.5-flash',
 ];
 
 /**
@@ -153,8 +153,11 @@ export async function scanAndExtractCaseDocument(options: ScanDocumentOptions): 
   const mimeType = options.mimeType || (fileName.endsWith('.pdf') ? 'application/pdf' : 'image/jpeg');
 
   let base64Data = options.fileBase64 || '';
-  if (!base64Data && options.fileBuffer) {
-    base64Data = options.fileBuffer.toString('base64');
+  let fileBuffer = options.fileBuffer;
+  if (!base64Data && fileBuffer) {
+    base64Data = fileBuffer.toString('base64');
+  } else if (!fileBuffer && base64Data) {
+    fileBuffer = Buffer.from(base64Data, 'base64');
   }
 
   const fileSizeBytes = base64Data ? Math.round((base64Data.length * 3) / 4) : 0;
@@ -162,8 +165,28 @@ export async function scanAndExtractCaseDocument(options: ScanDocumentOptions): 
   let modelUsed = 'none';
   let rawExtractedText = '';
 
-  // 1. Try Gemini Multimodal OCR
-  if (geminiApiKey && base64Data) {
+  // 1. High-Precision PDF Text Extraction
+  const isPdf = mimeType === 'application/pdf' || fileName.toLowerCase().endsWith('.pdf');
+  if (isPdf && fileBuffer) {
+    try {
+      const pdfExtraction = extractTextFromPdfBuffer(fileBuffer);
+      if (pdfExtraction.hasText) {
+        rawExtractedText = pdfExtraction.text;
+        parsedJson = parseLegalDocumentText(rawExtractedText, fileName);
+        modelUsed = 'Pleadings High-Precision PDF Legal Engine';
+        console.log(`✅ Extracted ${rawExtractedText.length} chars across ${pdfExtraction.pageCount} pages via PDF Engine.`);
+      }
+    } catch (pdfErr) {
+      console.warn('PDF extraction engine error:', pdfErr);
+    }
+  } else if (options.textPayload) {
+    rawExtractedText = options.textPayload;
+    parsedJson = parseLegalDocumentText(rawExtractedText, fileName);
+    modelUsed = 'Pleadings Text Legal Parser';
+  }
+
+  // 2. Multimodal OCR or AI Synthesis via Gemini (if API key is present)
+  if (geminiApiKey && (base64Data || rawExtractedText)) {
     for (const model of GEMINI_MODELS) {
       try {
         console.log(`🔍 Pleadings OCR Engine: Attempting scan with ${model}...`);
@@ -172,6 +195,8 @@ export async function scanAndExtractCaseDocument(options: ScanDocumentOptions): 
         const promptText = `${OCR_LEGAL_SYSTEM_PROMPT}
 
 ${options.customInstructions ? `ADMIN CUSTOM DIRECTIVES:\n${options.customInstructions}\n` : ''}
+
+${rawExtractedText ? `EXTRACTED VERBATIM DOCUMENT TEXT:\n${rawExtractedText.slice(0, 30000)}\n\n` : ''}
 
 Please scan this entire document, extract all text, perform legal structuring, and output strict JSON according to the schema:
 {
@@ -274,21 +299,20 @@ Please scan this entire document, extract all text, perform legal structuring, a
   "extractedRawTextSummary": "Verbatim transcript of key extracted text from the PDF..."
 }`;
 
-        const requestBody = {
-          contents: [
-            {
-              role: 'user',
-              parts: [
-                {
-                  inlineData: {
-                    mimeType: mimeType === 'application/pdf' ? 'application/pdf' : 'image/jpeg',
-                    data: base64Data,
-                  },
-                },
-                { text: promptText },
-              ],
+        const parts: any[] = [];
+        // If image or no extracted text, use inlineData
+        if (base64Data && (!rawExtractedText || base64Data.length < 15 * 1024 * 1024)) {
+          parts.push({
+            inlineData: {
+              mimeType: mimeType === 'application/pdf' ? 'application/pdf' : 'image/jpeg',
+              data: base64Data,
             },
-          ],
+          });
+        }
+        parts.push({ text: promptText });
+
+        const requestBody = {
+          contents: [{ role: 'user', parts }],
           generationConfig: {
             responseMimeType: 'application/json',
             temperature: 0.15,
@@ -307,9 +331,21 @@ Please scan this entire document, extract all text, perform legal structuring, a
           if (content) {
             const parsed = parseJsonSafely(content);
             if (parsed && (parsed.title || parsed.episodes || parsed.brief)) {
-              parsedJson = parsed;
+              // Merge AI enrichment into parsedJson
+              if (parsedJson) {
+                parsedJson = {
+                  ...parsedJson,
+                  ...parsed,
+                  title: parsed.title || parsedJson.title,
+                  brief: { ...parsedJson.brief, ...parsed.brief },
+                  personas: (parsed.personas && parsed.personas.length > 0) ? parsed.personas : parsedJson.personas,
+                  episodes: (parsed.episodes && parsed.episodes.length >= 8) ? parsed.episodes : parsedJson.episodes,
+                };
+              } else {
+                parsedJson = parsed;
+              }
               modelUsed = `Google Gemini (${model})`;
-              rawExtractedText = parsed.extractedRawTextSummary || content.slice(0, 1500);
+              rawExtractedText = parsed.extractedRawTextSummary || rawExtractedText || content.slice(0, 1500);
               console.log(`✅ OCR Scan Successful using ${modelUsed}`);
               break;
             }
@@ -324,13 +360,12 @@ Please scan this entire document, extract all text, perform legal structuring, a
     }
   }
 
-  // 2. Fallback if Gemini failed or only text is provided
+  // 3. Fallback if both Gemini and PDF parser yielded no text
   if (!parsedJson && options.textPayload) {
-    parsedJson = buildFallbackCaseFromText(options.textPayload, fileName);
+    parsedJson = parseLegalDocumentText(options.textPayload, fileName);
     modelUsed = 'Text Parser Fallback';
     rawExtractedText = options.textPayload;
   } else if (!parsedJson) {
-    // Generate a structured case template based on file name
     parsedJson = buildFallbackCaseFromText('', fileName);
     modelUsed = 'Pleadings Structural Archetype Engine';
     rawExtractedText = `Scanned document: ${fileName} (${fileSizeBytes} bytes)`;
@@ -535,6 +570,8 @@ Please scan this entire document, extract all text, perform legal structuring, a
   const structuredAdvocateRef = {
     statutoryText: advocateRef.statutoryText || [
       {
+        statute: parsedJson.statuteSections || 'Governing Statute',
+        text: 'Verbatim statutory section as reproduced in judgment.',
         act: parsedJson.statuteSections || 'Governing Statute',
         section: 'Key Provision',
         quotedText: 'Verbatim statutory section as reproduced in judgment.',

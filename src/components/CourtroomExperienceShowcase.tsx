@@ -48,12 +48,12 @@ export function CourtroomExperienceShowcase() {
           : ['ऐतिहासिक अखबारों की कटिंग प्रदर्शनी', 'विंटेज पेपर टेक्सचर और स्टैंप डिजाइन', 'मोबाइल पर केंद्रित व स्पष्ट विजुअल'],
     },
     briefs: {
-      badge: language === 'en' ? 'FEATURE 04 · LAW STUDENT TOOL' : 'फीचर 04 · लॉ छात्रों के लिए टूल',
+      badge: language === 'en' ? 'FEATURE 04 · CERTIFIED CASE BRIEF' : 'फीचर 04 · प्रमाणित केस ब्रीफ',
       title: language === 'en' ? '1-Click Standard Case Briefs & Citations' : '1-क्लिक में तैयार केस ब्रीफ और साइटेशन',
       desc:
         language === 'en'
-          ? 'Perfect for law students, advocates, and civil services aspirants. Instant breakdown of Statement of Facts, Issues Presented, Applied Statutes, and Holding.'
-          : 'लॉ के छात्रों, वकीलों और यूपीएससी अभ्यर्थियों के लिए उपयुक्त। तथ्यों का विवरण, कानूनी प्रश्न, लागू धाराएं और अंतिम निर्णय एक क्लिक में।',
+          ? 'Essential legal breakdown for readers and researchers. Instant view of Statement of Facts, Issues Presented, Applied Statutes, and Holding.'
+          : 'पाठकों और शोधकर्ताओं के लिए सारगर्भित कानूनी विश्लेषण। तथ्यों का विवरण, कानूनी प्रश्न, लागू धाराएं और अंतिम निर्णय एक क्लिक में।',
       highlights:
         language === 'en'
           ? ['Complete IRAC structured legal brief', '1-Click copy to clipboard for case prep', 'Direct link to certified judgment on Indian Kanoon']

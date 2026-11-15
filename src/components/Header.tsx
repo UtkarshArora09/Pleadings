@@ -113,7 +113,7 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
             className="text-sm font-semibold tracking-wider uppercase text-[#D4AF37] hover:text-white py-2 border-b border-white/5"
           >
-            {language === 'en' ? '+ Contribute A Case (Advocate Portal)' : '+ नया केस जोड़ें (वकील पोर्टल)'}
+            {language === 'en' ? '+ Contribute A Case' : '+ नया केस जोड़ें'}
           </Link>
 
           <Link

@@ -258,7 +258,9 @@ export interface CaseData {
     note: string;
   }[];
   advocateReference?: import('./case').AdvocateReference;
+  vote?: import('./case').CaseFile['vote'];
   // CMS & Ingestion fields
+  decidedOn?: string;
   status?: CaseStatus;
   createdAt?: string;
   updatedAt?: string;

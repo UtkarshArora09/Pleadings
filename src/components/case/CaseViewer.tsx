@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { CaseFile, Source } from '@/types/case';
-import { DepthToggle, DepthLayer } from './DepthToggle';
 import { SourcedBlock } from './SourcedBlock';
 import { Exhibit } from './Exhibit';
 import { CaseImage } from './CaseImage';
@@ -18,14 +17,6 @@ import { ReadNext } from './ReadNext';
 import { SourcesAndCorrections } from './SourcesAndCorrections';
 import { NewsletterCapture } from './NewsletterCapture';
 import { GlossarySheet } from '@/components/GlossarySheet';
-import { RatioObiterSplit } from './layers/RatioObiterSplit';
-import { DissentPanel } from './layers/DissentPanel';
-import { ExamAngle } from './layers/ExamAngle';
-import { Flashcards } from './layers/Flashcards';
-import { SubsequentHistory } from './layers/SubsequentHistory';
-import { AdvocateReference } from './layers/AdvocateReference';
-import { EpisodeQuestionCard } from './layers/EpisodeQuestionCard';
-import { LawyerEpisodeStream } from './layers/LawyerEpisodeStream';
 import { CharacterRoster } from '@/components/CharacterRoster';
 import { hasPersonaFormat, extractPersonasFromText } from '@/lib/parsePersonas';
 import { useApp } from '@/context/AppContext';
@@ -38,13 +29,7 @@ interface CaseViewerProps {
 
 export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { language, toggleBookmark, isBookmarked } = useApp();
-
-  // Depth Layer State: sync with ?depth= query and localStorage
-  const initialDepth = (searchParams.get('depth') as DepthLayer) || 'story';
-  const [depth, setDepth] = useState<DepthLayer>(initialDepth);
-  const [isCrossfading, setIsCrossfading] = useState(false);
 
   // Sheet States
   const [activeSource, setActiveSource] = useState<Source | null>(null);
@@ -76,14 +61,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
       return () => clearTimeout(timer);
     }
   }, [nextSlug, router]);
-
-  // Load saved depth from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('pleadings:depth') as DepthLayer;
-    if (saved && ['story', 'student', 'advocate'].includes(saved)) {
-      setDepth(saved);
-    }
-  }, []);
 
   // Track active section and episode on scroll for floating rail
   useEffect(() => {
@@ -136,28 +113,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeSectionId]);
 
-  // Handle Depth Change with 180ms crossfade and anchor preservation
-  const handleDepthChange = (newDepth: DepthLayer) => {
-    if (newDepth === depth) return;
-    setIsCrossfading(true);
-    localStorage.setItem('pleadings:depth', newDepth);
-
-    // Update URL query without full reload
-    const url = new URL(window.location.href);
-    url.searchParams.set('depth', newDepth);
-    window.history.replaceState(null, '', url.toString());
-
-    setTimeout(() => {
-      setDepth(newDepth);
-      setIsCrossfading(false);
-      // Restore scroll anchor
-      const targetEl = episodeRefs.current[activeEpisodeAnchor - 1];
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }, 180);
-  };
-
   // Touch Swipe for Horizontal Navigation to Next Case
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartRef.current = {
@@ -176,9 +131,9 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     // Detect fast horizontal swipe (> 100px, angle predominantly horizontal, < 350ms)
     if (Math.abs(deltaX) > 100 && Math.abs(deltaX) > Math.abs(deltaY) * 2.5 && deltaTime < 350) {
       if (deltaX < 0 && nextSlug) {
-        router.push(`/case/${nextSlug}?depth=${depth}`);
+        router.push(`/case/${nextSlug}`);
       } else if (deltaX > 0 && prevSlug) {
-        router.push(`/case/${prevSlug}?depth=${depth}`);
+        router.push(`/case/${prevSlug}`);
       }
     }
     touchStartRef.current = null;
@@ -200,9 +155,9 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const episodes = activeContent.episodes;
   const bookmarked = isBookmarked(caseData.slug);
 
-  // Calculate total paragraphs cited
+  // Calculate total paragraphs cited in Story mode
   const totalParasCited = episodes.reduce((acc, ep) => {
-    const blocks = (ep.layers?.story?.blocks || []).concat(ep.layers?.advocate?.blocks || []);
+    const blocks = ep.layers?.story?.blocks || [];
     const count = blocks.filter((b) => b?.source?.tier === 'BLACK').length;
     return acc + count;
   }, 0) || 12;
@@ -210,35 +165,15 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   // Track first AMBER block
   let hasFoundAmber = false;
 
-  const lawyerEps = caseData.lawyerEpisodes && caseData.lawyerEpisodes.length > 0
-    ? caseData.lawyerEpisodes
-    : [
-      { id: 'lawyer-ep-1', n: 1, kicker: 'LAWYER EP 01', title: 'Statutory Text' },
-      { id: 'lawyer-ep-2', n: 2, kicker: 'LAWYER EP 02', title: 'Court Holdings' },
-      { id: 'lawyer-ep-3', n: 3, kicker: 'LAWYER EP 03', title: 'Precedents' },
-      { id: 'lawyer-ep-4', n: 4, kicker: 'LAWYER EP 04', title: 'Citator History' },
-      { id: 'lawyer-ep-5', n: 5, kicker: 'LAWYER EP 05', title: 'Citation Index' },
-    ];
-
-  const episodeRailItems = depth === 'advocate'
-    ? [
-      { id: 'case-header', label: 'BRIEF', epNumber: '00' },
-      ...lawyerEps.map((ep, i) => ({
-        id: ep.id || `lawyer-ep-${i + 1}`,
-        label: `ADV ${i + 1}`,
-        epNumber: `0${i + 1}`,
-      })),
-      { id: 'case-dossier', label: 'INDEX', epNumber: '06' },
-    ]
-    : [
-      { id: 'case-header', label: 'BRIEF', epNumber: '00' },
-      ...episodes.map((_, i) => ({
-        id: `episode-${i + 1}`,
-        label: `EP ${i + 1}`,
-        epNumber: `0${i + 1}`,
-      })),
-      { id: 'case-dossier', label: 'RATIO', epNumber: '09' },
-    ];
+  const episodeRailItems = [
+    { id: 'case-header', label: 'BRIEF', epNumber: '00' },
+    ...episodes.map((_, i) => ({
+      id: `episode-${i + 1}`,
+      label: `EP ${i + 1}`,
+      epNumber: `0${i + 1}`,
+    })),
+    { id: 'case-dossier', label: 'RATIO', epNumber: '09' },
+  ];
 
   return (
     <div
@@ -247,40 +182,30 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
       className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden font-sans md:snap-y md:snap-proximity scroll-smooth"
     >
       {/* Sticky Top Navigation Bar */}
-      <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-2.5 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all gap-1.5 sm:gap-4 max-w-full overflow-hidden">
+      <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-3 sm:px-6 py-2.5 flex items-center justify-between transition-all gap-2 sm:gap-4 max-w-full overflow-hidden">
         {/* Left: Back Arrow & Case Title */}
-        <div className="flex items-center gap-1.5 sm:gap-3 min-w-0 shrink">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0 shrink">
           <Link
             href="/"
-            className="flex items-center gap-1 text-xs font-mono font-bold text-[#D4AF37] hover:text-white transition-colors shrink-0 p-1 -ml-1"
+            className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#D4AF37] hover:text-white transition-colors shrink-0 p-1 -ml-1"
             title="Back to Library"
           >
             <span className="text-sm sm:text-xs">←</span>
-            <span className="hidden sm:inline">LIBRARY</span>
+            <span>LIBRARY</span>
           </Link>
 
-          <span className="text-white/20 hidden md:inline">|</span>
+          <span className="text-white/20">|</span>
 
-          {/* Hide title on mobile screens so DepthToggle and Save always fit cleanly without right-edge cut-off */}
-          <span className="text-xs font-serif font-bold text-white truncate hidden md:inline max-w-[140px] lg:max-w-[280px]">
+          <span className="text-xs sm:text-sm font-serif font-bold text-white truncate max-w-[240px] sm:max-w-[420px] md:max-w-[550px]">
             {displayTitle}
           </span>
-        </div>
-
-        {/* Center: Depth Toggle (Story / Student / Advocate) */}
-        <div className="flex items-center justify-center shrink-0">
-          <DepthToggle
-            currentDepth={depth}
-            onChangeDepth={handleDepthChange}
-            lang={language}
-          />
         </div>
 
         {/* Right Actions: Save Button */}
         <div className="flex items-center gap-1.5 shrink-0">
           <button
             onClick={() => toggleBookmark(caseData.slug)}
-            className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1 ${bookmarked
+            className={`px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${bookmarked
                 ? 'bg-[#E50914] text-white border-[#E50914]'
                 : 'bg-white/5 hover:bg-white/10 text-white/80 border-white/15'
               }`}
@@ -368,197 +293,160 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           {/* Quick Scroll Indicator to Episode 1 */}
           <div className="pt-4 flex justify-center">
             <button
-              onClick={() => scrollToEpisode(depth === 'advocate' ? (lawyerEps[0]?.id || 'lawyer-ep-1') : 'episode-1')}
+              onClick={() => scrollToEpisode('episode-1')}
               className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-[#D4AF37] hover:text-black font-bold text-xs uppercase tracking-widest rounded-xs transition-all cursor-pointer text-white"
             >
-              <span>{depth === 'advocate' ? 'Begin Advocate Episode 1' : 'Begin Episode 1'}</span>
+              <span>Begin Episode 1</span>
               <span>↓</span>
             </button>
           </div>
         </section>
 
-        {/* Dedicated Mode Streams with 180ms Crossfade */}
-        <div
-          className={`transition-opacity duration-180 ${isCrossfading ? 'opacity-0' : 'opacity-100'
-            }`}
-        >
-          {depth === 'advocate' ? (
-            /* Advocate / Lawyer Mode: 5 Dedicated Lawyer Episodes Flow */
-            <LawyerEpisodeStream
-              lawyerEpisodes={caseData.lawyerEpisodes}
-              advocateReference={caseData.advocateReference}
-              subsequentHistory={caseData.subsequentHistory}
-              primaryCitation={caseData.citations?.primary}
-              parallelCitations={caseData.citations?.parallel}
-              lang={language}
-            />
-          ) : (
-            /* Story & Student Mode: Standard Story & Student Episodes Flow */
-            episodes.map((ep, epIdx) => {
-              const epNum = ep.n || epIdx + 1;
-              const currentLayer = ep.layers?.[depth] || ep.layers?.story || { blocks: [] };
-              const isVerdictEpisode = epNum === 7;
-              const isLocked = isVerdictEpisode && !isVerdictUnlocked;
-              const nextEpId = epNum < episodes.length ? `episode-${epNum + 1}` : 'case-dossier';
+        {/* 8-Episode Chronological Story Arc (Website Reader: Pure Story Mode) */}
+        <div className="space-y-0">
+          {episodes.map((ep, epIdx) => {
+            const epNum = ep.n || epIdx + 1;
+            const currentLayer = ep.layers?.story || { blocks: [] };
+            const isVerdictEpisode = epNum === 7;
+            const isLocked = isVerdictEpisode && !isVerdictUnlocked;
+            const nextEpId = epNum < episodes.length ? `episode-${epNum + 1}` : 'case-dossier';
 
-              return (
-                <article
-                  key={epNum}
-                  ref={(el) => {
-                    episodeRefs.current[epIdx] = el;
-                  }}
-                  onMouseEnter={() => setActiveEpisodeAnchor(epNum)}
-                  className="py-8 sm:py-12 md:py-16 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-t border-white/10 space-y-5 relative scroll-mt-16"
-                  id={`episode-${epNum}`}
-                >
-                  {/* Episode Kicker & Title */}
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                      <span>{ep.kicker}</span>
-                      <span className="text-white/40">{epNum} / {episodes.length || 8}</span>
-                    </div>
-                    <h2 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight leading-snug">
-                      {ep.title}
-                    </h2>
+            return (
+              <article
+                key={epNum}
+                ref={(el) => {
+                  episodeRefs.current[epIdx] = el;
+                }}
+                onMouseEnter={() => setActiveEpisodeAnchor(epNum)}
+                className="py-8 sm:py-12 md:py-16 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-t border-white/10 space-y-5 relative scroll-mt-16"
+                id={`episode-${epNum}`}
+              >
+                {/* Episode Kicker & Title */}
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                    <span>{ep.kicker}</span>
+                    <span className="text-white/40">{epNum} / {episodes.length || 8}</span>
                   </div>
+                  <h2 className="font-anton text-2xl sm:text-3xl text-white uppercase tracking-tight leading-snug">
+                    {ep.title}
+                  </h2>
+                </div>
 
-                  {/* Optional Episode Visual Image */}
-                  {ep.image && epIdx !== 0 && (!ep.exhibit?.image || ep.exhibit.image.src !== ep.image.src) && (
-                    <CaseImage
-                      src={ep.image.src}
-                      alt={ep.image.alt}
-                      provenance={ep.image.provenance}
-                      aspectRatio="aspect-[16/9]"
-                    />
-                  )}
+                {/* Optional Episode Visual Image */}
+                {ep.image && epIdx !== 0 && (!ep.exhibit?.image || ep.exhibit.image.src !== ep.image.src) && (
+                  <CaseImage
+                    src={ep.image.src}
+                    alt={ep.image.alt}
+                    provenance={ep.image.provenance}
+                    aspectRatio="aspect-[16/9]"
+                  />
+                )}
 
-                  {/* Episode 7: Vote Gate */}
-                  {isVerdictEpisode && (
-                    <VoteGate
-                      slug={caseData.slug}
-                      caseTitle={displayTitle}
-                      question={caseData.vote?.question || `How should the Court decide regarding ${displayTitle}?`}
-                      context={caseData.vote?.context || 'Balancing fundamental rights and statutory provisions.'}
-                      options={
-                        (caseData.vote?.options && Array.isArray(caseData.vote.options) && caseData.vote.options.length >= 2)
-                          ? [caseData.vote.options[0], caseData.vote.options[1]]
-                          : [
-                              { id: 'petitioner', label: 'In Favor of Petitioner', argument: 'Uphold fundamental constitutional liberties' },
-                              { id: 'respondent', label: 'In Favor of Respondent', argument: 'Uphold statutory compliance and state interest' }
-                            ]
+                {/* Episode 7: Vote Gate */}
+                {isVerdictEpisode && (
+                  <VoteGate
+                    slug={caseData.slug}
+                    caseTitle={displayTitle}
+                    question={caseData.vote?.question || `How should the Court decide regarding ${displayTitle}?`}
+                    context={caseData.vote?.context || 'Balancing fundamental rights and statutory provisions.'}
+                    options={
+                      (caseData.vote?.options && Array.isArray(caseData.vote.options) && caseData.vote.options.length >= 2)
+                        ? [caseData.vote.options[0], caseData.vote.options[1]]
+                        : [
+                            { id: 'petitioner', label: 'In Favor of Petitioner', argument: 'Uphold fundamental constitutional liberties' },
+                            { id: 'respondent', label: 'In Favor of Respondent', argument: 'Uphold statutory compliance and state interest' }
+                          ]
+                    }
+                    courtChoseOptionId={caseData.vote?.courtChoseOptionId || 'petitioner'}
+                    onUnlocked={() => setIsVerdictUnlocked(true)}
+                    lang={language}
+                  />
+                )}
+
+                {/* Episode Content with Blur Gate for Locked Verdict */}
+                <div className={`space-y-4 ${isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''}`}>
+                  {/* Sourced Blocks and Dynamic Personas */}
+                  {(() => {
+                    const explicitPersonas = (ep.personas && ep.personas.length > 0)
+                      ? ep.personas
+                      : (ep.characters && ep.characters.length > 0)
+                      ? ep.characters
+                      : null;
+
+                    let hasRenderedPersonas = false;
+
+                    const renderedBlocks = (currentLayer.blocks || []).map((block, bIdx) => {
+                      const isAmber = block.source?.tier === 'AMBER';
+                      let isFirstAmber = false;
+                      if (isAmber && !hasFoundAmber) {
+                        hasFoundAmber = true;
+                        isFirstAmber = true;
                       }
-                      courtChoseOptionId={caseData.vote?.courtChoseOptionId || 'petitioner'}
-                      onUnlocked={() => setIsVerdictUnlocked(true)}
-                      lang={language}
-                    />
-                  )}
 
-                  {/* Episode Content with Blur Gate for Locked Verdict */}
-                  <div className={`space-y-4 ${isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''}`}>
-                    {/* Sourced Blocks and Dynamic Persona Columns (Story & Student Modes) */}
-                    {(() => {
-                      const explicitPersonas = (ep.personas && ep.personas.length > 0)
-                        ? ep.personas
-                        : (ep.characters && ep.characters.length > 0)
-                        ? ep.characters
-                        : null;
-
-                      let hasRenderedPersonas = false;
-
-                      const renderedBlocks = (currentLayer.blocks || []).map((block, bIdx) => {
-                        const isAmber = block.source?.tier === 'AMBER';
-                        let isFirstAmber = false;
-                        if (isAmber && !hasFoundAmber) {
-                          hasFoundAmber = true;
-                          isFirstAmber = true;
-                        }
-
-                        // If text contains embedded personas (e.g. PERSONA 1 ... PERSONA 2 ...)
-                        if (hasPersonaFormat(block.text)) {
-                          hasRenderedPersonas = true;
-                          const parsed = extractPersonasFromText(block.text);
-                          return (
-                            <CharacterRoster
-                              key={bIdx}
-                              personas={parsed}
-                            />
-                          );
-                        }
-
+                      // If text contains embedded personas (e.g. PERSONA 1 ... PERSONA 2 ...)
+                      if (hasPersonaFormat(block.text)) {
+                        hasRenderedPersonas = true;
+                        const parsed = extractPersonasFromText(block.text);
                         return (
-                          <SourcedBlock
+                          <CharacterRoster
                             key={bIdx}
-                            block={block}
-                            isFirstAmber={isFirstAmber}
-                            onOpenSource={(src) => setActiveSource(src)}
-                            onOpenTerm={(term) => setActiveTermSlug(term)}
+                            personas={parsed}
                           />
                         );
-                      });
-
-                      // If episode has explicit personas configured and wasn't parsed from raw text
-                      const explicitPersonaRoster = (!hasRenderedPersonas && explicitPersonas && (depth === 'story' || depth === 'student')) ? (
-                        <CharacterRoster
-                          key="explicit-personas"
-                          personas={explicitPersonas}
-                        />
-                      ) : null;
+                      }
 
                       return (
-                        <>
-                          {renderedBlocks}
-                          {explicitPersonaRoster}
-                        </>
-                      );
-                    })()}
-
-                    {/* Student Layer: Ratio / Obiter / Dissent / Exam Angle + Interactive Questions */}
-                    {depth === 'student' && (
-                      <div className="space-y-4 pt-2">
-                        <RatioObiterSplit
-                          ratio={currentLayer.ratio}
-                          obiter={currentLayer.obiter}
-                          lang={language}
+                        <SourcedBlock
+                          key={bIdx}
+                          block={block}
+                          isFirstAmber={isFirstAmber}
+                          onOpenSource={(src) => setActiveSource(src)}
+                          onOpenTerm={(term) => setActiveTermSlug(term)}
                         />
-                        <DissentPanel dissent={currentLayer.dissent} lang={language} />
-                        <ExamAngle examAngle={currentLayer.examAngle} lang={language} />
+                      );
+                    });
 
-                        {/* Interactive Per-Episode Student Questions & Flashcards (Admin Customizable) */}
-                        {currentLayer.questions && currentLayer.questions.length > 0 && (
-                          <EpisodeQuestionCard
-                            questions={currentLayer.questions}
-                            episodeNum={epNum}
-                          />
-                        )}
-                      </div>
-                    )}
+                    // If episode has explicit personas configured and wasn't parsed from raw text
+                    const explicitPersonaRoster = (!hasRenderedPersonas && explicitPersonas) ? (
+                      <CharacterRoster
+                        key="explicit-personas"
+                        personas={explicitPersonas}
+                      />
+                    ) : null;
 
-                    {/* Exhibit Card (if any in this episode) */}
-                    {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
+                    return (
+                      <>
+                        {renderedBlocks}
+                        {explicitPersonaRoster}
+                      </>
+                    );
+                  })()}
 
-                    {/* End Hook */}
-                    {epIdx < (episodes.length - 1) && ep.endHook && (
-                      <div className="pt-3 text-xs sm:text-sm font-mono text-[#D4AF37] italic border-t border-white/5">
-                        ↳ {ep.endHook}
-                      </div>
-                    )}
-                  </div>
+                  {/* Exhibit Card (if any in this episode) */}
+                  {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
 
-                  {/* Quick Continue to Next Episode Button */}
-                  <div className="pt-3 flex items-center justify-between border-t border-white/5 text-xs font-mono">
-                    <span className="text-white/40">Episode {epNum} of {episodes.length || 8}</span>
-                    <button
-                      onClick={() => scrollToEpisode(nextEpId)}
-                      className="flex items-center gap-1.5 text-[#D4AF37] hover:text-white font-bold uppercase transition-colors cursor-pointer"
-                    >
-                      <span>{epNum < episodes.length ? `Continue to Episode ${epNum + 1}` : 'View Ratio & Impact'}</span>
-                      <span>↓</span>
-                    </button>
-                  </div>
-                </article>
-              );
-            })
-          )}
+                  {/* End Hook */}
+                  {epIdx < (episodes.length - 1) && ep.endHook && (
+                    <div className="pt-3 text-xs sm:text-sm font-mono text-[#D4AF37] italic border-t border-white/5">
+                      ↳ {ep.endHook}
+                    </div>
+                  )}
+                </div>
+
+                {/* Quick Continue to Next Episode Button */}
+                <div className="pt-3 flex items-center justify-between border-t border-white/5 text-xs font-mono">
+                  <span className="text-white/40">Episode {epNum} of {episodes.length || 8}</span>
+                  <button
+                    onClick={() => scrollToEpisode(nextEpId)}
+                    className="flex items-center gap-1.5 text-[#D4AF37] hover:text-white font-bold uppercase transition-colors cursor-pointer"
+                  >
+                    <span>{epNum < episodes.length ? `Continue to Episode ${epNum + 1}` : 'View Ratio & Impact'}</span>
+                    <span>↓</span>
+                  </button>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         {/* Section 9: End-of-Case Dossier Snap Section */}
@@ -566,22 +454,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           id="case-dossier"
           className="py-8 sm:py-12 md:py-16 md:min-h-[calc(100vh-64px)] md:snap-start flex flex-col justify-center border-t border-white/10 space-y-8"
         >
-          {/* Student Mode End: Flashcards */}
-          {depth === 'student' && caseData.flashcards && (
-            <Flashcards flashcards={caseData.flashcards} lang={language} />
-          )}
-
-          {/* Advocate Mode End: Consolidated Advocate Reference Block */}
-          {depth === 'advocate' && (
-            <AdvocateReference
-              reference={caseData.advocateReference}
-              subsequentHistory={caseData.subsequentHistory}
-              primaryCitation={caseData.citations?.primary}
-              parallelCitations={caseData.citations?.parallel}
-              lang={language}
-            />
-          )}
-
           {/* 1. If This Affects You */}
           <IfThisAffectsYou affectsYou={caseData.affectsYou} lang={language} />
 
@@ -608,7 +480,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           <div className="py-6 text-center border-t border-white/10 text-xs font-mono text-white/40 space-y-2">
             {nextSlug ? (
               <Link
-                href={`/case/${nextSlug}?depth=${depth}`}
+                href={`/case/${nextSlug}`}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-[#D4AF37] hover:bg-white text-black font-bold uppercase rounded-xs transition-all cursor-pointer shadow-lg"
               >
                 <span>Swipe or Tap for Next Case</span>

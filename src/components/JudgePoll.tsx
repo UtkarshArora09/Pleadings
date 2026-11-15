@@ -103,7 +103,7 @@ export function JudgePoll({ caseSlug, judgeDecision, onAdvanceToVerdict }: Judge
                       {option.simulatedVotesPercent}%
                     </span>
                     <span className="block text-[8px] text-[#a9a49a] uppercase tracking-wider">
-                      {language === 'en' ? 'Law Students' : 'छात्र मत'}
+                      {language === 'en' ? 'Verified Readers' : 'पाठक मत'}
                     </span>
                   </div>
                 )}

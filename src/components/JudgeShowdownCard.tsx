@@ -56,8 +56,8 @@ export function JudgeShowdownCard({ caseData }: JudgeShowdownCardProps) {
               </div>
 
               <div className="flex items-center justify-between text-[9px] font-mono text-white/50 mt-1">
-                <span>{opt1.simulatedVotesPercent}% Student Votes</span>
-                <span>{opt2.simulatedVotesPercent}% Student Votes</span>
+                <span>{opt1.simulatedVotesPercent}% Reader Votes</span>
+                <span>{opt2.simulatedVotesPercent}% Reader Votes</span>
               </div>
             </div>
           )}

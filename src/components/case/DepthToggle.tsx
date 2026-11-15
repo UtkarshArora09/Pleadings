@@ -2,17 +2,17 @@
 
 import React from 'react';
 
-export type DepthLayer = 'story' | 'student' | 'advocate';
+export type DepthLayer = 'story';
 
 interface DepthToggleProps {
-  currentDepth: DepthLayer;
-  onChangeDepth: (depth: DepthLayer) => void;
+  currentDepth?: DepthLayer;
+  onChangeDepth?: (depth: DepthLayer) => void;
   className?: string;
   lang?: 'en' | 'hi';
 }
 
 export function DepthToggle({
-  currentDepth,
+  currentDepth = 'story',
   onChangeDepth,
   className = '',
   lang = 'en'
@@ -21,14 +21,6 @@ export function DepthToggle({
     {
       id: 'story',
       label: lang === 'en' ? 'Story' : 'कथा'
-    },
-    {
-      id: 'student',
-      label: lang === 'en' ? 'Student' : 'छात्र'
-    },
-    {
-      id: 'advocate',
-      label: lang === 'en' ? 'Advocate' : 'अधिवक्ता'
     }
   ];
 
@@ -45,7 +37,7 @@ export function DepthToggle({
             key={opt.id}
             role="tab"
             aria-selected={isActive}
-            onClick={() => onChangeDepth(opt.id)}
+            onClick={() => onChangeDepth?.(opt.id)}
             className={`flex items-center justify-center px-2.5 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-tight sm:tracking-wider transition-all duration-200 cursor-pointer ${
               isActive
                 ? 'bg-[#D4AF37] text-black shadow-md'

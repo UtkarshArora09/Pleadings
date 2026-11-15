@@ -54,6 +54,8 @@ export async function POST(request: NextRequest) {
   try {
     const contentType = request.headers.get('content-type') || '';
     let fileBase64 = '';
+    let fileBuffer: Buffer | undefined;
+    let textPayload: string | undefined;
     let fileName = 'scanned-judgment.pdf';
     let mimeType = 'application/pdf';
     let autoSave = false;
@@ -75,11 +77,15 @@ export async function POST(request: NextRequest) {
       mimeType = file.type || (fileName.endsWith('.pdf') ? 'application/pdf' : 'image/jpeg');
 
       const arrayBuffer = await file.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-      fileBase64 = buffer.toString('base64');
+      fileBuffer = Buffer.from(arrayBuffer);
+      fileBase64 = fileBuffer.toString('base64');
     } else {
       const body = await request.json();
       fileBase64 = body.fileBase64 || body.pdfBase64 || '';
+      if (fileBase64) {
+        fileBuffer = Buffer.from(fileBase64, 'base64');
+      }
+      textPayload = body.textPayload;
       fileName = body.fileName || 'scanned-judgment.pdf';
       mimeType = body.mimeType || (fileName.endsWith('.pdf') ? 'application/pdf' : 'image/jpeg');
       autoSave = Boolean(body.autoSave);
@@ -95,6 +101,8 @@ export async function POST(request: NextRequest) {
 
     const scanResult = await scanAndExtractCaseDocument({
       fileBase64,
+      fileBuffer,
+      textPayload,
       fileName,
       mimeType,
       customInstructions,

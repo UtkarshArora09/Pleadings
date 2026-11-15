@@ -80,7 +80,7 @@ Sourced via Pleadings (Netflix for Indian Law)`;
       >
         <div className="flex items-center gap-4">
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#0E1016] bg-[#0E1016]/5 px-2.5 py-1 rounded-xs">
-            {language === 'en' ? 'Law Student Brief' : 'केस ब्रीफ'}
+            {language === 'en' ? 'Certified Case Brief' : 'केस ब्रीफ'}
           </span>
           <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-[0.2em] text-[#8a712a]">
             {caseData.court} · {caseData.year}

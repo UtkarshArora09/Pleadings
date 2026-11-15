@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { globalVotes } from '../route';
+import { globalVotes, VoteRecord } from '@/lib/voteStore';
 
 export async function GET(
   req: Request,
@@ -10,11 +10,11 @@ export async function GET(
     const url = new URL(req.url);
     const anonId = url.searchParams.get('anonId');
 
-    const caseVotes = globalVotes.filter((v) => v.slug === slug);
+    const caseVotes = globalVotes.filter((v: VoteRecord) => v.slug === slug);
     const totalVotes = caseVotes.length;
     const counts: Record<string, number> = {};
 
-    caseVotes.forEach((v) => {
+    caseVotes.forEach((v: VoteRecord) => {
       counts[v.optionId] = (counts[v.optionId] || 0) + 1;
     });
 
@@ -26,7 +26,7 @@ export async function GET(
     }
 
     const userVote = anonId
-      ? caseVotes.find((v) => v.anonId === anonId)?.optionId || null
+      ? caseVotes.find((v: VoteRecord) => v.anonId === anonId)?.optionId || null
       : null;
 
     return NextResponse.json({
