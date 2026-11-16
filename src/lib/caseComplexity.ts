@@ -21,7 +21,7 @@ export function getCaseComplexity(caseData: any, lang: 'en' | 'hi' = 'en'): Case
       badge: '5 Min Read • 2 Twists',
       twistsCount: 2,
       tagColor: '#D4AF37',
-      emoji: '⏱️',
+      emoji: '',
     };
   }
 
@@ -58,25 +58,22 @@ export function getCaseComplexity(caseData: any, lang: 'en' | 'hi' = 'en'): Case
     twistsCount = 2;
   }
 
-  // 3. Format badge
+  // 3. Format badge without emojis
   let complexity: 'Easy' | 'Moderate' | 'Deep-Dive' = 'Moderate';
   let badge = `${readTimeMin} Min Read • ${twistsCount} Twists`;
-  let emoji = '⏱️';
+  const emoji = '';
 
   if (readTimeMin <= 3) {
     complexity = 'Easy';
-    emoji = '⚡';
     badge = lang === 'hi' ? `${readTimeMin} मिनट • सरल कथा` : `${readTimeMin} Min Read • Easy`;
   } else if (readTimeMin >= 7 || twistsCount >= 3) {
     complexity = 'Deep-Dive';
-    emoji = '🔥';
     badge =
       lang === 'hi'
         ? `${readTimeMin} मिनट • गहन अध्ययन (${twistsCount} मोड़)`
         : `${readTimeMin} Min Deep-Dive • ${twistsCount} Twists`;
   } else {
     complexity = 'Moderate';
-    emoji = '⚖️';
     badge =
       lang === 'hi'
         ? `${readTimeMin} मिनट • ${twistsCount} मोड़`

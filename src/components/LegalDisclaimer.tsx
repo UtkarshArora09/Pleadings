@@ -23,16 +23,18 @@ export function LegalDisclaimer({
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className={`inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full text-[10px] font-mono text-[#D4AF37] hover:text-white bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 transition-all cursor-pointer select-none shrink-0 ${className}`}
+          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono text-[#D4AF37] hover:text-white bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 transition-all cursor-pointer select-none shrink-0 ${className}`}
           title="Read legal disclaimer"
         >
-          <span>⚖️</span>
           {compactOnMobile ? (
             <>
               <span className="hidden md:inline">
                 {lang === 'en' ? 'Educational Disclaimer: Not Legal Advice' : 'अस्वीकरण: विधिक सलाह नहीं'}
               </span>
               <span className="hidden xs:inline md:hidden">
+                {lang === 'en' ? 'Disclaimer' : 'अस्वीकरण'}
+              </span>
+              <span className="xs:hidden">
                 {lang === 'en' ? 'Disclaimer' : 'अस्वीकरण'}
               </span>
             </>
@@ -54,7 +56,7 @@ export function LegalDisclaimer({
     return (
       <div className={`p-4 rounded-xs bg-[#0C0E14] border border-white/10 text-white/50 text-[11px] font-mono leading-relaxed space-y-1.5 ${className}`}>
         <div className="flex items-center gap-2 text-[#D4AF37] font-bold uppercase tracking-wider text-[10px]">
-          <span>⚖️</span>
+          <span className="text-[#D4AF37] font-mono font-bold">§</span>
           <span>{lang === 'en' ? 'LEGAL & EDITORIAL DISCLAIMER' : 'विधिक एवं संपादकीय अस्वीकरण'}</span>
         </div>
         <p>
@@ -71,7 +73,7 @@ export function LegalDisclaimer({
     <>
       <div className={`p-3.5 sm:p-4 rounded-xs bg-[#121520] border border-[#D4AF37]/30 text-xs font-mono text-[#c5c1b8] flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${className}`}>
         <div className="flex items-start sm:items-center gap-2.5">
-          <span className="text-base text-[#D4AF37] shrink-0 mt-0.5 sm:mt-0">⚖️</span>
+          <span className="text-sm font-mono font-bold text-[#D4AF37] shrink-0 mt-0.5 sm:mt-0">§</span>
           <div>
             <strong className="text-white uppercase tracking-wider text-[10px] sm:text-[11px] block sm:inline mr-2">
               {lang === 'en' ? 'Educational Storytelling Precedent:' : 'शैक्षिक अदालती वृत्तांत:'}
@@ -115,7 +117,7 @@ function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => 
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-3 border-b border-white/10 shrink-0">
           <div className="flex items-center gap-2">
-            <span className="text-lg">⚖️</span>
+            <span className="text-base font-mono font-bold text-[#D4AF37]">§</span>
             <h3 className="font-anton text-xl text-white uppercase tracking-wide">
               {lang === 'en' ? 'Legal Notice & Disclaimer' : 'कानूनी अस्वीकरण'}
             </h3>

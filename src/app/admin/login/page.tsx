@@ -110,10 +110,7 @@ function LoginForm() {
               <span>Verifying Authority...</span>
             </>
           ) : (
-            <>
-              <span>⚖</span>
-              <span>Authenticate & Enter</span>
-            </>
+            <span>Authenticate & Enter</span>
           )}
         </button>
       </form>

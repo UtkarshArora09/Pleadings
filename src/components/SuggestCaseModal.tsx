@@ -87,7 +87,6 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
         {/* Header */}
         <div className="mb-6 space-y-1.5">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 text-[10px] font-mono font-bold uppercase tracking-widest rounded-2xs">
-            <span>💡</span>
             <span>{lang === 'en' ? 'READER STORY ROOM' : 'केस सुझाव'}</span>
           </div>
           <h2 className="font-anton text-2xl sm:text-3xl text-white tracking-wide uppercase">
@@ -103,7 +102,7 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
         {/* Success Message */}
         {isSuccess ? (
           <div className="p-6 bg-emerald-950/70 border border-emerald-500/50 rounded-xs text-center space-y-2 animate-fadeIn font-mono">
-            <span className="text-3xl">⚖️</span>
+            <span className="text-2xl text-emerald-400 font-bold block">✓</span>
             <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-300">
               {lang === 'en' ? 'Suggestion Received!' : 'सुझाव प्राप्त हुआ!'}
             </h3>

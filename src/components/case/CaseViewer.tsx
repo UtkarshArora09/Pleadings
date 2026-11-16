@@ -286,8 +286,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
               }`}
               title="Interactive Slide-by-Slide Story Arc"
             >
-              <span className="sm:hidden">🎞️</span>
-              <span className="hidden sm:inline">🎞️ Slides</span>
+              <span>Slides</span>
             </button>
             <button
               type="button"
@@ -299,8 +298,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
               }`}
               title="Continuous Vertical Reading"
             >
-              <span className="sm:hidden">📜</span>
-              <span className="hidden sm:inline">📜 Scroll</span>
+              <span>Scroll</span>
             </button>
           </div>
 
@@ -362,8 +360,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                 <div className="flex flex-wrap items-center gap-2">
                   <StatusBadge status={caseData.status} size="md" />
 
-                  <span className="px-2.5 py-0.5 rounded-2xs text-[10px] font-mono font-bold tracking-wider uppercase bg-black/80 backdrop-blur-md border border-[#D4AF37]/50 text-[#D4AF37] flex items-center gap-1 shadow-sm">
-                    <span>{complexityInfo.emoji}</span>
+                  <span className="px-2.5 py-0.5 rounded-2xs text-[10px] font-mono font-bold tracking-wider uppercase bg-black/80 backdrop-blur-md border border-[#D4AF37]/50 text-[#D4AF37] flex items-center shadow-sm">
                     <span>{complexityInfo.badge}</span>
                   </span>
 
@@ -703,7 +700,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             <div className="flex flex-wrap items-center gap-2.5">
               <StatusBadge status={caseData.status} size="md" />
               <span className="px-2 py-0.5 rounded-2xs text-[9px] font-mono font-bold tracking-wider uppercase bg-black/80 backdrop-blur-md border border-[#D4AF37]/50 text-[#D4AF37]">
-                {complexityInfo.emoji} {complexityInfo.badge}
+                {complexityInfo.badge}
               </span>
               <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase tracking-wider">
                 {caseData.court} · {caseData.year}

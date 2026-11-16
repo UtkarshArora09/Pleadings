@@ -53,7 +53,6 @@ export function Header() {
             onClick={() => setSuggestModalOpen(true)}
             className="text-white/80 hover:text-[#D4AF37] transition-colors flex items-center gap-1 cursor-pointer font-semibold"
           >
-            <span>💡</span>
             <span>{language === 'en' ? 'Suggest Case' : 'केस सुझाएं'}</span>
           </button>
 
@@ -125,9 +124,8 @@ export function Header() {
               setMobileMenuOpen(false);
               setSuggestModalOpen(true);
             }}
-            className="text-left text-sm font-semibold tracking-wider uppercase text-white/90 hover:text-[#D4AF37] py-2 border-b border-white/5 cursor-pointer flex items-center gap-2"
+            className="text-left text-sm font-semibold tracking-wider uppercase text-white/90 hover:text-[#D4AF37] py-2 border-b border-white/5 cursor-pointer flex items-center"
           >
-            <span>💡</span>
             <span>{language === 'en' ? 'Suggest a Case' : 'केस का सुझाव दें'}</span>
           </button>
 

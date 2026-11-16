@@ -92,8 +92,7 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
 
           {/* Bottom Poster Complexity Tag */}
           <div className="absolute bottom-2 left-2 z-10 pointer-events-none">
-            <span className="px-2 py-0.5 rounded-2xs text-[9px] font-mono font-bold tracking-wider uppercase bg-black/85 backdrop-blur-md border border-white/20 text-[#D4AF37] shadow-md flex items-center gap-1">
-              <span>{complexityInfo.emoji}</span>
+            <span className="px-2 py-0.5 rounded-2xs text-[9px] font-mono font-bold tracking-wider uppercase bg-black/85 backdrop-blur-md border border-white/20 text-[#D4AF37] shadow-md flex items-center">
               <span>{complexityInfo.badge}</span>
             </span>
           </div>

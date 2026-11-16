@@ -21,8 +21,7 @@ export function SuggestCaseBanner({ lang = 'en', compact = false }: SuggestCaseB
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
           <div className="space-y-1.5 max-w-xl">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37] px-2.5 py-0.5 bg-[#D4AF37]/15 rounded-2xs border border-[#D4AF37]/30 flex items-center gap-1">
-                <span>💡</span>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37] px-2.5 py-0.5 bg-[#D4AF37]/15 rounded-2xs border border-[#D4AF37]/30 flex items-center">
                 <span>{lang === 'en' ? 'SUGGEST A CASE' : 'केस सुझाएं'}</span>
               </span>
               <span className="text-[10px] font-mono text-white/50">For Readers & Advocates</span>
