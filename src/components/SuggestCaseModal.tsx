@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface SuggestCaseModalProps {
   isOpen: boolean;
@@ -19,8 +20,20 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+    if (isOpen) {
+      const orig = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = orig;
+      };
+    }
+  }, [isOpen]);
+
+  if (!isOpen || !mounted || typeof document === 'undefined') return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,9 +82,14 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto animate-fadeIn select-text">
-      <div className="relative w-full max-w-xl bg-[#12151E] border border-[#D4AF37]/40 rounded-sm shadow-2xl p-6 sm:p-8 text-white">
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto animate-fadeIn select-text"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="relative w-full max-w-xl bg-[#12151E] border border-[#D4AF37]/40 rounded-sm shadow-2xl p-6 sm:p-8 text-white my-auto">
         {/* Top Gold Bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E50914] via-[#D4AF37] to-[#E50914]" />
 
@@ -240,6 +258,7 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
           </form>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

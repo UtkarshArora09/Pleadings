@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface LegalDisclaimerProps {
   lang?: 'en' | 'hi';
@@ -103,14 +104,27 @@ export function LegalDisclaimer({
 }
 
 function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => void }) {
-  return (
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
+  if (!mounted || typeof document === 'undefined') return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md animate-fadeIn select-text p-3 sm:p-6 flex items-center justify-center"
+      className="fixed inset-0 z-[9999] overflow-y-auto bg-black/85 backdrop-blur-md animate-fadeIn select-text p-4 sm:p-6 flex items-center justify-center"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-lg max-h-[90vh] flex flex-col bg-[#12151E] border border-[#D4AF37]/50 rounded-sm shadow-2xl p-5 sm:p-7 text-white my-auto overflow-hidden">
+      <div className="relative w-full max-w-lg max-h-[85vh] flex flex-col bg-[#12151E] border border-[#D4AF37]/50 rounded-sm shadow-2xl p-5 sm:p-7 text-white my-auto overflow-hidden">
         {/* Top Gold Bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E50914] via-[#D4AF37] to-[#E50914]" />
 
@@ -133,7 +147,7 @@ function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => 
 
         {/* Modal Scrollable Points (1, 2, 3, 4 clearly visible) */}
         <div className="space-y-3 py-3 text-xs sm:text-sm text-[#d4cfc5] font-sans leading-relaxed overflow-y-auto pr-2 flex-1 scrollbar-thin scrollbar-thumb-white/20">
-          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+          <div className="p-3 rounded-2xs bg-white/5 border border-white/5">
             <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
               {lang === 'en' ? 'Point 1 · Educational & Storytelling Media' : 'बिंदु 1 · शैक्षिक एवं कथात्मक माध्यम'}
             </p>
@@ -144,7 +158,7 @@ function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => 
             </p>
           </div>
 
-          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+          <div className="p-3 rounded-2xs bg-white/5 border border-white/5">
             <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
               {lang === 'en' ? 'Point 2 · No Legal Advice or Representation' : 'बिंदु 2 · विधिक सलाह या प्रतिनिधित्व नहीं'}
             </p>
@@ -155,7 +169,7 @@ function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => 
             </p>
           </div>
 
-          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+          <div className="p-3 rounded-2xs bg-white/5 border border-white/5">
             <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
               {lang === 'en' ? 'Point 3 · Certified Public Court Records' : 'बिंदु 3 · सार्वजनिक अदालती रिकॉर्ड'}
             </p>
@@ -166,7 +180,7 @@ function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => 
             </p>
           </div>
 
-          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+          <div className="p-3 rounded-2xs bg-white/5 border border-white/5">
             <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
               {lang === 'en' ? 'Point 4 · Professional Legal Counsel' : 'बिंदु 4 · पेशेवर विधिक परामर्श'}
             </p>
@@ -182,12 +196,13 @@ function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => 
         <div className="pt-3 border-t border-white/10 flex justify-end shrink-0">
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-[#D4AF37] text-black font-bold font-mono text-xs uppercase tracking-wider rounded-xs hover:bg-white transition-all cursor-pointer shadow-md"
+            className="px-6 py-2.5 bg-[#D4AF37] text-black font-bold font-mono text-xs uppercase tracking-wider rounded-xs hover:bg-white transition-all cursor-pointer shadow-md"
           >
             {lang === 'en' ? 'Understood' : 'स्वीकार है'}
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
