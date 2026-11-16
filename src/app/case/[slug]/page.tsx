@@ -28,10 +28,29 @@ async function getCaseForPage(slug: string): Promise<CaseFile | null> {
 
 // Helper to generate hyper-targeted search keywords per case
 function getCaseKeywords(caseItem: CaseFile): string[] {
-  const base = [
+  const primaryCitation = caseItem.citations?.primary || '';
+  const parallelCitations = caseItem.citations?.parallel || [];
+
+  // Generate title variants for search engine matching
+  const titleVariants = [
     caseItem.title,
-    caseItem.citations.primary,
-    ...(caseItem.citations.parallel || []),
+    caseItem.title.replace(/\bv\.\b/gi, 'vs'),
+    caseItem.title.replace(/\bvs\.\b/gi, 'versus'),
+    caseItem.title.replace(/\s+and\s+ors\.?/gi, ''),
+    caseItem.title.replace(/\s+and\s+others/gi, ''),
+    `${caseItem.title} case`,
+    `${caseItem.title} summary`,
+    `${caseItem.title} judgment`,
+    `${caseItem.title} full judgment`,
+    `${caseItem.title} ratio decidendi`,
+    `${caseItem.title} facts and issues`,
+    `${caseItem.title} ${caseItem.year}`,
+  ];
+
+  const base = [
+    ...titleVariants,
+    primaryCitation,
+    ...parallelCitations,
     caseItem.court,
     `${caseItem.court} ${caseItem.year}`,
     ...(caseItem.doctrines || []),
@@ -45,13 +64,33 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
     'CLAT PG landmark judgments',
     'Judiciary exam case laws',
     'UPSC Law Optional cases',
+    'Supreme Court landmark cases',
+    'AIBE exam landmark cases',
   ];
 
-  // Case-specific search queries and natural language phrases
+  // Case-specific search queries, popular shorthand, and natural language phrases
   const slug = caseItem.slug;
   const specificMap: Record<string, string[]> = {
+    'anuradha-bhasin': [
+      'Anuradha Bhasin vs Union of India',
+      'Anuradha Bhasin v Union of India',
+      'Anuradha Bhasin case summary',
+      'Internet shutdown landmark judgment India',
+      'Right to Internet Article 19 1 a',
+      'Freedom of press Jammu and Kashmir shutdown',
+      'Section 144 CrPC indefinite orders illegal',
+      'Telecom Suspension Rules 2017 proportionality',
+      'Proportionality test Internet suspension',
+      'Ghulam Nabi Azad vs Union of India',
+      '(2020) 3 SCC 637',
+      'AIR 2020 SC 1308',
+      '2020 INSC 24',
+      'अनुराधा भसीन बनाम भारत संघ',
+      'अनुराधा भसीन केस',
+    ],
     'nanavati-case': [
       'KM Nanavati vs State of Maharashtra',
+      'K.M. Nanavati vs State of Maharashtra',
       'Nanavati case full judgment',
       'Commander Nanavati Prem Ahuja',
       'Sylvia Nanavati murder case',
@@ -62,9 +101,11 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Nanavati case ratio decidendi',
       'Rustom movie real case facts',
       'AIR 1962 SC 605',
+      'नानावटी केस',
     ],
     'kesavananda-bharati': [
       'Kesavananda Bharati vs State of Kerala',
+      'Kesavananda Bharati Sripadagalvaru',
       'Basic Structure Doctrine',
       'Article 368 amendment power',
       '13 judge bench Supreme Court',
@@ -73,6 +114,8 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Golaknath case overruled',
       'Can Parliament change basic structure',
       '(1973) 4 SCC 225',
+      'AIR 1973 SC 1461',
+      'केशवानंद भारती केस',
     ],
     'maneka-gandhi': [
       'Maneka Gandhi vs Union of India',
@@ -83,6 +126,7 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Right to travel abroad fundamental right',
       'Natural justice in Indian constitution',
       'AIR 1978 SC 597',
+      'मेनका गांधी बनाम भारत संघ',
     ],
     'm-c-mehta': [
       'MC Mehta vs Union of India',
@@ -93,6 +137,7 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Article 32 environmental public interest litigation',
       'Bhopal gas tragedy precedent',
       'AIR 1987 SC 1086',
+      'एम सी मेहता केस',
     ],
     'right-to-privacy-case': [
       'Justice KS Puttaswamy vs Union of India',
@@ -103,14 +148,35 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Proportionality test for privacy',
       'Informational privacy India',
       '(2017) 10 SCC 1',
+      'पुट्टास्वामी राइट टू प्राइवेसी केस',
     ],
     'shah-bano': [
       'Mohd Ahmed Khan vs Shah Bano Begum',
+      'Mohd. Ahmed Khan v. Shah Bano Begum',
       'Shah Bano case maintenance',
+      'Shah Bano case judgment summary',
       'Section 125 CrPC Muslim divorced woman',
       'Uniform Civil Code Article 44',
       'Muslim Women Protection of Rights on Divorce Act 1986',
       'AIR 1985 SC 945',
+      '(1985) 2 SCC 556',
+      '1985 SCR 3 844',
+      'शाह बानो मामला',
+      'शाह बानो बेगम केस',
+    ],
+    'the-shah-bano-case': [
+      'Mohd Ahmed Khan vs Shah Bano Begum',
+      'Mohd. Ahmed Khan v. Shah Bano Begum',
+      'Shah Bano case maintenance',
+      'Shah Bano case judgment summary',
+      'Section 125 CrPC Muslim divorced woman',
+      'Uniform Civil Code Article 44',
+      'Muslim Women Protection of Rights on Divorce Act 1986',
+      'AIR 1985 SC 945',
+      '(1985) 2 SCC 556',
+      '1985 SCR 3 844',
+      'शाह बानो मामला',
+      'शाह बानो बेगम केस',
     ],
     'shreya-singhal': [
       'Shreya Singhal vs Union of India',
@@ -119,6 +185,8 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Chilling effect doctrine online censorship',
       'Palghar Facebook arrest case',
       'AIR 2015 SC 1523',
+      '(2015) 5 SCC 1',
+      'श्रेया सिंघल केस',
     ],
     'vishaka-case': [
       'Vishaka vs State of Rajasthan',
@@ -127,6 +195,8 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Bhanwari Devi case judgment',
       'CEDAW convention application in Indian law',
       'AIR 1997 SC 3011',
+      '(1997) 6 SCC 241',
+      'विशाखा गाइडलाइंस केस',
     ],
     'ghost-case': [
       'State of Orissa vs Ram Bahadur Thapa',
@@ -136,6 +206,7 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Bona fide belief in ghosts legal defense',
       'Rasgovindpur aerodrome ghost attack',
       'AIR 1960 Ori 161',
+      'भूत केस कानून भारत',
     ],
     'haircut-case': [
       'Aashna Roy vs ITC Hotels Maurya',
@@ -143,6 +214,7 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'ITC Maurya salon deficiency in service',
       'Consumer Protection Act 2019 haircut compensation',
       'NCDRC 2 crore salon award Supreme Court',
+      'आईटीसी मौर्य हेयरकट केस',
     ],
     'navtej-johar': [
       'Navtej Singh Johar vs Union of India',
@@ -152,6 +224,8 @@ function getCaseKeywords(caseItem: CaseFile): string[] {
       'Constitutional morality and Section 377',
       'Suresh Kumar Koushal overruled',
       'AIR 2018 SC 4321',
+      '(2018) 10 SCC 1',
+      'नवतेज सिंह जौहर केस',
     ],
     'rinku-rukshar-habeas-corpus-case': [
       'Rinku alias Rukshar vs State of UP',
@@ -179,8 +253,9 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
     };
   }
 
-  const title = `${caseItem.title} (${caseItem.court}, ${caseItem.year}) | Pleadings`;
-  const description = `${caseItem.hook} Verified against the official judgment: ${caseItem.citations.primary}. Read the full courtroom thriller, evidence exhibits, and ratio decidendi.`;
+  const primaryCitation = caseItem.citations?.primary || '';
+  const title = `${caseItem.title} (${caseItem.year}) ${primaryCitation ? `[${primaryCitation}]` : ''} Case Summary, Facts & Judgment | Pleadings`;
+  const description = `Verified legal breakdown of ${caseItem.title} (${caseItem.court}, ${caseItem.year}) [${primaryCitation}]. ${caseItem.hook} Read the complete courtroom facts, evidence exhibits, ratio decidendi, and constitutional holdings.`;
   const url = `https://pleadings.in/case/${caseItem.slug}`;
   const ogImageUrl = `https://pleadings.in/api/share/${caseItem.slug}`;
   const keywords = getCaseKeywords(caseItem);
@@ -244,20 +319,24 @@ export default async function CasePage({ params }: CasePageProps) {
     ? allCases[currentIndex - 1].slug
     : allCases[allCases.length - 1]?.slug;
 
+  const primaryCitation = currentCase?.citations?.primary || '';
+  const parallelCitations = currentCase?.citations?.parallel || [];
+
   const jsonLd = currentCase ? {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'Article',
         '@id': `https://pleadings.in/case/${currentCase.slug}#article`,
-        headline: `${currentCase.title} — Verified Judgment Dossier`,
+        headline: `${currentCase.title} (${currentCase.year}) — Full Judgment, Facts & Case Brief`,
         description: currentCase.hook,
         datePublished: currentCase.publishedAt,
         dateModified: currentCase.review?.reviewedOn || currentCase.publishedAt,
         url: `https://pleadings.in/case/${currentCase.slug}`,
         author: {
           '@type': 'Person',
-          name: currentCase.review?.reviewer || 'Pleadings Advocate Board',
+          name: currentCase.review?.reviewer || 'Adv. Girish Kr. Srivastava',
+          jobTitle: 'Advocate & Legal Editor',
         },
         publisher: {
           '@type': 'Organization',
@@ -272,7 +351,7 @@ export default async function CasePage({ params }: CasePageProps) {
         about: [
           {
             '@type': 'Legislation',
-            name: currentCase.citations.primary,
+            name: primaryCitation,
             legislationJurisdiction: 'IN',
           },
           ...(currentCase.doctrines || []).map((d) => ({
@@ -294,7 +373,7 @@ export default async function CasePage({ params }: CasePageProps) {
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Browse Cases',
+            name: 'Case Library',
             item: 'https://pleadings.in/browse',
           },
           {
@@ -305,22 +384,58 @@ export default async function CasePage({ params }: CasePageProps) {
           },
         ],
       },
-      ...(currentCase.vote ? [
-        {
-          '@type': 'FAQPage',
-          '@id': `https://pleadings.in/case/${currentCase.slug}#faq`,
-          mainEntity: [
+      {
+        '@type': 'FAQPage',
+        '@id': `https://pleadings.in/case/${currentCase.slug}#faq`,
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: `What was the court's ruling in ${currentCase.title}?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: currentCase.status?.explain ||
+                `The ${currentCase.court} ruled authoritatively in ${currentCase.year}, establishing binding legal doctrine cited under ${primaryCitation}.`,
+            },
+          },
+          {
+            '@type': 'Question',
+            name: `What was the central legal issue in ${currentCase.title}?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: currentCase.hook ||
+                `The dispute involved constitutional principles, fundamental rights, and statutory interpretation under ${primaryCitation}.`,
+            },
+          },
+          {
+            '@type': 'Question',
+            name: `What is the official citation for ${currentCase.title}?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `The primary official citation is ${primaryCitation}${parallelCitations.length > 0 ? `, with parallel citations: ${parallelCitations.join(', ')}` : ''}. Decided by the ${currentCase.court} in ${currentCase.year}.`,
+            },
+          },
+          {
+            '@type': 'Question',
+            name: `Is ${currentCase.title} still good law in India?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: currentCase.status?.code === 'GOOD_LAW'
+                ? `Yes. ${currentCase.title} remains binding precedent under Indian law. ${currentCase.status?.explain || ''}`
+                : `${currentCase.title} has undergone subsequent legislative or judicial modification. ${currentCase.status?.explain || 'Refer to the citator history.'}`,
+            },
+          },
+          ...(currentCase.vote ? [
             {
               '@type': 'Question',
               name: currentCase.vote.question,
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: `${currentCase.vote.context} Court Decision: ${currentCase.vote.options.find(o => o.id === currentCase.vote?.courtChoseOptionId)?.argument || currentCase.status.explain}`,
+                text: `${currentCase.vote.context} Court Decision: ${currentCase.vote.options?.find((o: any) => o.id === currentCase.vote?.courtChoseOptionId)?.argument || currentCase.status.explain}`,
               },
             },
-          ],
-        },
-      ] : []),
+          ] : []),
+        ],
+      },
     ],
   } : null;
 

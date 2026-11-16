@@ -5,12 +5,14 @@ import React, { useState } from 'react';
 interface LegalDisclaimerProps {
   lang?: 'en' | 'hi';
   variant?: 'banner' | 'footer' | 'pill';
+  compactOnMobile?: boolean;
   className?: string;
 }
 
 export function LegalDisclaimer({
   lang = 'en',
   variant = 'banner',
+  compactOnMobile = false,
   className = '',
 }: LegalDisclaimerProps) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,11 +23,24 @@ export function LegalDisclaimer({
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono text-[#D4AF37] hover:text-white bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 transition-all cursor-pointer select-none ${className}`}
+          className={`inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full text-[10px] font-mono text-[#D4AF37] hover:text-white bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 transition-all cursor-pointer select-none shrink-0 ${className}`}
           title="Read legal disclaimer"
         >
           <span>⚖️</span>
-          <span>{lang === 'en' ? 'Educational Disclaimer: Not Legal Advice' : 'अस्वीकरण: विधिक सलाह नहीं'}</span>
+          {compactOnMobile ? (
+            <>
+              <span className="hidden md:inline">
+                {lang === 'en' ? 'Educational Disclaimer: Not Legal Advice' : 'अस्वीकरण: विधिक सलाह नहीं'}
+              </span>
+              <span className="hidden xs:inline md:hidden">
+                {lang === 'en' ? 'Disclaimer' : 'अस्वीकरण'}
+              </span>
+            </>
+          ) : (
+            <span>
+              {lang === 'en' ? 'Educational Disclaimer: Not Legal Advice' : 'अस्वीकरण: विधिक सलाह नहीं'}
+            </span>
+          )}
         </button>
 
         {modalOpen && (

@@ -34,8 +34,27 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const router = useRouter();
   const { language, toggleBookmark, isBookmarked } = useApp();
 
-  // View Mode: 'slide' (default slide-wise experience) or 'scroll' (continuous)
-  const [readingView, setReadingView] = useState<'slide' | 'scroll'>('slide');
+  // View Mode: Desktop & Laptop defaults to 'scroll', Mobile & Tablet defaults to 'slide'
+  const [readingView, setReadingView] = useState<'slide' | 'scroll'>('scroll');
+  const [userSelectedMode, setUserSelectedMode] = useState<boolean>(false);
+
+  // Responsive device view mode default
+  useEffect(() => {
+    if (userSelectedMode) return;
+    if (typeof window === 'undefined') return;
+
+    // Mobile / Tablet detection: screen width < 1024px or coarse touch devices
+    const isMobileOrTablet =
+      window.innerWidth < 1024 ||
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches && window.innerWidth < 1280);
+
+    setReadingView(isMobileOrTablet ? 'slide' : 'scroll');
+  }, [userSelectedMode]);
+
+  const changeReadingView = (mode: 'slide' | 'scroll') => {
+    setReadingView(mode);
+    setUserSelectedMode(true);
+  };
 
   // Slide Index: 0 = Prologue Hero, 1..8 = Episodes 1..8, 9 = Dossier
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -234,61 +253,63 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
       className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden font-sans select-none"
     >
       {/* Sticky Top Header Navigation */}
-      <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2 sm:gap-4 transition-all">
+      <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-2.5 sm:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-4 transition-all">
         {/* Left: Library Back & Case Title */}
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0 shrink">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0 flex-1 mr-1">
           <Link
             href="/"
-            className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#D4AF37] hover:text-white transition-colors shrink-0 p-1 -ml-1"
+            className="flex items-center gap-1 text-[11px] sm:text-xs font-mono font-bold text-[#D4AF37] hover:text-white transition-colors shrink-0 py-1"
             title="Back to Library"
           >
             <span>←</span>
-            <span>LIBRARY</span>
+            <span className="tracking-wider">LIBRARY</span>
           </Link>
 
-          <span className="text-white/20">|</span>
+          <span className="text-white/20 shrink-0 select-none">|</span>
 
-          <span className="text-xs sm:text-sm font-serif font-bold text-white truncate max-w-[170px] sm:max-w-[340px] md:max-w-[480px]">
+          <span className="text-xs sm:text-sm font-serif font-bold text-white/90 truncate min-w-0">
             {displayTitle}
           </span>
         </div>
 
         {/* Right Actions: Reading Mode Toggle, Disclaimer Pill & Save */}
-        <div className="flex items-center gap-2 shrink-0">
-          {/* Mode Switcher: Slide vs Continuous */}
-          <div className="hidden sm:inline-flex items-center p-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          {/* Mode Switcher: Slide vs Continuous (Desktop default: Scroll, Mobile default: Slides) */}
+          <div className="inline-flex items-center p-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono">
             <button
               type="button"
-              onClick={() => setReadingView('slide')}
-              className={`px-2.5 py-1 rounded-full font-bold uppercase transition-all cursor-pointer ${
+              onClick={() => changeReadingView('slide')}
+              className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full font-bold uppercase transition-all cursor-pointer ${
                 readingView === 'slide'
                   ? 'bg-[#D4AF37] text-black shadow-sm'
                   : 'text-white/60 hover:text-white'
               }`}
               title="Interactive Slide-by-Slide Story Arc"
             >
-              🎞️ Slides
+              <span className="sm:hidden">🎞️</span>
+              <span className="hidden sm:inline">🎞️ Slides</span>
             </button>
             <button
               type="button"
-              onClick={() => setReadingView('scroll')}
-              className={`px-2.5 py-1 rounded-full font-bold uppercase transition-all cursor-pointer ${
+              onClick={() => changeReadingView('scroll')}
+              className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full font-bold uppercase transition-all cursor-pointer ${
                 readingView === 'scroll'
                   ? 'bg-[#D4AF37] text-black shadow-sm'
                   : 'text-white/60 hover:text-white'
               }`}
               title="Continuous Vertical Reading"
             >
-              📜 Scroll
+              <span className="sm:hidden">📜</span>
+              <span className="hidden sm:inline">📜 Scroll</span>
             </button>
           </div>
 
-          <LegalDisclaimer variant="pill" lang={language} />
+          <LegalDisclaimer variant="pill" lang={language} compactOnMobile={true} />
 
           {/* Bookmark Button */}
           <button
             onClick={() => toggleBookmark(caseData.slug)}
-            className={`px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1 shrink-0 ${
               bookmarked
                 ? 'bg-[#E50914] text-white border-[#E50914]'
                 : 'bg-white/5 hover:bg-white/10 text-white/80 border-white/15'
@@ -296,7 +317,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             title={bookmarked ? 'Saved in library' : 'Save case'}
           >
             <span>{bookmarked ? '✓' : '+'}</span>
-            <span>{bookmarked ? 'SAVED' : 'SAVE'}</span>
+            <span className="hidden xs:inline">{bookmarked ? 'SAVED' : 'SAVE'}</span>
           </button>
         </div>
       </header>
@@ -360,7 +381,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           {currentSlide > 0 && (
             <button
               onClick={() => goToSlide(currentSlide - 1)}
-              className="fixed left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/70 hover:bg-[#D4AF37] text-white hover:text-black border border-white/20 hover:border-[#D4AF37] transition-all flex items-center justify-center text-sm sm:text-base font-bold shadow-2xl cursor-pointer backdrop-blur-md"
+              className="fixed left-1.5 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#D4AF37] text-white hover:text-black border border-white/20 hover:border-[#D4AF37] transition-all flex items-center justify-center text-xs sm:text-base font-bold shadow-2xl cursor-pointer backdrop-blur-md opacity-80 hover:opacity-100"
               title="Previous Slide (Swipe Right or Left Arrow)"
               aria-label="Previous Slide"
             >
@@ -371,7 +392,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
           {currentSlide < totalSlides - 1 && (
             <button
               onClick={() => goToSlide(currentSlide + 1)}
-              className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#D4AF37] hover:bg-white text-black border border-[#D4AF37] transition-all flex items-center justify-center text-sm sm:text-base font-bold shadow-2xl cursor-pointer backdrop-blur-md"
+              className="fixed right-1.5 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[#D4AF37] hover:bg-white text-black border border-[#D4AF37] transition-all flex items-center justify-center text-xs sm:text-base font-bold shadow-2xl cursor-pointer backdrop-blur-md opacity-85 hover:opacity-100"
               title="Next Slide (Swipe Left or Right Arrow)"
               aria-label="Next Slide"
             >
@@ -398,8 +419,8 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                   </span>
                 </div>
 
-                {/* Headline Title in Netflix Anton Style */}
-                <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-tight leading-[0.95] drop-shadow-xl">
+                {/* Headline Title in Netflix Anton Style (fixed line height to prevent line collision) */}
+                <h1 className="font-anton text-3xl sm:text-5xl md:text-7xl text-white uppercase tracking-tight leading-[1.08] sm:leading-[0.98] drop-shadow-xl break-words">
                   {displayTitle}
                 </h1>
 
@@ -484,7 +505,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                           Episode {epNum} of {episodes.length}
                         </span>
                       </div>
-                      <h2 className="font-anton text-2xl sm:text-4xl text-white uppercase tracking-tight leading-snug">
+                      <h2 className="font-anton text-2xl sm:text-4xl text-white uppercase tracking-tight leading-tight sm:leading-snug break-words">
                         {ep.title}
                       </h2>
                     </div>
@@ -736,7 +757,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
               </span>
             </div>
 
-            <h1 className="font-anton text-4xl sm:text-6xl text-white uppercase tracking-tight leading-[0.95]">
+            <h1 className="font-anton text-3xl sm:text-5xl md:text-6xl text-white uppercase tracking-tight leading-[1.08] sm:leading-[0.98] break-words">
               {displayTitle}
             </h1>
 
