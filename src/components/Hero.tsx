@@ -7,6 +7,7 @@ import { CaseFile } from '@/types/case';
 import { StatusBadge } from '@/components/case/StatusBadge';
 import { ProvenanceStrip } from '@/components/case/ProvenanceStrip';
 import { useApp } from '@/context/AppContext';
+import { getCaseComplexity } from '@/lib/caseComplexity';
 
 interface HeroProps {
   featuredCase: CaseFile;
@@ -37,6 +38,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
 
   const [heroImg, setHeroImg] = useState<string>(activeCase.poster?.src || (activeCase as any).bannerImage || '');
   const [hasHeroError, setHasHeroError] = useState<boolean>(false);
+  const complexityInfo = getCaseComplexity(activeCase, language);
 
   useEffect(() => {
     setHeroImg(activeCase.poster?.src || (activeCase as any).bannerImage || '');
@@ -82,6 +84,11 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
 
             <span className="text-[#D4AF37] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider">
               {activeCase.court} · {activeCase.year}
+            </span>
+
+            <span className="px-2 py-0.5 rounded-2xs text-[10px] font-mono font-bold tracking-wider uppercase bg-black/80 backdrop-blur-md border border-[#D4AF37]/50 text-[#D4AF37] flex items-center gap-1 shadow-sm">
+              <span>{complexityInfo.emoji}</span>
+              <span>{complexityInfo.badge}</span>
             </span>
           </div>
 

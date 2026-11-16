@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Logo } from './Logo';
 import { LanguageToggle } from './LanguageToggle';
+import { SuggestCaseModal } from './SuggestCaseModal';
 import { useApp } from '@/context/AppContext';
 
 export function Header() {
   const { language, bookmarkedSlugs } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [suggestModalOpen, setSuggestModalOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -45,6 +47,15 @@ export function Header() {
           >
             {language === 'en' ? 'Legal Glossary' : 'शब्दावली'}
           </Link>
+
+          <button
+            type="button"
+            onClick={() => setSuggestModalOpen(true)}
+            className="text-white/80 hover:text-[#D4AF37] transition-colors flex items-center gap-1 cursor-pointer font-semibold"
+          >
+            <span>💡</span>
+            <span>{language === 'en' ? 'Suggest Case' : 'केस सुझाएं'}</span>
+          </button>
 
           <Link
             href="/contribute"
@@ -108,6 +119,18 @@ export function Header() {
             {language === 'en' ? 'Legal Terms & Doctrines Glossary' : 'कानूनी शब्दावली और सिद्धांत'}
           </Link>
 
+          <button
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setSuggestModalOpen(true);
+            }}
+            className="text-left text-sm font-semibold tracking-wider uppercase text-white/90 hover:text-[#D4AF37] py-2 border-b border-white/5 cursor-pointer flex items-center gap-2"
+          >
+            <span>💡</span>
+            <span>{language === 'en' ? 'Suggest a Case' : 'केस का सुझाव दें'}</span>
+          </button>
+
           <Link
             href="/contribute"
             onClick={() => setMobileMenuOpen(false)}
@@ -130,6 +153,12 @@ export function Header() {
           </Link>
         </div>
       )}
+
+      <SuggestCaseModal
+        isOpen={suggestModalOpen}
+        onClose={() => setSuggestModalOpen(false)}
+        lang={language}
+      />
     </header>
   );
 }

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { CaseFile } from '@/types/case';
 import { CaseData } from '@/types';
 import { useApp } from '@/context/AppContext';
+import { getCaseComplexity } from '@/lib/caseComplexity';
 
 interface PosterCardProps {
   caseData: CaseFile | CaseData;
@@ -57,6 +58,7 @@ export function PosterCard({ caseData }: PosterCardProps) {
 
   const isCrime = String(categoryTag).toLowerCase().includes('ipc') || (caseData as any).genre === 'crime';
   const accentColor = isCrime ? '#E50914' : '#D4AF37';
+  const complexityInfo = getCaseComplexity(caseData, language);
 
   const [imgSrc, setImgSrc] = React.useState<string>(bannerImg);
   const [hasError, setHasError] = React.useState(false);
@@ -130,6 +132,14 @@ export function PosterCard({ caseData }: PosterCardProps) {
 
                 {/* Subtle Gradient Vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#12141D]/80 via-transparent to-transparent pointer-events-none" />
+
+                {/* Bottom Thumbnail Complexity Tag */}
+                <div className="absolute bottom-2 left-2 z-10 pointer-events-none">
+                  <span className="px-2 py-0.5 rounded-2xs text-[9px] font-mono font-bold tracking-wider uppercase bg-black/85 backdrop-blur-md border border-white/20 text-[#D4AF37] shadow-md flex items-center gap-1">
+                    <span>{complexityInfo.emoji}</span>
+                    <span>{complexityInfo.badge}</span>
+                  </span>
+                </div>
 
                 {/* Play Button Overlay on Hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">

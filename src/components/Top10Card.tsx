@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { CaseFile } from '@/types/case';
 import { CaseData } from '@/types';
 import { useApp } from '@/context/AppContext';
+import { getCaseComplexity } from '@/lib/caseComplexity';
 
 interface Top10CardProps {
   caseData: CaseFile | CaseData;
@@ -49,6 +50,7 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
 
   const rawCourt = (caseData as any).court;
   const displayCourt = typeof rawCourt === 'string' ? rawCourt : ((rawCourt as any)?.[language] || (rawCourt as any)?.en || 'Supreme Court of India');
+  const complexityInfo = getCaseComplexity(caseData, language);
 
   const bannerImg = (caseData as CaseFile).poster?.src || (caseData as any).bannerImage || '';
   const [imgSrc, setImgSrc] = React.useState<string>(bannerImg);
@@ -135,8 +137,8 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
             <h3 className="font-anton text-base sm:text-lg text-white uppercase tracking-tight leading-tight line-clamp-2 group-hover:text-[#D4AF37] transition-colors">
               {title}
             </h3>
-            <span className="text-[10px] font-mono text-white/60 block mt-1">
-              {caseData.year} · {readTimeStr}
+            <span className="text-[10px] font-mono text-[#D4AF37] block mt-1 font-semibold">
+              {caseData.year} · {complexityInfo.badge}
             </span>
           </div>
         </div>

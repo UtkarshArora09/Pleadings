@@ -5,6 +5,8 @@ import { Top10Carousel } from '@/components/Top10Carousel';
 import { PosterCard } from '@/components/PosterCard';
 import { CourtroomExperienceShowcase } from '@/components/CourtroomExperienceShowcase';
 import { HomeSectionNav } from '@/components/HomeSectionNav';
+import { SuggestCaseBanner } from '@/components/SuggestCaseBanner';
+import { LegalDisclaimer } from '@/components/LegalDisclaimer';
 import { getAllCases, getPublishedCases, getPublishedCasesAsync, getFeaturedCases, getTop10Cases } from '@/lib/cases';
 import Link from 'next/link';
 
@@ -111,10 +113,15 @@ export default async function HomePage() {
         <CourtroomExperienceShowcase />
       </section>
 
+      {/* Suggest A Case Section for Readers */}
+      <section className="px-4 sm:px-6 md:px-12 max-w-7xl mx-auto py-6 sm:py-8">
+        <SuggestCaseBanner />
+      </section>
+
       {/* Section 5: Comprehensive Editorial Footer */}
       <footer
         id="section-footer"
-        className="border-t border-white/10 bg-[#0A0C10] py-10 sm:py-14 px-4 sm:px-6 md:px-12 text-[#a9a49a] text-xs font-mono md:snap-start"
+        className="border-t border-white/10 bg-[#0A0C10] py-10 sm:py-14 px-4 sm:px-6 md:px-12 text-[#a9a49a] text-xs font-mono md:snap-start space-y-8"
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
@@ -148,7 +155,12 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-white/40">
+        {/* Prominent Educational Legal Disclaimer */}
+        <div className="max-w-7xl mx-auto">
+          <LegalDisclaimer variant="footer" />
+        </div>
+
+        <div className="max-w-7xl mx-auto pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-white/40">
           <div>© {new Date().getFullYear()} Pleadings. All rights reserved. Verified against the original/officially published judgment.</div>
           <div>Transforming verified Indian judgments into transparent legal media.</div>
         </div>
