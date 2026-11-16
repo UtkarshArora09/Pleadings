@@ -322,53 +322,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
         </div>
       </header>
 
-      {/* Slide Progress Bar (Instagram / LinkedIn Carousel Style) */}
-      {readingView === 'slide' && (
-        <div className="sticky top-[49px] sm:top-[53px] z-40 bg-[#0E1016]/98 backdrop-blur-md px-3 sm:px-6 py-2 border-b border-white/5 flex items-center justify-between gap-2">
-          {/* Segmented Story Bars */}
-          <div className="flex-1 flex items-center gap-1.5">
-            {Array.from({ length: totalSlides }).map((_, idx) => {
-              const isPast = idx < currentSlide;
-              const isCurrent = idx === currentSlide;
-              return (
-                <button
-                  key={idx}
-                  onClick={() => goToSlide(idx)}
-                  className="flex-1 h-1 sm:h-1.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none cursor-pointer"
-                  title={
-                    idx === 0
-                      ? 'Prologue'
-                      : idx === totalSlides - 1
-                      ? 'Case Dossier'
-                      : `Episode ${idx}`
-                  }
-                  aria-label={`Jump to slide ${idx + 1}`}
-                >
-                  <div
-                    className={`h-full w-full rounded-full transition-all duration-300 ${
-                      isCurrent
-                        ? 'bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.8)]'
-                        : isPast
-                        ? 'bg-[#D4AF37]/80'
-                        : 'bg-white/15 hover:bg-white/30'
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Current Slide Label & Counter */}
-          <div className="shrink-0 text-[10px] sm:text-[11px] font-mono font-bold text-[#D4AF37] uppercase tracking-wider pl-2">
-            {currentSlide === 0
-              ? 'PROLOGUE'
-              : currentSlide === totalSlides - 1
-              ? 'DOSSIER'
-              : `EP 0${currentSlide} / 0${episodes.length}`}
-          </div>
-        </div>
-      )}
-
       {/* ======================================================== */}
       {/* 1. SLIDE-WISE INTERACTIVE STORY ARC (DEFAULT EXPERIENCE) */}
       {/* ======================================================== */}

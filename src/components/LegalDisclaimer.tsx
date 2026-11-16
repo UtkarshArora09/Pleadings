@@ -102,12 +102,18 @@ export function LegalDisclaimer({
 
 function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn select-text">
-      <div className="relative w-full max-w-lg bg-[#12151E] border border-[#D4AF37]/50 rounded-sm shadow-2xl p-6 sm:p-8 text-white space-y-4">
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md animate-fadeIn select-text p-3 sm:p-6 flex items-center justify-center"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="relative w-full max-w-lg max-h-[90vh] flex flex-col bg-[#12151E] border border-[#D4AF37]/50 rounded-sm shadow-2xl p-5 sm:p-7 text-white my-auto overflow-hidden">
         {/* Top Gold Bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E50914] via-[#D4AF37] to-[#E50914]" />
 
-        <div className="flex items-center justify-between pb-3 border-b border-white/10">
+        {/* Modal Header */}
+        <div className="flex items-center justify-between pb-3 border-b border-white/10 shrink-0">
           <div className="flex items-center gap-2">
             <span className="text-lg">⚖️</span>
             <h3 className="font-anton text-xl text-white uppercase tracking-wide">
@@ -123,33 +129,58 @@ function DisclaimerModal({ lang, onClose }: { lang: 'en' | 'hi'; onClose: () => 
           </button>
         </div>
 
-        <div className="space-y-3 text-xs sm:text-sm text-[#d4cfc5] font-sans leading-relaxed">
-          <p>
-            {lang === 'en'
-              ? '1. Pleadings is a digital legal journalism and storytelling platform dedicated to making closed, certified Indian judicial precedents transparent and accessible to citizens, students, and practitioners.'
-              : '1. Pleadings एक कानूनी पत्रकारिता और शैक्षिक मंच है जो भारतीय अदालती फैसलों को सरल भाषा में प्रस्तुत करता है।'}
-          </p>
-          <p>
-            {lang === 'en'
-              ? '2. No Legal Advice: Nothing on this website constitutes legal advice, formal consultation, or representation. The information is provided solely for educational, historical, and public interest purposes.'
-              : '2. विधिक सलाह नहीं: इस वेबसाइट की कोई भी सामग्री कानूनी सलाह या प्रतिनिधित्व नहीं है। यह केवल शैक्षिक और सामान्य जानकारी के लिए है।'}
-          </p>
-          <p>
-            {lang === 'en'
-              ? '3. Public Records: Case narratives, quotations, and statutory mappings are drawn directly from publicly published records of the Supreme Court of India, High Courts, and district consumer forums.'
-              : '3. सार्वजनिक रिकॉर्ड: सभी मामले सुप्रीम कोर्ट और हाई कोर्ट के आधिकारिक रिकॉर्ड्स से संकलित किए गए हैं।'}
-          </p>
-          <p>
-            {lang === 'en'
-              ? '4. If you require legal assistance for an active dispute, bail application, or litigation, please consult an advocate enrolled with the Bar Council of India or reach out to the National Legal Services Authority (NALSA).'
-              : '4. किसी भी कानूनी विवाद के लिए बार काउंसिल ऑफ इंडिया में पंजीकृत अधिवक्ता या विधिक सेवा प्राधिकरण (NALSA) से संपर्क करें।'}
-          </p>
+        {/* Modal Scrollable Points (1, 2, 3, 4 clearly visible) */}
+        <div className="space-y-3 py-3 text-xs sm:text-sm text-[#d4cfc5] font-sans leading-relaxed overflow-y-auto pr-2 flex-1 scrollbar-thin scrollbar-thumb-white/20">
+          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+            <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
+              {lang === 'en' ? 'Point 1 · Educational & Storytelling Media' : 'बिंदु 1 · शैक्षिक एवं कथात्मक माध्यम'}
+            </p>
+            <p>
+              {lang === 'en'
+                ? 'Pleadings is a digital legal journalism and storytelling platform dedicated to making closed, certified Indian judicial precedents transparent and accessible to citizens, students, and practitioners.'
+                : 'Pleadings एक कानूनी पत्रकारिता और शैक्षिक मंच है जो भारतीय अदालती फैसलों को सरल भाषा में प्रस्तुत करता है।'}
+            </p>
+          </div>
+
+          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+            <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
+              {lang === 'en' ? 'Point 2 · No Legal Advice or Representation' : 'बिंदु 2 · विधिक सलाह या प्रतिनिधित्व नहीं'}
+            </p>
+            <p>
+              {lang === 'en'
+                ? 'Nothing on this website constitutes legal advice, formal consultation, or representation. The information is provided solely for educational, historical, and public interest purposes.'
+                : 'विधिक सलाह नहीं: इस वेबसाइट की कोई भी सामग्री कानूनी सलाह या प्रतिनिधित्व नहीं है। यह केवल शैक्षिक और सामान्य जानकारी के लिए है।'}
+            </p>
+          </div>
+
+          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+            <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
+              {lang === 'en' ? 'Point 3 · Certified Public Court Records' : 'बिंदु 3 · सार्वजनिक अदालती रिकॉर्ड'}
+            </p>
+            <p>
+              {lang === 'en'
+                ? 'Case narratives, quotations, and statutory mappings are drawn directly from publicly published records of the Supreme Court of India, High Courts, and district consumer forums.'
+                : 'सार्वजनिक रिकॉर्ड: सभी मामले सुप्रीम कोर्ट और हाई कोर्ट के आधिकारिक रिकॉर्ड्स से संकलित किए गए हैं।'}
+            </p>
+          </div>
+
+          <div className="p-2.5 rounded-2xs bg-white/5 border border-white/5">
+            <p className="font-bold text-[#D4AF37] text-xs uppercase tracking-wider mb-1">
+              {lang === 'en' ? 'Point 4 · Professional Legal Counsel' : 'बिंदु 4 · पेशेवर विधिक परामर्श'}
+            </p>
+            <p>
+              {lang === 'en'
+                ? 'If you require legal assistance for an active dispute, bail application, or litigation, please consult an advocate enrolled with the Bar Council of India or reach out to the National Legal Services Authority (NALSA).'
+                : 'किसी भी कानूनी विवाद के लिए बार काउंसिल ऑफ इंडिया में पंजीकृत अधिवक्ता या विधिक सेवा प्राधिकरण (NALSA) से संपर्क करें।'}
+            </p>
+          </div>
         </div>
 
-        <div className="pt-3 border-t border-white/10 flex justify-end">
+        {/* Modal Footer */}
+        <div className="pt-3 border-t border-white/10 flex justify-end shrink-0">
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-[#D4AF37] text-black font-bold font-mono text-xs uppercase tracking-wider rounded-xs hover:bg-white transition-all cursor-pointer"
+            className="px-5 py-2 bg-[#D4AF37] text-black font-bold font-mono text-xs uppercase tracking-wider rounded-xs hover:bg-white transition-all cursor-pointer shadow-md"
           >
             {lang === 'en' ? 'Understood' : 'स्वीकार है'}
           </button>
