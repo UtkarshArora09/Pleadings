@@ -17,9 +17,18 @@ export function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [mobileMenuOpen]);
 
   return (
     <header
@@ -91,9 +100,12 @@ export function Header() {
 
         {/* Mobile Hamburger Button */}
         <button
+          type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-[#F3EFE6] hover:text-[#D4AF37] text-lg focus:outline-none cursor-pointer"
-          aria-label="Toggle navigation menu"
+          className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-[#F3EFE6] hover:text-[#D4AF37] text-lg focus-visible:outline-2 focus-visible:outline-[#D4AF37] cursor-pointer"
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation-drawer"
         >
           {mobileMenuOpen ? '✕' : '☰'}
         </button>
@@ -101,7 +113,17 @@ export function Header() {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[58px] bg-[#0E1016]/98 border-b border-white/10 p-6 flex flex-col gap-4 lg:hidden shadow-2xl animate-fadeIn backdrop-blur-md">
+        <>
+          <div
+            className="fixed inset-0 top-[58px] bg-black/60 lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <nav
+            id="mobile-navigation-drawer"
+            aria-label="Mobile Navigation"
+            className="fixed inset-x-0 top-[58px] bg-[#0E1016]/98 border-b border-white/10 p-6 flex flex-col gap-4 lg:hidden shadow-2xl animate-fadeIn backdrop-blur-md z-10"
+          >
           <Link
             href="/browse"
             onClick={() => setMobileMenuOpen(false)}
@@ -149,7 +171,8 @@ export function Header() {
               </span>
             )}
           </Link>
-        </div>
+        </nav>
+        </>
       )}
 
       <SuggestCaseModal

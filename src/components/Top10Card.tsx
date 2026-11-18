@@ -7,6 +7,7 @@ import { CaseFile } from '@/types/case';
 import { CaseData } from '@/types';
 import { useApp } from '@/context/AppContext';
 import { getCaseComplexity } from '@/lib/caseComplexity';
+import { shouldBypassImageOptimization } from '@/lib/imageUtils';
 
 interface Top10CardProps {
   caseData: CaseFile | CaseData;
@@ -40,13 +41,6 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
 
   const rawTag = (caseData as any).tag || (caseData as any).categoryTag || (caseData as CaseFile).doctrines?.[0] || 'IPC';
   const categoryTag = typeof rawTag === 'string' ? rawTag : (rawTag?.[language] || rawTag?.en || 'IPC');
-
-  const rawReadTime = (caseData as CaseFile).readingTime?.story ?? (caseData as any).readTime;
-  const readTimeStr = typeof rawReadTime === 'number'
-    ? `${rawReadTime} min read`
-    : typeof rawReadTime === 'string'
-    ? rawReadTime
-    : ((rawReadTime as any)?.[language] || (rawReadTime as any)?.en || '5 min read');
 
   const rawCourt = (caseData as any).court;
   const displayCourt = typeof rawCourt === 'string' ? rawCourt : ((rawCourt as any)?.[language] || (rawCourt as any)?.en || 'Supreme Court of India');
@@ -95,7 +89,7 @@ export function Top10Card({ caseData, index }: Top10CardProps) {
               src={imgSrc}
               alt={String(title)}
               fill
-              unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:') || imgSrc.startsWith('http'))}
+              unoptimized={shouldBypassImageOptimization(imgSrc)}
               sizes="220px"
               onError={() => setHasError(true)}
               className="object-cover object-center brightness-90 group-hover:brightness-100 transition-transform duration-500 group-hover:scale-110"

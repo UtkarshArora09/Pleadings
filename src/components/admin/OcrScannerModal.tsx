@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { CaseData, Episode, PersonaItem } from '@/types';
+import { CaseData } from '@/types';
 
 interface OcrScannerModalProps {
   isOpen: boolean;

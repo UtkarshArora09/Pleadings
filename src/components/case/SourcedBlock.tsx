@@ -14,7 +14,6 @@ interface SourcedBlockProps {
 
 export function SourcedBlock({
   block,
-  isFirstAmber = false,
   onOpenSource,
   onOpenTerm,
   onOpenStatute,

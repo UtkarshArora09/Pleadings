@@ -4,10 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CaseFile } from '@/types/case';
-import { StatusBadge } from '@/components/case/StatusBadge';
-import { ProvenanceStrip } from '@/components/case/ProvenanceStrip';
 import { useApp } from '@/context/AppContext';
 import { getCaseComplexity } from '@/lib/caseComplexity';
+import { shouldBypassImageOptimization } from '@/lib/imageUtils';
 
 interface HeroProps {
   featuredCase: CaseFile;
@@ -30,20 +29,17 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
   const rawHook = activeContent.hook;
   const displayHook = typeof rawHook === 'string' ? rawHook : ((rawHook as any)?.[language] || (rawHook as any)?.en || '');
   const bookmarked = isBookmarked(activeCase.slug);
+  const bannerImageUrl = (activeCase as unknown as { bannerImage?: string }).bannerImage || '';
+  const resolvedHeroSrc = activeCase.poster?.src || bannerImageUrl;
 
-  const totalParasCited = activeCase.episodes.reduce((acc, ep) => {
-    const count = ep.layers.story.blocks.filter((b) => b.source.tier === 'BLACK').length;
-    return acc + count;
-  }, 0) || 12;
-
-  const [heroImg, setHeroImg] = useState<string>(activeCase.poster?.src || (activeCase as any).bannerImage || '');
+  const [heroImg, setHeroImg] = useState<string>(resolvedHeroSrc);
   const [hasHeroError, setHasHeroError] = useState<boolean>(false);
   const complexityInfo = getCaseComplexity(activeCase, language);
 
   useEffect(() => {
-    setHeroImg(activeCase.poster?.src || (activeCase as any).bannerImage || '');
+    setHeroImg(resolvedHeroSrc);
     setHasHeroError(false);
-  }, [activeCase.poster?.src, (activeCase as any).bannerImage, activeCase.slug]);
+  }, [resolvedHeroSrc, activeCase.slug]);
 
   return (
     <section
@@ -57,7 +53,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
             src={heroImg}
             alt={activeCase.poster?.alt || displayTitle}
             fill
-            unoptimized={typeof heroImg === 'string' && (heroImg.startsWith('data:') || heroImg.startsWith('blob:') || heroImg.startsWith('http'))}
+            unoptimized={shouldBypassImageOptimization(heroImg)}
             priority
             sizes="100vw"
             onError={() => setHasHeroError(true)}
@@ -98,7 +94,7 @@ export function Hero({ featuredCase, casesList }: HeroProps) {
 
           {/* Subtitle / Citation in Amber Gold */}
           <p className="text-[11px] sm:text-sm font-semibold text-[#D4AF37] uppercase tracking-wider font-mono">
-            {activeCase.court} · {activeCase.doctrines?.[0] || 'IPC 79'}
+            {activeCase.court} · {activeCase.doctrines?.[0] || 'Landmark Precedent'}
           </p>
 
           {/* Dramatic Story Hook */}

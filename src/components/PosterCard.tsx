@@ -7,6 +7,7 @@ import { CaseFile } from '@/types/case';
 import { CaseData } from '@/types';
 import { useApp } from '@/context/AppContext';
 import { getCaseComplexity } from '@/lib/caseComplexity';
+import { shouldBypassImageOptimization } from '@/lib/imageUtils';
 
 interface PosterCardProps {
   caseData: CaseFile | CaseData;
@@ -124,7 +125,7 @@ export function PosterCard({ caseData }: PosterCardProps) {
                   src={imgSrc}
                   alt={String(title)}
                   fill
-                  unoptimized={typeof imgSrc === 'string' && (imgSrc.startsWith('data:') || imgSrc.startsWith('blob:') || imgSrc.startsWith('http'))}
+                  unoptimized={shouldBypassImageOptimization(imgSrc)}
                   sizes="(max-width: 640px) 280px, 330px"
                   onError={() => setHasError(true)}
                   className="object-cover object-center transition-transform duration-500 group-hover:scale-105 brightness-90 group-hover:brightness-100"

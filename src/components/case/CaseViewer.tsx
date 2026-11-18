@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { CaseFile, Source } from '@/types/case';
+import { deduplicateCaseImages, resolveLocalizedField } from './CaseViewerHelpers';
 import { SourcedBlock } from './SourcedBlock';
 import { Exhibit } from './Exhibit';
 import { CaseImage } from './CaseImage';
@@ -52,27 +53,17 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const [activeTermSlug, setActiveTermSlug] = useState<string | null>(null);
   const [isVerdictUnlocked, setIsVerdictUnlocked] = useState<boolean>(false);
 
-  // Scroll View active tracking
-  const [activeSectionId, setActiveSectionId] = useState<string>('case-header');
-
   // Swipe Gesture Handling (Touch & Pointer)
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const slideContainerRef = useRef<HTMLDivElement>(null);
 
   // Localization resolution
   const activeContent = language === 'hi' && caseData.hi ? caseData.hi : caseData;
-  const rawTitle = activeContent.title;
-  const displayTitle =
-    typeof rawTitle === 'string'
-      ? rawTitle
-      : (rawTitle as any)?.[language] || (rawTitle as any)?.en || caseData.slug;
-  const rawHook = activeContent.hook;
-  const displayHook =
-    typeof rawHook === 'string'
-      ? rawHook
-      : (rawHook as any)?.[language] || (rawHook as any)?.en || '';
-  const episodes = activeContent.episodes || [];
+  const displayTitle = resolveLocalizedField(activeContent.title, language, caseData.slug);
+  const displayHook = resolveLocalizedField(activeContent.hook, language, '');
+  const episodes = useMemo(() => activeContent.episodes || [], [activeContent.episodes]);
   const bookmarked = isBookmarked(caseData.slug);
+  const handleVerdictUnlocked = useCallback(() => setIsVerdictUnlocked(true), []);
 
   // Responsive device view mode default + initial URL hash jump (#episode-2, #case-dossier)
   useEffect(() => {
@@ -109,39 +100,10 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   }, [userSelectedMode, episodes.length]);
 
   // Deduplicate images across the case post so the hero poster or any earlier episode/exhibit image never repeats
-  const normalizeImgKey = (src?: string) => {
-    if (!src) return '';
-    const trimmed = src.trim();
-    return trimmed.startsWith('data:') ? trimmed : trimmed.split('?')[0];
-  };
-  const { showEpisodeImage, cleanExhibits } = (() => {
-    const seen = new Set<string>();
-    const posterKey = normalizeImgKey(caseData.poster?.src);
-    if (posterKey) seen.add(posterKey);
-
-    const showImg: boolean[] = [];
-    const exhibits = episodes.map((ep) => {
-      const epKey = normalizeImgKey(ep.image?.src);
-      const exhibitKey = normalizeImgKey(ep.exhibit?.image?.src);
-
-      let cleanedExhibit = ep.exhibit;
-      if (ep.exhibit && exhibitKey) {
-        if (seen.has(exhibitKey)) {
-          cleanedExhibit = { ...ep.exhibit, image: undefined };
-        } else {
-          seen.add(exhibitKey);
-        }
-      }
-
-      const shouldShow = Boolean(epKey) && (!exhibitKey || epKey !== exhibitKey) && !seen.has(epKey);
-      if (shouldShow) seen.add(epKey);
-      showImg.push(shouldShow);
-
-      return cleanedExhibit;
-    });
-
-    return { showEpisodeImage: showImg, cleanExhibits: exhibits };
-  })();
+  const { showEpisodeImage, cleanExhibits } = useMemo(
+    () => deduplicateCaseImages(caseData.poster?.src, episodes),
+    [caseData.poster?.src, episodes]
+  );
 
   // Total slides: Prologue (1) + Episodes (N) + Dossier (1)
   const totalSlides = episodes.length + 2;
@@ -157,22 +119,24 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
       return acc + count;
     }, 0) || 12;
 
-  // Slide Navigation Helper with bounds checking
-  const goToSlide = (slideIdx: number) => {
-    if (slideIdx < 0) {
-      if (prevSlug) router.push(`/case/${prevSlug}`);
-      return;
-    }
-    if (slideIdx >= totalSlides) {
-      if (nextSlug) router.push(`/case/${nextSlug}`);
-      return;
-    }
-    setCurrentSlide(slideIdx);
-    // Scroll window to top of slide container smoothly
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+  // Slide Navigation Helper with bounds checking (memoized for stable hook deps)
+  const goToSlide = useCallback(
+    (slideIdx: number) => {
+      if (slideIdx < 0) {
+        if (prevSlug) router.push(`/case/${prevSlug}`);
+        return;
+      }
+      if (slideIdx >= totalSlides) {
+        if (nextSlug) router.push(`/case/${nextSlug}`);
+        return;
+      }
+      setCurrentSlide(slideIdx);
+      if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    },
+    [nextSlug, prevSlug, router, totalSlides]
+  );
 
   // Preload next case on idle
   useEffect(() => {
@@ -198,52 +162,32 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     }
   }, [nextSlug, router]);
 
-  // Keyboard navigation: ArrowLeft/ArrowRight for slides, ArrowUp/ArrowDown for continuous
+  // Keyboard navigation: ONLY in Slide mode and NEVER when typing or a modal/dialog is open (BUG-006)
   useEffect(() => {
+    if (readingView !== 'slide') return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) return;
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(target.tagName) || target.isContentEditable) return;
+      if (activeSource || activeTermSlug || document.querySelector('[role="dialog"]')) return;
 
-      if (readingView === 'slide') {
-        if (e.key === 'ArrowRight' || (e.key === ' ' && !e.shiftKey)) {
-          e.preventDefault();
-          goToSlide(currentSlide + 1);
-        } else if (e.key === 'ArrowLeft' || (e.key === ' ' && e.shiftKey)) {
-          e.preventDefault();
-          goToSlide(currentSlide - 1);
-        }
-      } else {
-        // Continuous scroll mode
-        const allIds = [
-          'case-header',
-          ...Array.from({ length: episodes.length }, (_, i) => `episode-${i + 1}`),
-          'case-dossier',
-        ];
-        const currentIdx = allIds.indexOf(activeSectionId);
-
-        if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
-          if (currentIdx >= 0 && currentIdx < allIds.length - 1) {
-            e.preventDefault();
-            const targetEl = document.getElementById(allIds[currentIdx + 1]);
-            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
-          }
-        } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
-          if (currentIdx > 0) {
-            e.preventDefault();
-            const targetEl = document.getElementById(allIds[currentIdx - 1]);
-            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToSlide(currentSlide - 1);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [readingView, currentSlide, totalSlides, activeSectionId, episodes.length]);
+  }, [readingView, currentSlide, goToSlide, activeSource, activeTermSlug]);
 
-  // Touch Swipe Gesture for Slide Navigation
-  // Swipe Left -> next slide (increases episode)
-  // Swipe Right -> previous slide (decreases episode)
+  // Touch Swipe Gesture strictly restricted to Slide view (never interferes with Scroll view)
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (readingView !== 'slide') return;
     touchStartRef.current = {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY,
@@ -252,7 +196,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!touchStartRef.current) return;
+    if (readingView !== 'slide' || !touchStartRef.current) return;
     const deltaX = e.changedTouches[0].clientX - touchStartRef.current.x;
     const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y;
     const deltaTime = Date.now() - touchStartRef.current.time;
@@ -260,41 +204,13 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     // Detect horizontal swipe (> 45px, predominantly horizontal, < 500ms)
     if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5 && deltaTime < 500) {
       if (deltaX < 0) {
-        // Swiped Left -> Advance to next slide
         goToSlide(currentSlide + 1);
       } else if (deltaX > 0) {
-        // Swiped Right -> Go to previous slide
         goToSlide(currentSlide - 1);
       }
     }
     touchStartRef.current = null;
   };
-
-  // Continuous scroll active observer
-  useEffect(() => {
-    if (readingView !== 'scroll') return;
-
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight / 3;
-      const allIds = [
-        'case-header',
-        ...Array.from({ length: episodes.length }, (_, i) => `episode-${i + 1}`),
-        'case-dossier',
-      ];
-
-      for (let i = allIds.length - 1; i >= 0; i--) {
-        const el = document.getElementById(allIds[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSectionId(allIds[i]);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [readingView, episodes.length]);
 
   const scrollToEpisode = (targetId: string) => {
     const el = document.getElementById(targetId);
@@ -307,7 +223,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden font-sans select-none"
+      className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative overflow-x-hidden font-sans"
     >
       {/* Sticky Top Header Navigation */}
       <header className="sticky top-0 z-50 w-full bg-[#0E1016]/95 backdrop-blur-md border-b border-white/10 px-2.5 sm:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-4 transition-all">
@@ -372,7 +288,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             title={bookmarked ? 'Saved in library' : 'Save case'}
           >
             <span>{bookmarked ? '✓' : '+'}</span>
-            <span className="hidden xs:inline">{bookmarked ? 'SAVED' : 'SAVE'}</span>
+            <span className="hidden sm:inline">{bookmarked ? (language === 'en' ? 'SAVED' : 'सहेजा') : (language === 'en' ? 'SAVE' : 'सहेजें')}</span>
           </button>
         </div>
       </header>
@@ -559,7 +475,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                               ]
                         }
                         courtChoseOptionId={caseData.vote?.courtChoseOptionId || 'petitioner'}
-                        onUnlocked={() => setIsVerdictUnlocked(true)}
+                        onUnlocked={handleVerdictUnlocked}
                         lang={language}
                       />
                     )}
@@ -874,7 +790,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                             ]
                       }
                       courtChoseOptionId={caseData.vote?.courtChoseOptionId || 'petitioner'}
-                      onUnlocked={() => setIsVerdictUnlocked(true)}
+                      onUnlocked={handleVerdictUnlocked}
                       lang={language}
                     />
                   )}

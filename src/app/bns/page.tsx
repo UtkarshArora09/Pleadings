@@ -4,8 +4,10 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import Link from 'next/link';
 import statuteMapData from '@/content/statute-map.json';
+import { useApp } from '@/context/AppContext';
 
 export default function BnsMapperPage() {
+  const { language } = useApp();
   const [query, setQuery] = useState('');
   const [filterChangedOnly, setFilterChangedOnly] = useState(false);
   const [allCases, setAllCases] = useState<any[]>([]);
@@ -59,41 +61,53 @@ export default function BnsMapperPage() {
   }, [query, filterChangedOnly]);
 
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none font-sans pb-24">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] font-sans pb-24">
       <Header />
 
       <div className="pt-28 px-4 sm:px-6 md:px-12 max-w-5xl mx-auto space-y-10">
         {/* Header Hero */}
         <div className="space-y-4 border-b border-white/10 pb-8 text-center sm:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xs text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]">
-            <span>CRIMINAL CODE TRANSITION CONCORDANCE</span>
+            <span>{language === 'en' ? 'CRIMINAL CODE TRANSITION CONCORDANCE' : 'नए आपराधिक कानून रूपांतरण सूची'}</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            IPC → BNS Statutory Concordance
+            {language === 'en' ? 'IPC → BNS Statutory Concordance' : 'IPC → BNS धारा मिलान तालिका'}
           </h1>
 
           <p className="text-sm sm:text-base text-[#a9a49a] max-w-3xl leading-relaxed">
-            Instant bi-directional legal mapping between repealed colonial statutes (IPC, CrPC, IEA) and the new Bharatiya criminal codes (BNS, BNSS, BSA), cross-referenced with certified Pleadings court records.
+            {language === 'en'
+              ? 'Instant bi-directional legal mapping between repealed colonial statutes (IPC, CrPC, IEA) and the new Bharatiya criminal codes (BNS, BNSS, BSA), cross-referenced with certified Pleadings court records.'
+              : 'पुराने IPC, CrPC और IEA कानूनों तथा नए भारतीय न्याय संहिता (BNS), BNSS और BSA के बीच त्वरित धारा मिलान।'}
           </p>
 
           {/* Search Box */}
           <div className="pt-3 max-w-2xl">
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-sm font-bold">
+              <label htmlFor="bns-search-input" className="sr-only">
+                Search IPC, CrPC, IEA, BNS, BNSS, or BSA sections
+              </label>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-sm font-bold" aria-hidden="true">
                 §
               </span>
               <input
+                id="bns-search-input"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by section (e.g. IPC 302, BNS 103) or offence (e.g. Murder, Defamation)..."
-                className="w-full bg-[#141824] border border-[#D4AF37]/40 rounded-xs pl-10 pr-4 py-3.5 text-sm sm:text-base text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden shadow-xl"
+                placeholder={
+                  language === 'en'
+                    ? 'Search by section (e.g. IPC 302, BNS 103) or offence (e.g. Murder, Defamation)...'
+                    : 'धारा (जैसे IPC 302, BNS 103) या अपराध से खोजें...'
+                }
+                className="w-full bg-[#141824] border border-[#D4AF37]/40 rounded-xs pl-10 pr-10 py-3.5 text-sm sm:text-base text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden shadow-xl"
               />
               {query && (
                 <button
+                  type="button"
+                  aria-label="Clear search"
                   onClick={() => setQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-sm"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-sm cursor-pointer"
                 >
                   ✕
                 </button>

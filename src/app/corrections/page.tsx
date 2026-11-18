@@ -3,8 +3,7 @@ import { Header } from '@/components/Header';
 import Link from 'next/link';
 import { getPublishedCasesAsync } from '@/lib/cases';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300;
 
 export const metadata = {
   title: 'Public Corrections Log & Editorial Transparency | Pleadings',
@@ -68,7 +67,7 @@ export default async function CorrectionsPage() {
     return `/browse?q=${encodeURIComponent(item.matchKeywords[0])}`;
   };
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6]">
       <Header />
 
       <div className="pt-28 pb-20 px-4 sm:px-6 md:px-12 max-w-4xl mx-auto space-y-10">

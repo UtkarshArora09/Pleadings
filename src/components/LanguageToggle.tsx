@@ -7,9 +7,15 @@ export function LanguageToggle() {
   const { language, setLanguage } = useApp();
 
   return (
-    <div className="inline-flex items-center bg-[#171A24] border border-[#rgba(243,239,230,0.10)] rounded-full p-1 shadow-md">
+    <div
+      role="group"
+      aria-label="Language selection"
+      className="inline-flex items-center bg-[#171A24] border border-white/15 rounded-full p-1 shadow-md"
+    >
       <button
+        type="button"
         onClick={() => setLanguage('en')}
+        aria-pressed={language === 'en'}
         className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
           language === 'en'
             ? 'bg-[#D4AF37] text-[#0E1016] font-bold shadow'
@@ -20,7 +26,9 @@ export function LanguageToggle() {
         EN
       </button>
       <button
+        type="button"
         onClick={() => setLanguage('hi')}
+        aria-pressed={language === 'hi'}
         className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
           language === 'hi'
             ? 'bg-[#D4AF37] text-[#0E1016] font-bold shadow'

@@ -1,4 +1,4 @@
-import { Episode } from './case';
+import type { Episode } from './case';
 
 export * from './case';
 

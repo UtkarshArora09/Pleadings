@@ -29,6 +29,7 @@ export default function ContributePage() {
     whyItMatters: '',
     judgmentUrl: '',
     additionalNotes: '',
+    website: '', // honeypot
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -95,6 +96,7 @@ export default function ContributePage() {
       whyItMatters: '',
       judgmentUrl: '',
       additionalNotes: '',
+      website: '',
     });
   };
 
@@ -177,6 +179,18 @@ export default function ContributePage() {
         ) : (
           /* Submission Form */
           <form onSubmit={handleSubmit} className="space-y-8 sm:space-y-10">
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="contribute-website-hp">Website</label>
+              <input
+                id="contribute-website-hp"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.website}
+                onChange={handleChange}
+              />
+            </div>
             {/* Error Banner */}
             {errorMessage && (
               <div className="p-4 bg-red-950/80 border border-red-500/50 rounded-md text-xs sm:text-sm text-red-200 flex items-center gap-3">

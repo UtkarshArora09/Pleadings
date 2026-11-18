@@ -186,17 +186,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
     judgmentUrl = urlMatch[1].trim();
   }
 
-  // 9. EXTRACT REVIEWING ADVOCATE & ENROLMENT
-  let reviewer = 'Adv. Girish Kr. Srivastava';
-  let enrolmentNumber = 'D/842/1991';
-
-  const reviewerMatch = normalizedText.match(/Reviewing\s+Advocate[:\s]*\n+([^\n·\d]+)(?:·\s*|\s+)([A-Z]\/\d+\/\d+)?/i);
-  if (reviewerMatch) {
-    reviewer = reviewerMatch[1].trim();
-    if (reviewerMatch[2]) enrolmentNumber = reviewerMatch[2].trim();
-  }
-
-  // 10. EXTRACT HOLDING / RATIO
+  // 9. EXTRACT HOLDING / RATIO
   let coreHolding = '';
   const holdingMatch =
     normalizedText.match(/Holding[:\s]*\n+([\s\S]*?)(?=\n\d|\nOverview|\nFIELD|\nFacts|\nOperative\s+Held)/i) ||
@@ -465,10 +455,6 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   }));
 
   const slug = slugify(shortTitle || title);
-
-  // Generate concise hook (under 14 words for strict validator contract)
-  const hookWords = `Landmark trial on ${statuteSections.split(';')[0]} before ${court} in ${year}.`.split(' ');
-  const hook = hookWords.slice(0, 12).join(' ');
 
   return {
     slug,

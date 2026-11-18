@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Anton, Montserrat, Noto_Sans_Devanagari } from 'next/font/google';
 import './globals.css';
 import { AppContextProvider } from '@/context/AppContext';
+import { safeJsonLd } from '@/lib/security/sanitize';
 
 const anton = Anton({
   weight: '400',
@@ -137,9 +138,6 @@ export const metadata: Metadata = {
     'Bar Council of India AIBE exam case laws',
     'Supreme Court latest precedents',
   ],
-  alternates: {
-    canonical: 'https://pleadings.in',
-  },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -239,7 +237,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(globalJsonLd) }}
         />
       </head>
       <body className="bg-[#0E1016] text-[#F3EFE6] font-sans antialiased selection:bg-[#D4AF37] selection:text-[#0E1016] overflow-x-hidden min-h-screen">

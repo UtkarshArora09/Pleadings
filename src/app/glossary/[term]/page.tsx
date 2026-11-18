@@ -8,8 +8,7 @@ import glossaryData from '@/content/glossary.json';
 import { getPublishedCasesAsync } from '@/lib/cases';
 import { StatuteRefInline } from '@/components/StatuteRef';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300;
 
 interface TermPageProps {
   params: Promise<{
@@ -77,20 +76,24 @@ export default async function TermPage({ params }: TermPageProps) {
     notFound();
   }
 
+  const validGlossarySlugs = new Set(glossaryData.map((g) => g.slug));
+  const validRelated = (item.related || []).filter((rel) => validGlossarySlugs.has(rel));
+
   const allCases = await getPublishedCasesAsync();
-  // Find cases using this term either in glossary array or body
+  // Find cases using this term either in glossary array or body (guarded against sparse episode shapes)
   const matchingCases = allCases.filter((c) => {
+    const termLower = item.term.toLowerCase();
     return (
-      c.glossary.some((g) => g.slug === item.slug || g.term.toLowerCase() === item.term.toLowerCase()) ||
-      c.doctrines.some((d) => d.toLowerCase().includes(item.slug) || d.toLowerCase().includes(item.term.toLowerCase())) ||
-      c.episodes.some((ep) =>
-        ep.layers.story.blocks.some((b) => b.text.toLowerCase().includes(item.term.toLowerCase()))
+      (c.glossary || []).some((g) => g?.slug === item.slug || g?.term?.toLowerCase() === termLower) ||
+      (c.doctrines || []).some((d) => typeof d === 'string' && (d.toLowerCase().includes(item.slug) || d.toLowerCase().includes(termLower))) ||
+      (c.episodes || []).some((ep) =>
+        (ep?.layers?.story?.blocks || []).some((b) => typeof b?.text === 'string' && b.text.toLowerCase().includes(termLower))
       )
     );
   });
 
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none font-sans pb-24">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] font-sans pb-24">
       <Header />
 
       <div className="pt-28 px-4 sm:px-6 md:px-12 max-w-4xl mx-auto space-y-10">
@@ -141,13 +144,13 @@ export default async function TermPage({ params }: TermPageProps) {
             </div>
           )}
 
-          {item.related && item.related.length > 0 && (
+          {validRelated.length > 0 && (
             <div className="pt-3 border-t border-white/10 space-y-2">
               <span className="text-[10px] font-mono uppercase text-white/50 block">
                 Related Doctrines:
               </span>
               <div className="flex flex-wrap gap-2">
-                {item.related.map((rel) => (
+                {validRelated.map((rel) => (
                   <Link
                     key={rel}
                     href={`/glossary/${rel}`}

@@ -111,9 +111,14 @@ async function getActiveGroqModels(apiKey: string): Promise<string[]> {
 async function getActiveGeminiModels(apiKey: string): Promise<string[]> {
   if (cachedGeminiModels && cachedGeminiModels.length > 0) return cachedGeminiModels;
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey.trim()}`, {
+    const controller = new AbortController();
+    const tid = setTimeout(() => controller.abort(), 10000);
+    const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {
       method: 'GET',
+      headers: { 'x-goog-api-key': apiKey.trim() },
+      signal: controller.signal,
     });
+    clearTimeout(tid);
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data.models) && data.models.length > 0) {
@@ -208,10 +213,16 @@ async function callGemini(userPrompt: string): Promise<{ poster: string; exhibit
 
   for (const model of models) {
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey.trim()}`;
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 20000);
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey.trim(),
+        },
+        signal: controller.signal,
         body: JSON.stringify({
           contents: [
             {
@@ -225,6 +236,7 @@ async function callGemini(userPrompt: string): Promise<{ poster: string; exhibit
           },
         }),
       });
+      clearTimeout(tid);
 
       if (response.ok) {
         const data = await response.json();

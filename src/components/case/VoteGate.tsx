@@ -47,6 +47,7 @@ export function VoteGate({
   const [totalVotes, setTotalVotes] = useState<number>(0);
   const [isThresholdMet, setIsThresholdMet] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [voteError, setVoteError] = useState<string | null>(null);
 
   const fetchVoteData = useCallback(async () => {
     try {
@@ -89,9 +90,10 @@ export function VoteGate({
   }, [slug, fetchVoteData, onUnlocked]);
 
   const handleCastVote = async (optionId: string) => {
-    if (hasVoted) return;
+    if (hasVoted || isSubmitting) return;
     setSelectedOption(optionId);
     setIsSubmitting(true);
+    setVoteError(null);
 
     try {
       const anonId = getOrCreateAnonId();
@@ -101,31 +103,46 @@ export function VoteGate({
         body: JSON.stringify({
           slug,
           optionId,
-          anonId
-        })
+          anonId,
+        }),
       });
 
-      const data = await res.json();
-      if (data.success) {
-        setHasVoted(true);
-        setTotalVotes(data.totalVotes || 1);
-        setIsThresholdMet(Boolean(data.isThresholdMet));
-        if (data.percentages) {
-          setPercentages(data.percentages);
-        }
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.success) {
+        setSelectedOption(null);
+        setVoteError(
+          data?.error ||
+            (lang === 'en'
+              ? 'Could not record your decision right now. Please try again.'
+              : 'आपका निर्णय दर्ज नहीं हो सका। कृपया पुनः प्रयास करें।')
+        );
+        return;
+      }
 
-        // Save locally
+      setHasVoted(true);
+      setTotalVotes(data.totalVotes || 1);
+      setIsThresholdMet(Boolean(data.isThresholdMet));
+      if (data.percentages) {
+        setPercentages(data.percentages);
+      }
+
+      try {
         const saved = localStorage.getItem('pleadings:votes');
         const parsed = saved ? JSON.parse(saved) : {};
         parsed[slug] = optionId;
         localStorage.setItem('pleadings:votes', JSON.stringify(parsed));
-
-        if (onUnlocked) onUnlocked();
+      } catch {
+        // ignore storage errors
       }
-    } catch (e) {
-      console.error('Error submitting vote:', e);
-      setHasVoted(true);
+
       if (onUnlocked) onUnlocked();
+    } catch {
+      setSelectedOption(null);
+      setVoteError(
+        lang === 'en'
+          ? 'Network error while recording your vote. Please retry.'
+          : 'नेटवर्क त्रुटि। कृपया पुनः प्रयास करें।'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -134,7 +151,7 @@ export function VoteGate({
   const didAgree = selectedOption === courtChoseOptionId;
 
   return (
-    <div className="my-8 p-5 sm:p-6 bg-[#141824] border border-[#D4AF37]/50 rounded-xs shadow-2xl space-y-5 select-none relative overflow-hidden">
+    <div className="my-8 p-5 sm:p-6 bg-[#141824] border border-[#D4AF37]/50 rounded-xs shadow-2xl space-y-5 relative overflow-hidden">
       {/* Background Accent */}
       <div className="absolute top-0 right-0 w-48 h-48 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -222,6 +239,11 @@ export function VoteGate({
       </div>
 
       {/* Bottom Status / Reveal Notice */}
+      {voteError && (
+        <div role="alert" className="p-3 bg-rose-950/60 border border-rose-500/40 rounded-xs text-center text-xs font-mono text-rose-200">
+          {voteError}
+        </div>
+      )}
       {!hasVoted ? (
         <div className="p-3 bg-black/40 border border-white/10 rounded-xs text-center text-xs font-mono text-[#D4AF37]">
           {lang === 'en' ? 'Cast your decision above to unlock the court\'s actual ruling.' : 'अदालत का फैसला जानने के लिए ऊपर अपना निर्णय चुनें।'}

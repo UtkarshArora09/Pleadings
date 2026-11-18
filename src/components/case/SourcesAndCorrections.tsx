@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReportErrorButton } from '@/components/ReportErrorButton';
+import { sanitizeHttpUrl } from '@/lib/security/sanitize';
 
 interface SourcesAndCorrectionsProps {
   caseSlug: string;
@@ -26,7 +27,7 @@ export function SourcesAndCorrections({
   const reviewDate = review?.reviewedOn || 'Verified';
 
   return (
-    <section className="my-12 p-5 sm:p-7 bg-[#0E1118] border border-white/10 rounded-xs shadow-xl space-y-6 select-none font-sans">
+    <section className="my-12 p-5 sm:p-7 bg-[#0E1118] border border-white/10 rounded-xs shadow-xl space-y-6 font-sans">
       <div className="flex items-center justify-between pb-2 border-b border-white/10">
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]">
           {lang === 'en' ? 'SOURCES, CITATIONS & EDITORIAL REVIEW' : 'स्रोत, साइटेशन और कानूनी समीक्षा'}
@@ -62,7 +63,7 @@ export function SourcesAndCorrections({
         <div className="flex flex-wrap gap-2">
           {sourceUrl && (
             <a
-              href={sourceUrl}
+              href={sanitizeHttpUrl(sourceUrl)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D4AF37]/15 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black border border-[#D4AF37]/40 rounded-xs text-xs font-mono font-bold transition-all"
@@ -74,7 +75,7 @@ export function SourcesAndCorrections({
           {safeSources.map((s, idx) => (
             <a
               key={idx}
-              href={s.url}
+              href={sanitizeHttpUrl(s.url)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 rounded-xs text-xs font-mono transition-all"

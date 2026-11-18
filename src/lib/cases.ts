@@ -1,7 +1,9 @@
 import { CaseFile } from '@/types/case';
-import { CaseStore } from '@/lib/db/caseStore';
+import { CaseStore, isCasePublished, resolveLegalStatus, resolvePublishStatus } from '@/lib/db/caseStore';
 
-function formatCaseDataToCaseFile(dyn: any): CaseFile {
+type RawCaseInput = Record<string, any>;
+
+function formatCaseDataToCaseFile(dyn: RawCaseInput): CaseFile {
   const titleStr =
     typeof dyn.title === 'string'
       ? dyn.title
@@ -10,11 +12,11 @@ function formatCaseDataToCaseFile(dyn: any): CaseFile {
   const hookStr =
     typeof dyn.blurb === 'string'
       ? dyn.blurb
-      : (dyn.blurb?.en !== undefined
-          ? dyn.blurb.en
-          : (typeof dyn.hook === 'string'
-              ? dyn.hook
-              : (dyn.hook?.en || dyn.featuredHeroHook?.en || '')));
+      : dyn.blurb?.en !== undefined
+      ? dyn.blurb.en
+      : typeof dyn.hook === 'string'
+      ? dyn.hook
+      : dyn.hook?.en || dyn.featuredHeroHook?.en || '';
 
   const posterImg = dyn.poster?.src
     ? dyn.poster
@@ -32,6 +34,10 @@ function formatCaseDataToCaseFile(dyn: any): CaseFile {
   const citation = dyn.citation || dyn.citations?.primary || `${year} INSC 1`;
   const categoryTag = dyn.categoryTag || dyn.category_tag || dyn.doctrines?.[0] || dyn.tag?.en || 'Constitutional';
 
+  // Clean separation between editorial publication status and legal precedential status
+  const publishStatus = resolvePublishStatus(dyn);
+  const legalStatus = resolveLegalStatus(dyn, year);
+
   return {
     ...dyn,
     slug: dyn.slug,
@@ -43,7 +49,10 @@ function formatCaseDataToCaseFile(dyn: any): CaseFile {
     bench: dyn.bench || [`Hon'ble Bench of the ${court}`],
     citations: dyn.citations || { primary: citation, parallel: [] },
     sourceUrl: dyn.sourceUrl || dyn.judgmentUrl || 'https://indiankanoon.org/',
-    status: dyn.status?.code ? dyn.status : { code: dyn.status === 'PUBLISHED' ? 'GOOD_LAW' : 'OVERRULED', explain: 'Active precedent', chain: [{ year, event: 'Delivered' }] },
+    publishStatus,
+    legalStatus,
+    // Keep `status` as the legal precedential status object for UI StatusBadge components
+    status: legalStatus,
     statuteMap: dyn.statuteMap || [{ old: categoryTag, new: null, note: 'Governing statute' }],
     doctrines: dyn.doctrines || [categoryTag],
     categories: dyn.categories || [dyn.genre || 'constitutional'],
@@ -55,34 +64,56 @@ function formatCaseDataToCaseFile(dyn: any): CaseFile {
     episodes: dyn.episodes || dyn.panels || [],
     lawyerEpisodes: dyn.lawyerEpisodes,
     rank: typeof dyn.rank === 'number' ? dyn.rank : 10,
-    vote: (dyn.vote && dyn.vote.question && Array.isArray(dyn.vote.options) && dyn.vote.options.length >= 2)
-      ? dyn.vote
-      : {
-          question: dyn.vote?.question || `How should the Court decide regarding ${titleStr}?`,
-          context: dyn.vote?.context || 'Balancing constitutional principles, fundamental freedoms, and statutory compliance.',
-          options: (dyn.vote?.options && Array.isArray(dyn.vote.options) && dyn.vote.options.length >= 2)
-            ? dyn.vote.options
-            : [
-                { id: 'petitioner', label: 'In Favor of Petitioner', argument: 'Uphold constitutional liberties and statutory safeguards.' },
-                { id: 'respondent', label: 'In Favor of Respondent', argument: 'Uphold regulatory authority and legitimate state interest.' },
-              ],
-          courtChoseOptionId: dyn.vote?.courtChoseOptionId || 'petitioner',
-        },
+    vote:
+      dyn.vote && dyn.vote.question && Array.isArray(dyn.vote.options) && dyn.vote.options.length >= 2
+        ? dyn.vote
+        : {
+            question: dyn.vote?.question || `How should the Court decide regarding ${titleStr}?`,
+            context:
+              dyn.vote?.context ||
+              'Balancing constitutional principles, fundamental freedoms, and statutory compliance.',
+            options:
+              dyn.vote?.options && Array.isArray(dyn.vote.options) && dyn.vote.options.length >= 2
+                ? dyn.vote.options
+                : [
+                    {
+                      id: 'petitioner',
+                      label: 'In Favor of Petitioner',
+                      argument: 'Uphold constitutional liberties and statutory safeguards.',
+                    },
+                    {
+                      id: 'respondent',
+                      label: 'In Favor of Respondent',
+                      argument: 'Uphold regulatory authority and legitimate state interest.',
+                    },
+                  ],
+            courtChoseOptionId: dyn.vote?.courtChoseOptionId || 'petitioner',
+          },
     glossary: Array.isArray(dyn.glossary) ? dyn.glossary : [],
     flashcards: Array.isArray(dyn.flashcards) ? dyn.flashcards : [],
     affectsYou: dyn.affectsYou || {
       heading: `How this ruling affects your legal rights`,
       points: [`Establishes binding procedural safeguards and substantive law standards.`],
-      actionLink: { label: 'Verified against official judgment record', url: dyn.sourceUrl || dyn.judgmentUrl || 'https://indiankanoon.org/' },
+      actionLink: {
+        label: 'Verified against official judgment record',
+        url: dyn.sourceUrl || dyn.judgmentUrl || 'https://indiankanoon.org/',
+      },
     },
-    timeline: Array.isArray(dyn.timeline) && dyn.timeline.length > 0
-      ? dyn.timeline
-      : [{ year, event: 'Judgment delivered by the Court' }],
+    timeline:
+      Array.isArray(dyn.timeline) && dyn.timeline.length > 0
+        ? dyn.timeline
+        : [{ year, event: 'Judgment delivered by the Court' }],
     relatedSlugs: Array.isArray(dyn.relatedSlugs) ? dyn.relatedSlugs : [],
     subsequentHistory: Array.isArray(dyn.subsequentHistory) ? dyn.subsequentHistory : [],
-    sources: Array.isArray(dyn.sources) && dyn.sources.length > 0
-      ? dyn.sources
-      : [{ label: 'Supreme Court of India / Indian Kanoon', url: dyn.sourceUrl || dyn.judgmentUrl || 'https://indiankanoon.org/' }],
+    sources:
+      Array.isArray(dyn.sources) && dyn.sources.length > 0
+        ? dyn.sources
+        : [
+            {
+              label: 'Supreme Court of India / Indian Kanoon',
+              url: dyn.sourceUrl || dyn.judgmentUrl || 'https://indiankanoon.org/',
+            },
+          ],
     advocateReference: dyn.advocateReference,
     review: dyn.review || {
       reviewer: dyn.reviewer || 'Adv. Girish Kr. Srivastava',
@@ -102,32 +133,24 @@ export async function getAllCasesAsync(): Promise<CaseFile[]> {
   return dynamicList.map(formatCaseDataToCaseFile);
 }
 
+/**
+ * Returns ONLY cases whose editorial publishStatus === 'PUBLISHED'.
+ * Published precedents that are legally OVERRULED, PARTLY_SUPERSEDED, or STATUTE_REPLACED
+ * remain visible with their legal status warning badge.
+ */
 export function getPublishedCases(): CaseFile[] {
-  const all = getAllCases();
-  return all.filter((c) => {
-    const s = (c as any).status;
-    if (s === 'DRAFT' || s === 'ARCHIVED' || s === 'ADMIN_REVIEW') return false;
-    if (s === 'PUBLISHED') return true;
-    if (typeof s === 'object' && s?.code) {
-      return s.code === 'GOOD_LAW';
-    }
-    return true;
-  });
+  const dynamicList = CaseStore.getAll();
+  return dynamicList.filter((c) => isCasePublished(c)).map(formatCaseDataToCaseFile);
 }
 
 export async function getPublishedCasesAsync(): Promise<CaseFile[]> {
-  const all = await getAllCasesAsync();
-  return all.filter((c) => {
-    const s = (c as any).status;
-    if (s === 'DRAFT' || s === 'ARCHIVED' || s === 'ADMIN_REVIEW') return false;
-    if (s === 'PUBLISHED') return true;
-    if (typeof s === 'object' && s?.code) {
-      return s.code === 'GOOD_LAW';
-    }
-    return true;
-  });
+  const dynamicList = await CaseStore.getAllAsync();
+  return dynamicList.filter((c) => isCasePublished(c)).map(formatCaseDataToCaseFile);
 }
 
+/**
+ * Admin/internal lookup by slug (includes DRAFT / ADMIN_REVIEW).
+ */
 export function getCaseBySlug(slug: string): CaseFile | null {
   if (!slug) return null;
   const decoded = decodeURIComponent(slug).trim().toLowerCase();
@@ -145,15 +168,42 @@ export async function getCaseBySlugAsync(slug: string): Promise<CaseFile | null>
   const decoded = decodeURIComponent(slug).trim().toLowerCase();
   const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
 
-  const dynamicCase = await CaseStore.getBySlugAsync(decoded) || await CaseStore.getBySlugAsync(cleanSlug);
+  const dynamicCase = (await CaseStore.getBySlugAsync(decoded)) || (await CaseStore.getBySlugAsync(cleanSlug));
   if (dynamicCase) {
     return formatCaseDataToCaseFile(dynamicCase);
   }
   return null;
 }
 
+/**
+ * Public-safe lookup by slug: strictly blocks DRAFT, ADMIN_REVIEW, and ARCHIVED cases (SEC-008).
+ */
+export function getPublishedCaseBySlug(slug: string): CaseFile | null {
+  if (!slug) return null;
+  const decoded = decodeURIComponent(slug).trim().toLowerCase();
+  const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+
+  const dynamicCase = CaseStore.getBySlug(decoded) || CaseStore.getBySlug(cleanSlug);
+  if (dynamicCase && isCasePublished(dynamicCase)) {
+    return formatCaseDataToCaseFile(dynamicCase);
+  }
+  return null;
+}
+
+export async function getPublishedCaseBySlugAsync(slug: string): Promise<CaseFile | null> {
+  if (!slug) return null;
+  const decoded = decodeURIComponent(slug).trim().toLowerCase();
+  const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+
+  const dynamicCase = (await CaseStore.getBySlugAsync(decoded)) || (await CaseStore.getBySlugAsync(cleanSlug));
+  if (dynamicCase && isCasePublished(dynamicCase)) {
+    return formatCaseDataToCaseFile(dynamicCase);
+  }
+  return null;
+}
+
 export function getAllCaseSlugs(): string[] {
-  const all = getAllCases();
+  const all = getPublishedCases();
   return all.map((c) => c.slug);
 }
 
@@ -166,13 +216,13 @@ export function getTop10Cases(): CaseFile[] {
   const all = getPublishedCases();
   return [...all]
     .filter((c) => {
-      const r = (c as any).rank;
+      const r = (c as unknown as { rank?: number }).rank;
       if (typeof r === 'number' && r > 10) return false;
       return true;
     })
     .sort((a, b) => {
-      const rankA = typeof (a as any).rank === 'number' ? (a as any).rank : 100;
-      const rankB = typeof (b as any).rank === 'number' ? (b as any).rank : 100;
+      const rankA = typeof (a as unknown as { rank?: number }).rank === 'number' ? (a as unknown as { rank: number }).rank : 100;
+      const rankB = typeof (b as unknown as { rank?: number }).rank === 'number' ? (b as unknown as { rank: number }).rank : 100;
       return rankA - rankB;
     })
     .slice(0, 10);
@@ -181,9 +231,6 @@ export function getTop10Cases(): CaseFile[] {
 export function getLatestCases(): CaseFile[] {
   const all = getPublishedCases();
   return [...all]
-    .sort(
-      (a, b) =>
-        new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime()
-    )
+    .sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime())
     .slice(0, 5);
 }

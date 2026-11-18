@@ -3,11 +3,12 @@
 import React, { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { validateSafeReturnUrl } from '@/lib/security/sanitize';
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const returnUrl = searchParams.get('returnUrl') || '/admin';
+  const returnUrl = validateSafeReturnUrl(searchParams.get('returnUrl'), '/admin');
 
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +34,6 @@ function LoginForm() {
 
       const data = await res.json();
       if (res.ok && data.success) {
-        // Successful login
         router.push(returnUrl);
         router.refresh();
       } else {
@@ -68,8 +68,11 @@ function LoginForm() {
 
       {/* Error Alert */}
       {error && (
-        <div className="mb-6 p-3 bg-red-950/60 border border-red-500/50 rounded-xs text-xs text-red-200 flex items-center gap-2 animate-fadeIn">
-          <span className="text-red-400 font-bold text-sm">⚠</span>
+        <div
+          role="alert"
+          className="mb-6 p-3 bg-red-950/60 border border-red-500/50 rounded-xs text-xs text-red-200 flex items-center gap-2 animate-fadeIn"
+        >
+          <span className="text-red-400 font-bold text-sm">!</span>
           <span>{error}</span>
         </div>
       )}
@@ -77,22 +80,28 @@ function LoginForm() {
       {/* Login Form */}
       <form onSubmit={handleLogin} className="space-y-5">
         <div>
-          <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#D4AF37] mb-2">
+          <label
+            htmlFor="admin-master-key"
+            className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#D4AF37] mb-2"
+          >
             Master Passkey / PIN
           </label>
           <div className="relative">
             <input
+              id="admin-master-key"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter Admin Key..."
+              autoComplete="current-password"
               autoFocus
-              className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#F3EFE6] px-4 py-3 rounded-xs focus:outline-none transition-all placeholder:text-[#a9a49a]/40 font-mono"
+              className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#F3EFE6] px-4 py-3 pr-16 rounded-xs focus:outline-none transition-all placeholder:text-[#a9a49a]/40 font-mono"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#a9a49a] hover:text-white transition-colors cursor-pointer"
+              aria-label={showPassword ? 'Hide passkey' : 'Show passkey'}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#a9a49a] hover:text-white transition-colors cursor-pointer px-1.5 py-1"
             >
               {showPassword ? 'Hide' : 'Show'}
             </button>
@@ -110,7 +119,7 @@ function LoginForm() {
               <span>Verifying Authority...</span>
             </>
           ) : (
-            <span>Authenticate & Enter</span>
+            <span>Authenticate &amp; Enter</span>
           )}
         </button>
       </form>
@@ -118,7 +127,7 @@ function LoginForm() {
       {/* Footer Security Notice */}
       <div className="mt-8 pt-6 border-t border-white/10 text-center text-[10px] text-[#8c887e] font-mono space-y-2">
         <p className="flex items-center justify-center gap-1 text-[#a9a49a]/70">
-          <span>🔒 Certified 256-bit Encrypted Session</span>
+          <span>HMAC-Signed HttpOnly Session · Rate-Limited Gate</span>
         </p>
         <div>
           <Link href="/" className="hover:text-[#D4AF37] transition-colors underline">
@@ -132,7 +141,7 @@ function LoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen bg-[#0A0C10] flex items-center justify-center p-4 relative select-none">
+    <div className="min-h-screen bg-[#0A0C10] flex items-center justify-center p-4 relative">
       {/* Background ambient lighting */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(212,175,55,0.06),transparent_60%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(229,9,20,0.04),transparent_50%)] pointer-events-none" />

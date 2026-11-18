@@ -23,7 +23,6 @@ export function JudgePoll({ caseSlug, judgeDecision, onAdvanceToVerdict }: Judge
   };
 
   const hasVoted = Boolean(selectedId);
-  const chosenOption = judgeDecision.options.find((opt) => opt.id === selectedId);
 
   return (
     <div className="w-full max-w-xl mx-auto my-2 sm:my-3 bg-[#141722]/95 border border-[#D4AF37]/30 p-4 sm:p-5 shadow-2xl rounded-sm backdrop-blur-sm">

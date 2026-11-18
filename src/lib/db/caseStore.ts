@@ -1,13 +1,81 @@
-import { CaseData, CaseStatus } from '@/types';
+import type { CaseData, CaseStatus } from '@/types';
 import {
   fetchCasesFromSupabase,
   fetchCaseBySlugFromSupabase,
   upsertCaseToSupabase,
   deleteCaseFromSupabase,
   updateCaseStatusInSupabase,
-  incrementCaseViewsInSupabase,
+  incrementCaseViewsAtomicInSupabase,
+  getCaseViewsFromSupabase,
   isSupabaseConfigured,
 } from '@/lib/supabase';
+
+const WORKFLOW_STATUSES = new Set<string>(['DRAFT', 'ADMIN_REVIEW', 'PUBLISHED', 'ARCHIVED']);
+const LEGAL_STATUS_CODES = new Set<string>([
+  'GOOD_LAW',
+  'PARTLY_SUPERSEDED',
+  'OVERRULED',
+  'STATUTE_REPLACED',
+]);
+
+export interface ResolvedLegalStatus {
+  code: 'GOOD_LAW' | 'PARTLY_SUPERSEDED' | 'OVERRULED' | 'STATUTE_REPLACED';
+  explain: string;
+  chain: Array<{ year: number; event: string }>;
+}
+
+/**
+ * Resolves editorial publication workflow status cleanly WITHOUT confusing it with legal status.
+ * Published cases that are legally OVERRULED, PARTLY_SUPERSEDED, or STATUTE_REPLACED stay PUBLISHED.
+ */
+export function resolvePublishStatus(raw: any): CaseStatus {
+  if (!raw || typeof raw !== 'object') return 'PUBLISHED';
+  if (typeof raw.publishStatus === 'string' && WORKFLOW_STATUSES.has(raw.publishStatus)) {
+    return raw.publishStatus as CaseStatus;
+  }
+  if (typeof raw.publish_status === 'string' && WORKFLOW_STATUSES.has(raw.publish_status)) {
+    return raw.publish_status as CaseStatus;
+  }
+  if (typeof raw.status === 'string' && WORKFLOW_STATUSES.has(raw.status)) {
+    return raw.status as CaseStatus;
+  }
+  // Legacy records storing only legalStatus object `{ code: ... }` are published editorial records
+  return 'PUBLISHED';
+}
+
+/**
+ * Resolves legal precedential status cleanly WITHOUT mutating drafts into OVERRULED.
+ */
+export function resolveLegalStatus(raw: any, fallbackYear = 2020): ResolvedLegalStatus {
+  const candidate =
+    (raw?.legalStatus && typeof raw.legalStatus === 'object' ? raw.legalStatus : null) ||
+    (raw?.status && typeof raw.status === 'object' && raw.status.code ? raw.status : null);
+
+  if (candidate && typeof candidate.code === 'string' && LEGAL_STATUS_CODES.has(candidate.code)) {
+    return {
+      code: candidate.code as ResolvedLegalStatus['code'],
+      explain: typeof candidate.explain === 'string' && candidate.explain.trim()
+        ? candidate.explain
+        : 'Verified against official court records.',
+      chain: Array.isArray(candidate.chain) && candidate.chain.length > 0
+        ? candidate.chain
+        : [{ year: fallbackYear, event: 'Judgment delivered' }],
+    };
+  }
+
+  return {
+    code: 'GOOD_LAW',
+    explain: 'Active binding precedent under Indian law.',
+    chain: [{ year: fallbackYear, event: 'Delivered' }],
+  };
+}
+
+/**
+ * Authoritative check for public visibility.
+ */
+export function isCasePublished(raw: any): boolean {
+  return resolvePublishStatus(raw) === 'PUBLISHED';
+}
 
 // In-memory cache for ultra-fast server/SSR lookups
 let cachedCases: CaseData[] | null = null;
@@ -294,6 +362,9 @@ export function normalizeCaseData(raw: any): CaseData {
 
   const views = typeof source.views === 'number' ? source.views : 0;
 
+  const publishStatus = resolvePublishStatus(source);
+  const legalStatus = resolveLegalStatus(source, year);
+
   return {
     ...source,
     slug: source.slug,
@@ -325,9 +396,9 @@ export function normalizeCaseData(raw: any): CaseData {
     flashcards: flashcards,
     subsequentHistory: subsequentHistory,
     advocateReference: source.advocateReference || undefined,
-    status: source.status === 'DRAFT' || source.status === 'ADMIN_REVIEW'
-      ? source.status
-      : (source.status?.code ? (source.status?.code === 'GOOD_LAW' ? 'PUBLISHED' : 'ADMIN_REVIEW') : (source.status || 'PUBLISHED')),
+    publishStatus,
+    legalStatus,
+    status: publishStatus,
     createdAt: source.createdAt || source.created_at || source.publishedAt || new Date().toISOString(),
     updatedAt: source.updatedAt || source.updated_at || new Date().toISOString(),
   };
@@ -383,11 +454,48 @@ export const CaseStore = {
    */
   getPublished(): CaseData[] {
     const all = this.getAll();
-    return all.filter((c) => c.status === 'PUBLISHED');
+    return all.filter((c) => isCasePublished(c));
   },
 
   /**
-   * Record view count directly into Supabase
+   * Serverless-safe atomic view counter (works across cold starts)
+   */
+  async recordViewAsync(slug: string): Promise<number> {
+    const decodedSlug = decodeURIComponent(slug).trim();
+
+    if (isSupabaseConfigured()) {
+      const atomicViews = await incrementCaseViewsAtomicInSupabase(decodedSlug);
+      if (typeof atomicViews === 'number') {
+        if (cachedCases) {
+          const idx = cachedCases.findIndex((c) => matchSlug(c.slug, decodedSlug));
+          if (idx !== -1) cachedCases[idx].views = atomicViews;
+        }
+        return atomicViews;
+      }
+    }
+
+    const all = this.getAll();
+    const idx = all.findIndex((c) => matchSlug(c.slug, decodedSlug));
+    if (idx !== -1) {
+      const currentViews = typeof all[idx].views === 'number' ? all[idx].views : 0;
+      const newViews = currentViews + 1;
+      all[idx].views = newViews;
+      return newViews;
+    }
+    return 1;
+  },
+
+  async getViewsAsync(slug: string): Promise<number> {
+    const decodedSlug = decodeURIComponent(slug).trim();
+    if (isSupabaseConfigured()) {
+      return getCaseViewsFromSupabase(decodedSlug);
+    }
+    const caseItem = this.getBySlug(decodedSlug);
+    return typeof caseItem?.views === 'number' ? caseItem.views : 0;
+  },
+
+  /**
+   * Legacy synchronous wrapper retained for backward compatibility
    */
   recordView(slug: string): number {
     const decodedSlug = decodeURIComponent(slug).trim();
@@ -398,9 +506,8 @@ export const CaseStore = {
       const currentViews = typeof all[idx].views === 'number' ? all[idx].views : 0;
       const newViews = currentViews + 1;
       all[idx].views = newViews;
-
       if (isSupabaseConfigured()) {
-        incrementCaseViewsInSupabase(all[idx].slug, newViews, all[idx]);
+        incrementCaseViewsAtomicInSupabase(all[idx].slug).catch(() => {});
       }
       return newViews;
     }
@@ -461,7 +568,7 @@ export const CaseStore = {
 
     // Upsert directly to Supabase Database
     if (isSupabaseConfigured()) {
-      await upsertCaseToSupabase(caseToSave);
+      await upsertCaseToSupabase(caseToSave as unknown as Record<string, unknown>);
     }
 
     // Update in-memory cache
@@ -506,7 +613,7 @@ export const CaseStore = {
 
     // Write directly to Supabase Database
     if (isSupabaseConfigured()) {
-      await upsertCaseToSupabase(updatedCase);
+      await upsertCaseToSupabase(updatedCase as unknown as Record<string, unknown>);
     }
 
     // Update local cache
@@ -550,12 +657,13 @@ export const CaseStore = {
     if (currentItem) {
       const updatedCase: CaseData = {
         ...currentItem,
+        publishStatus: status,
         status,
         updatedAt: new Date().toISOString(),
-      };
+      } as CaseData;
 
       if (isSupabaseConfigured()) {
-        await updateCaseStatusInSupabase(slug, status, updatedCase);
+        await updateCaseStatusInSupabase(slug, status, updatedCase as unknown as Record<string, unknown>);
       }
 
       if (cachedCases) {

@@ -7,11 +7,10 @@ import { CourtroomExperienceShowcase } from '@/components/CourtroomExperienceSho
 import { HomeSectionNav } from '@/components/HomeSectionNav';
 import { SuggestCaseBanner } from '@/components/SuggestCaseBanner';
 import { LegalDisclaimer } from '@/components/LegalDisclaimer';
-import { getAllCases, getPublishedCases, getPublishedCasesAsync, getFeaturedCases, getTop10Cases } from '@/lib/cases';
+import { getPublishedCasesAsync } from '@/lib/cases';
 import Link from 'next/link';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 export const metadata = {
   title: 'Pleadings — Landmark Indian Court Judgments as Verified Stories',
@@ -26,17 +25,17 @@ export default async function HomePage() {
   const allCases = await getPublishedCasesAsync();
   const top10Cases = [...allCases]
     .filter((c) => {
-      const r = (c as any).rank;
+      const r = (c as unknown as { rank?: number }).rank;
       if (typeof r === 'number' && r > 10) return false;
       return true;
     })
     .sort((a, b) => {
-      const rankA = typeof (a as any).rank === 'number' ? (a as any).rank : 100;
-      const rankB = typeof (b as any).rank === 'number' ? (b as any).rank : 100;
+      const rankA = typeof (a as unknown as { rank?: number }).rank === 'number' ? (a as unknown as { rank: number }).rank : 100;
+      const rankB = typeof (b as unknown as { rank?: number }).rank === 'number' ? (b as unknown as { rank: number }).rank : 100;
       return rankA - rankB;
     })
     .slice(0, 10);
-  const featuredCase = allCases.find((c) => c.featured) || allCases[0];
+  const featuredCase = allCases.find((c) => c.featured) || allCases[0] || null;
 
   return (
     <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#0E1016] text-[#F3EFE6] relative md:snap-y md:snap-proximity scroll-smooth">
@@ -44,7 +43,38 @@ export default async function HomePage() {
       <HomeSectionNav />
 
       {/* Section 1: Hero Billboard */}
-      <Hero featuredCase={featuredCase} casesList={allCases} />
+      {featuredCase ? (
+        <Hero featuredCase={featuredCase} casesList={allCases} />
+      ) : (
+        <section
+          id="section-hero"
+          className="min-h-[60vh] flex flex-col items-center justify-center text-center px-6 pt-28 pb-16 space-y-4"
+        >
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#D4AF37]">
+            PLEADINGS · VERIFIED INDIAN PRECEDENTS
+          </span>
+          <h1 className="font-anton text-4xl sm:text-6xl text-white uppercase tracking-tight">
+            Landmark Judgments As Verified Stories
+          </h1>
+          <p className="text-sm text-[#a9a49a] max-w-xl">
+            Our case archive is syncing. Explore our statutory concordance and plain-English glossary while records refresh.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center pt-2">
+            <Link
+              href="/browse"
+              className="px-5 py-2.5 bg-[#D4AF37] text-black font-bold text-xs font-mono uppercase tracking-wider rounded-xs"
+            >
+              Open Case Directory →
+            </Link>
+            <Link
+              href="/bns"
+              className="px-5 py-2.5 bg-white/10 text-white font-mono text-xs uppercase tracking-wider rounded-xs border border-white/15"
+            >
+              IPC → BNS Concordance
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Section 2: Top 10 Landmark Precedents in India */}
       <section
@@ -80,7 +110,7 @@ export default async function HomePage() {
 
           {/* Grid of Poster Cards */}
           <div className="flex items-center gap-4 overflow-x-auto pb-4 pt-1 scrollbar-none">
-            {allCases.map((caseItem: any) => (
+            {allCases.map((caseItem) => (
               <PosterCard key={caseItem.slug} caseData={caseItem} />
             ))}
           </div>
@@ -151,6 +181,9 @@ export default async function HomePage() {
             </Link>
             <Link href="/browse" className="hover:text-[#D4AF37] transition-colors">
               Browse Precedents
+            </Link>
+            <Link href="/privacy" className="hover:text-[#D4AF37] transition-colors">
+              Privacy Policy
             </Link>
           </div>
         </div>

@@ -1,12 +1,41 @@
+import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { saveJsonToSupabaseStorage } from '@/lib/supabase';
+import { saveSuggestionToSupabase } from '@/lib/supabase';
 import { sendAdminAlertEmail } from '@/lib/email';
+import { checkRateLimit, getClientIp, logSecurityEvent } from '@/lib/security/rateLimit';
+import { SuggestCaseSchema } from '@/lib/security/schemas';
+import { verifyTurnstileToken } from '@/lib/security/sanitize';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
+  const clientIp = getClientIp(req);
+
+  const rl = await checkRateLimit(clientIp, {
+    prefix: 'suggest-case',
+    limit: 5,
+    windowSec: 15 * 60,
+  });
+
+  if (!rl.allowed) {
+    logSecurityEvent('suggest_case_rate_limited', 'warn', { ip: clientIp });
+    return NextResponse.json(
+      { success: false, error: 'Too many submissions. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(rl.retryAfterSec) } }
+    );
+  }
+
   try {
-    const body = await req.json();
+    const rawBody = await req.json().catch(() => null);
+    const parsed = SuggestCaseSchema.safeParse(rawBody);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { success: false, error: parsed.error.issues[0]?.message || 'Please provide the case name and summary.' },
+        { status: 400 }
+      );
+    }
+
     const {
       caseName,
       courtOrCity,
@@ -14,31 +43,35 @@ export async function POST(req: NextRequest) {
       storySynopsis,
       contributorName,
       contributorContact,
-    } = body;
+      website,
+      turnstileToken,
+    } = parsed.data;
 
-    if (!caseName?.trim() || !storySynopsis?.trim()) {
-      return NextResponse.json(
-        { success: false, error: 'Please provide the case name/topic and what happened.' },
-        { status: 400 }
-      );
+    if (website && website.trim().length > 0) {
+      logSecurityEvent('suggest_case_honeypot_triggered', 'warn', { ip: clientIp });
+      return NextResponse.json({
+        success: true,
+        message: 'Thank you! Your case suggestion has been received.',
+      });
+    }
+
+    const turnstile = await verifyTurnstileToken(turnstileToken, clientIp);
+    if (!turnstile.ok) {
+      return NextResponse.json({ success: false, error: turnstile.reason }, { status: 400 });
     }
 
     const record = {
-      id: `sug_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-      caseName: caseName.trim(),
-      courtOrCity: courtOrCity?.trim() || 'Not specified',
-      year: year?.trim() || 'Unknown',
-      storySynopsis: storySynopsis.trim(),
-      contributorName: contributorName?.trim() || 'Anonymous',
-      contributorContact: contributorContact?.trim() || 'None',
+      id: `sug_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`,
+      caseName,
+      courtOrCity: courtOrCity || 'Not specified',
+      year: year || 'Unknown',
+      storySynopsis,
+      contributorName: contributorName || 'Anonymous',
+      contributorContact: contributorContact || 'None',
       submittedAt: new Date().toISOString(),
     };
 
-    const safeTitle = record.caseName.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
-    const savedToSupabase = await saveJsonToSupabaseStorage(
-      `suggestions/${Date.now()}-${safeTitle}.json`,
-      record
-    );
+    const savedToSupabase = await saveSuggestionToSupabase(record);
 
     await sendAdminAlertEmail({
       subject: `[Case Suggestion] ${record.caseName}`,
@@ -50,7 +83,7 @@ export async function POST(req: NextRequest) {
         { label: 'Story Synopsis', value: record.storySynopsis },
         { label: 'Suggested By', value: record.contributorName },
         { label: 'Contact', value: record.contributorContact },
-        { label: 'Saved to Storage', value: savedToSupabase ? 'Yes' : 'Fallback / Email only' },
+        { label: 'Stored Privately', value: savedToSupabase ? 'Yes' : 'Email alert only' },
       ],
     });
 
@@ -59,10 +92,10 @@ export async function POST(req: NextRequest) {
       message: 'Thank you! Your case suggestion has been received by our editorial team.',
       persisted: savedToSupabase,
     });
-  } catch (err: any) {
-    console.error('Suggest case error:', err);
+  } catch {
+    logSecurityEvent('suggest_case_exception', 'error', { ip: clientIp });
     return NextResponse.json(
-      { success: false, error: err.message || 'Failed to submit case suggestion' },
+      { success: false, error: 'Failed to submit case suggestion. Please try again.' },
       { status: 500 }
     );
   }

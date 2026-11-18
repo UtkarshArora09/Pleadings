@@ -1,6 +1,5 @@
-import { CaseFile, Episode, Exhibit, Block, CaseStatusCode, PersonaItem } from '@/types/case';
+import { CaseFile, Episode, Block, CaseStatusCode, PersonaItem } from '@/types/case';
 import { validateCase } from '@/lib/validateCase';
-import { getCaseVisualPrompts } from '@/lib/ai/visualPrompts';
 import { extractPersonasFromText, hasPersonaFormat } from '@/lib/parsePersonas';
 
 export interface AdminIngestPayload {

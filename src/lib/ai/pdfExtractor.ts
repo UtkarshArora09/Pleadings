@@ -228,7 +228,7 @@ export function extractTextFromPdfBuffer(pdfBuffer: Buffer): ExtractedPdf {
     // 6. Fallback if no page objects found or content empty: scan any BT...ET in any stream
     if (pageTexts.length === 0) {
       let fallbackText = '';
-      for (const [_, body] of objects.entries()) {
+      for (const body of objects.values()) {
         const stream = getDecompressedStream(body);
         if (stream && stream.includes('BT')) {
           fallbackText += parseContentStream(stream, new Map()) + '\n';

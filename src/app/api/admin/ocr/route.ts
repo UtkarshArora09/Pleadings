@@ -1,15 +1,22 @@
-import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { revalidatePath } from 'next/cache';
+import { NextRequest, NextResponse } from 'next/server';
 import { scanAndExtractCaseDocument } from '@/lib/ai/ocrScanner';
 import { CaseStore } from '@/lib/db/caseStore';
 import { isRequestAuthenticated } from '@/lib/auth';
 import { sendAdminCaseCreatedEmail } from '@/lib/email';
 import { CaseStatus } from '@/types';
+import { verifyFileMagicBytes } from '@/lib/security/sanitize';
+import { checkRateLimit, getClientIp, logSecurityEvent } from '@/lib/security/rateLimit';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
-export const maxDuration = 60; // Allow sufficient time for multi-page OCR & AI synthesis
+export const maxDuration = 60;
+
+const MAX_OCR_FILE_BYTES = 15 * 1024 * 1024; // 15 MB hard cap
+const MAX_TEXT_PAYLOAD_CHARS = 150_000;
+const MAX_CUSTOM_INSTRUCTIONS_CHARS = 1000;
 
 export async function GET(request: NextRequest) {
   if (!isRequestAuthenticated(request)) {
@@ -19,7 +26,6 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const isSample = searchParams.get('sample') === 'true';
 
-  // If testing with the built-in template PDF
   if (isSample) {
     try {
       const samplePath = path.join(process.cwd(), 'Pleadings_Case_Upload_Template.pdf');
@@ -30,11 +36,10 @@ export async function GET(request: NextRequest) {
           fileName: 'Pleadings_Case_Upload_Template.pdf',
           mimeType: 'application/pdf',
         });
-
         return NextResponse.json(result);
       }
-    } catch (err: any) {
-      return NextResponse.json({ success: false, error: err.message || 'Failed to scan sample template' }, { status: 500 });
+    } catch {
+      return NextResponse.json({ success: false, error: 'Failed to scan sample template.' }, { status: 500 });
     }
   }
 
@@ -42,13 +47,26 @@ export async function GET(request: NextRequest) {
     success: true,
     message: 'Pleadings High-Precision OCR & Legal Extraction Engine is active.',
     supportedFormats: ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'],
-    maxUploadSize: '50MB',
+    maxUploadSize: '15MB',
   });
 }
 
 export async function POST(request: NextRequest) {
   if (!isRequestAuthenticated(request)) {
     return NextResponse.json({ success: false, error: 'Unauthorized. Admin credentials required.' }, { status: 401 });
+  }
+
+  const clientIp = getClientIp(request);
+  const rl = await checkRateLimit(clientIp, {
+    prefix: 'admin-ocr',
+    limit: 10,
+    windowSec: 5 * 60,
+  });
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { success: false, error: 'OCR rate limit reached. Please wait a few minutes.' },
+      { status: 429, headers: { 'Retry-After': String(rl.retryAfterSec) } }
+    );
   }
 
   try {
@@ -67,37 +85,63 @@ export async function POST(request: NextRequest) {
       const file = formData.get('file') as File | null;
       autoSave = formData.get('autoSave') === 'true';
       publishImmediately = formData.get('publishImmediately') === 'true';
-      customInstructions = (formData.get('customInstructions') as string) || '';
+      customInstructions = String(formData.get('customInstructions') || '').slice(0, MAX_CUSTOM_INSTRUCTIONS_CHARS);
 
       if (!file) {
-        return NextResponse.json({ success: false, error: 'No file uploaded in form data' }, { status: 400 });
+        return NextResponse.json({ success: false, error: 'No file uploaded in form data.' }, { status: 400 });
       }
 
-      fileName = file.name;
-      mimeType = file.type || (fileName.endsWith('.pdf') ? 'application/pdf' : 'image/jpeg');
+      if (typeof file.size === 'number' && file.size > MAX_OCR_FILE_BYTES) {
+        return NextResponse.json({ success: false, error: 'Document exceeds the 15 MB maximum upload limit.' }, { status: 413 });
+      }
 
       const arrayBuffer = await file.arrayBuffer();
+      if (arrayBuffer.byteLength > MAX_OCR_FILE_BYTES) {
+        return NextResponse.json({ success: false, error: 'Document exceeds the 15 MB maximum upload limit.' }, { status: 413 });
+      }
+
       fileBuffer = Buffer.from(arrayBuffer);
+      const sig = verifyFileMagicBytes(fileBuffer, 'ocr');
+      if (!sig.valid || !sig.mimeType) {
+        return NextResponse.json({ success: false, error: sig.error || 'Unsupported file type.' }, { status: 400 });
+      }
+
+      fileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 120) || `document.${sig.extension}`;
+      mimeType = sig.mimeType;
       fileBase64 = fileBuffer.toString('base64');
     } else {
-      const body = await request.json();
-      fileBase64 = body.fileBase64 || body.pdfBase64 || '';
-      if (fileBase64) {
-        fileBuffer = Buffer.from(fileBase64, 'base64');
+      const body = await request.json().catch(() => null);
+      if (!body || typeof body !== 'object') {
+        return NextResponse.json({ success: false, error: 'Invalid JSON request body.' }, { status: 400 });
       }
-      textPayload = body.textPayload;
-      fileName = body.fileName || 'scanned-judgment.pdf';
-      mimeType = body.mimeType || (fileName.endsWith('.pdf') ? 'application/pdf' : 'image/jpeg');
+
+      fileBase64 = typeof body.fileBase64 === 'string' ? body.fileBase64 : typeof body.pdfBase64 === 'string' ? body.pdfBase64 : '';
+      textPayload = typeof body.textPayload === 'string' ? body.textPayload.slice(0, MAX_TEXT_PAYLOAD_CHARS) : undefined;
       autoSave = Boolean(body.autoSave);
       publishImmediately = Boolean(body.publishImmediately);
-      customInstructions = body.customInstructions || '';
+      customInstructions = typeof body.customInstructions === 'string' ? body.customInstructions.slice(0, MAX_CUSTOM_INSTRUCTIONS_CHARS) : '';
 
-      if (!fileBase64 && !body.textPayload) {
-        return NextResponse.json({ success: false, error: 'Missing document payload (fileBase64 or textPayload required)' }, { status: 400 });
+      if (!fileBase64 && !textPayload) {
+        return NextResponse.json(
+          { success: false, error: 'Missing document payload (fileBase64 or textPayload required).' },
+          { status: 400 }
+        );
+      }
+
+      if (fileBase64) {
+        // Approximate decoded byte length before decoding
+        if (fileBase64.length > Math.ceil((MAX_OCR_FILE_BYTES * 4) / 3) + 1024) {
+          return NextResponse.json({ success: false, error: 'Encoded document exceeds 15 MB limit.' }, { status: 413 });
+        }
+        fileBuffer = Buffer.from(fileBase64, 'base64');
+        const sig = verifyFileMagicBytes(fileBuffer, 'ocr');
+        if (!sig.valid || !sig.mimeType) {
+          return NextResponse.json({ success: false, error: sig.error || 'Unsupported file signature.' }, { status: 400 });
+        }
+        mimeType = sig.mimeType;
+        fileName = String(body.fileName || `scanned-judgment.${sig.extension}`).replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 120);
       }
     }
-
-    console.log(`📑 Ingesting document via OCR: ${fileName} (${mimeType}). AutoSave: ${autoSave}, PublishImmediately: ${publishImmediately}`);
 
     const scanResult = await scanAndExtractCaseDocument({
       fileBase64,
@@ -109,27 +153,38 @@ export async function POST(request: NextRequest) {
     });
 
     if (!scanResult.success) {
-      return NextResponse.json({ success: false, error: scanResult.error || 'Failed to extract case data' }, { status: 500 });
+      return NextResponse.json({ success: false, error: 'Failed to extract case data from document.' }, { status: 500 });
     }
 
     let finalCaseData = scanResult.caseData;
 
-    // If auto-save or direct publishing is requested
     if (autoSave || publishImmediately) {
       const statusToSet: CaseStatus = publishImmediately ? 'PUBLISHED' : 'ADMIN_REVIEW';
       finalCaseData.status = statusToSet;
+      (finalCaseData as unknown as { publishStatus?: CaseStatus }).publishStatus = statusToSet;
 
-      // Save to Supabase Database / CaseStore
-      const saved = await CaseStore.create(finalCaseData as any);
+      const saved = await CaseStore.create(finalCaseData);
       finalCaseData = saved;
 
-      // Send email alert for administrative awareness
+      if (publishImmediately) {
+        revalidatePath('/');
+        revalidatePath('/browse');
+        revalidatePath('/sitemap.xml');
+        revalidatePath(`/case/${saved.slug}`);
+      }
+
       try {
         await sendAdminCaseCreatedEmail(saved);
-      } catch (emailErr) {
-        console.warn('OCR Auto-Save email notification warning:', emailErr);
+      } catch {
+        // Non-fatal
       }
     }
+
+    logSecurityEvent('admin_ocr_processed', 'info', {
+      ip: clientIp,
+      fileName,
+      savedToPipeline: autoSave || publishImmediately,
+    });
 
     return NextResponse.json({
       success: true,
@@ -138,13 +193,10 @@ export async function POST(request: NextRequest) {
       metadata: scanResult.metadata,
       savedToPipeline: autoSave || publishImmediately,
     });
-  } catch (error: any) {
-    console.error('OCR Processing Endpoint Error:', error);
+  } catch {
+    logSecurityEvent('admin_ocr_exception', 'error', { ip: clientIp });
     return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : 'Internal error processing OCR scan',
-      },
+      { success: false, error: 'Internal error processing OCR scan.' },
       { status: 500 }
     );
   }

@@ -1,0 +1,51 @@
+name: Security & Quality CI
+
+on:
+  push:
+    branches: [main, "fix/**"]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 3 * * 1" # Weekly Monday 03:00 UTC security audit
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Typecheck, Lint, Tests, Secret Scan & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript type check
+        run: npx tsc --noEmit
+
+      - name: ESLint check
+        run: npm run lint
+
+      - name: Unit & Security regression tests
+        run: npm test
+
+      - name: Static secret & unsafe pattern guard
+        run: |
+          if grep -rnE "rejectUnauthorized:\s*false|pleadings-secured-editorial-session-2025|admin123" src/; then
+            echo "ERROR: Forbidden insecure pattern detected in src/!"
+            exit 1
+          fi
+
+      - name: NPM dependency vulnerability audit
+        run: npm audit --audit-level=high
+
+      - name: Production build check
+        run: npm run build

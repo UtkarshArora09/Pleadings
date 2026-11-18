@@ -2,10 +2,8 @@ import { MetadataRoute } from 'next';
 import { getPublishedCasesAsync } from '@/lib/cases';
 import glossaryData from '@/content/glossary.json';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300; // Revalidate every 5 minutes (also revalidated on-demand when cases publish)
 
-// Fallback slugs used only if Supabase is unreachable during offline build
 const FALLBACK_LANDMARK_SLUGS = [
   'can-a-secular-criminal-code-reach-past-personal-law-to-provide-maintenance',
   'nanavati-case',
@@ -27,45 +25,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/browse`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/bns`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/glossary`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/corrections`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
+    { url: `${baseUrl}`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: `${baseUrl}/browse`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/bns`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/glossary`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/contribute`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/corrections`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
+    { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
   ];
 
-  // Fetch all live published cases from Supabase so newly added cases appear automatically
   let dbCases: Array<{ slug: string; updatedAt?: string; publishedAt?: string }> = [];
   try {
     dbCases = await getPublishedCasesAsync();

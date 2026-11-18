@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useAccessibleModal } from '@/hooks/useAccessibleModal';
 
 interface SuggestCaseModalProps {
   isOpen: boolean;
@@ -16,22 +17,12 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
   const [storySynopsis, setStorySynopsis] = useState('');
   const [contributorName, setContributorName] = useState('');
   const [contributorContact, setContributorContact] = useState('');
+  const [website, setWebsite] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    if (isOpen) {
-      const orig = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = orig;
-      };
-    }
-  }, [isOpen]);
+  const mounted = useAccessibleModal(isOpen, onClose);
 
   if (!isOpen || !mounted || typeof document === 'undefined') return null;
 
@@ -56,6 +47,7 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
           storySynopsis: storySynopsis.trim(),
           contributorName: contributorName.trim(),
           contributorContact: contributorContact.trim(),
+          website,
         }),
       });
 
@@ -89,15 +81,21 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-xl bg-[#12151E] border border-[#D4AF37]/40 rounded-sm shadow-2xl p-6 sm:p-8 text-white my-auto">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="suggest-case-modal-title"
+        className="relative w-full max-w-xl bg-[#12151E] border border-[#D4AF37]/40 rounded-sm shadow-2xl p-6 sm:p-8 text-white my-auto"
+      >
         {/* Top Gold Bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E50914] via-[#D4AF37] to-[#E50914]" />
 
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
           className="absolute top-4 right-4 text-white/50 hover:text-white text-lg font-mono p-1 cursor-pointer transition-colors"
-          aria-label="Close"
+          aria-label="Close suggest case modal"
         >
           ✕
         </button>
@@ -107,7 +105,7 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 text-[10px] font-mono font-bold uppercase tracking-widest rounded-2xs">
             <span>{lang === 'en' ? 'READER STORY ROOM' : 'केस सुझाव'}</span>
           </div>
-          <h2 className="font-anton text-2xl sm:text-3xl text-white tracking-wide uppercase">
+          <h2 id="suggest-case-modal-title" className="font-anton text-2xl sm:text-3xl text-white tracking-wide uppercase">
             {lang === 'en' ? 'Suggest a Courtroom Story' : 'किसी केस का सुझाव दें'}
           </h2>
           <p className="text-xs text-[#a9a49a] font-sans leading-relaxed">
@@ -132,12 +130,17 @@ export function SuggestCaseModal({ isOpen, onClose, lang = 'en' }: SuggestCaseMo
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-xs font-mono">
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="suggest-website-hp">Website</label>
+              <input id="suggest-website-hp" type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+            </div>
             {/* Case Name / Topic */}
             <div className="space-y-1">
-              <label className="block text-white/80 uppercase font-bold tracking-wider">
+              <label htmlFor="suggest-case-name" className="block text-white/80 uppercase font-bold tracking-wider">
                 1. Case Name or Headline Topic <span className="text-[#E50914]">*</span>
               </label>
               <input
+                id="suggest-case-name"
                 type="text"
                 value={caseName}
                 onChange={(e) => setCaseName(e.target.value)}

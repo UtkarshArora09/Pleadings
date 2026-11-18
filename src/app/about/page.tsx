@@ -27,7 +27,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6]">
       <Header />
 
       <div className="pt-28 pb-20 px-4 sm:px-6 md:px-12 max-w-4xl mx-auto space-y-12">

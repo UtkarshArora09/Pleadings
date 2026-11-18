@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { shouldBypassImageOptimization } from '@/lib/imageUtils';
 
 interface CaseImageProps {
   src: string;
@@ -26,8 +27,7 @@ export function CaseImage({
 }: CaseImageProps) {
   const isIllustration = provenance === 'illustration';
   const resolvedAlt = isIllustration && !alt.startsWith('Illustration:') ? `Illustration: ${alt}` : alt;
-  const isDataUri = typeof src === 'string' && (src.startsWith('data:') || src.startsWith('blob:'));
-  const isRemote = typeof src === 'string' && src.startsWith('http');
+  const bypassOptimization = shouldBypassImageOptimization(src);
   const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
@@ -62,7 +62,7 @@ export function CaseImage({
           src={src}
           alt={resolvedAlt}
           fill
-          unoptimized={isDataUri || isRemote}
+          unoptimized={bypassOptimization}
           priority={priority}
           sizes="(max-width: 768px) 100vw, 50vw"
           onError={() => setHasError(true)}
@@ -74,7 +74,7 @@ export function CaseImage({
           alt={resolvedAlt}
           width={width || 600}
           height={height || 338}
-          unoptimized={isDataUri || isRemote}
+          unoptimized={bypassOptimization}
           priority={priority}
           onError={() => setHasError(true)}
           className="w-full h-auto object-cover object-center"

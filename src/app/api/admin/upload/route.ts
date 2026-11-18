@@ -1,7 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import { NextRequest, NextResponse } from 'next/server';
 import { isRequestAuthenticated } from '@/lib/auth';
+import { verifyFileMagicBytes } from '@/lib/security/sanitize';
+import { checkRateLimit, getClientIp, logSecurityEvent } from '@/lib/security/rateLimit';
+
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 5 MB hard limit
 
 export async function POST(request: NextRequest) {
   if (!isRequestAuthenticated(request)) {
@@ -11,11 +16,24 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const clientIp = getClientIp(request);
+  const rl = await checkRateLimit(clientIp, {
+    prefix: 'admin-upload',
+    limit: 30,
+    windowSec: 60,
+  });
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { success: false, error: 'Upload rate limit exceeded. Please retry shortly.' },
+      { status: 429, headers: { 'Retry-After': String(rl.retryAfterSec) } }
+    );
+  }
+
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
-    const slug = (formData.get('slug') as string) || 'case';
-    const type = (formData.get('type') as string) || 'poster';
+    const rawSlug = String(formData.get('slug') || 'case');
+    const rawType = String(formData.get('type') || 'poster');
 
     if (!file) {
       return NextResponse.json(
@@ -24,65 +42,88 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file type
-    const validMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/jpg'];
-    if (!validMimes.includes(file.type)) {
+    // Reject oversized files BEFORE allocating full buffer in memory
+    if (typeof file.size === 'number' && file.size > MAX_IMAGE_BYTES) {
+      logSecurityEvent('admin_upload_oversized', 'warn', { ip: clientIp, bytes: file.size });
       return NextResponse.json(
-        { success: false, error: 'Invalid file format. Please upload JPG, PNG, or WebP images.' },
+        { success: false, error: 'Image exceeds the 5 MB maximum upload size.' },
+        { status: 413 }
+      );
+    }
+
+    // Explicitly block SVG and unknown client-declared MIME types
+    const allowedClientMimes = new Set(['image/jpeg', 'image/jpg', 'image/png', 'image/webp']);
+    if (file.type && !allowedClientMimes.has(file.type.toLowerCase())) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid file format. Only JPG, PNG, and WebP images are permitted.' },
         { status: 400 }
       );
     }
 
     const bytes = await file.arrayBuffer();
+    if (bytes.byteLength > MAX_IMAGE_BYTES) {
+      return NextResponse.json(
+        { success: false, error: 'Image exceeds the 5 MB maximum upload size.' },
+        { status: 413 }
+      );
+    }
+
     const buffer = Buffer.from(bytes);
 
-    // Determine target file path
-    const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
-    const safeSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-    const safeType = type.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-    const fileName = `${safeSlug}-${safeType}-${Date.now()}.${ext}`;
+    // Inspect binary magic bytes — never trust file.type or file.name extension
+    const sig = verifyFileMagicBytes(buffer, 'image');
+    if (!sig.valid || !sig.mimeType || !sig.extension) {
+      logSecurityEvent('admin_upload_invalid_signature', 'warn', { ip: clientIp });
+      return NextResponse.json(
+        { success: false, error: sig.error || 'Invalid image file signature.' },
+        { status: 400 }
+      );
+    }
+
+    const safeSlug = rawSlug.toLowerCase().replace(/[^a-z0-9_-]/g, '-').slice(0, 60) || 'case';
+    const safeType = rawType.toLowerCase().replace(/[^a-z0-9_-]/g, '-').slice(0, 30) || 'poster';
+    const uniqueSuffix = `${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
+    const fileName = `${safeSlug}-${safeType}-${uniqueSuffix}.${sig.extension}`;
 
     let publicUrl = `/images/cases/${fileName}`;
 
-    // 1. Attempt Supabase Storage upload (permanent cloud storage accessible from everywhere)
     const { uploadImageToSupabase, isSupabaseConfigured } = await import('@/lib/supabase');
     if (isSupabaseConfigured()) {
-      const mime = file.type || (ext === 'png' ? 'image/png' : 'image/jpeg');
-      const supabaseUrl = await uploadImageToSupabase(buffer, fileName, mime);
+      const supabaseUrl = await uploadImageToSupabase(buffer, fileName, sig.mimeType);
       if (supabaseUrl) {
         publicUrl = supabaseUrl;
       }
     }
 
-    // 2. Fallback: Local filesystem or Data URI
     if (!publicUrl.startsWith('http')) {
       try {
         const uploadDir = path.join(process.cwd(), 'public', 'images', 'cases');
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
-
         const filePath = path.join(uploadDir, fileName);
         fs.writeFileSync(filePath, buffer);
-      } catch (fsErr) {
-        console.warn('Filesystem write failed (Vercel serverless environment), returning Data URI:', fsErr);
-        const mime = file.type || (ext === 'png' ? 'image/png' : 'image/jpeg');
-        publicUrl = `data:${mime};base64,${buffer.toString('base64')}`;
+      } catch {
+        publicUrl = `data:${sig.mimeType};base64,${buffer.toString('base64')}`;
       }
     }
+
+    logSecurityEvent('admin_upload_success', 'info', {
+      ip: clientIp,
+      fileName,
+      mimeType: sig.mimeType,
+      bytes: buffer.length,
+    });
 
     return NextResponse.json({
       success: true,
       url: publicUrl,
       fileName,
     });
-  } catch (error) {
-    console.error('Error handling admin image upload:', error);
+  } catch {
+    logSecurityEvent('admin_upload_exception', 'error', { ip: clientIp });
     return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : 'Internal upload error',
-      },
+      { success: false, error: 'Failed to upload image.' },
       { status: 500 }
     );
   }

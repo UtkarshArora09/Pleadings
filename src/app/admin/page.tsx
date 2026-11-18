@@ -11,7 +11,7 @@ export default function AdminDashboardPage() {
   const [filter, setFilter] = useState<string>('ALL');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [actionLoading, setActionLoading] = useState<string | null>(null);
-  const [lastSyncTime, setLastSyncTime] = useState<Date>(new Date());
+  const [, setLastSyncTime] = useState<Date>(new Date());
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [isOcrModalOpen, setIsOcrModalOpen] = useState<boolean>(false);
   const isFetchingRef = useRef<boolean>(false);

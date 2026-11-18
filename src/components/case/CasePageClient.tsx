@@ -12,238 +12,28 @@ interface CasePageClientProps {
   prevSlug?: string;
 }
 
-function normalizeToCaseFile(raw: any, slug: string): CaseFile {
-  const titleStr = typeof raw.title === 'string' ? raw.title : (raw.title?.en || raw.title?.hi || slug);
-  const hookStr =
-    typeof raw.blurb === 'string'
-      ? raw.blurb
-      : (raw.blurb?.en !== undefined
-          ? raw.blurb.en
-          : (typeof raw.hook === 'string'
-              ? raw.hook
-              : (raw.hook?.en || raw.featuredHeroHook?.en || '')));
-  const posterImg = raw.poster || {
-    src: raw.bannerImage || '',
-    alt: `${titleStr} cover poster`,
-    provenance: 'illustration' as const,
-  };
-
-  // Convert panels to episodes if episodes don't exist
-  let episodes = raw.episodes;
-  if (!episodes || !Array.isArray(episodes) || episodes.length === 0) {
-    if (raw.panels && Array.isArray(raw.panels)) {
-      episodes = raw.panels.map((p: any, idx: number) => {
-        const bodyText = typeof p.body === 'string' ? p.body : (p.body?.en || '');
-        const headlineText = typeof p.headline === 'string' ? p.headline : (p.headline?.en || `Episode ${idx + 1}`);
-        const eyebrowText = typeof p.eyebrow === 'string' ? p.eyebrow : (p.eyebrow?.en || `EPISODE 0${idx + 1}`);
-
-        return {
-          n: idx + 1,
-          kicker: eyebrowText,
-          title: headlineText,
-          layers: {
-            story: {
-              blocks: [
-                {
-                  type: 'para' as const,
-                  text: bodyText,
-                  source: { tier: 'AMBER' as const },
-                },
-              ],
-            },
-            student: {
-              blocks: [
-                {
-                  type: 'para' as const,
-                  text: `LEGAL ANALYSIS: ${bodyText}`,
-                  source: { tier: 'AMBER' as const },
-                },
-              ],
-              ratio: `Authoritative statutory construction and legal ratio.`,
-            },
-            advocate: {
-              blocks: [
-                {
-                  type: 'para' as const,
-                  text: `TRIAL PROPOSITION: Evidentiary burden and argument.`,
-                  source: { tier: 'AMBER' as const },
-                },
-              ],
-              pinpoints: [{ proposition: headlineText, para: 8 }],
-              howToUse: ['Cite this case for core doctrine.'],
-              howToDistinguish: ['Distinguish on specific facts.'],
-            },
-          },
-          image: p.image ? { src: p.image, alt: headlineText, provenance: 'illustration' as const } : undefined,
-          endHook: idx < 7 ? 'How did the next phase unfold?' : 'Case Dossier Complete.',
-        };
-      });
-    }
-  }
-
-  return {
-    ...raw,
-    slug: raw.slug || slug,
-    title: titleStr,
-    hook: hookStr,
-    court: raw.court || 'Supreme Court of India',
-    year: raw.year || 2024,
-    decidedOn: raw.decidedOn || `${raw.year || 2024}-05-15`,
-    bench: raw.bench || [`Hon'ble Bench of the ${raw.court || 'Supreme Court of India'}`],
-    citations: raw.citations || { primary: raw.citation || `${raw.year || 2024} INSC 1`, parallel: [] },
-    sourceUrl: raw.sourceUrl || raw.judgmentUrl || 'https://indiankanoon.org/',
-    status: raw.status?.code
-      ? raw.status
-      : { code: 'GOOD_LAW', explain: 'Active binding precedent under Indian law.', chain: [{ year: raw.year || 2024, event: 'Delivered' }] },
-    statuteMap: raw.statuteMap || [{ old: raw.categoryTag || 'Constitution', new: null, note: 'Governing statutory provision.' }],
-    doctrines: raw.doctrines || [raw.categoryTag || 'Constitutional Law'],
-    categories: raw.categories || [raw.genre || 'constitutional'],
-    readingTime: raw.readingTime || { story: 5, student: 7, advocate: 9 },
-    featured: typeof raw.featured === 'boolean' ? raw.featured : true,
-    publishedAt: raw.publishedAt || raw.createdAt || new Date().toISOString(),
-    poster: posterImg,
-    episodes: episodes || [],
-    vote: raw.vote || {
-      question: `How should the court decide this issue?`,
-      context: `Consider whether the statutory conditions were satisfied on the trial record.`,
-      options: [
-        { id: 'opt-1', label: 'Uphold the statutory claim', argument: 'The legal requirements were met based on the verified trial evidence.' },
-        { id: 'opt-2', label: 'Reject the claim', argument: 'Strict statutory preconditions were not established beyond doubt.' },
-      ],
-      courtChoseOptionId: 'opt-1',
-    },
-    glossary: raw.glossary || [],
-    flashcards: raw.flashcards || [],
-    affectsYou: raw.affectsYou || {
-      heading: `How this ruling protects your rights`,
-      points: [`Guarantees due process and statutory safeguards under Indian law.`],
-      actionLink: { label: 'Verified against the original/officially published judgment', url: raw.judgmentUrl || 'https://indiankanoon.org/' },
-    },
-    timeline: raw.timeline || [{ year: raw.year || 2024, event: 'Judgment delivered' }],
-    relatedSlugs: raw.relatedSlugs || ['ghost-case', 'nanavati-case'],
-    subsequentHistory: raw.subsequentHistory || [],
-    sources: raw.sources || [{ label: 'Verified against the original/officially published judgment', url: raw.judgmentUrl || 'https://indiankanoon.org/' }],
-    review: raw.review || {
-      reviewer: 'Adv. Girish Kr. Srivastava',
-      enrolment: 'D/842/1991',
-      reviewedOn: new Date().toISOString().split('T')[0],
-    },
-  } as unknown as CaseFile;
-}
-
-function isStockPlaceholder(url?: string): boolean {
-  if (!url) return true;
-  return (
-    url === '/images/cases/shah-bano.jpg' ||
-    url === '/images/cases/maneka-gandhi.jpg' ||
-    url === '/images/cases/kesavananda-bharati.jpg' ||
-    url === '/images/cases/ghost-case.jpg' ||
-    url === '/images/cases/nanavati-case.jpg' ||
-    url === '/images/cases/rinku-rukshar-poster.jpg' ||
-    url === '/images/cases/rinku-rukshar-exhibit.jpg' ||
-    url === '/images/cases/rinku-rukshar-verdict.jpg'
-  );
-}
-
-function mergeCustomVisuals(base: CaseFile, custom?: any): CaseFile {
-  if (!custom) return base;
-  const result = { ...base };
-
-  const customPoster = custom.poster?.src || custom.bannerImage;
-  if (customPoster && (!isStockPlaceholder(customPoster) || !base.poster?.src)) {
-    result.poster = {
-      src: customPoster,
-      alt: custom.poster?.alt || base.poster?.alt || `${base.title} poster`,
-      provenance: custom.poster?.provenance || 'illustration',
-    };
-    (result as any).bannerImage = customPoster;
-    if (result.episodes?.[0]) {
-      result.episodes[0] = { ...result.episodes[0], image: result.poster };
-    }
-    if (result.hi?.episodes?.[0]) {
-      result.hi.episodes[0] = { ...result.hi.episodes[0], image: result.poster };
-    }
-  }
-
-  const customExhibit =
-    custom.panels?.[1]?.photoExhibitSrc ||
-    custom.episodes?.[1]?.exhibit?.image?.src ||
-    custom.episodes?.[1]?.image?.src;
-  if (customExhibit && (!isStockPlaceholder(customExhibit) || !base.episodes?.[1]?.exhibit?.image?.src)) {
-    const exhibitImg = {
-      src: customExhibit,
-      alt: `Archival Exhibit for ${base.title}`,
-      provenance: 'archival' as const,
-    };
-    if (result.episodes?.[1]) {
-      result.episodes[1] = {
-        ...result.episodes[1],
-        image: exhibitImg,
-        exhibit: result.episodes[1].exhibit
-          ? { ...result.episodes[1].exhibit, image: exhibitImg }
-          : undefined,
-      };
-    }
-    if (result.hi?.episodes?.[1]) {
-      result.hi.episodes[1] = {
-        ...result.hi.episodes[1],
-        image: exhibitImg,
-        exhibit: result.hi.episodes[1].exhibit
-          ? { ...result.hi.episodes[1].exhibit, image: exhibitImg }
-          : undefined,
-      };
-    }
-  }
-
-  const customVerdict =
-    custom.panels?.[6]?.photoExhibitSrc ||
-    custom.episodes?.[6]?.image?.src ||
-    custom.episodes?.[6]?.exhibit?.image?.src;
-  if (customVerdict && (!isStockPlaceholder(customVerdict) || !base.episodes?.[6]?.image?.src)) {
-    const verdictImg = {
-      src: customVerdict,
-      alt: `Courtroom Verdict for ${base.title}`,
-      provenance: 'illustration' as const,
-    };
-    if (result.episodes?.[6]) {
-      result.episodes[6] = {
-        ...result.episodes[6],
-        image: verdictImg,
-        exhibit: result.episodes[6].exhibit
-          ? { ...result.episodes[6].exhibit, image: verdictImg }
-          : undefined,
-      };
-    }
-    if (result.hi?.episodes?.[6]) {
-      result.hi.episodes[6] = {
-        ...result.hi.episodes[6],
-        image: verdictImg,
-        exhibit: result.hi.episodes[6].exhibit
-          ? { ...result.hi.episodes[6].exhibit, image: verdictImg }
-          : undefined,
-      };
-    }
-  }
-
-  return result;
-}
-
 export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePageClientProps) {
   const [caseData, setCaseData] = useState<CaseFile | null>(initialCase);
   const [loading, setLoading] = useState<boolean>(!initialCase);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setCaseData(initialCase);
+    setLoading(!initialCase);
+    setError(null);
+  }, [initialCase]);
+
+  useEffect(() => {
     let isMounted = true;
 
-    // Record real view on case load and notify real-time listeners
+    // Record real view on case load (server-deduplicated atomic counter)
     try {
       const cleanSlug = decodeURIComponent(slug).trim();
       fetch(`/api/cases/${encodeURIComponent(cleanSlug)}/view`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       })
-        .then((res) => res.json())
+        .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
           if (data && data.success) {
             const viewsCount = typeof data.views === 'number' ? data.views : undefined;
@@ -252,51 +42,49 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
                 const bc = new BroadcastChannel('pleadings_case_events');
                 bc.postMessage({ type: 'CASE_VIEW', slug: cleanSlug, views: viewsCount, time: Date.now() });
                 bc.close();
-              } catch {}
+              } catch {
+                // ignore BroadcastChannel failures
+              }
             }
             try {
               localStorage.setItem(
                 'pleadings_last_view_event',
                 JSON.stringify({ slug: cleanSlug, views: viewsCount, time: Date.now() })
               );
-            } catch {}
+            } catch {
+              // ignore storage failures
+            }
           }
         })
         .catch(() => {});
-    } catch {}
+    } catch {
+      // ignore invalid slug URI
+    }
 
-    async function loadClientCase() {
+    // Avoid redundant network roundtrip when SSR already delivered `initialCase` (BUG-007)
+    if (initialCase) {
+      return () => {
+        isMounted = false;
+      };
+    }
+
+    async function loadPublicCase() {
       try {
-        // Fetch fresh case data from API
-        const res = await fetch(`/api/cases/${slug}`);
+        const res = await fetch(`/api/cases/${encodeURIComponent(slug)}`);
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.case && isMounted) {
-            const normalized = normalizeToCaseFile(data.case, slug);
-            setCaseData(normalized);
+            setCaseData(data.case as CaseFile);
             setLoading(false);
             return;
           }
         }
 
-        // Fallback: try admin API endpoint if logged in
-        const adminRes = await fetch(`/api/admin/cases/${slug}`);
-        if (adminRes.ok) {
-          const adminData = await adminRes.json();
-          if (adminData.success && adminData.case && isMounted) {
-            const normalized = normalizeToCaseFile(adminData.case, slug);
-            setCaseData(normalized);
-            setLoading(false);
-            return;
-          }
-        }
-
-        if (isMounted && !caseData && !initialCase) {
+        if (isMounted) {
           setError('Case record could not be found.');
         }
-      } catch (err) {
-        console.error('Failed to load dynamic case on client:', err);
-        if (isMounted && !caseData && !initialCase) {
+      } catch {
+        if (isMounted) {
           setError('Failed to load case dossier.');
         }
       } finally {
@@ -304,7 +92,7 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
       }
     }
 
-    loadClientCase();
+    loadPublicCase();
 
     return () => {
       isMounted = false;
@@ -332,7 +120,7 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
               Case Record Not Found
             </h1>
             <p className="text-xs text-[#a9a49a] leading-relaxed font-mono">
-              The case dossier <span className="text-[#D4AF37]">`{slug}`</span> is still being prepared or has not yet been saved to the archive.
+              The requested case dossier is not available in the published Pleadings archive.
             </p>
           </div>
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
@@ -343,10 +131,10 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
               Browse All Cases
             </Link>
             <Link
-              href={`/admin/cases/${slug}`}
+              href="/"
               className="px-4 py-2.5 bg-white/10 text-white font-mono text-xs uppercase tracking-wider rounded-xs hover:bg-white/20 transition-all border border-white/10"
             >
-              Open in Review Studio
+              Return Home
             </Link>
           </div>
         </div>
@@ -354,11 +142,5 @@ export function CasePageClient({ slug, initialCase, nextSlug, prevSlug }: CasePa
     );
   }
 
-  return (
-    <CaseViewer
-      caseData={caseData}
-      nextSlug={nextSlug}
-      prevSlug={prevSlug}
-    />
-  );
+  return <CaseViewer caseData={caseData} nextSlug={nextSlug} prevSlug={prevSlug} />;
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getCaseBySlug, getCaseBySlugAsync, getAllCases, getAllCasesAsync, getAllCaseSlugs } from '@/lib/cases';
-import { CaseStore } from '@/lib/db/caseStore';
+import { notFound } from 'next/navigation';
+import { getPublishedCaseBySlug, getPublishedCaseBySlugAsync, getPublishedCasesAsync } from '@/lib/cases';
 import { CaseFile } from '@/types/case';
 import { CasePageClient } from '@/components/case/CasePageClient';
+import { safeJsonLd } from '@/lib/security/sanitize';
 
 interface CasePageProps {
   params: Promise<{
@@ -11,8 +12,7 @@ interface CasePageProps {
   }>;
 }
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 export const dynamicParams = true;
 
 async function getCaseForPage(slug: string): Promise<CaseFile | null> {
@@ -20,10 +20,10 @@ async function getCaseForPage(slug: string): Promise<CaseFile | null> {
   const decoded = decodeURIComponent(slug).trim();
   const cleanSlug = decoded.replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
 
-  const caseItem = (await getCaseBySlugAsync(decoded)) || (await getCaseBySlugAsync(cleanSlug));
+  const caseItem = (await getPublishedCaseBySlugAsync(decoded)) || (await getPublishedCaseBySlugAsync(cleanSlug));
   if (caseItem) return caseItem;
 
-  return getCaseBySlug(decoded) || getCaseBySlug(cleanSlug);
+  return getPublishedCaseBySlug(decoded) || getPublishedCaseBySlug(cleanSlug);
 }
 
 // Helper to generate hyper-targeted search keywords per case
@@ -245,11 +245,10 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   const caseItem = await getCaseForPage(slug);
 
   if (!caseItem) {
-    const humanTitle = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     return {
-      title: `${humanTitle} | Pleadings`,
-      description: `Episodic courtroom experience and landmark legal breakdown for ${humanTitle}.`,
-      robots: { index: true, follow: true },
+      title: 'Case Not Found | Pleadings',
+      description: 'The requested legal case dossier could not be found in the Pleadings archive.',
+      robots: { index: false, follow: false },
     };
   }
 
@@ -310,8 +309,13 @@ export default async function CasePage({ params }: CasePageProps) {
   const { slug } = await params;
   const currentCase = await getCaseForPage(slug);
 
-  const allCases = await getAllCasesAsync();
-  const currentIndex = currentCase ? allCases.findIndex((c) => c.slug === currentCase.slug) : -1;
+  // Return genuine HTTP 404 for unknown or unpublished draft slugs (SEO-001, SEC-008)
+  if (!currentCase) {
+    notFound();
+  }
+
+  const allCases = await getPublishedCasesAsync();
+  const currentIndex = allCases.findIndex((c) => c.slug === currentCase.slug);
   const nextSlug = currentIndex >= 0 && currentIndex < allCases.length - 1
     ? allCases[currentIndex + 1].slug
     : allCases[0]?.slug;
@@ -319,8 +323,14 @@ export default async function CasePage({ params }: CasePageProps) {
     ? allCases[currentIndex - 1].slug
     : allCases[allCases.length - 1]?.slug;
 
-  const primaryCitation = currentCase?.citations?.primary || '';
-  const parallelCitations = currentCase?.citations?.parallel || [];
+  const primaryCitation = currentCase.citations?.primary || '';
+  const parallelCitations = currentCase.citations?.parallel || [];
+  const posterSrc = currentCase.poster?.src || '';
+  const resolvedPosterImage = posterSrc
+    ? posterSrc.startsWith('http://') || posterSrc.startsWith('https://')
+      ? posterSrc
+      : `https://pleadings.in${posterSrc.startsWith('/') ? '' : '/'}${posterSrc}`
+    : 'https://pleadings.in/opengraph-image';
 
   const jsonLd = currentCase ? {
     '@context': 'https://schema.org',
@@ -347,7 +357,7 @@ export default async function CasePage({ params }: CasePageProps) {
             url: 'https://pleadings.in/icon.svg',
           },
         },
-        image: currentCase.poster?.src ? `https://pleadings.in${currentCase.poster.src}` : 'https://pleadings.in/opengraph-image',
+        image: resolvedPosterImage,
         about: [
           {
             '@type': 'Legislation',
@@ -444,7 +454,7 @@ export default async function CasePage({ params }: CasePageProps) {
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
       <React.Suspense fallback={<div className="min-h-screen bg-[#0E1016] text-[#D4AF37] flex items-center justify-center font-mono">Loading case dossier...</div>}>

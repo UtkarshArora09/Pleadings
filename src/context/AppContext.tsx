@@ -49,16 +49,25 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
   const [isShareOpen, setIsShareOpen] = useState<boolean>(false);
   const [shareData, setShareData] = useState<{ title: string; url: string; citation: string } | null>(null);
 
-  // Load persisted state from localStorage on mount
+  // Load persisted state from localStorage on mount with strict runtime validation
   useEffect(() => {
     try {
       const savedBookmarks = localStorage.getItem('pleadings_bookmarks');
       if (savedBookmarks) {
-        setBookmarkedSlugs(JSON.parse(savedBookmarks));
+        const parsed = JSON.parse(savedBookmarks);
+        if (Array.isArray(parsed)) {
+          const clean = Array.from(
+            new Set(parsed.filter((s): s is string => typeof s === 'string' && s.trim().length > 0))
+          );
+          setBookmarkedSlugs(clean);
+        }
       }
       const savedDecisions = localStorage.getItem('pleadings_decisions');
       if (savedDecisions) {
-        setUserDecisions(JSON.parse(savedDecisions));
+        const parsed = JSON.parse(savedDecisions);
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+          setUserDecisions(parsed as Record<string, string>);
+        }
       }
       const savedLang = (localStorage.getItem('pleadings:lang') || localStorage.getItem('pleadings_lang')) as Language;
       if (savedLang === 'en' || savedLang === 'hi') {
@@ -68,7 +77,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
         }
       }
     } catch {
-      // ignore storage errors
+      // ignore corrupted storage errors
     }
   }, []);
 

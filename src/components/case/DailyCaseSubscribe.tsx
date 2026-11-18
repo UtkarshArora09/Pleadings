@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 interface DailyCaseSubscribeProps {
   caseSlug?: string;
@@ -15,6 +16,7 @@ export function DailyCaseSubscribe({
 }: DailyCaseSubscribeProps) {
   const [channel, setChannel] = useState<'whatsapp' | 'email'>('whatsapp');
   const [inputValue, setInputValue] = useState('');
+  const [website, setWebsite] = useState(''); // honeypot
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -31,7 +33,7 @@ export function DailyCaseSubscribe({
       return;
     }
 
-    if (channel === 'email' && !val.includes('@')) {
+    if (channel === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
       setErrorMsg('Please enter a valid email address.');
       return;
     }
@@ -45,35 +47,27 @@ export function DailyCaseSubscribe({
       setIsSubmitting(true);
       setErrorMsg(null);
 
-      // Attempt API dispatch
-      try {
-        await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contact: val,
-            channel,
-            caseSlug,
-            frequency: 'daily-3min',
-            timestamp: new Date().toISOString(),
-          }),
-        });
-      } catch {
-        // Fallback to local storage
-      }
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contact: val,
+          channel,
+          caseSlug: caseSlug || 'general',
+          frequency: 'daily-3min',
+          website,
+        }),
+      });
 
-      try {
-        const key = 'pleadings:daily_subscribers';
-        const list = JSON.parse(localStorage.getItem(key) || '[]');
-        list.push({ contact: val, channel, caseSlug, date: new Date().toISOString() });
-        localStorage.setItem(key, JSON.stringify(list));
-      } catch {
-        // ignore
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.success) {
+        setErrorMsg(data?.error || 'Could not save your subscription right now. Please try again.');
+        return;
       }
 
       setIsSuccess(true);
     } catch {
-      setErrorMsg('Failed to subscribe. Please try again.');
+      setErrorMsg('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -81,15 +75,13 @@ export function DailyCaseSubscribe({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-md border border-[#D4AF37]/50 bg-gradient-to-br from-[#151926] via-[#10131E] to-[#151926] p-5 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.8)] text-white select-none ${
+      className={`relative overflow-hidden rounded-md border border-[#D4AF37]/50 bg-gradient-to-br from-[#151926] via-[#10131E] to-[#151926] p-5 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.8)] text-white ${
         compact ? 'my-4' : 'my-8 sm:my-10'
       }`}
     >
-      {/* Decorative Gold Glow Accent */}
       <div className="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-[#D4AF37]/10 blur-3xl pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
 
-      {/* Header Pill */}
       <div className="flex items-center gap-2 mb-2.5">
         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/40 flex items-center gap-1.5 shadow-sm">
           <span>{lang === 'en' ? 'FREE DAILY DISPATCH' : 'दैनिक 3 मिनट केस'}</span>
@@ -97,38 +89,51 @@ export function DailyCaseSubscribe({
         <span className="text-[10px] font-mono text-emerald-400">● 100% Free · 0 Spam</span>
       </div>
 
-      {/* Title & Pitch */}
       <div className="space-y-1 mb-4">
         <h3 className="font-anton text-xl sm:text-2xl text-white tracking-wide uppercase">
           {lang === 'en'
-            ? "Get Tomorrow's 3-Min Case Delivered Free"
-            : 'कल का 3-मिनट कानूनी केस सीधे पाएं'}
+            ? 'Join the 3-Min Landmark Case Dispatch'
+            : '3-मिनट ऐतिहासिक कानूनी केस अपडेट से जुड़ें'}
         </h3>
         <p className="text-xs sm:text-sm text-[#c5c1b6] font-sans leading-relaxed">
           {lang === 'en'
-            ? 'One landmark Indian court battle condensed into an episodic 3-minute story, delivered every morning directly to your WhatsApp or Inbox.'
-            : 'हर सुबह एक ऐतिहासिक भारतीय अदालती फैसला 3 मिनट की रोचक कहानी के रूप में आपके व्हाट्सएप या इनबॉक्स पर।'}
+            ? 'Receive curated landmark Indian court battles condensed into verified 3-minute courtroom stories on WhatsApp or Email.'
+            : 'ऐतिहासिक भारतीय अदालती फैसले 3 मिनट की सत्यापित कहानी के रूप में अपने व्हाट्सएप या ईमेल पर पाएं।'}
         </p>
       </div>
 
-      {/* Success State */}
       {isSuccess ? (
-        <div className="p-4 bg-emerald-950/80 border border-emerald-500/50 rounded-xs text-xs sm:text-sm text-emerald-300 flex items-center gap-3 font-mono animate-fadeIn">
+        <div
+          role="status"
+          className="p-4 bg-emerald-950/80 border border-emerald-500/50 rounded-xs text-xs sm:text-sm text-emerald-300 flex items-center gap-3 font-mono animate-fadeIn"
+        >
           <span className="text-lg font-bold">✓</span>
           <div>
             <div className="font-bold uppercase tracking-wider">
-              {lang === 'en' ? "You're all set!" : 'आप जुड़ चुके हैं!'}
+              {lang === 'en' ? 'Subscription Request Registered!' : 'आपका अनुरोध दर्ज हो गया!'}
             </div>
             <div className="text-[11px] text-emerald-300/80">
               {lang === 'en'
-                ? `Tomorrow's 3-minute judgment will arrive on your ${channel} at 8:00 AM.`
-                : `कल सुबह 8:00 बजे आपके ${channel} पर अगला केस पहुंचेगा।`}
+                ? `Your ${channel} contact has been privately added to our editorial dispatch list.`
+                : `आपका ${channel} विवरण हमारी संपादकीय सूची में सुरक्षित दर्ज कर लिया गया है।`}
             </div>
           </div>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-3">
-          {/* Channel Selector Pills */}
+          {/* Honeypot field hidden from human readers */}
+          <div className="hidden" aria-hidden="true">
+            <label htmlFor="subscribe-website-hp">Website</label>
+            <input
+              id="subscribe-website-hp"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </div>
+
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -136,6 +141,7 @@ export function DailyCaseSubscribe({
                 setChannel('whatsapp');
                 setErrorMsg(null);
               }}
+              aria-pressed={channel === 'whatsapp'}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xs text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 channel === 'whatsapp'
                   ? 'bg-[#25D366] text-black shadow-md'
@@ -151,6 +157,7 @@ export function DailyCaseSubscribe({
                 setChannel('email');
                 setErrorMsg(null);
               }}
+              aria-pressed={channel === 'email'}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xs text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 channel === 'email'
                   ? 'bg-[#D4AF37] text-black shadow-md'
@@ -161,10 +168,13 @@ export function DailyCaseSubscribe({
             </button>
           </div>
 
-          {/* Input & Submit Row */}
           <div className="flex flex-col sm:flex-row gap-2">
             <div className="relative flex-1">
+              <label htmlFor={`daily-sub-input-${caseSlug || 'global'}`} className="sr-only">
+                {channel === 'whatsapp' ? 'WhatsApp phone number' : 'Email address'}
+              </label>
               <input
+                id={`daily-sub-input-${caseSlug || 'global'}`}
                 type={channel === 'email' ? 'email' : 'tel'}
                 value={inputValue}
                 onChange={(e) => {
@@ -192,7 +202,7 @@ export function DailyCaseSubscribe({
                 </>
               ) : (
                 <>
-                  <span>{lang === 'en' ? "Get Tomorrow's Case" : 'केस प्राप्त करें'}</span>
+                  <span>{lang === 'en' ? 'Join Case Dispatch' : 'जुड़ें'}</span>
                   <span>→</span>
                 </>
               )}
@@ -200,16 +210,30 @@ export function DailyCaseSubscribe({
           </div>
 
           {errorMsg && (
-            <div className="text-[11px] font-mono text-red-400 flex items-center gap-1">
+            <div role="alert" className="text-[11px] font-mono text-red-400 flex items-center gap-1">
               <span>✕</span>
               <span>{errorMsg}</span>
             </div>
           )}
 
-          <p className="text-[10px] font-mono text-white/40">
-            {lang === 'en'
-              ? 'One verified Indian court judgment every morning. Instant 1-click unsubscribe.'
-              : 'हर सुबह एक सत्यापित भारतीय अदालती फैसला। कभी भी 1-क्लिक में अनसब्सक्राइब करें।'}
+          <p className="text-[10px] font-mono text-white/45">
+            {lang === 'en' ? (
+              <>
+                Stored privately under our{' '}
+                <Link href="/privacy" className="text-[#D4AF37] underline">
+                  Privacy Policy
+                </Link>
+                . Opt out anytime by replying STOP.
+              </>
+            ) : (
+              <>
+                आपका विवरण हमारी{' '}
+                <Link href="/privacy" className="text-[#D4AF37] underline">
+                  गोपनीयता नीति
+                </Link>{' '}
+                के तहत सुरक्षित रहता है। कभी भी STOP लिखकर बाहर निकलें।
+              </>
+            )}
           </p>
         </form>
       )}

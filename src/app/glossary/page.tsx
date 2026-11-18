@@ -26,7 +26,7 @@ export default function GlossaryPage() {
   }, [searchQuery]);
 
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative pb-24 select-none font-sans">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative pb-24 font-sans">
       <Header />
 
       <div className="pt-28 px-4 sm:px-6 md:px-12 max-w-5xl mx-auto space-y-10">
@@ -47,20 +47,30 @@ export default function GlossaryPage() {
           {/* Search Box */}
           <div className="pt-2 max-w-xl">
             <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-xs font-bold">
+              <label htmlFor="glossary-search-input" className="sr-only">
+                {language === 'en' ? 'Search legal glossary terms' : 'कानूनी शब्दावली खोजें'}
+              </label>
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-xs font-bold" aria-hidden="true">
                 §
               </span>
               <input
+                id="glossary-search-input"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search legal doctrines (e.g. Mens Rea, Basic Structure, Due Process)..."
-                className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-9 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
+                placeholder={
+                  language === 'en'
+                    ? 'Search legal doctrines (e.g. Mens Rea, Basic Structure, Due Process)...'
+                    : 'कानूनी सिद्धांत या शब्द खोजें (जैसे Mens Rea, Basic Structure)...'
+                }
+                className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-9 pr-9 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
               />
               {searchQuery && (
                 <button
+                  type="button"
+                  aria-label="Clear search"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs cursor-pointer"
                 >
                   ✕
                 </button>
@@ -69,7 +79,29 @@ export default function GlossaryPage() {
           </div>
         </div>
 
-        {/* Terms Grid */}
+        {/* Terms Grid or Empty State */}
+        {filteredTerms.length === 0 ? (
+          <div className="py-16 text-center bg-[#12141C] border border-white/10 rounded-xs space-y-3">
+            <div className="text-2xl font-mono text-[#D4AF37]">§</div>
+            <h2 className="font-serif font-bold text-lg text-white">
+              {language === 'en'
+                ? `No legal term matching "${searchQuery}"`
+                : `"${searchQuery}" से मिलता कोई कानूनी शब्द नहीं मिला`}
+            </h2>
+            <p className="text-xs text-[#a9a49a]">
+              {language === 'en'
+                ? 'Try searching for doctrines like Mens Rea, Basic Structure, Ratio Decidendi, or Article 21.'
+                : 'अन्य कानूनी शब्दों जैसे Mens Rea, Basic Structure या Ratio Decidendi के साथ खोजें।'}
+            </p>
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className="px-4 py-2 bg-[#D4AF37] text-black font-bold text-xs uppercase font-mono rounded-xs cursor-pointer"
+            >
+              {language === 'en' ? 'Show All Terms' : 'सभी शब्द देखें'}
+            </button>
+          </div>
+        ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {filteredTerms.map((item) => {
             const plain = language === 'hi' ? item.plainMeaning.hi : item.plainMeaning.en;
@@ -113,6 +145,7 @@ export default function GlossaryPage() {
             );
           })}
         </div>
+        )}
       </div>
     </main>
   );

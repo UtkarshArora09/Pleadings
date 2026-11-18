@@ -1,21 +1,40 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { recordVoteForSlugAsync } from '@/lib/voteStore';
+import { checkRateLimit, getClientIp, logSecurityEvent } from '@/lib/security/rateLimit';
+import { VoteSchema } from '@/lib/security/schemas';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { slug, optionId, anonId } = body;
+export async function POST(req: NextRequest) {
+  const clientIp = getClientIp(req);
 
-    if (!slug || !optionId || !anonId) {
+  const rl = await checkRateLimit(clientIp, {
+    prefix: 'vote',
+    limit: 20,
+    windowSec: 60,
+  });
+
+  if (!rl.allowed) {
+    logSecurityEvent('vote_rate_limited', 'warn', { ip: clientIp });
+    return NextResponse.json(
+      { success: false, error: 'Too many vote requests. Please try again shortly.' },
+      { status: 429, headers: { 'Retry-After': String(rl.retryAfterSec) } }
+    );
+  }
+
+  try {
+    const rawBody = await req.json().catch(() => null);
+    const parsed = VoteSchema.safeParse(rawBody);
+
+    if (!parsed.success) {
       return NextResponse.json(
-        { success: false, error: 'Missing required vote parameters.' },
+        { success: false, error: 'Missing or invalid vote parameters.' },
         { status: 400 }
       );
     }
 
-    const caseVotes = await recordVoteForSlugAsync(String(slug), String(optionId), String(anonId));
+    const { slug, optionId, anonId } = parsed.data;
+    const caseVotes = await recordVoteForSlugAsync(slug, optionId, anonId);
     const totalVotes = caseVotes.length;
     const counts: Record<string, number> = {};
 
@@ -37,8 +56,8 @@ export async function POST(req: Request) {
       percentages,
       isThresholdMet: totalVotes >= 50,
     });
-  } catch (error) {
-    console.error('Failed to submit vote:', error);
+  } catch {
+    logSecurityEvent('vote_exception', 'error', { ip: clientIp });
     return NextResponse.json(
       { success: false, error: 'Internal server error.' },
       { status: 500 }

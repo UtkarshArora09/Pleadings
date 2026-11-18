@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { CaseData, Episode } from '@/types';
+import { CaseData } from '@/types';
 
 export default function AdminOcrScannerPage() {
   const router = useRouter();

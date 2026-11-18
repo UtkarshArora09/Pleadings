@@ -7,10 +7,9 @@ import { Header } from '@/components/Header';
 import { CaseCard } from '@/components/CaseCard';
 import { getPublishedCases } from '@/lib/cases';
 import { useApp } from '@/context/AppContext';
-import { CaseFile } from '@/types/case';
 
 function BrowseContent() {
-  const { bookmarkedSlugs } = useApp();
+  const { language, bookmarkedSlugs } = useApp();
   const searchParams = useSearchParams();
   const initialTab = searchParams.get('tab') === 'saved' ? 'SAVED' : 'ALL';
   const initialQuery = searchParams.get('q') || '';
@@ -173,8 +172,13 @@ function BrowseContent() {
     setSelectedTab('ALL');
   };
 
+  const liveSavedCount = useMemo(() => {
+    const liveSlugs = new Set(allCases.map((c) => c.slug));
+    return bookmarkedSlugs.filter((s) => liveSlugs.has(s)).length;
+  }, [allCases, bookmarkedSlugs]);
+
   return (
-    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative pb-20 select-none font-sans">
+    <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] relative pb-20 font-sans">
       <Header />
 
       <div className="pt-28 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto space-y-8">
@@ -183,16 +187,17 @@ function BrowseContent() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#D4AF37] block">
-                COMPREHENSIVE CASE DIRECTORY
+                {language === 'en' ? 'COMPREHENSIVE CASE DIRECTORY' : 'संपूर्ण केस निर्देशिका'}
               </span>
               <h1 className="font-anton text-3xl sm:text-5xl text-white uppercase tracking-tight mt-1">
-                Browse Precedents
+                {language === 'en' ? 'Browse Precedents' : 'ऐतिहासिक फैसले खोजें'}
               </h1>
             </div>
 
             {/* Tab: All vs Saved */}
             <div className="flex items-center p-1 bg-black/60 rounded-full border border-white/15">
               <button
+                type="button"
                 onClick={() => setSelectedTab('ALL')}
                 className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
                   selectedTab === 'ALL'
@@ -200,9 +205,10 @@ function BrowseContent() {
                     : 'text-white/70 hover:text-white'
                 }`}
               >
-                All Cases ({allCases.length})
+                {language === 'en' ? `All Cases (${allCases.length})` : `सभी मामले (${allCases.length})`}
               </button>
               <button
+                type="button"
                 onClick={() => setSelectedTab('SAVED')}
                 className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
                   selectedTab === 'SAVED'
@@ -210,27 +216,37 @@ function BrowseContent() {
                     : 'text-white/70 hover:text-white'
                 }`}
               >
-                Saved ({bookmarkedSlugs.length})
+                {language === 'en' ? `Saved (${liveSavedCount})` : `सहेजे गए (${liveSavedCount})`}
               </button>
             </div>
           </div>
 
           {/* Search Input */}
           <div className="relative max-w-xl">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-xs font-bold">
+            <label htmlFor="browse-search-input" className="sr-only">
+              {language === 'en' ? 'Search legal cases' : 'कानूनी मामले खोजें'}
+            </label>
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D4AF37] font-mono text-xs font-bold" aria-hidden="true">
               §
             </span>
             <input
+              id="browse-search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by case title, citation (e.g. AIR 1960), court, or statute..."
-              className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-9 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
+              placeholder={
+                language === 'en'
+                  ? 'Search by case title, citation (e.g. AIR 1960), court, or statute...'
+                  : 'केस का नाम, साइटेशन, कोर्ट या धारा खोजें...'
+              }
+              className="w-full bg-[#12141C] border border-white/20 rounded-xs pl-9 pr-9 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-[#D4AF37] focus:outline-hidden"
             />
             {searchQuery && (
               <button
+                type="button"
+                aria-label="Clear search"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs cursor-pointer"
               >
                 ✕
               </button>
@@ -242,26 +258,30 @@ function BrowseContent() {
         <div className="p-4 bg-[#12141C] border border-white/10 rounded-xs space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold">
-              FILTER PRECEDENTS
+              {language === 'en' ? 'FILTER PRECEDENTS' : 'फ़िल्टर विकल्प'}
             </span>
             <button
+              type="button"
               onClick={resetFilters}
               className="text-[10px] font-mono text-white/50 hover:text-[#D4AF37] transition-colors cursor-pointer"
             >
-              Reset All Filters ↺
+              {language === 'en' ? 'Reset All Filters ↺' : 'सभी फ़िल्टर रीसेट करें ↺'}
             </button>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs font-mono">
             {/* 1. Court Filter */}
             <div>
-              <label className="block text-[10px] uppercase text-white/50 mb-1">Court</label>
+              <label htmlFor="filter-court" className="block text-[10px] uppercase text-white/50 mb-1">
+                {language === 'en' ? 'Court' : 'न्यायालय'}
+              </label>
               <select
+                id="filter-court"
                 value={selectedCourt}
                 onChange={(e) => setSelectedCourt(e.target.value)}
                 className="w-full bg-black/50 border border-white/15 rounded-xs p-1.5 text-white focus:border-[#D4AF37] focus:outline-hidden"
               >
-                <option value="ALL">All Courts</option>
+                <option value="ALL">{language === 'en' ? 'All Courts' : 'सभी न्यायालय'}</option>
                 {courts.map((court) => (
                   <option key={court} value={court}>{court}</option>
                 ))}
@@ -270,18 +290,22 @@ function BrowseContent() {
 
             {/* 2. Decade Filter */}
             <div>
-              <label className="block text-[10px] uppercase text-white/50 mb-1">Decade</label>
+              <label htmlFor="filter-decade" className="block text-[10px] uppercase text-white/50 mb-1">
+                {language === 'en' ? 'Decade' : 'दशक'}
+              </label>
               <select
+                id="filter-decade"
                 value={selectedDecade}
                 onChange={(e) => setSelectedDecade(e.target.value)}
                 className="w-full bg-black/50 border border-white/15 rounded-xs p-1.5 text-white focus:border-[#D4AF37] focus:outline-hidden"
               >
-                <option value="ALL">All Decades</option>
+                <option value="ALL">{language === 'en' ? 'All Decades' : 'सभी दशक'}</option>
                 <option value="1950">1950s</option>
                 <option value="1960">1960s</option>
                 <option value="1970">1970s</option>
                 <option value="1980">1980s</option>
                 <option value="1990">1990s</option>
+                <option value="2000">2000s</option>
                 <option value="2010">2010s</option>
                 <option value="2020">2020s</option>
               </select>
@@ -289,13 +313,16 @@ function BrowseContent() {
 
             {/* 3. Doctrine Filter */}
             <div>
-              <label className="block text-[10px] uppercase text-white/50 mb-1">Doctrine</label>
+              <label htmlFor="filter-doctrine" className="block text-[10px] uppercase text-white/50 mb-1">
+                {language === 'en' ? 'Doctrine' : 'सिद्धांत'}
+              </label>
               <select
+                id="filter-doctrine"
                 value={selectedDoctrine}
                 onChange={(e) => setSelectedDoctrine(e.target.value)}
                 className="w-full bg-black/50 border border-white/15 rounded-xs p-1.5 text-white focus:border-[#D4AF37] focus:outline-hidden"
               >
-                <option value="ALL">All Doctrines</option>
+                <option value="ALL">{language === 'en' ? 'All Doctrines' : 'सभी सिद्धांत'}</option>
                 {doctrines.map((doc) => (
                   <option key={doc} value={doc}>{doc}</option>
                 ))}
@@ -304,13 +331,16 @@ function BrowseContent() {
 
             {/* 4. Status Filter */}
             <div>
-              <label className="block text-[10px] uppercase text-white/50 mb-1">Status</label>
+              <label htmlFor="filter-status" className="block text-[10px] uppercase text-white/50 mb-1">
+                {language === 'en' ? 'Status' : 'कानूनी स्थिति'}
+              </label>
               <select
+                id="filter-status"
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
                 className="w-full bg-black/50 border border-white/15 rounded-xs p-1.5 text-white focus:border-[#D4AF37] focus:outline-hidden"
               >
-                <option value="ALL">All Statuses</option>
+                <option value="ALL">{language === 'en' ? 'All Statuses' : 'सभी स्थितियां'}</option>
                 <option value="GOOD_LAW">Still Good Law</option>
                 <option value="PARTLY_SUPERSEDED">Partly Superseded</option>
                 <option value="STATUTE_REPLACED">Statute Replaced</option>
@@ -320,13 +350,16 @@ function BrowseContent() {
 
             {/* 5. Reading Time Filter */}
             <div>
-              <label className="block text-[10px] uppercase text-white/50 mb-1">Reading Time</label>
+              <label htmlFor="filter-read-time" className="block text-[10px] uppercase text-white/50 mb-1">
+                {language === 'en' ? 'Reading Time' : 'पठन समय'}
+              </label>
               <select
+                id="filter-read-time"
                 value={selectedReadTime}
                 onChange={(e) => setSelectedReadTime(e.target.value)}
                 className="w-full bg-black/50 border border-white/15 rounded-xs p-1.5 text-white focus:border-[#D4AF37] focus:outline-hidden"
               >
-                <option value="ALL">Any Length</option>
+                <option value="ALL">{language === 'en' ? 'Any Length' : 'कोई भी अवधि'}</option>
                 <option value="SHORT">≤ 5 minutes</option>
                 <option value="LONG">&gt; 5 minutes</option>
               </select>

@@ -2,14 +2,10 @@
 
 import React, { useState, useEffect, use } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { CaseData, StoryPanel, Episode, PersonaItem } from '@/types';
+import { CaseData, Episode, PersonaItem } from '@/types';
 import { extractPersonasFromText, hasPersonaFormat } from '@/lib/parsePersonas';
-import {
-  getCaseVisualPrompts,
-  getArchetypePrompt,
-  LEGAL_PROMPT_ARCHETYPES,
-} from '@/lib/ai/visualPrompts';
+import { getCaseVisualPrompts } from '@/lib/ai/visualPrompts';
+import { AdminImagePreview } from '@/components/admin/AdminImagePreview';
 
 interface ReviewStudioProps {
   params: Promise<{ slug: string }>;
@@ -17,7 +13,6 @@ interface ReviewStudioProps {
 
 export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   const { slug } = use(params);
-  const router = useRouter();
 
   const [caseData, setCaseData] = useState<CaseData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -54,9 +49,11 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   // Smart LLM Prompt Director State (Groq / Gemini)
   const [generatingSmartPrompts, setGeneratingSmartPrompts] = useState<boolean>(false);
   const [smartPromptProvider, setSmartPromptProvider] = useState<string | null>(null);
-  const [selectedArtStyle, setSelectedArtStyle] = useState<string>('Cinematic 35mm Period Film, dramatic lighting');
+  const selectedArtStyle = 'Cinematic 35mm Period Film, dramatic lighting';
   const [activeRefineSlot, setActiveRefineSlot] = useState<'poster' | 'exhibit' | 'verdict' | null>(null);
   const [customRefineText, setCustomRefineText] = useState<string>('');
+  void activeRefineSlot;
+  void customRefineText;
 
   useEffect(() => {
     async function loadCase() {
@@ -169,25 +166,6 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     setTimeout(() => setSmartPromptProvider(null), 4000);
   };
 
-  const handleArchetypeChange = (slot: 'poster' | 'exhibit' | 'verdict', archetypeId: string) => {
-    if (!caseData) return;
-    const caseTitleEn = typeof caseData.title === 'string' ? caseData.title : (caseData.title?.en || caseData.slug);
-    const newPrompt = getArchetypePrompt(archetypeId, {
-      title: caseTitleEn,
-      court: caseData.court,
-      year: caseData.year,
-      genre: caseData.categoryTag,
-      categoryTag: caseData.categoryTag,
-      slug: caseData.slug || slug,
-    });
-
-    setPrompts((prev) => ({
-      ...prev,
-      [slot]: newPrompt,
-      [`${slot}Archetype`]: archetypeId,
-    }));
-  };
-
   const handlePromptTextChange = (slot: 'poster' | 'exhibit' | 'verdict', text: string) => {
     setPrompts((prev) => ({
       ...prev,
@@ -288,15 +266,9 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     maxHeight = 576,
     quality = 0.65
   ): Promise<{ blob: Blob; dataUrl: string; fileName: string }> {
-    return new Promise((resolve) => {
-      if (file.type === 'image/svg+xml') {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const dataUrl = (reader.result as string) || '';
-          resolve({ blob: file, dataUrl, fileName: file.name });
-        };
-        reader.onerror = () => resolve({ blob: file, dataUrl: '', fileName: file.name });
-        reader.readAsDataURL(file);
+    return new Promise((resolve, reject) => {
+      if (file.type === 'image/svg+xml' || file.name.toLowerCase().endsWith('.svg')) {
+        reject(new Error('SVG uploads are disallowed for security reasons. Please upload JPG, PNG, or WebP.'));
         return;
       }
 
@@ -2750,19 +2722,12 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
-              <div className="space-y-2">
-                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center group shadow-md">
-                  <img
-                    src={caseData.bannerImage || caseData.poster?.src || '/images/cases/ghost-case.jpg'}
-                    alt="Hero Poster Preview"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/images/cases/ghost-case.jpg';
-                    }}
-                  />
-                </div>
-                <p className="text-[10px] font-mono text-[#8c887e] text-center">Placement: Top Case Banner & Reel Cards</p>
-              </div>
+              <AdminImagePreview
+                src={caseData.bannerImage || caseData.poster?.src || '/images/cases/ghost-case.jpg'}
+                fallbackSrc="/images/cases/ghost-case.jpg"
+                alt="Hero Poster Preview"
+                caption="Placement: Top Case Banner & Reel Cards"
+              />
 
               {/* Prompt & Actions */}
               <div className="md:col-span-2 space-y-3">
@@ -2855,19 +2820,12 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
-              <div className="space-y-2">
-                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center group shadow-md">
-                  <img
-                    src={caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || '/images/cases/nanavati_portrait.jpg'}
-                    alt="Exhibit Preview"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/images/cases/nanavati_portrait.jpg';
-                    }}
-                  />
-                </div>
-                <p className="text-[10px] font-mono text-[#8c887e] text-center">Placement: Inside Episode 02 Evidence Layer</p>
-              </div>
+              <AdminImagePreview
+                src={caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || '/images/cases/nanavati_portrait.jpg'}
+                fallbackSrc="/images/cases/nanavati_portrait.jpg"
+                alt="Exhibit Preview"
+                caption="Placement: Inside Episode 02 Evidence Layer"
+              />
 
               {/* Prompt & Actions */}
               <div className="md:col-span-2 space-y-3">
@@ -2960,19 +2918,12 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
-              <div className="space-y-2">
-                <div className="aspect-[16/9] bg-[#0E1016] border border-white/15 rounded-xs overflow-hidden relative flex items-center justify-center group shadow-md">
-                  <img
-                    src={caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || (caseData as any).episodes?.[6]?.image?.src || '/images/cases/ghost_court_verdict.jpg'}
-                    alt="Verdict Scene Preview"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/images/cases/ghost_court_verdict.jpg';
-                    }}
-                  />
-                </div>
-                <p className="text-[10px] font-mono text-[#8c887e] text-center">Placement: Inside Episode 07 Verdict & Ratio</p>
-              </div>
+              <AdminImagePreview
+                src={caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || (caseData as any).episodes?.[6]?.image?.src || '/images/cases/ghost_court_verdict.jpg'}
+                fallbackSrc="/images/cases/ghost_court_verdict.jpg"
+                alt="Verdict Scene Preview"
+                caption="Placement: Inside Episode 07 Verdict & Ratio"
+              />
 
               {/* Prompt & Actions */}
               <div className="md:col-span-2 space-y-3">

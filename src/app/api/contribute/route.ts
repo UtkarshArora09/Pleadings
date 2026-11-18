@@ -1,132 +1,110 @@
+import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { saveSubmissionToSupabase } from '@/lib/supabase';
 import { sendCaseContributionEmails } from '@/lib/email';
-import fs from 'fs';
-import path from 'path';
+import { checkRateLimit, getClientIp, logSecurityEvent } from '@/lib/security/rateLimit';
+import { ContributeSchema } from '@/lib/security/schemas';
+import { verifyTurnstileToken } from '@/lib/security/sanitize';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
+  const clientIp = getClientIp(req);
+
+  const rl = await checkRateLimit(clientIp, {
+    prefix: 'contribute',
+    limit: 3,
+    windowSec: 30 * 60,
+  });
+
+  if (!rl.allowed) {
+    logSecurityEvent('contribute_rate_limited', 'warn', { ip: clientIp });
+    return NextResponse.json(
+      { success: false, error: 'Submission limit reached. Please wait before submitting another case.' },
+      { status: 429, headers: { 'Retry-After': String(rl.retryAfterSec) } }
+    );
+  }
+
   try {
-    const body = await req.json();
+    const rawBody = await req.json().catch(() => null);
+    const parsed = ContributeSchema.safeParse(rawBody);
 
-    const {
-      advocateName,
-      barCouncilNo,
-      barAssociation,
-      email,
-      phone,
-      designation,
-      caseTitle,
-      court,
-      year,
-      citation,
-      statutes,
-      doctrine,
-      facts,
-      issues,
-      prosecutionArgs,
-      defenceArgs,
-      holdingAndRatio,
-      whyItMatters,
-      judgmentUrl,
-      additionalNotes,
-    } = body;
-
-    // Validation
-    if (
-      !advocateName?.trim() ||
-      !barCouncilNo?.trim() ||
-      !email?.trim() ||
-      !phone?.trim() ||
-      !caseTitle?.trim() ||
-      !court?.trim() ||
-      !year ||
-      !citation?.trim() ||
-      !statutes?.trim() ||
-      !facts?.trim() ||
-      !holdingAndRatio?.trim()
-    ) {
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Please fill in all mandatory case and advocate details.' },
+        {
+          success: false,
+          error: parsed.error.issues[0]?.message || 'Please fill in all mandatory case and advocate details.',
+        },
         { status: 400 }
       );
     }
 
+    const data = parsed.data;
+
+    if (data.website && data.website.trim().length > 0) {
+      logSecurityEvent('contribute_honeypot_triggered', 'warn', { ip: clientIp });
+      return NextResponse.json({
+        success: true,
+        submissionId: `sub_${Date.now()}_ok`,
+        emailSent: false,
+        emailNotice: 'Submission logged.',
+      });
+    }
+
+    const turnstile = await verifyTurnstileToken(data.turnstileToken, clientIp);
+    if (!turnstile.ok) {
+      return NextResponse.json({ success: false, error: turnstile.reason }, { status: 400 });
+    }
+
     const submissionRecord = {
-      id: `sub_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      id: `sub_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`,
       submittedAt: new Date().toISOString(),
       advocate: {
-        name: advocateName.trim(),
-        barCouncilNo: barCouncilNo.trim(),
-        barAssociation: barAssociation?.trim() || 'High Court / Supreme Court Bar',
-        email: email.trim().toLowerCase(),
-        phone: phone.trim(),
-        designation: designation?.trim() || 'Advocate',
+        name: data.advocateName,
+        barCouncilNo: data.barCouncilNo,
+        barAssociation: data.barAssociation || 'High Court / Supreme Court Bar',
+        email: data.email.toLowerCase(),
+        phone: data.phone,
+        designation: data.designation || 'Advocate',
       },
       caseDetails: {
-        title: caseTitle.trim(),
-        court: court.trim(),
-        year: String(year).trim(),
-        citation: citation.trim(),
-        statutes: statutes.trim(),
-        doctrine: doctrine?.trim() || '',
-        facts: facts.trim(),
-        issues: issues?.trim() || '',
-        prosecutionArgs: prosecutionArgs?.trim() || '',
-        defenceArgs: defenceArgs?.trim() || '',
-        holdingAndRatio: holdingAndRatio.trim(),
-        whyItMatters: whyItMatters?.trim() || '',
-        judgmentUrl: judgmentUrl?.trim() || '',
-        additionalNotes: additionalNotes?.trim() || '',
+        title: data.caseTitle,
+        court: data.court,
+        year: data.year,
+        citation: data.citation,
+        statutes: data.statutes,
+        doctrine: data.doctrine,
+        facts: data.facts,
+        issues: data.issues,
+        prosecutionArgs: data.prosecutionArgs,
+        defenceArgs: data.defenceArgs,
+        holdingAndRatio: data.holdingAndRatio,
+        whyItMatters: data.whyItMatters,
+        judgmentUrl: data.judgmentUrl,
+        additionalNotes: data.additionalNotes,
       },
       status: 'PENDING_VERIFICATION',
     };
 
-    // 1. Persist to Supabase Storage
-    try {
-      await saveSubmissionToSupabase(submissionRecord);
-    } catch (e) {
-      console.warn('Could not save to Supabase:', e);
-    }
+    // Persist strictly to private RLS-protected table (never public storage or local disk)
+    const persisted = await saveSubmissionToSupabase(submissionRecord);
 
-    // 2. Persist locally to data/submissions.json (if writable)
-    try {
-      const submissionsDir = path.join(process.cwd(), 'data');
-      if (!fs.existsSync(submissionsDir)) {
-        fs.mkdirSync(submissionsDir, { recursive: true });
-      }
-      const submissionsFile = path.join(submissionsDir, 'submissions.json');
-      let currentSubmissions: any[] = [];
-      if (fs.existsSync(submissionsFile)) {
-        const raw = fs.readFileSync(submissionsFile, 'utf-8');
-        currentSubmissions = JSON.parse(raw);
-      }
-      currentSubmissions.unshift(submissionRecord);
-      fs.writeFileSync(submissionsFile, JSON.stringify(currentSubmissions, null, 2), 'utf-8');
-    } catch (e) {
-      console.warn('Local file write skipped:', e);
-    }
-
-    // 3. Dispatch Notification Emails via centralized email service
-    const emailResult = await sendCaseContributionEmails(submissionRecord as any);
+    const emailResult = await sendCaseContributionEmails(submissionRecord);
 
     return NextResponse.json({
       success: true,
       submissionId: submissionRecord.id,
+      persisted,
       emailSent: emailResult.success,
       emailNotice: emailResult.success
-        ? 'Notification and acknowledgement emails sent successfully to admin and advocate.'
-        : emailResult.error
-        ? `Submission recorded in database. (Email status: ${emailResult.error})`
-        : 'Submission recorded in database.',
+        ? 'Notification and acknowledgement emails sent successfully.'
+        : 'Submission recorded in our private editorial verification queue.',
     });
-  } catch (error: any) {
-    console.error('Contribution API error:', error);
+  } catch {
+    logSecurityEvent('contribute_exception', 'error', { ip: clientIp });
     return NextResponse.json(
-      { error: error?.message || 'Failed to process case submission.' },
+      { success: false, error: 'Failed to process case submission. Please try again.' },
       { status: 500 }
     );
   }
 }
-

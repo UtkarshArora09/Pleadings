@@ -64,7 +64,6 @@ export const LEGAL_PROMPT_ARCHETYPES: PromptArchetype[] = [
       const title = ctx.title || 'Landmark Legal Case';
       const court = ctx.court || 'Supreme Court of India';
       const year = ctx.year || '1980';
-      const genre = ctx.genre || ctx.categoryTag || 'Constitutional Law';
       return `Dramatic 16:9 cinematic archival photograph of a distinguished Indian Senior Advocate in classic black court gown with white neck bands, standing at the polished teak wooden lectern arguing passionately before the ${court} in the landmark trial of "${title}" (${year}), open law reports and legal briefs, golden tungsten lighting casting warm amber highlights and deep dramatic shadows, authentic Indian courtroom atmosphere, 8k resolution.`;
     },
   },

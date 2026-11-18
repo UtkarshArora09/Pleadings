@@ -7,6 +7,7 @@ import { CaseFile } from '@/types/case';
 import { StatusBadge } from '@/components/case/StatusBadge';
 import { useApp } from '@/context/AppContext';
 import { getCaseComplexity } from '@/lib/caseComplexity';
+import { shouldBypassImageOptimization } from '@/lib/imageUtils';
 
 interface CaseCardProps {
   caseData: CaseFile;
@@ -18,12 +19,14 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
   const { language, isBookmarked, toggleBookmark } = useApp();
   const [hasVoted, setHasVoted] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [posterSrc, setPosterSrc] = useState<string>(caseData.poster?.src || (caseData as any).bannerImage || '');
+  const fallbackBanner = (caseData as unknown as { bannerImage?: string }).bannerImage || '';
+  const resolvedPoster = caseData.poster?.src || fallbackBanner;
+  const [posterSrc, setPosterSrc] = useState<string>(resolvedPoster);
 
   useEffect(() => {
-    setPosterSrc(caseData.poster?.src || (caseData as any).bannerImage || '');
+    setPosterSrc(resolvedPoster);
     setHasError(false);
-  }, [caseData.slug, caseData.poster?.src, (caseData as any).bannerImage]);
+  }, [caseData.slug, resolvedPoster]);
 
   useEffect(() => {
     const saved = localStorage.getItem('pleadings:votes');
@@ -71,7 +74,7 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
               src={posterSrc}
               alt={caseData.poster?.alt || displayTitle}
               fill
-              unoptimized={typeof posterSrc === 'string' && (posterSrc.startsWith('data:') || posterSrc.startsWith('blob:') || posterSrc.startsWith('http'))}
+              unoptimized={shouldBypassImageOptimization(posterSrc)}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               priority={priority}
               onError={() => setHasError(true)}
@@ -141,18 +144,20 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
         </Link>
 
         <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             toggleBookmark(caseData.slug);
           }}
-          className={`p-1.5 rounded-xs transition-colors cursor-pointer text-xs ${
+          className={`min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xs transition-colors cursor-pointer text-sm ${
             bookmarked
               ? 'text-[#E50914] bg-[#E50914]/10'
-              : 'text-white/40 hover:text-white hover:bg-white/10'
+              : 'text-white/50 hover:text-white hover:bg-white/10'
           }`}
           title={bookmarked ? 'Remove bookmark' : 'Bookmark case'}
-          aria-label="Bookmark case"
+          aria-label={bookmarked ? `Remove ${displayTitle} from saved cases` : `Save ${displayTitle}`}
+          aria-pressed={bookmarked}
         >
           {bookmarked ? '★' : '☆'}
         </button>
