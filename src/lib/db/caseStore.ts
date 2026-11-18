@@ -211,7 +211,9 @@ export function normalizeCaseData(raw: any): CaseData {
         },
         personas: (epNum === 2 ? (source.characters || p.characters) : undefined),
         characters: (epNum === 2 ? (source.characters || p.characters) : undefined),
-        image: p.image || p.photoExhibitSrc ? { src: p.image || p.photoExhibitSrc, alt: headlineText, provenance: 'illustration' as const } : undefined,
+        image: (p.image || p.photoExhibitSrc) && (p.image || p.photoExhibitSrc) !== bannerImage
+          ? { src: p.image || p.photoExhibitSrc, alt: headlineText, provenance: 'illustration' as const }
+          : undefined,
         endHook: epNum < 8 ? 'How did the proceedings unfold?' : 'Case dossier complete.',
       };
     });

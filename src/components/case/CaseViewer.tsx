@@ -86,6 +86,41 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const episodes = activeContent.episodes || [];
   const bookmarked = isBookmarked(caseData.slug);
 
+  // Deduplicate images across the case post so the hero poster or any earlier episode/exhibit image never repeats
+  const normalizeImgKey = (src?: string) => {
+    if (!src) return '';
+    const trimmed = src.trim();
+    return trimmed.startsWith('data:') ? trimmed : trimmed.split('?')[0];
+  };
+  const { showEpisodeImage, cleanExhibits } = (() => {
+    const seen = new Set<string>();
+    const posterKey = normalizeImgKey(caseData.poster?.src);
+    if (posterKey) seen.add(posterKey);
+
+    const showImg: boolean[] = [];
+    const exhibits = episodes.map((ep) => {
+      const epKey = normalizeImgKey(ep.image?.src);
+      const exhibitKey = normalizeImgKey(ep.exhibit?.image?.src);
+
+      let cleanedExhibit = ep.exhibit;
+      if (ep.exhibit && exhibitKey) {
+        if (seen.has(exhibitKey)) {
+          cleanedExhibit = { ...ep.exhibit, image: undefined };
+        } else {
+          seen.add(exhibitKey);
+        }
+      }
+
+      const shouldShow = Boolean(epKey) && (!exhibitKey || epKey !== exhibitKey) && !seen.has(epKey);
+      if (shouldShow) seen.add(epKey);
+      showImg.push(shouldShow);
+
+      return cleanedExhibit;
+    });
+
+    return { showEpisodeImage: showImg, cleanExhibits: exhibits };
+  })();
+
   // Total slides: Prologue (1) + Episodes (N) + Dossier (1)
   const totalSlides = episodes.length + 2;
 
@@ -460,16 +495,15 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                       </h2>
                     </div>
 
-                    {/* Optional Episode Visual Image */}
-                    {ep.image &&
-                      (!ep.exhibit?.image || ep.exhibit.image.src !== ep.image.src) && (
-                        <CaseImage
-                          src={ep.image.src}
-                          alt={ep.image.alt}
-                          provenance={ep.image.provenance}
-                          aspectRatio="aspect-[16/9]"
-                        />
-                      )}
+                    {/* Optional Episode Visual Image (deduplicated against Hero Poster & earlier episodes) */}
+                    {ep.image && showEpisodeImage[epIdx] && (
+                      <CaseImage
+                        src={ep.image.src}
+                        alt={ep.image.alt}
+                        provenance={ep.image.provenance}
+                        aspectRatio="aspect-[16/9]"
+                      />
+                    )}
 
                     {/* Episode 7: Interactive Vote Gate */}
                     {isVerdictEpisode && (
@@ -555,7 +589,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                       })()}
 
                       {/* Exhibit Card (if present) */}
-                      {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
+                      {cleanExhibits[epIdx] && <Exhibit exhibit={cleanExhibits[epIdx]!} />}
 
                       {/* End Hook */}
                       {!isFinalEpisode && ep.endHook && (
@@ -778,7 +812,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                     </h2>
                   </div>
 
-                  {ep.image && (!ep.exhibit?.image || ep.exhibit.image.src !== ep.image.src) && (
+                  {ep.image && showEpisodeImage[epIdx] && (
                     <CaseImage
                       src={ep.image.src}
                       alt={ep.image.alt}
@@ -868,7 +902,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                       );
                     })()}
 
-                    {ep.exhibit && <Exhibit exhibit={ep.exhibit} />}
+                    {cleanExhibits[epIdx] && <Exhibit exhibit={cleanExhibits[epIdx]!} />}
 
                     {epIdx < episodes.length - 1 && ep.endHook && (
                       <div className="pt-3 text-xs sm:text-sm font-mono text-[#D4AF37] italic border-t border-white/5">

@@ -401,16 +401,18 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
 
         if (tgt === 'poster') {
+          const oldPosterSrc = updated.poster?.src || updated.bannerImage;
           updated.bannerImage = url;
           updated.poster = { src: url, alt: `${titleStr} cover poster`, provenance: 'illustration' as const };
-          if (updated.episodes?.[0]) {
+          // Do not duplicate the hero poster image inside Episode 1 (Hero already displays poster.src)
+          if (updated.episodes?.[0]?.image?.src && updated.episodes[0].image.src === oldPosterSrc) {
             const epList = [...updated.episodes];
-            epList[0] = { ...epList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            epList[0] = { ...epList[0], image: undefined };
             updated.episodes = epList;
           }
-          if (updated.hi?.episodes?.[0]) {
+          if (updated.hi?.episodes?.[0]?.image?.src && updated.hi.episodes[0].image.src === oldPosterSrc) {
             const hiEpList = [...updated.hi.episodes];
-            hiEpList[0] = { ...hiEpList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            hiEpList[0] = { ...hiEpList[0], image: undefined };
             updated.hi = { ...updated.hi, episodes: hiEpList };
           }
         } else if (tgt === 'exhibit') {
@@ -518,16 +520,18 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
 
         if (tgt === 'poster') {
+          const oldPosterSrc = updated.poster?.src || updated.bannerImage;
           updated.bannerImage = url;
           updated.poster = { src: url, alt: `${titleStr} cover poster`, provenance: 'illustration' as const };
-          if (updated.episodes?.[0]) {
+          // Do not duplicate the hero poster image inside Episode 1 (Hero already displays poster.src)
+          if (updated.episodes?.[0]?.image?.src && updated.episodes[0].image.src === oldPosterSrc) {
             const epList = [...updated.episodes];
-            epList[0] = { ...epList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            epList[0] = { ...epList[0], image: undefined };
             updated.episodes = epList;
           }
-          if (updated.hi?.episodes?.[0]) {
+          if (updated.hi?.episodes?.[0]?.image?.src && updated.hi.episodes[0].image.src === oldPosterSrc) {
             const hiEpList = [...updated.hi.episodes];
-            hiEpList[0] = { ...hiEpList[0], image: { src: url, alt: `${titleStr} cover`, provenance: 'illustration' } };
+            hiEpList[0] = { ...hiEpList[0], image: undefined };
             updated.hi = { ...updated.hi, episodes: hiEpList };
           }
         } else if (tgt === 'exhibit') {
