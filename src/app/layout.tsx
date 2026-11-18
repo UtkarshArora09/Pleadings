@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: '%s | Pleadings',
   },
   description:
-    'Pleadings transforms real, closed, certified Indian court judgments into cinematic legal thrillers, evidence exhibits, and law student case briefs. Search landmark Supreme Court of India precedents, IPC to BNS 2023 concordance, and core constitutional doctrines.',
+    'Pleadings transforms real, closed, certified Indian court judgments into cinematic legal thrillers, evidence exhibits, and verified courtroom stories. Search landmark Supreme Court of India precedents, IPC to BNS 2023 concordance, and core constitutional doctrines.',
   applicationName: 'Pleadings',
   authors: [{ name: 'Pleadings Editorial Board', url: 'https://pleadings.in/about' }],
   creator: 'Pleadings',
@@ -172,7 +172,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Pleadings — Real Indian Court Judgments as Verified Stories',
     description:
-      'Certified Indian legal precedents transformed into episodic stories, evidence reels, and law student briefs.',
+      'Certified Indian legal precedents transformed into episodic courtroom stories and verified evidence exhibits.',
     images: ['https://pleadings.in/opengraph-image'],
     creator: '@pleadings_in',
     site: '@pleadings_in',

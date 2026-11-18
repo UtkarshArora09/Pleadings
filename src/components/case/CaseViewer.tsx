@@ -37,19 +37,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   // View Mode: Desktop & Laptop defaults to 'scroll', Mobile & Tablet defaults to 'slide'
   const [readingView, setReadingView] = useState<'slide' | 'scroll'>('scroll');
   const [userSelectedMode, setUserSelectedMode] = useState<boolean>(false);
-
-  // Responsive device view mode default
-  useEffect(() => {
-    if (userSelectedMode) return;
-    if (typeof window === 'undefined') return;
-
-    // Mobile / Tablet detection: screen width < 1024px or coarse touch devices
-    const isMobileOrTablet =
-      window.innerWidth < 1024 ||
-      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches && window.innerWidth < 1280);
-
-    setReadingView(isMobileOrTablet ? 'slide' : 'scroll');
-  }, [userSelectedMode]);
+  const hashHandledRef = useRef<boolean>(false);
 
   const changeReadingView = (mode: 'slide' | 'scroll') => {
     setReadingView(mode);
@@ -85,6 +73,40 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
       : (rawHook as any)?.[language] || (rawHook as any)?.en || '';
   const episodes = activeContent.episodes || [];
   const bookmarked = isBookmarked(caseData.slug);
+
+  // Responsive device view mode default + initial URL hash jump (#episode-2, #case-dossier)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const isMobileOrTablet =
+      window.innerWidth < 1024 ||
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches && window.innerWidth < 1280);
+
+    if (!userSelectedMode) {
+      setReadingView(isMobileOrTablet ? 'slide' : 'scroll');
+    }
+
+    if (!hashHandledRef.current && window.location.hash) {
+      hashHandledRef.current = true;
+      const hash = window.location.hash;
+      const epMatch = hash.match(/^#episode-(\d+)$/);
+      if (isMobileOrTablet) {
+        if (epMatch) {
+          const epIndex = parseInt(epMatch[1], 10);
+          if (epIndex >= 1 && epIndex <= episodes.length) {
+            setCurrentSlide(epIndex);
+          }
+        } else if (hash === '#case-dossier') {
+          setCurrentSlide(episodes.length + 1);
+        }
+      } else {
+        setTimeout(() => {
+          const target = document.getElementById(hash.slice(1));
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
+    }
+  }, [userSelectedMode, episodes.length]);
 
   // Deduplicate images across the case post so the hero poster or any earlier episode/exhibit image never repeats
   const normalizeImgKey = (src?: string) => {
@@ -454,7 +476,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                 {/* Big Swipe / Begin CTA */}
                 <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 text-xs font-mono">
                   <div className="flex items-center gap-2 text-white/50">
-                    <span className="text-[#D4AF37]">👈 Swipe Left</span>
+                    <span className="text-[#D4AF37]">← Swipe Left</span>
                     <span>or use keyboard arrows to advance</span>
                   </div>
 
@@ -635,7 +657,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                 <SuggestCaseBanner lang={language} />
 
                 {/* 5. Read Next Landmark Precedents */}
-                <ReadNext relatedSlugs={caseData.relatedSlugs} lang={language} />
+                <ReadNext relatedSlugs={caseData.relatedSlugs} currentSlug={caseData.slug} lang={language} />
 
                 {/* 6. Sources & Editorial Review */}
                 <SourcesAndCorrections
@@ -938,7 +960,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             <WhatChangedSince timeline={caseData.timeline} lang={language} />
             <DailyCaseSubscribe caseSlug={caseData.slug} lang={language} />
             <SuggestCaseBanner lang={language} />
-            <ReadNext relatedSlugs={caseData.relatedSlugs} lang={language} />
+            <ReadNext relatedSlugs={caseData.relatedSlugs} currentSlug={caseData.slug} lang={language} />
             <SourcesAndCorrections
               caseSlug={caseData.slug}
               sourceUrl={caseData.sourceUrl}

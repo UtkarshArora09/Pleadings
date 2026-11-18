@@ -1,6 +1,10 @@
 import React from 'react';
 import { Header } from '@/components/Header';
 import Link from 'next/link';
+import { getPublishedCasesAsync } from '@/lib/cases';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export const metadata = {
   title: 'Public Corrections Log & Editorial Transparency | Pleadings',
@@ -28,6 +32,7 @@ const CORRECTIONS_LOG = [
     date: '2026-03-10',
     caseTitle: 'The Ghost Case (State of Orissa v. Ram Bahadur Thapa)',
     slug: 'ghost-case',
+    matchKeywords: ['ghost', 'ram bahadur thapa'],
     type: 'CITATION CLARIFICATION',
     details: 'Clarified footnote in Episode 04 distinguishing IPC §79 (mistake of fact) from IPC §76 (act done by person bound by law). Added BNS §17 statutory cross-reference.'
   },
@@ -35,6 +40,7 @@ const CORRECTIONS_LOG = [
     date: '2026-02-18',
     caseTitle: 'The Luxury Haircut Case (ITC v. Aashna Roy)',
     slug: 'haircut-case',
+    matchKeywords: ['haircut', 'aashna roy', 'itc'],
     type: 'STATUTORY AMENDMENT',
     details: 'Updated consumer jurisdiction limits in the "If This Affects You" panel following the revised Consumer Protection (Jurisdiction of District Commission, State Commission and National Commission) Rules.'
   },
@@ -42,12 +48,25 @@ const CORRECTIONS_LOG = [
     date: '2026-01-25',
     caseTitle: 'Shah Bano (Mohd. Ahmed Khan v. Shah Bano Begum)',
     slug: 'shah-bano',
+    matchKeywords: ['shah bano', 'ahmed khan', 'maintenance'],
     type: 'HISTORICAL CHRONOLOGY',
     details: 'Refined chronology in the precedent chain explaining the harmonious construction in Danial Latifi (2001) regarding fair and reasonable provision within the iddat period.'
   }
 ];
 
-export default function CorrectionsPage() {
+export default async function CorrectionsPage() {
+  const liveCases = await getPublishedCasesAsync().catch(() => []);
+
+  const resolveCaseHref = (item: (typeof CORRECTIONS_LOG)[number]) => {
+    const exact = liveCases.find((c) => c.slug === item.slug);
+    if (exact) return `/case/${exact.slug}`;
+    const fuzzy = liveCases.find((c) => {
+      const hay = `${c.slug} ${c.title || ''} ${c.hook || ''}`.toLowerCase();
+      return item.matchKeywords.some((kw) => hay.includes(kw));
+    });
+    if (fuzzy) return `/case/${fuzzy.slug}`;
+    return `/browse?q=${encodeURIComponent(item.matchKeywords[0])}`;
+  };
   return (
     <main className="min-h-screen bg-[#0E1016] text-[#F3EFE6] select-none">
       <Header />
@@ -81,7 +100,7 @@ export default function CorrectionsPage() {
                   <time className="text-xs font-mono text-white/50">{item.date}</time>
                 </div>
                 <Link
-                  href={`/case/${item.slug}`}
+                  href={resolveCaseHref(item)}
                   className="text-xs font-mono text-[#D4AF37] hover:underline"
                 >
                   View Case →

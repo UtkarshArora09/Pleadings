@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
-import { getCaseBySlug } from '@/lib/cases';
+import { getCaseBySlugAsync } from '@/lib/cases';
 
 export const runtime = 'nodejs';
 
@@ -12,17 +12,17 @@ export async function GET(
   const searchParams = req.nextUrl.searchParams;
   const agree = searchParams.get('agree') === 'true';
 
-  const caseItem = getCaseBySlug(slug);
+  const caseItem = await getCaseBySlugAsync(slug);
   const title = caseItem ? caseItem.title : 'PLEADINGS LANDMARK CASE';
   const court = caseItem ? `${caseItem.court} · ${caseItem.year}` : 'Supreme Court of India';
   const statusCode = caseItem?.status?.code || 'GOOD_LAW';
 
   const statusDisplay = {
-    GOOD_LAW: '✅ STILL GOOD LAW',
-    PARTLY_SUPERSEDED: '⚠️ PARTLY SUPERSEDED',
-    OVERRULED: '✕ OVERRULED',
-    STATUTE_REPLACED: '⚖ STATUTE REPLACED'
-  }[statusCode] || '✅ GOOD LAW';
+    GOOD_LAW: 'STILL GOOD LAW',
+    PARTLY_SUPERSEDED: 'PARTLY SUPERSEDED',
+    OVERRULED: 'OVERRULED',
+    STATUTE_REPLACED: 'STATUTE REPLACED',
+  }[statusCode] || 'GOOD LAW';
 
   const headline = agree
     ? `I ruled for the petitioner.\n${caseItem?.court || 'The Court'} did too.`

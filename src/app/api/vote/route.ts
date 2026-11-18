@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import { globalVotes } from '@/lib/voteStore';
+import { recordVoteForSlugAsync } from '@/lib/voteStore';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {
@@ -13,26 +15,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if user already voted for this case
-    const existingIndex = globalVotes.findIndex(
-      (v) => v.slug === slug && v.anonId === anonId
-    );
-
-    if (existingIndex >= 0) {
-      // Update vote
-      globalVotes[existingIndex].optionId = optionId;
-      globalVotes[existingIndex].createdAt = new Date().toISOString();
-    } else {
-      globalVotes.push({
-        slug,
-        optionId,
-        anonId,
-        createdAt: new Date().toISOString()
-      });
-    }
-
-    // Tally votes for this slug
-    const caseVotes = globalVotes.filter((v) => v.slug === slug);
+    const caseVotes = await recordVoteForSlugAsync(String(slug), String(optionId), String(anonId));
     const totalVotes = caseVotes.length;
     const counts: Record<string, number> = {};
 
@@ -41,16 +24,18 @@ export async function POST(req: Request) {
     });
 
     const percentages: Record<string, number> = {};
-    Object.keys(counts).forEach((opt) => {
-      percentages[opt] = Math.round((counts[opt] / totalVotes) * 100);
-    });
+    if (totalVotes > 0) {
+      Object.keys(counts).forEach((opt) => {
+        percentages[opt] = Math.round((counts[opt] / totalVotes) * 100);
+      });
+    }
 
     return NextResponse.json({
       success: true,
       totalVotes,
       counts,
       percentages,
-      isThresholdMet: totalVotes >= 50
+      isThresholdMet: totalVotes >= 50,
     });
   } catch (error) {
     console.error('Failed to submit vote:', error);
@@ -60,5 +45,3 @@ export async function POST(req: Request) {
     );
   }
 }
-
-

@@ -92,7 +92,6 @@ export function DailyCaseSubscribe({
       {/* Header Pill */}
       <div className="flex items-center gap-2 mb-2.5">
         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/40 flex items-center gap-1.5 shadow-sm">
-          <span>⚡</span>
           <span>{lang === 'en' ? 'FREE DAILY DISPATCH' : 'दैनिक 3 मिनट केस'}</span>
         </span>
         <span className="text-[10px] font-mono text-emerald-400">● 100% Free · 0 Spam</span>
@@ -115,7 +114,7 @@ export function DailyCaseSubscribe({
       {/* Success State */}
       {isSuccess ? (
         <div className="p-4 bg-emerald-950/80 border border-emerald-500/50 rounded-xs text-xs sm:text-sm text-emerald-300 flex items-center gap-3 font-mono animate-fadeIn">
-          <span className="text-xl">🎉</span>
+          <span className="text-lg font-bold">✓</span>
           <div>
             <div className="font-bold uppercase tracking-wider">
               {lang === 'en' ? "You're all set!" : 'आप जुड़ चुके हैं!'}
@@ -143,7 +142,6 @@ export function DailyCaseSubscribe({
                   : 'bg-white/5 hover:bg-white/10 text-white/70 border border-white/10'
               }`}
             >
-              <span>💬</span>
               <span>WhatsApp</span>
             </button>
 
@@ -159,7 +157,6 @@ export function DailyCaseSubscribe({
                   : 'bg-white/5 hover:bg-white/10 text-white/70 border border-white/10'
               }`}
             >
-              <span>✉️</span>
               <span>Email</span>
             </button>
           </div>
@@ -211,8 +208,8 @@ export function DailyCaseSubscribe({
 
           <p className="text-[10px] font-mono text-white/40">
             {lang === 'en'
-              ? 'Join 14,000+ lawyers, students, and citizens reading daily court stories. Instant 1-click unsubscribe.'
-              : '14,000+ पाठक रोज पढ़ते हैं। कभी भी अनसब्सक्राइब करें।'}
+              ? 'One verified Indian court judgment every morning. Instant 1-click unsubscribe.'
+              : 'हर सुबह एक सत्यापित भारतीय अदालती फैसला। कभी भी 1-क्लिक में अनसब्सक्राइब करें।'}
           </p>
         </form>
       )}

@@ -5,8 +5,11 @@ import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { CaseCard } from '@/components/CaseCard';
 import glossaryData from '@/content/glossary.json';
-import { getAllCases } from '@/lib/cases';
+import { getPublishedCasesAsync } from '@/lib/cases';
 import { StatuteRefInline } from '@/components/StatuteRef';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 interface TermPageProps {
   params: Promise<{
@@ -74,7 +77,7 @@ export default async function TermPage({ params }: TermPageProps) {
     notFound();
   }
 
-  const allCases = getAllCases();
+  const allCases = await getPublishedCasesAsync();
   // Find cases using this term either in glossary array or body
   const matchingCases = allCases.filter((c) => {
     return (

@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { CaseStatus, CaseStatusCode } from '@/types/case';
 
 interface StatusBadgeProps {
@@ -62,6 +63,20 @@ export function StatusBadge({
   className = ''
 }: StatusBadgeProps) {
   const [showModal, setShowModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!showModal) return;
+    const orig = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = orig;
+    };
+  }, [showModal]);
   const statusCode = (typeof status === 'object' && status?.code) ? status.code : 'GOOD_LAW';
   const cfg = statusConfig[statusCode] || statusConfig.GOOD_LAW;
   const explainText = (typeof status === 'object' && status?.explain)
@@ -109,9 +124,9 @@ export function StatusBadge({
         {interactive && <span className="opacity-70 text-[9px] font-mono">?</span>}
       </span>
 
-      {/* Explanatory Chain Sheet */}
-      {showModal && (
-        <div className="fixed inset-0 z-[120] flex items-end sm:items-center justify-center p-3 sm:p-4">
+      {/* Explanatory Chain Sheet (rendered via Portal to prevent clipping inside transformed containers) */}
+      {showModal && mounted && typeof document !== 'undefined' && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-3 sm:p-4">
           <div
             className="fixed inset-0 bg-black/80 backdrop-blur-xs cursor-pointer"
             onClick={() => setShowModal(false)}
@@ -187,7 +202,8 @@ export function StatusBadge({
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

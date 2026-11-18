@@ -412,3 +412,62 @@ export async function sendAdminCaseCreatedEmail(
     return false;
   }
 }
+
+/**
+ * Sends a clean notification email to all admin recipients (used for subscribers & case suggestions)
+ */
+export async function sendAdminAlertEmail(opts: {
+  subject: string;
+  heading: string;
+  fields: Array<{ label: string; value: string }>;
+}): Promise<boolean> {
+  const transporter = createEmailTransporter();
+  const { gmailUser } = getSmtpCredentials();
+  const adminRecipients = getAdminRecipients();
+
+  if (!transporter || !gmailUser || adminRecipients.length === 0) {
+    return false;
+  }
+
+  const timeStr = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  const escapeHtml = (s: string) =>
+    String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+  const rowsHtml = opts.fields
+    .map(
+      (f) =>
+        `<div style="margin-bottom:8px;"><strong style="color:#D4AF37;">${escapeHtml(f.label)}:</strong> <span style="color:#F3EFE6;">${escapeHtml(f.value)}</span></div>`
+    )
+    .join('');
+
+  const html = `
+    <div style="font-family: Arial, Helvetica, sans-serif; background-color: #0E1016; color: #F3EFE6; padding: 24px; border-radius: 8px; max-width: 650px; margin: 0 auto; border: 1px solid #D4AF37;">
+      <div style="border-bottom: 2px solid #D4AF37; padding-bottom: 12px; margin-bottom: 18px;">
+        <h1 style="color: #E50914; margin: 0; font-size: 20px; letter-spacing: 2px;">PLEADINGS</h1>
+        <p style="color: #D4AF37; margin: 4px 0 0 0; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;">${escapeHtml(opts.heading)}</p>
+      </div>
+      <div style="background-color: #171922; border: 1px solid #2a2d3d; border-radius: 6px; padding: 16px; font-size: 13px; line-height: 1.6;">
+        ${rowsHtml}
+      </div>
+      <p style="margin: 14px 0 0 0; font-size: 11px; color: #94a3b8; text-align: center;">Received at ${timeStr} IST</p>
+    </div>
+  `;
+
+  try {
+    for (const recipient of adminRecipients) {
+      await transporter.sendMail({
+        from: `"Pleadings Notifications" <${gmailUser}>`,
+        to: recipient,
+        subject: opts.subject,
+        html,
+      });
+    }
+    return true;
+  } catch (err) {
+    console.error('[Email] Failed to send admin alert email:', err);
+    return false;
+  }
+}

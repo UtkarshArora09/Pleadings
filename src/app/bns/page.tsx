@@ -1,26 +1,43 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import Link from 'next/link';
 import statuteMapData from '@/content/statute-map.json';
-import { getAllCases } from '@/lib/cases';
 
 export default function BnsMapperPage() {
   const [query, setQuery] = useState('');
   const [filterChangedOnly, setFilterChangedOnly] = useState(false);
-  const allCases = useMemo(() => getAllCases(), []);
+  const [allCases, setAllCases] = useState<any[]>([]);
+
+  useEffect(() => {
+    let mounted = true;
+    fetch('/api/cases')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (mounted && data?.success && Array.isArray(data.cases)) {
+          setAllCases(data.cases);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   // Find cases citing a statute
   const findCasesForStatute = (oldSec: string, newSec: string | null) => {
+    const oldClean = oldSec.toLowerCase().replace(/\s+/g, '');
+    const newClean = newSec ? newSec.toLowerCase().replace(/\s+/g, '') : '';
     return allCases.filter((c) => {
-      const oldClean = oldSec.toLowerCase().replace(/\s+/g, '');
-      const newClean = newSec ? newSec.toLowerCase().replace(/\s+/g, '') : '';
+      const statutes = Array.isArray(c.statuteMap) ? c.statuteMap : [];
+      const primaryCite = String(c.citations?.primary || c.citation || '').toLowerCase();
+      const doctrines = Array.isArray(c.doctrines) ? c.doctrines : [];
       return (
-        c.statuteMap.some((sm) => sm.old.toLowerCase().replace(/\s+/g, '').includes(oldClean)) ||
-        c.citations.primary.toLowerCase().includes(oldClean) ||
-        (newClean && c.statuteMap.some((sm) => sm.new && sm.new.toLowerCase().replace(/\s+/g, '').includes(newClean))) ||
-        (c.doctrines && c.doctrines.some((d) => d.toLowerCase().includes(oldClean)))
+        statutes.some((sm: any) => String(sm?.old || '').toLowerCase().replace(/\s+/g, '').includes(oldClean)) ||
+        primaryCite.includes(oldClean) ||
+        (newClean && statutes.some((sm: any) => sm?.new && String(sm.new).toLowerCase().replace(/\s+/g, '').includes(newClean))) ||
+        doctrines.some((d: any) => String(d || '').toLowerCase().includes(oldClean))
       );
     });
   };
@@ -105,7 +122,7 @@ export default function BnsMapperPage() {
         <div className="space-y-4">
           {results.length === 0 ? (
             <div className="py-16 text-center bg-[#12141C] border border-white/10 rounded-xs space-y-3">
-              <div className="text-3xl">⚖</div>
+              <div className="text-3xl font-mono text-[#D4AF37]">§</div>
               <h3 className="font-serif font-bold text-lg text-white">No statute matching "{query}"</h3>
               <p className="text-xs text-[#a9a49a]">
                 Try searching without the section symbol or search by legal subject (e.g. "Arrest", "Bail", "Modesty").
@@ -126,7 +143,7 @@ export default function BnsMapperPage() {
                       <span className="font-mono text-base sm:text-lg font-bold text-[#D4AF37] bg-black/50 px-3 py-1 rounded-xs border border-[#D4AF37]/30">
                         {stat.old}
                       </span>
-                      <span className="text-white/40 text-base">➔</span>
+                      <span className="text-white/40 text-base">→</span>
                       <span className={`font-mono text-base sm:text-lg font-bold px-3 py-1 rounded-xs border ${
                         stat.new
                           ? 'text-emerald-400 bg-emerald-950/60 border-emerald-500/40'
@@ -138,7 +155,7 @@ export default function BnsMapperPage() {
 
                     {stat.changed && (
                       <span className="text-[10px] font-mono uppercase font-bold text-amber-300 bg-amber-950/80 px-2 py-0.5 border border-amber-600/40 rounded-2xs">
-                        ⚠️ SUBSTANTIVE REFORM
+                        SUBSTANTIVE REFORM
                       </span>
                     )}
                   </div>
@@ -168,7 +185,7 @@ export default function BnsMapperPage() {
                               href={`/case/${c.slug}`}
                               className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#D4AF37] hover:text-white px-2.5 py-1 bg-black/40 border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded-xs transition-colors"
                             >
-                              <span>📖 {displayTitle} ({c.year})</span>
+                              <span>§ {displayTitle} ({c.year})</span>
                               <span>→</span>
                             </Link>
                           );

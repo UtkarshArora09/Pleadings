@@ -1,23 +1,23 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { StatusBadge } from './StatusBadge';
-import { getCaseBySlug } from '@/lib/cases';
 
 interface ReadNextProps {
   relatedSlugs: string[];
+  currentSlug?: string;
   lang?: 'en' | 'hi';
 }
 
 function ReadNextPoster({ src, alt }: { src: string; alt: string }) {
-  const [hasError, setHasError] = React.useState(false);
+  const [hasError, setHasError] = useState(false);
 
   if (hasError || !src) {
     return (
-      <div className="relative w-20 h-28 flex-shrink-0 rounded-2xs overflow-hidden border border-red-500/30 bg-[#121520] flex flex-col items-center justify-center p-1 text-center">
-        <span className="text-red-400 font-mono text-[9px] font-bold uppercase tracking-wider">
-          ✕ Error
-        </span>
+      <div className="relative w-20 h-28 flex-shrink-0 rounded-2xs overflow-hidden border border-white/15 bg-[#121520] flex flex-col items-center justify-center p-1 text-center">
+        <span className="text-[#D4AF37] font-mono text-base font-bold">§</span>
       </div>
     );
   }
@@ -28,7 +28,7 @@ function ReadNextPoster({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         fill
-        unoptimized={typeof src === 'string' && (src.startsWith('data:') || src.startsWith('blob:'))}
+        unoptimized={typeof src === 'string' && (src.startsWith('data:') || src.startsWith('blob:') || src.startsWith('http'))}
         sizes="80px"
         onError={() => setHasError(true)}
         className="object-cover group-hover:scale-105 transition-transform"
@@ -37,13 +37,47 @@ function ReadNextPoster({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
-  if (!relatedSlugs || !Array.isArray(relatedSlugs) || relatedSlugs.length === 0) return null;
+export function ReadNext({ relatedSlugs, currentSlug, lang = 'en' }: ReadNextProps) {
+  const [cases, setCases] = useState<any[]>([]);
 
-  const cases = relatedSlugs
-    .map((slug) => getCaseBySlug(slug))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c))
-    .slice(0, 2);
+  useEffect(() => {
+    let mounted = true;
+    fetch('/api/cases')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!mounted || !data?.success || !Array.isArray(data.cases)) return;
+        const pool = data.cases.filter((c: any) => c.slug && c.slug !== currentSlug);
+
+        // Prefer explicitly listed relatedSlugs first, then backfill from other published cases
+        const matched: any[] = [];
+        const usedSlugs = new Set<string>();
+
+        if (Array.isArray(relatedSlugs)) {
+          for (const rel of relatedSlugs) {
+            const found = pool.find((c: any) => c.slug === rel);
+            if (found && !usedSlugs.has(found.slug)) {
+              matched.push(found);
+              usedSlugs.add(found.slug);
+            }
+          }
+        }
+
+        for (const c of pool) {
+          if (matched.length >= 2) break;
+          if (!usedSlugs.has(c.slug)) {
+            matched.push(c);
+            usedSlugs.add(c.slug);
+          }
+        }
+
+        setCases(matched.slice(0, 2));
+      })
+      .catch(() => {});
+
+    return () => {
+      mounted = false;
+    };
+  }, [relatedSlugs, currentSlug]);
 
   if (cases.length === 0) return null;
 
@@ -58,9 +92,16 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
       <div className="grid gap-4 sm:grid-cols-2">
         {cases.map((c) => {
           const rawTitle = lang === 'hi' && c.hi ? c.hi.title : c.title;
-          const displayTitle = typeof rawTitle === 'string' ? rawTitle : ((rawTitle as any)?.[lang] || (rawTitle as any)?.en || c.slug);
-          const rawHook = lang === 'hi' && c.hi ? c.hi.hook : c.hook;
-          const displayHook = typeof rawHook === 'string' ? rawHook : ((rawHook as any)?.[lang] || (rawHook as any)?.en || '');
+          const displayTitle =
+            typeof rawTitle === 'string'
+              ? rawTitle
+              : rawTitle?.[lang] || rawTitle?.en || c.slug;
+          const rawHook = lang === 'hi' && c.hi ? c.hi.hook : c.hook || c.blurb;
+          const displayHook =
+            typeof rawHook === 'string'
+              ? rawHook
+              : rawHook?.[lang] || rawHook?.en || '';
+          const posterSrc = c.poster?.src || c.bannerImage || '';
 
           return (
             <Link
@@ -68,9 +109,9 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
               href={`/case/${c.slug}`}
               className="p-4 bg-[#141824] hover:bg-[#1a2030] border border-white/10 hover:border-[#D4AF37] rounded-xs transition-all shadow-lg flex gap-4 group cursor-pointer"
             >
-              <ReadNextPoster src={c.poster.src} alt={c.poster.alt} />
+              <ReadNextPoster src={posterSrc} alt={displayTitle} />
 
-              <div className="flex-1 flex flex-col justify-between">
+              <div className="flex-1 flex flex-col justify-between min-w-0">
                 <div className="space-y-1">
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <StatusBadge status={c.status} size="sm" interactive={false} />
@@ -88,9 +129,9 @@ export function ReadNext({ relatedSlugs, lang = 'en' }: ReadNextProps) {
                   </p>
                 </div>
 
-                <div className="text-[10px] font-mono text-[#D4AF37] font-bold pt-2">
-                  {lang === 'en' ? 'Read Case →' : 'केस पढ़ें →'}
-                </div>
+                <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase tracking-wider pt-2">
+                  {lang === 'en' ? 'Read Story →' : 'पूरी कहानी पढ़ें →'}
+                </span>
               </div>
             </Link>
           );

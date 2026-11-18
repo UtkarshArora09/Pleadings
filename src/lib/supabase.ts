@@ -309,3 +309,49 @@ export async function saveSubmissionToSupabase(submission: any): Promise<boolean
     return false;
   }
 }
+
+/**
+ * Persist arbitrary JSON payload to Supabase Storage (zero-migration persistence)
+ */
+export async function saveJsonToSupabaseStorage(filePath: string, payload: unknown): Promise<boolean> {
+  const client = getSupabaseAdmin() || getSupabase();
+  if (!client || !filePath) return false;
+
+  try {
+    const jsonBuffer = Buffer.from(JSON.stringify(payload, null, 2), 'utf-8');
+    const { error } = await client.storage
+      .from('case-images')
+      .upload(filePath, jsonBuffer, {
+        contentType: 'application/json',
+        upsert: true,
+      });
+
+    if (error) {
+      console.warn(`Supabase JSON storage save error (${filePath}):`, error.message);
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Load arbitrary JSON payload from Supabase Storage
+ */
+export async function loadJsonFromSupabaseStorage<T = any>(filePath: string): Promise<T | null> {
+  const client = getSupabaseAdmin() || getSupabase();
+  if (!client || !filePath) return null;
+
+  try {
+    const { data, error } = await client.storage
+      .from('case-images')
+      .download(filePath);
+
+    if (error || !data) return null;
+    const text = await data.text();
+    return JSON.parse(text) as T;
+  } catch {
+    return null;
+  }
+}

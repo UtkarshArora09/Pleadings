@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import { globalVotes, VoteRecord } from '@/lib/voteStore';
+import { getVotesForSlugAsync, VoteRecord } from '@/lib/voteStore';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(
   req: Request,
@@ -10,7 +12,7 @@ export async function GET(
     const url = new URL(req.url);
     const anonId = url.searchParams.get('anonId');
 
-    const caseVotes = globalVotes.filter((v: VoteRecord) => v.slug === slug);
+    const caseVotes = await getVotesForSlugAsync(slug);
     const totalVotes = caseVotes.length;
     const counts: Record<string, number> = {};
 
@@ -35,7 +37,7 @@ export async function GET(
       counts,
       percentages,
       isThresholdMet: totalVotes >= 50,
-      userVote
+      userVote,
     });
   } catch (error) {
     console.error('Failed to get votes:', error);

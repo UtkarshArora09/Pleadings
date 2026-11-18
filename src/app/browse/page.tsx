@@ -13,6 +13,7 @@ function BrowseContent() {
   const { bookmarkedSlugs } = useApp();
   const searchParams = useSearchParams();
   const initialTab = searchParams.get('tab') === 'saved' ? 'SAVED' : 'ALL';
+  const initialQuery = searchParams.get('q') || '';
 
   const [allCases, setAllCases] = useState<any[]>(() => {
     try {
@@ -48,7 +49,15 @@ function BrowseContent() {
 
   // Filter States
   const [selectedTab, setSelectedTab] = useState<string>(initialTab);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
+
+  // Sync URL query params (e.g. from Google Sitelinks Search Box or Header nav)
+  useEffect(() => {
+    const qParam = searchParams.get('q');
+    if (qParam !== null) setSearchQuery(qParam);
+    const tabParam = searchParams.get('tab');
+    if (tabParam === 'saved') setSelectedTab('SAVED');
+  }, [searchParams]);
   const [selectedCourt, setSelectedCourt] = useState<string>('ALL');
   const [selectedDecade, setSelectedDecade] = useState<string>('ALL');
   const [selectedDoctrine, setSelectedDoctrine] = useState<string>('ALL');

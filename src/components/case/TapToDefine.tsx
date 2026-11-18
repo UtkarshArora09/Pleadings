@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { findLegalDefinition, LegalDefinition } from '@/lib/legalDictionary';
 
 interface TapToDefineProps {
@@ -11,30 +12,43 @@ interface TapToDefineProps {
 
 export function TapToDefine({ term, display, lang = 'en' }: TapToDefineProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tooltipPos, setTooltipPos] = useState<'top' | 'bottom'>('top');
+  const [mounted, setMounted] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number; width: number; placeBelow: boolean }>({
+    top: 0,
+    left: 16,
+    width: 300,
+    placeBelow: false,
+  });
   const triggerRef = useRef<HTMLButtonElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const displayText = display || term;
   const defInfo: LegalDefinition | null = findLegalDefinition(term);
 
-  // Position calculation
   useEffect(() => {
-    if (isOpen && triggerRef.current) {
-      const rect = triggerRef.current.getBoundingClientRect();
-      // If trigger is in the upper third of screen, show tooltip below
-      if (rect.top < 180) {
-        setTooltipPos('bottom');
-      } else {
-        setTooltipPos('top');
-      }
-    }
-  }, [isOpen]);
+    setMounted(true);
+  }, []);
 
-  // Click outside to close
+  // Viewport-clamped positioning so tooltip NEVER clips off left/right edges on mobile
+  const updatePosition = () => {
+    if (!triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    const margin = 16;
+    const vw = window.innerWidth;
+    const width = Math.min(320, vw - margin * 2);
+    const center = rect.left + rect.width / 2;
+    const left = Math.max(margin, Math.min(vw - width - margin, center - width / 2));
+    const placeBelow = rect.top < 190;
+    const top = placeBelow ? rect.bottom + 8 : rect.top - 8;
+
+    setCoords({ top, left, width, placeBelow });
+  };
+
   useEffect(() => {
     if (!isOpen) return;
+    updatePosition();
 
+    const handleScrollOrResize = () => updatePosition();
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (
         triggerRef.current &&
@@ -46,29 +60,32 @@ export function TapToDefine({ term, display, lang = 'en' }: TapToDefineProps) {
       }
     };
 
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize);
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('touchstart', handleClickOutside);
     return () => {
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
   }, [isOpen]);
 
   if (!defInfo) {
-    // If not in dictionary, render styled text
     return <span className="font-medium text-[#F3EFE6]">{displayText}</span>;
   }
 
   const definition = lang === 'hi' ? defInfo.definitionHi : defInfo.definition;
 
   return (
-    <span className="relative inline-block">
+    <span className="relative inline">
       <button
         ref={triggerRef}
         type="button"
         onClick={(e) => {
           e.stopPropagation();
-          setIsOpen(!isOpen);
+          setIsOpen((prev) => !prev);
         }}
         className={`inline font-semibold transition-all cursor-pointer px-1 py-0.5 rounded-2xs border-b-2 border-dotted text-[#F3EFE6] select-text ${
           isOpen
@@ -82,19 +99,19 @@ export function TapToDefine({ term, display, lang = 'en' }: TapToDefineProps) {
         <span className="text-[10px] text-[#D4AF37] ml-0.5 opacity-80">ℹ</span>
       </button>
 
-      {/* Floating 1-Sentence Inline Popover Tooltip */}
-      {isOpen && (
+      {isOpen && mounted && typeof document !== 'undefined' && createPortal(
         <div
           ref={tooltipRef}
           onClick={(e) => e.stopPropagation()}
-          className={`absolute left-1/2 -translate-x-1/2 z-50 w-72 sm:w-80 p-3.5 rounded-sm bg-[#151924] border border-[#D4AF37] shadow-[0_15px_35px_rgba(0,0,0,0.9)] text-left font-sans animate-fadeIn select-text ${
-            tooltipPos === 'top'
-              ? 'bottom-full mb-2 origin-bottom'
-              : 'top-full mt-2 origin-top'
-          }`}
-          style={{ maxWidth: 'calc(100vw - 32px)' }}
+          style={{
+            position: 'fixed',
+            top: coords.top,
+            left: coords.left,
+            width: coords.width,
+            transform: coords.placeBelow ? 'none' : 'translateY(-100%)',
+          }}
+          className="z-[9999] p-3.5 rounded-sm bg-[#151924] border border-[#D4AF37] shadow-[0_15px_35px_rgba(0,0,0,0.9)] text-left font-sans select-text"
         >
-          {/* Top Header with term and close button */}
           <div className="flex items-center justify-between pb-1.5 border-b border-white/10 gap-2">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
@@ -113,25 +130,16 @@ export function TapToDefine({ term, display, lang = 'en' }: TapToDefineProps) {
             </button>
           </div>
 
-          {/* 1-Sentence Plain-English Definition */}
           <p className="text-xs text-[#E3DFD5] leading-relaxed pt-2">
             {definition}
           </p>
 
-          <div className="pt-2 mt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-white/40">
-            <span>Plain-English Dictionary</span>
-            <span className="text-[#D4AF37]/80">Tap anywhere to close</span>
+          <div className="mt-2.5 pt-1.5 border-t border-white/5 flex items-center justify-between text-[9px] font-mono text-white/40 uppercase tracking-wider">
+            <span>Plain-English Legal Dictionary</span>
+            <span>Tap anywhere to dismiss</span>
           </div>
-
-          {/* Caret Arrow */}
-          <div
-            className={`absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#151924] border-[#D4AF37] transform rotate-45 ${
-              tooltipPos === 'top'
-                ? 'top-full -mt-1.5 border-r border-b'
-                : 'bottom-full -mb-1.5 border-l border-t'
-            }`}
-          />
-        </div>
+        </div>,
+        document.body
       )}
     </span>
   );

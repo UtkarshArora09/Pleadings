@@ -16,7 +16,7 @@ export const revalidate = 0;
 export const metadata = {
   title: 'Pleadings — Landmark Indian Court Judgments as Verified Stories',
   description:
-    'Certified Indian legal precedents transformed into transparent, episodic courtroom thrillers, evidence reels, and law student briefs.',
+    'Certified Indian legal precedents transformed into transparent, episodic courtroom thrillers, evidence exhibits, and interactive legal stories.',
   alternates: {
     canonical: 'https://pleadings.in',
   },
