@@ -230,4 +230,17 @@ export const AdminCaseCreateSchema = AdminCaseUpdateSchema.extend({
   enrolmentNumber: z.string().max(100).optional(),
   enrolment: z.string().max(100).optional(),
   publishedAt: z.string().max(60).optional(),
-});
+  judgmentText: z.string().max(100000).optional(),
+  additionalNotes: z.string().max(50000).optional(),
+  makeTrendingTop10: z.boolean().optional(),
+  studentRatio: z.string().max(10000).optional(),
+  studentObiter: z.union([z.string().max(10000), z.array(z.string().max(2000))]).optional(),
+  studentExamAngle: z.string().max(10000).optional(),
+  studentFlashcards: z.array(z.unknown()).optional(),
+  advocateStrategy: z.string().max(10000).optional(),
+  advocatePinpoints: z.union([z.string().max(10000), z.array(z.string().max(2000))]).optional(),
+  advocateTrialPropositions: z.union([z.string().max(10000), z.array(z.string().max(2000))]).optional(),
+  advocateSubsequentHistory: z.array(z.unknown()).optional(),
+  parallelCitations: z.union([z.string().max(2000), z.array(z.string().max(500))]).optional(),
+  personas: z.array(z.unknown()).optional(),
+}).passthrough();
