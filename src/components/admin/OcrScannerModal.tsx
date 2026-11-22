@@ -612,62 +612,20 @@ export default function OcrScannerModal({ isOpen, onClose, onCaseIngested }: Ocr
                         />
                       </div>
 
-                      {/* Layer B: Student Depth */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-white/10">
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold block">
-                            Layer B · Ratio Decidendi
-                          </span>
-                          <textarea
-                            rows={2}
-                            value={scannedCase.episodes[activeEpisodeIdx].layers?.student?.ratio || ''}
-                            onChange={(e) => {
-                              const updatedEpisodes = [...scannedCase.episodes!];
-                              updatedEpisodes[activeEpisodeIdx].layers.student.ratio = e.target.value;
-                              setScannedCase({ ...scannedCase, episodes: updatedEpisodes });
-                            }}
-                            className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-2.5 rounded-xs"
-                          />
-                        </div>
-
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold block">
-                            Layer B · Exam Angle (CLAT-PG / Judiciary)
-                          </span>
-                          <textarea
-                            rows={2}
-                            value={scannedCase.episodes[activeEpisodeIdx].layers?.student?.examAngle || ''}
-                            onChange={(e) => {
-                              const updatedEpisodes = [...scannedCase.episodes!];
-                              updatedEpisodes[activeEpisodeIdx].layers.student.examAngle = e.target.value;
-                              setScannedCase({ ...scannedCase, episodes: updatedEpisodes });
-                            }}
-                            className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-2.5 rounded-xs"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Layer C: Advocate Trial Proposition */}
+                      {/* End Hook */}
                       <div className="pt-2 border-t border-white/10 space-y-1">
-                        <span className="text-[10px] font-mono text-amber-400 uppercase font-bold block">
-                          Layer C · Advocate Trial Proposition (Clean Single Sentence)
+                        <span className="text-[10px] font-mono text-[#a9a49a] uppercase font-bold block">
+                          End Hook / Cliffhanger
                         </span>
                         <input
                           type="text"
-                          value={scannedCase.episodes[activeEpisodeIdx].layers?.advocate?.blocks?.[0]?.text || ''}
+                          value={scannedCase.episodes[activeEpisodeIdx].endHook || ''}
                           onChange={(e) => {
                             const updatedEpisodes = [...scannedCase.episodes!];
-                            if (!updatedEpisodes[activeEpisodeIdx].layers.advocate) {
-                              updatedEpisodes[activeEpisodeIdx].layers.advocate = { blocks: [] };
-                            }
-                            updatedEpisodes[activeEpisodeIdx].layers.advocate.blocks[0] = {
-                              type: 'para',
-                              text: e.target.value,
-                              source: { tier: 'BLACK' },
-                            };
+                            updatedEpisodes[activeEpisodeIdx].endHook = e.target.value;
                             setScannedCase({ ...scannedCase, episodes: updatedEpisodes });
                           }}
-                          className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-amber-300 px-3 py-2 rounded-xs font-mono"
+                          className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white px-3.5 py-2 rounded-xs font-mono"
                         />
                       </div>
                     </div>

@@ -2,11 +2,16 @@
 
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+import Image from 'next/image';
 import { useAccessibleModal } from '@/hooks/useAccessibleModal';
 
-interface ShareSheetProps {
+export interface ShareSheetProps {
   slug: string;
   caseTitle: string;
+  court?: string;
+  year?: number | string;
+  citation?: string;
+  posterSrc?: string;
   userVotedOptionId?: string;
   courtOptionId?: string;
   isOpen: boolean;
@@ -17,35 +22,61 @@ interface ShareSheetProps {
 export function ShareSheet({
   slug,
   caseTitle,
-  userVotedOptionId,
-  courtOptionId,
+  court,
+  year,
+  citation,
+  posterSrc,
   isOpen,
   onClose,
+  lang = 'en',
 }: ShareSheetProps) {
   const [copied, setCopied] = useState(false);
   const mounted = useAccessibleModal(isOpen, onClose);
 
   if (!isOpen || !mounted || typeof document === 'undefined') return null;
 
-  const didAgree = Boolean(userVotedOptionId && courtOptionId && userVotedOptionId === courtOptionId);
-  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://pleadings.in';
+  const currentOrigin =
+    typeof window !== 'undefined' ? window.location.origin : 'https://pleadings.in';
   const caseUrl = `${currentOrigin}/case/${slug}`;
-  const shareImageUrl = `${currentOrigin}/api/share/${slug}?agree=${didAgree}&vote=${encodeURIComponent(
-    userVotedOptionId || 'voted'
-  )}`;
+  const shareImageUrl = `${currentOrigin}/api/share/${slug}`;
 
-  const whatsappMsg = didAgree
-    ? `I agreed with the court's ruling on ${caseTitle}. Can you? ${caseUrl}`
-    : `I weighed the evidence differently from the court in ${caseTitle}. How would you decide? ${caseUrl}`;
+  const courtLabel = court || 'Supreme Court of India';
+  const yearLabel = year ? String(year) : '';
+  const metaLine = [courtLabel, yearLabel, citation].filter(Boolean).join(' · ');
+
+  const whatsappMsg =
+    lang === 'hi'
+      ? `🏛️ Pleadings: "${caseTitle}" (${metaLine}) के ऐतिहासिक निर्णय को 8 चित्रों और कड़ियों में पढ़ें:\n${caseUrl}`
+      : `🏛️ Pleadings: Read the landmark court judgment "${caseTitle}" (${metaLine}) in 8 visual episodes:\n${caseUrl}`;
+
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMsg)}`;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(whatsappMsg)}`;
+  const twitterText = `Explore "${caseTitle}" on @pleadings_in — landmark court jurisprudence in 8 visual episodes.`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(caseUrl)}`;
   const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(caseUrl)}`;
+
+  const handleNativeShare = async () => {
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+      try {
+        await navigator.share({
+          title: `${caseTitle} — Pleadings`,
+          text: whatsappMsg,
+          url: caseUrl,
+        });
+      } catch (err: any) {
+        if (err?.name !== 'AbortError') {
+          handleCopy();
+        }
+      }
+    } else {
+      handleCopy();
+    }
+  };
 
   const handleCopy = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
       navigator.clipboard.writeText(caseUrl);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 2200);
     }
   };
 
@@ -56,7 +87,7 @@ export function ShareSheet({
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `pleadings-${slug}-verdict.png`;
+      a.download = `pleadings-${slug}.png`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -66,76 +97,124 @@ export function ShareSheet({
     }
   };
 
+  const canNativeShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+
   return createPortal(
     <div className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-3 sm:p-4">
+      {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/85 backdrop-blur-xs cursor-pointer"
+        className="fixed inset-0 bg-black/85 backdrop-blur-xs cursor-pointer transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
+      {/* Modal Dialog */}
       <div
-        className="relative z-10 w-full max-w-md bg-[#12141C] text-[#F3EFE6] border border-[#D4AF37]/50 rounded-2xl p-6 shadow-2xl animate-slideUp sm:animate-scaleUp space-y-5"
+        className="relative z-10 w-full max-w-md bg-[#121520] text-[#F3EFE6] border border-[#D4AF37]/50 rounded-2xl p-5 sm:p-6 shadow-2xl animate-slideUp sm:animate-scaleUp space-y-4"
         role="dialog"
         aria-modal="true"
         aria-labelledby="share-sheet-title"
       >
+        {/* Top Header Bar */}
         <div className="flex items-center justify-between pb-3 border-b border-white/10">
-          <span
-            id="share-sheet-title"
-            className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D4AF37]"
-          >
-            SHARE THE VERDICT CHALLENGE
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+            <span
+              id="share-sheet-title"
+              className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]"
+            >
+              {lang === 'hi' ? 'निर्णय साझा करें' : 'SHARE LANDMARK CASE'}
+            </span>
+          </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close share dialog"
-            className="text-white/60 hover:text-white p-1 text-base cursor-pointer"
+            className="text-white/60 hover:text-white p-1 text-base rounded-full hover:bg-white/10 transition-colors cursor-pointer"
           >
             ✕
           </button>
         </div>
 
-        <div className="p-4 bg-[#181C28] rounded-xl border border-white/10 text-center space-y-1.5">
-          <div className="text-[10px] font-mono uppercase text-[#D4AF37]">
-            {didAgree ? '✓ YOU AGREED WITH THE BENCH' : 'YOU DISSENTED FROM THE BENCH'}
+        {/* Presentable Case Card Preview */}
+        <div className="p-3.5 bg-[#181D2C] rounded-xl border border-white/10 flex gap-3.5 items-center">
+          {posterSrc && (
+            <div className="relative w-16 h-20 shrink-0 rounded-lg overflow-hidden border border-white/10 bg-black/50">
+              <Image
+                src={posterSrc}
+                alt={caseTitle}
+                fill
+                sizes="64px"
+                className="object-cover"
+              />
+            </div>
+          )}
+          <div className="min-w-0 flex-1 space-y-1">
+            <div className="text-[10px] font-mono text-[#D4AF37] uppercase font-bold tracking-wider truncate">
+              {courtLabel} {yearLabel ? `· ${yearLabel}` : ''}
+            </div>
+            <h3 className="font-serif font-bold text-sm text-white line-clamp-2 leading-snug">
+              {caseTitle}
+            </h3>
+            {citation && (
+              <p className="text-[10px] font-mono text-white/50 truncate">
+                {citation}
+              </p>
+            )}
           </div>
-          <h3 className="font-serif font-bold text-base text-white">{caseTitle}</h3>
-          <p className="text-xs text-white/70">
-            {didAgree
-              ? 'Test if your friends can spot the legal ratio.'
-              : 'See if your friends would have ruled like you or the judges.'}
-          </p>
         </div>
 
+        {/* Share Action Buttons */}
         <div className="space-y-2.5">
+          {canNativeShare && (
+            <button
+              type="button"
+              onClick={handleNativeShare}
+              className="flex items-center justify-center gap-2.5 w-full py-3 px-4 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg cursor-pointer hover:scale-[1.01]"
+            >
+              <span>📲</span>
+              <span>{lang === 'hi' ? 'डिवाइस से साझा करें' : 'Share via Device (WhatsApp, AirDrop, etc.)'}</span>
+            </button>
+          )}
+
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2.5 w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#20ba5a] text-black font-bold text-sm uppercase tracking-wider rounded-xl transition-all shadow-lg cursor-pointer hover:scale-[1.02]"
+            className="flex items-center justify-center gap-2.5 w-full py-3 px-4 bg-[#25D366] hover:bg-[#20ba5a] text-black font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md cursor-pointer hover:scale-[1.01]"
           >
-            <span>Share to WhatsApp</span>
+            <span>💬</span>
+            <span>{lang === 'hi' ? 'व्हाट्सएप पर शेयर करें' : 'Share to WhatsApp'}</span>
           </a>
 
           <button
             type="button"
-            onClick={handleDownloadStoryImage}
-            className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:opacity-90 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md cursor-pointer hover:scale-[1.01]"
+            onClick={handleCopy}
+            className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-white font-semibold text-xs uppercase tracking-wider rounded-xl border border-white/15 transition-all cursor-pointer"
           >
-            <span>Download Instagram Story Card (1080×1350)</span>
+            <span>{copied ? '✓' : '🔗'}</span>
+            <span>
+              {copied
+                ? lang === 'hi'
+                  ? 'लिंक कॉपी हो गया! ✓'
+                  : 'Link Copied to Clipboard! ✓'
+                : lang === 'hi'
+                ? 'डायरेक्ट लिंक कॉपी करें'
+                : 'Copy Direct Link'}
+            </span>
           </button>
 
           <button
             type="button"
-            onClick={handleCopy}
-            className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs uppercase tracking-wider rounded-xl border border-white/15 transition-all cursor-pointer"
+            onClick={handleDownloadStoryImage}
+            className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-gradient-to-r from-[#833ab4]/80 via-[#fd1d1d]/80 to-[#fcb045]/80 hover:from-[#833ab4] hover:to-[#fcb045] text-white font-semibold text-[11px] uppercase tracking-wider rounded-xl transition-all shadow-xs cursor-pointer"
           >
-            <span>{copied ? 'Link Copied to Clipboard! ✓' : 'Copy Direct Link'}</span>
+            <span>📷</span>
+            <span>{lang === 'hi' ? 'सोशल स्टोरी कार्ड डाउनलोड करें' : 'Download Social Story Card (1080×1350)'}</span>
           </button>
 
-          <div className="flex gap-2 pt-1">
+          {/* Social Row: X / Twitter & LinkedIn */}
+          <div className="flex gap-2 pt-0.5">
             <a
               href={twitterUrl}
               target="_blank"

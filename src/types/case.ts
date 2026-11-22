@@ -71,7 +71,7 @@ export interface Episode {
   title: string;
   layers: {
     story: EpisodeLayer;
-    student: EpisodeLayer;
+    student?: EpisodeLayer;
     advocate?: EpisodeLayer;
   };
   personas?: PersonaItem[];

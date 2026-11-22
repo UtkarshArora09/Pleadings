@@ -1,7 +1,6 @@
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { CaseStore } from '@/lib/db/caseStore';
-import { processCaseIngestion } from '@/lib/ai/pipeline';
 import { isRequestAuthenticated } from '@/lib/auth';
 import { sendAdminCaseCreatedEmail } from '@/lib/email';
 import { CaseData } from '@/types';
@@ -89,16 +88,38 @@ export async function POST(request: NextRequest) {
         updatedAt: new Date().toISOString(),
       } as unknown as CaseData;
     } else {
-      const generated = await processCaseIngestion({
-        ...(body as Record<string, any>),
-        title: titleStr,
+      const defaultEpisodes = Array.from({ length: 8 }, (_, i) => ({
+        n: i + 1,
+        kicker: `EPISODE 0${i + 1}`,
+        title: `Episode ${i + 1}`,
+        layers: {
+          story: {
+            blocks: [
+              {
+                type: 'para' as const,
+                text: i === 0 ? String(body.factsSummary || briefObj?.facts?.en || '') : '',
+                source: { tier: 'AMBER' as const },
+              },
+            ],
+          },
+        },
+        endHook: i < 7 ? 'What followed next in the proceedings?' : 'Case dossier complete.',
+      }));
+
+      caseToSave = {
+        ...body,
         court: courtStr,
         year: yearNum,
         genre: genreStr,
-        statuteSections: statuteSectionsStr,
-        factsSummary: String(body.factsSummary || briefObj?.facts?.en || titleStr),
-      });
-      caseToSave = generated as unknown as CaseData;
+        categoryTag: String(body.categoryTag || statuteSectionsStr),
+        episodes: defaultEpisodes,
+        brief: body.brief || {
+          facts: { en: String(body.factsSummary || ''), hi: '' },
+          held: { en: '', hi: '' },
+          reasoning: { en: '', hi: '' },
+        },
+        updatedAt: new Date().toISOString(),
+      } as unknown as CaseData;
     }
 
     const savedCase = await CaseStore.create(caseToSave);

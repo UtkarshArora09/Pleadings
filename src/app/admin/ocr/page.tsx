@@ -22,7 +22,7 @@ export default function AdminOcrScannerPage() {
   const [scannedCase, setScannedCase] = useState<CaseData | null>(null);
   const [rawText, setRawText] = useState<string>('');
   const [scanMetadata, setScanMetadata] = useState<any>(null);
-  const [activeVerificationTab, setActiveVerificationTab] = useState<'metadata' | 'episodes' | 'advocate' | 'brief' | 'hindi' | 'flashcards' | 'rawText'>('metadata');
+  const [activeVerificationTab, setActiveVerificationTab] = useState<'metadata' | 'episodes' | 'brief' | 'hindi' | 'rawText'>('metadata');
   const [activeEpisodeIdx, setActiveEpisodeIdx] = useState<number>(0);
 
   // Saving State
@@ -381,12 +381,10 @@ export default function AdminOcrScannerPage() {
           <div className="flex flex-wrap gap-1.5 border-b border-white/10 pb-3">
             {[
               { id: 'metadata', label: '1. Case Record & Metadata' },
-              { id: 'episodes', label: `2. 8 Episodes & Tri-Depth Layers (${scannedCase.episodes?.length || 0})` },
-              { id: 'advocate', label: '3. Advocate 5-Part Reference' },
-              { id: 'brief', label: '4. Case Brief & Personas' },
-              { id: 'hindi', label: '5. Bilingual Judicial Hindi' },
-              { id: 'flashcards', label: '6. Flashcards & Poll' },
-              { id: 'rawText', label: '7. Raw OCR Transcript' },
+              { id: 'episodes', label: `2. 8 Story Episodes (${scannedCase.episodes?.length || 0})` },
+              { id: 'brief', label: '3. Case Brief & Personas' },
+              { id: 'hindi', label: '4. Bilingual Judicial Hindi' },
+              { id: 'rawText', label: '5. Raw OCR Transcript' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -570,13 +568,13 @@ export default function AdminOcrScannerPage() {
                     </h4>
                   </div>
 
-                  {/* Story Layer */}
+                  {/* Story Episode Narrative */}
                   <div className="space-y-1.5">
                     <span className="text-[11px] font-mono text-[#D4AF37] uppercase font-bold block">
-                      Layer A · General Story Narrative (Verbatim Facts)
+                      Episode Story Narrative (Extracted Facts)
                     </span>
                     <textarea
-                      rows={3}
+                      rows={5}
                       value={scannedCase.episodes[activeEpisodeIdx].layers?.story?.blocks?.[0]?.text || ''}
                       onChange={(e) => {
                         const updatedEpisodes = [...scannedCase.episodes!];
@@ -590,66 +588,24 @@ export default function AdminOcrScannerPage() {
                         };
                         setScannedCase({ ...scannedCase, episodes: updatedEpisodes });
                       }}
-                      className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-3 rounded-xs"
+                      className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-3 rounded-xs font-sans leading-relaxed"
                     />
                   </div>
 
-                  {/* Student Layer */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-white/10">
-                    <div className="space-y-1">
-                      <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold block">
-                        Layer B · Ratio Decidendi
-                      </span>
-                      <textarea
-                        rows={2}
-                        value={scannedCase.episodes[activeEpisodeIdx].layers?.student?.ratio || ''}
-                        onChange={(e) => {
-                          const updatedEpisodes = [...scannedCase.episodes!];
-                          updatedEpisodes[activeEpisodeIdx].layers.student.ratio = e.target.value;
-                          setScannedCase({ ...scannedCase, episodes: updatedEpisodes });
-                        }}
-                        className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-2.5 rounded-xs"
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold block">
-                        Layer B · Exam Angle (CLAT-PG / Judiciary)
-                      </span>
-                      <textarea
-                        rows={2}
-                        value={scannedCase.episodes[activeEpisodeIdx].layers?.student?.examAngle || ''}
-                        onChange={(e) => {
-                          const updatedEpisodes = [...scannedCase.episodes!];
-                          updatedEpisodes[activeEpisodeIdx].layers.student.examAngle = e.target.value;
-                          setScannedCase({ ...scannedCase, episodes: updatedEpisodes });
-                        }}
-                        className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-2.5 rounded-xs"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Advocate Layer */}
-                  <div className="pt-3 border-t border-white/10 space-y-1">
-                    <span className="text-[10px] font-mono text-amber-400 uppercase font-bold block">
-                      Layer C · Advocate Trial Proposition (Clean Single Sentence)
+                  {/* End Hook */}
+                  <div className="pt-2 border-t border-white/10 space-y-1">
+                    <span className="text-[10px] font-mono text-[#a9a49a] uppercase font-bold block">
+                      End Hook / Cliffhanger
                     </span>
                     <input
                       type="text"
-                      value={scannedCase.episodes[activeEpisodeIdx].layers?.advocate?.blocks?.[0]?.text || ''}
+                      value={scannedCase.episodes[activeEpisodeIdx].endHook || ''}
                       onChange={(e) => {
                         const updatedEpisodes = [...scannedCase.episodes!];
-                        if (!updatedEpisodes[activeEpisodeIdx].layers.advocate) {
-                          updatedEpisodes[activeEpisodeIdx].layers.advocate = { blocks: [] };
-                        }
-                        updatedEpisodes[activeEpisodeIdx].layers.advocate.blocks[0] = {
-                          type: 'para',
-                          text: e.target.value,
-                          source: { tier: 'BLACK' },
-                        };
+                        updatedEpisodes[activeEpisodeIdx].endHook = e.target.value;
                         setScannedCase({ ...scannedCase, episodes: updatedEpisodes });
                       }}
-                      className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-amber-300 px-3.5 py-2.5 rounded-xs font-mono"
+                      className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white px-3.5 py-2 rounded-xs font-mono"
                     />
                   </div>
                 </div>
@@ -657,65 +613,7 @@ export default function AdminOcrScannerPage() {
             </div>
           )}
 
-          {/* TAB 3: ADVOCATE 5-PART REFERENCE */}
-          {activeVerificationTab === 'advocate' && (
-            <div className="space-y-4">
-              <div className="bg-[#121520] border border-white/10 p-5 rounded-xs space-y-4">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] font-bold">
-                  Part 1 · Statutory Text Quoted in Judgment
-                </h4>
-                {scannedCase.advocateReference?.statutoryText?.map((st, i) => (
-                  <div key={i} className="p-3.5 bg-[#0A0C10] border border-white/10 rounded-xs space-y-2">
-                    <div className="flex items-center justify-between text-xs text-[#a9a49a] font-mono">
-                      <span className="text-white font-bold">{st.act || st.statute || 'Statute'}{st.section ? ` — ${st.section}` : ''}</span>
-                      <span>Pinpoint: {st.pinpoint || 'Verified Record'}</span>
-                    </div>
-                    <p className="text-xs text-amber-100/90 italic font-mono bg-black/40 p-3 rounded-xs">
-                      {st.quotedText || st.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-[#121520] border border-white/10 p-5 rounded-xs space-y-4">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] font-bold">
-                  Part 2 · The Court&apos;s Enumerated Holdings
-                </h4>
-                {scannedCase.advocateReference?.holdings?.map((h, i) => (
-                  <div key={i} className="p-3 bg-[#0A0C10] border border-white/10 rounded-xs flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-full bg-[#D4AF37] text-[#0E1016] text-xs font-bold flex items-center justify-center shrink-0">
-                      {h.number || i + 1}
-                    </span>
-                    <div className="flex-1 space-y-1">
-                      <p className="text-xs text-white font-medium">{h.holding}</p>
-                      <p className="text-[10px] text-[#a9a49a] font-mono">Pinpoint: {h.pinpoint}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-[#121520] border border-white/10 p-5 rounded-xs space-y-4">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] font-bold">
-                  Part 3 · Precedents Discussed & Treatments
-                </h4>
-                <div className="space-y-2">
-                  {scannedCase.advocateReference?.precedents?.map((pr, i) => (
-                    <div key={i} className="p-3 bg-[#0A0C10] border border-white/10 rounded-xs flex items-center justify-between gap-4">
-                      <div>
-                        <p className="text-xs text-white font-bold">{pr.caseName}</p>
-                        <p className="text-[10px] text-[#a9a49a] font-mono">{pr.citation}</p>
-                      </div>
-                      <span className="px-2.5 py-1 bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-mono font-bold uppercase rounded-xs">
-                        {pr.treatment}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* TAB 4: BRIEF */}
+          {/* TAB 3: BRIEF */}
           {activeVerificationTab === 'brief' && (
             <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4">
               <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] font-bold">
@@ -787,24 +685,7 @@ export default function AdminOcrScannerPage() {
             </div>
           )}
 
-          {/* TAB 6: FLASHCARDS */}
-          {activeVerificationTab === 'flashcards' && (
-            <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4">
-              <h4 className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] font-bold">
-                Student High-Yield Flashcards ({scannedCase.flashcards?.length || 0})
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {scannedCase.flashcards?.map((fc, i) => (
-                  <div key={i} className="p-4 bg-[#0A0C10] border border-white/10 rounded-xs space-y-2">
-                    <p className="text-xs font-bold text-white">Q: {fc.q}</p>
-                    <p className="text-xs text-amber-300/90 font-mono">A: {fc.a}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* TAB 7: RAW TEXT */}
+          {/* TAB 5: RAW TEXT */}
           {activeVerificationTab === 'rawText' && (
             <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-3">
               <div className="flex items-center justify-between text-xs font-mono text-[#a9a49a]">

@@ -24,7 +24,7 @@ function pruneRevokedSessions(nowSec: number) {
 }
 
 function getSessionSecret(): string | null {
-  const explicit = (process.env.ADMIN_SESSION_SECRET || '').trim();
+  const explicit = (process.env.ADMIN_SESSION_SECRET || '').trim().replace(/^["']|["']$/g, '');
   if (explicit.length >= 16) return explicit;
 
   // Derive a deterministic signing key from the configured env credential if ADMIN_SESSION_SECRET
@@ -116,7 +116,8 @@ export function validateAdminCredential(key: string): boolean {
 
   let matched = false;
   for (const expected of envKeys) {
-    if (timingSafeStringEqual(trimmed, expected)) {
+    const unquoted = expected.replace(/^["']|["']$/g, '').trim();
+    if (timingSafeStringEqual(trimmed, expected) || timingSafeStringEqual(trimmed, unquoted)) {
       matched = true;
     }
   }

@@ -18,7 +18,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'panels' | 'flashcards' | 'history' | 'brief' | 'images'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'panels' | 'brief' | 'images'>('overview');
   const [activeLanguage, setActiveLanguage] = useState<'en' | 'hi'>('en');
   const [episodeLayersTab, setEpisodeLayersTab] = useState<Record<number, 'story' | 'student' | 'advocate'>>({});
 
@@ -746,11 +746,9 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
       <div className="flex items-center gap-2 border-b border-white/10 pb-2 overflow-x-auto">
         {[
           { id: 'overview', label: '1. Overview & Metadata' },
-          { id: 'panels', label: `2. Story & Student Episodes (${caseData.episodes?.length || 8})` },
-          { id: 'flashcards', label: `3. Student Flashcards (${caseData.flashcards?.length || 0})` },
-          { id: 'history', label: `4. Lawyer Episodes (5 Core + Custom)` },
-          { id: 'brief', label: '5. Legal Brief & Certified Ratio' },
-          { id: 'images', label: '6. AI Visuals & Dual Generator' },
+          { id: 'panels', label: `2. 8 Story Episodes (${caseData.episodes?.length || 8})` },
+          { id: 'brief', label: '3. Precedent Brief & Ratio' },
+          { id: 'images', label: '4. AI Visuals & Dual Generator' },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -909,7 +907,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         );
       })()}
 
-      {/* TAB 2: STORY & DEPTH LAYERS (CUSTOMIZABLE EPISODES) */}
+      {/* TAB 2: 8 STORY EPISODES (CUSTOMIZABLE) */}
       {activeTab === 'panels' && (() => {
         const ensureEpisodes = (): Episode[] => {
           if (caseData.episodes && caseData.episodes.length > 0) return [...caseData.episodes];
@@ -918,15 +916,60 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             kicker: (typeof caseData.panels?.[i]?.eyebrow === 'object' ? caseData.panels?.[i]?.eyebrow?.[activeLanguage] : caseData.panels?.[i]?.eyebrow) || `EPISODE 0${i + 1}`,
             title: (typeof caseData.panels?.[i]?.headline === 'object' ? caseData.panels?.[i]?.headline?.[activeLanguage] : caseData.panels?.[i]?.headline) || `Episode ${i + 1}`,
             layers: {
-              story: { blocks: [{ type: 'para' as const, text: (typeof caseData.panels?.[i]?.body === 'object' ? caseData.panels?.[i]?.body?.[activeLanguage] : caseData.panels?.[i]?.body) || '', source: { tier: 'AMBER' as const } }] },
-              student: { blocks: [{ type: 'para' as const, text: `LEGAL ANALYSIS: ${(typeof caseData.panels?.[i]?.body === 'object' ? caseData.panels?.[i]?.body?.[activeLanguage] : caseData.panels?.[i]?.body) || ''}`, source: { tier: 'AMBER' as const } }], ratio: '', obiter: [], examAngle: '' },
-              advocate: { blocks: [{ type: 'para' as const, text: `TRIAL PROPOSITION: Standard of proof and statutory application.`, source: { tier: 'AMBER' as const } }], pinpoints: [{ proposition: 'Core proposition', para: 8 }] },
+              story: {
+                blocks: [
+                  {
+                    type: 'para' as const,
+                    text: (typeof caseData.panels?.[i]?.body === 'object' ? caseData.panels?.[i]?.body?.[activeLanguage] : caseData.panels?.[i]?.body) || '',
+                    source: { tier: 'AMBER' as const },
+                  },
+                ],
+              },
             },
-            endHook: i < 7 ? 'How did the proceedings unfold?' : 'Case dossier complete.',
+            endHook: i < 7 ? 'What followed next in the proceedings?' : 'Case dossier complete.',
           }));
         };
 
         const currentEpisodes = ensureEpisodes();
+
+        const updateEpisodeField = (idx: number, updates: Partial<Episode>) => {
+          const updated = [...currentEpisodes];
+          updated[idx] = { ...updated[idx], ...updates };
+          setCaseData({ ...caseData, episodes: updated });
+        };
+
+        const updateEpisodeNarrative = (idx: number, text: string) => {
+          const updated = [...currentEpisodes];
+          const ep = updated[idx];
+          const existingBlocks = ep.layers?.story?.blocks || [];
+          const firstBlock = existingBlocks[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } };
+          updated[idx] = {
+            ...ep,
+            layers: {
+              ...ep.layers,
+              story: {
+                ...ep.layers?.story,
+                blocks: [{ ...firstBlock, text }],
+              },
+            },
+          };
+
+          const updatedPanels = [...(caseData.panels || [])];
+          if (updatedPanels[idx]) {
+            const currentBody = updatedPanels[idx].body;
+            const enVal = typeof currentBody === 'object' && currentBody !== null ? currentBody.en : (typeof currentBody === 'string' ? currentBody : '');
+            const hiVal = typeof currentBody === 'object' && currentBody !== null ? currentBody.hi : '';
+            updatedPanels[idx] = {
+              ...updatedPanels[idx],
+              body: {
+                en: activeLanguage === 'en' ? text : enVal,
+                hi: activeLanguage === 'hi' ? text : hiVal,
+              },
+            };
+          }
+
+          setCaseData({ ...caseData, episodes: updated, panels: updatedPanels });
+        };
 
         const handleAddEpisode = () => {
           const nextNum = currentEpisodes.length + 1;
@@ -935,14 +978,13 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
             kicker: `EPISODE 0${nextNum}`,
             title: `Episode ${nextNum}`,
             layers: {
-              story: { blocks: [{ type: 'para' as const, text: '', source: { tier: 'AMBER' as const } }] },
-              student: { blocks: [{ type: 'para' as const, text: 'LEGAL ANALYSIS: ', source: { tier: 'AMBER' as const } }], ratio: '', obiter: [], examAngle: '' },
-              advocate: { blocks: [{ type: 'para' as const, text: 'TRIAL PROPOSITION: ', source: { tier: 'AMBER' as const } }], pinpoints: [{ proposition: '', para: 8 }] },
+              story: {
+                blocks: [{ type: 'para' as const, text: '', source: { tier: 'AMBER' as const } }],
+              },
             },
             endHook: 'What followed next in the proceedings?',
           };
-          const updated = [...currentEpisodes, newEp];
-          setCaseData({ ...caseData, episodes: updated });
+          setCaseData({ ...caseData, episodes: [...currentEpisodes, newEp] });
         };
 
         const handleDeleteEpisode = (targetIdx: number) => {
@@ -961,30 +1003,34 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
           <div className="space-y-6">
             <div className="p-4 bg-black/40 border border-white/10 rounded-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                  Customizable Episode Architecture ({currentEpisodes.length} Episodes)
+                <h3 className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                  <span>Customizable Story Episodes ({currentEpisodes.length} Episodes)</span>
                 </h3>
                 <p className="text-[11px] text-[#a9a49a] mt-0.5">
-                  Customize episodes dynamically. Each episode contains <strong>Story</strong> (general reading), <strong>Student</strong> (legal ratio, obiter, exam angle), and <strong>Advocate</strong> (trial proposition & paragraph pinpoints).
+                  Clean, reader-first judicial episodes. Fully customizable text, kicker, headline, and personas with no unwanted AI generation.
                 </p>
               </div>
 
-              <button
-                type="button"
-                onClick={handleAddEpisode}
-                className="px-4 py-2 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-md self-start sm:self-auto flex items-center gap-1.5"
-              >
-                <span>+</span>
-                <span>Add Episode</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleAddEpisode}
+                  className="px-3.5 py-1.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-md flex items-center gap-1.5"
+                >
+                  <span>+</span>
+                  <span>Add Episode</span>
+                </button>
+              </div>
             </div>
 
             {currentEpisodes.map((ep, idx) => {
-              const currentLayer = episodeLayersTab[idx] || 'story';
+              const narrativeText = ep.layers?.story?.blocks?.[0]?.text || '';
+              const isPersonaEpisode = idx === 1;
 
               return (
                 <div key={idx} className="bg-[#121520] border border-white/10 rounded-xs overflow-hidden shadow-xl">
-                  {/* Episode Header & 3-Way Layer Switcher */}
+                  {/* Episode Header Bar */}
                   <div className="p-4 bg-black/60 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
@@ -993,744 +1039,200 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      {/* Layer Selector Pill: Story / Student */}
-                      <div className="inline-flex items-center p-0.5 bg-[#0A0C10] border border-white/15 rounded-xs">
-                        <button
-                          type="button"
-                          onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'story' })}
-                          className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${currentLayer === 'story'
-                              ? 'bg-[#D4AF37] text-black shadow-md'
-                              : 'text-[#a9a49a] hover:text-white hover:bg-white/5'
-                            }`}
-                        >
-                          <span>📖</span>
-                          <span>Story</span>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => setEpisodeLayersTab({ ...episodeLayersTab, [idx]: 'student' })}
-                          className={`px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1.5 ${currentLayer === 'student'
-                              ? 'bg-sky-400 text-black shadow-md font-bold'
-                              : 'text-[#a9a49a] hover:text-sky-300 hover:bg-white/5'
-                            }`}
-                        >
-                          <span>🎓</span>
-                          <span>Student</span>
-                        </button>
-                      </div>
-
-                      {/* Delete Episode button */}
+                    <div className="flex items-center gap-2">
                       {currentEpisodes.length > 1 && (
                         <button
                           type="button"
                           onClick={() => handleDeleteEpisode(idx)}
-                          title="Delete this episode"
-                          className="px-2 py-1 text-xs text-red-400 hover:text-white hover:bg-red-500/20 border border-red-500/30 rounded-xs font-mono transition-all cursor-pointer"
+                          className="px-2.5 py-1 bg-red-950/40 hover:bg-red-900 border border-red-500/30 text-red-300 text-[11px] font-mono rounded-xs transition-colors cursor-pointer"
                         >
-                          ✕
+                          ✕ Delete
                         </button>
                       )}
                     </div>
                   </div>
 
-                  <div className="p-6 space-y-5">
-                    {/* 1. STORY LAYER */}
-                    {currentLayer === 'story' && (
-                      <div className="space-y-4 animate-fadeIn">
-                        <div className="flex items-center gap-2 pb-2 border-b border-white/5 text-[10px] font-mono text-[#D4AF37] uppercase font-bold">
-                          <span>📖 General Story Arc Layer (Public Narrative)</span>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                              Episode Eyebrow / Kicker Tag
-                            </label>
-                            <input
-                              type="text"
-                              value={ep.kicker || ''}
-                              onChange={(e) => {
-                                const epList = ensureEpisodes();
-                                epList[idx] = { ...epList[idx], kicker: e.target.value };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#D4AF37] font-bold p-2.5 rounded-xs"
-                            />
-                          </div>
-
-                          <div>
-                            <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                              Episode Title / Headline
-                            </label>
-                            <input
-                              type="text"
-                              value={ep.title || ''}
-                              onChange={(e) => {
-                                const epList = ensureEpisodes();
-                                epList[idx] = { ...epList[idx], title: e.target.value };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              className="w-full bg-[#0A0C10] border border-white/15 text-sm text-white font-bold p-2.5 rounded-xs"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                            Story Narrative Body Text ({activeLanguage.toUpperCase()})
-                          </label>
-                          <textarea
-                            rows={4}
-                            value={ep.layers?.story?.blocks?.[0]?.text || ''}
-                            onChange={(e) => {
-                              const epList = ensureEpisodes();
-                              const storyBlocks = [{ ...(epList[idx].layers?.story?.blocks?.[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } }), text: e.target.value }];
-                              epList[idx] = {
-                                ...epList[idx],
-                                layers: {
-                                  ...epList[idx].layers,
-                                  story: { ...epList[idx].layers?.story, blocks: storyBlocks },
-                                },
-                              };
-                              setCaseData({ ...caseData, episodes: epList });
-                            }}
-                            className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#c9c5bc] p-3 rounded-xs leading-relaxed"
-                          />
-                        </div>
-
-                        {/* Dynamic Dramatis Personae Columns Manager (Episode 2 / Personas) */}
-                        {((idx === 1) || (ep.personas && ep.personas.length > 0) || hasPersonaFormat(ep.layers?.story?.blocks?.[0]?.text)) && (() => {
-                          const currentPersonas: PersonaItem[] = (ep.personas && ep.personas.length > 0)
-                            ? ep.personas
-                            : (ep.characters && ep.characters.length > 0)
-                            ? ep.characters
-                            : hasPersonaFormat(ep.layers?.story?.blocks?.[0]?.text)
-                            ? extractPersonasFromText(ep.layers?.story?.blocks?.[0]?.text)
-                            : [
-                                { name: 'Petitioner / Accused', role: 'Primary Litigant', tag: 'Aggrieved Party', description: '' },
-                                { name: 'Respondent / State', role: 'Opposite Party', tag: 'Defending Party', description: '' },
-                                { name: 'Trial Court / Coram', role: 'Adjudicating Body', tag: 'Court of Record', description: '' },
-                              ];
-
-                          const updatePersonas = (newPersonas: PersonaItem[]) => {
-                            const epList = ensureEpisodes();
-                            epList[idx] = {
-                              ...epList[idx],
-                              personas: newPersonas,
-                              characters: newPersonas,
-                            };
-                            setCaseData({ ...caseData, episodes: epList });
-                          };
-
-                          return (
-                            <div className="bg-black/50 border border-[#D4AF37]/40 p-4 rounded-xs space-y-3.5 my-3">
-                              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-white/10 gap-2">
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-                                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#D4AF37]">
-                                      Dramatis Personae Columns Manager ({currentPersonas.length} Personas)
-                                    </h4>
-                                  </div>
-                                  <p className="text-[11px] text-[#a9a49a] mt-0.5">
-                                    Rendered in both Story & Student modes as distinct stacked cards (Persona 1 to N).
-                                  </p>
-                                </div>
-
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    const nextPNum = currentPersonas.length + 1;
-                                    const updated = [
-                                      ...currentPersonas,
-                                      {
-                                        name: '',
-                                        role: nextPNum === 1 ? 'Petitioner' : nextPNum === 2 ? 'Respondent' : nextPNum === 3 ? 'Key Witness' : nextPNum === 4 ? 'Intervener' : 'Bench / Coram',
-                                        tag: 'Litigant Entity',
-                                        description: '',
-                                      },
-                                    ];
-                                    updatePersonas(updated);
-                                  }}
-                                  className="px-3 py-1.5 bg-[#D4AF37]/20 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black border border-[#D4AF37]/40 text-xs font-mono font-bold uppercase rounded-xs transition-all cursor-pointer flex items-center gap-1 self-start sm:self-auto"
-                                >
-                                  <span>+</span>
-                                  <span>Add Persona</span>
-                                </button>
-                              </div>
-
-                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                                {currentPersonas.map((persona, pIdx) => (
-                                  <div key={pIdx} className="bg-[#141722] border border-white/10 hover:border-[#D4AF37]/50 p-3.5 rounded-xs space-y-2.5 transition-all">
-                                    <div className="flex items-center justify-between pb-1 border-b border-white/5">
-                                      <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
-                                        PERSONA 0{pIdx + 1}
-                                      </span>
-                                      {currentPersonas.length > 1 && (
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            const filtered = currentPersonas.filter((_, i) => i !== pIdx);
-                                            updatePersonas(filtered);
-                                          }}
-                                          className="text-[10px] font-mono text-red-400 hover:text-red-300 uppercase cursor-pointer"
-                                        >
-                                          ✕ Remove
-                                        </button>
-                                      )}
-                                    </div>
-
-                                    <div>
-                                      <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Name / Litigant Title</label>
-                                      <input
-                                        type="text"
-                                        placeholder="e.g. Shah Bano Begum"
-                                        value={persona.name}
-                                        onChange={(e) => {
-                                          const updated = [...currentPersonas];
-                                          updated[pIdx] = { ...updated[pIdx], name: e.target.value };
-                                          updatePersonas(updated);
-                                        }}
-                                        className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs font-bold"
-                                      />
-                                    </div>
-
-                                    <div className="grid grid-cols-2 gap-2">
-                                      <div>
-                                        <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Role Pill</label>
-                                        <input
-                                          type="text"
-                                          placeholder="e.g. Petitioner / Divorced Wife"
-                                          value={persona.role}
-                                          onChange={(e) => {
-                                            const updated = [...currentPersonas];
-                                            updated[pIdx] = { ...updated[pIdx], role: e.target.value };
-                                            updatePersonas(updated);
-                                          }}
-                                          className="w-full bg-[#0A0C10] border border-white/10 text-xs text-[#D4AF37] p-2 rounded-xs"
-                                        />
-                                      </div>
-                                      <div>
-                                        <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Tag / Designation</label>
-                                        <input
-                                          type="text"
-                                          placeholder="e.g. Aggrieved Litigant"
-                                          value={persona.tag || ''}
-                                          onChange={(e) => {
-                                            const updated = [...currentPersonas];
-                                            updated[pIdx] = { ...updated[pIdx], tag: e.target.value };
-                                            updatePersonas(updated);
-                                          }}
-                                          className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
-                                        />
-                                      </div>
-                                    </div>
-
-                                    <div>
-                                      <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Persona Description</label>
-                                      <textarea
-                                        rows={3}
-                                        placeholder="Details of this persona's role, background, claims, and actions..."
-                                        value={persona.description}
-                                        onChange={(e) => {
-                                          const updated = [...currentPersonas];
-                                          updated[pIdx] = { ...updated[pIdx], description: e.target.value };
-                                          updatePersonas(updated);
-                                        }}
-                                        className="w-full bg-[#0A0C10] border border-white/10 text-xs text-[#c9c5bc] p-2 rounded-xs leading-relaxed"
-                                      />
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          );
-                        })()}
-
-                        <div>
-                          <label className="block text-[10px] font-mono text-[#D4AF37] uppercase mb-1">
-                            End Hook / Next Episode Transition
-                          </label>
-                          <input
-                            type="text"
-                            value={ep.endHook || ''}
-                            onChange={(e) => {
-                              const epList = ensureEpisodes();
-                              epList[idx] = { ...epList[idx], endHook: e.target.value };
-                              setCaseData({ ...caseData, episodes: epList });
-                            }}
-                            className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#D4AF37] italic p-2 rounded-xs"
-                            placeholder="↳ The sentence that leads readers to the next episode..."
-                          />
-                        </div>
+                  {/* Episode Content */}
+                  <div className="p-5 space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                          Episode Kicker / Eyebrow
+                        </label>
+                        <input
+                          type="text"
+                          value={ep.kicker || ''}
+                          onChange={(e) => updateEpisodeField(idx, { kicker: e.target.value })}
+                          className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono"
+                          placeholder={`EPISODE 0${idx + 1} · STAGE`}
+                        />
                       </div>
-                    )}
 
-                    {/* 2. STUDENT LAYER */}
-                    {currentLayer === 'student' && (
-                      <div className="space-y-5 animate-fadeIn border-l-2 border-sky-400 pl-4">
-                        <div className="flex items-center gap-2 pb-2 border-b border-sky-500/20 text-[10px] font-mono text-sky-300 uppercase font-bold">
-                          <span>🎓 Student Depth Layer (IRAC Legal Analysis, Ratio Decidendi, Obiter & Exam Angle)</span>
-                        </div>
+                      <div>
+                        <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                          Episode Headline / Title
+                        </label>
+                        <input
+                          type="text"
+                          value={ep.title || ''}
+                          onChange={(e) => updateEpisodeField(idx, { title: e.target.value })}
+                          className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-sans font-bold"
+                          placeholder="e.g. THE GENESIS OF THE DISPUTE"
+                        />
+                      </div>
+                    </div>
 
-                        <div>
-                          <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
-                            Student Legal Analysis Text (IRAC Breakdown)
-                          </label>
-                          <textarea
-                            rows={3}
-                            value={ep.layers?.student?.blocks?.[0]?.text || ''}
-                            onChange={(e) => {
-                              const epList = ensureEpisodes();
-                              const studentBlocks = [{ ...(epList[idx].layers?.student?.blocks?.[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } }), text: e.target.value }];
-                              epList[idx] = {
-                                ...epList[idx],
-                                layers: {
-                                  ...epList[idx].layers,
-                                  student: { ...epList[idx].layers?.student, blocks: studentBlocks },
-                                },
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="text-[10px] font-mono text-[#D4AF37] uppercase font-semibold">
+                          Episode Story Narrative ({activeLanguage.toUpperCase()})
+                        </label>
+                        <span className="text-[10px] font-mono text-[#a9a49a]">
+                          {narrativeText.split(/\s+/).filter(Boolean).length} words
+                        </span>
+                      </div>
+                      <textarea
+                        rows={7}
+                        value={narrativeText}
+                        onChange={(e) => updateEpisodeNarrative(idx, e.target.value)}
+                        placeholder="Write the full case narrative for this episode..."
+                        className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-3 rounded-xs leading-relaxed font-sans"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                        End Hook / Cliffhanger (Leads to Next Episode)
+                      </label>
+                      <input
+                        type="text"
+                        value={ep.endHook || ''}
+                        onChange={(e) => updateEpisodeField(idx, { endHook: e.target.value })}
+                        className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#F3EFE6]/90 p-2.5 rounded-xs italic"
+                        placeholder="e.g. What followed in the Supreme Court deliberation?"
+                      />
+                    </div>
+
+                    {/* Dramatis Personae (Personas) on Episode 2 */}
+                    {isPersonaEpisode && (
+                      <div className="mt-6 pt-5 border-t border-white/10 space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                              <span>👥</span>
+                              <span>Dramatis Personae (Litigants & Key Figures)</span>
+                            </h4>
+                            <p className="text-[10px] text-[#a9a49a] mt-0.5">
+                              Key figures rendered as cards in Episode 2 (Petitioner, Respondent, Key Witnesses, Judges).
+                            </p>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const currentPersonas = caseData.personas || [];
+                              const newPersona: PersonaItem = {
+                                name: 'New Litigant',
+                                role: 'Primary Litigant',
+                                tag: 'Litigant',
+                                description: 'Description of character role in the case.',
+                                badgeEmoji: '⚖️',
                               };
-                              setCaseData({ ...caseData, episodes: epList });
+                              setCaseData({ ...caseData, personas: [...currentPersonas, newPersona] });
                             }}
-                            className="w-full bg-[#0A0C10] border border-sky-500/30 text-xs text-sky-100 p-3 rounded-xs leading-relaxed"
-                          />
+                            className="px-3 py-1 bg-white/10 hover:bg-white/20 text-white text-[11px] font-mono uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
+                          >
+                            + Add Character
+                          </button>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
-                              Ratio Decidendi (Binding Legal Principle)
-                            </label>
-                            <textarea
-                              rows={2}
-                              value={ep.layers?.student?.ratio || ''}
-                              onChange={(e) => {
-                                const epList = ensureEpisodes();
-                                epList[idx] = {
-                                  ...epList[idx],
-                                  layers: {
-                                    ...epList[idx].layers,
-                                    student: { ...epList[idx].layers?.student, ratio: e.target.value },
-                                  },
-                                };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              placeholder="e.g. Authoritative holding on statutory limits..."
-                              className="w-full bg-[#0A0C10] border border-sky-500/30 text-xs text-white p-2.5 rounded-xs"
-                            />
-                          </div>
-
-                          <div>
-                            <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
-                              Exam Angle (CLAT-PG / Judiciary Mains Focus)
-                            </label>
-                            <textarea
-                              rows={2}
-                              value={ep.layers?.student?.examAngle || ''}
-                              onChange={(e) => {
-                                const epList = ensureEpisodes();
-                                epList[idx] = {
-                                  ...epList[idx],
-                                  layers: {
-                                    ...epList[idx].layers,
-                                    student: { ...epList[idx].layers?.student, examAngle: e.target.value },
-                                  },
-                                };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              placeholder="e.g. Frequently tested in Judiciary Mains under Section 300..."
-                              className="w-full bg-[#0A0C10] border border-sky-500/30 text-xs text-white p-2.5 rounded-xs"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Obiter Dicta Bullet Manager */}
-                        <div className="space-y-2 pt-2 border-t border-sky-500/10">
-                          <div className="flex items-center justify-between">
-                            <label className="text-[10px] font-mono text-sky-300 uppercase font-bold">
-                              Obiter Dicta (Persuasive Observations)
-                            </label>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const epList = ensureEpisodes();
-                                const currentObiter = epList[idx].layers?.student?.obiter || [];
-                                epList[idx] = {
-                                  ...epList[idx],
-                                  layers: {
-                                    ...epList[idx].layers,
-                                    student: { ...epList[idx].layers?.student, obiter: [...currentObiter, ''] },
-                                  },
-                                };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              className="text-[10px] font-mono text-sky-400 hover:text-white uppercase font-bold cursor-pointer"
-                            >
-                              + Add Obiter Point
-                            </button>
-                          </div>
-
-                          {(ep.layers?.student?.obiter || []).map((ob: string, oIdx: number) => (
-                            <div key={oIdx} className="flex items-center gap-2">
-                              <input
-                                type="text"
-                                value={ob}
-                                onChange={(e) => {
-                                  const epList = ensureEpisodes();
-                                  const currentObiter = [...(epList[idx].layers?.student?.obiter || [])];
-                                  currentObiter[oIdx] = e.target.value;
-                                  epList[idx] = {
-                                    ...epList[idx],
-                                    layers: {
-                                      ...epList[idx].layers,
-                                      student: { ...epList[idx].layers?.student, obiter: currentObiter },
-                                    },
-                                  };
-                                  setCaseData({ ...caseData, episodes: epList });
-                                }}
-                                className="flex-1 bg-[#0A0C10] border border-sky-500/20 text-xs text-white p-2 rounded-xs"
-                                placeholder="Observation point..."
-                              />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {(caseData.personas || []).map((persona, pIdx) => (
+                            <div key={pIdx} className="p-3 bg-black/40 border border-white/10 rounded-xs space-y-2 relative">
                               <button
                                 type="button"
                                 onClick={() => {
-                                  const epList = ensureEpisodes();
-                                  const currentObiter = (epList[idx].layers?.student?.obiter || []).filter((_: any, i: number) => i !== oIdx);
-                                  epList[idx] = {
-                                    ...epList[idx],
-                                    layers: {
-                                      ...epList[idx].layers,
-                                      student: { ...epList[idx].layers?.student, obiter: currentObiter },
-                                    },
-                                  };
-                                  setCaseData({ ...caseData, episodes: epList });
+                                  const updated = (caseData.personas || []).filter((_, i) => i !== pIdx);
+                                  setCaseData({ ...caseData, personas: updated });
                                 }}
-                                className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
+                                className="absolute top-2 right-2 text-red-400 hover:text-red-300 text-xs font-mono"
                               >
                                 ✕
                               </button>
+
+                              <div className="grid grid-cols-3 gap-2 pr-6">
+                                <div className="col-span-2">
+                                  <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Name</label>
+                                  <input
+                                    type="text"
+                                    value={persona.name}
+                                    onChange={(e) => {
+                                      const updated = [...(caseData.personas || [])];
+                                      updated[pIdx] = { ...updated[pIdx], name: e.target.value };
+                                      setCaseData({ ...caseData, personas: updated });
+                                    }}
+                                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-1.5 rounded-xs"
+                                  />
+                                </div>
+                                <div>
+                                  <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Emoji</label>
+                                  <input
+                                    type="text"
+                                    value={persona.badgeEmoji || '⚖️'}
+                                    onChange={(e) => {
+                                      const updated = [...(caseData.personas || [])];
+                                      updated[pIdx] = { ...updated[pIdx], badgeEmoji: e.target.value };
+                                      setCaseData({ ...caseData, personas: updated });
+                                    }}
+                                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-1.5 rounded-xs text-center"
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="grid grid-cols-2 gap-2">
+                                <div>
+                                  <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Role / Title</label>
+                                  <input
+                                    type="text"
+                                    value={persona.role}
+                                    onChange={(e) => {
+                                      const updated = [...(caseData.personas || [])];
+                                      updated[pIdx] = { ...updated[pIdx], role: e.target.value };
+                                      setCaseData({ ...caseData, personas: updated });
+                                    }}
+                                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-1.5 rounded-xs"
+                                  />
+                                </div>
+                                <div>
+                                  <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Category Tag</label>
+                                  <input
+                                    type="text"
+                                    value={persona.tag}
+                                    onChange={(e) => {
+                                      const updated = [...(caseData.personas || [])];
+                                      updated[pIdx] = { ...updated[pIdx], tag: e.target.value };
+                                      setCaseData({ ...caseData, personas: updated });
+                                    }}
+                                    className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-1.5 rounded-xs"
+                                  />
+                                </div>
+                              </div>
+
+                              <div>
+                                <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Description / Significance</label>
+                                <textarea
+                                  rows={2}
+                                  value={persona.description}
+                                  onChange={(e) => {
+                                    const updated = [...(caseData.personas || [])];
+                                    updated[pIdx] = { ...updated[pIdx], description: e.target.value };
+                                    setCaseData({ ...caseData, personas: updated });
+                                  }}
+                                  className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-1.5 rounded-xs"
+                                />
+                              </div>
                             </div>
                           ))}
-                        </div>
-
-                        {/* Minority Dissent (Optional) */}
-                        <div className="p-3 bg-black/40 border border-rose-500/20 rounded-xs space-y-2">
-                          <span className="text-[10px] font-mono font-bold text-rose-400 uppercase">
-                            Minority Dissent (Optional)
-                          </span>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            <input
-                              type="text"
-                              placeholder="Dissenting Judge (e.g. Justice Subba Rao)"
-                              value={ep.layers?.student?.dissent?.judge || ''}
-                              onChange={(e) => {
-                                const epList = ensureEpisodes();
-                                const curDissent = epList[idx].layers?.student?.dissent || { judge: '', ground: '', text: '' };
-                                epList[idx] = {
-                                  ...epList[idx],
-                                  layers: {
-                                    ...epList[idx].layers,
-                                    student: { ...epList[idx].layers?.student, dissent: { ...curDissent, judge: e.target.value } },
-                                  },
-                                };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              className="bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
-                            />
-                            <input
-                              type="text"
-                              placeholder="Core Ground (e.g. Overbreadth of restriction)"
-                              value={ep.layers?.student?.dissent?.ground || ''}
-                              onChange={(e) => {
-                                const epList = ensureEpisodes();
-                                const curDissent = epList[idx].layers?.student?.dissent || { judge: '', ground: '', text: '' };
-                                epList[idx] = {
-                                  ...epList[idx],
-                                  layers: {
-                                    ...epList[idx].layers,
-                                    student: { ...epList[idx].layers?.student, dissent: { ...curDissent, ground: e.target.value } },
-                                  },
-                                };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              className="bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
-                            />
-                          </div>
-                          <textarea
-                            rows={2}
-                            placeholder="Dissenting text / judicial excerpt..."
-                            value={ep.layers?.student?.dissent?.text || ''}
-                            onChange={(e) => {
-                              const epList = ensureEpisodes();
-                              const curDissent = epList[idx].layers?.student?.dissent || { judge: '', ground: '', text: '' };
-                              epList[idx] = {
-                                ...epList[idx],
-                                layers: {
-                                  ...epList[idx].layers,
-                                  student: { ...epList[idx].layers?.student, dissent: { ...curDissent, text: e.target.value } },
-                                },
-                              };
-                              setCaseData({ ...caseData, episodes: epList });
-                            }}
-                            className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs"
-                          />
-                        </div>
-
-                        {/* Interactive Student Practice Questions & Mini-Flashcards */}
-                        <div className="p-4 bg-black/50 border border-sky-500/30 rounded-xs space-y-4">
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-sky-500/20">
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs font-mono font-bold text-sky-400">🎓</span>
-                                <h5 className="text-xs font-mono font-bold text-sky-300 uppercase tracking-wider">
-                                  Episode 0{idx + 1} Interactive Student Questions & Flashcards
-                                </h5>
-                              </div>
-                              <p className="text-[11px] text-[#a9a49a]">
-                                Admin-controlled questions shown to law students inside this episode. Leave empty to omit.
-                              </p>
-                            </div>
-
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const epList = ensureEpisodes();
-                                const curQuestions = epList[idx].layers?.student?.questions || [];
-                                epList[idx] = {
-                                  ...epList[idx],
-                                  layers: {
-                                    ...epList[idx].layers,
-                                    student: {
-                                      ...epList[idx].layers?.student,
-                                      questions: [
-                                        ...curQuestions,
-                                        {
-                                          q: '',
-                                          a: '',
-                                          options: ['', ''],
-                                          correctOptionIdx: 0,
-                                          explanation: '',
-                                        },
-                                      ],
-                                    },
-                                  },
-                                };
-                                setCaseData({ ...caseData, episodes: epList });
-                              }}
-                              className="px-3 py-1.5 bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/30 text-sky-300 text-xs font-mono font-bold uppercase rounded-xs cursor-pointer self-start sm:self-auto"
-                            >
-                              + Add Question
-                            </button>
-                          </div>
-
-                          {(!ep.layers?.student?.questions || ep.layers?.student?.questions.length === 0) ? (
-                            <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
-                              No interactive questions added for Episode {idx + 1}. Click "+ Add Question" to create one.
-                            </div>
-                          ) : (
-                            <div className="space-y-4">
-                              {ep.layers.student.questions.map((qItem, qIdx) => (
-                                <div key={qIdx} className="p-3.5 bg-[#0A0C10] border border-sky-500/20 rounded-xs space-y-3">
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-[10px] font-mono text-sky-400 font-bold uppercase">
-                                      Question #{qIdx + 1}
-                                    </span>
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        const epList = ensureEpisodes();
-                                        const curQuestions = (epList[idx].layers?.student?.questions || []).filter((_, i) => i !== qIdx);
-                                        epList[idx] = {
-                                          ...epList[idx],
-                                          layers: {
-                                            ...epList[idx].layers,
-                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                          },
-                                        };
-                                        setCaseData({ ...caseData, episodes: epList });
-                                      }}
-                                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
-                                    >
-                                      ✕ Delete Question
-                                    </button>
-                                  </div>
-
-                                  <div>
-                                    <label className="block text-[10px] font-mono text-sky-300 uppercase mb-1">
-                                      Question Prompt
-                                    </label>
-                                    <input
-                                      type="text"
-                                      value={qItem.q}
-                                      onChange={(e) => {
-                                        const epList = ensureEpisodes();
-                                        const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
-                                        curQuestions[qIdx] = { ...curQuestions[qIdx], q: e.target.value };
-                                        epList[idx] = {
-                                          ...epList[idx],
-                                          layers: {
-                                            ...epList[idx].layers,
-                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                          },
-                                        };
-                                        setCaseData({ ...caseData, episodes: epList });
-                                      }}
-                                      placeholder="e.g. Which statutory section governs this legal issue?"
-                                      className="w-full bg-[#121520] border border-sky-500/20 text-xs text-white p-2.5 rounded-xs font-medium"
-                                    />
-                                  </div>
-
-                                  <div>
-                                    <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
-                                      Verified Legal Answer / Key Point
-                                    </label>
-                                    <textarea
-                                      rows={2}
-                                      value={qItem.a}
-                                      onChange={(e) => {
-                                        const epList = ensureEpisodes();
-                                        const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
-                                        curQuestions[qIdx] = { ...curQuestions[qIdx], a: e.target.value };
-                                        epList[idx] = {
-                                          ...epList[idx],
-                                          layers: {
-                                            ...epList[idx].layers,
-                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                          },
-                                        };
-                                        setCaseData({ ...caseData, episodes: epList });
-                                      }}
-                                      placeholder="e.g. The Court established that..."
-                                      className="w-full bg-[#121520] border border-emerald-500/20 text-xs text-emerald-200 p-2.5 rounded-xs font-serif"
-                                    />
-                                  </div>
-
-                                  {/* Optional Multiple Choice Options */}
-                                  <div className="space-y-2 pt-1 border-t border-sky-500/10">
-                                    <div className="flex items-center justify-between">
-                                      <label className="text-[10px] font-mono text-sky-300 uppercase">
-                                        Multiple-Choice Options (Optional)
-                                      </label>
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          const epList = ensureEpisodes();
-                                          const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
-                                          const curOpts = curQuestions[qIdx].options || [];
-                                          curQuestions[qIdx] = { ...curQuestions[qIdx], options: [...curOpts, ''] };
-                                          epList[idx] = {
-                                            ...epList[idx],
-                                            layers: {
-                                              ...epList[idx].layers,
-                                              student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                            },
-                                          };
-                                          setCaseData({ ...caseData, episodes: epList });
-                                        }}
-                                        className="text-[10px] font-mono text-sky-400 hover:text-white uppercase font-bold cursor-pointer"
-                                      >
-                                        + Add Option Choice
-                                      </button>
-                                    </div>
-
-                                    {(qItem.options || []).map((opt, optIdx) => (
-                                      <div key={optIdx} className="flex items-center gap-2">
-                                        <input
-                                          type="radio"
-                                          name={`correct-opt-${idx}-${qIdx}`}
-                                          checked={qItem.correctOptionIdx === optIdx}
-                                          onChange={() => {
-                                            const epList = ensureEpisodes();
-                                            const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
-                                            curQuestions[qIdx] = { ...curQuestions[qIdx], correctOptionIdx: optIdx };
-                                            epList[idx] = {
-                                              ...epList[idx],
-                                              layers: {
-                                                ...epList[idx].layers,
-                                                student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                              },
-                                            };
-                                            setCaseData({ ...caseData, episodes: epList });
-                                          }}
-                                          title="Mark as correct answer"
-                                          className="accent-sky-400 cursor-pointer"
-                                        />
-                                        <span className="text-[10px] font-mono text-white/50">{String.fromCharCode(65 + optIdx)}.</span>
-                                        <input
-                                          type="text"
-                                          value={opt}
-                                          onChange={(e) => {
-                                            const epList = ensureEpisodes();
-                                            const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
-                                            const curOpts = [...(curQuestions[qIdx].options || [])];
-                                            curOpts[optIdx] = e.target.value;
-                                            curQuestions[qIdx] = { ...curQuestions[qIdx], options: curOpts };
-                                            epList[idx] = {
-                                              ...epList[idx],
-                                              layers: {
-                                                ...epList[idx].layers,
-                                                student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                              },
-                                            };
-                                            setCaseData({ ...caseData, episodes: epList });
-                                          }}
-                                          placeholder={`Option ${String.fromCharCode(65 + optIdx)}`}
-                                          className="flex-1 bg-[#121520] border border-white/10 text-xs text-white p-1.5 rounded-xs"
-                                        />
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            const epList = ensureEpisodes();
-                                            const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
-                                            const curOpts = (curQuestions[qIdx].options || []).filter((_, i) => i !== optIdx);
-                                            curQuestions[qIdx] = { ...curQuestions[qIdx], options: curOpts };
-                                            epList[idx] = {
-                                              ...epList[idx],
-                                              layers: {
-                                                ...epList[idx].layers,
-                                                student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                              },
-                                            };
-                                            setCaseData({ ...caseData, episodes: epList });
-                                          }}
-                                          className="text-xs text-red-400 hover:text-red-300 font-mono px-1 cursor-pointer"
-                                        >
-                                          ✕
-                                        </button>
-                                      </div>
-                                    ))}
-                                  </div>
-
-                                  <div>
-                                    <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                                      Explanation / Legal Authority (Optional)
-                                    </label>
-                                    <input
-                                      type="text"
-                                      value={qItem.explanation || ''}
-                                      onChange={(e) => {
-                                        const epList = ensureEpisodes();
-                                        const curQuestions = [...(epList[idx].layers?.student?.questions || [])];
-                                        curQuestions[qIdx] = { ...curQuestions[qIdx], explanation: e.target.value };
-                                        epList[idx] = {
-                                          ...epList[idx],
-                                          layers: {
-                                            ...epList[idx].layers,
-                                            student: { ...epList[idx].layers?.student, questions: curQuestions },
-                                          },
-                                        };
-                                        setCaseData({ ...caseData, episodes: epList });
-                                      }}
-                                      placeholder="e.g. As affirmed in para 14 of the judgment..."
-                                      className="w-full bg-[#121520] border border-white/10 text-xs text-white/80 p-2 rounded-xs"
-                                    />
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
                         </div>
                       </div>
                     )}
@@ -1738,809 +1240,6 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                 </div>
               );
             })}
-          </div>
-        );
-      })()}
-
-      {/* TAB 3: STUDENT FLASHCARDS */}
-      {activeTab === 'flashcards' && (
-        <div className="bg-[#121520] border border-sky-500/30 p-6 rounded-xs space-y-6 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="w-2 h-2 rounded-full bg-sky-400" />
-                <h3 className="text-sm font-mono font-bold text-sky-400 uppercase tracking-wider">
-                  Student Mode Revision Flashcards
-                </h3>
-              </div>
-              <p className="text-xs text-[#a9a49a]">
-                These interactive Q&A cards appear at the end of the case in <strong>Student Mode</strong> to help law students memorize core ratio and exam issues.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                const current = caseData.flashcards || [];
-                setCaseData({
-                  ...caseData,
-                  flashcards: [...current, { q: 'What is the primary holding?', a: 'The Court held that...' }],
-                });
-              }}
-              className="px-4 py-2 bg-sky-400 hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-md self-start sm:self-auto"
-            >
-              + Add Flashcard
-            </button>
-          </div>
-
-          <div className="space-y-4">
-            {(caseData.flashcards || []).length === 0 ? (
-              <div className="p-8 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/50">
-                No flashcards created yet. Click "+ Add Flashcard" to add revision questions for students.
-              </div>
-            ) : (
-              (caseData.flashcards || []).map((card, cIdx) => (
-                <div key={cIdx} className="p-4 bg-black/40 border border-sky-500/20 rounded-xs space-y-3">
-                  <div className="flex items-center justify-between pb-2 border-b border-white/5">
-                    <span className="text-[10px] font-mono font-bold text-sky-300 uppercase">
-                      Flashcard #{cIdx + 1}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const updated = (caseData.flashcards || []).filter((_, i) => i !== cIdx);
-                        setCaseData({ ...caseData, flashcards: updated });
-                      }}
-                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
-                    >
-                      ✕ Delete Flashcard
-                    </button>
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                      Question
-                    </label>
-                    <input
-                      type="text"
-                      value={card.q}
-                      onChange={(e) => {
-                        const updated = [...(caseData.flashcards || [])];
-                        updated[cIdx] = { ...updated[cIdx], q: e.target.value };
-                        setCaseData({ ...caseData, flashcards: updated });
-                      }}
-                      className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white font-medium p-2.5 rounded-xs"
-                      placeholder="e.g. What was the central constitutional issue?"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
-                      Answer / Verified Judicial Reasoning
-                    </label>
-                    <textarea
-                      rows={2}
-                      value={card.a}
-                      onChange={(e) => {
-                        const updated = [...(caseData.flashcards || [])];
-                        updated[cIdx] = { ...updated[cIdx], a: e.target.value };
-                        setCaseData({ ...caseData, flashcards: updated });
-                      }}
-                      className="w-full bg-[#0A0C10] border border-emerald-500/30 text-xs text-emerald-100 p-2.5 rounded-xs font-serif italic"
-                      placeholder="e.g. The Court ruled that fundamental rights are not silos..."
-                    />
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* TAB 4: ADVOCATE REFERENCE & CITATIONS (5 CORE + CUSTOM LAWYER EPISODES) */}
-      {activeTab === 'history' && (() => {
-        const advRef = caseData.advocateReference || {};
-        const statutoryText = advRef.statutoryText || [];
-        const holdings = advRef.holdings || [];
-        const precedents = advRef.precedents || [];
-        const citatorHistory = advRef.citatorHistory || [];
-        const parallelCitations: string[] = advRef.parallelCitations || ((caseData as any).citations?.parallel || []);
-        const citatorDisclaimer = advRef.citatorDisclaimer ||
-          "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter.";
-
-        const customLawyerEpisodes: import('@/types').LawyerEpisode[] = (caseData.lawyerEpisodes || []).filter(
-          (ep) => !['STATUTORY_TEXT', 'ENUMERATED_HOLDINGS', 'PRECEDENTS_DISCUSSED', 'CITATOR_HISTORY', 'PARALLEL_CITATIONS'].includes(ep.type || '')
-        );
-
-        const buildAllLawyerEpisodes = (ref: typeof advRef, customs: import('@/types').LawyerEpisode[]) => [
-          {
-            id: 'lawyer-ep-1',
-            n: 1,
-            type: 'STATUTORY_TEXT' as const,
-            kicker: 'LAWYER EPISODE 01 · STATUTORY TEXT',
-            title: 'Statutory Text As Reproduced In The Judgment',
-            description: 'Verbatim statutory provisions and sections reproduced in full by the court.',
-            statutoryText: ref.statutoryText || [],
-          },
-          {
-            id: 'lawyer-ep-2',
-            n: 2,
-            type: 'ENUMERATED_HOLDINGS' as const,
-            kicker: 'LAWYER EPISODE 02 · COURT HOLDINGS',
-            title: "The Court's Enumerated Holdings",
-            description: "Operative conclusions and findings of law with precise pinpoint citations.",
-            holdings: ref.holdings || [],
-          },
-          {
-            id: 'lawyer-ep-3',
-            n: 3,
-            type: 'PRECEDENTS_DISCUSSED' as const,
-            kicker: 'LAWYER EPISODE 03 · PRECEDENT TREATMENT',
-            title: 'Precedents Discussed In This Judgment',
-            description: 'Prior authorities cited and their specific judicial treatment by the bench.',
-            precedents: ref.precedents || [],
-          },
-          {
-            id: 'lawyer-ep-4',
-            n: 4,
-            type: 'CITATOR_HISTORY' as const,
-            kicker: 'LAWYER EPISODE 04 · CITATOR RECORD',
-            title: 'Subsequent Citator History',
-            description: 'Treatment of this precedent in subsequent judicial decisions.',
-            citatorHistory: ref.citatorHistory || [],
-            citatorDisclaimer: ref.citatorDisclaimer,
-          },
-          {
-            id: 'lawyer-ep-5',
-            n: 5,
-            type: 'PARALLEL_CITATIONS' as const,
-            kicker: 'LAWYER EPISODE 05 · CITATION INDEX',
-            title: 'Full Parallel Citation Index',
-            description: 'Certified reporter volume and page references across major law reports.',
-            parallelCitations: ref.parallelCitations || [],
-          },
-          ...customs,
-        ];
-
-        const updateAdvRef = (partial: Partial<import('@/types').AdvocateReference>) => {
-          const updatedRef = { ...advRef, ...partial };
-          const updatedLawyerEps = buildAllLawyerEpisodes(updatedRef, customLawyerEpisodes);
-          setCaseData({
-            ...caseData,
-            advocateReference: updatedRef,
-            lawyerEpisodes: updatedLawyerEps,
-          });
-        };
-
-        const updateCustomLawyerEpisodes = (updatedCustoms: import('@/types').LawyerEpisode[]) => {
-          const updatedLawyerEps = buildAllLawyerEpisodes(advRef, updatedCustoms);
-          setCaseData({
-            ...caseData,
-            lawyerEpisodes: updatedLawyerEps,
-          });
-        };
-
-        return (
-          <div className="bg-[#121520] border border-emerald-500/30 p-6 rounded-xs space-y-8 shadow-xl">
-            {/* Header */}
-            <div className="pb-5 border-b border-white/10">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-                <h3 className="text-base font-anton text-white uppercase tracking-wider">
-                  Dedicated Lawyer Episodes Studio (5 Core + Custom Episodes)
-                </h3>
-              </div>
-              <p className="text-xs text-[#a9a49a] max-w-2xl leading-relaxed">
-                Independent reading flow for advocates and legal practitioners. Decoupled from the story narrative. Contains the 5 certified lawyer episodes plus any custom episodes added by the admin.
-              </p>
-            </div>
-
-            {/* PART 1: STATUTORY TEXT AS REPRODUCED IN THE JUDGMENT */}
-            <div className="p-5 bg-black/40 border border-emerald-500/20 rounded-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-emerald-400">1 ·</span>
-                    <h4 className="font-anton text-sm text-white uppercase tracking-wider">
-                      Statutory Text As Reproduced In The Judgment
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-[#a9a49a]">
-                    Quote, verbatim, any section(s) of law the judgment reproduces in full.
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    updateAdvRef({
-                      statutoryText: [...statutoryText, { statute: '', text: '' }],
-                    });
-                  }}
-                  className="px-3 py-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold uppercase rounded-xs cursor-pointer self-start sm:self-auto"
-                >
-                  + Add Statute Quote
-                </button>
-              </div>
-
-              {statutoryText.length === 0 ? (
-                <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
-                  No verbatim statutory quotes added yet. (Omitted if none quoted in judgment).
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {statutoryText.map((item, idx) => (
-                    <div key={idx} className="p-4 bg-[#0A0C10] border border-white/10 rounded-xs space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono text-emerald-300 font-bold uppercase">
-                          Statute #{idx + 1}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = statutoryText.filter((_, i) => i !== idx);
-                            updateAdvRef({ statutoryText: updated });
-                          }}
-                          className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
-                        >
-                          ✕ Delete
-                        </button>
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                          Act & Section Header (e.g. Section 125, Code of Criminal Procedure, 1973)
-                        </label>
-                        <input
-                          type="text"
-                          value={item.statute}
-                          onChange={(e) => {
-                            const updated = [...statutoryText];
-                            updated[idx] = { ...updated[idx], statute: e.target.value };
-                            updateAdvRef({ statutoryText: updated });
-                          }}
-                          placeholder="e.g. Section 125, Code of Criminal Procedure, 1973"
-                          className="w-full bg-[#121520] border border-white/15 text-xs text-white p-2 rounded-xs font-medium"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
-                          Verbatim Quoted Text (Reproduced exactly as in judgment)
-                        </label>
-                        <textarea
-                          rows={3}
-                          value={item.text}
-                          onChange={(e) => {
-                            const updated = [...statutoryText];
-                            updated[idx] = { ...updated[idx], text: e.target.value };
-                            updateAdvRef({ statutoryText: updated });
-                          }}
-                          placeholder="&ldquo;Quote section text verbatim...&rdquo;"
-                          className="w-full bg-[#121520] border border-emerald-500/20 text-xs text-[#dedad2] p-2.5 rounded-xs font-serif leading-relaxed"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* PART 2: THE COURT'S ENUMERATED HOLDINGS */}
-            <div className="p-5 bg-black/40 border border-emerald-500/20 rounded-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-emerald-400">2 ·</span>
-                    <h4 className="font-anton text-sm text-white uppercase tracking-wider">
-                      The Court&apos;s Enumerated Holdings
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-[#a9a49a]">
-                    List numbered conclusions with real pinpoint citations (SCR/SCC page or paragraph). Keep 1 line each.
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    const nextNum = String(holdings.length + 1);
-                    updateAdvRef({
-                      holdings: [...holdings, { number: nextNum, holding: '', pinpoint: '' }],
-                    });
-                  }}
-                  className="px-3 py-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold uppercase rounded-xs cursor-pointer self-start sm:self-auto"
-                >
-                  + Add Holding
-                </button>
-              </div>
-
-              {holdings.length === 0 ? (
-                <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
-                  No enumerated holdings added yet.
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {holdings.map((h, idx) => (
-                    <div key={idx} className="p-3 bg-[#0A0C10] border border-white/10 rounded-xs flex flex-col md:flex-row items-start md:items-center gap-3">
-                      <div className="w-16">
-                        <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Point #</label>
-                        <input
-                          type="text"
-                          value={h.number}
-                          onChange={(e) => {
-                            const updated = [...holdings];
-                            updated[idx] = { ...updated[idx], number: e.target.value };
-                            updateAdvRef({ holdings: updated });
-                          }}
-                          className="w-full bg-[#121520] border border-white/15 text-xs text-center font-mono font-bold text-white p-2 rounded-xs"
-                          placeholder="1"
-                        />
-                      </div>
-
-                      <div className="flex-1 w-full">
-                        <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Holding Summary (1 Line)</label>
-                        <input
-                          type="text"
-                          value={h.holding}
-                          onChange={(e) => {
-                            const updated = [...holdings];
-                            updated[idx] = { ...updated[idx], holding: e.target.value };
-                            updateAdvRef({ holdings: updated });
-                          }}
-                          placeholder="Authoritative holding statement..."
-                          className="w-full bg-[#121520] border border-white/15 text-xs text-white p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <div className="w-full md:w-48">
-                        <label className="block text-[9px] font-mono text-emerald-300 uppercase">Pinpoint Citation</label>
-                        <input
-                          type="text"
-                          value={h.pinpoint}
-                          onChange={(e) => {
-                            const updated = [...holdings];
-                            updated[idx] = { ...updated[idx], pinpoint: e.target.value };
-                            updateAdvRef({ holdings: updated });
-                          }}
-                          placeholder="e.g. 865H, 866A-C"
-                          className="w-full bg-[#121520] border border-emerald-500/30 text-xs font-mono text-emerald-300 p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const updated = holdings.filter((_, i) => i !== idx);
-                          updateAdvRef({ holdings: updated });
-                        }}
-                        className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer self-end md:self-center mt-2 md:mt-0"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* PART 3: PRECEDENTS DISCUSSED IN THIS JUDGMENT */}
-            <div className="p-5 bg-black/40 border border-emerald-500/20 rounded-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-emerald-400">3 ·</span>
-                    <h4 className="font-anton text-sm text-white uppercase tracking-wider">
-                      Precedents Discussed In This Judgment
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-[#a9a49a]">
-                    Table of cases the court engaged with: Case Name — Citation — How current judgment treated it.
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    updateAdvRef({
-                      precedents: [...precedents, { caseName: '', citation: '', treatment: 'Affirmed' }],
-                    });
-                  }}
-                  className="px-3 py-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold uppercase rounded-xs cursor-pointer self-start sm:self-auto"
-                >
-                  + Add Precedent
-                </button>
-              </div>
-
-              {precedents.length === 0 ? (
-                <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
-                  No precedents discussed added yet.
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {precedents.map((p, idx) => (
-                    <div key={idx} className="p-3 bg-[#0A0C10] border border-white/10 rounded-xs grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-                      <div className="md:col-span-4">
-                        <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Case Title</label>
-                        <input
-                          type="text"
-                          value={p.caseName}
-                          onChange={(e) => {
-                            const updated = [...precedents];
-                            updated[idx] = { ...updated[idx], caseName: e.target.value };
-                            updateAdvRef({ precedents: updated });
-                          }}
-                          placeholder="e.g. Bai Tahira v. Ali Hussain"
-                          className="w-full bg-[#121520] border border-white/15 text-xs text-white p-2 rounded-xs font-serif font-bold"
-                        />
-                      </div>
-
-                      <div className="md:col-span-3">
-                        <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Citation</label>
-                        <input
-                          type="text"
-                          value={p.citation}
-                          onChange={(e) => {
-                            const updated = [...precedents];
-                            updated[idx] = { ...updated[idx], citation: e.target.value };
-                            updateAdvRef({ precedents: updated });
-                          }}
-                          placeholder="e.g. [1979] 2 SCR 75"
-                          className="w-full bg-[#121520] border border-white/15 text-xs font-mono text-white p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <div className="md:col-span-4">
-                        <label className="block text-[9px] font-mono text-emerald-300 uppercase">Treatment Note / Verb</label>
-                        <input
-                          type="text"
-                          value={p.treatment}
-                          onChange={(e) => {
-                            const updated = [...precedents];
-                            updated[idx] = { ...updated[idx], treatment: e.target.value };
-                            updateAdvRef({ precedents: updated });
-                          }}
-                          placeholder="e.g. Affirmed as correctly decided / Applied / Referred to"
-                          className="w-full bg-[#121520] border border-emerald-500/30 text-xs text-white p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <div className="md:col-span-1 text-right">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = precedents.filter((_, i) => i !== idx);
-                            updateAdvRef({ precedents: updated });
-                          }}
-                          className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* PART 4: SUBSEQUENT CITATOR HISTORY & MANDATORY NOTICE */}
-            <div className="p-5 bg-black/40 border border-emerald-500/20 rounded-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-emerald-400">4 ·</span>
-                    <h4 className="font-anton text-sm text-white uppercase tracking-wider">
-                      Subsequent Citator History
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-[#a9a49a]">
-                    Reproduce recorded citator metadata plainly (e.g. F 1986 SC 587 (4)).
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    updateAdvRef({
-                      citatorHistory: [...citatorHistory, { code: 'F (Followed)', citation: '', points: '(4)' }],
-                    });
-                  }}
-                  className="px-3 py-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold uppercase rounded-xs cursor-pointer self-start sm:self-auto"
-                >
-                  + Add Citator Entry
-                </button>
-              </div>
-
-              {citatorHistory.length === 0 ? (
-                <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
-                  No citator history added yet.
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {citatorHistory.map((c, idx) => (
-                    <div key={idx} className="p-3 bg-[#0A0C10] border border-white/10 rounded-xs grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-                      <div className="md:col-span-4">
-                        <label className="block text-[9px] font-mono text-emerald-300 uppercase">Code / Verb</label>
-                        <input
-                          type="text"
-                          value={c.code}
-                          onChange={(e) => {
-                            const updated = [...citatorHistory];
-                            updated[idx] = { ...updated[idx], code: e.target.value };
-                            updateAdvRef({ citatorHistory: updated });
-                          }}
-                          placeholder="e.g. F (Followed) / RF (Referred) / D (Distinguished)"
-                          className="w-full bg-[#121520] border border-emerald-500/30 text-xs font-mono font-bold text-emerald-300 p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <div className="md:col-span-4">
-                        <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Citation</label>
-                        <input
-                          type="text"
-                          value={c.citation}
-                          onChange={(e) => {
-                            const updated = [...citatorHistory];
-                            updated[idx] = { ...updated[idx], citation: e.target.value };
-                            updateAdvRef({ citatorHistory: updated });
-                          }}
-                          placeholder="e.g. 1986 SC 587"
-                          className="w-full bg-[#121520] border border-white/15 text-xs font-mono text-white p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <div className="md:col-span-3">
-                        <label className="block text-[9px] font-mono text-[#a9a49a] uppercase">Point(s)</label>
-                        <input
-                          type="text"
-                          value={c.points || ''}
-                          onChange={(e) => {
-                            const updated = [...citatorHistory];
-                            updated[idx] = { ...updated[idx], points: e.target.value };
-                            updateAdvRef({ citatorHistory: updated });
-                          }}
-                          placeholder="e.g. (4) or (5, 6)"
-                          className="w-full bg-[#121520] border border-white/15 text-xs font-mono text-white p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <div className="md:col-span-1 text-right">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = citatorHistory.filter((_, i) => i !== idx);
-                            updateAdvRef({ citatorHistory: updated });
-                          }}
-                          className="text-xs text-red-400 hover:text-red-300 font-mono px-2 py-1 cursor-pointer"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Mandatory Citator Notice Editor */}
-              <div className="pt-3 border-t border-white/10 space-y-2">
-                <label className="block text-[10px] font-mono text-amber-300 uppercase font-bold">
-                  ⚠️ Mandatory Citator Verification Disclaimer Notice
-                </label>
-                <textarea
-                  rows={2}
-                  value={citatorDisclaimer}
-                  onChange={(e) => {
-                    updateAdvRef({ citatorDisclaimer: e.target.value });
-                  }}
-                  className="w-full bg-[#0A0C10] border border-amber-500/30 text-xs text-amber-200 p-2.5 rounded-xs font-mono leading-relaxed"
-                />
-              </div>
-            </div>
-
-            {/* PART 5: FULL PARALLEL CITATION INDEX */}
-            <div className="p-5 bg-black/40 border border-emerald-500/20 rounded-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-emerald-400">5 ·</span>
-                    <h4 className="font-anton text-sm text-white uppercase tracking-wider">
-                      Full Parallel Citation Index
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-[#a9a49a]">
-                    List every equivalent/parallel citation provided in the report header (AIR, SCR, SCC, SCALE, BOM LR, DMC, etc.).
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    updateAdvRef({
-                      parallelCitations: [...parallelCitations, ''],
-                    });
-                  }}
-                  className="px-3 py-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold uppercase rounded-xs cursor-pointer self-start sm:self-auto"
-                >
-                  + Add Parallel Citation
-                </button>
-              </div>
-
-              {/* Bulk paste helper */}
-              <div>
-                <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                  Quick Bulk Edit (Separated by &ldquo;·&rdquo; or comma or newlines)
-                </label>
-                <textarea
-                  rows={2}
-                  value={parallelCitations.join(' · ')}
-                  onChange={(e) => {
-                    const parsed = e.target.value
-                      .split(/[·,\n]+/)
-                      .map((s) => s.trim())
-                      .filter(Boolean);
-                    updateAdvRef({ parallelCitations: parsed });
-                  }}
-                  placeholder="e.g. 1985 AIR 945 · 1985 SCR (3) 844 · 1985 (2) SCC 556"
-                  className="w-full bg-[#0A0C10] border border-white/15 text-xs font-mono text-emerald-200 p-2.5 rounded-xs"
-                />
-              </div>
-
-              {parallelCitations.length > 0 && (
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {parallelCitations.map((c: string, idx: number) => (
-                    <span
-                      key={idx}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#0A0C10] border border-emerald-500/30 text-emerald-300 text-xs font-mono rounded-xs"
-                    >
-                      <span>{c}</span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const updated = parallelCitations.filter((_: string, i: number) => i !== idx);
-                          updateAdvRef({ parallelCitations: updated });
-                        }}
-                        className="text-[10px] text-red-400 hover:text-red-300 cursor-pointer"
-                      >
-                        ✕
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* PART 6: ADDITIONAL CUSTOM LAWYER EPISODES */}
-            <div className="p-5 bg-black/40 border border-emerald-500/20 rounded-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-white/10">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-emerald-400">+</span>
-                    <h4 className="font-anton text-sm text-white uppercase tracking-wider">
-                      Additional Custom Lawyer Episodes ({customLawyerEpisodes.length})
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-[#a9a49a]">
-                    Add custom episodes to Lawyer mode (e.g. Procedural History, Detailed Arguments of Senior Counsel, Full High Court History, etc.).
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    const nextNum = 6 + customLawyerEpisodes.length;
-                    const newCustomEp: import('@/types').LawyerEpisode = {
-                      id: `lawyer-ep-${nextNum}`,
-                      n: nextNum,
-                      type: 'CUSTOM',
-                      kicker: `LAWYER EPISODE 0${nextNum} · CUSTOM RECORD`,
-                      title: `Episode ${nextNum} Title`,
-                      description: `Detailed lawyer notes and judicial record.`,
-                      paragraphs: [''],
-                    };
-                    updateCustomLawyerEpisodes([...customLawyerEpisodes, newCustomEp]);
-                  }}
-                  className="px-3.5 py-2 bg-emerald-500 hover:bg-white text-black font-mono font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer shadow-md self-start sm:self-auto flex items-center gap-1.5"
-                >
-                  <span>+</span>
-                  <span>Add Custom Lawyer Episode</span>
-                </button>
-              </div>
-
-              {customLawyerEpisodes.length === 0 ? (
-                <div className="p-4 text-center border border-dashed border-white/10 rounded-xs text-xs font-mono text-white/40">
-                  No additional custom lawyer episodes added. Click "+ Add Custom Lawyer Episode" if you wish to add Episode 6, Episode 7, etc.
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {customLawyerEpisodes.map((cEp, cIdx) => (
-                    <div key={cIdx} className="p-4 bg-[#0A0C10] border border-emerald-500/20 rounded-xs space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase">
-                          Custom Lawyer Episode #{cIdx + 1} (Episode 0{cEp.n || 6 + cIdx})
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = customLawyerEpisodes.filter((_, i) => i !== cIdx);
-                            updateCustomLawyerEpisodes(updated);
-                          }}
-                          className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
-                        >
-                          ✕ Delete Episode
-                        </button>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                            Episode Kicker
-                          </label>
-                          <input
-                            type="text"
-                            value={cEp.kicker}
-                            onChange={(e) => {
-                              const updated = [...customLawyerEpisodes];
-                              updated[cIdx] = { ...updated[cIdx], kicker: e.target.value };
-                              updateCustomLawyerEpisodes(updated);
-                            }}
-                            className="w-full bg-[#121520] border border-white/15 text-xs text-emerald-300 font-bold p-2 rounded-xs"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                            Episode Title
-                          </label>
-                          <input
-                            type="text"
-                            value={cEp.title}
-                            onChange={(e) => {
-                              const updated = [...customLawyerEpisodes];
-                              updated[cIdx] = { ...updated[cIdx], title: e.target.value };
-                              updateCustomLawyerEpisodes(updated);
-                            }}
-                            className="w-full bg-[#121520] border border-white/15 text-xs text-white font-bold p-2 rounded-xs"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
-                          Description
-                        </label>
-                        <input
-                          type="text"
-                          value={cEp.description || ''}
-                          onChange={(e) => {
-                            const updated = [...customLawyerEpisodes];
-                            updated[cIdx] = { ...updated[cIdx], description: e.target.value };
-                            updateCustomLawyerEpisodes(updated);
-                          }}
-                          className="w-full bg-[#121520] border border-white/15 text-xs text-white/80 p-2 rounded-xs"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] font-mono text-emerald-300 uppercase mb-1">
-                          Episode Content / Paragraphs
-                        </label>
-                        <textarea
-                          rows={4}
-                          value={(cEp.paragraphs || []).join('\n\n')}
-                          onChange={(e) => {
-                            const updated = [...customLawyerEpisodes];
-                            updated[cIdx] = { ...updated[cIdx], paragraphs: e.target.value.split('\n\n').map(p => p.trim()).filter(Boolean) };
-                            updateCustomLawyerEpisodes(updated);
-                          }}
-                          placeholder="Enter paragraph text (separate paragraphs with blank lines)..."
-                          className="w-full bg-[#121520] border border-emerald-500/20 text-xs text-white p-2.5 rounded-xs leading-relaxed"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         );
       })()}

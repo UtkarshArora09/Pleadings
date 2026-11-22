@@ -8,6 +8,7 @@ import { StatusBadge } from '@/components/case/StatusBadge';
 import { useApp } from '@/context/AppContext';
 import { getCaseComplexity } from '@/lib/caseComplexity';
 import { shouldBypassImageOptimization } from '@/lib/imageUtils';
+import { ShareSheet } from '@/components/case/ShareSheet';
 
 interface CaseCardProps {
   caseData: CaseFile;
@@ -19,6 +20,7 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
   const { language, isBookmarked, toggleBookmark } = useApp();
   const [hasVoted, setHasVoted] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const fallbackBanner = (caseData as unknown as { bannerImage?: string }).bannerImage || '';
   const resolvedPoster = caseData.poster?.src || fallbackBanner;
   const [posterSrc, setPosterSrc] = useState<string>(resolvedPoster);
@@ -143,25 +145,55 @@ export function CaseCard({ caseData, className = '', priority = false }: CaseCar
           <span>→</span>
         </Link>
 
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleBookmark(caseData.slug);
-          }}
-          className={`min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xs transition-colors cursor-pointer text-sm ${
-            bookmarked
-              ? 'text-[#E50914] bg-[#E50914]/10'
-              : 'text-white/50 hover:text-white hover:bg-white/10'
-          }`}
-          title={bookmarked ? 'Remove bookmark' : 'Bookmark case'}
-          aria-label={bookmarked ? `Remove ${displayTitle} from saved cases` : `Save ${displayTitle}`}
-          aria-pressed={bookmarked}
-        >
-          {bookmarked ? '★' : '☆'}
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsShareOpen(true);
+            }}
+            className="min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xs transition-colors cursor-pointer text-xs text-white/50 hover:text-[#D4AF37] hover:bg-white/10"
+            title="Share case"
+            aria-label={`Share ${displayTitle}`}
+          >
+            <span>↗</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleBookmark(caseData.slug);
+            }}
+            className={`min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xs transition-colors cursor-pointer text-sm ${
+              bookmarked
+                ? 'text-[#E50914] bg-[#E50914]/10'
+                : 'text-white/50 hover:text-white hover:bg-white/10'
+            }`}
+            title={bookmarked ? 'Remove bookmark' : 'Bookmark case'}
+            aria-label={bookmarked ? `Remove ${displayTitle} from saved cases` : `Save ${displayTitle}`}
+            aria-pressed={bookmarked}
+          >
+            {bookmarked ? '★' : '☆'}
+          </button>
+        </div>
       </div>
+
+      {isShareOpen && (
+        <ShareSheet
+          slug={caseData.slug}
+          caseTitle={displayTitle}
+          court={caseData.court}
+          year={caseData.year}
+          citation={caseData.citations?.primary || (caseData as any).citation}
+          posterSrc={posterSrc}
+          isOpen={isShareOpen}
+          onClose={() => setIsShareOpen(false)}
+          lang={language}
+        />
+      )}
     </div>
   );
 }

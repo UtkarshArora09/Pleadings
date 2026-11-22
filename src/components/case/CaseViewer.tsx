@@ -11,7 +11,7 @@ import { CaseImage } from './CaseImage';
 import { StatusBadge } from './StatusBadge';
 import { ProvenanceStrip } from './ProvenanceStrip';
 import { ParaSheet } from './ParaSheet';
-import { VoteGate } from './VoteGate';
+import { ShareSheet } from './ShareSheet';
 import { IfThisAffectsYou } from './IfThisAffectsYou';
 import { WhatChangedSince } from './WhatChangedSince';
 import { ReadNext } from './ReadNext';
@@ -51,7 +51,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   // Sheet States
   const [activeSource, setActiveSource] = useState<Source | null>(null);
   const [activeTermSlug, setActiveTermSlug] = useState<string | null>(null);
-  const [isVerdictUnlocked, setIsVerdictUnlocked] = useState<boolean>(false);
+  const [isShareOpen, setIsShareOpen] = useState<boolean>(false);
 
   // Swipe Gesture Handling (Touch & Pointer)
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
@@ -63,7 +63,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
   const displayHook = resolveLocalizedField(activeContent.hook, language, '');
   const episodes = useMemo(() => activeContent.episodes || [], [activeContent.episodes]);
   const bookmarked = isBookmarked(caseData.slug);
-  const handleVerdictUnlocked = useCallback(() => setIsVerdictUnlocked(true), []);
 
   // Responsive device view mode default + initial URL hash jump (#episode-2, #case-dossier)
   useEffect(() => {
@@ -277,6 +276,17 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
 
           <LegalDisclaimer variant="pill" lang={language} compactOnMobile={true} />
 
+          {/* Share Button */}
+          <button
+            type="button"
+            onClick={() => setIsShareOpen(true)}
+            className="px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs rounded-xs border font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 bg-white/5 hover:bg-[#D4AF37] hover:text-black hover:border-[#D4AF37] text-white/80 border-white/15 shadow-xs"
+            title={language === 'en' ? 'Share case' : 'निर्णय साझा करें'}
+          >
+            <span>↗</span>
+            <span className="hidden sm:inline">{language === 'en' ? 'SHARE' : 'साझा करें'}</span>
+          </button>
+
           {/* Bookmark Button */}
           <button
             onClick={() => toggleBookmark(caseData.slug)}
@@ -414,8 +424,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                 const ep = episodes[epIdx];
                 const epNum = ep.n || epIdx + 1;
                 const currentLayer = ep.layers?.story || { blocks: [] };
-                const isVerdictEpisode = epNum === 7;
-                const isLocked = isVerdictEpisode && !isVerdictUnlocked;
                 const isFinalEpisode = epIdx === episodes.length - 1;
 
                 return (
@@ -443,49 +451,8 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                       />
                     )}
 
-                    {/* Episode 7: Interactive Vote Gate */}
-                    {isVerdictEpisode && (
-                      <VoteGate
-                        slug={caseData.slug}
-                        caseTitle={displayTitle}
-                        question={
-                          caseData.vote?.question ||
-                          `How should the Court decide regarding ${displayTitle}?`
-                        }
-                        context={
-                          caseData.vote?.context ||
-                          'Balancing fundamental constitutional rights against statutory state action.'
-                        }
-                        options={
-                          caseData.vote?.options &&
-                          Array.isArray(caseData.vote.options) &&
-                          caseData.vote.options.length >= 2
-                            ? [caseData.vote.options[0], caseData.vote.options[1]]
-                            : [
-                                {
-                                  id: 'petitioner',
-                                  label: 'In Favor of Petitioner',
-                                  argument: 'Uphold fundamental constitutional liberties',
-                                },
-                                {
-                                  id: 'respondent',
-                                  label: 'In Favor of Respondent',
-                                  argument: 'Uphold statutory compliance and state interest',
-                                },
-                              ]
-                        }
-                        courtChoseOptionId={caseData.vote?.courtChoseOptionId || 'petitioner'}
-                        onUnlocked={handleVerdictUnlocked}
-                        lang={language}
-                      />
-                    )}
-
                     {/* Episode Narrative Content (With Plain-English Tap-To-Define on tricky terms) */}
-                    <div
-                      className={`space-y-4 ${
-                        isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''
-                      }`}
-                    >
+                    <div className="space-y-4">
                       {(() => {
                         const explicitPersonas =
                           ep.personas && ep.personas.length > 0
@@ -727,8 +694,6 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
             {episodes.map((ep, epIdx) => {
               const epNum = ep.n || epIdx + 1;
               const currentLayer = ep.layers?.story || { blocks: [] };
-              const isVerdictEpisode = epNum === 7;
-              const isLocked = isVerdictEpisode && !isVerdictUnlocked;
               const nextEpId =
                 epNum < episodes.length ? `episode-${epNum + 1}` : 'case-dossier';
 
@@ -759,47 +724,7 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                     />
                   )}
 
-                  {isVerdictEpisode && (
-                    <VoteGate
-                      slug={caseData.slug}
-                      caseTitle={displayTitle}
-                      question={
-                        caseData.vote?.question ||
-                        `How should the Court decide regarding ${displayTitle}?`
-                      }
-                      context={
-                        caseData.vote?.context ||
-                        'Balancing fundamental constitutional rights against state action.'
-                      }
-                      options={
-                        caseData.vote?.options &&
-                        Array.isArray(caseData.vote.options) &&
-                        caseData.vote.options.length >= 2
-                          ? [caseData.vote.options[0], caseData.vote.options[1]]
-                          : [
-                              {
-                                id: 'petitioner',
-                                label: 'In Favor of Petitioner',
-                                argument: 'Uphold fundamental constitutional liberties',
-                              },
-                              {
-                                id: 'respondent',
-                                label: 'In Favor of Respondent',
-                                argument: 'Uphold statutory compliance and state interest',
-                              },
-                            ]
-                      }
-                      courtChoseOptionId={caseData.vote?.courtChoseOptionId || 'petitioner'}
-                      onUnlocked={handleVerdictUnlocked}
-                      lang={language}
-                    />
-                  )}
-
-                  <div
-                    className={`space-y-4 ${
-                      isLocked ? 'blur-md pointer-events-none select-none opacity-40' : ''
-                    }`}
-                  >
+                  <div className="space-y-4">
                     {(() => {
                       const explicitPersonas =
                         ep.personas && ep.personas.length > 0
@@ -906,6 +831,19 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
         }
         isOpen={Boolean(activeTermSlug)}
         onClose={() => setActiveTermSlug(null)}
+        lang={language}
+      />
+
+      {/* Presentable Case Share Modal */}
+      <ShareSheet
+        slug={caseData.slug}
+        caseTitle={displayTitle}
+        court={caseData.court}
+        year={caseData.year}
+        citation={caseData.citations?.primary || (caseData as any).citation}
+        posterSrc={caseData.poster?.src}
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
         lang={language}
       />
     </div>
