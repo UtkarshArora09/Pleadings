@@ -611,10 +611,29 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     }
   };
 
-  if (loading || !caseData) {
+  if (loading) {
     return (
-      <div className="p-16 text-center text-xs font-mono text-[#a9a49a]">
+      <div className="p-16 text-center text-xs font-mono text-[#a9a49a] animate-pulse">
         Loading Case Review Studio...
+      </div>
+    );
+  }
+
+  if (!caseData) {
+    return (
+      <div className="p-16 text-center max-w-md mx-auto space-y-4">
+        <div className="text-sm font-mono text-red-400">
+          Case record not found or invalid slug: &ldquo;{slug}&rdquo;
+        </div>
+        <p className="text-xs text-[#a9a49a]">
+          This case could not be retrieved from the database. Please select a valid case from the catalog.
+        </p>
+        <Link
+          href="/admin"
+          className="inline-block px-4 py-2 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase font-mono rounded-xs transition-colors"
+        >
+          ← Return to Case Catalog
+        </Link>
       </div>
     );
   }

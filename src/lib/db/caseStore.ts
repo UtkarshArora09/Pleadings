@@ -365,9 +365,16 @@ export function normalizeCaseData(raw: any): CaseData {
   const publishStatus = resolvePublishStatus(source);
   const legalStatus = resolveLegalStatus(source, year);
 
+  const fallbackSlug = (titleEn || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '') || `case-${Date.now()}`;
+
   return {
     ...source,
-    slug: source.slug,
+    slug: (typeof source.slug === 'string' && source.slug.trim()) ? source.slug.trim() : fallbackSlug,
     title: { en: titleEn, hi: titleHi },
     tag: { en: categoryTag, hi: categoryTag },
     categoryTag: categoryTag,

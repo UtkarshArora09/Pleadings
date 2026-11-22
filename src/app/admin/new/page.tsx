@@ -256,7 +256,8 @@ export default function NewCasePage() {
       }
 
       // Redirect to the Review Studio for this case
-      router.push(`/admin/cases/${data.case.slug}`);
+      const targetSlug = data.case?.slug || formData.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+      router.push(`/admin/cases/${targetSlug}`);
     } catch (err: unknown) {
       console.error('Ingestion error:', err);
       setError(err instanceof Error ? err.message : 'Failed to ingest case');

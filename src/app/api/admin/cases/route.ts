@@ -52,6 +52,24 @@ export async function POST(request: NextRequest) {
         ? String((rawTitle as { en?: string }).en || '')
         : String(body.slug || '');
 
+    function slugify(text: string): string {
+      return (text || '')
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    const rawSlugCandidate = typeof body.slug === 'string' && body.slug.trim() ? body.slug : titleStr;
+    const caseSlug = slugify(rawSlugCandidate) || `case-${Date.now()}`;
+    const normalizedTitle =
+      typeof rawTitle === 'string'
+        ? { en: rawTitle, hi: rawTitle }
+        : typeof rawTitle === 'object' && rawTitle !== null
+        ? rawTitle
+        : { en: titleStr || 'Untitled Case', hi: titleStr || 'Untitled Case' };
+
     const courtStr = String(body.court || 'Supreme Court of India');
     const yearNum =
       typeof body.year === 'number'
@@ -81,6 +99,8 @@ export async function POST(request: NextRequest) {
     if (Array.isArray(body.episodes) && body.episodes.length > 0) {
       caseToSave = {
         ...body,
+        slug: caseSlug,
+        title: normalizedTitle,
         court: courtStr,
         year: yearNum,
         genre: genreStr,
@@ -108,6 +128,8 @@ export async function POST(request: NextRequest) {
 
       caseToSave = {
         ...body,
+        slug: caseSlug,
+        title: normalizedTitle,
         court: courtStr,
         year: yearNum,
         genre: genreStr,
