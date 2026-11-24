@@ -403,28 +403,28 @@ Please scan this entire document, extract all text, perform legal structuring, a
     ? parsedJson.episodes
     : [];
 
-  if (episodes.length === 0) {
-    const defaultKickers = [
-      'EPISODE 01 · THE PREMISE',
-      'EPISODE 02 · DRAMATIS PERSONAE',
-      'EPISODE 03 · THE INVESTIGATION & TRIAL',
-      'EPISODE 04 · THE LEGAL CONTROVERSY',
-      'EPISODE 05 · COURTROOM ARGUMENTS',
-      'EPISODE 06 · JUDICIAL DELIBERATION',
-      'EPISODE 07 · THE RATIO & VERDICT',
-      'EPISODE 08 · PRECEDENTIAL LEGACY',
-    ];
-    const defaultTitles = [
-      'HOW THE DISPUTE AROSE',
-      'KEY CHARACTERS & TENSIONS',
-      'TRIAL PROCEEDINGS & EVIDENCE',
-      'THE CENTRAL STATUTORY QUESTION',
-      'CONTENTIONS AT THE BAR',
-      'BENCH DELIBERATIONS & DOCTRINE',
-      'THE OPERATIVE DECREE',
-      'LONG-TERM JURISPRUDENTIAL IMPACT',
-    ];
+  const defaultKickers = [
+    'EPISODE 01 · THE PREMISE',
+    'EPISODE 02 · DRAMATIS PERSONAE',
+    'EPISODE 03 · THE TRIAL & INQUIRY',
+    'EPISODE 04 · THE LEGAL CONTROVERSY',
+    'EPISODE 05 · COURTROOM ARGUMENTS',
+    'EPISODE 06 · JUDICIAL DELIBERATION',
+    'EPISODE 07 · OPERATIVE VERDICT',
+    'EPISODE 08 · PRECEDENTIAL LEGACY',
+  ];
+  const defaultTitles = [
+    'THE GENESIS OF THE DISPUTE',
+    'THE PARTIES & CONFLICTING INTERESTS',
+    'PROCEDURAL ORDERS & INVESTIGATIVE RECORD',
+    'THE CENTRAL CONSTITUTIONAL QUESTION',
+    'CONTENTIONS AT THE BAR',
+    'BENCH REASONING & DOCTRINAL TESTS',
+    'THE BINDING HOLDING & DECREE',
+    'THE DOCTRINE GOING FORWARD',
+  ];
 
+  if (episodes.length === 0) {
     episodes = defaultKickers.map((kicker, i) => ({
       n: i + 1,
       kicker,
@@ -463,48 +463,66 @@ Please scan this entire document, extract all text, perform legal structuring, a
           pinpoints: [{ para: (i + 1) * 8, proposition: `Operative finding on ${categoryTag} threshold.` }],
         },
       },
+      personas: i === 1 ? rawPersonas : undefined,
     }));
   } else {
     // Validate each episode layers
-    episodes = episodes.map((ep, idx) => ({
-      n: ep.n || idx + 1,
-      kicker: ep.kicker || `EPISODE 0${idx + 1} · STAGE ${idx + 1}`,
-      title: ep.title || `STAGE ${idx + 1} OF ${caseTitleEn}`,
-      endHook: ep.endHook || 'The proceedings moved forward.',
-      layers: {
-        story: {
-          blocks: ep.layers?.story?.blocks || [
+    episodes = episodes.map((ep, idx) => {
+      const epNum = ep.n || idx + 1;
+      const kicker = ep.kicker || defaultKickers[idx] || `EPISODE 0${epNum} · THE DISPUTE`;
+      const title = ep.title || defaultTitles[idx] || `EPISODE ${epNum}`;
+      const storyBlocks = ep.layers?.story?.blocks && ep.layers.story.blocks.length > 0
+        ? ep.layers.story.blocks
+        : [
             {
-              type: 'para',
-              text: `Factual developments of episode ${idx + 1}.`,
-              source: { tier: 'BLACK', para: idx + 1 },
+              type: 'para' as const,
+              text: typeof (ep as any).text === 'string' && (ep as any).text.trim()
+                ? (ep as any).text.trim()
+                : `Factual developments of episode ${epNum} in ${caseTitleEn}.`,
+              source: { tier: 'BLACK' as const, para: epNum },
             },
-          ],
+          ];
+
+      return {
+        n: epNum,
+        kicker,
+        title,
+        endHook: ep.endHook || (idx < 7 ? 'The controversy escalated to the next judicial milestone.' : 'The precedent remains binding law under Article 141.'),
+        layers: {
+          story: {
+            blocks: storyBlocks,
+          },
+          student: {
+            blocks: ep.layers?.student?.blocks || [
+              {
+                type: 'para',
+                text: `Student legal breakdown of episode ${epNum}.`,
+                source: { tier: 'BLACK' },
+              },
+            ],
+            ratio: ep.layers?.student?.ratio || `Ratio decidendi of ${caseTitleEn}`,
+            obiter: ep.layers?.student?.obiter || ['Judicial observation noted by the court.'],
+            examAngle: ep.layers?.student?.examAngle || 'CLAT-PG & Judiciary Mains significance.',
+          },
+          advocate: {
+            blocks: ep.layers?.advocate?.blocks || [
+              {
+                type: 'para',
+                text: `TRIAL PROPOSITION: Legal point illustrated by episode ${epNum}.`,
+                source: { tier: 'BLACK' },
+              },
+            ],
+            pinpoints: ep.layers?.advocate?.pinpoints || [{ para: epNum * 5, proposition: 'Quoted rule.' }],
+          },
         },
-        student: {
-          blocks: ep.layers?.student?.blocks || [
-            {
-              type: 'para',
-              text: `Student legal breakdown of episode ${idx + 1}.`,
-              source: { tier: 'BLACK' },
-            },
-          ],
-          ratio: ep.layers?.student?.ratio || `Ratio decidendi of ${caseTitleEn}`,
-          obiter: ep.layers?.student?.obiter || ['Judicial observation noted by the court.'],
-          examAngle: ep.layers?.student?.examAngle || 'CLAT-PG & Judiciary Mains significance.',
-        },
-        advocate: {
-          blocks: ep.layers?.advocate?.blocks || [
-            {
-              type: 'para',
-              text: `TRIAL PROPOSITION: Legal point illustrated by episode ${idx + 1}.`,
-              source: { tier: 'BLACK' },
-            },
-          ],
-          pinpoints: ep.layers?.advocate?.pinpoints || [{ para: (idx + 1) * 5, proposition: 'Quoted rule.' }],
-        },
-      },
-    }));
+        personas: epNum === 2 ? (ep.personas || rawPersonas) : ep.personas,
+      };
+    });
+  }
+
+  // Ensure Episode 2 has personas
+  if (episodes[1] && (!episodes[1].personas || episodes[1].personas.length === 0) && rawPersonas.length > 0) {
+    episodes[1].personas = rawPersonas;
   }
 
   // 4. Construct StoryPanels for backwards compatibility with Reader

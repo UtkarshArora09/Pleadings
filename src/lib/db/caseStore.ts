@@ -286,25 +286,61 @@ export function normalizeCaseData(raw: any): CaseData {
       };
     });
   } else {
+    const defaultKickers = [
+      'EPISODE 01 · THE PREMISE',
+      'EPISODE 02 · DRAMATIS PERSONAE',
+      'EPISODE 03 · THE TRIAL & INQUIRY',
+      'EPISODE 04 · THE LEGAL CONTROVERSY',
+      'EPISODE 05 · COURTROOM ARGUMENTS',
+      'EPISODE 06 · JUDICIAL DELIBERATION',
+      'EPISODE 07 · OPERATIVE VERDICT',
+      'EPISODE 08 · PRECEDENTIAL LEGACY',
+    ];
+
+    const defaultTitles = [
+      'THE GENESIS OF THE DISPUTE',
+      'THE PARTIES & CONFLICTING INTERESTS',
+      'PROCEDURAL ORDERS & INVESTIGATIVE RECORD',
+      'THE CENTRAL CONSTITUTIONAL QUESTION',
+      'CONTENTIONS AT THE BAR',
+      'BENCH REASONING & DOCTRINAL TESTS',
+      'THE BINDING HOLDING & DECREE',
+      'THE DOCTRINE GOING FORWARD',
+    ];
+
     episodes = episodes.slice(0, 8).map((ep: any, idx: number) => {
       const p = panels[idx];
-      const storyBlocks = ep.layers?.story?.blocks || [
-        { type: 'para' as const, text: typeof p?.body === 'string' ? p.body : (p?.body?.en || blurbEn), source: { tier: 'AMBER' as const } }
+      const rawText = ep.layers?.story?.blocks?.[0]?.text;
+      const fallbackBody = typeof p?.body === 'string' ? p.body : (p?.body?.en || blurbEn);
+      const textToUse = (typeof rawText === 'string' && rawText.trim()) ? rawText.trim() : fallbackBody || `Factual developments of episode ${idx + 1} in ${titleEn}.`;
+
+      const storyBlocks = [
+        { type: 'para' as const, text: textToUse, source: { tier: 'AMBER' as const, para: idx + 1 } }
       ];
       const studentBlocks = ep.layers?.student?.blocks || [
-        { type: 'para' as const, text: `LEGAL ANALYSIS: ${storyBlocks[0]?.text || blurbEn}`, source: { tier: 'AMBER' as const } }
+        { type: 'para' as const, text: `LEGAL ANALYSIS: ${textToUse}`, source: { tier: 'AMBER' as const } }
       ];
       const advocateBlocks = ep.layers?.advocate?.blocks || [
         { type: 'para' as const, text: `TRIAL PROPOSITION: Standard of proof under ${categoryTag}.`, source: { tier: 'AMBER' as const } }
       ];
 
+      const rawKicker = ep.kicker && !ep.kicker.match(/^EPISODE 0?\d$/i)
+        ? ep.kicker
+        : (p?.eyebrow ? (typeof p.eyebrow === 'string' ? p.eyebrow : p.eyebrow.en) : defaultKickers[idx] || `EPISODE 0${idx + 1}`);
+
+      const rawTitle = ep.title && !ep.title.match(/^Episode \d+$/i) && !ep.title.match(/^STAGE \d+$/i)
+        ? ep.title
+        : (p?.headline ? (typeof p.headline === 'string' ? p.headline : p.headline.en) : defaultTitles[idx] || `Episode ${idx + 1}`);
+
+      const resolvedPersonas = idx === 1 ? (ep.personas || source.personas || source.characters || ep.characters) : ep.personas;
+
       return {
         ...ep,
         n: ep.n || idx + 1,
-        kicker: ep.kicker || (p?.eyebrow ? (typeof p.eyebrow === 'string' ? p.eyebrow : p.eyebrow.en) : `EPISODE 0${idx + 1}`),
-        title: ep.title || (p?.headline ? (typeof p.headline === 'string' ? p.headline : p.headline.en) : `Episode ${idx + 1}`),
-        personas: ep.personas || (idx === 1 ? (source.characters || ep.characters) : undefined),
-        characters: ep.characters || (idx === 1 ? (source.characters || ep.personas) : undefined),
+        kicker: rawKicker,
+        title: rawTitle,
+        personas: resolvedPersonas,
+        characters: resolvedPersonas,
         layers: {
           story: {
             ...ep.layers?.story,

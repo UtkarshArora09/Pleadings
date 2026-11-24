@@ -296,96 +296,221 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   // 13. EXTRACT 8 STORY EPISODES
   const episodes: Episode[] = [];
 
-  const episodeMatches = Array.from(normalizedText.matchAll(/EPISODE\s+0?(\d)\s*[·:-]\s*([^\n:]+)[:\s]*([^\n]*)/gi));
+  const DEFAULT_EP_STAGES = [
+    'THE PREMISE',
+    'DRAMATIS PERSONAE',
+    'THE TRIAL & INQUIRY',
+    'THE LEGAL CONTROVERSY',
+    'COURTROOM ARGUMENTS',
+    'JUDICIAL DELIBERATION',
+    'OPERATIVE VERDICT',
+    'PRECEDENTIAL LEGACY',
+  ];
 
-  if (episodeMatches && episodeMatches.length >= 4) {
-    for (let idx = 0; idx < episodeMatches.length; idx++) {
-      const match = episodeMatches[idx];
-      const epNum = parseInt(match[1], 10);
-      const kickerStage = match[2].trim().toUpperCase();
-      const rawHeading = match[3]?.trim() || `STAGE ${epNum}`;
+  const DEFAULT_EP_TITLES = [
+    'THE GENESIS OF THE DISPUTE',
+    'THE PARTIES & CONFLICTING INTERESTS',
+    'PROCEDURAL ORDERS & INVESTIGATIVE RECORD',
+    'THE CENTRAL CONSTITUTIONAL QUESTION',
+    'CONTENTIONS AT THE BAR',
+    'BENCH REASONING & DOCTRINAL TESTS',
+    'THE BINDING HOLDING & DECREE',
+    'THE DOCTRINE GOING FORWARD',
+  ];
 
-      // Find the text between this episode header and the next
-      const startIndex = match.index! + match[0].length;
-      let endIndex = normalizedText.length;
-      if (idx < episodeMatches.length - 1) {
-        endIndex = episodeMatches[idx + 1].index!;
-      }
+  const DEFAULT_EP_HOOKS = [
+    'The conflict triggered high-stakes judicial intervention.',
+    'The fundamental tension between State authority and individual liberty.',
+    'The administrative paper trail scrutinized before the bench.',
+    'The scope and limits of state power challenged at the apex level.',
+    'Rival arguments pushed the Court towards a landmark determination.',
+    'The judges deliberated on the proportionality of state restrictions.',
+    'The apex court declared the law with authoritative finality.',
+    'The ruling remains binding law under Article 141 of the Constitution.',
+  ];
 
-      const epTextChunk = normalizedText.slice(startIndex, endIndex);
-
-      // Extract Story Narrative
-      let storyText = '';
-      const storyNarrativeMatch = epTextChunk.match(/Story\s+Narrative[:\s]*\n+([\s\S]*?)(?=Student\s+Layer|Advocate\s+Layer|TRIAL\s+PROPOSITION|EPISODE|\n--- PAGE BREAK ---)/i);
-      if (storyNarrativeMatch) {
-        storyText = storyNarrativeMatch[1].trim().replace(/\s+/g, ' ');
-      } else {
-        // Fallback: take first coherent paragraph
-        const lines = epTextChunk.split(/\n+/).map((l) => l.trim()).filter((l) => l.length > 20 && !l.includes('PROPOSITION') && !l.includes('Ratio:'));
-        storyText = lines[0] || `Factual sequence of Episode ${epNum} in ${title}.`;
-      }
-
-      // Extract Student Layer Ratio & Obiter if available
-      let epRatio = '';
-      let epObiter: string[] = [];
-      let epExamAngle = '';
-      const studentMatch = epTextChunk.match(/Student\s+Layer[^\n]*[:\s]*\n+([\s\S]*?)(?=Advocate\s+Layer|TRIAL\s+PROPOSITION|EPISODE|\n---)/i);
-      if (studentMatch) {
-        const sBlock = studentMatch[1];
-        const rMatch = sBlock.match(/Ratio[:\s]*([^.]+?\.)/i);
-        if (rMatch) epRatio = rMatch[1].trim();
-        const oMatch = sBlock.match(/Obiter[:\s]*([^.]+?\.)/i);
-        if (oMatch) epObiter = [oMatch[1].trim()];
-        const eMatch = sBlock.match(/Exam\s+Angle[:\s]*([^.]+?\.)/i);
-        if (eMatch) epExamAngle = eMatch[1].trim();
-      }
-
-      // Extract Advocate Trial Proposition
-      let epTrialProp = '';
-      const advMatch = epTextChunk.match(/TRIAL\s+PROPOSITION[:\s]*([^\n[\]]+)(?:\[([^\]]+)\])?/i);
-      if (advMatch) {
-        epTrialProp = advMatch[1].trim();
-      }
-
-      episodes.push({
-        n: epNum,
-        kicker: `EPISODE 0${epNum} · ${kickerStage}`,
-        title: rawHeading.toUpperCase(),
-        endHook: epNum < 8 ? `The legal controversy escalated to the next judicial milestone.` : `The precedent remains binding law under Article 141.`,
-        layers: {
-          story: {
-            blocks: [
-              {
-                type: 'para',
-                text: storyText,
-                source: { tier: 'BLACK', para: epNum },
+  // First check if raw text contains an embedded JSON block with genuine episodes
+  try {
+    const jsonMatch = normalizedText.match(/\{[\s\S]*"episodes"\s*:\s*\[[\s\S]*\][\s\S]*\}/);
+    if (jsonMatch) {
+      const parsedJsonObj = JSON.parse(jsonMatch[0]);
+      if (Array.isArray(parsedJsonObj.episodes) && parsedJsonObj.episodes.length >= 4) {
+        parsedJsonObj.episodes.forEach((ep: any, i: number) => {
+          const epNum = ep.n || i + 1;
+          const storyBlockText =
+            ep.layers?.story?.blocks?.[0]?.text ||
+            (typeof ep.text === 'string' ? ep.text : '') ||
+            `Factual sequence of Episode ${epNum} in ${title}.`;
+          episodes.push({
+            n: epNum,
+            kicker: ep.kicker || `EPISODE 0${epNum} · ${DEFAULT_EP_STAGES[epNum - 1] || 'STAGE'}`,
+            title: (ep.title || DEFAULT_EP_TITLES[epNum - 1] || `EPISODE ${epNum}`).toUpperCase(),
+            endHook: ep.endHook || DEFAULT_EP_HOOKS[epNum - 1] || 'What followed next in the proceedings?',
+            layers: {
+              story: {
+                blocks: [
+                  {
+                    type: 'para',
+                    text: storyBlockText,
+                    source: { tier: 'BLACK', para: epNum },
+                  },
+                ],
               },
-            ],
-          },
-          student: {
-            blocks: [
-              {
-                type: 'para',
-                text: `Doctrinal legal analysis for ${kickerStage} under ${statuteSections}.`,
-                source: { tier: 'BLACK' },
+              student: ep.layers?.student || {
+                blocks: [{ type: 'para', text: `Legal analysis for Episode ${epNum}.`, source: { tier: 'BLACK' } }],
+                ratio: coreHolding || `Ratio decidendi of ${title}`,
+                obiter: [`Judicial observation in ${title}.`],
+                examAngle: `Key doctrine for CLAT-PG & Judiciary examination.`,
               },
-            ],
-            ratio: epRatio || coreHolding || `Ratio decidendi of ${title}`,
-            obiter: epObiter.length > 0 ? epObiter : [`Judicial observation regarding ${kickerStage}.`],
-            examAngle: epExamAngle || `High-yield topic for CLAT-PG & Judiciary Mains.`,
-          },
-          advocate: {
-            blocks: [
-              {
-                type: 'para',
-                text: epTrialProp ? `TRIAL PROPOSITION: ${epTrialProp}` : `TRIAL PROPOSITION: Legal threshold established by ${title}.`,
-                source: { tier: 'BLACK' },
+              advocate: ep.layers?.advocate || {
+                blocks: [{ type: 'para', text: `TRIAL PROPOSITION: Legal threshold illustrated by ${title}.`, source: { tier: 'BLACK' } }],
+                pinpoints: [{ para: epNum * 10, proposition: 'Operative finding' }],
               },
-            ],
-            pinpoints: [{ para: epNum * 12, proposition: epTrialProp || 'Operative finding' }],
+            },
+            personas: epNum === 2 ? personas : undefined,
+          });
+        });
+      }
+    }
+  } catch {
+    // Non-fatal, proceed to regex parser
+  }
+
+  // Regex for episode markers: "EPISODE 01 · THE PREMISE: THE ARREST" or "EPISODE 1: The Arrest" or "EPISODE 1 - The Arrest"
+  if (episodes.length === 0) {
+    const episodeMatches = Array.from(
+      normalizedText.matchAll(/EPISODE\s+0?(\d)\s*(?:[·:\-–—]\s*([^\n:\-–—]+))?(?:[·:\-–—]\s*([^\n]+))?/gi)
+    );
+
+    if (episodeMatches && episodeMatches.length >= 4) {
+      for (let idx = 0; idx < episodeMatches.length; idx++) {
+        const match = episodeMatches[idx];
+        const epNum = parseInt(match[1], 10);
+        const part1 = (match[2] || '').trim();
+        const part2 = (match[3] || '').trim();
+
+        let epKicker = '';
+        let epTitle = '';
+
+        if (part2) {
+          epKicker = `EPISODE 0${epNum} · ${part1.toUpperCase()}`;
+          epTitle = part2.toUpperCase();
+        } else if (part1) {
+          if (part1.includes('·') || part1.includes(' - ') || part1.includes(':')) {
+            const subparts = part1.split(/[·:\-–—]/).map((s) => s.trim()).filter(Boolean);
+            if (subparts.length >= 2) {
+              epKicker = `EPISODE 0${epNum} · ${subparts[0].toUpperCase()}`;
+              epTitle = subparts.slice(1).join(' - ').toUpperCase();
+            } else {
+              epKicker = `EPISODE 0${epNum} · ${DEFAULT_EP_STAGES[epNum - 1] || 'THE STAGE'}`;
+              epTitle = part1.toUpperCase();
+            }
+          } else {
+            epKicker = `EPISODE 0${epNum} · ${DEFAULT_EP_STAGES[epNum - 1] || 'THE DISPUTE'}`;
+            epTitle = part1.toUpperCase();
+          }
+        } else {
+          epKicker = `EPISODE 0${epNum} · ${DEFAULT_EP_STAGES[epNum - 1] || 'STAGE'}`;
+          epTitle = DEFAULT_EP_TITLES[epNum - 1] || `EPISODE ${epNum}`;
+        }
+
+        // Find the text between this episode header and the next
+        const startIndex = match.index! + match[0].length;
+        let endIndex = normalizedText.length;
+        if (idx < episodeMatches.length - 1) {
+          endIndex = episodeMatches[idx + 1].index!;
+        }
+
+        const epTextChunk = normalizedText.slice(startIndex, endIndex);
+
+        // Extract Story Narrative
+        let storyText = '';
+        const storyNarrativeMatch = epTextChunk.match(
+          /(?:Story\s+Narrative|Narrative|Facts\s+in\s+Brief|Factual\s+Summary)[:\s]*\n+([\s\S]*?)(?=Student\s+Layer|Advocate\s+Layer|TRIAL\s+PROPOSITION|End\s*Hook|Cliffhanger|EPISODE|\n--- PAGE BREAK ---|$)/i
+        );
+        if (storyNarrativeMatch) {
+          storyText = storyNarrativeMatch[1].trim().replace(/\s+/g, ' ');
+        } else {
+          // Fallback: take first coherent paragraphs
+          const lines = epTextChunk
+            .split(/\n\n+/)
+            .map((l) => l.trim().replace(/\s+/g, ' '))
+            .filter((l) => l.length > 25 && !l.startsWith('TRIAL PROPOSITION') && !l.startsWith('Ratio:') && !l.startsWith('Obiter:'));
+          storyText = lines.slice(0, 2).join('\n\n') || `Factual sequence of Episode ${epNum} in ${title}.`;
+        }
+
+        // Extract End Hook if marked
+        let epEndHook = '';
+        const hookMatch = epTextChunk.match(/(?:End\s*Hook|Cliffhanger|Hook)[:\s]*([^\n]+)/i);
+        if (hookMatch) {
+          epEndHook = hookMatch[1].trim();
+        } else {
+          epEndHook = DEFAULT_EP_HOOKS[epNum - 1] || (epNum < 8 ? 'The legal controversy escalated to the next judicial milestone.' : 'The precedent remains binding law under Article 141.');
+        }
+
+        // Extract Student Layer Ratio & Obiter if available
+        let epRatio = '';
+        let epObiter: string[] = [];
+        let epExamAngle = '';
+        const studentMatch = epTextChunk.match(/Student\s+Layer[^\n]*[:\s]*\n+([\s\S]*?)(?=Advocate\s+Layer|TRIAL\s+PROPOSITION|EPISODE|\n---)/i);
+        if (studentMatch) {
+          const sBlock = studentMatch[1];
+          const rMatch = sBlock.match(/Ratio[:\s]*([^.]+?\.)/i);
+          if (rMatch) epRatio = rMatch[1].trim();
+          const oMatch = sBlock.match(/Obiter[:\s]*([^.]+?\.)/i);
+          if (oMatch) epObiter = [oMatch[1].trim()];
+          const eMatch = sBlock.match(/Exam\s+Angle[:\s]*([^.]+?\.)/i);
+          if (eMatch) epExamAngle = eMatch[1].trim();
+        }
+
+        // Extract Advocate Trial Proposition
+        let epTrialProp = '';
+        const advMatch = epTextChunk.match(/TRIAL\s+PROPOSITION[:\s]*([^\n[\]]+)(?:\[([^\]]+)\])?/i);
+        if (advMatch) {
+          epTrialProp = advMatch[1].trim();
+        }
+
+        episodes.push({
+          n: epNum,
+          kicker: epKicker,
+          title: epTitle,
+          endHook: epEndHook,
+          layers: {
+            story: {
+              blocks: [
+                {
+                  type: 'para',
+                  text: storyText,
+                  source: { tier: 'BLACK', para: epNum },
+                },
+              ],
+            },
+            student: {
+              blocks: [
+                {
+                  type: 'para',
+                  text: `Doctrinal legal analysis for ${epTitle} under ${statuteSections}.`,
+                  source: { tier: 'BLACK' },
+                },
+              ],
+              ratio: epRatio || coreHolding || `Ratio decidendi of ${title}`,
+              obiter: epObiter.length > 0 ? epObiter : [`Judicial observation regarding ${epTitle}.`],
+              examAngle: epExamAngle || `High-yield topic for CLAT-PG & Judiciary Mains.`,
+            },
+            advocate: {
+              blocks: [
+                {
+                  type: 'para',
+                  text: epTrialProp ? `TRIAL PROPOSITION: ${epTrialProp}` : `TRIAL PROPOSITION: Legal threshold established by ${title}.`,
+                  source: { tier: 'BLACK' },
+                },
+              ],
+              pinpoints: [{ para: epNum * 12, proposition: epTrialProp || 'Operative finding' }],
+            },
           },
-        },
-      });
+          personas: epNum === 2 ? personas : undefined,
+        });
+      }
     }
   }
 

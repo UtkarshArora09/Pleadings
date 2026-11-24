@@ -459,26 +459,72 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                             ? ep.personas
                             : ep.characters && ep.characters.length > 0
                             ? ep.characters
+                            : epIdx === 1 && (caseData as any).personas && (caseData as any).personas.length > 0
+                            ? (caseData as any).personas
                             : null;
 
                         let hasRenderedPersonas = false;
 
-                        const renderedBlocks = (currentLayer.blocks || []).map((block, bIdx) => {
-                          if (hasPersonaFormat(block.text)) {
-                            hasRenderedPersonas = true;
-                            const parsed = extractPersonasFromText(block.text);
-                            return <CharacterRoster key={bIdx} personas={parsed} />;
-                          }
+                        const nonBlankBlocks = (currentLayer.blocks || []).filter(
+                          (b) => b && typeof b.text === 'string' && b.text.trim().length > 0
+                        );
 
-                          return (
-                            <SourcedBlock
-                              key={bIdx}
-                              block={block}
-                              onOpenSource={(src) => setActiveSource(src)}
-                              onOpenTerm={(term) => setActiveTermSlug(term)}
-                            />
-                          );
-                        });
+                        let renderedBlocks: React.ReactNode[] = [];
+
+                        if (nonBlankBlocks.length > 0) {
+                          renderedBlocks = nonBlankBlocks.map((block, bIdx) => {
+                            if (hasPersonaFormat(block.text)) {
+                              hasRenderedPersonas = true;
+                              const parsed = extractPersonasFromText(block.text);
+                              return <CharacterRoster key={bIdx} personas={parsed} />;
+                            }
+
+                            return (
+                              <SourcedBlock
+                                key={bIdx}
+                                block={block}
+                                onOpenSource={(src) => setActiveSource(src)}
+                                onOpenTerm={(term) => setActiveTermSlug(term)}
+                              />
+                            );
+                          });
+                        } else {
+                          // Safe Fallback: Look for panel body or brief so an episode never renders blank!
+                          const panelBody = (caseData as any).panels?.[epIdx]?.body;
+                          const panelText =
+                            typeof panelBody === 'string'
+                              ? panelBody
+                              : typeof panelBody === 'object' && panelBody !== null
+                              ? panelBody[language] || panelBody.en || ''
+                              : '';
+
+                          const briefText =
+                            epIdx === 0
+                              ? (caseData as any).brief?.facts?.en || (caseData as any).hook || ''
+                              : epIdx === 6
+                              ? (caseData as any).brief?.held?.en || ''
+                              : epIdx === 5
+                              ? (caseData as any).brief?.reasoning?.en || ''
+                              : epIdx === 7
+                              ? (caseData as any).brief?.whyItMatters?.en || ''
+                              : '';
+
+                          const fallbackText = panelText || briefText;
+                          if (fallbackText && fallbackText.trim().length > 0) {
+                            renderedBlocks = [
+                              <SourcedBlock
+                                key="fallback-block"
+                                block={{
+                                  type: 'para',
+                                  text: fallbackText,
+                                  source: { tier: 'AMBER' },
+                                }}
+                                onOpenSource={(src) => setActiveSource(src)}
+                                onOpenTerm={(term) => setActiveTermSlug(term)}
+                              />,
+                            ];
+                          }
+                        }
 
                         const explicitPersonaRoster =
                           !hasRenderedPersonas && explicitPersonas ? (
@@ -731,26 +777,72 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                           ? ep.personas
                           : ep.characters && ep.characters.length > 0
                           ? ep.characters
+                          : epIdx === 1 && (caseData as any).personas && (caseData as any).personas.length > 0
+                          ? (caseData as any).personas
                           : null;
 
                       let hasRenderedPersonas = false;
 
-                      const renderedBlocks = (currentLayer.blocks || []).map((block, bIdx) => {
-                        if (hasPersonaFormat(block.text)) {
-                          hasRenderedPersonas = true;
-                          const parsed = extractPersonasFromText(block.text);
-                          return <CharacterRoster key={bIdx} personas={parsed} />;
-                        }
+                      const nonBlankBlocks = (currentLayer.blocks || []).filter(
+                        (b) => b && typeof b.text === 'string' && b.text.trim().length > 0
+                      );
 
-                        return (
-                          <SourcedBlock
-                            key={bIdx}
-                            block={block}
-                            onOpenSource={(src) => setActiveSource(src)}
-                            onOpenTerm={(term) => setActiveTermSlug(term)}
-                          />
-                        );
-                      });
+                      let renderedBlocks: React.ReactNode[] = [];
+
+                      if (nonBlankBlocks.length > 0) {
+                        renderedBlocks = nonBlankBlocks.map((block, bIdx) => {
+                          if (hasPersonaFormat(block.text)) {
+                            hasRenderedPersonas = true;
+                            const parsed = extractPersonasFromText(block.text);
+                            return <CharacterRoster key={bIdx} personas={parsed} />;
+                          }
+
+                          return (
+                            <SourcedBlock
+                              key={bIdx}
+                              block={block}
+                              onOpenSource={(src) => setActiveSource(src)}
+                              onOpenTerm={(term) => setActiveTermSlug(term)}
+                            />
+                          );
+                        });
+                      } else {
+                        // Safe Fallback: Look for panel body or brief so an episode never renders blank!
+                        const panelBody = (caseData as any).panels?.[epIdx]?.body;
+                        const panelText =
+                          typeof panelBody === 'string'
+                            ? panelBody
+                            : typeof panelBody === 'object' && panelBody !== null
+                            ? panelBody[language] || panelBody.en || ''
+                            : '';
+
+                        const briefText =
+                          epIdx === 0
+                            ? (caseData as any).brief?.facts?.en || (caseData as any).hook || ''
+                            : epIdx === 6
+                            ? (caseData as any).brief?.held?.en || ''
+                            : epIdx === 5
+                            ? (caseData as any).brief?.reasoning?.en || ''
+                            : epIdx === 7
+                            ? (caseData as any).brief?.whyItMatters?.en || ''
+                            : '';
+
+                        const fallbackText = panelText || briefText;
+                        if (fallbackText && fallbackText.trim().length > 0) {
+                          renderedBlocks = [
+                            <SourcedBlock
+                              key="fallback-block"
+                              block={{
+                                type: 'para',
+                                text: fallbackText,
+                                source: { tier: 'AMBER' },
+                              }}
+                              onOpenSource={(src) => setActiveSource(src)}
+                              onOpenTerm={(term) => setActiveTermSlug(term)}
+                            />,
+                          ];
+                        }
+                      }
 
                       const explicitPersonaRoster =
                         !hasRenderedPersonas && explicitPersonas ? (

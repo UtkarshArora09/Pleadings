@@ -19,6 +19,12 @@ export function SourcedBlock({
   onOpenStatute,
 }: SourcedBlockProps) {
   const { text, source, type, items } = block;
+
+  // Don't render empty blocks or blank whitespace
+  if ((!text || text.trim() === '') && (type !== 'list' || !items || items.length === 0)) {
+    return null;
+  }
+
   const isAmber = source.tier === 'AMBER';
   const isBlack = source.tier === 'BLACK';
   const isBlue = source.tier === 'BLUE';

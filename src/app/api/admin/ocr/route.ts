@@ -36,7 +36,12 @@ export async function GET(request: NextRequest) {
           fileName: 'Pleadings_Case_Upload_Template.pdf',
           mimeType: 'application/pdf',
         });
-        return NextResponse.json(result);
+        return NextResponse.json({
+          success: true,
+          case: result.caseData,
+          rawText: result.rawExtractedText,
+          metadata: result.metadata,
+        });
       }
     } catch {
       return NextResponse.json({ success: false, error: 'Failed to scan sample template.' }, { status: 500 });

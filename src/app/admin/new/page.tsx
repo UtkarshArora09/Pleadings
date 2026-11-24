@@ -3,6 +3,98 @@
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Episode, PersonaItem } from '@/types';
+
+const DEFAULT_EPISODES: Episode[] = [
+  {
+    n: 1,
+    kicker: 'EPISODE 01 · THE PREMISE',
+    title: 'THE GENESIS OF THE DISPUTE',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'The controversy escalated to the next judicial milestone.',
+  },
+  {
+    n: 2,
+    kicker: 'EPISODE 02 · DRAMATIS PERSONAE',
+    title: 'THE PARTIES & CONFLICTING INTERESTS',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'What followed next in the proceedings?',
+  },
+  {
+    n: 3,
+    kicker: 'EPISODE 03 · THE TRIAL & INQUIRY',
+    title: 'PROCEDURAL ORDERS & INVESTIGATIVE RECORD',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'What followed next in the proceedings?',
+  },
+  {
+    n: 4,
+    kicker: 'EPISODE 04 · THE LEGAL CONTROVERSY',
+    title: 'THE CENTRAL CONSTITUTIONAL QUESTION',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'The rival contentions were framed before the bench.',
+  },
+  {
+    n: 5,
+    kicker: 'EPISODE 05 · COURTROOM ARGUMENTS',
+    title: 'CONTENTIONS AT THE BAR',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'The bench retired to formulate its authoritative doctrine.',
+  },
+  {
+    n: 6,
+    kicker: 'EPISODE 06 · JUDICIAL DELIBERATION',
+    title: 'BENCH REASONING & DOCTRINAL TESTS',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'The operative verdict was delivered in open court.',
+  },
+  {
+    n: 7,
+    kicker: 'EPISODE 07 · OPERATIVE VERDICT',
+    title: 'THE BINDING HOLDING & DECREE',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'How does this judgment shape Indian jurisprudence going forward?',
+  },
+  {
+    n: 8,
+    kicker: 'EPISODE 08 · PRECEDENTIAL LEGACY',
+    title: 'THE DOCTRINE GOING FORWARD',
+    layers: {
+      story: {
+        blocks: [{ type: 'para', text: '', source: { tier: 'AMBER' } }],
+      },
+    },
+    endHook: 'The precedent remains binding law under Article 141.',
+  },
+];
 
 export default function NewCasePage() {
   const router = useRouter();
@@ -18,49 +110,60 @@ export default function NewCasePage() {
     statuteSections: '',
     factsSummary: '',
     judgmentUrl: '',
-    judgmentText: '',
-    additionalNotes: '',
     reviewer: 'Adv. Girish Kr. Srivastava',
     enrolmentNumber: 'D/842/1991',
     rank: 1,
     makeTrendingTop10: true,
-    // Student Layer Inputs
-    studentRatio: '',
-    studentObiter: '',
-    studentExamAngle: '',
-    // Advocate Layer Inputs
-    advocateStrategy: '',
-    advocatePinpoints: '',
-    advocateTrialPropositions: '',
-    parallelCitations: '',
   });
 
-  const [personas, setPersonas] = useState<
-    { name: string; role: string; tag: string; description: string }[]
-  >([
-    { name: '', role: 'Petitioner / Accused', tag: 'Aggrieved Party', description: '' },
-    { name: '', role: 'Respondent / State', tag: 'Opposing Authority', description: '' },
-    { name: '', role: 'Key Witness / Eyewitness', tag: 'Primary Evidence', description: '' },
-  ]);
+  const [episodes, setEpisodes] = useState<Episode[]>(DEFAULT_EPISODES);
+  const [selectedEpTab, setSelectedEpTab] = useState<number>(0);
 
-  const [flashcards, setFlashcards] = useState<{ q: string; a: string }[]>([
-    { q: '', a: '' }
-  ]);
-
-  const [subsequentHistory, setSubsequentHistory] = useState<
-    { type: 'followed' | 'distinguished' | 'doubted' | 'overruled' | 'statute'; case: string; year: number; note: string }[]
-  >([
-    { type: 'followed', case: '', year: new Date().getFullYear(), note: '' }
+  const [personas, setPersonas] = useState<PersonaItem[]>([
+    { name: '', role: 'Petitioner / Accused', tag: 'Aggrieved Party', description: '', badgeEmoji: '⚖️' },
+    { name: '', role: 'Respondent / State', tag: 'Opposing Authority', description: '', badgeEmoji: '🏛️' },
+    { name: '', role: 'Key Witness / Eyewitness', tag: 'Primary Evidence', description: '', badgeEmoji: '👤' },
   ]);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentStep, setCurrentStep] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
 
   // OCR Auto-Fill State
   const [ocrLoading, setOcrLoading] = useState<boolean>(false);
   const [ocrSuccessMsg, setOcrSuccessMsg] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState<boolean>(false);
+
+  const updateEpisodeField = (idx: number, updates: Partial<Episode>) => {
+    setEpisodes((prev) => {
+      const updated = [...prev];
+      updated[idx] = { ...updated[idx], ...updates };
+      return updated;
+    });
+  };
+
+  const updateEpisodeNarrative = (idx: number, text: string) => {
+    setEpisodes((prev) => {
+      const updated = [...prev];
+      const ep = updated[idx];
+      const existingBlocks = ep.layers?.story?.blocks || [];
+      const firstBlock = existingBlocks[0] || { type: 'para' as const, source: { tier: 'AMBER' as const } };
+      updated[idx] = {
+        ...ep,
+        layers: {
+          ...ep.layers,
+          story: {
+            ...ep.layers?.story,
+            blocks: [{ ...firstBlock, text }],
+          },
+        },
+      };
+      return updated;
+    });
+
+    if (idx === 0) {
+      setFormData((prev) => ({ ...prev, factsSummary: text }));
+    }
+  };
 
   const handleOcrFile = async (file: File | null, isSample = false) => {
     try {
@@ -89,64 +192,85 @@ export default function NewCasePage() {
 
       const c = data.case;
 
-      // Extract student obiter
-      const studentObiterList: string[] = [];
-      if (c.episodes && Array.isArray(c.episodes)) {
-        c.episodes.forEach((ep: any) => {
-          if (ep.layers?.student?.obiter) {
-            studentObiterList.push(...ep.layers.student.obiter);
-          }
-        });
-      }
-
-      // Extract advocate trial propositions
-      const trialProps: string[] = [];
-      const pinpoints: string[] = [];
-      if (c.episodes && Array.isArray(c.episodes)) {
-        c.episodes.forEach((ep: any) => {
-          const advText = ep.layers?.advocate?.blocks?.[0]?.text;
-          if (advText) {
-            trialProps.push(advText.replace(/^TRIAL PROPOSITION:\s*/i, ''));
-          }
-          if (ep.layers?.advocate?.pinpoints) {
-            ep.layers.advocate.pinpoints.forEach((p: any) => {
-              pinpoints.push(`¶${p.para}: ${p.proposition}`);
-            });
-          }
-        });
-      }
-
-      // Populate form
+      // Populate base form fields
       setFormData((prev) => ({
         ...prev,
-        title: c.title?.en || prev.title,
-        shortTitle: c.featuredHeroHook?.en || prev.shortTitle,
+        title: typeof c.title === 'string' ? c.title : (c.title?.en || prev.title),
+        shortTitle: typeof c.featuredHeroHook === 'string' ? c.featuredHeroHook : (c.featuredHeroHook?.en || c.shortTitle || prev.shortTitle),
         citation: c.citation || prev.citation,
         court: c.court || prev.court,
-        year: c.year || prev.year,
+        year: typeof c.year === 'number' ? c.year : (parseInt(c.year) || prev.year),
         genre: c.genre || prev.genre,
         statuteSections: c.brief?.chargesApplied?.join('; ') || c.categoryTag || prev.statuteSections,
         factsSummary: c.brief?.facts?.en || c.episodes?.[0]?.layers?.story?.blocks?.[0]?.text || prev.factsSummary,
         judgmentUrl: c.judgmentUrl || prev.judgmentUrl,
-        studentRatio: c.brief?.held?.en || c.episodes?.[6]?.layers?.student?.ratio || prev.studentRatio,
-        studentObiter: studentObiterList.join('\n') || prev.studentObiter,
-        studentExamAngle: c.episodes?.[0]?.layers?.student?.examAngle || prev.studentExamAngle,
-        advocateTrialPropositions: trialProps.join('\n') || prev.advocateTrialPropositions,
-        advocatePinpoints: pinpoints.join('\n') || prev.advocatePinpoints,
-        parallelCitations: c.advocateReference?.parallelCitations?.join(', ') || prev.parallelCitations,
         reviewer: 'Adv. Girish Kr. Srivastava',
         enrolmentNumber: 'D/842/1991',
       }));
 
+      // Populate all 8 episodes
+      if (c.episodes && Array.isArray(c.episodes) && c.episodes.length > 0) {
+        const extractedEpisodes: Episode[] = c.episodes.map((ep: any, idx: number) => {
+          const defaultKickers = [
+            'EPISODE 01 · THE PREMISE',
+            'EPISODE 02 · DRAMATIS PERSONAE',
+            'EPISODE 03 · THE TRIAL & INQUIRY',
+            'EPISODE 04 · THE LEGAL CONTROVERSY',
+            'EPISODE 05 · COURTROOM ARGUMENTS',
+            'EPISODE 06 · JUDICIAL DELIBERATION',
+            'EPISODE 07 · OPERATIVE VERDICT',
+            'EPISODE 08 · PRECEDENTIAL LEGACY',
+          ];
+          const defaultTitles = [
+            'THE GENESIS OF THE DISPUTE',
+            'THE PARTIES & CONFLICTING INTERESTS',
+            'PROCEDURAL ORDERS & INVESTIGATIVE RECORD',
+            'THE CENTRAL CONSTITUTIONAL QUESTION',
+            'CONTENTIONS AT THE BAR',
+            'BENCH REASONING & DOCTRINAL TESTS',
+            'THE BINDING HOLDING & DECREE',
+            'THE DOCTRINE GOING FORWARD',
+          ];
+
+          const narrativeText =
+            ep.layers?.story?.blocks?.[0]?.text ||
+            (typeof ep.text === 'string' ? ep.text : '') ||
+            (idx === 0 ? c.brief?.facts?.en || '' : '');
+
+          return {
+            n: idx + 1,
+            kicker: ep.kicker || defaultKickers[idx] || `EPISODE 0${idx + 1}`,
+            title: ep.title || defaultTitles[idx] || `Episode ${idx + 1}`,
+            endHook: ep.endHook || (idx < 7 ? 'What followed next in the proceedings?' : 'The precedent remains binding law under Article 141.'),
+            layers: {
+              story: {
+                blocks: [
+                  {
+                    type: 'para' as const,
+                    text: narrativeText,
+                    source: { tier: 'AMBER' as const, para: idx + 1 },
+                  },
+                ],
+              },
+            },
+          };
+        });
+
+        // Ensure array has 8 episodes
+        while (extractedEpisodes.length < 8) {
+          const idx = extractedEpisodes.length;
+          extractedEpisodes.push(DEFAULT_EPISODES[idx]);
+        }
+
+        setEpisodes(extractedEpisodes);
+      }
+
+      // Populate Personas
       if (c.personas && Array.isArray(c.personas) && c.personas.length > 0) {
         setPersonas(c.personas);
       }
 
-      if (c.flashcards && Array.isArray(c.flashcards) && c.flashcards.length > 0) {
-        setFlashcards(c.flashcards);
-      }
-
-      setOcrSuccessMsg(`✓ Successfully auto-filled all case fields from "${isSample ? 'Pleadings Sample Template PDF' : file?.name}" via Multimodal OCR.`);
+      setOcrSuccessMsg(`✓ Successfully auto-filled all 8 customizable episodes and case record from "${isSample ? 'Pleadings Sample Template PDF' : file?.name}" via Multimodal OCR.`);
     } catch (ocrErr: any) {
       console.error('OCR Ingestion error:', ocrErr);
       setError(ocrErr.message || 'Failed to auto-populate from PDF.');
@@ -158,16 +282,21 @@ export default function NewCasePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
-      !formData.title ||
-      !formData.court ||
-      !formData.statuteSections ||
-      !formData.factsSummary ||
+      !formData.title.trim() ||
+      !formData.court.trim() ||
+      !formData.statuteSections.trim() ||
       !formData.reviewer.trim() ||
       !formData.enrolmentNumber.trim()
     ) {
       setError(
-        'Please fill in all required fields: Title, Court, Statute/Sections, Facts Summary, Reviewing Advocate, and Bar Enrolment Number.'
+        'Please fill in all required fields: Title, Court, Statute/Sections, Reviewing Advocate, and Bar Enrolment Number.'
       );
+      return;
+    }
+
+    const firstEpText = episodes[0]?.layers?.story?.blocks?.[0]?.text || formData.factsSummary;
+    if (!firstEpText.trim()) {
+      setError('Please provide the narrative text for Episode 01 (The Genesis of the Dispute).');
       return;
     }
 
@@ -175,98 +304,71 @@ export default function NewCasePage() {
       setLoading(true);
       setError(null);
 
-      setCurrentStep('1. Reading admin source document & extracting legal facts...');
-      await new Promise((r) => setTimeout(r, 600));
-
-      setCurrentStep('2. Structuring 8-Episode Story Arc with Student & Advocate Layers...');
-      await new Promise((r) => setTimeout(r, 600));
-
-      setCurrentStep('3. Translating full case into natural judicial Hindi (en + hi)...');
-      await new Promise((r) => setTimeout(r, 600));
-
-      setCurrentStep('4. Generating cinematic AI visual prompts (Hero 16:9, Scene, Courtroom)...');
-
-      // Parse student obiter lines
-      const studentObiterList = formData.studentObiter
-        .split('\n')
-        .map((s) => s.trim())
-        .filter(Boolean);
-
-      // Parse advocate trial propositions lines
-      const advocateTrialPropositionsList = formData.advocateTrialPropositions
-        .split('\n')
-        .map((s) => s.trim())
-        .filter(Boolean);
-
-      // Parse parallel citations
-      const parallelCitationsList = formData.parallelCitations
-        .split(/[,\n]/)
-        .map((s) => s.trim())
-        .filter(Boolean);
-
-      // Parse pinpoints e.g. "¶8: Proposition" or "8: Proposition"
-      const pinpointsList: { proposition: string; para: number }[] = [];
-      if (formData.advocatePinpoints) {
-        formData.advocatePinpoints.split('\n').forEach((line) => {
-          const trimmed = line.trim();
-          if (!trimmed) return;
-          const match = trimmed.match(/(?:¶|para|p\.?)?\s*(\d+)\s*[:\-–]\s*(.+)/i);
-          if (match) {
-            pinpointsList.push({
-              para: parseInt(match[1]),
-              proposition: match[2].trim(),
-            });
-          } else {
-            pinpointsList.push({
-              para: 8,
-              proposition: trimmed,
-            });
-          }
-        });
-      }
-
-      const studentFlashcards = flashcards.filter((f) => f.q.trim() && f.a.trim());
-      const advocateSubsequentHistory = subsequentHistory.filter((h) => h.case.trim() && h.note.trim());
       const validPersonas = personas.filter((p) => p.name.trim() || p.description.trim());
+
+      // Ensure every episode has a valid story block
+      const formattedEpisodes = episodes.map((ep, idx) => {
+        const text = ep.layers?.story?.blocks?.[0]?.text || (idx === 0 ? formData.factsSummary : '');
+        return {
+          ...ep,
+          n: idx + 1,
+          kicker: ep.kicker || `EPISODE 0${idx + 1}`,
+          title: ep.title || `Episode ${idx + 1}`,
+          layers: {
+            story: {
+              blocks: [
+                {
+                  type: 'para' as const,
+                  text: text.trim(),
+                  source: { tier: 'AMBER' as const, para: idx + 1 },
+                },
+              ],
+            },
+          },
+          endHook: ep.endHook || (idx < 7 ? 'What followed next in the proceedings?' : 'Case dossier complete.'),
+          personas: idx === 1 && validPersonas.length > 0 ? validPersonas : undefined,
+        };
+      });
 
       const res = await fetch('/api/admin/cases', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          factsSummary: firstEpText,
           rank: formData.makeTrendingTop10 ? formData.rank : 99,
           personas: validPersonas.length > 0 ? validPersonas : undefined,
-          studentRatio: formData.studentRatio || undefined,
-          studentObiter: studentObiterList.length > 0 ? studentObiterList : undefined,
-          studentExamAngle: formData.studentExamAngle || undefined,
-          studentFlashcards: studentFlashcards.length > 0 ? studentFlashcards : undefined,
-          advocateStrategy: formData.advocateStrategy || undefined,
-          advocatePinpoints: pinpointsList.length > 0 ? pinpointsList : undefined,
-          advocateTrialPropositions: advocateTrialPropositionsList.length > 0 ? advocateTrialPropositionsList : undefined,
-          advocateSubsequentHistory: advocateSubsequentHistory.length > 0 ? advocateSubsequentHistory : undefined,
-          advocateReference: parallelCitationsList.length > 0 ? {
-            parallelCitations: parallelCitationsList
-          } : undefined,
+          episodes: formattedEpisodes,
+          brief: {
+            facts: { en: formattedEpisodes[0]?.layers?.story?.blocks?.[0]?.text || formData.factsSummary, hi: '' },
+            held: { en: formattedEpisodes[6]?.layers?.story?.blocks?.[0]?.text || '', hi: '' },
+            reasoning: { en: formattedEpisodes[5]?.layers?.story?.blocks?.[0]?.text || '', hi: '' },
+            whyItMatters: { en: formattedEpisodes[7]?.layers?.story?.blocks?.[0]?.text || '', hi: '' },
+          },
         }),
       });
 
       const data = await res.json();
       if (!data.success) {
-        throw new Error(data.error || 'Failed to process case ingestion');
+        throw new Error(data.error || 'Failed to save case record.');
       }
 
-      // Redirect to the Review Studio for this case
+      // Redirect directly to the Review & Visual Asset Studio for this case
       const targetSlug = data.case?.slug || formData.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
       router.push(`/admin/cases/${targetSlug}`);
     } catch (err: unknown) {
-      console.error('Ingestion error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to ingest case');
+      console.error('Case save error:', err);
+      setError(err instanceof Error ? err.message : 'Failed to save case');
       setLoading(false);
     }
   };
 
+  const activeEp = episodes[selectedEpTab] || episodes[0];
+  const activeEpNarrative = activeEp?.layers?.story?.blocks?.[0]?.text || '';
+  const isPersonaEpisode = selectedEpTab === 1;
+
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn">
+    <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn pb-16">
       {/* Top Header */}
       <div className="flex items-center justify-between pb-6 border-b border-white/10">
         <div>
@@ -277,7 +379,7 @@ export default function NewCasePage() {
             Add New Landmark Case
           </h1>
           <p className="text-xs text-[#a9a49a]">
-            Enter the verified facts and judgment source. AI will structure the complete Pleadings story, arguments, interactive poll, Hindi text, and visual assets for your review.
+            Enter the verified facts and customize all 8 story episodes directly. No unwanted AI generation or pipeline overwrites.
           </p>
         </div>
       </div>
@@ -307,7 +409,7 @@ export default function NewCasePage() {
                 Smart OCR Auto-Fill Engine
               </h3>
               <p className="text-xs text-[#a9a49a]">
-                Upload a case PDF or judgment docket to auto-populate the entire form instantly.
+                Upload a case PDF or judgment docket to extract all 8 episodes, kicker, headlines, and characters.
               </p>
             </div>
           </div>
@@ -354,7 +456,7 @@ export default function NewCasePage() {
             <div className="flex items-center gap-3 py-2">
               <div className="w-5 h-5 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin" />
               <span className="text-xs font-mono text-[#D4AF37] font-bold uppercase tracking-wider animate-pulse">
-                Multimodal OCR & Entity Extraction in progress...
+                Extracting all 8 story episodes from document via OCR...
               </span>
             </div>
           ) : (
@@ -379,14 +481,14 @@ export default function NewCasePage() {
         </div>
       </div>
 
-      {/* Ingestion Form */}
+      {/* Case Ingestion & Episode Customization Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Step 1: Basic Case Information */}
         <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4 shadow-xl">
           <div className="flex items-center gap-2 pb-3 border-b border-white/10">
             <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
             <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-              Step 1 · Basic Case Record
+              Step 1 · Basic Case Record & Citation
             </h2>
           </div>
 
@@ -502,7 +604,7 @@ export default function NewCasePage() {
               <input
                 type="text"
                 required
-                placeholder="e.g. Adv. Counsel Name"
+                placeholder="e.g. Adv. Girish Kr. Srivastava"
                 value={formData.reviewer}
                 onChange={(e) => setFormData({ ...formData, reviewer: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
@@ -516,83 +618,15 @@ export default function NewCasePage() {
               <input
                 type="text"
                 required
-                placeholder="e.g. D/1042/2012"
+                placeholder="e.g. D/842/1991"
                 value={formData.enrolmentNumber}
                 onChange={(e) => setFormData({ ...formData, enrolmentNumber: e.target.value })}
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
               />
             </div>
           </div>
-        </div>
 
-        {/* Step 2: Trending & Front Page Placement */}
-        <div className="bg-[#121520] border border-[#E50914]/30 p-6 rounded-xs space-y-4 shadow-xl">
-          <div className="flex items-center gap-2 pb-3 border-b border-white/10">
-            <span className="w-2 h-2 rounded-full bg-[#E50914] animate-pulse" />
-            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#E50914]">
-              Step 2 · Front Page & Trending Placement
-            </h2>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-black/40 border border-white/10 rounded-xs">
-            <div>
-              <label className="flex items-center gap-2 cursor-pointer font-bold text-sm text-white">
-                <input
-                  type="checkbox"
-                  checked={formData.makeTrendingTop10}
-                  onChange={(e) => setFormData({ ...formData, makeTrendingTop10: e.target.checked })}
-                  className="w-4 h-4 accent-[#E50914] rounded cursor-pointer"
-                />
-                <span>Feature in Trending Top 10 Landmark Precedents Shelf</span>
-              </label>
-              <p className="text-[11px] text-[#a9a49a] mt-1 pl-6">
-                When enabled, this case is displayed on the Homepage Top 10 numbered shelf and the Billboard Trending selector bar.
-              </p>
-            </div>
-
-            {formData.makeTrendingTop10 && (
-              <div className="flex items-center gap-2 pl-6 sm:pl-0">
-                <span className="text-xs font-mono text-[#D4AF37]">Rank Position:</span>
-                <select
-                  value={formData.rank}
-                  onChange={(e) => setFormData({ ...formData, rank: parseInt(e.target.value) })}
-                  className="bg-[#121520] border border-[#D4AF37] text-[#D4AF37] font-bold text-xs px-3 py-1.5 rounded-xs focus:outline-none cursor-pointer"
-                >
-                  {Array.from({ length: 10 }).map((_, i) => (
-                    <option key={i + 1} value={i + 1}>
-                      #{i + 1}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Step 3: Case Facts & Legal Source Material */}
-        <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4 shadow-xl">
-          <div className="flex items-center gap-2 pb-3 border-b border-white/10">
-            <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-            <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-              Step 3 · Case Facts & Source Material
-            </h2>
-          </div>
-
-          <div>
-            <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
-              Factual Summary / Background <span className="text-[#E50914]">*</span>
-            </label>
-            <textarea
-              required
-              rows={5}
-              placeholder="Describe what happened: the incident, who was arrested/sued, what was challenged, and why it went to court..."
-              value={formData.factsSummary}
-              onChange={(e) => setFormData({ ...formData, factsSummary: e.target.value })}
-              className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3 rounded-xs focus:outline-none leading-relaxed"
-            />
-          </div>
-
-          <div>
+          <div className="pt-2">
             <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
               Verified Public Judgment URL
             </label>
@@ -605,414 +639,341 @@ export default function NewCasePage() {
             />
           </div>
 
-          <div>
-            <label className="block text-[11px] font-mono text-[#a9a49a] uppercase mb-1">
-              Judgment Extract / Excerpts / Key Observations
+          {/* Trending Option */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 bg-black/40 border border-white/10 rounded-xs mt-2">
+            <label className="flex items-center gap-2 cursor-pointer font-bold text-xs text-white">
+              <input
+                type="checkbox"
+                checked={formData.makeTrendingTop10}
+                onChange={(e) => setFormData({ ...formData, makeTrendingTop10: e.target.checked })}
+                className="w-4 h-4 accent-[#D4AF37] rounded cursor-pointer"
+              />
+              <span>Feature on Top 10 Trending Shelf</span>
             </label>
-            <textarea
-              rows={4}
-              placeholder="Paste relevant excerpts from the certified judgment or court order..."
-              value={formData.judgmentText}
-              onChange={(e) => setFormData({ ...formData, judgmentText: e.target.value })}
-              className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3 rounded-xs focus:outline-none leading-relaxed font-mono text-xs"
-            />
+
+            {formData.makeTrendingTop10 && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono text-[#D4AF37]">Rank:</span>
+                <select
+                  value={formData.rank}
+                  onChange={(e) => setFormData({ ...formData, rank: parseInt(e.target.value) })}
+                  className="bg-[#121520] border border-[#D4AF37] text-[#D4AF37] font-bold text-xs px-2.5 py-1 rounded-xs focus:outline-none cursor-pointer"
+                >
+                  {Array.from({ length: 10 }).map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      #{i + 1} Trending
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Step 3.5: Episode 02 · Dramatis Personae (Dynamic Personas 1 till 6 / N) */}
-        <div className="bg-[#121520] border border-[#D4AF37]/30 p-6 rounded-xs space-y-4 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-white/10 gap-2">
+        {/* Step 2: 8 Story Episodes (Fully Customizable) */}
+        <div className="bg-[#121520] border border-[#D4AF37]/40 p-6 rounded-xs space-y-5 shadow-2xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/10">
             <div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                  Episode 02 · Dramatis Personae ({personas.length} Personas)
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+                <h2 className="text-sm font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                  Step 2 · 8 Story Episodes (Fully Customizable)
                 </h2>
               </div>
-              <p className="text-xs text-[#a9a49a] mt-1">
-                Configure key litigants, bench, and witnesses. Displayed in both Story & Student modes as distinct column cards.
+              <p className="text-xs text-[#a9a49a] mt-0.5">
+                Episode 0 is the Hero Cover. Episodes 1 to 8 contain the genuine legal narrative and characters with zero AI interference.
               </p>
             </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                const nextNum = personas.length + 1;
-                setPersonas([
-                  ...personas,
-                  {
-                    name: '',
-                    role: nextNum === 1 ? 'Petitioner / Accused' : nextNum === 2 ? 'Respondent / State' : nextNum === 3 ? 'Victim / Complainant' : nextNum === 4 ? 'Key Witness' : nextNum === 5 ? 'Coram / Bench' : 'Senior Counsel',
-                    tag: 'Legal Litigant',
-                    description: '',
-                  },
-                ]);
-              }}
-              className="px-3 py-1.5 bg-[#D4AF37]/20 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black border border-[#D4AF37]/40 text-xs font-mono font-bold uppercase rounded-xs transition-all cursor-pointer flex items-center gap-1 self-start sm:self-auto"
-            >
-              <span>+</span>
-              <span>Add Persona</span>
-            </button>
+            <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-1 bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 rounded-xs self-start sm:self-auto">
+              8 Episodes Complete Arc
+            </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-            {personas.map((persona, pIdx) => (
-              <div key={pIdx} className="bg-black/40 border border-white/10 hover:border-[#D4AF37]/50 p-4 rounded-xs space-y-3 transition-all">
-                <div className="flex items-center justify-between pb-1.5 border-b border-white/5">
-                  <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
-                    PERSONA 0{pIdx + 1}
-                  </span>
-                  {personas.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => setPersonas(personas.filter((_, i) => i !== pIdx))}
-                      className="text-[10px] font-mono text-red-400 hover:text-red-300 uppercase cursor-pointer"
-                    >
-                      ✕ Remove
-                    </button>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Name / Litigant Title</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Shah Bano Begum"
-                    value={persona.name}
-                    onChange={(e) => {
-                      const updated = [...personas];
-                      updated[pIdx].name = e.target.value;
-                      setPersonas(updated);
-                    }}
-                    className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs font-bold"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Role Pill</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Petitioner / Wife"
-                      value={persona.role}
-                      onChange={(e) => {
-                        const updated = [...personas];
-                        updated[pIdx].role = e.target.value;
-                        setPersonas(updated);
-                      }}
-                      className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
-                    />
+          {/* Episode Tab Buttons */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-1.5 p-1 bg-black/40 border border-white/10 rounded-xs">
+            {episodes.map((ep, idx) => {
+              const isSelected = selectedEpTab === idx;
+              const hasText = (ep.layers?.story?.blocks?.[0]?.text || '').trim().length > 0;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setSelectedEpTab(idx)}
+                  className={`py-2 px-1 text-center rounded-xs font-mono transition-all cursor-pointer relative ${
+                    isSelected
+                      ? 'bg-[#D4AF37] text-black font-bold shadow-md'
+                      : hasText
+                      ? 'bg-white/10 text-white hover:bg-white/15'
+                      : 'bg-white/5 text-white/50 hover:bg-white/10'
+                  }`}
+                >
+                  <div className="text-[10px] uppercase font-bold tracking-wider">
+                    EP 0{idx + 1}
                   </div>
-                  <div>
-                    <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Tag / Title</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Indigent Wife"
-                      value={persona.tag}
-                      onChange={(e) => {
-                        const updated = [...personas];
-                        updated[pIdx].tag = e.target.value;
-                        setPersonas(updated);
-                      }}
-                      className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
-                    />
+                  <div className="text-[8px] truncate mt-0.5 opacity-80">
+                    {idx === 0
+                      ? 'Premise'
+                      : idx === 1
+                      ? 'Personas'
+                      : idx === 2
+                      ? 'Inquiry'
+                      : idx === 3
+                      ? 'Controversy'
+                      : idx === 4
+                      ? 'Arguments'
+                      : idx === 5
+                      ? 'Deliberation'
+                      : idx === 6
+                      ? 'Verdict'
+                      : 'Legacy'}
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Description</label>
-                  <textarea
-                    rows={3}
-                    placeholder="Key facts and relevance in this case..."
-                    value={persona.description}
-                    onChange={(e) => {
-                      const updated = [...personas];
-                      updated[pIdx].description = e.target.value;
-                      setPersonas(updated);
-                    }}
-                    className="w-full bg-[#121520] border border-white/10 text-xs text-[#c9c5bc] p-2 rounded-xs"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Step 4: Student Layer & Academic Insights (Admin-Defined) */}
-        <div className="bg-[#121520] border border-sky-500/30 p-6 rounded-xs space-y-4 shadow-xl">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-sky-400" />
-              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-sky-400">
-                Step 4 · Student Layer & Exam Angle (Admin-Controlled)
-              </h2>
-            </div>
-            <span className="text-[10px] font-mono text-sky-300/60 uppercase">Shown in Student Mode</span>
-          </div>
-          <p className="text-xs text-[#a9a49a]">
-            Define the authoritative Ratio Decidendi, Obiter Dicta, and CLAT/Judiciary exam notes that law students will see when toggling to Student Mode.
-          </p>
-
-          <div>
-            <label className="block text-[11px] font-mono text-sky-300 uppercase mb-1">
-              Ratio Decidendi (Binding Legal Principle)
-            </label>
-            <textarea
-              rows={2}
-              placeholder="e.g. The Supreme Court held that statutory restrictions under Article 19(2) must satisfy the test of clear proportionality..."
-              value={formData.studentRatio}
-              onChange={(e) => setFormData({ ...formData, studentRatio: e.target.value })}
-              className="w-full bg-[#0A0C10] border border-white/15 focus:border-sky-400 text-sm text-white p-3 rounded-xs focus:outline-none leading-relaxed"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-[11px] font-mono text-sky-300 uppercase mb-1">
-                Obiter Dicta (Persuasive Remarks · 1 per line)
-              </label>
-              <textarea
-                rows={3}
-                placeholder="Courts must balance individual liberties with systemic state objectives.&#10;Procedural safeguards are integral to the administration of substantive justice."
-                value={formData.studentObiter}
-                onChange={(e) => setFormData({ ...formData, studentObiter: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-sky-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-mono text-sky-300 uppercase mb-1">
-                Exam Angle / Key Takeaway for Judiciary & CLAT-PG
-              </label>
-              <textarea
-                rows={3}
-                placeholder="e.g. Tested in CLAT-PG, Judiciary Mains, and AIBE under constitutional free speech thresholds and procedural safeguards."
-                value={formData.studentExamAngle}
-                onChange={(e) => setFormData({ ...formData, studentExamAngle: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-sky-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
-              />
-            </div>
-          </div>
-
-          {/* Interactive Student Revision Flashcards */}
-          <div className="pt-3 border-t border-sky-500/20 space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-[11px] font-mono text-sky-300 uppercase font-bold flex items-center gap-1.5">
-                <span>🗂️ Student Revision Flashcards (Q&A Cards)</span>
-              </label>
-              <button
-                type="button"
-                onClick={() => setFlashcards([...flashcards, { q: '', a: '' }])}
-                className="text-[10px] font-mono font-bold text-sky-400 hover:text-white uppercase px-2.5 py-1 bg-sky-950/60 border border-sky-500/30 rounded-xs cursor-pointer"
-              >
-                + Add Flashcard
-              </button>
-            </div>
-
-            {flashcards.map((fc, fcIdx) => (
-              <div key={fcIdx} className="p-3 bg-black/40 border border-sky-500/20 rounded-xs space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-sky-400 font-bold">Card #{fcIdx + 1}</span>
-                  {flashcards.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => setFlashcards(flashcards.filter((_, i) => i !== fcIdx))}
-                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
-                    >
-                      ✕ Remove
-                    </button>
+                  {hasText && (
+                    <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   )}
-                </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Episode Editor */}
+          <div className="p-5 bg-black/40 border border-white/10 rounded-xs space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-white/10">
+              <span className="font-anton text-lg text-white uppercase tracking-wider flex items-center gap-2">
+                <span className="text-[#D4AF37]">Episode 0{selectedEpTab + 1}:</span>
+                <span>{activeEp.title || `Episode ${selectedEpTab + 1}`}</span>
+              </span>
+              <span className="text-[10px] font-mono text-[#a9a49a]">
+                Tab {selectedEpTab + 1} of 8
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                  Episode Kicker / Eyebrow <span className="text-[#E50914]">*</span>
+                </label>
                 <input
                   type="text"
-                  placeholder="Question (e.g. What was the central issue in this case?)"
-                  value={fc.q}
-                  onChange={(e) => {
-                    const updated = [...flashcards];
-                    updated[fcIdx].q = e.target.value;
-                    setFlashcards(updated);
-                  }}
-                  className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-sky-400"
-                />
-                <textarea
-                  rows={2}
-                  placeholder="Answer / Key Takeaway for exam revision..."
-                  value={fc.a}
-                  onChange={(e) => {
-                    const updated = [...flashcards];
-                    updated[fcIdx].a = e.target.value;
-                    setFlashcards(updated);
-                  }}
-                  className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-sky-400"
+                  required
+                  value={activeEp.kicker || ''}
+                  onChange={(e) => updateEpisodeField(selectedEpTab, { kicker: e.target.value })}
+                  className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-mono"
+                  placeholder={`EPISODE 0${selectedEpTab + 1} · STAGE`}
                 />
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Step 5: Advocate Layer & Litigation Practice (Admin-Defined) */}
-        <div className="bg-[#121520] border border-emerald-500/30 p-6 rounded-xs space-y-4 shadow-xl">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-emerald-400">
-                Step 5 · Advocate Layer & Courtroom Practice (Admin-Controlled)
-              </h2>
+              <div>
+                <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                  Episode Headline / Title <span className="text-[#E50914]">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={activeEp.title || ''}
+                  onChange={(e) => updateEpisodeField(selectedEpTab, { title: e.target.value })}
+                  className="w-full bg-[#0A0C10] border border-white/15 text-xs text-white p-2.5 rounded-xs font-sans font-bold"
+                  placeholder="e.g. THE GENESIS OF THE DISPUTE"
+                />
+              </div>
             </div>
-            <span className="text-[10px] font-mono text-emerald-300/60 uppercase">Shown in Advocate Mode</span>
-          </div>
-          <p className="text-xs text-[#a9a49a]">
-            Provide courtroom citations, trial propositions per episode, paragraph pinpoints, and parallel law report citations.
-          </p>
 
-          <div>
-            <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
-              Overall Case Proposition / Key Takeaway
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. Standard of proof: Section 125 CrPC is a secular, summary remedy applicable uniformly across all personal laws."
-              value={formData.advocateStrategy}
-              onChange={(e) => setFormData({ ...formData, advocateStrategy: e.target.value })}
-              className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
-                Trial Propositions (1 per line)
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="text-[10px] font-mono text-[#D4AF37] uppercase font-semibold">
+                  Episode Narrative Story Content <span className="text-[#E50914]">*</span>
+                </label>
+                <span className="text-[10px] font-mono text-[#a9a49a]">
+                  {activeEpNarrative.split(/\s+/).filter(Boolean).length} words · {activeEpNarrative.length} chars
+                </span>
+              </div>
               <textarea
-                rows={3}
-                placeholder="TRIAL PROPOSITION: A neglected wife is entitled to invoke s. 125 independent of personal law.&#10;TRIAL PROPOSITION: Mahr is not an amount payable on divorce under s. 127(3)(b)."
-                value={formData.advocateTrialPropositions}
-                onChange={(e) => setFormData({ ...formData, advocateTrialPropositions: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+                rows={8}
+                required={selectedEpTab === 0}
+                value={activeEpNarrative}
+                onChange={(e) => updateEpisodeNarrative(selectedEpTab, e.target.value)}
+                placeholder={`Write the factual chronological narrative for Episode 0${selectedEpTab + 1}...`}
+                className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white p-3.5 rounded-xs leading-relaxed font-sans"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
-                Paragraph Pinpoints (¶Para: Rule)
+              <label className="block text-[10px] font-mono text-[#a9a49a] uppercase mb-1">
+                End Hook / Cliffhanger
               </label>
-              <textarea
-                rows={3}
-                placeholder="¶8: Section 125 CrPC applies to all citizens&#10;¶11: Surah Al-Baqarah verses impose maintenance obligation"
-                value={formData.advocatePinpoints}
-                onChange={(e) => setFormData({ ...formData, advocatePinpoints: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
+              <input
+                type="text"
+                value={activeEp.endHook || ''}
+                onChange={(e) => updateEpisodeField(selectedEpTab, { endHook: e.target.value })}
+                className="w-full bg-[#0A0C10] border border-white/15 text-xs text-[#F3EFE6]/90 p-2.5 rounded-xs italic"
+                placeholder="e.g. The constitutional controversy escalated to the highest bench."
               />
             </div>
 
-            <div>
-              <label className="block text-[11px] font-mono text-emerald-300 uppercase mb-1">
-                Parallel Citations (1 per line or comma-separated)
-              </label>
-              <textarea
-                rows={3}
-                placeholder="AIR 1985 SC 945&#10;(1985) 2 SCC 556&#10;(1985) 3 SCR 844&#10;1985 Cri LJ 875"
-                value={formData.parallelCitations}
-                onChange={(e) => setFormData({ ...formData, parallelCitations: e.target.value })}
-                className="w-full bg-[#0A0C10] border border-white/15 focus:border-emerald-400 text-xs text-white p-3 rounded-xs focus:outline-none font-mono"
-              />
-            </div>
-          </div>
+            {/* Dramatis Personae Editor inside Episode 2 */}
+            {isPersonaEpisode && (
+              <div className="mt-6 pt-5 border-t border-white/10 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <h3 className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                      <span>👥</span>
+                      <span>Dramatis Personae · Litigants & Key Figures ({personas.length})</span>
+                    </h3>
+                    <p className="text-[11px] text-[#a9a49a] mt-0.5">
+                      Character cards rendered in Episode 02 (Petitioner, Respondent, Key Witnesses, Bench).
+                    </p>
+                  </div>
 
-          {/* Interactive Advocate Subsequent Judicial Citations */}
-          <div className="pt-3 border-t border-emerald-500/20 space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-[11px] font-mono text-emerald-300 uppercase font-bold flex items-center gap-1.5">
-                <span>⚖️ Subsequent Judicial Citations & History</span>
-              </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nextNum = personas.length + 1;
+                      setPersonas([
+                        ...personas,
+                        {
+                          name: '',
+                          role: nextNum === 1 ? 'Primary Petitioner' : nextNum === 2 ? 'Respondent / State' : 'Key Figure',
+                          tag: 'Legal Litigant',
+                          description: '',
+                          badgeEmoji: nextNum === 1 ? '⚖️' : nextNum === 2 ? '🏛️' : '👤',
+                        },
+                      ]);
+                    }}
+                    className="px-3 py-1.5 bg-[#D4AF37] hover:bg-white text-black font-bold text-xs uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1 self-start sm:self-auto shadow-sm"
+                  >
+                    <span>+</span>
+                    <span>Add Character Card</span>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  {personas.map((persona, pIdx) => (
+                    <div key={pIdx} className="bg-black/60 border border-white/10 hover:border-[#D4AF37]/50 p-4 rounded-xs space-y-3 transition-all">
+                      <div className="flex items-center justify-between pb-1.5 border-b border-white/5">
+                        <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase flex items-center gap-1">
+                          <span>{persona.badgeEmoji || '👤'}</span>
+                          <span>PERSONA 0{pIdx + 1}</span>
+                        </span>
+                        {personas.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => setPersonas(personas.filter((_, i) => i !== pIdx))}
+                            className="text-[10px] font-mono text-red-400 hover:text-red-300 uppercase cursor-pointer"
+                          >
+                            ✕ Remove
+                          </button>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="col-span-2">
+                          <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Character Name</label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Shreya Singhal"
+                            value={persona.name}
+                            onChange={(e) => {
+                              const updated = [...personas];
+                              updated[pIdx].name = e.target.value;
+                              setPersonas(updated);
+                            }}
+                            className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs font-bold"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Emoji</label>
+                          <input
+                            type="text"
+                            placeholder="⚖️"
+                            value={persona.badgeEmoji || '⚖️'}
+                            onChange={(e) => {
+                              const updated = [...personas];
+                              updated[pIdx].badgeEmoji = e.target.value;
+                              setPersonas(updated);
+                            }}
+                            className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs text-center"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Role Pill</label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Petitioner / Student"
+                            value={persona.role}
+                            onChange={(e) => {
+                              const updated = [...personas];
+                              updated[pIdx].role = e.target.value;
+                              setPersonas(updated);
+                            }}
+                            className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Tag</label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Aggrieved Litigant"
+                            value={persona.tag || ''}
+                            onChange={(e) => {
+                              const updated = [...personas];
+                              updated[pIdx].tag = e.target.value;
+                              setPersonas(updated);
+                            }}
+                            className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-0.5">Description</label>
+                        <textarea
+                          rows={2}
+                          placeholder="Key facts and relevance in this case..."
+                          value={persona.description}
+                          onChange={(e) => {
+                            const updated = [...personas];
+                            updated[pIdx].description = e.target.value;
+                            setPersonas(updated);
+                          }}
+                          className="w-full bg-[#121520] border border-white/10 text-xs text-[#c9c5bc] p-2 rounded-xs leading-relaxed"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Fast Next/Prev Episode Switcher */}
+            <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
               <button
                 type="button"
-                onClick={() =>
-                  setSubsequentHistory([
-                    ...subsequentHistory,
-                    { type: 'followed', case: '', year: new Date().getFullYear(), note: '' }
-                  ])
-                }
-                className="text-[10px] font-mono font-bold text-emerald-400 hover:text-white uppercase px-2.5 py-1 bg-emerald-950/60 border border-emerald-500/30 rounded-xs cursor-pointer"
+                disabled={selectedEpTab === 0}
+                onClick={() => setSelectedEpTab((prev) => Math.max(0, prev - 1))}
+                className="px-3 py-1.5 bg-white/5 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed rounded-xs text-[#a9a49a] hover:text-white transition-all cursor-pointer"
               >
-                + Add Citation Record
+                ← Prev Episode (0{selectedEpTab})
+              </button>
+
+              <span className="text-[#D4AF37] font-bold">
+                Episode 0{selectedEpTab + 1} of 8
+              </span>
+
+              <button
+                type="button"
+                disabled={selectedEpTab === 7}
+                onClick={() => setSelectedEpTab((prev) => Math.min(7, prev + 1))}
+                className="px-3 py-1.5 bg-white/5 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed rounded-xs text-[#a9a49a] hover:text-white transition-all cursor-pointer"
+              >
+                Next Episode (0{selectedEpTab + 2}) →
               </button>
             </div>
-
-            {subsequentHistory.map((hist, hIdx) => (
-              <div key={hIdx} className="p-3 bg-black/40 border border-emerald-500/20 rounded-xs space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-emerald-400 font-bold">Citation Record #{hIdx + 1}</span>
-                  {subsequentHistory.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => setSubsequentHistory(subsequentHistory.filter((_, i) => i !== hIdx))}
-                      className="text-xs text-red-400 hover:text-red-300 font-mono cursor-pointer"
-                    >
-                      ✕ Remove
-                    </button>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <input
-                    type="text"
-                    placeholder="Case Name & Citation (e.g. Danial Latifi v. UOI (2001) 7 SCC 740)"
-                    value={hist.case}
-                    onChange={(e) => {
-                      const updated = [...subsequentHistory];
-                      updated[hIdx].case = e.target.value;
-                      setSubsequentHistory(updated);
-                    }}
-                    className="sm:col-span-2 bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-emerald-400"
-                  />
-                  <div className="flex gap-2">
-                    <select
-                      value={hist.type}
-                      onChange={(e) => {
-                        const updated = [...subsequentHistory];
-                        updated[hIdx].type = e.target.value as any;
-                        setSubsequentHistory(updated);
-                      }}
-                      className="flex-1 bg-[#0A0C10] border border-white/10 text-xs text-emerald-300 p-2 rounded-xs focus:border-emerald-400 cursor-pointer"
-                    >
-                      <option value="followed">Followed In</option>
-                      <option value="distinguished">Distinguished</option>
-                      <option value="doubted">Doubted</option>
-                      <option value="overruled">Overruled</option>
-                      <option value="statute">Statute Modified</option>
-                    </select>
-                    <input
-                      type="number"
-                      placeholder="Year"
-                      value={hist.year}
-                      onChange={(e) => {
-                        const updated = [...subsequentHistory];
-                        updated[hIdx].year = parseInt(e.target.value) || new Date().getFullYear();
-                        setSubsequentHistory(updated);
-                      }}
-                      className="w-18 bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs text-center focus:border-emerald-400"
-                    />
-                  </div>
-                </div>
-
-                <textarea
-                  rows={2}
-                  placeholder="Summary of judicial treatment / holding (e.g. Upheld constitutional validity...)"
-                  value={hist.note}
-                  onChange={(e) => {
-                    const updated = [...subsequentHistory];
-                    updated[hIdx].note = e.target.value;
-                    setSubsequentHistory(updated);
-                  }}
-                  className="w-full bg-[#0A0C10] border border-white/10 text-xs text-white p-2 rounded-xs focus:border-emerald-400"
-                />
-              </div>
-            ))}
           </div>
         </div>
 
-        {/* Submit & Generate Button */}
+        {/* Submit & Save Button */}
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link
             href="/admin"
@@ -1029,27 +990,17 @@ export default function NewCasePage() {
             {loading ? (
               <>
                 <span className="w-4 h-4 border-2 border-[#0E1016] border-t-transparent rounded-full animate-spin" />
-                <span>Processing AI Pipeline...</span>
+                <span>Saving Case & 8 Episodes...</span>
               </>
             ) : (
               <>
-                <span>⚡</span>
-                <span>Generate Complete Pleadings Experience</span>
+                <span>💾</span>
+                <span>Save Case & Open Visual Studio</span>
                 <span>→</span>
               </>
             )}
           </button>
         </div>
-
-        {/* Live Step Progress Indicator */}
-        {loading && (
-          <div className="p-4 bg-[#141824] border border-[#D4AF37]/40 rounded-xs animate-fadeIn">
-            <div className="text-[11px] font-mono font-bold text-[#D4AF37] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
-              <span>{currentStep}</span>
-            </div>
-          </div>
-        )}
       </form>
     </div>
   );
