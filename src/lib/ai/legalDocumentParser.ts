@@ -356,16 +356,6 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
                   },
                 ],
               },
-              student: ep.layers?.student || {
-                blocks: [{ type: 'para', text: `Legal analysis for Episode ${epNum}.`, source: { tier: 'BLACK' } }],
-                ratio: coreHolding || `Ratio decidendi of ${title}`,
-                obiter: [`Judicial observation in ${title}.`],
-                examAngle: `Key doctrine for CLAT-PG & Judiciary examination.`,
-              },
-              advocate: ep.layers?.advocate || {
-                blocks: [{ type: 'para', text: `TRIAL PROPOSITION: Legal threshold illustrated by ${title}.`, source: { tier: 'BLACK' } }],
-                pinpoints: [{ para: epNum * 10, proposition: 'Operative finding' }],
-              },
             },
             personas: epNum === 2 ? personas : undefined,
           });
@@ -485,28 +475,6 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
                 },
               ],
             },
-            student: {
-              blocks: [
-                {
-                  type: 'para',
-                  text: `Doctrinal legal analysis for ${epTitle} under ${statuteSections}.`,
-                  source: { tier: 'BLACK' },
-                },
-              ],
-              ratio: epRatio || coreHolding || `Ratio decidendi of ${title}`,
-              obiter: epObiter.length > 0 ? epObiter : [`Judicial observation regarding ${epTitle}.`],
-              examAngle: epExamAngle || `High-yield topic for CLAT-PG & Judiciary Mains.`,
-            },
-            advocate: {
-              blocks: [
-                {
-                  type: 'para',
-                  text: epTrialProp ? `TRIAL PROPOSITION: ${epTrialProp}` : `TRIAL PROPOSITION: Legal threshold established by ${title}.`,
-                  source: { tier: 'BLACK' },
-                },
-              ],
-              pinpoints: [{ para: epNum * 12, proposition: epTrialProp || 'Operative finding' }],
-            },
           },
           personas: epNum === 2 ? personas : undefined,
         });
@@ -545,16 +513,6 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
         layers: {
           story: {
             blocks: [{ type: 'para', text: textChunk, source: { tier: 'BLACK', para: idx + 1 } }],
-          },
-          student: {
-            blocks: [{ type: 'para', text: `Legal breakdown of ${t.title}.`, source: { tier: 'BLACK' } }],
-            ratio: coreHolding || `Core ratio decidendi of ${title}.`,
-            obiter: [`Judicial observation in ${title}.`],
-            examAngle: `Key doctrine for CLAT-PG & Judiciary examination.`,
-          },
-          advocate: {
-            blocks: [{ type: 'para', text: `TRIAL PROPOSITION: Legal threshold illustrated by ${title}.`, source: { tier: 'BLACK' } }],
-            pinpoints: [{ para: (idx + 1) * 10, proposition: 'Operative finding' }],
           },
         },
       });

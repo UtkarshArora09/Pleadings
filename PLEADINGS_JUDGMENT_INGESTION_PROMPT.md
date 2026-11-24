@@ -1,10 +1,10 @@
 # PLEADINGS — MASTER JUDGMENT INGESTION PROMPT
-## Certified Landmark Case Extraction, Zero-Hallucination Framing & Dossier Generation
+## Certified Landmark Case Extraction, Zero-Hallucination Framing & Story Dossier
 
 > **How to Use:**
 > Copy and paste the prompt below into **Gemini 1.5/2.0 Pro**, **Claude 3.5 Sonnet**, **GPT-4o**, or the **Pleadings Admin OCR & Ingestion Studio**.
 > Paste the raw text of any Supreme Court of India or High Court judgment immediately following the prompt.
-> The output will automatically adhere to the strict 8-episode Pleadings structure and produce both a **Verified Case Record Dossier** (matching `Anuradha Bhasin v. Union of India`) and a **Pleadings-compliant JSON payload** ready for one-click ingestion into `/admin/new` or `/admin/ocr`.
+> The output will automatically adhere to the strict 8-episode Pleadings structure with **ONLY the Story Layer**, producing both a **Verified Case Record Dossier** and a **Pleadings-compliant JSON payload** ready for one-click ingestion into `/admin/new` or `/admin/ocr`.
 
 ---
 
@@ -27,7 +27,7 @@ Your mission is to transform raw Indian court judgments into an engaging, accura
 
 #### RULE 2: SIMPLE, HUMANIZED, AND ACCESSIBLE ENGLISH (NO AI BUZZWORDS)
 - Write in **natural, clear, human English** like an experienced senior legal journalist explaining a case to an intelligent citizen.
-- Keep sentences crisp and direct. Avoid convoluted legalistic jargon where simple words suffice.
+- Keep sentences crisp, direct, and engaging. Avoid convoluted legalistic jargon where simple words suffice.
 - **STRICTLY BANNED AI BUZZWORDS & CLICHÉS:**
   You are strictly prohibited from using the following words or phrases in any part of the output:
   `"delve"`, `"tapestry"`, `"nuanced"`, `"testament to"`, `"crucible"`, `"paradigm"`, `"unfurls"`, `"beacon of justice"`, `"paragon"`, `"kaleidoscope"`, `"veritable"`, `"pivotal nexus"`, `"echoes of"`, `"in a world where"`, `"it is worth noting"`, `"serves as a reminder"`, `"intertwined"`, `"hallowed halls"`, `"unbeknownst"`, `"palpable"`.
@@ -50,23 +50,19 @@ Structure the entire factual and legal journey into exactly 8 chronological epis
 - **Episode 07 · OPERATIVE VERDICT:** The binding decree, operative orders, relief granted or writ issued, and directions to authorities.
 - **Episode 08 · PRECEDENTIAL LEGACY:** The binding doctrine established under Article 141 and how it governs future cases in India.
 
-#### RULE 5: TRI-DEPTH LAYERS FOR EACH EPISODE
-Every episode must include 3 distinct depth layers:
-1. **Story Layer (`story`):** Plain-English narrative for everyday readers (120–220 words per episode).
-2. **Student Layer (`student`):**
-   - `ratioDecidendi`: Binding legal rule established in this stage.
-   - `obiterDicta`: Judicial commentary or persuasive observations.
-   - `examInsight`: CLAT-PG / Judicial Services exam takeaways.
-3. **Advocate Layer (`advocate`):**
-   - `trialProposition`: Formal courtroom proposition with pinpoint paragraph citations `[¶...]`.
+#### RULE 5: ONLY ONE LAYER — THE STORY LAYER (NO STUDENT OR ADVOCATE LAYERS)
+- Every episode contains **ONLY THE STORY LAYER (`story`)**.
+- Absolutely NO student layers, NO advocate layers, NO exam angles, and NO separate lawyer episode tables.
+- Pure, compelling, natural human storytelling (150–250 words per episode) strictly grounded in the judgment facts.
+- Each episode contains:
+  * `kicker`: e.g. "EPISODE 01 · THE PREMISE"
+  * `title`: Case-specific factual headline in plain English
+  * `endHook`: A natural transition sentence leading to the next episode
+  * `layers.story.blocks`: Paragraph blocks containing the verified factual narrative
 
-#### RULE 6: 5-PART DEDICATED LAWYER EPISODES
-Provide the authoritative reference data extracted directly from the judgment:
-1. **Part 1 · Statutory Text:** Key statutory sections quoted in the judgment with pinpoints.
-2. **Part 2 · Enumerated Holdings:** Exact numbered holdings with SCC/SCR paragraph citations.
-3. **Part 3 · Precedents Cited:** Table of prior cases cited with treatment (`Followed`, `Overruled`, `Distinguished`, `Applied`).
-4. **Part 4 · Citator History:** Subsequent treatment with mandatory citator notice.
-5. **Part 5 · Parallel Citations:** Complete parallel law report citations (SCC, AIR, Scale, etc.).
+#### RULE 6: DRAMATIS PERSONAE (REAL LITIGANTS ONLY)
+Extract only genuine parties named in the judgment (Petitioner, Co-Petitioners, State / Respondents, Key Authorities):
+- Name, Role, Tag (e.g. "Aggrieved Litigant", "State Authority"), and a 1–2 sentence description of who they are and their role in the dispute.
 
 ---
 
@@ -74,7 +70,12 @@ Provide the authoritative reference data extracted directly from the judgment:
 
 Return your response in two clear sections:
 1. **SECTION A: CERTIFIED CASE RECORD DOSSIER (HTML/Markdown Format)**
-   A complete, printable dossier matching the format of `Anuradha Bhasin v. Union of India`.
+   A complete, printable dossier containing:
+   - Case Identification & Core Ratio
+   - Overview & Case Metadata Table (including Catalog Blurb)
+   - Dramatis Personae Cards
+   - Case Brief (Facts, Issues, Held, Reasoning)
+   - The 8 Chronological Story Episodes (pure Story narrative)
 2. **SECTION B: PLEADINGS CMS IMPORT JSON**
    A strict, valid JSON object ready for direct import into the Pleadings admin database.
 
@@ -154,63 +155,131 @@ Return your response in two clear sections:
           "blocks": [
             {
               "type": "para",
-              "text": "Factual narrative written in simple, natural human English. Strictly grounded in the judgment with NO AI buzzwords.",
+              "text": "Factual narrative written in simple, natural human English. Strictly grounded in the judgment with NO AI buzzwords and NO invented facts.",
               "source": { "tier": "BLACK", "para": 1 }
             }
           ]
-        },
-        "student": {
-          "ratioDecidendi": "Core legal rule established in this stage.",
-          "obiterDicta": "Persuasive judicial observation.",
-          "examInsight": "High-yield examination takeaway."
-        },
-        "advocate": {
-          "trialProposition": "FORMAL TRIAL PROPOSITION. [¶Paragraph Number]"
         }
       }
-    }
-    /* ... Episodes 2 through 8 following the exact same structure ... */
-  ],
-  "lawyerEpisodes": [
-    {
-      "partNumber": 1,
-      "title": "Statutory Text As Quoted In The Judgment",
-      "category": "STATUTORY_TEXT",
-      "items": [
-        { "label": "Statute Name & Section", "content": "Exact section text quoted in judgment", "pinpoint": "Para X" }
-      ]
     },
     {
-      "partNumber": 2,
-      "title": "The Court's Enumerated Holdings",
-      "category": "HOLDINGS",
-      "items": [
-        { "label": "Holding 1", "content": "Exact legal rule declared by the bench", "pinpoint": "Para Y" }
-      ]
+      "n": 2,
+      "kicker": "EPISODE 02 · DRAMATIS PERSONAE",
+      "title": "THE LITIGANTS & CONFLICTING INTERESTS",
+      "endHook": "What followed next in the proceedings?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Narrative introducing the parties and their actions as documented in the judgment record.",
+              "source": { "tier": "BLACK", "para": 2 }
+            }
+          ]
+        }
+      }
     },
     {
-      "partNumber": 3,
-      "title": "Precedents Discussed In This Judgment",
-      "category": "PRECEDENTS",
-      "items": [
-        { "label": "Case Name v. Case Name", "content": "Principle followed/distinguished", "pinpoint": "Citation" }
-      ]
+      "n": 3,
+      "kicker": "EPISODE 03 · THE TRIAL & INQUIRY",
+      "title": "INVESTIGATION & EXECUTIVE ORDERS",
+      "endHook": "What followed next in the proceedings?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Narrative detailing the investigation, orders passed, and procedural steps taken before reaching the court.",
+              "source": { "tier": "BLACK", "para": 3 }
+            }
+          ]
+        }
+      }
     },
     {
-      "partNumber": 4,
-      "title": "Subsequent Citator History",
-      "category": "CITATOR_HISTORY",
-      "items": [
-        { "label": "Treatment Flag", "content": "Subsequent Supreme Court citation", "pinpoint": "Notice included" }
-      ]
+      "n": 4,
+      "kicker": "EPISODE 04 · THE LEGAL CONTROVERSY",
+      "title": "THE STATUTORY CLASH",
+      "endHook": "What followed next in the proceedings?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Narrative outlining the core constitutional question and conflicting provisions.",
+              "source": { "tier": "BLACK", "para": 4 }
+            }
+          ]
+        }
+      }
     },
     {
-      "partNumber": 5,
-      "title": "Full Parallel Citation Index",
-      "category": "PARALLEL_CITATIONS",
-      "items": [
-        { "label": "Report", "content": "Citation string", "pinpoint": "Official Law Reports" }
-      ]
+      "n": 5,
+      "kicker": "EPISODE 05 · COURTROOM ARGUMENTS",
+      "title": "SUBMISSIONS AT THE BAR",
+      "endHook": "What followed next in the proceedings?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Narrative capturing the arguments presented by counsel on both sides directly from the judgment.",
+              "source": { "tier": "BLACK", "para": 5 }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "n": 6,
+      "kicker": "EPISODE 06 · JUDICIAL DELIBERATION",
+      "title": "BENCH ANALYSIS & DOCTRINAL TESTS",
+      "endHook": "What followed next in the proceedings?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Narrative explaining how the judges evaluated the law and formulated their reasoning.",
+              "source": { "tier": "BLACK", "para": 6 }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "n": 7,
+      "kicker": "EPISODE 07 · OPERATIVE VERDICT",
+      "title": "THE BINDING HOLDING & RELIEF",
+      "endHook": "What followed next in the proceedings?",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Narrative describing the court's definitive ruling, relief granted, and orders issued.",
+              "source": { "tier": "BLACK", "para": 7 }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "n": 8,
+      "kicker": "EPISODE 08 · PRECEDENTIAL LEGACY",
+      "title": "THE DOCTRINE GOING FORWARD",
+      "endHook": "Case dossier complete.",
+      "layers": {
+        "story": {
+          "blocks": [
+            {
+              "type": "para",
+              "text": "Narrative detailing the precedential impact of this ruling under Article 141 for the future.",
+              "source": { "tier": "BLACK", "para": 8 }
+            }
+          ]
+        }
+      }
     }
   ]
 }

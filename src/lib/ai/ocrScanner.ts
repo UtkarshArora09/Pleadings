@@ -53,8 +53,10 @@ Your mission is to perform faithful, 100% verified Optical Character Recognition
    - Sentence 2: What legal question came before the Court.
    - Sentence 3: What the Court decided and why it matters to everyday people.
 
-4. 8 CHRONOLOGICAL STORY EPISODES:
-   Organize the narrative strictly into 8 episodes with authentic, case-specific headlines (NOT generic "Stage 1" or "Episode 1"):
+4. 8 CHRONOLOGICAL STORY EPISODES (STORY LAYER ONLY):
+   Organize the narrative strictly into 8 episodes with authentic, case-specific headlines (NOT generic "Stage 1" or "Episode 1").
+   Every episode contains ONLY ONE layer: the Story Layer (layers.story). Absolutely NO student layer and NO advocate layer.
+   Write pure, compelling, natural human storytelling (150–250 words per episode) strictly 100% grounded in the judgment facts:
    - EPISODE 01 · THE PREMISE: The factual inception and real events that sparked the conflict.
    - EPISODE 02 · DRAMATIS PERSONAE: The real parties involved and their conflicting interests.
    - EPISODE 03 · THE TRIAL & INQUIRY: How police investigation, trial court orders, or state inquiries unfolded.
@@ -261,22 +263,6 @@ Please scan this entire document, extract all text, perform legal structuring, a
         "story": {
           "blocks": [
             { "type": "para", "text": "Factual narrative written in simple, direct, natural human English. Strictly 100% grounded in the real facts of the judgment with NO AI buzzwords and NO invented facts.", "source": { "tier": "BLACK", "para": 1 } }
-          ]
-        },
-        "student": {
-          "blocks": [
-            { "type": "para", "text": "Academic analysis of episode 1...", "source": { "tier": "BLACK", "para": 1 } }
-          ],
-          "ratio": "Clear binding ratio decidendi...",
-          "obiter": ["Relevant obiter dictum 1", "Obiter dictum 2"],
-          "examAngle": "CLAT-PG & Judiciary Mains focus..."
-        },
-        "advocate": {
-          "blocks": [
-            { "type": "para", "text": "TRIAL PROPOSITION: Section 66A of the IT Act creates a chilling effect on legitimate free speech and is void for vagueness.", "source": { "tier": "BLACK", "para": 1 } }
-          ],
-          "pinpoints": [
-            { "para": 14, "proposition": "On clear definition of free speech thresholds under Article 19(1)(a)" }
           ]
         }
       }

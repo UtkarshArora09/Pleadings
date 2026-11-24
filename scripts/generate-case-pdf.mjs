@@ -124,14 +124,6 @@ function loadCaseData(inputArg) {
           story: {
             blocks: [{ text: 'On August 4, 2019, all mobile networks, broadband connections, and landlines were terminated across Jammu & Kashmir without advance warning or published executive decrees.' }],
           },
-          student: {
-            ratioDecidendi: 'Internet medium is protected under Article 19(1)(a).',
-            obiterDicta: 'The digital sphere is indispensable to democratic participation.',
-            examInsight: 'Proportionality review of telecom shutdowns for CLAT-PG.',
-          },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: Indefinite suspension of internet connectivity without temporal boundaries is ultra vires Article 19 and the Telecom Suspension Rules, 2017. [¶24, ¶88]',
-          },
         },
       },
       {
@@ -142,9 +134,6 @@ function loadCaseData(inputArg) {
         layers: {
           story: {
             blocks: [{ text: 'Anuradha Bhasin and Ghulam Nabi Azad moved the Supreme Court under Article 32, alleging total suppression of press freedom and basic liberties.' }],
-          },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: Blanket communication curbs that completely paralyze newspaper publication violate the freedom of the press under Article 19(1)(a). [¶31]',
           },
         },
       },
@@ -157,9 +146,6 @@ function loadCaseData(inputArg) {
           story: {
             blocks: [{ text: 'When asked to produce the restriction orders, the State initially claimed executive privilege, arguing national security shielded the orders from public disclosure.' }],
           },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: The State must publish all executive orders restricting fundamental liberties so affected citizens can seek judicial review. [¶18, ¶26]',
-          },
         },
       },
       {
@@ -170,9 +156,6 @@ function loadCaseData(inputArg) {
         layers: {
           story: {
             blocks: [{ text: 'District Magistrates routinely issued repetitive Section 144 CrPC curfew orders covering entire regions for months without citing specific imminent danger.' }],
-          },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: Section 144 CrPC cannot be used as a routine administrative tool to suppress legitimate expression or dissent. [¶42, ¶99]',
           },
         },
       },
@@ -185,9 +168,6 @@ function loadCaseData(inputArg) {
           story: {
             blocks: [{ text: 'The Solicitor General argued that cross-border terrorism necessitated preemptive curbs; Senior Counsel argued that security cannot extinguish constitutional existence.' }],
           },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: National security claims do not grant the State total immunity from constitutional proportionality scrutiny. [¶64, ¶71]',
-          },
         },
       },
       {
@@ -198,9 +178,6 @@ function loadCaseData(inputArg) {
         layers: {
           story: {
             blocks: [{ text: 'The Bench examined international human rights standards and domestic constitutional tests, applying the Modern Dental College and Puttaswamy proportionality doctrines.' }],
-          },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: State restrictions on fundamental rights must adopt the least restrictive measure available to achieve legitimate aims. [¶102, ¶108]',
           },
         },
       },
@@ -213,9 +190,6 @@ function loadCaseData(inputArg) {
           story: {
             blocks: [{ text: 'The Supreme Court directed immediate review of all suspension orders, ordered restoration of essential websites, and mandated 7-day review cycles.' }],
           },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: An order suspending telecom services under the 2017 Rules cannot be permanent and must be reviewed every 7 working days. [¶124, ¶130]',
-          },
         },
       },
       {
@@ -227,62 +201,7 @@ function loadCaseData(inputArg) {
           story: {
             blocks: [{ text: 'Anuradha Bhasin became India foundational digital rights jurisprudence, cited across common law jurisdictions balancing cybersecurity and civil liberty.' }],
           },
-          advocate: {
-            trialProposition: 'TRIAL PROPOSITION: The right to internet access as a conduit for trade, profession, and speech is non-negotiable in 21st-century jurisprudence. [¶142]',
-          },
         },
-      },
-    ],
-    lawyerEpisodes: [
-      {
-        partNumber: 1,
-        title: 'Statutory Text As Reproduced In The Judgment',
-        items: [
-          { label: 'Temporary Suspension of Telecom Services Rules, 2017 — Rule 2(2)', content: '"An order issued by the competent authority... shall not be valid for more than seven working days unless confirmed by the Review Committee." (Pinpoint: SCR p. 45, Para 38)' },
-          { label: 'Constitution of India — Article 19(1)(a) & 19(1)(g)', content: '"All citizens shall have the right to freedom of speech and expression; and to practise any profession, or to carry on any occupation, trade or business."' },
-          { label: 'Code of Criminal Procedure, 1973 — Section 144', content: '"Power to issue order in urgent cases of nuisance or apprehended danger."' },
-        ],
-      },
-      {
-        partNumber: 2,
-        title: "The Court's Enumerated Holdings",
-        items: [
-          { label: 'Holding 1', content: 'Freedom of speech and expression and the freedom to practice any trade or business through the medium of the internet is constitutionally protected under Article 19(1)(a) and 19(1)(g). [¶111, SCC p. 680]' },
-          { label: 'Holding 2', content: 'An order suspending internet services indefinitely is impermissible under the Temporary Suspension of Telecom Services Rules, 2017. [¶124, SCC p. 688]' },
-          { label: 'Holding 3', content: 'Section 144 CrPC cannot be used as a tool to prevent the legitimate expression of democratic opinions. [¶99, SCC p. 675]' },
-          { label: 'Holding 4', content: 'The State is obligated to publish all suspension and restriction orders to ensure transparent judicial review. [¶18, SCC p. 650]' },
-        ],
-      },
-      {
-        partNumber: 3,
-        title: 'Precedents Discussed In This Judgment',
-        items: [
-          { case: 'Sakal Papers (P) Ltd. v. Union of India', citation: '[1962] 3 SCR 842', treatment: 'Followed', principle: 'State cannot restrict newspaper publication through indirect economic/operational curbs.' },
-          { case: 'Bennett Coleman & Co. v. Union of India', citation: '(1972) 2 SCC 788', treatment: 'Followed', principle: 'Freedom of speech encompasses the freedom of circulation and publication tools.' },
-          { case: 'Modern Dental College v. State of M.P.', citation: '(2016) 7 SCC 353', treatment: 'Applied', principle: 'Four-pronged proportionality test for fundamental rights restrictions.' },
-          { case: 'K.S. Puttaswamy v. Union of India', citation: '(2017) 10 SCC 1', treatment: 'Followed', principle: 'Proportionality standard to prevent arbitrary executive invasions into liberty.' },
-        ],
-      },
-      {
-        partNumber: 4,
-        title: 'Subsequent Citator History',
-        items: [
-          { label: 'Followed', content: 'Foundation for Media Professionals v. Union of India (2020) 5 SCC 746 (4G Restoration Case)' },
-          { label: 'Followed', content: 'Internet Freedom Foundation v. Union of India (2021) 2 SCC 110' },
-          { label: 'Referred to', content: 'Manohar Lal Sharma v. Union of India (Pegasus Case) (2022) 1 SCC 715' },
-        ],
-      },
-      {
-        partNumber: 5,
-        title: 'Full Parallel Citation Index',
-        items: [
-          'AIR 2020 SC 1308',
-          '(2020) 3 SCC 637',
-          '(2020) 1 Scale 691',
-          '(2020) 1 Mad LJ 574',
-          '2020 (77) OCR 784',
-          'AIRONLINE 2020 SC 17',
-        ],
       },
     ],
   };
@@ -305,7 +224,6 @@ function renderHtml(caseData) {
   const reasoningText = caseData.brief?.reasoning?.en || caseData.brief?.reasoning || '';
   const personas = Array.isArray(caseData.personas) ? caseData.personas : [];
   const episodes = Array.isArray(caseData.episodes) ? caseData.episodes : [];
-  const lawyerEps = Array.isArray(caseData.lawyerEpisodes) ? caseData.lawyerEpisodes : [];
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -643,15 +561,15 @@ function renderHtml(caseData) {
     <strong>Reasoning:</strong> ${reasoningText}</p>
   </div>
 
-  <!-- PAGE 2: 8 EPISODES & 3-TIER LAYERS -->
+  <!-- PAGE 2: 8 CHRONOLOGICAL STORY EPISODES -->
   <div class="page-break"></div>
 
   <div class="header">
     <div class="title-group">
       <h1>PLEADINGS</h1>
-      <p>8-Episode Synchronized Story & Depth Layer Structure</p>
+      <p>8-Episode Synchronized Landmark Story Arc</p>
     </div>
-    <div class="badge">Episodes 01 – 08</div>
+    <div class="badge">Episodes 01 – 08 · Story Layer</div>
   </div>
 
   <h2><span class="num">4</span> The 8-Episode Sequential Arc</h2>
@@ -660,78 +578,17 @@ function renderHtml(caseData) {
     const kicker = ep.kicker || `EPISODE 0${ep.n || ''}`;
     const epTitle = ep.title || '';
     const storyText = ep.layers?.story?.blocks?.[0]?.text || ep.text || '';
-    const student = ep.layers?.student;
-    const advocate = ep.layers?.advocate;
 
     return `
       <div class="section-card">
         <h4>${kicker}: ${epTitle}</h4>
         <p><strong>Story Narrative:</strong> ${storyText}</p>
-        ${student ? `
-          <p><strong>Student Layer (Ratio & Obiter):</strong> Ratio: ${student.ratioDecidendi || 'Direct legal finding.'} Obiter: ${student.obiterDicta || ''} Exam Angle: ${student.examInsight || ''}</p>
-        ` : ''}
-        ${advocate ? `
-          <p><strong>Advocate Layer:</strong> <code>${advocate.trialProposition || ''}</code></p>
-        ` : ''}
       </div>
     `;
   }).join('')}
 
-  <!-- PAGE 3: LAWYER EPISODES & FLASHCARDS -->
-  <div class="page-break"></div>
-
-  <div class="header">
-    <div class="title-group">
-      <h1>PLEADINGS</h1>
-      <p>5-Part Dedicated Lawyer Episodes Dossier & Student Flashcards</p>
-    </div>
-    <div class="badge">Advocate Reference</div>
-  </div>
-
-  <h2><span class="num">5</span> Dedicated Lawyer Episodes (5 Core Modules)</h2>
-
-  ${lawyerEps.map(part => `
-    <div class="section-card">
-      <h4>Part ${part.partNumber || ''} · ${part.title || ''}</h4>
-      ${Array.isArray(part.items) ? (
-        part.partNumber === 3 ? `
-          <table>
-            <thead>
-              <tr>
-                <th>Precedent Case</th>
-                <th>Citation</th>
-                <th>Treatment</th>
-                <th>Judicial Principle</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${part.items.map(it => `
-                <tr>
-                  <td><strong>${it.case || it.label || ''}</strong></td>
-                  <td>${it.citation || it.pinpoint || ''}</td>
-                  <td><strong>${it.treatment || 'Applied'}</strong></td>
-                  <td>${it.principle || it.content || ''}</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        ` : part.partNumber === 5 ? `
-          <div class="code-block">${JSON.stringify(part.items, null, 2)}</div>
-        ` : `
-          ${part.items.map(it => `
-            <p><strong>${it.label || ''}:</strong><br><em>${it.content || ''}</em></p>
-          `).join('')}
-        `
-      ) : ''}
-    </div>
-  `).join('')}
-
-  <div class="disclaimer-banner">
-    <strong>Mandatory Citator Notice:</strong> "These are the citator entries recorded in this report and may not be complete or current. Verify this case's present status through a live citator (SCC Online, Manupatra, or equivalent) before relying on it in an active matter."
-  </div>
-
   <div class="footer">
-    <span>Pleadings Landmark Legal Editorial Platform · Admin Ingestion & OCR Certification Dossier</span>
+    <span>Pleadings Landmark Legal Editorial Platform · Admin Ingestion & Case Dossier</span>
     <span>https://pleadings.in</span>
   </div>
 
