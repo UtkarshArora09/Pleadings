@@ -345,6 +345,7 @@ Please scan this entire document, extract all text, perform legal structuring, a
                   title: parsed.title || parsedJson.title,
                   brief: { ...parsedJson.brief, ...parsed.brief },
                   personas: (parsed.personas && parsed.personas.length > 0) ? parsed.personas : parsedJson.personas,
+                  timeline: (parsed.timeline && parsed.timeline.length > 0) ? parsed.timeline : parsedJson.timeline,
                   episodes: (parsed.episodes && parsed.episodes.length >= 8) ? parsed.episodes : parsedJson.episodes,
                 };
               } else {
@@ -411,6 +412,13 @@ Please scan this entire document, extract all text, perform legal structuring, a
     : Array.isArray(parsedJson.studentFlashcards) && parsedJson.studentFlashcards.length > 0
     ? parsedJson.studentFlashcards
     : [];
+
+  // Extract raw timeline / chronological milestones
+  const rawTimeline = Array.isArray(parsedJson.timeline) && parsedJson.timeline.length > 0
+    ? parsedJson.timeline
+    : Array.isArray(parsedJson.chronologicalEvolution) && parsedJson.chronologicalEvolution.length > 0
+    ? parsedJson.chronologicalEvolution
+    : undefined;
 
   // Ensure 8 episodes exist
   let episodes: Episode[] = Array.isArray(parsedJson.episodes) && parsedJson.episodes.length > 0
@@ -751,6 +759,7 @@ Please scan this entire document, extract all text, perform legal structuring, a
     },
     personas: extractedPersonas,
     episodes,
+    timeline: rawTimeline,
     lawyerEpisodes,
     advocateReference: structuredAdvocateRef,
     flashcards: rawFlashcards.length > 0

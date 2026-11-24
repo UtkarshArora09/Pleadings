@@ -250,6 +250,7 @@ export interface CaseData {
   personas?: import('./case').PersonaItem[];
   characters?: import('./case').PersonaItem[];
   episodes?: Episode[];
+  timeline?: { year: number; event: string }[];
   lawyerEpisodes?: import('./case').LawyerEpisode[];
   flashcards?: { q: string; a: string }[];
   subsequentHistory?: {

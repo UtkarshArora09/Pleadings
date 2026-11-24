@@ -851,6 +851,107 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                 />
               </div>
             </div>
+
+            {/* Chronological Case Timeline / What Changed Since */}
+            <div className="pt-4 border-t border-white/10 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="block text-[11px] font-mono text-[#D4AF37] uppercase font-bold">
+                    ⏳ Chronological Milestones (What Changed Since)
+                  </label>
+                  <p className="text-[10px] text-[#a9a49a]">
+                    Dates and procedural milestones displayed in the reader &ldquo;What Changed Since&rdquo; component.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const currentTimeline = Array.isArray(caseData.timeline) ? [...caseData.timeline] : [];
+                    currentTimeline.push({
+                      year: typeof caseData.year === 'number' ? caseData.year : new Date().getFullYear(),
+                      event: '',
+                    });
+                    setCaseData({ ...caseData, timeline: currentTimeline });
+                  }}
+                  className="px-2.5 py-1 bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 border border-[#D4AF37]/40 text-[#D4AF37] rounded-xs text-[10px] font-mono font-bold uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  + Add Milestone
+                </button>
+              </div>
+
+              {(!caseData.timeline || caseData.timeline.length === 0) ? (
+                <div className="p-4 bg-[#0A0C10] border border-white/10 rounded-xs text-xs text-[#a9a49a] font-mono flex items-center justify-between">
+                  <span>No custom milestones saved yet (falling back to default judgment year).</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCaseData({
+                        ...caseData,
+                        timeline: [{
+                          year: typeof caseData.year === 'number' ? caseData.year : new Date().getFullYear(),
+                          event: 'Judgment delivered by the Court',
+                        }],
+                      });
+                    }}
+                    className="text-[#D4AF37] hover:underline uppercase text-[10px]"
+                  >
+                    Initialize Timeline
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-2.5">
+                  {caseData.timeline.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 bg-[#0A0C10] border border-white/15 focus-within:border-[#D4AF37] rounded-xs flex flex-col sm:flex-row gap-3 items-start"
+                    >
+                      <div className="w-full sm:w-28 shrink-0">
+                        <label className="block text-[9px] font-mono text-[#D4AF37] uppercase mb-1">
+                          Year
+                        </label>
+                        <input
+                          type="number"
+                          value={item.year}
+                          onChange={(e) => {
+                            const updated = [...(caseData.timeline || [])];
+                            updated[idx] = { ...updated[idx], year: parseInt(e.target.value) || 2020 };
+                            setCaseData({ ...caseData, timeline: updated });
+                          }}
+                          className="w-full bg-[#121520] border border-white/10 text-xs text-[#D4AF37] font-mono font-bold p-2 rounded-xs"
+                        />
+                      </div>
+                      <div className="flex-1 w-full">
+                        <label className="block text-[9px] font-mono text-[#a9a49a] uppercase mb-1">
+                          Milestone Event
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={item.event}
+                          onChange={(e) => {
+                            const updated = [...(caseData.timeline || [])];
+                            updated[idx] = { ...updated[idx], event: e.target.value };
+                            setCaseData({ ...caseData, timeline: updated });
+                          }}
+                          className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs leading-relaxed"
+                          placeholder="Describe the milestone event..."
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = (caseData.timeline || []).filter((_, i) => i !== idx);
+                          setCaseData({ ...caseData, timeline: updated });
+                        }}
+                        className="self-end sm:self-center px-2 py-1 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xs text-xs font-mono"
+                        title="Delete milestone"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         );
       })()}

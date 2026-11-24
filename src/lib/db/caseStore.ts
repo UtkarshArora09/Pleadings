@@ -447,6 +447,7 @@ export function normalizeCaseData(raw: any): CaseData {
     panels: panels,
     brief: brief,
     episodes: episodes,
+    timeline: Array.isArray(source.timeline) && source.timeline.length > 0 ? source.timeline : undefined,
     lawyerEpisodes: buildDefaultLawyerEpisodes(source),
     flashcards: flashcards,
     subsequentHistory: subsequentHistory,

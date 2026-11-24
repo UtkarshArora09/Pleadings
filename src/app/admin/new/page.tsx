@@ -141,6 +141,28 @@ export default function NewCasePage() {
     { name: '', role: 'Key Witness / Eyewitness', tag: 'Primary Evidence', description: '', badgeEmoji: '👤' },
   ]);
 
+  // Chronological Case Timeline ("What Changed Since")
+  const [timeline, setTimeline] = useState<{ year: number; event: string }[]>([]);
+
+  const addTimelineEvent = () => {
+    setTimeline((prev) => [
+      ...prev,
+      { year: formData.year || new Date().getFullYear(), event: '' },
+    ]);
+  };
+
+  const updateTimelineEvent = (index: number, field: 'year' | 'event', val: any) => {
+    setTimeline((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: val };
+      return updated;
+    });
+  };
+
+  const removeTimelineEvent = (index: number) => {
+    setTimeline((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -285,6 +307,11 @@ export default function NewCasePage() {
       // Populate Personas
       if (c.personas && Array.isArray(c.personas) && c.personas.length > 0) {
         setPersonas(c.personas);
+      }
+
+      // Populate Chronological Timeline / What Changed Since
+      if (c.timeline && Array.isArray(c.timeline) && c.timeline.length > 0) {
+        setTimeline(c.timeline);
       }
 
       // Populate Images if present
@@ -442,6 +469,11 @@ export default function NewCasePage() {
 
       const validPersonas = personas.filter((p) => p.name.trim() || p.description.trim());
 
+      const validTimeline = timeline
+        .filter((t) => t.event && t.event.trim().length > 0)
+        .map((t) => ({ year: Number(t.year) || formData.year, event: t.event.trim() }))
+        .sort((a, b) => a.year - b.year);
+
       // Ensure every episode has a valid story block and attached image
       const formattedEpisodes = episodes.map((ep, idx) => {
         const text = ep.layers?.story?.blocks?.[0]?.text || (idx === 0 ? formData.factsSummary : '');
@@ -501,6 +533,7 @@ export default function NewCasePage() {
           verdictImage: images.verdict || undefined,
           publishStatus: submitStatus,
           status: submitStatus,
+          timeline: validTimeline.length > 0 ? validTimeline : undefined,
           personas: validPersonas.length > 0 ? validPersonas : undefined,
           episodes: formattedEpisodes,
           brief: {
@@ -856,14 +889,110 @@ export default function NewCasePage() {
           </div>
         </div>
 
-        {/* Step 2: 8 Story Episodes (Fully Customizable) */}
+        {/* Step 2: Chronological Case Timeline / What Changed Since */}
+        <div className="bg-[#121520] border border-[#D4AF37]/30 p-6 rounded-xs space-y-4 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/10">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]" />
+                <h2 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                  Step 2 · Chronological Milestones (&ldquo;What Changed Since&rdquo;)
+                </h2>
+              </div>
+              <p className="text-xs text-[#a9a49a] mt-0.5">
+                Key milestones from inception, lower court orders, to the final landmark ruling and subsequent statutory shifts.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <span className="text-[10px] font-mono px-2 py-0.5 bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 rounded-xs">
+                {timeline.length} {timeline.length === 1 ? 'Milestone' : 'Milestones'}
+              </span>
+              <button
+                type="button"
+                onClick={addTimelineEvent}
+                className="px-2.5 py-1 bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 border border-[#D4AF37]/40 text-[#D4AF37] rounded-xs text-[10px] font-mono font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1"
+              >
+                <span>+</span> Add Milestone
+              </button>
+            </div>
+          </div>
+
+          {timeline.length === 0 ? (
+            <div className="p-6 bg-black/30 border border-dashed border-white/10 rounded-xs text-center space-y-2">
+              <span className="text-2xl">⏳</span>
+              <p className="text-xs text-white/60 font-sans">
+                No timeline milestones added yet.
+              </p>
+              <p className="text-[11px] text-[#8c887e]">
+                Drop a judgment PDF into the OCR engine above to auto-extract genuine historical dates, or click below.
+              </p>
+              <button
+                type="button"
+                onClick={addTimelineEvent}
+                className="mt-2 px-3 py-1.5 bg-[#D4AF37] hover:bg-white text-[#0E1016] rounded-xs text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer inline-flex items-center gap-1.5"
+              >
+                <span>+</span> Add First Milestone
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {timeline.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 bg-black/40 border border-white/10 hover:border-[#D4AF37]/40 rounded-xs flex flex-col sm:flex-row gap-3 items-start transition-colors"
+                >
+                  <div className="w-full sm:w-28 shrink-0">
+                    <label className="block text-[9px] font-mono text-[#D4AF37] uppercase mb-1">
+                      Year
+                    </label>
+                    <input
+                      type="number"
+                      required
+                      min={1947}
+                      max={2035}
+                      value={item.year}
+                      onChange={(e) => updateTimelineEvent(idx, 'year', parseInt(e.target.value) || formData.year)}
+                      className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-[#D4AF37] font-mono font-bold p-2 rounded-xs focus:outline-none"
+                      placeholder="e.g. 2021"
+                    />
+                  </div>
+
+                  <div className="flex-1 w-full">
+                    <label className="block text-[9px] font-mono text-[#a9a49a] uppercase mb-1">
+                      Milestone Event / Legal Evolution
+                    </label>
+                    <textarea
+                      rows={2}
+                      required
+                      value={item.event}
+                      onChange={(e) => updateTimelineEvent(idx, 'event', e.target.value)}
+                      placeholder="e.g. NCDRC awarded ₹2 crore compensation; Supreme Court later set aside quantum and remanded matter for fresh consideration."
+                      className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-2.5 rounded-xs focus:outline-none leading-relaxed font-sans"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => removeTimelineEvent(idx)}
+                    className="self-end sm:self-center px-2 py-1 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xs text-xs font-mono transition-colors cursor-pointer"
+                    title="Delete milestone"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Step 3: 8 Story Episodes (Fully Customizable) */}
         <div className="bg-[#121520] border border-[#D4AF37]/40 p-6 rounded-xs space-y-5 shadow-2xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/10">
             <div>
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
                 <h2 className="text-sm font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                  Step 2 · 8 Story Episodes (Fully Customizable)
+                  Step 3 · 8 Story Episodes (Fully Customizable)
                 </h2>
               </div>
               <p className="text-xs text-[#a9a49a] mt-0.5">
@@ -1160,7 +1289,7 @@ export default function NewCasePage() {
         </div>
 
         {/* ======================================================== */}
-        {/* STEP 3 · CASE VISUAL ASSETS & IMAGE UPLOADS              */}
+        {/* STEP 4 · CASE VISUAL ASSETS & IMAGE UPLOADS              */}
         {/* ======================================================== */}
         <div className="bg-[#121520] border border-white/10 rounded-xs p-6 space-y-6">
           <div className="border-b border-white/10 pb-4 flex items-center justify-between">
@@ -1168,7 +1297,7 @@ export default function NewCasePage() {
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
                 <span className="text-xs font-mono font-bold tracking-widest text-[#D4AF37] uppercase">
-                  STEP 3 · CASE VISUAL ASSETS & IMAGES
+                  STEP 4 · CASE VISUAL ASSETS & IMAGES
                 </span>
               </div>
               <p className="text-xs text-[#a9a49a] mt-1">

@@ -59,6 +59,12 @@ Every episode contains **ONLY THE STORY LAYER** (pure, natural legal narrative o
 Extract only genuine parties named in the judgment (Petitioner, Co-Petitioners, State / Respondents, Key Authorities):
 - Name, Role/Tag (e.g. "Primary Petitioner · Aggrieved Citizen", "The Respondent · State Authority"), and a 1–2 sentence description of who they are and their role in the dispute.
 
+#### 6. CHRONOLOGICAL CASE TIMELINE (WHAT CHANGED SINCE)
+Extract 3 to 6 genuine chronological milestones documented in the judgment (from factual inception, lower court / tribunal orders, remittals, to apex rulings):
+- **Year** (e.g. 2018, 2021, 2023, 2026)
+- **Milestone Date** (e.g. 12 April 2018 or Month Year)
+- **Key Factual / Procedural Evolution** (1-2 sentences strictly grounded in the record).
+
 ---
 
 ### REQUIRED HTML DOCUMENT STRUCTURE
@@ -409,7 +415,35 @@ Generate the HTML document following this exact template so the Pleadings OCR pa
     </div>
   </div>
 
-  <h2><span class="num">3</span> Case Brief & Certified Ratio</h2>
+  <h2><span class="num">3</span> Chronological Case Timeline (What Changed Since)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 14%;">Year</th>
+        <th style="width: 22%;">Milestone Date</th>
+        <th>Key Factual / Procedural Evolution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>[Year, e.g. 2018]</strong></td>
+        <td>[Date, e.g. 12 April 2018]</td>
+        <td>[Factual inception: Incident occurred and initial proceedings or complaint initiated.]</td>
+      </tr>
+      <tr>
+        <td><strong>[Year, e.g. 2021]</strong></td>
+        <td>[Date, e.g. 21 September 2021]</td>
+        <td>[Lower court, high court, or tribunal order and primary findings.]</td>
+      </tr>
+      <tr>
+        <td><strong>[Year, e.g. 2026]</strong></td>
+        <td>[Date, e.g. 15 January 2026]</td>
+        <td>[Supreme Court delivers binding judgment settling the doctrine under Article 141.]</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">4</span> Case Brief & Certified Ratio</h2>
   <div class="section-card">
     <h4>Facts & Procedural Genesis</h4>
     <p>[Clear narrative of facts and lower court/state actions leading to this litigation.]</p>
@@ -436,7 +470,7 @@ Generate the HTML document following this exact template so the Pleadings OCR pa
     <div class="badge">Episodes 01 – 08 · Story Layer</div>
   </div>
 
-  <h2><span class="num">4</span> The 8-Episode Sequential Arc</h2>
+  <h2><span class="num">5</span> The 8-Episode Sequential Arc</h2>
 
   <div class="section-card">
     <h4>EPISODE 01 · THE PREMISE: [Case-Specific Factual Title]</h4>

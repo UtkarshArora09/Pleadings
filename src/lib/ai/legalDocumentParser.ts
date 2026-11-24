@@ -635,6 +635,91 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
     blurbText = `Landmark judgment in ${title} decided by ${court} in ${year}.`;
   }
 
+  // EXTRACT CHRONOLOGICAL TIMELINE / WHAT CHANGED SINCE
+  const timeline: { year: number; event: string }[] = [];
+  const explicitTimelineMatch = normalizedText.match(
+    /(?:Chronological\s+(?:Case\s+)?Timeline|Timeline|Chronological\s+Evolution|Key\s+Dates\s*&\s*Milestones)[:\s]*\n+([\s\S]*?)(?=\n\s*(?:The\s+8-Episode|EPISODE|Dramatis|Case\s+Brief|Lawyer\s+Reference|\n--- PAGE BREAK ---|$))/i
+  );
+
+  if (explicitTimelineMatch) {
+    const rawSection = explicitTimelineMatch[1];
+    const lines = rawSection.split('\n').map((l) => l.trim()).filter(Boolean);
+    for (const line of lines) {
+      const m = line.match(/\b(19\d{2}|20\d{2})\b\s*[:\-|·\t|]?\s*([^\n]+)/);
+      if (m) {
+        const y = parseInt(m[1], 10);
+        let ev = m[2].trim().replace(/\s+/g, ' ');
+        if (ev.includes('|')) {
+          const parts = ev.split('|').map((p) => p.trim()).filter(Boolean);
+          if (parts.length >= 2) {
+            ev = `${parts[0]}: ${parts.slice(1).join(' - ')}`;
+          } else if (parts.length === 1) {
+            ev = parts[0];
+          }
+        }
+        if (y >= 1947 && y <= 2035 && ev.length >= 8) {
+          timeline.push({ year: y, event: ev });
+        }
+      }
+    }
+  }
+
+  // Automatic chronological extractor from facts and narrative
+  if (timeline.length < 2) {
+    const factsAndEpisodes = normalizedText.slice(0, 25000);
+    const flattenedText = factsAndEpisodes.replace(/\r\n/g, '\n').replace(/\n(?!\n)/g, ' ');
+    const dateRegex = /\b(?:(\d{1,2}[./-]\d{1,2}[./-](19\d{2}|20\d{2}))|((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+(19\d{2}|20\d{2}))|(\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+(19\d{2}|20\d{2})))\b/gi;
+
+    const dateMatches = Array.from(flattenedText.matchAll(dateRegex));
+    const yearToEvent = new Map<number, string>();
+
+    for (const match of dateMatches) {
+      const yearStr = match[2] || match[4] || match[6];
+      if (!yearStr) continue;
+      const y = parseInt(yearStr, 10);
+      if (y < 1950 || y > 2035) continue;
+
+      const matchPos = match.index || 0;
+      let start = matchPos;
+      while (start > 0 && !/[.!?\n]/.test(flattenedText[start - 1])) start--;
+      let end = matchPos;
+      while (end < flattenedText.length && !/[.!?\n]/.test(flattenedText[end])) end++;
+      if (end < flattenedText.length && /[.!?]/.test(flattenedText[end])) end++;
+
+      let sentence = flattenedText.slice(start, end).replace(/\s+/g, ' ').trim();
+      sentence = sentence.replace(/^(?:Facts|Issues|Held|Reasoning|Episode\s+\d+|By\s+order\s+dated)[:\s]*/i, '');
+      sentence = sentence.replace(/\[[^\]]+\]/g, '').trim();
+
+      if (/enrolment|D\/\d+|Act,\s*\d{4}|\d+\s+SCC\s+\d+|\d+\s+SCR\s+\d+|AIR\s+\d{4}/i.test(sentence)) {
+        continue;
+      }
+      if (/Civil\s+Appeal|Neutral\s+citation|Bench\s+|Rajesh\s+Bindal|Reviewing/i.test(sentence)) {
+        continue;
+      }
+
+      if (sentence.length >= 25 && sentence.length <= 250) {
+        if (!yearToEvent.has(y) || sentence.length > yearToEvent.get(y)!.length) {
+          yearToEvent.set(y, sentence);
+        }
+      }
+    }
+
+    const sortedYears = Array.from(yearToEvent.keys()).sort((a, b) => a - b);
+    for (const y of sortedYears) {
+      timeline.push({ year: y, event: yearToEvent.get(y)! });
+    }
+  }
+
+  // Ensure default decision year is present at the end
+  if (timeline.length === 0 || !timeline.some((t) => t.year === year)) {
+    timeline.push({
+      year,
+      event: `Supreme Court delivered final judgment in ${title} establishing binding precedent under Article 141.`,
+    });
+  }
+
+  timeline.sort((a, b) => a.year - b.year);
+
   const slug = slugify(shortTitle || title);
 
   return {
@@ -676,6 +761,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
     },
     personas,
     episodes,
+    timeline,
     lawyerEpisodes: [],
     advocateReference: {
       statutoryText: [{ statute: statuteSections, text: 'Verbatim statutory text', act: statuteSections, section: 'Core Provision', quotedText: 'Verbatim statutory text', pinpoint: 'Para 1' }],
