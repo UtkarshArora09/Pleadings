@@ -441,15 +441,27 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                       </h2>
                     </div>
 
-                    {/* Optional Episode Visual Image (deduplicated against Hero Poster & earlier episodes) */}
-                    {ep.image && showEpisodeImage[epIdx] && (
-                      <CaseImage
-                        src={ep.image.src}
-                        alt={ep.image.alt}
-                        provenance={ep.image.provenance}
-                        aspectRatio="aspect-[16/9]"
-                      />
-                    )}
+                    {/* Episode Visual Image (deduplicated against Hero Poster & earlier episodes) */}
+                    {(() => {
+                      const epImgSrc =
+                        ep.image?.src ||
+                        (caseData as any).panels?.[epIdx]?.photoExhibitSrc ||
+                        (caseData as any).panels?.[epIdx]?.image ||
+                        (epIdx === 1 ? (caseData as any).exhibitImage : undefined) ||
+                        (epIdx === 6 ? (caseData as any).verdictImage : undefined);
+
+                      if (epImgSrc && showEpisodeImage[epIdx]) {
+                        return (
+                          <CaseImage
+                            src={epImgSrc}
+                            alt={ep.image?.alt || `${ep.title} visual exhibit`}
+                            provenance={ep.image?.provenance || (epIdx === 1 ? 'archival' : 'illustration')}
+                            aspectRatio="aspect-[16/9]"
+                          />
+                        );
+                      }
+                      return null;
+                    })()}
 
                     {/* Episode Narrative Content (With Plain-English Tap-To-Define on tricky terms) */}
                     <div className="space-y-4">
@@ -761,14 +773,27 @@ export function CaseViewer({ caseData, nextSlug, prevSlug }: CaseViewerProps) {
                     </h2>
                   </div>
 
-                  {ep.image && showEpisodeImage[epIdx] && (
-                    <CaseImage
-                      src={ep.image.src}
-                      alt={ep.image.alt}
-                      provenance={ep.image.provenance}
-                      aspectRatio="aspect-[16/9]"
-                    />
-                  )}
+                  {/* Episode Visual Image (deduplicated against Hero Poster & earlier episodes) */}
+                  {(() => {
+                    const epImgSrc =
+                      ep.image?.src ||
+                      (caseData as any).panels?.[epIdx]?.photoExhibitSrc ||
+                      (caseData as any).panels?.[epIdx]?.image ||
+                      (epIdx === 1 ? (caseData as any).exhibitImage : undefined) ||
+                      (epIdx === 6 ? (caseData as any).verdictImage : undefined);
+
+                    if (epImgSrc && showEpisodeImage[epIdx]) {
+                      return (
+                        <CaseImage
+                          src={epImgSrc}
+                          alt={ep.image?.alt || `${ep.title} visual exhibit`}
+                          provenance={ep.image?.provenance || (epIdx === 1 ? 'archival' : 'illustration')}
+                          aspectRatio="aspect-[16/9]"
+                        />
+                      );
+                    }
+                    return null;
+                  })()}
 
                   <div className="space-y-4">
                     {(() => {

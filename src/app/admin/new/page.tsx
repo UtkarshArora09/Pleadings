@@ -99,6 +99,9 @@ const DEFAULT_EPISODES: Episode[] = [
 export default function NewCasePage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const posterFileRef = useRef<HTMLInputElement>(null);
+  const exhibitFileRef = useRef<HTMLInputElement>(null);
+  const verdictFileRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -118,6 +121,18 @@ export default function NewCasePage() {
 
   const [episodes, setEpisodes] = useState<Episode[]>(DEFAULT_EPISODES);
   const [selectedEpTab, setSelectedEpTab] = useState<number>(0);
+
+  // Visual Assets & Images State
+  const [images, setImages] = useState<{
+    poster: string;
+    exhibit: string;
+    verdict: string;
+  }>({
+    poster: '',
+    exhibit: '',
+    verdict: '',
+  });
+  const [uploadingSlot, setUploadingSlot] = useState<'poster' | 'exhibit' | 'verdict' | null>(null);
 
   const [personas, setPersonas] = useState<PersonaItem[]>([
     { name: '', role: 'Petitioner / Accused', tag: 'Aggrieved Party', description: '', badgeEmoji: '⚖️' },
@@ -270,6 +285,15 @@ export default function NewCasePage() {
         setPersonas(c.personas);
       }
 
+      // Populate Images if present
+      if (c.poster?.src || c.bannerImage || c.exhibitImage || c.verdictImage) {
+        setImages((prev) => ({
+          poster: c.poster?.src || c.bannerImage || prev.poster,
+          exhibit: c.exhibitImage || prev.exhibit,
+          verdict: c.verdictImage || prev.verdict,
+        }));
+      }
+
       setOcrSuccessMsg(`✓ Successfully auto-filled all 8 customizable episodes and case record from "${isSample ? 'Pleadings Sample Template PDF' : file?.name}" via Multimodal OCR.`);
     } catch (ocrErr: any) {
       console.error('OCR Ingestion error:', ocrErr);
@@ -279,8 +303,110 @@ export default function NewCasePage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function compressImageForUpload(
+    file: File,
+    maxWidth = 1024,
+    maxHeight = 576,
+    quality = 0.65
+  ): Promise<{ blob: Blob; dataUrl: string; fileName: string }> {
+    return new Promise((resolve, reject) => {
+      if (file.type === 'image/svg+xml' || file.name.toLowerCase().endsWith('.svg')) {
+        reject(new Error('SVG uploads are disallowed for security reasons. Please upload JPG, PNG, or WebP.'));
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (readerEvent) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth || height > maxHeight) {
+            const ratio = Math.min(maxWidth / width, maxHeight / height);
+            width = Math.round(width * ratio);
+            height = Math.round(height * ratio);
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            const dataUrl = (readerEvent.target?.result as string) || '';
+            resolve({ blob: file, dataUrl, fileName: file.name });
+            return;
+          }
+
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const outputType = 'image/jpeg';
+          const dataUrl = canvas.toDataURL(outputType, quality);
+
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || 'photo';
+                resolve({ blob, dataUrl, fileName: `${baseName}.jpg` });
+              } else {
+                resolve({ blob: file, dataUrl, fileName: file.name });
+              }
+            },
+            outputType,
+            quality
+          );
+        };
+        img.onerror = () => {
+          const dataUrl = (readerEvent.target?.result as string) || '';
+          resolve({ blob: file, dataUrl, fileName: file.name });
+        };
+        img.src = (readerEvent.target?.result as string) || '';
+      };
+      reader.onerror = () => resolve({ blob: file, dataUrl: '', fileName: file.name });
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const handleImageFile = async (file: File | null, slot: 'poster' | 'exhibit' | 'verdict') => {
+    if (!file) return;
+    try {
+      setUploadingSlot(slot);
+      setError(null);
+      const { blob, fileName, dataUrl } = await compressImageForUpload(file);
+      let finalUrl = dataUrl;
+
+      try {
+        const data = new FormData();
+        data.append('file', blob, fileName);
+        data.append(
+          'slug',
+          formData.title ? formData.title.toLowerCase().replace(/[^a-z0-9_-]/g, '-').slice(0, 50) : 'case'
+        );
+        data.append('type', slot);
+        const upRes = await fetch('/api/admin/upload', {
+          method: 'POST',
+          body: data,
+        });
+        if (upRes.ok) {
+          const upJson = await upRes.json();
+          if (upJson.success && upJson.url) {
+            finalUrl = upJson.url;
+          }
+        }
+      } catch (uploadErr) {
+        console.warn('Network upload fallback to Data URI:', uploadErr);
+      }
+      setImages((prev) => ({ ...prev, [slot]: finalUrl }));
+    } catch (err: any) {
+      setError(err.message || 'Image upload failed');
+    } finally {
+      setUploadingSlot(null);
+    }
+  };
+
+  const handleSubmit = async (submitStatus: 'PUBLISHED' | 'ADMIN_REVIEW' = 'PUBLISHED') => {
     if (
       !formData.title.trim() ||
       !formData.court.trim() ||
@@ -304,16 +430,32 @@ export default function NewCasePage() {
       setLoading(true);
       setError(null);
 
+      const titleStr = formData.title.trim();
+      const safeSlug =
+        titleStr
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/[\s_-]+/g, '-')
+          .replace(/^-+|-+$/g, '') || `case-${Date.now()}`;
+
       const validPersonas = personas.filter((p) => p.name.trim() || p.description.trim());
 
-      // Ensure every episode has a valid story block
+      // Ensure every episode has a valid story block and attached image
       const formattedEpisodes = episodes.map((ep, idx) => {
         const text = ep.layers?.story?.blocks?.[0]?.text || (idx === 0 ? formData.factsSummary : '');
+        const epImg =
+          idx === 1 && images.exhibit
+            ? { src: images.exhibit, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' as const }
+            : idx === 6 && images.verdict
+            ? { src: images.verdict, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' as const }
+            : ep.image;
+
         return {
           ...ep,
           n: idx + 1,
           kicker: ep.kicker || `EPISODE 0${idx + 1}`,
           title: ep.title || `Episode ${idx + 1}`,
+          image: epImg,
           layers: {
             story: {
               blocks: [
@@ -330,13 +472,24 @@ export default function NewCasePage() {
         };
       });
 
+      const posterObj = images.poster
+        ? { src: images.poster, alt: `${titleStr} cover poster`, provenance: 'illustration' as const }
+        : undefined;
+
       const res = await fetch('/api/admin/cases', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          slug: safeSlug,
           factsSummary: firstEpText,
           rank: formData.makeTrendingTop10 ? formData.rank : 99,
+          bannerImage: images.poster || undefined,
+          poster: posterObj,
+          exhibitImage: images.exhibit || undefined,
+          verdictImage: images.verdict || undefined,
+          publishStatus: submitStatus,
+          status: submitStatus,
           personas: validPersonas.length > 0 ? validPersonas : undefined,
           episodes: formattedEpisodes,
           brief: {
@@ -353,8 +506,8 @@ export default function NewCasePage() {
         throw new Error(data.error || 'Failed to save case record.');
       }
 
-      // Redirect directly to the Review & Visual Asset Studio for this case
-      const targetSlug = data.case?.slug || formData.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+      // Redirect cleanly (guaranteed never undefined)
+      const targetSlug = data.case?.slug || data.slug || safeSlug;
       router.push(`/admin/cases/${targetSlug}`);
     } catch (err: unknown) {
       console.error('Case save error:', err);
@@ -482,7 +635,7 @@ export default function NewCasePage() {
       </div>
 
       {/* Case Ingestion & Episode Customization Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={(e) => { e.preventDefault(); handleSubmit('PUBLISHED'); }} className="space-y-6">
         {/* Step 1: Basic Case Information */}
         <div className="bg-[#121520] border border-white/10 p-6 rounded-xs space-y-4 shadow-xl">
           <div className="flex items-center gap-2 pb-3 border-b border-white/10">
@@ -973,33 +1126,325 @@ export default function NewCasePage() {
           </div>
         </div>
 
-        {/* Submit & Save Button */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* ======================================================== */}
+        {/* STEP 3 · CASE VISUAL ASSETS & IMAGE UPLOADS              */}
+        {/* ======================================================== */}
+        <div className="bg-[#121520] border border-white/10 rounded-xs p-6 space-y-6">
+          <div className="border-b border-white/10 pb-4 flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                <span className="text-xs font-mono font-bold tracking-widest text-[#D4AF37] uppercase">
+                  STEP 3 · CASE VISUAL ASSETS & IMAGES
+                </span>
+              </div>
+              <p className="text-xs text-[#a9a49a] mt-1">
+                Upload or link the 3 essential case visuals: Hero Poster, Archival Exhibit (Episode 2), and Courtroom Verdict (Episode 7).
+              </p>
+            </div>
+            <span className="hidden sm:inline-block px-2.5 py-1 rounded-2xs text-[10px] font-mono font-bold bg-white/5 text-white/70 border border-white/10 uppercase">
+              JPG / PNG / WebP
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Slot 1: Hero Billboard Cover Poster */}
+            <div className="bg-black/50 border border-white/10 rounded-xs p-4 space-y-3 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between pb-2 border-b border-white/5">
+                  <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
+                    SLOT 1 · HERO POSTER COVER
+                  </span>
+                  <span className="text-[9px] font-mono text-white/40 uppercase">Slide 0</span>
+                </div>
+                <p className="text-[11px] text-[#8c887e] mt-1.5 leading-relaxed">
+                  The primary marquee poster displayed on the case header and catalog.
+                </p>
+
+                {/* Preview */}
+                <div className="mt-3 relative w-full aspect-[16/9] bg-[#0E1016] border border-white/10 rounded-xs overflow-hidden flex items-center justify-center">
+                  {images.poster ? (
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={images.poster}
+                        alt="Hero Poster Preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setImages((prev) => ({ ...prev, poster: '' }))}
+                        className="absolute top-1 right-1 px-1.5 py-0.5 bg-black/80 hover:bg-red-600 text-[10px] text-white font-mono rounded-xs transition-colors"
+                        title="Remove image"
+                      >
+                        ✕
+                      </button>
+                    </>
+                  ) : (
+                    <div className="text-center p-3 text-white/30 text-xs font-mono">
+                      <span>🖼️</span>
+                      <p className="text-[10px] mt-1">No poster selected</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Direct URL input */}
+                <div className="mt-3">
+                  <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-1">
+                    Image URL
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://... or upload below"
+                    value={images.poster}
+                    onChange={(e) => setImages((prev) => ({ ...prev, poster: e.target.value }))}
+                    className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
+                  />
+                </div>
+              </div>
+
+              {/* Upload Button */}
+              <div className="pt-2">
+                <input
+                  type="file"
+                  ref={posterFileRef}
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={(e) => handleImageFile(e.target.files?.[0] || null, 'poster')}
+                />
+                <button
+                  type="button"
+                  disabled={uploadingSlot === 'poster'}
+                  onClick={() => posterFileRef.current?.click()}
+                  className="w-full py-2 bg-white/5 hover:bg-white/10 border border-white/15 text-white/90 hover:text-white rounded-xs text-[11px] font-mono font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  {uploadingSlot === 'poster' ? (
+                    <>
+                      <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Compressing & Uploading...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>📁</span>
+                      <span>{images.poster ? 'Replace Poster File' : 'Browse Poster File'}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Slot 2: Archival Exhibit Image (Episode 2) */}
+            <div className="bg-black/50 border border-white/10 rounded-xs p-4 space-y-3 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between pb-2 border-b border-white/5">
+                  <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
+                    SLOT 2 · ARCHIVAL EXHIBIT
+                  </span>
+                  <span className="text-[9px] font-mono text-white/40 uppercase">Episode 2</span>
+                </div>
+                <p className="text-[11px] text-[#8c887e] mt-1.5 leading-relaxed">
+                  Historical evidence document or photo displayed inside Episode 02.
+                </p>
+
+                {/* Preview */}
+                <div className="mt-3 relative w-full aspect-[16/9] bg-[#0E1016] border border-white/10 rounded-xs overflow-hidden flex items-center justify-center">
+                  {images.exhibit ? (
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={images.exhibit}
+                        alt="Exhibit Preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setImages((prev) => ({ ...prev, exhibit: '' }))}
+                        className="absolute top-1 right-1 px-1.5 py-0.5 bg-black/80 hover:bg-red-600 text-[10px] text-white font-mono rounded-xs transition-colors"
+                        title="Remove image"
+                      >
+                        ✕
+                      </button>
+                    </>
+                  ) : (
+                    <div className="text-center p-3 text-white/30 text-xs font-mono">
+                      <span>📜</span>
+                      <p className="text-[10px] mt-1">No exhibit image</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Direct URL input */}
+                <div className="mt-3">
+                  <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-1">
+                    Image URL
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://... or upload below"
+                    value={images.exhibit}
+                    onChange={(e) => setImages((prev) => ({ ...prev, exhibit: e.target.value }))}
+                    className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
+                  />
+                </div>
+              </div>
+
+              {/* Upload Button */}
+              <div className="pt-2">
+                <input
+                  type="file"
+                  ref={exhibitFileRef}
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={(e) => handleImageFile(e.target.files?.[0] || null, 'exhibit')}
+                />
+                <button
+                  type="button"
+                  disabled={uploadingSlot === 'exhibit'}
+                  onClick={() => exhibitFileRef.current?.click()}
+                  className="w-full py-2 bg-white/5 hover:bg-white/10 border border-white/15 text-white/90 hover:text-white rounded-xs text-[11px] font-mono font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  {uploadingSlot === 'exhibit' ? (
+                    <>
+                      <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Compressing & Uploading...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>📁</span>
+                      <span>{images.exhibit ? 'Replace Exhibit File' : 'Browse Exhibit File'}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Slot 3: Courtroom Verdict Scene (Episode 7) */}
+            <div className="bg-black/50 border border-white/10 rounded-xs p-4 space-y-3 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between pb-2 border-b border-white/5">
+                  <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
+                    SLOT 3 · COURTROOM VERDICT
+                  </span>
+                  <span className="text-[9px] font-mono text-white/40 uppercase">Episode 7</span>
+                </div>
+                <p className="text-[11px] text-[#8c887e] mt-1.5 leading-relaxed">
+                  Operative courtroom decree or bench holding scene inside Episode 07.
+                </p>
+
+                {/* Preview */}
+                <div className="mt-3 relative w-full aspect-[16/9] bg-[#0E1016] border border-white/10 rounded-xs overflow-hidden flex items-center justify-center">
+                  {images.verdict ? (
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={images.verdict}
+                        alt="Verdict Preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setImages((prev) => ({ ...prev, verdict: '' }))}
+                        className="absolute top-1 right-1 px-1.5 py-0.5 bg-black/80 hover:bg-red-600 text-[10px] text-white font-mono rounded-xs transition-colors"
+                        title="Remove image"
+                      >
+                        ✕
+                      </button>
+                    </>
+                  ) : (
+                    <div className="text-center p-3 text-white/30 text-xs font-mono">
+                      <span>⚖️</span>
+                      <p className="text-[10px] mt-1">No verdict image</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Direct URL input */}
+                <div className="mt-3">
+                  <label className="block text-[9px] font-mono text-[#8c887e] uppercase mb-1">
+                    Image URL
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://... or upload below"
+                    value={images.verdict}
+                    onChange={(e) => setImages((prev) => ({ ...prev, verdict: e.target.value }))}
+                    className="w-full bg-[#121520] border border-white/10 text-xs text-white p-2 rounded-xs"
+                  />
+                </div>
+              </div>
+
+              {/* Upload Button */}
+              <div className="pt-2">
+                <input
+                  type="file"
+                  ref={verdictFileRef}
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={(e) => handleImageFile(e.target.files?.[0] || null, 'verdict')}
+                />
+                <button
+                  type="button"
+                  disabled={uploadingSlot === 'verdict'}
+                  onClick={() => verdictFileRef.current?.click()}
+                  className="w-full py-2 bg-white/5 hover:bg-white/10 border border-white/15 text-white/90 hover:text-white rounded-xs text-[11px] font-mono font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  {uploadingSlot === 'verdict' ? (
+                    <>
+                      <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Compressing & Uploading...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>📁</span>
+                      <span>{images.verdict ? 'Replace Verdict File' : 'Browse Verdict File'}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Submit & Publish Action Bar */}
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
           <Link
             href="/admin"
-            className="text-xs font-mono text-[#a9a49a] hover:text-white uppercase tracking-wider"
+            className="text-xs font-mono text-[#a9a49a] hover:text-white uppercase tracking-wider order-3 sm:order-1"
           >
-            Cancel
+            ← Cancel & Return
           </Link>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full sm:w-auto px-8 py-4 bg-[#D4AF37] hover:bg-white text-[#0E1016] font-bold text-xs uppercase tracking-widest transition-all rounded-xs shadow-2xl flex items-center justify-center gap-3 cursor-pointer"
-          >
-            {loading ? (
-              <>
-                <span className="w-4 h-4 border-2 border-[#0E1016] border-t-transparent rounded-full animate-spin" />
-                <span>Saving Case & 8 Episodes...</span>
-              </>
-            ) : (
-              <>
-                <span>💾</span>
-                <span>Save Case & Open Visual Studio</span>
-                <span>→</span>
-              </>
-            )}
-          </button>
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto order-1 sm:order-2">
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => handleSubmit('ADMIN_REVIEW')}
+              className="w-full sm:w-auto px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white border border-white/20 font-bold text-xs uppercase tracking-widest transition-all rounded-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            >
+              <span>💾</span>
+              <span>Save as Draft</span>
+            </button>
+
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => handleSubmit('PUBLISHED')}
+              className="w-full sm:w-auto px-8 py-3.5 bg-[#D4AF37] hover:bg-white text-[#0E1016] font-bold text-xs uppercase tracking-widest transition-all rounded-xs shadow-2xl flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50"
+            >
+              {loading ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-[#0E1016] border-t-transparent rounded-full animate-spin" />
+                  <span>Publishing Landmark Case...</span>
+                </>
+              ) : (
+                <>
+                  <span>🚀</span>
+                  <span>Publish Case Live</span>
+                  <span>→</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </form>
     </div>

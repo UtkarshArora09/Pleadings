@@ -334,11 +334,21 @@ export function normalizeCaseData(raw: any): CaseData {
 
       const resolvedPersonas = idx === 1 ? (ep.personas || source.personas || source.characters || ep.characters) : ep.personas;
 
+      const resolvedImage =
+        (ep.image?.src && ep.image.src !== bannerImage)
+          ? ep.image
+          : (p?.photoExhibitSrc && p.photoExhibitSrc !== bannerImage)
+          ? { src: p.photoExhibitSrc, alt: `${rawTitle} exhibit`, provenance: (idx === 1 ? 'archival' : idx === 6 ? 'illustration' : 'archival') as ('archival' | 'illustration') }
+          : (p?.image && p.image !== bannerImage)
+          ? { src: p.image, alt: `${rawTitle} visual`, provenance: (idx === 6 ? 'illustration' : 'archival') as ('archival' | 'illustration') }
+          : undefined;
+
       return {
         ...ep,
         n: ep.n || idx + 1,
         kicker: rawKicker,
         title: rawTitle,
+        image: resolvedImage,
         personas: resolvedPersonas,
         characters: resolvedPersonas,
         layers: {
@@ -427,6 +437,8 @@ export function normalizeCaseData(raw: any): CaseData {
     watermark: source.watermark || '§',
     bannerImage: bannerImage,
     poster: source.poster || { src: bannerImage, alt: `${titleEn} cover poster`, provenance: 'illustration' },
+    exhibitImage: source.exhibitImage || undefined,
+    verdictImage: source.verdictImage || undefined,
     matchRate: source.matchRate || 98,
     maturityRating: source.maturityRating || 'U/A 13+',
     rank: typeof source.rank === 'number' ? source.rank : 10,

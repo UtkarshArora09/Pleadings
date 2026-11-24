@@ -57,6 +57,10 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
 
   useEffect(() => {
     async function loadCase() {
+      if (!slug || slug === 'undefined') {
+        window.location.href = '/admin';
+        return;
+      }
       try {
         setLoading(true);
 
@@ -65,10 +69,15 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
           const data = await res.json();
           if (data.success && data.case) {
             setCaseData(data.case);
+          } else {
+            setImageError(data.error || 'Case record not found.');
           }
+        } else {
+          setImageError(`Case record not found (HTTP ${res.status}).`);
         }
       } catch (err) {
         console.error('Failed to load case for review:', err);
+        setImageError('Network error loading case record.');
       } finally {
         setLoading(false);
       }
@@ -80,6 +89,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     if (!updatedCaseData) return;
     try {
       setSaving(true);
+      setImageError(null);
 
       const res = await fetch(`/api/admin/cases/${slug}`, {
         method: 'PUT',
@@ -92,17 +102,16 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
           setCaseData(data.case);
           setSaveSuccess(true);
           setTimeout(() => setSaveSuccess(false), 2500);
+        } else {
+          throw new Error(data.error || 'Failed to save case updates.');
         }
       } else {
-        setCaseData(updatedCaseData);
-        setSaveSuccess(true);
-        setTimeout(() => setSaveSuccess(false), 2500);
+        const errJson = await res.json().catch(() => null);
+        throw new Error(errJson?.error || `Failed to save case (HTTP ${res.status}).`);
       }
     } catch (err) {
       console.error('Error saving case:', err);
-      setCaseData(updatedCaseData);
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 2500);
+      setImageError(err instanceof Error ? err.message : 'Error saving case.');
     } finally {
       setSaving(false);
     }
@@ -326,6 +335,83 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
     });
   }
 
+  const applyImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
+    const updated = { ...prev };
+    const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
+
+    if (tgt === 'poster') {
+      const oldPosterSrc = updated.poster?.src || updated.bannerImage;
+      updated.bannerImage = url;
+      updated.poster = { src: url, alt: `${titleStr} cover poster`, provenance: 'illustration' as const };
+      if (updated.episodes?.[0]?.image?.src && updated.episodes[0].image.src === oldPosterSrc) {
+        const epList = [...updated.episodes];
+        epList[0] = { ...epList[0], image: undefined };
+        updated.episodes = epList;
+      }
+      if (updated.hi?.episodes?.[0]?.image?.src && updated.hi.episodes[0].image.src === oldPosterSrc) {
+        const hiEpList = [...updated.hi.episodes];
+        hiEpList[0] = { ...hiEpList[0], image: undefined };
+        updated.hi = { ...updated.hi, episodes: hiEpList };
+      }
+    } else if (tgt === 'exhibit') {
+      updated.exhibitImage = url;
+      if (updated.panels?.[1]) {
+        const panels = [...updated.panels];
+        panels[1] = {
+          ...panels[1],
+          photoExhibitSrc: url,
+          image: url,
+          evidence: panels[1].evidence ? { ...panels[1].evidence, imageSrc: url } : undefined,
+        };
+        updated.panels = panels;
+      }
+      if (updated.episodes?.[1]) {
+        const epList = [...updated.episodes];
+        epList[1] = {
+          ...epList[1],
+          image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
+        };
+        updated.episodes = epList;
+      }
+      if (updated.hi?.episodes?.[1]) {
+        const hiEpList = [...updated.hi.episodes];
+        hiEpList[1] = {
+          ...hiEpList[1],
+          image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
+        };
+        updated.hi = { ...updated.hi, episodes: hiEpList };
+      }
+    } else if (tgt === 'verdict') {
+      updated.verdictImage = url;
+      if (updated.panels?.[6]) {
+        const panels = [...updated.panels];
+        panels[6] = {
+          ...panels[6],
+          photoExhibitSrc: url,
+          image: url,
+        };
+        updated.panels = panels;
+      }
+      if (updated.episodes?.[6]) {
+        const epList = [...updated.episodes];
+        epList[6] = {
+          ...epList[6],
+          image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
+        };
+        updated.episodes = epList;
+      }
+      if (updated.hi?.episodes?.[6]) {
+        const hiEpList = [...updated.hi.episodes];
+        hiEpList[6] = {
+          ...hiEpList[6],
+          image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
+        };
+        updated.hi = { ...updated.hi, episodes: hiEpList };
+      }
+    }
+    return updated;
+  };
+
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'poster' | 'exhibit' | 'verdict') => {
     const file = e.target.files?.[0];
     if (!file || !caseData) return;
@@ -368,87 +454,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         throw new Error('Image could not be read. Please try another image.');
       }
 
-      const syncImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
-        const updated = { ...prev };
-        const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
-
-        if (tgt === 'poster') {
-          const oldPosterSrc = updated.poster?.src || updated.bannerImage;
-          updated.bannerImage = url;
-          updated.poster = { src: url, alt: `${titleStr} cover poster`, provenance: 'illustration' as const };
-          // Do not duplicate the hero poster image inside Episode 1 (Hero already displays poster.src)
-          if (updated.episodes?.[0]?.image?.src && updated.episodes[0].image.src === oldPosterSrc) {
-            const epList = [...updated.episodes];
-            epList[0] = { ...epList[0], image: undefined };
-            updated.episodes = epList;
-          }
-          if (updated.hi?.episodes?.[0]?.image?.src && updated.hi.episodes[0].image.src === oldPosterSrc) {
-            const hiEpList = [...updated.hi.episodes];
-            hiEpList[0] = { ...hiEpList[0], image: undefined };
-            updated.hi = { ...updated.hi, episodes: hiEpList };
-          }
-        } else if (tgt === 'exhibit') {
-          if (updated.panels?.[1]) {
-            const panels = [...updated.panels];
-            panels[1] = {
-              ...panels[1],
-              photoExhibitSrc: url,
-              image: url,
-              evidence: panels[1].evidence ? { ...panels[1].evidence, imageSrc: url } : undefined,
-            };
-            updated.panels = panels;
-          }
-          if (updated.episodes?.[1]) {
-            const epList = [...updated.episodes];
-            epList[1] = {
-              ...epList[1],
-              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
-              exhibit: epList[1].exhibit ? { ...epList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
-            };
-            updated.episodes = epList;
-          }
-          if (updated.hi?.episodes?.[1]) {
-            const hiEpList = [...updated.hi.episodes];
-            hiEpList[1] = {
-              ...hiEpList[1],
-              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
-              exhibit: hiEpList[1].exhibit ? { ...hiEpList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
-            };
-            updated.hi = { ...updated.hi, episodes: hiEpList };
-          }
-        } else if (tgt === 'verdict') {
-          if (updated.panels?.[6]) {
-            const panels = [...updated.panels];
-            panels[6] = {
-              ...panels[6],
-              photoExhibitSrc: url,
-              image: url,
-            };
-            updated.panels = panels;
-          }
-          if (updated.episodes?.[6]) {
-            const epList = [...updated.episodes];
-            epList[6] = {
-              ...epList[6],
-              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
-              exhibit: epList[6].exhibit ? { ...epList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
-            };
-            updated.episodes = epList;
-          }
-          if (updated.hi?.episodes?.[6]) {
-            const hiEpList = [...updated.hi.episodes];
-            hiEpList[6] = {
-              ...hiEpList[6],
-              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
-              exhibit: hiEpList[6].exhibit ? { ...hiEpList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
-            };
-            updated.hi = { ...updated.hi, episodes: hiEpList };
-          }
-        }
-        return updated;
-      };
-
-      const updated = syncImageUpdate(caseData, finalUrl, target);
+      const updated = applyImageUpdate(caseData, finalUrl, target);
       setCaseData(updated);
       await handleSave(updated);
     } catch (err: unknown) {
@@ -487,87 +493,7 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
         throw new Error(data.error || 'AI Generation failed');
       }
 
-      const syncImageUpdate = (prev: any, url: string, tgt: 'poster' | 'exhibit' | 'verdict') => {
-        const updated = { ...prev };
-        const titleStr = typeof updated.title === 'string' ? updated.title : (updated.title?.en || updated.slug);
-
-        if (tgt === 'poster') {
-          const oldPosterSrc = updated.poster?.src || updated.bannerImage;
-          updated.bannerImage = url;
-          updated.poster = { src: url, alt: `${titleStr} cover poster`, provenance: 'illustration' as const };
-          // Do not duplicate the hero poster image inside Episode 1 (Hero already displays poster.src)
-          if (updated.episodes?.[0]?.image?.src && updated.episodes[0].image.src === oldPosterSrc) {
-            const epList = [...updated.episodes];
-            epList[0] = { ...epList[0], image: undefined };
-            updated.episodes = epList;
-          }
-          if (updated.hi?.episodes?.[0]?.image?.src && updated.hi.episodes[0].image.src === oldPosterSrc) {
-            const hiEpList = [...updated.hi.episodes];
-            hiEpList[0] = { ...hiEpList[0], image: undefined };
-            updated.hi = { ...updated.hi, episodes: hiEpList };
-          }
-        } else if (tgt === 'exhibit') {
-          if (updated.panels?.[1]) {
-            const panels = [...updated.panels];
-            panels[1] = {
-              ...panels[1],
-              photoExhibitSrc: url,
-              image: url,
-              evidence: panels[1].evidence ? { ...panels[1].evidence, imageSrc: url } : undefined,
-            };
-            updated.panels = panels;
-          }
-          if (updated.episodes?.[1]) {
-            const epList = [...updated.episodes];
-            epList[1] = {
-              ...epList[1],
-              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
-              exhibit: epList[1].exhibit ? { ...epList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
-            };
-            updated.episodes = epList;
-          }
-          if (updated.hi?.episodes?.[1]) {
-            const hiEpList = [...updated.hi.episodes];
-            hiEpList[1] = {
-              ...hiEpList[1],
-              image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' },
-              exhibit: hiEpList[1].exhibit ? { ...hiEpList[1].exhibit, image: { src: url, alt: `Archival Exhibit for ${titleStr}`, provenance: 'archival' } } : undefined,
-            };
-            updated.hi = { ...updated.hi, episodes: hiEpList };
-          }
-        } else if (tgt === 'verdict') {
-          if (updated.panels?.[6]) {
-            const panels = [...updated.panels];
-            panels[6] = {
-              ...panels[6],
-              photoExhibitSrc: url,
-              image: url,
-            };
-            updated.panels = panels;
-          }
-          if (updated.episodes?.[6]) {
-            const epList = [...updated.episodes];
-            epList[6] = {
-              ...epList[6],
-              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
-              exhibit: epList[6].exhibit ? { ...epList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
-            };
-            updated.episodes = epList;
-          }
-          if (updated.hi?.episodes?.[6]) {
-            const hiEpList = [...updated.hi.episodes];
-            hiEpList[6] = {
-              ...hiEpList[6],
-              image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' },
-              exhibit: hiEpList[6].exhibit ? { ...hiEpList[6].exhibit, image: { src: url, alt: `Courtroom Verdict for ${titleStr}`, provenance: 'illustration' } } : undefined,
-            };
-            updated.hi = { ...updated.hi, episodes: hiEpList };
-          }
-        }
-        return updated;
-      };
-
-      const updated = syncImageUpdate(caseData, data.url, target);
+      const updated = applyImageUpdate(caseData, data.url, target);
       setCaseData(updated);
       await handleSave(updated);
     } catch (err: unknown) {
@@ -1532,14 +1458,14 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                 </span>
               </div>
               <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
-                {caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || 'No exhibit image'}
+                {caseData.exhibitImage || (caseData as any).episodes?.[1]?.image?.src || caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || 'No exhibit image'}
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
               <AdminImagePreview
-                src={caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || '/images/cases/nanavati_portrait.jpg'}
+                src={caseData.exhibitImage || (caseData as any).episodes?.[1]?.image?.src || caseData.panels?.[1]?.photoExhibitSrc || caseData.panels?.[1]?.image || (caseData as any).episodes?.[1]?.exhibit?.image?.src || '/images/cases/nanavati_portrait.jpg'}
                 fallbackSrc="/images/cases/nanavati_portrait.jpg"
                 alt="Exhibit Preview"
                 caption="Placement: Inside Episode 02 Evidence Layer"
@@ -1630,14 +1556,14 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
                 </span>
               </div>
               <span className="text-[10px] font-mono text-white/50 truncate max-w-xs">
-                {caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || (caseData as any).episodes?.[6]?.image?.src || 'No verdict image'}
+                {caseData.verdictImage || (caseData as any).episodes?.[6]?.image?.src || caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || 'No verdict image'}
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {/* Image Preview */}
               <AdminImagePreview
-                src={caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || (caseData as any).episodes?.[6]?.image?.src || '/images/cases/ghost_court_verdict.jpg'}
+                src={caseData.verdictImage || (caseData as any).episodes?.[6]?.image?.src || caseData.panels?.[6]?.photoExhibitSrc || caseData.panels?.[6]?.image || '/images/cases/ghost_court_verdict.jpg'}
                 fallbackSrc="/images/cases/ghost_court_verdict.jpg"
                 alt="Verdict Scene Preview"
                 caption="Placement: Inside Episode 07 Verdict & Ratio"

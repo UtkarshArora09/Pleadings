@@ -23,19 +23,25 @@ export function deduplicateCaseImages(
 
   const showEpisodeImage: boolean[] = [];
   const cleanExhibits = episodes.map((ep) => {
-    const epKey = normalizeImgKey(ep.image?.src);
+    const rawEpImgSrc = ep.image?.src || (ep as any).photoExhibitSrc || (ep as any).imageSrc;
+    const epKey = normalizeImgKey(rawEpImgSrc);
     const exhibitKey = normalizeImgKey(ep.exhibit?.image?.src);
+
+    const hasValidExhibitCard = Boolean(
+      ep.exhibit && ep.exhibit.headline && ep.exhibit.kind && exhibitKey
+    );
 
     let cleanedExhibit = ep.exhibit;
     if (ep.exhibit && exhibitKey) {
       if (seen.has(exhibitKey)) {
         cleanedExhibit = { ...ep.exhibit, image: undefined };
-      } else {
+      } else if (hasValidExhibitCard) {
         seen.add(exhibitKey);
       }
     }
 
-    const shouldShow = Boolean(epKey) && (!exhibitKey || epKey !== exhibitKey) && !seen.has(epKey);
+    const isSuppressedByExhibitCard = hasValidExhibitCard && Boolean(exhibitKey) && epKey === exhibitKey;
+    const shouldShow = Boolean(epKey) && !isSuppressedByExhibitCard && !seen.has(epKey);
     if (shouldShow) seen.add(epKey);
     showEpisodeImage.push(shouldShow);
 

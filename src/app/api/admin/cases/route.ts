@@ -134,10 +134,19 @@ export async function POST(request: NextRequest) {
             ? String(body.factsSummary || briefObj?.facts?.en || '')
             : '';
 
+        const epImage =
+          ep.image ||
+          (i === 1 && body.exhibitImage
+            ? { src: String(body.exhibitImage), alt: `${title} Archival Exhibit`, provenance: 'archival' as const }
+            : i === 6 && body.verdictImage
+            ? { src: String(body.verdictImage), alt: `${title} Courtroom Verdict`, provenance: 'illustration' as const }
+            : undefined);
+
         return {
           n: epNum,
           kicker,
           title,
+          image: epImage,
           endHook: ep.endHook || (i < 7 ? 'What followed next in the proceedings?' : 'Case dossier complete.'),
           layers: {
             story: {
@@ -164,16 +173,30 @@ export async function POST(request: NextRequest) {
         };
       });
 
-      const panels = normalizedEpisodes.map((ep, i) => ({
-        id: `panel-${i + 1}`,
-        type: i === 0 ? 'HOOK' as const : i === 1 ? 'PEOPLE' as const : i === 6 ? 'VERDICT' as const : i === 7 ? 'RATIO' as const : 'INCIDENT' as const,
-        eyebrow: { en: ep.kicker, hi: ep.kicker },
-        headline: { en: ep.title, hi: ep.title },
-        body: {
-          en: ep.layers?.story?.blocks?.[0]?.text || '',
-          hi: ep.layers?.story?.blocks?.[0]?.text || '',
-        },
-      }));
+      const panels = normalizedEpisodes.map((ep, i) => {
+        const panelImg =
+          ep.image?.src ||
+          (i === 1 && body.exhibitImage ? String(body.exhibitImage) : undefined) ||
+          (i === 6 && body.verdictImage ? String(body.verdictImage) : undefined);
+
+        return {
+          id: `panel-${i + 1}`,
+          type: i === 0 ? 'HOOK' as const : i === 1 ? 'PEOPLE' as const : i === 6 ? 'VERDICT' as const : i === 7 ? 'RATIO' as const : 'INCIDENT' as const,
+          eyebrow: { en: ep.kicker, hi: ep.kicker },
+          headline: { en: ep.title, hi: ep.title },
+          photoExhibitSrc: panelImg,
+          image: panelImg,
+          body: {
+            en: ep.layers?.story?.blocks?.[0]?.text || '',
+            hi: ep.layers?.story?.blocks?.[0]?.text || '',
+          },
+        };
+      });
+
+      const posterSrc = String(body.bannerImage || (body.poster as any)?.src || '');
+      const posterObj =
+        body.poster ||
+        (posterSrc ? { src: posterSrc, alt: `${titleStr} cover poster`, provenance: 'illustration' as const } : undefined);
 
       caseToSave = {
         ...body,
@@ -183,6 +206,10 @@ export async function POST(request: NextRequest) {
         year: yearNum,
         genre: genreStr,
         categoryTag: String(body.categoryTag || statuteSectionsStr),
+        bannerImage: posterSrc || undefined,
+        poster: posterObj,
+        publishStatus: (body.publishStatus as any) || 'PUBLISHED',
+        status: (body.publishStatus as any) || 'PUBLISHED',
         episodes: normalizedEpisodes,
         panels: body.panels || panels,
         personas: validPersonas.length > 0 ? validPersonas : normalizedEpisodes[1]?.personas || [],
@@ -260,7 +287,7 @@ export async function POST(request: NextRequest) {
       // Non-fatal
     }
 
-    return NextResponse.json({ success: true, case: savedCase });
+    return NextResponse.json({ success: true, case: savedCase, slug: savedCase.slug });
   } catch {
     logSecurityEvent('admin_case_create_exception', 'error', { ip: clientIp });
     return NextResponse.json(

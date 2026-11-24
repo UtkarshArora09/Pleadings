@@ -261,6 +261,8 @@ export interface CaseData {
   vote?: import('./case').CaseFile['vote'];
   // CMS & Ingestion fields
   decidedOn?: string;
+  exhibitImage?: string;
+  verdictImage?: string;
   status?: CaseStatus;
   createdAt?: string;
   updatedAt?: string;
