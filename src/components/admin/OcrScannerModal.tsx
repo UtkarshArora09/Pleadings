@@ -159,11 +159,16 @@ export default function OcrScannerModal({ isOpen, onClose, onCaseIngested }: Ocr
         onCaseIngested(savedCase);
       }
 
+      const targetSlug =
+        (savedCase && typeof savedCase.slug === 'string' && savedCase.slug !== 'undefined' ? savedCase.slug : '') ||
+        (payload && typeof payload.slug === 'string' && payload.slug !== 'undefined' ? payload.slug : '') ||
+        (data && typeof data.slug === 'string' && data.slug !== 'undefined' ? data.slug : '');
+
       setTimeout(() => {
-        if (publishImmediately) {
+        if (publishImmediately || !targetSlug) {
           onClose();
         } else {
-          router.push(`/admin/cases/${savedCase.slug}`);
+          router.push(`/admin/cases/${targetSlug}`);
           onClose();
         }
       }, 1500);

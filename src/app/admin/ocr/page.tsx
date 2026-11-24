@@ -148,11 +148,16 @@ export default function AdminOcrScannerPage() {
           : '✅ Case successfully saved in the Admin Pipeline (Admin Review)!'
       );
 
+      const targetSlug =
+        (savedCase && typeof savedCase.slug === 'string' && savedCase.slug !== 'undefined' ? savedCase.slug : '') ||
+        (payload && typeof payload.slug === 'string' && payload.slug !== 'undefined' ? payload.slug : '') ||
+        (data && typeof data.slug === 'string' && data.slug !== 'undefined' ? data.slug : '');
+
       setTimeout(() => {
-        if (publishImmediately) {
+        if (publishImmediately || !targetSlug) {
           router.push('/admin');
         } else {
-          router.push(`/admin/cases/${savedCase.slug}`);
+          router.push(`/admin/cases/${targetSlug}`);
         }
       }, 1500);
     } catch (err: any) {

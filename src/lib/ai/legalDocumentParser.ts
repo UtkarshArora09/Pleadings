@@ -579,6 +579,23 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
     },
   }));
 
+  // EXTRACT CATALOG BLURB / STORY HOOK
+  let blurbText = '';
+  const blurbMatch =
+    normalizedText.match(/Catalog\s+Blurb[:\s]*\n+([^\n]+(?:\n[^\n]+)?)/i) ||
+    normalizedText.match(/Blurb[:\s]*\n+([^\n]+(?:\n[^\n]+)?)/i) ||
+    normalizedText.match(/Story\s+Hook[:\s]*\n+([^\n]+(?:\n[^\n]+)?)/i);
+
+  if (blurbMatch) {
+    blurbText = blurbMatch[1].trim().replace(/\s+/g, ' ');
+  } else if (coreHolding && facts) {
+    blurbText = `${facts.slice(0, 160).trim()}... In this decision, ${court} held that ${coreHolding.slice(0, 140).trim()}.`;
+  } else if (coreHolding) {
+    blurbText = coreHolding.slice(0, 240);
+  } else {
+    blurbText = `Landmark judgment in ${title} decided by ${court} in ${year}.`;
+  }
+
   const slug = slugify(shortTitle || title);
 
   return {
@@ -593,8 +610,8 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
     decidedOn,
     readTime: { en: '8 min read', hi: '8 मिनट पठन' },
     blurb: {
-      en: coreHolding ? coreHolding.slice(0, 160) + '...' : `${title} delivered by ${court} in ${year}.`,
-      hi: toJudicialHindi(coreHolding ? coreHolding.slice(0, 160) + '...' : `${title}।`),
+      en: blurbText,
+      hi: toJudicialHindi(blurbText),
     },
     citation: primaryCitation,
     judgmentUrl,

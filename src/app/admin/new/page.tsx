@@ -106,6 +106,7 @@ export default function NewCasePage() {
   const [formData, setFormData] = useState({
     title: '',
     shortTitle: '',
+    blurb: '',
     citation: '',
     court: 'Supreme Court of India',
     year: new Date().getFullYear() - 1,
@@ -212,6 +213,7 @@ export default function NewCasePage() {
         ...prev,
         title: typeof c.title === 'string' ? c.title : (c.title?.en || prev.title),
         shortTitle: typeof c.featuredHeroHook === 'string' ? c.featuredHeroHook : (c.featuredHeroHook?.en || c.shortTitle || prev.shortTitle),
+        blurb: typeof c.blurb === 'string' ? c.blurb : (c.blurb?.en || c.featuredHeroDesc?.en || c.featuredHeroHook?.en || c.brief?.facts?.en?.slice(0, 260) || prev.blurb),
         citation: c.citation || prev.citation,
         court: c.court || prev.court,
         year: typeof c.year === 'number' ? c.year : (parseInt(c.year) || prev.year),
@@ -476,12 +478,21 @@ export default function NewCasePage() {
         ? { src: images.poster, alt: `${titleStr} cover poster`, provenance: 'illustration' as const }
         : undefined;
 
+      const resolvedBlurb =
+        formData.blurb.trim() ||
+        firstEpText.slice(0, 240).trim() ||
+        `Landmark judicial proceedings and constitutional review in ${titleStr}.`;
+
       const res = await fetch('/api/admin/cases', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           slug: safeSlug,
+          blurb: { en: resolvedBlurb, hi: resolvedBlurb },
+          hook: resolvedBlurb,
+          featuredHeroHook: { en: formData.shortTitle || titleStr, hi: formData.shortTitle || titleStr },
+          featuredHeroDesc: { en: resolvedBlurb, hi: resolvedBlurb },
           factsSummary: firstEpText,
           rank: formData.makeTrendingTop10 ? formData.rank : 99,
           bannerImage: images.poster || undefined,
@@ -747,6 +758,28 @@ export default function NewCasePage() {
                 className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-sm text-white px-3.5 py-2.5 rounded-xs focus:outline-none"
               />
             </div>
+          </div>
+
+          {/* Catalog Blurb / Editorial Story Hook */}
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-[11px] font-mono text-[#a9a49a] uppercase">
+                Catalog Blurb / Story Hook <span className="text-[#E50914]">*</span>
+              </label>
+              <span className="text-[10px] font-mono text-[#D4AF37]">
+                Displayed on Home Reel Cards & Search
+              </span>
+            </div>
+            <textarea
+              rows={3}
+              placeholder="e.g. When communications were completely suspended across Jammu & Kashmir, the Executive Editor of Kashmir Times challenged the blackout. In a landmark ruling, the Supreme Court declared that freedom of speech and trade over the internet are fundamental rights under Article 19."
+              value={formData.blurb}
+              onChange={(e) => setFormData({ ...formData, blurb: e.target.value })}
+              className="w-full bg-[#0A0C10] border border-white/15 focus:border-[#D4AF37] text-xs text-white p-3 rounded-xs focus:outline-none leading-relaxed font-sans"
+            />
+            <p className="text-[10px] font-mono text-[#8c887e] mt-1">
+              A punchy 1–3 sentence overview in simple, natural English explaining the core real-life conflict and what the court held.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-white/5">

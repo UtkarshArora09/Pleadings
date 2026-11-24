@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, use } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { CaseData, Episode, PersonaItem } from '@/types';
 import { extractPersonasFromText, hasPersonaFormat } from '@/lib/parsePersonas';
 import { getCaseVisualPrompts } from '@/lib/ai/visualPrompts';
@@ -13,6 +14,7 @@ interface ReviewStudioProps {
 
 export default function ReviewStudioPage({ params }: ReviewStudioProps) {
   const { slug } = use(params);
+  const router = useRouter();
 
   const [caseData, setCaseData] = useState<CaseData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -57,8 +59,9 @@ export default function ReviewStudioPage({ params }: ReviewStudioProps) {
 
   useEffect(() => {
     async function loadCase() {
-      if (!slug || slug === 'undefined') {
-        window.location.href = '/admin';
+      if (!slug || slug === 'undefined' || slug === 'null') {
+        setLoading(false);
+        router.replace('/admin');
         return;
       }
       try {

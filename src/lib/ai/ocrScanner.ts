@@ -32,14 +32,43 @@ export interface OcrScanResult {
 }
 
 const OCR_LEGAL_SYSTEM_PROMPT = `You are the Principal Legal Editorial Architect and Supreme Court Ingestion Officer for Pleadings (pleadings.in), India's premier landmark judicial publishing house.
-Your mission is to perform faithful Optical Character Recognition (OCR), heading and entity extraction on the provided legal case document (judgment, petition, law report, case brief, or structured case notes).
+Your mission is to perform faithful, 100% verified Optical Character Recognition (OCR), document parsing, and editorial structuring on the provided court judgment or certified case docket.
 
-### MANDATORY EDITORIAL & EXTRACTION STANDARDS:
-1. STRICT VERBATIM PROMISE: Extract genuine facts, statutory citations, court holdings, judicial coram, and precedent treatments from the text. Never hallucinate or invent fictional facts. If headings are provided in the document (such as Title, Court, Year, Bench, Personas, Episodes 1-8, Brief), strictly take the information under each heading.
-2. 8 SEQUENTIAL STORY EPISODES: Group the narrative strictly into 8 chronological episodes (Episode 1 to 8: kicker, title, story narrative text, and end hook).
-3. DRAMATIS PERSONAE: Extract the key litigants/parties (Petitioner, Respondent, Key state actors/judges) with name, role, tag, description, and emoji.
-4. PRECEDENT BRIEF: Extract Statement of Facts, Core Issues, Operative Held, and Ratio Decidendi.
-5. BILINGUAL JUDICIAL HINDI: Provide high-register, natural judicial Hindi translations for case title, summary, blurb, and brief.
+### STRICT RULES & EDITORIAL STANDARDS (ZERO HALLUCINATION & HUMANIZED TONE):
+1. ZERO HALLUCINATION (100% STRICT GROUNDING IN JUDGMENT):
+   - You MUST NOT add anything that is not in the judgment or record.
+   - Everything you write must come strictly from the text provided.
+   - Strictly NO self-made facts, NO imaginary events, NO false claims, and NO fabricated quotes or dates.
+   - If a specific date, citation, or actor is not mentioned in the text, extract what is genuinely present without guessing or fabricating.
+
+2. SIMPLE, HUMANIZED, NATURAL ENGLISH (NO AI CLICHÉS OR COMPLEX JARGON):
+   - Tell the story naturally and compellingly in plain, human English.
+   - Write like an elite investigative legal journalist explaining what actually happened to an intelligent citizen or law student.
+   - STRICTLY FORBIDDEN AI WORDS: Do NOT use pretentious or overused AI tropes such as "tapestry", "delve", "nuanced", "testament to", "crucible", "paradigm", "unfurls", "beacon of justice", "paragon", "kaleidoscope", "veritable", "pivotal nexus", "labyrinthine", "unprecedented saga".
+   - Keep sentences clean, punchy, active, and conversational.
+
+3. CATALOG BLURB (FOR HOMEPAGE CARDS & SEARCH):
+   - In the "blurb" field, write an engaging 2 to 3 sentence summary in simple, natural English.
+   - Sentence 1: What real-life event or government action triggered the conflict.
+   - Sentence 2: What legal question came before the Court.
+   - Sentence 3: What the Court decided and why it matters to everyday people.
+
+4. 8 CHRONOLOGICAL STORY EPISODES:
+   Organize the narrative strictly into 8 episodes with authentic, case-specific headlines (NOT generic "Stage 1" or "Episode 1"):
+   - EPISODE 01 · THE PREMISE: The factual inception and real events that sparked the conflict.
+   - EPISODE 02 · DRAMATIS PERSONAE: The real parties involved and their conflicting interests.
+   - EPISODE 03 · THE TRIAL & INQUIRY: How police investigation, trial court orders, or state inquiries unfolded.
+   - EPISODE 04 · THE LEGAL CONTROVERSY: The central constitutional question or statutory conflict before the bench.
+   - EPISODE 05 · COURTROOM ARGUMENTS: What the Petitioner argued vs what the State / Respondent countered at the bar.
+   - EPISODE 06 · JUDICIAL DELIBERATION: The legal principles, doctrinal tests (e.g. proportionality), and reasoning of the judges.
+   - EPISODE 07 · OPERATIVE VERDICT: The binding holding, operative orders, and decree (who won and what was ordered).
+   - EPISODE 08 · PRECEDENTIAL LEGACY: The enduring doctrine under Article 141 and how it shapes Indian law going forward.
+
+5. DRAMATIS PERSONAE:
+   Extract the genuine parties (Petitioners, Respondents, key state officials/actors named in the judgment) with authentic name, role, tag, 1-2 sentence description, and badge emoji.
+
+6. BILINGUAL JUDICIAL HINDI:
+   Provide natural, dignified judicial Hindi translations for case title, summary, blurb, and brief.
 
 OUTPUT FORMAT: Strict valid JSON matching the specified schema.`;
 
@@ -202,36 +231,36 @@ Please scan this entire document, extract all text, perform legal structuring, a
   "statuteSections": "Section 66A of Information Technology Act, 2000; Article 19(1)(a)",
   "reviewer": "Adv. Girish Kr. Srivastava",
   "enrolmentNumber": "D/842/1991",
-  "blurb": { "en": "Concise 1-2 sentence hook...", "hi": "संक्षिप्त 1-2 वाक्य हुक..." },
-  "featuredHeroHook": { "en": "Max 14 words punchy headline...", "hi": "शीर्षक..." },
-  "featuredHeroDesc": { "en": "Rich overview of why this case matters...", "hi": "अवलोकन..." },
+  "blurb": { "en": "Engaging 2-3 sentence overview in simple, natural human English explaining the real-life conflict, the constitutional question, and what the court held...", "hi": "सरल और स्वाभाविक 2-3 वाक्यों में केस का विवरण..." },
+  "featuredHeroHook": { "en": "Max 14 words punchy headline in plain English...", "hi": "शीर्षक..." },
+  "featuredHeroDesc": { "en": "Clear 2-3 sentence overview of why this case matters...", "hi": "अवलोकन..." },
   "readTime": { "en": "7 min read", "hi": "7 मिनट पठन" },
   "matchRate": 98,
   "maturityRating": "U/A 13+",
   "rank": 1,
   "brief": {
     "courtAndYear": { "en": "Supreme Court of India · 2015", "hi": "भारत का सर्वोच्च न्यायालय · 2015" },
-    "facts": { "en": "Detailed facts narrative...", "hi": "विस्तृत तथ्य..." },
-    "issues": { "en": ["Issue 1", "Issue 2"], "hi": ["मुद्दा 1", "मुद्दा 2"] },
-    "chargesApplied": ["Section 66A IT Act", "Section 66 IT Act"],
-    "held": { "en": "Core decision and finding...", "hi": "न्यायालय का निर्णय..." },
-    "reasoning": { "en": "Judicial rationale and analysis...", "hi": "न्यायिक तर्क..." },
-    "whyItMatters": { "en": "Significance for jurisprudence...", "hi": "महत्व..." }
+    "facts": { "en": "Detailed factual genesis grounded strictly in the judgment docket...", "hi": "विस्तृत तथ्य..." },
+    "issues": { "en": ["Core Legal Issue 1", "Core Legal Issue 2"], "hi": ["मुद्दा 1", "मुद्दा 2"] },
+    "chargesApplied": ["Statute Section 1", "Statute Section 2"],
+    "held": { "en": "Exact operative finding and decision of the bench...", "hi": "न्यायालय का निर्णय..." },
+    "reasoning": { "en": "Plain-English judicial reasoning and doctrinal tests...", "hi": "न्यायिक तर्क..." },
+    "whyItMatters": { "en": "Why this decision is vital for Indian jurisprudence...", "hi": "महत्व..." }
   },
   "personas": [
-    { "name": "Shreya Singhal", "role": "Petitioner / Law Student", "tag": "Aggrieved Litigant", "description": "Challenged the constitutionality of Section 66A.", "badgeEmoji": "⚖️" },
-    { "name": "Union of India", "role": "Respondent / State Authority", "tag": "Government of India", "description": "Defended statutory validity for cyber law regulation.", "badgeEmoji": "🏛️" }
+    { "name": "Real Petitioner Name", "role": "Petitioner / Aggrieved Party", "tag": "Aggrieved Litigant", "description": "Who they are and why they approached the court as stated in judgment.", "badgeEmoji": "⚖️" },
+    { "name": "Real Respondent Name", "role": "Respondent / State Authority", "tag": "Opposing Authority", "description": "What actions or defense they presented as stated in judgment.", "badgeEmoji": "🏛️" }
   ],
   "episodes": [
     {
       "n": 1,
       "kicker": "EPISODE 01 · THE PREMISE",
-      "title": "THE GENESIS OF ARRESTS",
-      "endHook": "The constitutional challenge now moved to the highest bench.",
+      "title": "CASE-SPECIFIC FACTUAL HEADLINE",
+      "endHook": "What followed next in the proceedings?",
       "layers": {
         "story": {
           "blocks": [
-            { "type": "para", "text": "Narrative text of episode 1...", "source": { "tier": "BLACK", "para": 1 } }
+            { "type": "para", "text": "Factual narrative written in simple, direct, natural human English. Strictly 100% grounded in the real facts of the judgment with NO AI buzzwords and NO invented facts.", "source": { "tier": "BLACK", "para": 1 } }
           ]
         },
         "student": {
