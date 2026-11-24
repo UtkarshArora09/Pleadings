@@ -7,10 +7,45 @@ export interface ExtractedPdf {
   hasText: boolean;
 }
 
+// Helper: Decode ASCII85 encoded streams
+function decodeAscii85(str: string): Buffer {
+  const clean = str.replace(/^<~/, '').replace(/~>[\s\S]*$/, '').replace(/\s+/g, '');
+  const out: number[] = [];
+  let i = 0;
+  while (i < clean.length) {
+    if (clean[i] === 'z') {
+      out.push(0, 0, 0, 0);
+      i++;
+      continue;
+    }
+    let count = 0;
+    let val = 0;
+    for (let j = 0; j < 5; j++) {
+      if (i + j < clean.length) {
+        val = val * 85 + (clean.charCodeAt(i + j) - 33);
+        count++;
+      } else {
+        val = val * 85 + 84;
+      }
+    }
+    const b0 = (val >>> 24) & 0xff;
+    const b1 = (val >>> 16) & 0xff;
+    const b2 = (val >>> 8) & 0xff;
+    const b3 = val & 0xff;
+    if (count >= 2) out.push(b0);
+    if (count >= 3) out.push(b1);
+    if (count >= 4) out.push(b2);
+    if (count >= 5) out.push(b3);
+    i += count;
+  }
+  return Buffer.from(out);
+}
+
 /**
  * High-precision, zero-dependency PDF text extraction engine.
  * Specifically handles Chromium/Edge print-to-pdf subsetted fonts with /ToUnicode CMaps,
- * standard Type1/TrueType fonts, uncompressed streams, and zlib/FlateDecode compressed streams.
+ * ReportLab ASCII85Decode/FlateDecode streams, standard Type1/TrueType fonts,
+ * and uncompressed/raw streams.
  */
 export function extractTextFromPdfBuffer(pdfBuffer: Buffer): ExtractedPdf {
   try {
@@ -37,7 +72,11 @@ export function extractTextFromPdfBuffer(pdfBuffer: Buffer): ExtractedPdf {
       let s = streamIdx + 6;
       while (body.charCodeAt(s) === 10 || body.charCodeAt(s) === 13) s++;
 
-      const rawBytes = Buffer.from(body.slice(s, endStreamIdx), 'binary');
+      let rawBytes: any = Buffer.from(body.slice(s, endStreamIdx), 'binary');
+      const header = body.slice(0, streamIdx);
+      if (header.includes('ASCII85Decode')) {
+        rawBytes = decodeAscii85(body.slice(s, endStreamIdx));
+      }
       try {
         return zlib.inflateSync(rawBytes).toString('latin1');
       } catch {
@@ -215,7 +254,8 @@ export function extractTextFromPdfBuffer(pdfBuffer: Buffer): ExtractedPdf {
           if (/^\d{1,2}\/\d{1,2}\/\d{2,4},\s+\d{1,2}:\d{2}\s+(?:AM|PM)$/i.test(trimmed)) return false;
           if (/^file:\/\/\//i.test(trimmed)) return false;
           if (/^\d+\s*\/\s*\d+$/.test(trimmed)) return false;
-          if (/^Pleadings\s*—\s*Landmark\s+Case/i.test(trimmed)) return false;
+          if (/^Page \d+$/i.test(trimmed)) return false;
+          if (/^Pleadings\s*[·—]\s*(?:Landmark\s+Case|Certified\s+Case\s+Record\s+Dossier)/i.test(trimmed)) return false;
           return true;
         })
         .join('\n');
@@ -249,48 +289,149 @@ export function extractTextFromPdfBuffer(pdfBuffer: Buffer): ExtractedPdf {
 
       while ((btMatch = btRegex.exec(streamStr)) !== null) {
         const block = btMatch[1];
-        const commands = block.match(/\/[A-Za-z0-9_]+\s+[\d.]+\s+Tf|(?:\([^)]*\)|<[^>]*>|\[[^\]]*\])\s*(?:Tj|TJ|'|")|[\d.-]+\s+[\d.-]+\s+(?:Td|TD|Tm)|T\*/g) || [];
-
+        let i = 0;
         let lineText = '';
-        for (const cmd of commands) {
-          if (cmd.includes('Tf')) {
-            const fontMatch = cmd.match(/\/([A-Za-z0-9_]+)\s+[\d.]+\s+Tf/);
-            if (fontMatch) {
-              currentFont = '/' + fontMatch[1];
+
+        while (i < block.length) {
+          while (i < block.length && /\s/.test(block[i])) i++;
+          if (i >= block.length) break;
+
+          // Check for font switch: /FontName size Tf
+          if (block[i] === '/') {
+            const fontCmdMatch = block.slice(i).match(/^\/([A-Za-z0-9_+]+)\s+[\d.]+\s+Tf/);
+            if (fontCmdMatch) {
+              currentFont = '/' + fontCmdMatch[1];
               currentCMap = fontMap.get(currentFont) || null;
+              i += fontCmdMatch[0].length;
+              continue;
             }
-          } else if (cmd.endsWith('Tj') || cmd.endsWith("'") || cmd.endsWith('"')) {
-            const strMatch = cmd.match(/^(\([^)]*\)|<[^>]*>)/);
-            if (strMatch) {
-              lineText += decodeString(strMatch[1], currentCMap);
-              if (cmd.endsWith("'") || cmd.endsWith('"')) lineText += '\n';
+          }
+
+          if (block[i] === '(') {
+            // String literal with balanced & escaped parenthesis parsing
+            let depth = 0;
+            let strContent = '';
+            while (i < block.length) {
+              const ch = block[i];
+              if (ch === '\\' && i + 1 < block.length) {
+                strContent += ch + block[i + 1];
+                i += 2;
+                continue;
+              }
+              if (ch === '(') {
+                depth++;
+                if (depth > 1) strContent += ch;
+              } else if (ch === ')') {
+                depth--;
+                if (depth === 0) {
+                  i++;
+                  break;
+                }
+                strContent += ch;
+              } else {
+                strContent += ch;
+              }
+              i++;
             }
-          } else if (cmd.endsWith('TJ')) {
-            const arrMatch = cmd.match(/^\[([\s\S]*)\]\s*TJ$/);
-            if (arrMatch) {
-              const inner = arrMatch[1].match(/\([^)]*\)|<[^>]*>|[\d.-]+/g) || [];
-              for (const item of inner) {
-                if (item.startsWith('(') || item.startsWith('<')) {
-                  lineText += decodeString(item, currentCMap);
-                } else {
-                  const offset = parseFloat(item);
-                  if (offset < -150) {
-                    lineText += ' ';
+            while (i < block.length && /\s/.test(block[i])) i++;
+            if (block.startsWith('Tj', i)) {
+              lineText += decodeString('(' + strContent + ')', currentCMap);
+              i += 2;
+            } else if (block[i] === "'") {
+              lineText += decodeString('(' + strContent + ')', currentCMap) + '\n';
+              i += 1;
+            } else if (block[i] === '"') {
+              lineText += decodeString('(' + strContent + ')', currentCMap) + '\n';
+              i += 1;
+            }
+          } else if (block[i] === '<') {
+            // Hex string literal
+            let hexContent = '';
+            i++;
+            while (i < block.length && block[i] !== '>') {
+              hexContent += block[i];
+              i++;
+            }
+            if (i < block.length && block[i] === '>') i++;
+            while (i < block.length && /\s/.test(block[i])) i++;
+            if (block.startsWith('Tj', i)) {
+              lineText += decodeString('<' + hexContent + '>', currentCMap);
+              i += 2;
+            }
+          } else if (block[i] === '[') {
+            // TJ array
+            let arrContent = '';
+            i++;
+            while (i < block.length && block[i] !== ']') {
+              arrContent += block[i];
+              i++;
+            }
+            if (i < block.length && block[i] === ']') i++;
+            while (i < block.length && /\s/.test(block[i])) i++;
+            if (block.startsWith('TJ', i)) {
+              let j = 0;
+              while (j < arrContent.length) {
+                while (j < arrContent.length && /\s/.test(arrContent[j])) j++;
+                if (j >= arrContent.length) break;
+                if (arrContent[j] === '(') {
+                  let depth = 0;
+                  let itemStr = '';
+                  while (j < arrContent.length) {
+                    const ch = arrContent[j];
+                    if (ch === '\\' && j + 1 < arrContent.length) {
+                      itemStr += ch + arrContent[j + 1];
+                      j += 2;
+                      continue;
+                    }
+                    if (ch === '(') {
+                      depth++;
+                      if (depth > 1) itemStr += ch;
+                    } else if (ch === ')') {
+                      depth--;
+                      if (depth === 0) {
+                        j++;
+                        break;
+                      }
+                      itemStr += ch;
+                    } else {
+                      itemStr += ch;
+                    }
+                    j++;
                   }
+                  lineText += decodeString('(' + itemStr + ')', currentCMap);
+                } else if (arrContent[j] === '<') {
+                  let hex = '';
+                  j++;
+                  while (j < arrContent.length && arrContent[j] !== '>') {
+                    hex += arrContent[j];
+                    j++;
+                  }
+                  if (j < arrContent.length && arrContent[j] === '>') j++;
+                  lineText += decodeString('<' + hex + '>', currentCMap);
+                } else {
+                  let numStr = '';
+                  while (j < arrContent.length && !/[\s(\[<]/.test(arrContent[j])) {
+                    numStr += arrContent[j];
+                    j++;
+                  }
+                  const offset = parseFloat(numStr);
+                  if (offset < -150) lineText += ' ';
                 }
               }
+              i += 2;
             }
-          } else if (cmd.endsWith('Td') || cmd.endsWith('TD') || cmd.endsWith('Tm')) {
-            const parts = cmd.trim().split(/\s+/);
-            const dy = parseFloat(parts[1]);
-            if (Math.abs(dy) > 5) {
-              lineText += '\n';
+          } else if (block.startsWith('T*', i)) {
+            if (lineText.trim()) {
+              out += lineText.trim() + '\n';
+              lineText = '';
             }
-          } else if (cmd === 'T*') {
-            lineText += '\n';
+            i += 2;
+          } else {
+            // Skip non-string token
+            while (i < block.length && !/\s/.test(block[i])) i++;
           }
         }
-        out += lineText + '\n';
+        if (lineText.trim()) out += lineText.trim() + '\n';
       }
 
       return out;
@@ -328,7 +469,13 @@ export function extractTextFromPdfBuffer(pdfBuffer: Buffer): ExtractedPdf {
           .replace(/\\\(/g, '(')
           .replace(/\\\)/g, ')')
           .replace(/\\\\/g, '\\')
-          .replace(/\\([0-7]{1,3})/g, (_, oct) => String.fromCharCode(parseInt(oct, 8)));
+          .replace(/\\([0-7]{1,3})/g, (_, oct) => {
+            const code = parseInt(oct, 8);
+            if (code === 1) return ' · ';
+            if (code === 2) return '₹';
+            if (code < 32) return ' ';
+            return String.fromCharCode(code);
+          });
       }
       return '';
     }

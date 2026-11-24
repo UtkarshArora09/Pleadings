@@ -40,20 +40,28 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
 
   // 1. EXTRACT FORMAL CASE TITLE
   let title = '';
-  const formalTitleMatch =
-    normalizedText.match(/(?:Formal\s+Case\s+Title|Formal\s+Title|Case\s+Title)[:\s]+([^\n]+)/i) ||
-    normalizedText.match(/Case\s+Identification[^\n]*\n+Case\s+Title[:\s]+([^\n]+)/i) ||
-    normalizedText.match(/(?:IN\s+THE\s+SUPREME\s+COURT\s+OF\s+INDIA[^\n]*\n+)([\s\S]*?)(?=VERSUS|v\.)/i);
-
-  if (formalTitleMatch) {
-    title = formalTitleMatch[1].trim();
-    // Clean up trailing "and Others" or extra punctuation if necessary
-    title = title.replace(/\s+/g, ' ');
+  // Check for clean single-line "X v. Y" or "X vs. Y"
+  const singleLineTitleMatch = normalizedText.match(/^[ \t]*([A-Z][^\n]{2,80}?\s+(?:v\.|vs\.|versus)\s+[A-Z][^\n]{2,80})[ \t]*$/im);
+  if (singleLineTitleMatch) {
+    title = singleLineTitleMatch[1].trim();
   }
 
   if (!title) {
-    // Try to find "X v. Y" or "X vs. Y"
-    const vMatch = normalizedText.match(/([A-Z][A-Za-z\s.,()&]+?\s+(?:v\.|vs\.|versus)\s+[A-Z][A-Za-z\s.,()&]+)/i);
+    const formalTitleMatch =
+      normalizedText.match(/(?:Formal\s+Case\s+Title|Formal\s+Title|Case\s+Title)[:\s]+([^\n]+)/i) ||
+      normalizedText.match(/Case\s+Identification[^\n]*\n+Case\s+Title[:\s]+([^\n]+)/i) ||
+      normalizedText.match(/(?:IN\s+THE\s+SUPREME\s+COURT\s+OF\s+INDIA[^\n]*\n+)([\s\S]*?)(?=VERSUS|v\.)/i);
+
+    if (formalTitleMatch) {
+      title = formalTitleMatch[1].trim();
+      // Clean up trailing "and Others" or extra punctuation if necessary
+      title = title.replace(/\s+/g, ' ');
+    }
+  }
+
+  if (!title) {
+    // Try to find "X v. Y" or "X vs. Y" without crossing newlines
+    const vMatch = normalizedText.match(/([A-Z][A-Za-z0-9 .,()&'-]{2,60}\s+(?:v\.|vs\.|versus)\s+[A-Z][A-Za-z0-9 .,()&'-]{2,60})/i);
     if (vMatch) {
       title = vMatch[1].split('\n')[0].trim();
     }
@@ -71,7 +79,13 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   if (shortTitleMatch) {
     shortTitle = shortTitleMatch[1].trim();
   } else {
-    shortTitle = title.length > 40 ? `The ${title.split('v.')[0].trim()} Case` : title;
+    // Look for subtitle under case title: "The ... Case · Supreme Court ..."
+    const subtitleCaseMatch = normalizedText.match(/(The\s+[^\n·]+?\s+Case)\s*[·-]/i);
+    if (subtitleCaseMatch) {
+      shortTitle = subtitleCaseMatch[1].trim();
+    } else {
+      shortTitle = title.includes(' v. ') ? `The ${title.split(' v. ')[0].trim()} Case` : title;
+    }
   }
 
   // 3. EXTRACT COURT & YEAR
@@ -194,67 +208,101 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
 
   // 11. EXTRACT DRAMATIS PERSONAE
   const personas: PersonaItem[] = [];
-  const dpSectionMatch = normalizedText.match(/Dramatis\s+Personae\s*\([^)]*\)[:\s]*\n+([\s\S]*?)(?=\n\d\s*\n|\nCase\s+Brief|\n--- PAGE BREAK ---)/i);
+  const dpSectionMatch = normalizedText.match(
+    /(?:Dramatis\s+Personae|Key\s+Litigants\s+&\s+Figures|Key\s+Personas)(?:\s*\([^)]*\))?[:\s]*\n+([\s\S]*?)(?=\n\s*(?:The\s+8-Episode|EPISODE|Facts|Lawyer\s+Reference|Case\s+Brief|\n--- PAGE BREAK ---\n\n--- PAGE BREAK ---|$))/i
+  );
 
   if (dpSectionMatch) {
     const dpBlock = dpSectionMatch[1];
-    const lines = dpBlock.split('\n').map((l) => l.trim()).filter(Boolean);
 
-    let idx = 0;
-    while (idx < lines.length) {
-      const line = lines[idx];
+    // Pattern B: Name (Role / Tag): Description
+    const personaCardMatches = Array.from(
+      dpBlock.matchAll(
+        /([A-Z][A-Za-z0-9 .,&'-]+?)\s*\(([\s\S]*?)\)\s*:\s*([\s\S]*?)(?=\n[A-Z][A-Za-z0-9 .,&'-]+?\s*\(|\n\s*(?:The\s+8-Episode|EPISODE|\n--- PAGE BREAK ---|$))/g
+      )
+    );
 
-      // Check if this line or next line is a persona tag containing "·", "Petitioner", "Respondent", "State", "Witness", "Authority"
-      const isTag = (str: string) => /·|Petitioner|Respondent|State\s+Authority|Party|Witness|Opposition|Accused|Editor/i.test(str);
+    if (personaCardMatches.length > 0) {
+      for (const m of personaCardMatches) {
+        const name = m[1].trim();
+        const roleAndTag = m[2].trim();
+        const desc = m[3].trim().replace(/\s+/g, ' ');
 
-      if (!isTag(line) && line.length >= 3 && line.length <= 50 && idx + 1 < lines.length && isTag(lines[idx + 1])) {
-        const name = line;
-        idx++;
-        let tag = lines[idx];
-        idx++;
-
-        // If tag wrapped to next line (e.g. "Primary Petitioner · Aggrieved \n Editor")
-        if (idx < lines.length && (lines[idx] === 'Editor' || lines[idx] === 'Party' || lines[idx] === 'Authority')) {
-          tag += ' ' + lines[idx];
-          idx++;
+        let role = roleAndTag;
+        let tag = roleAndTag;
+        if (roleAndTag.includes('/')) {
+          const parts = roleAndTag.split('/').map((p) => p.trim());
+          role = parts[0];
+          tag = parts.slice(1).join(' / ');
         }
 
-        const descLines: string[] = [];
-        while (idx < lines.length) {
-          const nextL = lines[idx];
-          // Check if next item starts a new persona
-          if (idx + 1 < lines.length && !isTag(nextL) && nextL.length <= 50 && isTag(lines[idx + 1])) {
-            break;
-          }
-          if (/^\d+\s*$/.test(nextL) || nextL.startsWith('Case Brief')) {
-            break;
-          }
-          descLines.push(nextL);
-          idx++;
-        }
-
-        const role = tag.split('·')[0]?.trim() || tag;
-        const tagClean = tag.split('·')[1]?.trim() || tag;
+        const isPetitioner = /petitioner|appellant|complainant/i.test(role);
+        const isRespondent = /respondent|opposite\s+party|state|government/i.test(role);
 
         personas.push({
           name,
           role,
-          tag: tagClean,
-          description: descLines.join(' ').replace(/\s+/g, ' ') || `Key contender in ${title}.`,
-          badgeEmoji: role.toLowerCase().includes('petitioner') ? '⚖️' : role.toLowerCase().includes('respondent') ? '🏛️' : '👤',
+          tag,
+          description: desc,
+          badgeEmoji: isPetitioner ? '⚖️' : isRespondent ? '🏛️' : '👤',
         });
-      } else {
-        idx++;
+      }
+    } else {
+      // Pattern A: Multi-line tag format
+      const lines = dpBlock.split('\n').map((l) => l.trim()).filter(Boolean);
+      let idx = 0;
+      while (idx < lines.length) {
+        const line = lines[idx];
+        const isTag = (str: string) => /·|Petitioner|Respondent|State\s+Authority|Party|Witness|Opposition|Accused|Editor/i.test(str);
+
+        if (!isTag(line) && line.length >= 3 && line.length <= 50 && idx + 1 < lines.length && isTag(lines[idx + 1])) {
+          const name = line;
+          idx++;
+          let tag = lines[idx];
+          idx++;
+
+          if (idx < lines.length && (lines[idx] === 'Editor' || lines[idx] === 'Party' || lines[idx] === 'Authority')) {
+            tag += ' ' + lines[idx];
+            idx++;
+          }
+
+          const descLines: string[] = [];
+          while (idx < lines.length) {
+            const nextL = lines[idx];
+            if (idx + 1 < lines.length && !isTag(nextL) && nextL.length <= 50 && isTag(lines[idx + 1])) {
+              break;
+            }
+            if (/^\d+\s*$/.test(nextL) || nextL.startsWith('Case Brief')) {
+              break;
+            }
+            descLines.push(nextL);
+            idx++;
+          }
+
+          const role = tag.split('·')[0]?.trim() || tag;
+          const tagClean = tag.split('·')[1]?.trim() || tag;
+
+          personas.push({
+            name,
+            role,
+            tag: tagClean,
+            description: descLines.join(' ').replace(/\s+/g, ' ') || `Key contender in ${title}.`,
+            badgeEmoji: role.toLowerCase().includes('petitioner') ? '⚖️' : role.toLowerCase().includes('respondent') ? '🏛️' : '👤',
+          });
+        } else {
+          idx++;
+        }
       }
     }
   }
 
+  // Fallback: If personas still empty, derive from title
   if (personas.length === 0) {
-    const pet = title.split('v.')[0]?.trim() || 'Petitioner';
-    const resp = title.split('v.')[1]?.trim() || 'Union of India / State';
+    const pet = title.split(/\s+(?:v\.|vs\.|versus)\s+/i)[0]?.trim() || 'Petitioner';
+    const resp = title.split(/\s+(?:v\.|vs\.|versus)\s+/i)[1]?.trim() || 'Respondent';
     personas.push(
-      { name: pet, role: 'Primary Petitioner', tag: 'Aggrieved Party', description: `Initiated legal challenge in ${title}.`, badgeEmoji: '⚖️' },
-      { name: resp, role: 'The Respondent / State', tag: 'State Authority', description: `Defended government orders and procedure.`, badgeEmoji: '🏛️' }
+      { name: pet, role: 'Appellant / Petitioner', tag: 'Aggrieved Party', description: `Party to ${title}.`, badgeEmoji: '⚖️' },
+      { name: resp, role: 'Respondent', tag: 'Opposing Party', description: `Respondent party in ${title}.`, badgeEmoji: '🏛️' }
     );
   }
 
@@ -362,7 +410,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
     // Non-fatal, proceed to regex parser
   }
 
-  // Regex for episode markers: "EPISODE 01 · THE PREMISE: THE ARREST" or "EPISODE 1: The Arrest" or "EPISODE 1 - The Arrest"
+  // Regex for episode markers: "EPISODE 01 · THE PREMISE" ... "EPISODE 08 · PRECEDENTIAL LEGACY"
   if (episodes.length === 0) {
     const episodeMatches = Array.from(
       normalizedText.matchAll(/EPISODE\s+0?(\d)\s*(?:[·:\-–—]\s*([^\n:\-–—]+))?(?:[·:\-–—]\s*([^\n]+))?/gi)
@@ -376,28 +424,26 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
         const part2 = (match[3] || '').trim();
 
         let epKicker = '';
-        let epTitle = '';
+        let explicitTitle = '';
 
         if (part2) {
           epKicker = `EPISODE 0${epNum} · ${part1.toUpperCase()}`;
-          epTitle = part2.toUpperCase();
+          explicitTitle = part2.toUpperCase();
         } else if (part1) {
           if (part1.includes('·') || part1.includes(' - ') || part1.includes(':')) {
             const subparts = part1.split(/[·:\-–—]/).map((s) => s.trim()).filter(Boolean);
             if (subparts.length >= 2) {
               epKicker = `EPISODE 0${epNum} · ${subparts[0].toUpperCase()}`;
-              epTitle = subparts.slice(1).join(' - ').toUpperCase();
+              explicitTitle = subparts.slice(1).join(' - ').toUpperCase();
             } else {
               epKicker = `EPISODE 0${epNum} · ${DEFAULT_EP_STAGES[epNum - 1] || 'THE STAGE'}`;
-              epTitle = part1.toUpperCase();
+              explicitTitle = part1.toUpperCase();
             }
           } else {
-            epKicker = `EPISODE 0${epNum} · ${DEFAULT_EP_STAGES[epNum - 1] || 'THE DISPUTE'}`;
-            epTitle = part1.toUpperCase();
+            epKicker = `EPISODE 0${epNum} · ${part1.toUpperCase()}`;
           }
         } else {
           epKicker = `EPISODE 0${epNum} · ${DEFAULT_EP_STAGES[epNum - 1] || 'STAGE'}`;
-          epTitle = DEFAULT_EP_TITLES[epNum - 1] || `EPISODE ${epNum}`;
         }
 
         // Find the text between this episode header and the next
@@ -405,24 +451,86 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
         let endIndex = normalizedText.length;
         if (idx < episodeMatches.length - 1) {
           endIndex = episodeMatches[idx + 1].index!;
+        } else {
+          // Episode 8: Stop before reference parts, citator, or appendices
+          const stopMatch = normalizedText.slice(startIndex).match(/\n\s*(?:Lawyer\s+Reference|Part\s+\d+|Flashcards|Citator\s+History)/i);
+          if (stopMatch) {
+            endIndex = startIndex + stopMatch.index!;
+          }
         }
 
-        const epTextChunk = normalizedText.slice(startIndex, endIndex);
+        const epTextChunk = normalizedText.slice(startIndex, endIndex).trim();
+        const rawLines = epTextChunk.split('\n').map((l) => l.trim()).filter(Boolean);
 
-        // Extract Story Narrative
-        let storyText = '';
-        const storyNarrativeMatch = epTextChunk.match(
-          /(?:Story\s+Narrative|Narrative|Story|Facts\s+in\s+Brief|Factual\s+Summary)[:\s]+([\s\S]*?)(?=Student\s+Layer|Advocate\s+Layer|TRIAL\s+PROPOSITION|End\s*Hook|Cliffhanger|EPISODE|\n--- PAGE BREAK ---|$)/i
-        );
-        if (storyNarrativeMatch) {
-          storyText = storyNarrativeMatch[1].trim().replace(/\s+/g, ' ');
-        } else {
-          // Fallback: take first coherent paragraphs
-          const lines = epTextChunk
-            .split(/\n\n+/)
-            .map((l) => l.trim().replace(/\s+/g, ' '))
-            .filter((l) => l.length > 25 && !l.startsWith('TRIAL PROPOSITION') && !l.startsWith('Ratio:') && !l.startsWith('Obiter:'));
-          storyText = lines.slice(0, 2).join('\n\n') || `Factual sequence of Episode ${epNum} in ${title}.`;
+        // Extract Headline / Title if on next line
+        let epTitle = explicitTitle;
+        let narrativeStartLine = 0;
+
+        if (!epTitle && rawLines.length > 0) {
+          const firstLine = rawLines[0];
+          if (firstLine && !/^(?:STUDENT|ADVOCATE|STORY)\s+LAYER/i.test(firstLine) && firstLine.length < 100) {
+            epTitle = firstLine;
+            narrativeStartLine = 1;
+            // Check for wrapped title line
+            if (rawLines.length > 1) {
+              const secondLine = rawLines[1];
+              if (
+                secondLine &&
+                secondLine === secondLine.toUpperCase() &&
+                secondLine.length < 50 &&
+                !secondLine.endsWith('.') &&
+                !/^(?:STUDENT|ADVOCATE|STORY)\s+LAYER/i.test(secondLine)
+              ) {
+                epTitle += ' ' + secondLine;
+                narrativeStartLine = 2;
+              }
+            }
+            epTitle = epTitle.toUpperCase();
+          }
+        }
+
+        if (!epTitle) {
+          epTitle = DEFAULT_EP_TITLES[epNum - 1] || `EPISODE ${epNum}`;
+        }
+
+        // Collect narrative lines up until STUDENT LAYER, ADVOCATE LAYER, or next marker
+        const narrativeLines: string[] = [];
+        for (let li = narrativeStartLine; li < rawLines.length; li++) {
+          const l = rawLines[li];
+          if (/^(?:STUDENT\s+LAYER|ADVOCATE\s+LAYER|TRIAL\s+PROPOSITION|Ratio\s+decidendi|Obiter\s+dicta|Exam\s+insight)/i.test(l)) {
+            break;
+          }
+          if (/^--- PAGE BREAK ---$/i.test(l)) continue;
+          narrativeLines.push(l);
+        }
+
+        // Reassemble wrapped lines into smooth coherent paragraphs
+        const paragraphs: string[] = [];
+        let currentPara: string[] = [];
+
+        for (const line of narrativeLines) {
+          const trimmed = line.trim();
+          if (
+            currentPara.length > 0 &&
+            /(\[[^\]]+\]|[.?!]["']?)$/.test(currentPara[currentPara.length - 1]) &&
+            /^[A-Z"']/.test(trimmed)
+          ) {
+            paragraphs.push(currentPara.join(' '));
+            currentPara = [trimmed];
+          } else {
+            currentPara.push(trimmed);
+          }
+        }
+        if (currentPara.length > 0) {
+          paragraphs.push(currentPara.join(' '));
+        }
+
+        let storyText = paragraphs.join('\n\n').trim();
+        // Remove leading "Story Narrative:" or "Narrative:" prefix if present
+        storyText = storyText.replace(/^(?:Story\s+Narrative|Narrative|Facts\s+in\s+Brief)[:\s]*/i, '').trim();
+
+        if (!storyText) {
+          storyText = `Factual sequence of Episode ${epNum} in ${title}.`;
         }
 
         // Extract End Hook if marked
@@ -431,29 +539,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
         if (hookMatch) {
           epEndHook = hookMatch[1].trim();
         } else {
-          epEndHook = DEFAULT_EP_HOOKS[epNum - 1] || (epNum < 8 ? 'The legal controversy escalated to the next judicial milestone.' : 'The precedent remains binding law under Article 141.');
-        }
-
-        // Extract Student Layer Ratio & Obiter if available
-        let epRatio = '';
-        let epObiter: string[] = [];
-        let epExamAngle = '';
-        const studentMatch = epTextChunk.match(/Student\s+Layer[^\n]*[:\s]*\n+([\s\S]*?)(?=Advocate\s+Layer|TRIAL\s+PROPOSITION|EPISODE|\n---)/i);
-        if (studentMatch) {
-          const sBlock = studentMatch[1];
-          const rMatch = sBlock.match(/Ratio[:\s]*([^.]+?\.)/i);
-          if (rMatch) epRatio = rMatch[1].trim();
-          const oMatch = sBlock.match(/Obiter[:\s]*([^.]+?\.)/i);
-          if (oMatch) epObiter = [oMatch[1].trim()];
-          const eMatch = sBlock.match(/Exam\s+Angle[:\s]*([^.]+?\.)/i);
-          if (eMatch) epExamAngle = eMatch[1].trim();
-        }
-
-        // Extract Advocate Trial Proposition
-        let epTrialProp = '';
-        const advMatch = epTextChunk.match(/TRIAL\s+PROPOSITION[:\s]*([^\n[\]]+)(?:\[([^\]]+)\])?/i);
-        if (advMatch) {
-          epTrialProp = advMatch[1].trim();
+          epEndHook = DEFAULT_EP_HOOKS[epNum - 1] || (epNum < 8 ? 'The controversy escalated to the next judicial milestone.' : 'The precedent remains binding law under Article 141.');
         }
 
         episodes.push({
@@ -535,8 +621,9 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
 
   // EXTRACT CATALOG BLURB / STORY HOOK
   let blurbText = '';
-  const blurbMatch =
-    normalizedText.match(/(?:Catalog\s+Blurb|Editorial\s+Story\s+Hook|Story\s+Hook|Blurb)[:\s]+([^\n]+(?:\n[^\n]+)?)/i);
+  const blurbMatch = normalizedText.match(
+    /(?:Catalog\s+Blurb|Editorial\s+Story\s+Hook|Story\s+Hook|Blurb)[:\s]*\n+([\s\S]*?)(?=\n\s*(?:Facts|Issues|Held|Reasoning|Why\s+It\s+Matters|Dramatis|The\s+8-Episode|EPISODE|\n--- PAGE BREAK ---|$))/i
+  );
 
   if (blurbMatch) {
     blurbText = blurbMatch[1].trim().replace(/\s+/g, ' ');
@@ -553,6 +640,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   return {
     slug,
     title: { en: title, hi: toJudicialHindi(title) },
+    shortTitle: shortTitle || (title.includes(' v. ') ? `The ${title.split(' v. ')[0].trim()} Case` : title),
     tag: { en: `${genre.charAt(0).toUpperCase() + genre.slice(1)} Law`, hi: `${toJudicialHindi(genre)} विधि` },
     categoryTag: genre.charAt(0).toUpperCase() + genre.slice(1),
     genre,

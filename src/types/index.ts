@@ -204,6 +204,7 @@ export interface CaseData {
     en: string;
     hi: string;
   };
+  shortTitle?: string;
   tag: {
     en: string;
     hi: string;

@@ -1,7 +1,6 @@
-import { CaseData, StoryPanel, Episode, PersonaItem } from '@/types';
-import { slugify } from '@/lib/ai/pipeline';
+import type { CaseData, StoryPanel, Episode, PersonaItem } from '@/types';
+import { slugify, parseLegalDocumentText } from './legalDocumentParser';
 import { extractTextFromPdfBuffer } from './pdfExtractor';
-import { parseLegalDocumentText } from './legalDocumentParser';
 
 export interface ScanDocumentOptions {
   fileBase64?: string;
@@ -683,6 +682,7 @@ Please scan this entire document, extract all text, perform legal structuring, a
   const constructedCaseData: CaseData = {
     slug,
     title: { en: caseTitleEn, hi: caseTitleHi },
+    shortTitle: parsedJson.shortTitle || (caseTitleEn.includes(' v. ') ? `The ${caseTitleEn.split(' v. ')[0].trim()} Case` : caseTitleEn),
     tag: {
       en: parsedJson.tag?.en || `${categoryTag} Jurisprudence`,
       hi: parsedJson.tag?.hi || `${categoryTag} न्यायशास्त्र`,

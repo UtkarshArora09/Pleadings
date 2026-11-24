@@ -212,7 +212,7 @@ export default function NewCasePage() {
       setFormData((prev) => ({
         ...prev,
         title: typeof c.title === 'string' ? c.title : (c.title?.en || prev.title),
-        shortTitle: typeof c.featuredHeroHook === 'string' ? c.featuredHeroHook : (c.featuredHeroHook?.en || c.shortTitle || prev.shortTitle),
+        shortTitle: c.shortTitle || (typeof c.featuredHeroHook === 'string' ? c.featuredHeroHook : c.featuredHeroHook?.en) || prev.shortTitle,
         blurb: typeof c.blurb === 'string' ? c.blurb : (c.blurb?.en || c.featuredHeroDesc?.en || c.featuredHeroHook?.en || c.brief?.facts?.en?.slice(0, 260) || prev.blurb),
         citation: c.citation || prev.citation,
         court: c.court || prev.court,
