@@ -41,9 +41,8 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   // 1. EXTRACT FORMAL CASE TITLE
   let title = '';
   const formalTitleMatch =
-    normalizedText.match(/Formal\s+Case\s+Title[:\s]*\n+([^\n]+)/i) ||
-    normalizedText.match(/Case\s+Title[:\s]*\n+([^\n]+)/i) ||
-    normalizedText.match(/Case\s+Identification[^\n]*\n+Case\s+Title[:\s]*([^\n]+)/i) ||
+    normalizedText.match(/(?:Formal\s+Case\s+Title|Formal\s+Title|Case\s+Title)[:\s]+([^\n]+)/i) ||
+    normalizedText.match(/Case\s+Identification[^\n]*\n+Case\s+Title[:\s]+([^\n]+)/i) ||
     normalizedText.match(/(?:IN\s+THE\s+SUPREME\s+COURT\s+OF\s+INDIA[^\n]*\n+)([\s\S]*?)(?=VERSUS|v\.)/i);
 
   if (formalTitleMatch) {
@@ -67,9 +66,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   // 2. EXTRACT EDITORIAL SHORT NAME
   let shortTitle = '';
   const shortTitleMatch =
-    normalizedText.match(/Editorial\s+Short\s+Name[:\s]*\n+([^\n]+)/i) ||
-    normalizedText.match(/Editorial\s+Short\s+Title[:\s]*\n+([^\n]+)/i) ||
-    normalizedText.match(/Short\s+Title[:\s]*\n+([^\n]+)/i);
+    normalizedText.match(/(?:Editorial\s+Short\s+Name|Editorial\s+Short\s+Title|Short\s+Title|Editorial\s+Name)[:\s]+([^\n]+)/i);
 
   if (shortTitleMatch) {
     shortTitle = shortTitleMatch[1].trim();
@@ -82,8 +79,8 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   let year = new Date().getFullYear();
 
   const courtYearMatch =
-    normalizedText.match(/Court\s+&\s+Year[:\s]*\n+([^\n·\d]+)(?:·\s*|\s+)(\d{4})/i) ||
-    normalizedText.match(/Court\s+&\s+Year[:\s]*\n*([^\n]+)/i) ||
+    normalizedText.match(/Court\s+&\s+Year[:\s]+([^\n·\d]+)(?:·\s*|\s+)(\d{4})/i) ||
+    normalizedText.match(/Court\s+&\s+Year[:\s]+([^\n]+)/i) ||
     normalizedText.match(/SUPREME\s+COURT\s+CERTIFIED\s*·\s*(\d{4})/i);
 
   if (courtYearMatch) {
@@ -133,13 +130,12 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   const parallelCitations: string[] = [];
 
   const primCitMatch =
-    normalizedText.match(/Primary\s+Citation[:\s]*\n+([^\n·|]+)/i) ||
-    normalizedText.match(/Law\s+Citations[:\s]*\n+([^\n]+)/i);
+    normalizedText.match(/(?:Primary\s+Citation|Law\s+Citations|Citation)[:\s]+([^\n·|]+)/i);
   if (primCitMatch) {
     primaryCitation = primCitMatch[1].trim();
   }
 
-  const parCitMatch = normalizedText.match(/Parallel\s+Citation[:\s]*\n+([^\n]+)/i);
+  const parCitMatch = normalizedText.match(/(?:Parallel\s+Citation[s]?|Parallel)[:\s]+([^\n]+)/i);
   if (parCitMatch) {
     const rawList = parCitMatch[1].split(/[|,]/);
     for (const item of rawList) {
@@ -416,7 +412,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
         // Extract Story Narrative
         let storyText = '';
         const storyNarrativeMatch = epTextChunk.match(
-          /(?:Story\s+Narrative|Narrative|Facts\s+in\s+Brief|Factual\s+Summary)[:\s]*\n+([\s\S]*?)(?=Student\s+Layer|Advocate\s+Layer|TRIAL\s+PROPOSITION|End\s*Hook|Cliffhanger|EPISODE|\n--- PAGE BREAK ---|$)/i
+          /(?:Story\s+Narrative|Narrative|Story|Facts\s+in\s+Brief|Factual\s+Summary)[:\s]+([\s\S]*?)(?=Student\s+Layer|Advocate\s+Layer|TRIAL\s+PROPOSITION|End\s*Hook|Cliffhanger|EPISODE|\n--- PAGE BREAK ---|$)/i
         );
         if (storyNarrativeMatch) {
           storyText = storyNarrativeMatch[1].trim().replace(/\s+/g, ' ');
@@ -540,9 +536,7 @@ export function parseLegalDocumentText(rawText: string, fileName = 'uploaded-cas
   // EXTRACT CATALOG BLURB / STORY HOOK
   let blurbText = '';
   const blurbMatch =
-    normalizedText.match(/Catalog\s+Blurb[:\s]*\n+([^\n]+(?:\n[^\n]+)?)/i) ||
-    normalizedText.match(/Blurb[:\s]*\n+([^\n]+(?:\n[^\n]+)?)/i) ||
-    normalizedText.match(/Story\s+Hook[:\s]*\n+([^\n]+(?:\n[^\n]+)?)/i);
+    normalizedText.match(/(?:Catalog\s+Blurb|Editorial\s+Story\s+Hook|Story\s+Hook|Blurb)[:\s]+([^\n]+(?:\n[^\n]+)?)/i);
 
   if (blurbMatch) {
     blurbText = blurbMatch[1].trim().replace(/\s+/g, ' ');
