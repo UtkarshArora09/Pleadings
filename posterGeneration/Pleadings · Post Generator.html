@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pleadings · Post Generator</title>
 <style>
-:root{--bg:#f6f6f4;--panel:#fff;--tx:#111;--mut:#6b6b66;--line:#e3e3df;--red:#C4161E;--accent:#5c1d68;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#f6f6f4;--panel:#fff;--tx:#111;--mut:#6b6b66;--line:#e3e3df;--red:#C4161E;--accent:#C4161E;--gold:#C59B27;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141414;--panel:#1e1e1e;--tx:#f2f2ee;--mut:#a5a59e;--line:#34342f}}
 :root[data-theme="dark"]{--bg:#141414;--panel:#1e1e1e;--tx:#f2f2ee;--mut:#a5a59e;--line:#34342f}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -187,81 +187,99 @@ function resolvePhoto(d, fallbackPreset){
 
 /* ================= 1. BREAKING NEWS TEMPLATES ================= */
 
-// NEW 1: Bar & Bench Style Editorial Blend (Inspired by Ref 1)
-function bnBarBench(d){
- const fs=fit(d.head.length,[128,114,98,84]);
+// 1. Pleadings Apex Dispatch (Proprietary Editorial Plate)
+function bnDispatch(d){
+ const fs=fit(d.head.length,[130,116,98,84]);
  const pos={Top:'0%',Center:'50%',Bottom:'100%'}[d.focus]||'50%';
  const ph = resolvePhoto(d, PRESET_SC_FACADE);
  const imgStyle = ph.crop === 'facade'
-   ? 'position:absolute;left:0;top:-38%;width:100%;height:138%;object-fit:cover;object-position:center bottom'
+   ? 'position:absolute;left:0;top:-25%;width:100%;height:130%;object-fit:cover;object-position:center bottom'
    : 'position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:50% '+pos;
- const dateStr = (d.date||'').toUpperCase().replace(/\s*\d{4}$/,'');
+ const dateStr = (d.date||'').toUpperCase();
 
- return '<div class="pg" style="height:1350px;background:#FBF8F3;color:#111">'+
+ return '<div class="pg" style="height:1350px;background:#FAFAF7;color:#111">'+
  '<div class="in" style="padding:56px 74px 48px;display:flex;flex-direction:column;justify-content:space-between">'+
   '<div>'+
    '<div class="row" style="align-items:flex-start">'+
-    '<div style="width:130px;height:5px;background:#5c1d68;border-radius:2px;margin-top:14px"></div>'+
+    '<div>'+
+      logo(54)+
+      '<div style="display:flex;align-items:center;gap:8px;margin-top:14px">'+
+       '<div style="width:28px;height:3px;background:'+RED+';border-radius:1px"></div>'+
+       '<div style="width:12px;height:1px;background:#C59B27"></div>'+
+       '<span class="mono" style="font-size:13px;letter-spacing:.22em;color:'+RED+';font-weight:700">LEGAL INTELLIGENCE</span>'+
+      '</div>'+
+    '</div>'+
     '<div style="text-align:right">'+
-      logo(50)+
-      '<div style="background:#5c1d68;color:#fff;font-family:DM,monospace;font-weight:700;font-size:16px;letter-spacing:.08em;padding:5px 14px;border-radius:4px;margin-top:8px;display:inline-block">'+esc(dateStr)+'</div>'+
+      '<div style="border:1.5px solid rgba(17,17,17,.18);background:#fff;border-radius:6px;padding:6px 14px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:inline-flex;align-items:center;gap:10px">'+
+       '<span style="background:'+RED+';color:#fff;font-family:DM,monospace;font-size:12px;font-weight:700;letter-spacing:.12em;padding:3px 7px;border-radius:3px">APEX</span>'+
+       '<span class="mono" style="font-size:15px;font-weight:600;color:#111;letter-spacing:.08em">'+esc(dateStr)+'</span>'+
+      '</div>'+
     '</div>'+
    '</div>'+
-   '<div class="mono" style="margin-top:20px;font-size:17px;letter-spacing:.12em;display:flex;align-items:center;gap:14px">'+
-    '<span style="color:#5c1d68;font-weight:700"><i class="dot" style="background:#5c1d68"></i>'+esc(d.tag)+'</span>'+
-    '<span style="opacity:.65">'+esc(d.court)+'</span>'+
+   '<div class="mono" style="margin-top:24px;font-size:17px;letter-spacing:.14em;display:flex;align-items:center;gap:12px">'+
+    '<span style="color:'+RED+';font-weight:700"><i class="dot" style="background:'+RED+'"></i>'+esc(d.tag)+'</span>'+
+    '<span style="opacity:.3">|</span>'+
+    '<span style="opacity:.75">'+esc(d.court)+'</span>'+
    '</div>'+
-   '<h1 class="serif" style="font-size:'+fs+'px;line-height:1.02;letter-spacing:-.015em;margin-top:28px;color:#5c1d68">'+hl(d.head)+'</h1>'+
-   (d.sum ? '<p style="font:400 28px/1.48 \'IN\';opacity:.82;margin-top:20px;color:#222;max-width:820px">'+esc(d.sum)+'</p>' : '')+
+   '<h1 class="serif" style="font-size:'+fs+'px;line-height:1.02;letter-spacing:-.015em;margin-top:26px;color:#111">'+hl(d.head)+'</h1>'+
+   (d.sum ? '<p style="font:400 28px/1.48 IN;opacity:.84;margin-top:20px;color:#262626;max-width:840px">'+esc(d.sum)+'</p>' : '')+
   '</div>'+
-  '<div style="flex:1;min-height:360px;margin-top:30px;position:relative;overflow:hidden;border-radius:4px">'+
-   '<div style="position:absolute;inset:0;overflow:hidden">'+
-    '<img src="'+ph.src+'" style="'+imgStyle+'">'+
-    '<div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(251,248,243,0) 0%, rgba(251,248,243,0.3) 40%, rgba(251,248,243,1) 98%)"></div>'+
+  '<div style="flex:1;min-height:380px;margin-top:28px;position:relative;border-radius:6px;overflow:hidden;border:1.5px solid rgba(17,17,17,.14);box-shadow:0 8px 24px rgba(0,0,0,.07);background:#eae6de">'+
+   '<img src="'+ph.src+'" style="'+imgStyle+'">'+
+   '<div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(17,17,17,.88) 0%, rgba(17,17,17,.2) 40%, rgba(250,250,247,0) 80%)"></div>'+
+   '<div style="position:absolute;left:22px;bottom:20px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border:1px solid rgba(17,17,17,.15);border-radius:5px;padding:8px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 16px rgba(0,0,0,.15)">'+
+     '<span style="width:9px;height:9px;border-radius:50%;background:'+RED+'"></span>'+
+     '<span class="mono" style="font-size:15px;font-weight:700;color:#111;letter-spacing:.08em">'+esc(d.verdict || 'COURT REPORT')+'</span>'+
    '</div>'+
-   (d.credit ? '<div class="mono" style="position:absolute;right:12px;bottom:8px;font-size:14px;opacity:.7;color:#111;text-shadow:0 1px 2px #fff">Photo: '+esc(d.credit)+'</div>' : '')+
+   (d.credit ? '<div class="mono" style="position:absolute;right:22px;bottom:22px;font-size:13px;color:rgba(255,255,255,.85);letter-spacing:.06em;text-shadow:0 1px 3px rgba(0,0,0,.8)">Source: '+esc(d.credit)+'</div>' : '')+
   '</div>'+
-  '<div class="row mono" style="padding-top:18px;border-top:1.5px solid rgba(17,17,17,.22);font-size:19px">'+
+  '<div class="row mono" style="padding-top:18px;border-top:1.5px solid rgba(17,17,17,.2);font-size:19px;margin-top:20px">'+
    socials(18,22)+
    (d.story ? '<span style="white-space:nowrap">Full story'+arrow()+'</span>' : '<span>'+esc(d.hd || '@pleadings.in')+'</span>')+
   '</div>'+
  '</div></div>';
 }
 
-// NEW 2: LiveLaw Style Breaking with Arch Cutout (Inspired by Ref 2)
-function bnLiveLaw(d){
+// 2. Pleadings Priority Wire (Proprietary Dossier Frame)
+function bnHerald(d){
  const fs=fit(d.head.length,[126,112,96,82]);
  const pos={Top:'0%',Center:'50%',Bottom:'100%'}[d.focus]||'50%';
  const ph = resolvePhoto(d, PRESET_SC_DOME);
  const imgStyle = ph.crop === 'dome'
-   ? 'position:absolute;right:0;bottom:0;width:170%;height:170%;object-fit:contain;object-position:right bottom'
+   ? 'position:absolute;right:0;bottom:0;width:150%;height:150%;object-fit:contain;object-position:right bottom'
    : 'position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:50% '+pos;
 
  const dateDay = (d.date||'').slice(0,2).trim();
  const dateRest = (d.date||'').slice(2).trim();
 
- return '<div class="pg" style="height:1350px;background:#ffffff;color:#111">'+
- '<div style="position:absolute;right:-60px;bottom:-60px;width:540px;height:540px;border-radius:270px;background:#551217;z-index:1"></div>'+
- '<div class="in" style="padding:60px 74px 48px;display:flex;flex-direction:column;justify-content:space-between;z-index:2">'+
+ return '<div class="pg" style="height:1350px;background:#FFFFFF;color:#111">'+
+ '<div style="position:absolute;left:0;top:0;width:8px;height:100%;background:'+RED+'"></div>'+
+ '<div class="in" style="padding:60px 74px 48px 84px;display:flex;flex-direction:column;justify-content:space-between">'+
   '<div>'+
-   '<div style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#E51821,#A30D14);color:#fff;font-family:IN,sans-serif;font-weight:900;font-size:20px;letter-spacing:.08em;padding:9px 22px;border-radius:6px;box-shadow:0 6px 18px rgba(196,22,30,.3);position:relative">'+
-     'BREAKING'+
-     '<div style="position:absolute;bottom:-6px;left:22px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #A30D14"></div>'+
+   '<div style="display:inline-flex;align-items:center;border:2px solid '+RED+';border-radius:6px;overflow:hidden;box-shadow:0 4px 14px rgba(196,22,30,.15)">'+
+     '<span style="background:'+RED+';color:#fff;font-family:DM,monospace;font-weight:900;font-size:15px;letter-spacing:.14em;padding:7px 16px;display:flex;align-items:center;gap:6px">'+
+       '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>PRIORITY DISPATCH'+
+     '</span>'+
+     '<span style="background:#fff;color:'+RED+';font-family:DM,monospace;font-weight:700;font-size:14px;letter-spacing:.1em;padding:7px 14px;border-left:1.5px solid '+RED+'">'+esc(d.tag)+'</span>'+
    '</div>'+
-   '<h1 class="serif" style="font-size:'+fs+'px;line-height:.98;letter-spacing:-.02em;margin-top:34px;color:#8C0D12;font-weight:700">'+hl(d.head)+'</h1>'+
-   (d.sum ? '<p style="font:400 28px/1.46 \'IN\';opacity:.86;margin-top:20px;color:#222;max-width:680px">'+esc(d.sum)+'</p>' : '')+
+   '<h1 class="serif" style="font-size:'+fs+'px;line-height:.97;letter-spacing:-.02em;margin-top:32px;color:'+RED+';font-weight:700">'+hl(d.head)+'</h1>'+
+   (d.sum ? '<p style="font:400 28px/1.46 IN;opacity:.86;margin-top:20px;color:#222;max-width:740px">'+esc(d.sum)+'</p>' : '')+
   '</div>'+
-  '<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:24px;position:relative;z-index:2">'+
-   '<div>'+
-    logo(66)+
-    '<div class="mono" style="font-size:26px;font-weight:700;color:#111;margin-top:16px">'+esc(dateDay)+
+  '<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:36px;margin-top:20px">'+
+   '<div style="flex:1">'+
+    logo(68)+
+    '<div class="mono" style="font-size:26px;font-weight:700;color:#111;margin-top:18px">'+esc(dateDay)+
       '<span style="font-size:16px;font-weight:400;opacity:.7;display:block;margin-top:2px">'+esc(dateRest)+'</span>'+
     '</div>'+
-    '<div class="mono" style="font-size:16px;color:#8C0D12;margin-top:10px;font-weight:600">'+esc(d.court)+'</div>'+
+    '<div style="margin-top:16px;padding:12px 16px;border-left:3px solid '+RED+';background:#f8f8f6;border-radius:0 4px 4px 0">'+
+     '<div class="mono" style="font-size:14px;opacity:.65">FORUM // BENCH</div>'+
+     '<div style="font:600 18px IN;color:#111;margin-top:3px">'+esc(d.court)+'</div>'+
+    '</div>'+
    '</div>'+
-   '<div style="width:420px;height:470px;border-radius:210px 210px 0 0;overflow:hidden;position:relative;border:4px solid #fff;box-shadow:0 12px 36px rgba(0,0,0,.18);background:#f2ede6;flex:none">'+
+   '<div style="width:440px;height:450px;border-radius:12px;overflow:hidden;position:relative;border:2px solid #111;box-shadow:0 12px 36px rgba(0,0,0,.14);background:#f2ede6;flex:none">'+
     '<img src="'+ph.src+'" style="'+imgStyle+'">'+
-    (d.credit ? '<div class="mono" style="position:absolute;right:10px;bottom:6px;font-size:13px;opacity:.7;color:#fff;text-shadow:0 1px 3px #000">Photo: '+esc(d.credit)+'</div>' : '')+
+    '<div style="position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)"></div>'+
+    (d.credit ? '<div class="mono" style="position:absolute;right:10px;bottom:8px;font-size:12px;background:rgba(0,0,0,.7);color:#fff;padding:3px 8px;border-radius:3px">Photo: '+esc(d.credit)+'</div>' : '')+
    '</div>'+
   '</div>'+
   '<div class="row mono" style="padding-top:18px;border-top:1.5px solid rgba(17,17,17,.25);font-size:19px;margin-top:20px">'+
@@ -475,8 +493,8 @@ function phClassic(d){
  '</div></div></div>';
 }
 
-function phBarBench(d){ return bnBarBench(d); }
-function phLiveLaw(d){ return bnLiveLaw(d); }
+function phDispatch(d){ return bnDispatch(d); }
+function phHerald(d){ return bnHerald(d); }
 function phSplit(d){ return bnSplit(d); }
 function phHero(d){ return bnCinematic(d); }
 
@@ -751,8 +769,8 @@ const today=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',y
 const T={
  bn:{h:1350,name:'BreakingNews',
   templates:[
-   {id:'barbench',name:'Bar & Bench Editorial',sub:'Warm parchment & photo blend',fn:bnBarBench,hasPhoto:true},
-   {id:'livelaw',name:'LiveLaw Breaking',sub:'Speech badge & arch dome cutout',fn:bnLiveLaw,hasPhoto:true},
+   {id:'dispatch',name:'Pleadings Apex Dispatch',sub:'Alabaster plate & architectural frame',fn:bnDispatch,hasPhoto:true},
+   {id:'herald',name:'Pleadings Priority Wire',sub:'Precision wire badge & dossier plate',fn:bnHerald,hasPhoto:true},
    {id:'classic',name:'Classic Broadsheet',sub:'Original masthead & seal',fn:bnClassic},
    {id:'banner',name:'Front-Page Banner',sub:'Red ribbon & 2-col docket',fn:bnBanner},
    {id:'gazette',name:'Courtroom Gazette',sub:'Ink header & docket grid',fn:bnGazette},
@@ -778,8 +796,8 @@ const T={
   ]},
  ph:{h:1350,name:'BigHeadline',
   templates:[
-   {id:'barbench',name:'Bar & Bench Editorial',sub:'Warm parchment & photo blend',fn:phBarBench,hasPhoto:true},
-   {id:'livelaw',name:'LiveLaw Arched Cutout',sub:'Speech badge & arch cutout',fn:phLiveLaw,hasPhoto:true},
+   {id:'dispatch',name:'Pleadings Apex Dispatch',sub:'Editorial plate & architectural photo',fn:phDispatch,hasPhoto:true},
+   {id:'herald',name:'Pleadings Priority Wire',sub:'Precision wire badge & framed docket',fn:phHerald,hasPhoto:true},
    {id:'classic',name:'Classic Photo Card',sub:'Original photo card with red divider',fn:phClassic,hasPhoto:true},
    {id:'split',name:'Split 50/50 Spotlight',sub:'Half photo & half docket',fn:phSplit,hasPhoto:true},
    {id:'hero',name:'Cinematic Dark Hero',sub:'Full photo with dark contrast',fn:phHero,hasPhoto:true}
@@ -800,7 +818,7 @@ const T={
  cr:{h:1350,name:'Carousel',
   templates:[
    {id:'classic',name:'Classic Editorial',sub:'Original big red numeral & pillar',fn:crClassic},
-   {id:'photo',name:'Photo Editorial Cover',sub:'Bar & Bench style photo cover',fn:crPhoto,hasPhoto:true},
+   {id:'photo',name:'Pleadings Architectural Cover',sub:'Proprietary photo cover & docket',fn:crPhoto,hasPhoto:true},
    {id:'index',name:'Archival Index',sub:'Framed dossier & red badge',fn:crIndex},
    {id:'column',name:'Broadsheet Column',sub:'Ghost numeral & wide text',fn:crColumn},
    {id:'brief',name:'Black-Bar Brief',sub:'Ink header & step progress',fn:crBrief}
@@ -839,7 +857,7 @@ const T={
 };
 
 const V={};
-const SEL={bn:'barbench',ph:'barbench',cr:'classic',rl:'classic'};
+const SEL={bn:'dispatch',ph:'dispatch',cr:'classic',rl:'classic'};
 
 for(const k in T){
  V[k]={};
